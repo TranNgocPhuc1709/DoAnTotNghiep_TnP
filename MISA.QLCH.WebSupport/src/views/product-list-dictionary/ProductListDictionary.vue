@@ -41,7 +41,7 @@ export default {
           width: 120,
         }),
         new Column({
-          fieldText: "Demo Column 2",
+          fieldText: "Tên Sản Phẩm",
           dataIndex: "Column2",
           width: 260
         }),
