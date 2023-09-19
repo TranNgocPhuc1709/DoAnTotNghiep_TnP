@@ -46,35 +46,35 @@ export default {
           bindingIndex: "Column1"
         }),
         "txtColumn2": new TextBox({
-          fieldText: "Demo Column 2",
+          fieldText: "Tên Sản Phẩm",
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column2"
         }),
         "txtColumn3": new TextBox({
-          fieldText: "Demo Column 3",
+          fieldText: "Nhóm Sản Phẩm",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column3"
         }),
         "txtColumn4": new TextBox({
-          fieldText: "Demo Column 4",
+          fieldText: "Giá",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column4"
         }),
         "txtColumn5": new TextBox({
-          fieldText: "Demo Column 5",
+          fieldText: "Tồn Kho",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column5"
         }),
         "txtColumn6": new TextBox({
-          fieldText: "Demo Column 6",
+          fieldText: "Ghi Chú",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,

@@ -46,23 +46,23 @@ export default {
           width: 260
         }),
         new Column({
-          fieldText: "Demo Column 3",
+          fieldText: "Nhóm Sản Phẩm",
           dataIndex: "Column3",
           width: 260
         }),
         new Column({
-          fieldText: "Demo Column 4",
+          fieldText: "Giá",
           dataIndex: "Column4",
           width: 260
         }),
         new Column({
-          fieldText: "Demo Column 5",
+          fieldText: "Tồn Kho",
           dataIndex: "Column5",
           minWidth: 260,
           flex: 1
         }),
         new Column({
-          fieldText: "Demo Column 6",
+          fieldText: "Ghi Chú",
           dataIndex: "Column6",
           width: 160
         })
