@@ -1,0 +1,39 @@
+<div class="button-body prevent-select" v-if="control"> <!--Xác định width height của control-->
+
+    <div class="d-flex height-fill pss-rel"
+        :class="[control.classType,{'btn-read-only':control.readOnly}]"
+        :id="control.id"
+        :isLoading="control.isLoadingData"
+    >
+        <button 
+            class="qlch-btn"
+            :isLoading="control.isLoadingData"
+            @click="buttonClick"
+        >
+            <span v-if="!control.isLoadingData" class="d-flex-center height-fill">
+                
+                <span class="icon-left" :class="control.classIconLeft"></span>
+                <span v-if="control.fieldText" class="btn-text">{{control.fieldText}}</span>
+                <span :class="control.classIconRight"></span>
+                
+            </span>
+        </button>
+        <div v-if="!control.isLoadingData" class="d-flex-center body-arrow" :id="control.id+`-arrow-bg`" @click="itemArrowClick" :class=[control.classType]>
+            <div :class="['arrow-fat',control.clsArrowStatus]" :id="control.id+`-arrow-item`"></div>
+        </div>
+        <span v-if="control.isLoadingData" class='spinning-loading'></span>
+
+        <div v-if="thisData.isShowBoxDetail && control.children" class="pss-abs bg-box-item scroll-auto" :id="control.id+`-box-item`" v-click-out="boxDetailClickOut">
+            <div  v-for="itemChild in control.children" :key="itemChild.id" :class="itemChild.type==='line'?'width-fill': 'box-item'" @click="itemChildClick(itemChild)">
+                <div v-if="itemChild.type==='line'">
+                    <div class="item-line"></div>
+                </div>
+                <div v-else class="d-flex">
+                    <div class="icon i-image" :class=[itemChild.classIcon]></div>
+                    <div class="text-description">{{itemChild.fieldText}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

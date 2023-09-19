@@ -1,0 +1,38 @@
+{
+  "name": "misa-qlch-app",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "misa-qlch-base-component",
+    "misa-qlch-control",
+    "misa-qlch-web-support"
+  ],
+  "scripts": {
+    "create-template": "cd command/action && node create-template.js",
+    "create-project-vue": "cd command/action && node create-vue-project-template.js",
+    "debug-MISA.QLCH.Control": "concurrently \"cd MISA.QLCH.Control && npm run dev\"",
+    "serve-MISA.QLCH.Control": "concurrently \"cd MISA.QLCH.Control && npm run serve\"",
+    "debug-MISA.QLCH.BaseComponent": "concurrently \"yarn serve-MISA.QLCH.Control\" \"cd MISA.QLCH.BaseComponent && npm run dev\"",
+    "serve-MISA.QLCH.BaseComponent": "concurrently \"cd MISA.QLCH.BaseComponent && npm run serve\"",
+    "debug-MISA.QLCH.WebSupport": "concurrently \"yarn serve-MISA.QLCH.Control\" \"yarn serve-MISA.QLCH.BaseComponent\" \"cd MISA.QLCH.WebSupport && npm run dev\"",
+    "serve-MISA.QLCH.WebSupport": "concurrently \"cd MISA.QLCH.WebSupport && npm run serve\""
+  },
+  "dependencies": {
+    "chart.js": "^4.4.0",
+    "concurrently": "^8.2.0",
+    "vue": "^3.2.47",
+    "vue-chartjs": "^5.2.0",
+    "vue-i18n": "^9.2.2",
+    "vue-router": "^4.2.0",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@originjs/vite-plugin-federation": "^1.2.2",
+    "@types/node": "^20.1.2",
+    "@vitejs/plugin-vue": "^4.1.0",
+    "sass": "^1.62.1",
+    "typescript": "^5.0.2",
+    "vite": "^4.3.2",
+    "vue-tsc": "^1.4.2"
+  }
+}

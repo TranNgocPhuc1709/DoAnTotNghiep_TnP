@@ -1,0 +1,45 @@
+<h3>1.Number Field Default</h3>
+<div class="d-flex">
+    <div class="bg-control">
+        <e-number :control="numDefault" v-model="numDefault.value" />
+    </div>
+    <div class="bg-control">
+        <e-number :control="numReadOnly" v-model="numReadOnly.value" />
+    </div>
+    <div class="bg-control">
+        <e-number :control="numRequire" v-model="numRequire.value" />
+    </div>
+</div>
+
+<h3>2.Number Field by label vertical box</h3>
+<div class="d-flex">
+    <div class="bg-control-vertical">
+        <e-number :control="numVBoxDefault" v-model="numVBoxDefault.value" />
+    </div>
+    <div class="bg-control-vertical">
+        <e-number :control="numVBoxReadOnly" v-model="numVBoxReadOnly.value" />
+    </div>
+    <div class="bg-control-vertical">
+        <e-number :control="numVBoxRequire" v-model="numVBoxRequire.value" />
+    </div>
+</div>
+
+
+<h3>3.Number Field Type password</h3>
+<div class="d-flex">
+    <div class="bg-control">
+        <e-number :control="numPasswordRequire" v-model="numPasswordRequire.value" />
+    </div>
+    <div class="bg-control">
+        <e-number :control="numPasswordReadOnly" />
+    </div>
+
+</div>
+
+<h3>4.Number Field loading</h3>
+<div class="d-flex">
+    <div class="bg-control">
+        <e-number :control="numLoading" v-model="numLoading.value" />
+    </div>
+
+</div>

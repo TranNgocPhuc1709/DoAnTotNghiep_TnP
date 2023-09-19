@@ -1,0 +1,36 @@
+<e-popup @onCloseClick="onCloseClick" :idRoot="idRoot" :styleFrom="styleFrom">
+    <template v-slot:title>
+        <p v-if="propView" class="no-pad-mar prevent-select">{{propView.title}}</p>
+        <p v-else>BaseDictionaryDetailView: Title </p>
+    </template>
+
+    <template v-slot:content-detail>
+        <slot name="content-detail">
+            <h3>Dev: Vui lòng đảm bảo đã hoàn thành 2 việc:</h3>
+            <ul>
+                <li>Override lại function async createComponent() ở màn hình danh sách để khai báo Component Detail
+                </li>
+                <li>Màn hình template detail khai báo template v-slot:content-detail</li>
+            </ul>
+        </slot>
+    </template>
+
+    <template v-slot:form-button>
+        <div class="height-fill width-fill no-pad-mar d-flex" v-if="propView">
+            <div class="text-header height-fill d-flex-vcenter">
+                <e-button class="btn-help" :control="btnHelp"></e-button>
+            </div>
+            <div v-if="propView && propView.toolBarItems && propView.toolBarItems.length > 0"
+                class="icon-right flex-1 height-fill flex-h-end">
+                <div v-for="item in propView.toolBarItems" :key="item.name" class="height-fill d-flex-vcenter">
+                    <e-button class="btn-detail" :control="item.control" @click="onClickItem(item)"></e-button>
+                </div>
+            </div>
+        </div>
+        <div v-else class="height-fill width-fill no-pad-mar d-flex">
+            <div class="text-header height-fill d-flex-vcenter">
+                <b>BaseDictionaryDetailView: Button Toolbar</b>
+            </div>
+        </div>
+    </template>
+</e-popup>

@@ -1,0 +1,289 @@
+.i-user {
+    width: 16px;
+    height: 16px;
+    background: url("@library-src/assets/images/Icons_all.png") no-repeat center -3px;
+}
+
+.i-eye-show {
+    width: 16px;
+    height: 16px;
+    background: url("@library-src/assets/images/show_password.png") no-repeat center center;
+}
+
+.i-eye-hide {
+    width: 16px;
+    height: 16px;
+    background: url("@library-src/assets/images/hide_password.png") no-repeat center center;
+}
+
+.i-lock {
+    width: 20px;
+    height: 16px;
+    background: url("@library-src/assets/images/Icons_all.png") no-repeat center;
+}
+
+.i-stock {
+    width: 16px;
+    height: 16px;
+    background: url("@library-src/assets/images/slibarmenu.png") no-repeat 0px -73px;
+
+}
+
+.i-employee {
+    width: 16px;
+    height: 16px;
+    background: url("@library-src/assets/images/slibarmenu.png") no-repeat -1px -417px;
+
+}
+
+
+.i-setting {
+    width: 16px;
+    height: 16px;
+    background: url("@library-src/assets/images/slibarmenu.png") no-repeat -1px -313px;
+}
+
+.i-report {
+    width: 16px;
+    height: 16px;
+    background: url("@library-src/assets/images/slibarmenu.png") no-repeat 0px -271px;
+}
+
+.i-avatar {
+    width: 16px;
+    height: 16px;
+    background: url("@library-src/assets/images/Employee.png") no-repeat;
+    background-size: contain;
+}
+
+.i-arrow {
+    width: 16px;
+    height: 16px;
+    background: url("@library-src/assets/images/arrow-down-line.png") no-repeat center;
+}
+
+.i-logout {
+    width: 16px;
+    height: 16px;
+    background: url("@library-src/assets/images/icon-logout.png") no-repeat center;
+}
+
+.i-first {
+    width: 16px;
+    height: 16px;
+    background: url("@library-src/assets/images/common-icon.png") no-repeat -653px -127px;
+}
+
+.i-back {
+    width: 16px;
+    height: 16px;
+    background: url("@library-src/assets/images/common-icon.png") no-repeat -703px -127px;
+}
+
+.i-next {
+    width: 16px;
+    height: 16px;
+    background: url("@library-src/assets/images/common-icon.png") no-repeat -751px -126px;
+}
+
+.i-last {
+    width: 16px;
+    height: 16px;
+    background: url("@library-src/assets/images/common-icon.png") no-repeat -801px -126px;
+}
+
+.i-reload {
+    width: 16px;
+    height: 16px;
+    background: url("@library-src/assets/images/common-icon.png") no-repeat -852px -127px;
+}
+
+
+.i-reload-white {
+    width: 13px;
+    height: 17px;
+    background: url("@library-src/assets/images/common-icon.png") no-repeat -878px -126px;
+}
+
+.i-save {
+    width: 14px;
+    height: 14px;
+    background: url("@library-src/assets/images/common-icon.png") no-repeat -328px -127px;
+}
+
+.i-add {
+    width: 14px;
+    height: 14px;
+    background: url("@library-src/assets/images/common-icon.png") no-repeat -28px -127px;
+}
+
+.i-add-white {
+    width: 14px;
+    height: 14px;
+    background: url("@library-src/assets/images/common-icon.png") no-repeat -2px -128px;
+}
+
+.i-duplicate-white {
+    width: 18px;
+    height: 18px;
+    background: url("@library-src/assets/images/common-icon.png") no-repeat -976px -126px;
+}
+
+.i-pencil-white {
+    width: 15px;
+    height: 15px;
+    background: url("@library-src/assets/images/common-icon.png") no-repeat -77px -203px;
+}
+
+.i-cancel {
+    width: 16px;
+    height: 16px;
+    background: url("@library-src/assets/images/common-icon.png") no-repeat -251px -126px;
+}
+
+.i-recycle-white {
+    width: 12px;
+    height: 15px;
+    background: url("@library-src/assets/images/common-icon.png") no-repeat -1079px -128px;
+}
+
+.i-date {
+    width: 16px;
+    height: 16px;
+    background: url("@library-src/assets/images/common-icon.png") no-repeat -2px -178px;
+}
+
+.i-utility-white {
+    width: 16px;
+    height: 16px;
+    background: url("@library-src/assets/images/iconUtil.png") no-repeat;
+}
+
+
+.i-image {
+    background: url("@library-src/assets/images/iconUpdateImage.png") no-repeat;
+    width: 16px;
+}
+
+.i-double-image {
+    background: url("@library-src/assets/images/iconUpdateImageQuick.png") no-repeat;
+    width: 16px;
+}
+
+.i-play {
+    background: url("@library-src/assets/images/iconActive.png") no-repeat;
+    width: 16px;
+}
+
+.i-pause {
+    background: url("@library-src/assets/images/iconInActive.png") no-repeat;
+    width: 16px;
+}
+
+.i-help {
+    width: 16px;
+    height: 16px;
+    background-color: var(--icon-bg);
+    position: relative;
+    border-radius: 50%;
+}
+
+.i-help::before {
+    content: '\003F';
+    font-size: 12px;
+    font-weight: bold;
+    position: absolute;
+    color: var(--icon-color-text);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Roboto', sans-serif;
+}
+
+.i-warning {
+    width: 16px;
+    height: 16px;
+    background-color: red;
+    position: relative;
+    border-radius: 50%;
+}
+
+.i-warning::before {
+    content: '!';
+    font-size: 12px;
+    font-weight: bold;
+    position: absolute;
+    color: var(--icon-color-text);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Roboto', sans-serif;
+}
+
+
+
+.arrow {
+    border: solid var(--input-text-color);
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 2px;
+}
+
+.arrow.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.i-maximize {
+    width: 16px;
+    height: 16px;
+    background: url("@library-src/assets/images/common-icon.png") no-repeat -1177px -127px;
+}
+
+.i-close {
+    width: 16px;
+    height: 16px;
+    background: url("@library-src/assets/images/common-icon.png") no-repeat -1127px -127px;
+}
+
+.i-support {
+    width: 25px;
+    height: 25px;
+    background: url("@library-src/assets/images/Icons_All.png") no-repeat left top;
+}
+
+.i-mail {
+    background: url("@library-src/assets/images/Icons_All.png") no-repeat left;
+    width: 25px;
+    height: 25px;
+}
+
+.i-use-tutorial {
+    background: url("@library-src/assets/images/Icons_All.png") no-repeat left bottom;
+    width: 25px;
+    height: 25px;
+}
+
+.i-notification-warning {
+    background: url("@library-src/assets/images/icon-popup.png") no-repeat -56px 0px;
+    width: 44px;
+    height: 44px
+}
+
+.i-notification-error {
+    background: url("@library-src/assets/images/icon-popup.png") no-repeat -111px 0px;
+    width: 44px;
+    height: 44px
+}
+
+.i-notification-question {
+    background: url("@library-src/assets/images/icon-popup.png") no-repeat -166px 0px;
+    width: 44px;
+    height: 44px
+}
+
+.i-notification-info {
+    background: url("@library-src/assets/images/icon-popup.png") no-repeat 0px 0px;
+    width: 44px;
+    height: 44px
+}

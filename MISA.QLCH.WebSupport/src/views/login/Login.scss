@@ -1,0 +1,103 @@
+.bg-login {
+    background: url("@library-src/assets/images/bg_Login.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.header-login {
+    height: 66px
+}
+
+.footer-login {
+    height: 50px;
+    background-color: rgba(0, 0, 0, .5);
+    color: white;
+}
+
+.img-logo {
+    background: url("@library-src/assets/images/Logo_Full_White.png") no-repeat left center;
+}
+
+
+.frm-login-bg {
+    width: 800px;
+    height: 500px;
+    background-color: white;
+    border-radius: 12px;
+}
+
+.frm-login-left {
+    width: 300px;
+    background: url("@library-src/assets/images/img_login.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.frm-login-slogan {
+    height: 120px;
+}
+
+.img-slogan {
+    width: 230px;
+    height: 48px;
+    background: url("@library-src/assets/images/LogoMshop.png") no-repeat center center;
+}
+
+.from-login-help {
+    height: 105px;
+}
+
+.content-help {
+    color: white;
+    list-style: none;
+    padding-left: 20px;
+}
+
+.content-help li {
+    margin-top: 10px;
+    height: 25px;
+}
+
+.content-help li .text {
+    margin-left: 16px;
+}
+
+.frm-login {
+    padding: 80px 75px 0 75px;
+    height: calc(100% - 80px);
+}
+
+.frm-logo-misa {
+    background: url("@library-src/assets/images/ic_MISA.svg") no-repeat left top;
+    height: 36px;
+    margin-bottom: 16px;
+}
+
+.frm-login-item {
+    margin-top: 8px;
+    height: 36px;
+}
+
+.btn-login {
+    height: 46px;
+}
+
+.link-action {
+    color: #183bb3;
+    cursor: pointer;
+}
+
+.icon-left-input {
+    top: calc((100% - 16px) / 2);
+    left: 8px;
+
+}
+
+.time-work {
+    color: #757575;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 24px;
+}

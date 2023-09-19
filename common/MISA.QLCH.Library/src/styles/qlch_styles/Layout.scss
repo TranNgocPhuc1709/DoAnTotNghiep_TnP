@@ -1,0 +1,280 @@
+//Display: Grid
+.d-grid-1 {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+}
+
+.d-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.d-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.d-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.d-grid-5 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.d-grid-6 {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.d-grid-7 {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.d-grid-8 {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+}
+
+.d-grid-9 {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+}
+
+.d-grid-10 {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+}
+
+.d-grid-11 {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+}
+
+.d-grid-12 {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+}
+
+.d-none {
+    display: none;
+}
+
+//End display gird
+
+// Grid column
+.grid-col-all {
+    column-span: all;
+}
+
+.grid-col-1 {
+    grid-column: span 1;
+}
+
+.grid-col-2 {
+    grid-column: span 2;
+}
+
+.grid-col-3 {
+    grid-column: span 3;
+}
+
+.grid-col-4 {
+    grid-column: span 4;
+}
+
+.grid-col-5 {
+    grid-column: span 5;
+}
+
+.grid-col-6 {
+    grid-column: span 6;
+}
+
+.grid-col-7 {
+    grid-column: span 7;
+}
+
+.grid-col-8 {
+    grid-column: span 8;
+}
+
+.grid-col-9 {
+    grid-column: span 9;
+}
+
+.grid-col-10 {
+    grid-column: span 10;
+}
+
+.grid-col-11 {
+    grid-column: span 11;
+}
+
+.grid-col-12 {
+    grid-column: span 12;
+}
+
+// End Grid column
+
+// Display flex
+
+.d-flex {
+    display: flex;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.flex-vend {
+    display: flex;
+    align-self: flex-end;
+}
+
+.flex-v-start {
+    display: flex;
+    align-self: flex-start;
+}
+
+.flex-h-end {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.flex-h-start {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.d-flex-h-center {
+    display: flex;
+    justify-content: center;
+}
+
+.d-flex-vcenter {
+    display: flex;
+    align-items: center;
+}
+
+.d-flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.d-flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+// End Display flex
+
+// Display Block
+.d-block {
+    display: block;
+}
+
+.d-block-inline {
+    display: inline-block;
+}
+
+// End Display Block
+
+//margin
+.no-pad-mar {
+    padding: 0;
+    margin: 0;
+}
+
+//padding
+
+// Text
+.text-wrap {
+    height: 100%;
+    width: 100%;
+    overflow-wrap: break-word;
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.text-h-ellipse {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.text-v-ellipse {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+// End Text
+
+
+// Scroll
+.scroll-auto {
+    overflow: auto;
+}
+
+.scroll-hidden {
+    overflow: hidden;
+}
+
+// End Scroll
+
+.pss-rel {
+    position: relative;
+}
+
+.pss-abs {
+    position: absolute;
+}
+
+.pss-abs-center {
+    position: absolute;
+    top: 50%;
+    right: 50%
+}
+
+.pss-fix-center {
+    position: fixed;
+    top: 50%;
+    right: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.pss-sticky-left {
+    position: sticky;
+    left: 0;
+}
+
+.pss-sticky-top {
+    position: sticky;
+    top: 0;
+}
+
+.height-fill {
+    height: 100%
+}
+
+.width-fill {
+    width: 100%
+}
+
+.width-full-view {
+    width: 100vw;
+}
+
+.height-full-view {
+    height: 100vh;
+}

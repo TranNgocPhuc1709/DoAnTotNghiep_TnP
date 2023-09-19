@@ -1,0 +1,45 @@
+<h3>1. Text field Default</h3>
+<div class="d-flex">
+    <div class="bg-control">
+        <e-text-box :control="txtDefault" v-model="txtDefault.value" />
+    </div>
+    <div class="bg-control">
+        <e-text-box :control="txtReadOnly" v-model="txtReadOnly.value" />
+    </div>
+    <div class="bg-control">
+        <e-text-box :control="txtRequire" v-model="txtRequire.value" />
+    </div>
+</div>
+
+<h3>2. Text field by label vertical box</h3>
+<div class="d-flex">
+    <div class="bg-control">
+        <e-text-box :control="txtVBoxDefault" v-model="txtVBoxDefault.value" />
+    </div>
+    <div class="bg-control">
+        <e-text-box :control="txtVBoxReadOnly" />
+    </div>
+    <div class="bg-control">
+        <e-text-box :control="txtVBoxRequire" v-model="txtVBoxRequire.value" />
+    </div>
+</div>
+
+
+<h3>3. Text field Type password</h3>
+<div class="d-flex">
+    <div class="bg-control">
+        <e-text-box :control="txtPasswordRequire" v-model="txtPasswordRequire.value" />
+    </div>
+    <div class="bg-control">
+        <e-text-box :control="txtPasswordReadOnly" />
+    </div>
+
+</div>
+
+<h3>4. Text field loading</h3>
+<div class="d-flex">
+    <div class="bg-control">
+        <e-text-box :control="txtLoading" v-model="txtLoading.value" />
+    </div>
+
+</div>

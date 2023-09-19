@@ -1,0 +1,124 @@
+/*
+Mode VBox
+*/
+
+.txt-label,
+.body-input {
+    height: 100%;
+}
+
+.txt-label {
+    margin-right: 4px;
+}
+
+
+
+.qlch-cbb {
+    border-radius: 3px;
+    background: repeat-x 0 0;
+    width: 100%;
+    color: var(--input-text-color);
+    padding: 5px 17px 4px 5px;
+    background-color: var(--input-bg-color);
+    border: 1px solid var(--input-border-color);
+}
+
+.qlch-cbb:focus,
+.qlch-cbb.warning-valid:focus {
+    border: 1px solid var(--input-border-color-hover);
+    outline: none;
+}
+
+.qlch-cbb:disabled {
+    opacity: var(--opacity-read-only);
+    background-color: var(--input-bg-color-disable);
+}
+
+.lbl-default {
+    margin-right: 16px;
+}
+
+.qlch-cbb.warning-valid {
+    border: 1px solid var(--input-border-color-validate);
+}
+
+.warning-valid{
+    padding-left: 8px;
+}
+
+.i-warning:hover+.bg-warning {
+    display: block;
+}
+
+.body-input {
+    position: relative;
+}
+
+.bg-warning {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    background-color: var(--bg-require-warning);
+    color: var(--text-require-warning);
+    display: none;
+    padding: 8px;
+    border-radius: 3px;
+}
+
+.lbl-loading {
+    width: 100px;
+}
+
+.display-text {
+    height: 20px;
+}
+
+.bg-arrow {
+    width: 8px;
+    right: 0;
+    padding-right: 8px;
+}
+
+.bg-arrow:hover {
+    cursor: pointer;
+}
+
+.bg-box-item {
+    // min-width: 160px;
+    width: 100%;
+    max-height: 142px;
+    border: 1px solid var(--input-border-color);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 3px;
+    top: 100%;
+    background-color: var(--background-color);
+    z-index: 1;
+}
+
+.box-item {
+    padding: 8px;
+    white-space: nowrap;
+}
+
+.box-item:hover {
+    cursor: pointer;
+}
+
+.box-item.active {
+    background-color: var(--item-data-hover);
+}
+
+.item-data.skeleton-loading {
+    height: 19px;
+    border-radius: 5px;
+}
+
+.box-item-loading:hover {
+    cursor: default;
+    background-color: inherit;
+}
+
+.box-item-content {
+    position: relative;
+    z-index: 2;
+}

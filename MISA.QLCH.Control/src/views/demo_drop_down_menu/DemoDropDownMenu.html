@@ -1,0 +1,14 @@
+<h3>1. Default</h3>
+<div class="d-flex">
+    <div class="bg-control">
+        <e-drop-down-menu :control="dropDefault" />
+    </div>
+
+    <div class="bg-control">
+        <e-drop-down-menu :control="dropReadOnly" />
+    </div>
+
+    <div class="bg-control">
+        <e-drop-down-menu :control="dropLoading" @buttonClick="btnLoadingClick(dropLoading)" />
+    </div>
+</div>

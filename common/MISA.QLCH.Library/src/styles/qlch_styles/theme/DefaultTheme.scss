@@ -1,0 +1,109 @@
+/* main.css */
+:root {
+    /* Variables for default theme (light-mode) */
+    --background-color: #fff;
+    --text-color: #212121;  
+    --font-size: 13px;
+    --font-size-title: 18px;
+    --font-weight:400;
+    --line-height: 1.5;
+    --pu-primary:#2b3173;
+    --pu-primary-hover:#1e235a;
+
+    /*SlideBar*/
+    --text-color-sidebar:#fff;
+    --text-color-sidebar-hover:#fff;
+    --subdued-background-color:#e5e6eb;
+
+    /*ReadOnly*/
+    --opacity-read-only: 0.6;
+
+    /*Button Theme*/
+    --btn-primary: #2b3173;
+    --btn-primary-read-only: #2b3173;
+    --btn-border-primary: #2b3173;
+    --btn-primary-hover: #6b6f9d;
+    --btn-border-primary-hover: #6b6f9d;
+    --btn-text-color-primary: #fff;
+
+    --btn-secondary: #fff;
+    --btn-border-secondary: #2b3173;
+    --btn-border-secondary-hover: #1e235a;
+    --btn-text-color-secondary: #2b3173;
+    --btn-text-font-weight-secondary: 600;
+    --btn-text-color-secondary-hover: #1e235a;
+
+    --btn-tertiary: #fff;
+    --btn-border-tertiary: #fff;
+    --btn-border-tertiary-hover: #1e235a;
+    --btn-text-font-weight-tertiary: 600;
+    --btn-text-color-tertiary: #2b3173;
+    --btn-text-color-tertiary-hover: #1e235a;
+
+    /*Input theme*/
+    --input-text-color: #404040;
+    --input-bg-color: #fff;
+    --input-border-color: #d0d0d0;
+    --input-border-color-validate: #cf4c35;
+    --input-border-color-hover:#636dde;
+    --input-bg-color-disable:#e5e6eb;
+
+    /*Text Require*/
+    --text-color-require: #cf4c35;
+    --bg-require-warning:#cf4c35;
+    --text-require-warning:#fff;
+
+    /*Loading Load Data*/
+    --background-color-loading-data: #e5e6eb;
+    --background-color-loading-data-gradient-1: #e5e6eb;
+    --background-color-loading-data-gradient-2: #f5f5f5;
+
+    /*Scrollbar*/
+    --background-scrollbar-thumb:#9aa4bb;
+    --background-scrollbar-track:#f1f1f1;
+
+    /*Combobox*/
+    --item-data-hover: #ccc;
+
+    /*DateTimePicker*/
+    --date-time-background-header-box-item: #6b6f9d;
+    --date-time-border-arrow: #fff;
+    --date-time-bg-week:#ececec;
+    --date-time-color-day: #333;
+    --date-time-color-day-inactive:#aaa;
+    --date-time-color-day-active:#fff;
+    --date-time-color-day-hover:#f2f2f2;
+
+    /*Checkbox*/
+    --checkbox-bg:white;
+    --checkbox-border: #757575;
+    --checkbox-box-shadow: rgba(0, 0, 0, 0.05);
+    --checkbox-checked-bg: #2b3173;
+    --checkbox-disable-bg:#c6c6c6;
+    --checkbox--disable-border: #757575;
+
+    /*Grid*/
+    --grid-border: #e9e9e9;
+    --bg-body-normal: white;
+    --bg-body-two: #f6f6f6;
+    --grid-color: #404040;
+    --grid-hover: #e2e4f1;
+    --bg-color-head: #f0f0f0;
+    --bg-popup-hover:#6b6f9d;
+
+    /*icon*/
+    --icon-bg: #2b3173;
+    --icon-color-text: white;
+	
+	/* Variables for default theme (light-mode) */
+    /* BaseDictionaryList */
+    --bg-toolbar: #2b3173;
+    --button-toolbar: #190472;
+
+    /*BaseDictionaryDetail */
+    --bg-body-detail: white;
+    --bg-head-detail: #f0f0f0;
+    --color-font-header: #212121;
+    --border-detail: #dfdfdf;
+    --border-footer-detail: #dfdfdf;
+}

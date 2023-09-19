@@ -1,0 +1,15 @@
+<!-- <div class="button-body" v-if="control"> -->
+    <div class="d-flex height-fill width-fill" v-if="control">
+        <button class="qlch-btn pss-rel flex-1" :isLoading="control.isLoadingData" :id="control.id"
+            :class="[control.classType,{'btn-read-only':control.readOnly}]" @click.stop="click"
+            :style="control.styleButton">
+            <span v-if="!control.isLoadingData" class="d-flex-center height-fill">
+                <span class="icon" :class="control.classIconLeft"></span>
+                <span v-if="control.fieldText" class="btn-text">{{control.fieldText}}</span>
+                <span class="icon" :class="control.classIconRight"></span>
+            </span>
+            <span v-if="control.isLoadingData" class='spinning-loading'></span>
+        </button>
+        <slot name="right"></slot>
+    </div>
+<!-- </div> -->

@@ -1,0 +1,151 @@
+<div v-if="control && control.columns && control.columns.length > 0"
+    class="height-fill width-fill d-flex-column pss-rel" :id="control.id">
+
+    <div class="scroll-auto flex-1">
+        <table class="qlch-grid width-fill height-fill" @mousemove="onMouseMoveInGrid($event)"
+            @mouseup="onMouseUpInGrid" v-mouse-up-out="onMouseUpOutGrid">
+            <thead class="pss-sticky-top">
+                <tr class="d-flex">
+                    <th class="head-checkbox pss-sticky-left">
+                        <div class="width-fill height-fill">
+                            <e-checkbox class="d-flex-center " :control="cbkCheckAll"
+                                @update:modelValue="onChangeSelectAllItem" v-model="thisData.isCheckAll"></e-checkbox>
+                        </div>
+                    </th>
+                    <th v-for="column in control.columns" :key="column.dataIndex"
+                        :style="`flex:`+column.flex+`;width:`+column.width+`px;min-width:`+column.minWidth+`px`"
+                        :id="column.id" class="pss-rel">
+                        <div class="text-h-ellipse width-fill d-flex-center text-header">
+                            {{column.fieldText}}</div>
+                        <div class="width-fill d-flex-center pnl-filter"
+                            v-if="column.isFilter && column.dataIndex && thisData.filterControl && thisData.filterControl[column.dataIndex]">
+                            <div class="button-filter" v-if="thisData.filterControl[column.dataIndex].button">
+                                <button class="height-fill width-fill no-pad-mar"
+                                    :style="thisData.filterControl[column.dataIndex].button.styleButton"
+                                    :id="column.id + `-button-filter`"
+                                    @click="onCLickBtnFilter(column,thisData.filterControl[column.dataIndex].button)">
+                                    {{thisData.filterControl[column.dataIndex].button.fieldText}}
+                                </button>
+                                <div class="pss-abs popup-filter"
+                                    v-if="thisData.filterControl[column.dataIndex].button.children && thisData.filterControl[column.dataIndex].button.children.length > 0"
+                                    :id="column.id + `-popup-filter`" v-click-out="onClickOutFilter">
+                                    <div v-for="itemChild in thisData.filterControl[column.dataIndex].button.children"
+                                        :key="itemChild.itemCode" class="height-fill d-flex-column"
+                                        @click="onChangeOperatorFilter(column, itemChild)">
+                                        <div class="d-flex-vcenter item-popup">
+                                            <div class="text-description">{{itemChild.fieldText}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <e-text-box
+                                v-if="thisData.filterControl[column.dataIndex].input && thisData.filterData[column.dataIndex]"
+                                class="height-fill width-fill" :control="thisData.filterControl[column.dataIndex].input"
+                                v-model="thisData.filterData[column.dataIndex].value" @blur="onBlurFilter"
+                                @enter="onEnterFilter"></e-text-box>
+                        </div>
+                        <div class="resizer" :id="column.id + `-resizer`"
+                            @mousedown="onMouseDownInColumn($event,column)">
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody v-if="control.isLoadingData" class="pss-rel width-fill height-fill">
+                <tr class="d-flex pss-rel loading">
+                    <td class="head-checkbox pss-sticky-left d-flex-center">
+                        <div class="item-loading width-fill skeleton-loading"></div>
+                    </td>
+                    <td v-for="column in control.columns" :key="column.dataIndex" class="pss-rel no-pad-mar"
+                        :style="`flex:`+column.flex+`;width:`+column.width+`px;min-width:`+column.minWidth+`px`">
+                        <div class="item-loading skeleton-loading"></div>
+                        <div class="resizer" :id="column.id + `-resizer`"
+                            @mousedown="onMouseDownInColumn($event,column)">
+                        </div>
+                    </td>
+                </tr>
+
+            </tbody>
+            <tbody v-else-if="control.data && control.data.length > 0">
+                <tr class="d-flex pss-rel" v-for="item in control.data" :key="item[control.primaryKey]">
+                    <td class="head-checkbox pss-sticky-left d-flex-center">
+                        <div class="">
+                            <e-checkbox :control="cbkCheckItem" @update:modelValue="onChangeSelectItem($event, item)"
+                                v-model="item[`checked`]"></e-checkbox>
+                        </div>
+                    </td>
+                    <td v-for="column in control.columns" :key="column.dataIndex" class="pss-rel"
+                        :style="`flex:`+column.flex+`;width:`+column.width+`px;min-width:`+column.minWidth+`px`">
+                        <div class="text-h-ellipse text-body">{{item[column.dataIndex]}}</div>
+                        <div class="resizer" :id="column.id + `-resizer`"
+                            @mousedown="onMouseDownInColumn($event,column)">
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody v-else class="pss-rel width-fill height-fill">
+                <div class="pss-abs width-fill height-fill">
+                    <p class="no-pad-mar width-fill height-fill d-flex-center">Không có dữ liệu</p>
+                </div>
+            </tbody>
+
+
+        </table>
+    </div>
+
+    <div class="paging-toolbar" v-if="thisData.footer">
+        <div class="height-fill d-flex-vcenter body-paging-toolbar">
+            <div class="pagging-toolbar-right flex-1 height-fill d-flex">
+                <div class="height-fill d-flex-vcenter">
+                    <div class="btn-toolbar-wrap item-toolbar">
+                        <button class="btn-toolbar width-fill height-fill" @click="onBtnFirstClick">
+                            <span class="i-first d-block icon-paging"></span>
+                        </button>
+                    </div>
+                    <div class="btn-toolbar-wrap item-toolbar">
+                        <button class="btn-toolbar width-fill height-fill" @click="onBtnBackClick">
+                            <span class="i-back d-block icon-paging"></span>
+                        </button>
+                    </div>
+
+                    <div class="item-toolbar">
+                        <p class="d-flex-vcenter no-pad-mar">Trang</p>
+                    </div>
+                    <div class="display-page d-flex-vcenter item-toolbar">
+                        <e-number class="input-toolbar-paging" :control="numPage"
+                            v-model="thisData.footer.pageActive" />
+                    </div>
+                    <div class="item-toolbar">
+                        <p class="d-flex-vcenter no-pad-mar">trên {{thisData.footer.totalPage}}</p>
+                    </div>
+
+                    <div class="btn-toolbar-wrap item-toolbar">
+                        <button class="btn-toolbar width-fill height-fill" @click="onBtnNextClick">
+                            <span class="i-next d-block icon-paging"></span>
+                        </button>
+                    </div>
+                    <div class="btn-toolbar-wrap item-toolbar">
+                        <button class="btn-toolbar width-fill height-fill" @click="onBtnLastClick">
+                            <span class="i-last d-block icon-paging"></span>
+                        </button>
+                    </div>
+
+                    <div class="btn-toolbar-wrap item-toolbar">
+                        <button class="btn-toolbar width-fill height-fill" @click="onReloadClick">
+                            <span class="i-reload d-block icon-paging"></span>
+                        </button>
+                    </div>
+                    <div class="display-page d-flex-vcenter item-toolbar">
+                        <e-combobox class="input-toolbar-paging" :control="cbLimit" v-model="thisData.footer.limit"
+                            @update:modelValue="onChangeLimit" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-item-right">
+                <p class="no-pad-mar d-flex flex-h-end">Hiển thị {{thisData.footer.start}} - {{thisData.footer.end}}
+                    trên
+                    {{thisData.footer.totalRecord}} kết quả</p>
+            </div>
+        </div>
+    </div>
+</div>

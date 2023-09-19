@@ -1,0 +1,236 @@
+/*
+Mode VBox
+*/
+
+.txt-label,
+.body-input {
+    height: 35px;
+}
+
+.txt-label{
+    margin-right: 4px;
+}
+
+
+
+.qlch-date-input {
+    border-radius: 3px;
+    background: repeat-x 0 0;
+    width: 100%;
+    color: var(--input-text-color);
+    padding: 5px 25px 4px 5px;
+    background-color: var(--input-bg-color);
+    border: 1px solid var(--input-border-color);
+}
+
+.qlch-date-input:focus,
+.qlch-date-input.warning-valid:focus {
+    border: 1px solid var(--input-border-color-hover);
+    outline: none;
+}
+
+.qlch-date-input:disabled {
+    opacity: var(--opacity-read-only);
+    background-color: var(--input-bg-color-disable);
+}
+
+.lbl-default {
+    margin-right: 16px;
+}
+
+.qlch-date-input.warning-valid {
+    border: 1px solid var(--input-border-color-validate);
+}
+
+.i-warning:hover+.bg-warning {
+    display: block;
+}
+
+.warning-valid{
+    padding-left: 8px;
+}
+
+.body-input {
+    position: relative;
+}
+
+.bg-warning {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    background-color: var(--bg-require-warning);
+    color: var(--text-require-warning);
+    display: none;
+    padding: 8px;
+    border-radius: 3px;
+}
+
+.lbl-loading {
+    width: 100px;
+}
+
+.display-text {
+    height: 20px;
+}
+
+.bg-arrow {
+    width: 25px;
+    right: 0;
+}
+
+.bg-arrow:hover {
+    cursor: pointer;
+}
+
+.bg-box-item {
+    min-width: 308px;
+    width: 310px;
+    border: 1px solid var(--input-border-color);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 3px;
+    top: 100%;
+    left: 0%;
+    background-color: var(--background-color);
+    z-index: 1;
+}
+
+.box-item {
+    padding: 8px;
+    white-space: nowrap;
+}
+
+.box-item:hover {
+    cursor: pointer;
+}
+
+.box-item.active {
+    background-color: var(--item-data-hover);
+}
+
+.item-data.skeleton-loading {
+    height: 19px;
+    border-radius: 5px;
+}
+
+.box-item-loading:hover {
+    cursor: default;
+    background-color: inherit;
+}
+
+.box-item-content {
+    position: relative;
+    z-index: 2;
+}
+
+.box-item-header {
+    background-color: var(--date-time-background-header-box-item);
+}
+
+
+.box-item-content ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    text-align: center;
+}
+
+.box-item-content .weeks {
+    line-height: 36px;
+    font-size: 13px;
+    color: var(--input-text-color);
+    background: var(--date-time-bg-week);
+}
+
+
+.box-item-content .days {
+    margin-bottom: 20px;
+}
+
+.box-item-content li {
+    color: var(--date-time-color-day);
+    width: calc(100% / 7);
+}
+
+.box-item-content .weeks li {
+    cursor: default;
+}
+
+.box-item-content .days li {
+    z-index: 1;
+    cursor: pointer;
+    position: relative;
+    margin-top: 2px;
+    line-height: 36px;
+}
+
+.days li.inactive {
+    color: var(--date-time-color-day-inactive);
+}
+
+.days li.active {
+    color: var(--date-time-color-day-active);
+}
+
+.days li::before {
+    position: absolute;
+    content: "";
+    left: 50%;
+    top: 50%;
+    height: 38px;
+    width: 100%;
+    z-index: -1;
+    transform: translate(-50%, -50%);
+}
+
+.days li.active::before {
+    background: var(--date-time-background-header-box-item);
+    border-radius: 25%;
+}
+
+.days li:not(.active):hover::before {
+    background: var(--date-time-color-day-hover);
+}
+
+.date-picker-month {
+    padding: 14px;
+    font-size: 15px;
+    color: var(--date-time-color-day-active);
+    cursor: pointer;
+}
+
+
+.arrow.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.arrow.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.arrow {
+    border: solid var(--date-time-border-arrow);
+    border-width: 0px 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    height: 0px;
+    opacity: 0.5;
+}
+
+.item-date-arrow:hover {
+    cursor: pointer;
+}
+
+.item-date-arrow:hover .arrow {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.item-date-arrow {
+    padding: 0 20px;
+}
+
+.box-item-footer {
+    margin: 8px 0;
+}

@@ -1,0 +1,22 @@
+<base-dictionary-detail-view :idRoot="idRoot" :propView="propView" :styleFrom="`width: 500px;`"
+    @toolbarClick="onSelectAction" @closeFormClick="onCloseForm">
+    <template v-slot:content-detail>
+        <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtAccountNumber`]"
+                v-model="masterData[bindingControl[`txtAccountNumber`].bindingIndex]">
+            </e-text-box>
+        </div>
+        <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtBankName`]"
+                v-model="masterData[bindingControl[`txtBankName`].bindingIndex]"></e-text-box>
+        </div>
+        <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtAccountHolder`]"
+                v-model="masterData[bindingControl[`txtAccountHolder`].bindingIndex]"></e-text-box>
+        </div>
+        <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtDescription`]"
+                v-model="masterData[bindingControl[`txtDescription`].bindingIndex]"></e-text-box>
+        </div>
+    </template>
+</base-dictionary-detail-view>

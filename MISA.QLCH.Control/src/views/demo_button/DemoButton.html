@@ -1,0 +1,71 @@
+
+    <h3>1. Button default</h3>
+    <div class="d-flex">
+        <div class="btn-item">
+            <e-button :control="btnDefaultPrimary" />
+        </div>
+
+        <div class="btn-item">
+            <e-button :control="btnDefaultSecondary" />
+        </div>
+        <div class="btn-item">
+            <e-button :control="btnDefaultTertiary" />
+        </div>
+
+    </div>
+
+    <h3>2. Button with Icons</h3>
+    <div class="d-flex">
+        <div class="btn-item">
+            <e-button :control="btnIconLeftPrimary" />
+        </div>
+
+        <div class="btn-item">
+            <e-button :control="btnIconLeftSecondary" />
+        </div>
+        <div class="btn-item">
+            <e-button :control="btnIconLeftTertiary" />
+        </div>
+
+    </div>
+    <h4></h4>
+    <div class="d-flex">
+        <div class="btn-item">
+            <e-button :control="btnIconRightPrimary" />
+        </div>
+
+        <div class="btn-item">
+            <e-button :control="btnIconRightSecondary" />
+        </div>
+        <div class="btn-item">
+            <e-button :control="btnIconRightTertiary" />
+        </div>
+
+    </div>
+    <h3>3. Button Read only (disabled)</h3>
+    <div class="d-flex">
+        <div class="btn-item">
+            <e-button :control="btnReadOnlyPrimary" />
+        </div>
+
+        <div class="btn-item">
+            <e-button :control="btnReadOnlySecondary" />
+        </div>
+        <div class="btn-item">
+            <e-button :control="btnReadOnlyTertiary" />
+        </div>
+    </div>
+
+    <h3>4. Button Save Loading</h3>
+    <div class="d-flex">
+        <div class="btn-item">
+            <e-button :control="btnLoadingPrimary" @click="btnLoading_Click(btnLoadingPrimary)" />
+        </div>
+        <div class="btn-item">
+            <e-button :control="btnLoadingSecondary" @click="btnLoading_Click(btnLoadingSecondary)" />
+        </div>
+        <div class="btn-item">
+            <e-button :control="btnLoadingTertiary" @click="btnLoading_Click(btnLoadingTertiary)" />
+        </div>
+    </div>
+

@@ -1,0 +1,26 @@
+.left-sidebar{
+    width: 160px;
+    min-width: 160px;
+    background-color: var(--pu-primary);
+}
+
+.item-route{
+    height: 40px;
+    background-color: var(--pu-primary);
+}
+
+a{
+    background-color: var(--pu-primary);
+    color: var(--text-color-sidebar);
+    text-decoration: none;
+    padding-left: 15px;
+}
+
+a:hover{
+    background-color: var(--pu-primary-hover);
+    color: var(--text-color-sidebar-hover);
+}
+
+.foot{
+    border-top: 1px solid #ccc
+}

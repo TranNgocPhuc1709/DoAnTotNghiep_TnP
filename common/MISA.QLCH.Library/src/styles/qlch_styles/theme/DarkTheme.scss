@@ -1,0 +1,62 @@
+/*
+document.documentElement.setAttribute('data-theme', "darkMode")
+*/
+[data-theme="darkMode"] {
+    /* Variables for default theme (dark-mode) */
+    --background-color: #101010;
+    --text-color: #fff;
+    --pu-primary:#101010;
+    --pu-primary-hover:#111;
+
+    /*SlideBar*/
+    --text-color-sidebar:#fff;
+    --text-color-sidebar-hover:#fff;
+
+    --subdued-background-color:#111;
+
+    /*Button Theme*/
+    --btn-primary: #2b3173;
+    --btn-border-primary: #2b3173;
+    --btn-primary-hover: #1e235a;
+    --btn-border-primary-hover: #1e235a;
+    --btn-text-color-primary: #fff;
+
+    --btn-secondary: #fff;
+    --btn-border-secondary: #2b3173;
+    --btn-border-secondary-hover: #1e235a;
+    --btn-text-color-secondary: #2b3173;
+    --btn-text-color-secondary-hover: #1e235a;
+
+    --btn-tertiary: #111;
+    --btn-border-tertiary: #111;
+    --btn-border-tertiary-hover: #fff;
+    --btn-text-color-tertiary: #fff;
+    --btn-text-color-tertiary-hover: #fff;
+
+    /*Input theme*/
+    --input-text-color: #fff;
+    --input-bg-color: #111;
+    --input-border-color: #ccc;
+    --input-border-color-validate: red;
+    --input-border-color-hover:#ccc;
+    --input-bg-color-disable:#ccc;
+
+    /*Text Require*/
+    --text-color-require: red;
+
+    /*Loadding Load Data*/
+    --background-color-loading-data: #e5e6eb;
+    --background-color-loading-data-gradient-1: #e5e6eb;
+    --background-color-loading-data-gradient-2: #f5f5f5;
+
+    /*Scrollbar*/
+    --background-scrollbar-thumb:#9aa4bb;
+    --background-scrollbar-track:#f1f1f1;
+
+    /*Combobox*/
+    --item-data-hover: #ccc;
+
+    /*DateTimePicker*/
+    --date-time-background-header-box-item: #6b6f9d;
+    --date-time-border-arrow: #fff;
+}

@@ -1,0 +1,76 @@
+/*
+Mode VBox
+*/
+
+.txt-label,
+.body-input {
+    height: 100%;
+}
+
+.txt-label {
+    margin-right: 4px;
+}
+
+.qlch-num {
+    border-radius: 3px;
+    background: repeat-x 0 0;
+    width: 100%;
+    color: var(--input-text-color);
+    padding: 5px 10px 4px;
+    background-color: var(--input-bg-color);
+    border: 1px solid var(--input-border-color);
+    text-align: right;
+}
+
+.qlch-num:focus,
+.qlch-num.warning-valid:focus {
+    border: 1px solid var(--input-border-color-hover);
+    outline: none;
+}
+
+.qlch-num:disabled {
+    opacity: var(--opacity-read-only);
+    background-color: var(--input-bg-color-disable);
+}
+
+.lbl-default {
+    margin-right: 16px;
+}
+
+
+.qlch-num.warning-valid {
+    border: 1px solid var(--input-border-color-validate);
+}
+
+.i-warning:hover+.bg-warning {
+    display: block;
+}
+
+.body-input {
+    position: relative;
+}
+
+.warning-valid{
+    padding-left: 8px;
+}
+
+
+
+.bg-warning {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    background-color: var(--bg-require-warning);
+    color: var(--text-require-warning);
+    display: none;
+    padding: 8px;
+    border-radius: 3px;
+}
+
+.lbl-loading {
+    width: 100px;
+}
+
+.display-text {
+    height: 20px;
+}

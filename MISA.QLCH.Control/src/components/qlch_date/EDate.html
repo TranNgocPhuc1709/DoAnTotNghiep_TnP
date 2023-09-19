@@ -1,0 +1,80 @@
+<div v-if="control" class="qlch-date-time height-fill width-fill" :class="[
+                {'d-flex':control.boxType!='vbox'},
+                {'d-flex-column':control.boxType=='vbox'},
+                control.classParent
+            ]" v-click-out="dateTimeClickOut">
+    <div v-if="control.fieldText && !control.isLoadingData" class="txt-label d-flex-vcenter"
+        :class=[control.classLabel]>
+        <slot name="labelTextBox">
+            <span v-t="control.fieldText"></span>
+            <span v-if="control.require" class="txt-require">*</span>
+        </slot>
+    </div>
+    <div class="body-input prevent-select d-flex" :class="{'flex-1':control.boxType=='hbox'}" v-if="!control.isLoadingData">
+        <input type="text" class="qlch-date-input flex-1" :id="control.id" :value="thisData.displayValue"
+            :disabled="control.readOnly" :placeholder="control.placeholder"
+            :class="[{'warning-valid': !control.isValidateSuccess && control.isActive}]" :maxlength="control.maxlength"
+            @blur.stop="blurEvent" @input.stop="inputEvent" @focus.stop="focusEvent" @mouseover.stop="onHover"
+            @keydown.stop="onKeyDown" autocomplete="off">
+
+        <div v-if="!control.isValidateSuccess && control.isActive"
+            class="warning-valid height-fill d-flex d-flex-vcenter pss-rel">
+            <div :id="control.idWarning" class="i-warning" @mouseover.stop="onHoverWarning"></div>
+            <span v-if="!control.isValidateSuccess && control.isActive" class="bg-warning" :style="control.styleWarning"
+                :id="control.idWarningInformation">{{control.contentWarning}}</span>
+        </div>
+        <div class="pss-abs bg-arrow d-flex-center height-fill" @click=itemCalendarIconClick
+            :style="(!control.isValidateSuccess && control.isActive)?`right:25px`:``">
+            <span class="i-date item-arrow"></span>
+        </div>
+
+        <!--Box Item Data-->
+        <div v-if="thisData.isShowBoxItem" class="pss-abs bg-box-item" :id="control.id+`-parent-box-item`">
+            <div class="d-flex-column height-fill">
+
+                <div class="box-item-header d-flex">
+                    <div class="d-flex-vcenter item-date-arrow" @click="changeMouthClick(`down`)"><span
+                            class="arrow left"></span></div>
+                    <div class="flex-1 d-flex-center date-picker-month" @click="clickChooseQuickMouthYear()">
+                        <span
+                            v-t="thisData.calendarMouth"></span><span>&ensp;</span><span>{{thisData.calendarYear}}</span>
+                    </div>
+                    <div class="d-flex-vcenter item-date-arrow" @click="changeMouthClick(`up`)"><span
+                            class="arrow right"></span></div>
+                </div>
+                <div class="box-item-content flex-1">
+
+                    <ul class="weeks no-pad-mar">
+                        <li>{{ $t("EDateResource.Sun") }}</li>
+                        <li>{{ $t("EDateResource.Mon") }}</li>
+                        <li>{{ $t("EDateResource.Tue") }}</li>
+                        <li>{{ $t("EDateResource.Wed") }}</li>
+                        <li>{{ $t("EDateResource.Thu") }}</li>
+                        <li>{{ $t("EDateResource.Fri") }}</li>
+                        <li>{{ $t("EDateResource.Sat") }}</li>
+                    </ul>
+                    <ul class="days no-pad-mar">
+                        <li v-for="item in thisData.listDayInMouth" :key="item.value" :class="item.cls"
+                            @click="btnAnyDayClick(item)" :id="item.value">
+                            {{item.display}}
+                        </li>
+                    </ul>
+                </div>
+                <div class="box-item-footer d-flex-center">
+                    <e-button :control="btnToDay" @btnClick="btnToDayClick()"></e-button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--Loading-->
+    <div v-if="control.fieldText && control.isLoadingData" class="txt-label d-flex-vcenter lbl-loading"
+        :class="[control.classLabel]"> <!--Label-->
+        <div class="skeleton-loading width-fill display-text">
+        </div>
+    </div>
+    <div class="body-input prevent-select d-flex skeleton-loading" :class="{'flex-1':control.boxType=='hbox'}"
+        v-if="control.isLoadingData">
+    </div>
+</div>

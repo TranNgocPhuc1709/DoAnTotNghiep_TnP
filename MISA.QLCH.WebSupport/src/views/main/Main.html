@@ -1,0 +1,22 @@
+<div class="body-home">
+    <div class="d-flex height-fill width-fill">
+        <div>
+            <left-menu @pageClick="changeItemMenu" :pages="pages" />
+        </div>
+
+        <div class="flex-1 body-right scroll-hidden">
+            <div class="d-flex-column height-fill width-fill">
+                <div class="navbar d-flex-vcenter">
+                    <p class="title" v-if="thisData">{{thisData.title}}</p>
+                </div>
+                <div class="flex-1 bg-body scroll-auto" id="qlch-home-content">
+                    <div class="main-content height-fill width-fill scroll-auto" id="main-control-content">
+                        <!-- <div class="height-fill width-fill"> -->
+                        <router-view />
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

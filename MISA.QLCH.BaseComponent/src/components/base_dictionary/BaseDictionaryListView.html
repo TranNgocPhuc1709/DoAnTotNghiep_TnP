@@ -1,0 +1,21 @@
+<div class="height-fill width-fill scroll-hidden d-flex-column" v-if="viewControl">
+    <div class="d-flex-vcenter qlch-toolbar">
+        <div v-if="viewControl.toolBarItems && viewControl.toolBarItems.length > 0"
+            class="height-fill d-flex width-fill no-pad-mar">
+            <div class="height-fill" v-for="item in viewControl.toolBarItems" :key="item.name">
+                <e-button class="button-toolbar" :control="item.control" @click="onClickItem(item.control)"></e-button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="flex-1 d-flex">
+        <slot name="content">
+            <div class="body-grid width-fill" :id="viewControl.id + `-grid-master`">
+                <e-grid v-if="viewControl.gridMaster" :control="viewControl.gridMaster" @loadData="onLoadGridMaster"
+                    @changeSelectedRecord="onchangeSelectedRecordMaster" />
+            </div>
+        </slot>
+    </div>
+
+</div>

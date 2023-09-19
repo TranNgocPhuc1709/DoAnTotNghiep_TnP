@@ -1,0 +1,46 @@
+<label v-if="control" class="qlch-textfield height-fill width-fill" :class="[
+                {'d-flex':control.boxType!='vbox'},
+                {'d-flex-column':control.boxType=='vbox'},
+                control.classParent
+            ]">
+    <div v-if="control.fieldText && !control.isLoadingData" class="txt-label d-flex-vcenter"
+        :style="`width:`+control.labelWidth+`px`"> <!--Label-->
+        <slot name="labelTextBox">
+            <span>{{control.fieldText}}</span>
+            <span v-if="control.require" class="txt-require">*</span>
+        </slot>
+    </div>
+    <div class="body-input d-flex flex-1" v-if="!control.isLoadingData">
+        <!--Input-->
+        <slot name="trigger-left"></slot>
+        <input :type="thisData.inputType" class="qlch-txt flex-1" :style="control.styleInput" :id="control.id"
+            :disabled="control.readOnly" :value="modelValue" :placeholder="control.placeholder"
+            :class="[{'warning-valid': !control.isValidateSuccess && control.isActive}]" :maxlength="control.maxlength"
+            @input.stop="onInput" @blur.stop="onBlur" @focus.stop="onFocus" @keydown.stop="onKeyDown" autocomplete="off">
+
+        <span v-if="control.type=='password'" class="icon-show-hide-password pss-abs"
+            :class="[thisData.classIconEyeStatus,{'icon-eye-read-only':control.readOnly}]"
+            :style="(!control.isValidateSuccess && control.isActive)?`right:30px`:``"
+            @mouseup="onMouseUpChangeType(false)" v-mouse-up-out="resetDisplayTypePassword"
+            @mousedown="onMouseUpChangeType(true)"></span>
+
+        <div v-if="!control.isValidateSuccess && control.isActive"
+            class="warning-valid height-fill d-flex d-flex-vcenter pss-rel">
+            <div :id="control.idWarning" class="i-warning" @mouseover.stop="onHoverWarning"></div>
+            <span v-if="!control.isValidateSuccess && control.isActive" class="bg-warning" :style="control.styleWarning"
+                :id="control.idWarningInformation">{{control.contentWarning}}</span>
+        </div>
+
+        <slot name="trigger-right"></slot>
+    </div>
+
+    <!--Loading-->
+    <div v-if="control.fieldText && control.isLoadingData" class="txt-label d-flex-vcenter lbl-loading"
+        :class="[control.classLabel]"> <!--Label-->
+        <div class="skeleton-loading width-fill display-text">
+        </div>
+    </div>
+    <div class="body-input d-flex skeleton-loading" :class="{'flex-1':control.boxType=='hbox'}"
+        v-if="control.isLoadingData">
+    </div>
+</label>

@@ -1,0 +1,14 @@
+<label v-if="control" class="parent-checkbox prevent-select width-fill height-fill"
+    :class="{'active':!(control.isLoadingData || control.readOnly)}">
+    <div class="d-flex-vcenter" v-if="!control.isLoadingData">
+        <input type="checkbox" :id="control.id" :disabled="control.readOnly" :checked="modelValue"
+            @change.stop="onChange" autocomplete="off">
+        <span class="check-box-custom"></span>
+        <span class="field-label" v-if="control.fieldText">{{control.fieldText}}</span>
+    </div>
+
+    <div class="d-flex-vcenter" v-if="control.isLoadingData">
+        <span class="check-box-custom-loading skeleton-loading"></span>
+        <span class="field-label-loading skeleton-loading" v-if="control.fieldText"></span>
+    </div>
+</label>

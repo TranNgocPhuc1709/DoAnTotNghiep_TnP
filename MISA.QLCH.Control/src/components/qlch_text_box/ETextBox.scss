@@ -1,0 +1,95 @@
+/*
+Mode VBox
+*/
+
+.txt-label,
+.body-input {
+    height: 100%;
+}
+
+.txt-label {
+    margin-right: 4px;
+}
+
+
+.qlch-txt {
+    border-radius: 3px;
+    background: repeat-x 0 0;
+    width: 100%;
+    color: var(--input-text-color);
+    padding: 5px 10px 4px;
+    background-color: var(--input-bg-color);
+    border: 1px solid var(--input-border-color);
+}
+
+.qlch-txt:focus,
+.qlch-txt.warning-valid:focus {
+    border: 1px solid var(--input-border-color-hover) !important;
+    outline: none;
+}
+
+.qlch-txt:disabled {
+    opacity: var(--opacity-read-only);
+    background-color: var(--input-bg-color-disable);
+}
+
+.lbl-default {
+    margin-right: 16px;
+}
+
+.qlch-txt[type="password"] {
+    padding-right: 25px;
+}
+
+
+.qlch-txt.warning-valid {
+    border: 1px solid var(--input-border-color-validate);
+}
+
+.i-warning:hover+.bg-warning {
+    display: block;
+}
+
+.body-input {
+    position: relative;
+}
+
+.icon-show-hide-password {
+    
+    position: absolute;
+    top: calc((100% - 16px)/2); //16px là độ cao của icon con mắt
+    right: 5px;
+}
+
+
+.icon-show-hide-password:hover {
+    cursor: pointer;
+}
+
+.icon-show-hide-password.icon-eye-read-only:hover {
+    cursor: default;
+}
+
+.bg-warning {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    background-color: var(--bg-require-warning);
+    color: var(--text-require-warning);
+    display: none;
+    padding: 8px;
+    border-radius: 3px;
+    z-index: 1;
+}
+
+.lbl-loading {
+    width: 100px;
+}
+
+.display-text {
+    height: 20px;
+}
+
+.warning-valid{
+    padding-left: 8px;
+}

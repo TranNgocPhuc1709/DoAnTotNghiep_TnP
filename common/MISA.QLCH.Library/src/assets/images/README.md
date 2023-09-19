@@ -1,0 +1,1 @@
+# Thư mục chứa các thành phần tĩnh của ứng dụng, Ex: Image

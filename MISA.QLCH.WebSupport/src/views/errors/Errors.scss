@@ -1,0 +1,20 @@
+.body-home {
+    width: 100vw;
+    height: 100vh;
+    background: url("@library-src/assets/images/bgErrorPage.jpg") no-repeat center center;
+    background-size: cover;
+    position: relative;
+    color: white;
+}
+
+.cloud {
+    background: url("@library-src/assets/images/cloud.png")no-repeat center center;
+    height: 95px;
+    display: block;
+    width: 700px;
+}
+
+
+.footer {
+    height: 41px;
+}

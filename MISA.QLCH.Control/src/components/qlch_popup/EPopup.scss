@@ -1,0 +1,40 @@
+.body-detail {
+    background-color: var(--bg-body-detail);
+    border-radius: 3px;
+    border: 2px solid var(--border-detail);
+}
+
+.detail-head {
+    height: 41px;
+    background-color: var(--bg-head-detail);
+    padding: 0 14px;
+}
+
+.detail-footer {
+    height: 70px;
+    padding: 0 14px;
+    border-top: 1px solid var(--border-footer-detail);
+}
+
+
+.icon {
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+.icon:first-of-type {
+    margin-left: 0px;
+}
+
+.cursor-header {
+    cursor: move;
+}
+
+.text-header {
+    font: 700 16px "Roboto";
+    color: var(--color-font-header);
+}
+
+.body-content-detail {
+    padding: 0 14px;
+}

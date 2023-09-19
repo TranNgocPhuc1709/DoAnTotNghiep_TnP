@@ -1,0 +1,19 @@
+<div class="left-sidebar scroll-auto height-fill">
+    <div class="d-flex-column width-fill height-fill">
+        <div class="content flex-1" v-if="pages && pages.length">
+            <div  v-for="item in pages" :key="item.routerLink" class="item-route width-fill">
+                <router-link :to="item.routerLink" class="d-flex-vcenter height-fill" @click="routerClick(item)">
+                    <span>{{item.fieldText}}</span>
+                </router-link>
+            </div>
+            
+        </div>
+        <div class="foot">
+            <div class="item-route width-fill">
+                <a href="#" class="d-flex-vcenter height-fill">
+                    Thu gọn
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

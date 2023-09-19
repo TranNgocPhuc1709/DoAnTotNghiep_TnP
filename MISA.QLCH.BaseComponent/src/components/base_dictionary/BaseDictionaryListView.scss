@@ -1,0 +1,14 @@
+.qlch-toolbar {
+    background-color: var(--bg-toolbar);
+    height: 36px;
+    min-height: 36px;
+    max-height: 36px;
+}
+
+.button-toolbar {
+    border-right: 1px solid var(--button-toolbar);
+}
+
+.button-toolbar .qlch-btn {
+    border-radius: 0 !important;
+}

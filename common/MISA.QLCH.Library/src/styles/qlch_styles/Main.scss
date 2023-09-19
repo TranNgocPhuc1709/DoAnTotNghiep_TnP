@@ -1,0 +1,117 @@
+// @import "@/styles/library/DarkTheme.scss";
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif !important;
+    font-size: var(--font-size);
+    font-weight: var(--font-weight);
+    line-height: var(--line-height);
+    color: var(--text-color);
+    text-align: left;
+    background-color: var(--background-color);
+    width: 100vw;
+    height: 100vh;
+}
+
+.txt-require {
+    color: var(--text-color-require);
+    margin-left: 4px;
+}
+
+// ::-webkit-scrollbar {
+//     width: 6px;
+//     height: 6px;
+//     opacity: .3;
+// }
+
+// ::-webkit-scrollbar-thumb {
+//     background: var(--background-scrollbar-thumb);
+//     width: 6px;
+//     height: 10px;
+//     border-radius: 4px;
+// }
+// ::-webkit-scrollbar-track {
+//     background: var(--subdued-background-color);
+// }
+
+
+.skeleton-loading {
+    background: linear-gradient(110deg, var(--background-color-loading-data-gradient-1) 8%, var(--background-color-loading-data-gradient-2) 18%, var(--background-color-loading-data-gradient-1) 33%);
+    border-radius: 3px;
+    background-size: 200% 100%;
+    animation: 0.5s shine linear infinite;
+}
+
+@keyframes shine {
+    to {
+        background-position-x: -200%;
+    }
+}
+
+.spinning-loading {
+    content: "";
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    border: 3px solid transparent;
+    border-radius: 50%;
+    animation: loading-spinner 1s ease infinite;
+    border-top-color: var(--btn-text-color-secondary);
+}
+
+@keyframes loading-spinner {
+    from {
+        transform: rotate(0turn);
+    }
+
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+input {
+    font-family: 'Roboto', sans-serif !important;
+    font-size: var(--font-size);
+    font-weight: var(--font-weight);
+    line-height: var(--line-height);
+    color: var(--text-color);
+}
+
+.qlch-bg-detail {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+}
+
+.qlch-mask {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    background-color: rgba(0, 0, 0, .6);
+    z-index: 2;
+}
+
+.qlch-input-default {
+    height: 35px !important
+}
+
+.prevent-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.allow-select {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}

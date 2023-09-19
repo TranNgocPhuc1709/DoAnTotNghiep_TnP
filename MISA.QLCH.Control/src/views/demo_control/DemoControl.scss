@@ -1,0 +1,27 @@
+.body-home{
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--subdued-background-color);
+}
+
+.navbar{
+    height: 60px;
+    min-height: 60px;
+    background-color: var(--background-color);
+}
+
+.bg-body{
+    margin: 8px;
+}
+
+.main-content{
+    background-color: var(--background-color);
+}
+
+.title{
+    font-size: var(--font-size-title);
+    color: var(--text-color);
+    font-weight: 700;
+    margin: 0 0 0 24px;
+}
+

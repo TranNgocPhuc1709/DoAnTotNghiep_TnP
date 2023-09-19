@@ -1,0 +1,79 @@
+<div v-if="control" class="qlch-combobox height-fill width-fill" :class="[
+                {'d-flex':control.boxType!='vbox'},
+                {'d-flex-column':control.boxType=='vbox'},
+                control.classParent
+            ]" v-click-out="comboboxClickOut">
+    <div v-if="control.fieldText && !control.isLoadingData" class="txt-label d-flex-vcenter"
+        :class=[control.classLabel]> <!--Label-->
+        <slot name="labelTextBox">
+            <span>{{control.fieldText}}</span>
+            <span v-if="control.require" class="txt-require">*</span>
+        </slot>
+    </div>
+    <div class="body-input d-flex" :class="{'flex-1':control.boxType=='hbox'}" v-if="!control.isLoadingData">
+        <!--Input-->
+        <input v-if="!control.selectOnly" type="text" class="qlch-cbb flex-1" :id="control.id"
+            :disabled="control.readOnly" :value="thisData.displayValue" :placeholder="control.placeholder"
+            :class="[{'warning-valid': !control.isValidateSuccess && control.isActive}]" :maxlength="control.maxlength"
+            @blur.stop="onBlur" @input.stop="onInput" @focus.stop="onFocus" @mouseover.stop="onHover"
+            @keydown.stop="onKeyDown" autocomplete="off">
+
+        <div v-else class="flex-1 qlch-cbb cursor-pointer prevent-select" @click="onItemArrowClick" :id="control.id">
+            <span class="d-flex-vcenter height-fill">
+                {{thisData.displayValue}}
+            </span>
+        </div>
+        <div v-if="!control.isValidateSuccess && control.isActive"
+            class="warning-valid height-fill d-flex d-flex-vcenter pss-rel">
+            <div :id="control.idWarning" class="i-warning" @mouseover.stop="onHoverWarning"></div>
+            <span v-if="!control.isValidateSuccess && control.isActive" class="bg-warning" :style="control.styleWarning"
+                :id="control.idWarningInformation">{{control.contentWarning}}</span>
+        </div>
+        <div class="pss-abs bg-arrow d-flex-center height-fill" @click=onItemArrowClick
+            :style="(!control.isValidateSuccess && control.isActive)?`right:25px`:``">
+            <span class="arrow down item-arrow"></span>
+        </div>
+
+        <!--Box Item Data-->
+        <div v-if="thisData.isShowBoxItem" class="pss-abs bg-box-item scroll-auto" :id="control.id+`-parent-box-item`">
+            <div v-if="control.isLoadingItemData">
+                <div class="box-item box-item-loading">
+                    <div class="item-data skeleton-loading">
+                    </div>
+                </div>
+
+            </div>
+            <div v-else-if="control.dataDisplay && control.dataDisplay.length > 0">
+                <div v-for="item in control.dataDisplay" class="box-item" :key="item[control.valueField]"
+                    :class="{'active':item['active']||item['selected']}" @click.stop="clickItemInBox(item)"
+                    @mouseover.stop="hoverItem(item)" :id="control.id+`-item-`+item[control.valueField]">
+                    <div class="item-data">
+                        {{item[control.displayField]}}
+                    </div>
+                </div>
+            </div>
+            <div v-else>
+                <div class="flex-1 d-flex-center">
+                    <p>Không có dữ liệu</p>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <!--Loading-->
+    <div v-if="control.fieldText && control.isLoadingData" class="txt-label d-flex-vcenter lbl-loading"
+        :class="[control.classLabel]">
+        <div class="skeleton-loading width-fill display-text">
+        </div>
+    </div>
+    <div class="body-input d-flex skeleton-loading width-fill" :class="{'flex-1':control.boxType=='hbox'}"
+        v-if="control.isLoadingData">
+    </div>
+</div>
+<div v-else>
+    <h1>This is E Combobox</h1>
+</div>

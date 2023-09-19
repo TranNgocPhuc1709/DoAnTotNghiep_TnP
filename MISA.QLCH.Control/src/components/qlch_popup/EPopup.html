@@ -1,0 +1,39 @@
+<div class="height-fill width-fill d-flex-center" :id="thisData.idParent" @mousemove="onMouseMove" @mouseup="onMouseUp"
+    v-mouse-up-out="onMouseUpOut">
+    <div class="body-detail d-flex-column" :style="styleFrom" :id="thisData.id" @resize="onResizeBrowser">
+        <div class="detail-head d-flex">
+            <div class="cursor-header text-header flex-1 height-fill d-flex-vcenter" @mousedown="onMouseDown">
+                <slot name="title">
+                    <p>Title</p>
+                </slot>
+            </div>
+            <div class="icon-right height-fill flex-h-end">
+                <slot name="window-button">
+                    <div class="icon height-fill d-flex-vcenter" @click="onMaximizeClick">
+                        <div class="i-maximize"></div>
+                    </div>
+
+                    <div class="icon height-fill d-flex-vcenter" @click="onCloseClick">
+                        <div class="i-close"></div>
+                    </div>
+                </slot>
+            </div>
+
+        </div>
+        <div class="flex-1 body-content-detail">
+            <slot name="content-detail">
+                <h3>Dev: Vui lòng khai báo nội dung form</h3>
+            </slot>
+        </div>
+        <div class="detail-footer">
+            <slot name="form-button">
+                <div class="height-fill width-fill no-pad-mar d-flex">
+                    <div class="text-header height-fill d-flex-vcenter">
+                        <b>BaseDictionaryDetailView: Button Toolbar</b>
+                    </div>
+                </div>
+            </slot>
+        </div>
+
+    </div>
+</div>
