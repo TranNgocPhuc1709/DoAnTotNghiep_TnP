@@ -16,7 +16,11 @@ import PopupLibrary from '@library-src/utilities/commons/PopupLibrary';
 import MisaCopyright from 'qlch_control/MisaCopyright';
 import ElementLibrary from '@library-src/utilities/commons/ElementLibrary';
 import router from '@src/router';
-import { useStore } from 'vuex';
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import ContextModel from '@store-src/models/context/ContextModel';
+import Guid from '@library-src/utilities/types/Guid';
+import Constant from '@library-src/utilities/constants/Constant';
+// import { useStore } from 'vuex';
 export default {
 
   components: {
@@ -32,12 +36,12 @@ export default {
       classType: "primary"
     });
     const websiteMISA = import.meta.env.QLCH_WebsiteMISA;
-    const store = useStore(); // Access the Vuex store
+    // const store = useStore(); // Access the Vuex store
     return {
       thisData,
       btnLogin,
       websiteMISA,
-      store
+
     };
   },
 
@@ -81,7 +85,9 @@ export default {
         }
 
         if (me.validateLogin()) {
-          me.store.dispatch('context/updateUser', 'hello');
+          // me.store.dispatch('context/updateUser', 'hello');
+          const newContext = new ContextModel({ token: Guid.NewGuid() }); // Tạo token lưu trên local store
+          LocalStorageLibrary.setByKey(Constant.tokenContext, newContext);
           router.push({ path: '/' })
         }
 

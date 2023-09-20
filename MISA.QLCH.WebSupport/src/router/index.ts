@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import routes from './router';
-import { useStore } from 'vuex';
 import DocumentLibrary from '@library-src/utilities/window/document/DocumentLibrary';
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import ContextModel from '@store-src/models/context/ContextModel';
+import Constant from '@library-src/utilities/constants/Constant';
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,14 +13,14 @@ const router = createRouter({
 /**
  * Xử lý nghiệp vụ trước khi router
  */
+
 router.beforeEach((to, from, next) => {
     if (to && to.meta && from) {
-
+        const context = LocalStorageLibrary.getByKey<ContextModel>(Constant.tokenContext)
         if (to.name == "login") {
-            const store = useStore();
-            const token = store.state.context.token;
-            if (token) {
-                next({ name: from.name ?? "/" });
+
+            if (context && context.token) {
+                next({ path: from.path ?? "/" });
                 return;
             }
         }
@@ -28,10 +30,8 @@ router.beforeEach((to, from, next) => {
             return;
         }
     }
-
-    const store = useStore();
-    const token = store.state.context.token;
-    if (!token) {
+    const context = LocalStorageLibrary.getByKey<ContextModel>(Constant.tokenContext)
+    if (!context || !context.token) {
         next({ name: 'login' });
         return;
     }
@@ -43,7 +43,7 @@ router.beforeEach((to, from, next) => {
     if (to && to.meta && from) {
         const meta = to.meta;
         const path = meta['title'] ? meta['title'] : 'MISA eShop Support';
-        DocumentLibrary.setTitleDocument(path);
+        DocumentLibrary.setTitleDocument("" + path);
     }
     next();
 });
