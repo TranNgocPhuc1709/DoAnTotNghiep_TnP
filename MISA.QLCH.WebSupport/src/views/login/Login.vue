@@ -85,37 +85,39 @@ export default {
       try {
 
         const me = this;
-        const txtUserName = me.bindingControl[`txtUserName`];
-        txtUserName.readOnly = true;
-        const txtPassword = me.bindingControl[`txtPassword`];
-        txtPassword.readOnly = true;
-        const ebutton = me.btnLogin;
-        ebutton.isLoadingData = true;
         if (!FormLibrary.validFormByBindingControl(me.bindingControl)) {
-          return;
+
+          return
         }
+
+        me.onOffFormLoading(true);
 
         await Function.getTimeOut(3000, '');
         if (me.validateLogin()) {
-
-
-
-
           const newContext = new ContextModel({ token: Guid.NewGuid() }); // Tạo token lưu trên local store
           LocalStorageLibrary.setByKey(Constant.tokenContext, newContext);
           router.push({ path: '/' })
 
         }
         else {
-
-          txtUserName.readOnly = false;
-          txtPassword.readOnly = false;
-          ebutton.isLoadingData = false;
+          me.onOffFormLoading(false)
         }
 
       } catch (error) {
         Log.ErrorLog(error as Error)
       }
+    },
+
+    onOffFormLoading(on: boolean) {
+      const me = this;
+      const txtUserName = me.bindingControl[`txtUserName`];
+      const txtPassword = me.bindingControl[`txtPassword`];
+      const ebutton = me.btnLogin;
+
+      txtUserName.readOnly = on;
+      txtPassword.readOnly = on;
+      ebutton.isLoadingData = on;
+
     },
 
     /**
