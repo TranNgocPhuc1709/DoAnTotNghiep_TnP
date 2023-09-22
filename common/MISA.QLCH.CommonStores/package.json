@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Thư viện store Vuex dùng chung",
   "main": "index.js",
-  "author": "tnduc",
+  "author": "tnphuc",
   "license": "MIT",
   "private": true,
   "devDependencies": {

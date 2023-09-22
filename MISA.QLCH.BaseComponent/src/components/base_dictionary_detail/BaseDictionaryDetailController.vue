@@ -26,7 +26,7 @@ export default {
     },
 
     /**
-     * tnduc - 19.09.2023 
+     * tnphuc - 19.09.2023 
      */
     data() {
         const me = this;
@@ -46,7 +46,7 @@ export default {
     methods: {
         /**
          * Khai báo các nút chức năng trên form
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         buildToolBarItems(): Array<ToolBarItemsView> {
             return Array(
@@ -79,7 +79,7 @@ export default {
 
         /**
          * Khai báo danh sách control binding trên form
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         buildBindingControl(): Record<string, BaseInput> {
             return {}
@@ -87,7 +87,7 @@ export default {
 
         /**
          * Khai báo tiêu đề cho form
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         getTitleForm() {
             return "BaseDictionaryDetailForm";
@@ -96,7 +96,7 @@ export default {
         /**
          * Sự kiện khi người dùng click trên tool Bar item
          * @param item 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onSelectAction(item: ToolBarItemsView) {
             try {
@@ -125,7 +125,7 @@ export default {
 
         /**
          * Thực hiện click vào nút close form 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onCloseForm() {
             try {
@@ -138,7 +138,7 @@ export default {
 
         /**
          * Sự kiện click button Lưu
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         async btnSaveClick(control: Button | DropDownMenu | DropDownMenuChild) {
             const me = this;
@@ -164,7 +164,7 @@ export default {
 
         /**
          * Validate dữ liệu trước khi save
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         validateDataBeforeSave() {
             const me = this;
@@ -177,7 +177,7 @@ export default {
 
         /**
          * Sự kiện click vào button lưu và thêm mới
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         async btnSaveNewClick(control: Button | DropDownMenu | DropDownMenuChild) {
             const me = this;
@@ -196,7 +196,7 @@ export default {
 
         /**
          * Sự kiện click vào button hủy bỏ
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         async btnCancelClick() {
             const me = this;
@@ -209,7 +209,7 @@ export default {
 
         /**
          * Thực hiện validate thêm nếu cần
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         validateDataBeforeSaveCustom() {
             return true;
@@ -217,19 +217,19 @@ export default {
 
         /**
          * function custom Data trước khi save
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         preDataBeforeSave() { },
 
         /**
          * Cần làm gì trước khi save thì viết vào hàm này
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         confirmBeforeSave() { },
 
         /** 
          * Thực hiện lấy thông tin nhập liệu trên form đẩy lên server để cất
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
         */
         submitChanges() {
             const me = this;
@@ -239,7 +239,7 @@ export default {
 
         /**
          * Hàm save đối tượng
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         saveData() {
             const me = this;
@@ -252,7 +252,7 @@ export default {
          * Hàm read loading toàn bộ from khi người dùng bắt đầu thực hiện chức năng
          * @param control button đang thao tác
          * @param enable true ? đang save : đã save xong
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         loadMaskInFormSave(control: Button | DropDownMenu | DropDownMenuChild, enable: boolean) {
             const me = this;
@@ -265,7 +265,7 @@ export default {
          * Bật loading button
          * @param control 
          * @param enable 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         setLoadingButtonClicking(control: Button | DropDownMenu | DropDownMenuChild, enable: boolean) {
             if (control) {
@@ -275,7 +275,7 @@ export default {
 
         /**
          * Set Readonly tất cả button khác khi save
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         setReadOnlyToolbarButton(enable: boolean) {
             const me = this;
@@ -292,7 +292,7 @@ export default {
         /**
          * Set RedOnly tất cả button 
          * @param enable 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         setRedOnlyAllControlInForm(enable: boolean) {
             const me = this;
@@ -308,7 +308,7 @@ export default {
 
         /**
          * Thực hiện đóng form
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         closeForm() {
             const me = this;
@@ -321,13 +321,13 @@ export default {
 
         /**
          * Sau khi đóng form xong thì xử lý thêm gì ở master thì Override function này ở master, override ở component detail và nội dung hàm sẽ viết ở tầng khởi tạo component
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         afterCloseForm() { },
 
         /**
          * Trước khi đóng form còn muốn làm gì thì override lại function này
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         beforeCloseForm() { },
 

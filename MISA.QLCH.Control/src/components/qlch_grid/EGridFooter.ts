@@ -71,7 +71,7 @@ export default class EGridFooter {
 
     /**
      * tính toán lại các thông tin liên quan dựa vào thanh phần total Record
-     * tnduc - 2022.08.03
+     * tnphuc - 2022.08.03
      */
     calcInfoDataWhenChange(totalRecord: number) {
         try {

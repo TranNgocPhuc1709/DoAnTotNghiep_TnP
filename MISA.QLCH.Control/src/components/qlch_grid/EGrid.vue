@@ -96,7 +96,7 @@ export default {
         /**
          * 
          * @param props Tham số truyền từ ngoài parent vào
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         function buildThisDataBy(props: LooseRequired<{ readonly control?: Grid | undefined; } & { readonly control?: Grid | undefined; }>) {
             let result = new EGrid();
@@ -117,7 +117,7 @@ export default {
          * 
          * @param column 
          * @param result 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         function buildFilterData(column: Column, result: EGrid) {
             if (column.dataIndex) {
@@ -130,7 +130,7 @@ export default {
          * 
          * @param column 
          * @param result 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         function buildFilterControl(column: Column, result: EGrid) {
             const styleInput = "border-radius: 0;border-right:0px;border-left:0px;border-bottom:0px;border-top:0px";
@@ -160,7 +160,7 @@ export default {
         /**
          * 
          * @param props 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         function checkExistsColumnIn(props: LooseRequired<{ readonly control?: Grid | undefined; } & { readonly control?: Grid | undefined; }>) {
             return (props && props.control && props.control.columns && props.control.columns.length > 0);
@@ -184,7 +184,7 @@ export default {
 
     /**
      * Khởi tạo biến kiểm tra đã khai báo Key Id của table hay chưa?
-     * tnduc - 19.09.2023 
+     * tnphuc - 19.09.2023 
      */
     created() {
 
@@ -206,7 +206,7 @@ export default {
 
         /**
          * Sự kiện check all 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onChangeSelectAllItem(value: boolean) {
             const me = this;
@@ -237,7 +237,7 @@ export default {
          * Sự kiện chọn trên checkbox grid
          * @param value 
          * @param record 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onChangeSelectItem(value: boolean, record: Record<string, any>) {
             try {
@@ -256,7 +256,7 @@ export default {
          * Sự kiện ấn chuột xuống tại vị trí cột để thay đổi size cột
          * @param e 
          * @param column 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onMouseDownInColumn(e: MouseEvent, column: Column) {
             const me = this;
@@ -281,7 +281,7 @@ export default {
 
         /**
          * Sự kiện nhả con chuột lên trên Grid
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onMouseUpInGrid() {
             try {
@@ -295,7 +295,7 @@ export default {
         /**
          * Sự kiện di chuyển con chuột trên grid
          * @param e 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onMouseMoveInGrid(e: MouseEvent) {
             const me = this;
@@ -315,7 +315,7 @@ export default {
 
         /**
          * Sự kiện nhả con chuột ở bên ngoài Grid 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onMouseUpOutGrid() {
             const me = this;
@@ -328,7 +328,7 @@ export default {
 
         /**
          * Sự kiện click bút filter show ra popup filter
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onCLickBtnFilter(column: Column, button: DropDownMenu) {
             const me = this;
@@ -396,7 +396,7 @@ export default {
 
         /**
          * Sự kiện click ra ngoài vùng filter
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onClickOutFilter(e: Event) {
             const me = this;
@@ -428,7 +428,7 @@ export default {
          * Thay đổi kiểu lọc dữ liệu
          * @param column 
          * @param itemChild 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onChangeOperatorFilter(column: Column, itemChild: DropDownMenuChild) {
             const me = this;
@@ -450,7 +450,7 @@ export default {
 
         /**
          * Thực hiện filter text trên column
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onBlurFilter() {
             try {
@@ -463,7 +463,7 @@ export default {
 
         /**
          * Thực hiện filter text trên column
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onEnterFilter() {
             try {
@@ -476,7 +476,7 @@ export default {
 
         /**
          * Nạp lại dữ liệu
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onReloadClick() {
             try {
@@ -489,7 +489,7 @@ export default {
 
         /**
          * Sự kiện click vào nút về trang đầu
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onBtnFirstClick() {
             try {
@@ -505,7 +505,7 @@ export default {
 
         /**
          * Sự kiện click vào nút back 1 trang
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onBtnBackClick() {
             try {
@@ -521,7 +521,7 @@ export default {
 
         /**
          * Sự kiện click vào nút next 1 trang
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onBtnNextClick() {
             try {
@@ -538,7 +538,7 @@ export default {
 
         /**
          * Sự kiện click vào trang cuối
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onBtnLastClick() {
             try {
@@ -555,7 +555,7 @@ export default {
 
         /**
          * Sự kiện thay đổi giới hạn / trang
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onChangeLimit() {
             try {
@@ -568,7 +568,7 @@ export default {
 
         /**
          * Reset tất cả children về undefined
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         resetAllChildrenFilter() {
             const me = this;
@@ -588,7 +588,7 @@ export default {
 
         /**
          * Áp dụng độ rộng cột sau khi setup
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         clearColumnResize() {
             const me = this;
@@ -597,7 +597,7 @@ export default {
 
         /**
          * Emit sự kiện reload 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         reloadData() {
             const me = this;
@@ -620,7 +620,7 @@ export default {
         /**
          * Thêm 1 item mới vào list selected
          * @param record 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         changeRecordToListSelected(record: Record<string, any>, editMode: EditMode) {
             const me = this;
@@ -642,7 +642,7 @@ export default {
         /**
          * Xóa 1 item trên list selected
          * @param record 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         addRecordToListSelected(record: Record<string, any>) {
             const me = this;
@@ -658,7 +658,7 @@ export default {
         /**
          * Xóa 1 item trên list selected
          * @param record 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         removeRecordToListSelected(record: Record<string, any>) {
             const me = this;

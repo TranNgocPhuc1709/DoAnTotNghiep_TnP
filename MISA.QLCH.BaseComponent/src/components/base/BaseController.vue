@@ -18,7 +18,7 @@ export default {
          * Xử lý event show window khi nhấn vào các button thêm, sửa, nhân bản...
          * @param record 
          * @param editMode 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         async showFromDetail(record: Record<string, any>, editMode: EditMode) {
             const me = this;
@@ -30,7 +30,7 @@ export default {
 
         /**
          * Create component popup
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         createComponent() {
             return null;
@@ -39,7 +39,7 @@ export default {
         /**
          * Tạo prop cho popup detail
          * @param editMode 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         createPropsDetail(record: Record<string, any>, editMode: EditMode) {
             record['editMode'] = editMode;

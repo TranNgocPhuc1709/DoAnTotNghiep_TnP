@@ -23,7 +23,7 @@ export default {
     methods: {
         /**
          * Action Click Button
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         click() {
             try {

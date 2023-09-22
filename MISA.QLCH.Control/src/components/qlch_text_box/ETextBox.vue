@@ -28,7 +28,7 @@ export default {
 
     /**
    * Lifecycle hook Vue
-   * tnduc - 2022.08.23
+   * tnphuc - 2022.08.23
    */
     created() {
         const me = this;
@@ -48,9 +48,9 @@ export default {
     methods: {
         /**
          * Show Hide Password, Áp dụng cho tất cả control type="password"
-         * tnduc - 2022.08.23
+         * tnphuc - 2022.08.23
          */
-         onMouseUpChangeType(show: boolean) {
+        onMouseUpChangeType(show: boolean) {
             const me = this;
             try {
                 if (!me.control || me.control.readOnly) {
@@ -76,16 +76,16 @@ export default {
 
         /**
          * Reset trạng thái hiển thị password
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
-        resetDisplayTypePassword(){
+        resetDisplayTypePassword() {
             const me = this;
             me.onMouseUpChangeType(false);
         },
 
         /**
          * Khởi tạo v-model cho các class kế thừa
-         * tnduc - 2022.07.19
+         * tnphuc - 2022.07.19
          */
         onInput(e: Event) {
             const me = this;
@@ -105,7 +105,7 @@ export default {
 
         /**
          * Khởi tạo sự kiện blur trên input
-         * tnduc - 2022.08.08
+         * tnphuc - 2022.08.08
          */
         onBlur() {
             const me = this;
@@ -128,7 +128,7 @@ export default {
 
         /**
          * Event sự kiện Focus vào control
-         * tnduc - 2022.08.24
+         * tnphuc - 2022.08.24
          */
         onFocus() {
             const me = this;
@@ -145,7 +145,7 @@ export default {
 
         /**
          * Sự kiện người dùng sử dụng bàn phím
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onKeyDown(e: KeyboardEvent) {
             try {

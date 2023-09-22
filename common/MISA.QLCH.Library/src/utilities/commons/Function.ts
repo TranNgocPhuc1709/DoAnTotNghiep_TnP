@@ -4,7 +4,7 @@ export default class Function {
    * @param ms 
    * @param msg 
    * @returns 
-   * tnduc - 19.09.2023 
+   * tnphuc - 19.09.2023 
    */
   public static getTimeOut(ms: number, msg: string) {
     return new Promise(resolve => {

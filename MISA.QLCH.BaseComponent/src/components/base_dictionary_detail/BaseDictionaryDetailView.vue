@@ -44,7 +44,7 @@ export default {
     methods: {
         /**
          * Thực hiện click button close in form
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onCloseClick() {
             const me = this;
@@ -58,7 +58,7 @@ export default {
         /**
          * Sự kiện click vào các nút chức năng
          * @param item 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onClickItem(item: ToolBarItemsView) {
             const me = this;

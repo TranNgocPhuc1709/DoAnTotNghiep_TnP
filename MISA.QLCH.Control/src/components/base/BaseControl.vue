@@ -14,11 +14,11 @@ export default {
             type: BaseControl,
             require: true
         },
-        
+
         /**
          * id root của component trên Dom
          */
-         idRoot: {
+        idRoot: {
             type: String
         }
     },
@@ -26,7 +26,7 @@ export default {
     methods: {
         /**
          * Check if control is eligible to emit External Events?
-         * tnduc - 2022.08.23
+         * tnphuc - 2022.08.23
          */
         validateControlBeforeHandlerEvent(control?: BaseControl) {
             if (!control) {
@@ -42,7 +42,7 @@ export default {
 
         /**
          * Calculate the Position popup according to the top right left bottom of the browser for the default TH align left
-         * tnduc - 2022.09.07
+         * tnphuc - 2022.09.07
          */
         calculatorPositionFloatLeftItemID(idParent: string, idItem: string) {
             const widthBrowser = window.innerWidth;

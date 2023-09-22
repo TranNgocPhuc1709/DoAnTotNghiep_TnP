@@ -30,7 +30,7 @@ export default {
 
     /**
    * Hook
-   * tnduc - 2022.09.05
+   * tnphuc - 2022.09.05
    */
     mounted() {
         const me = this;
@@ -50,7 +50,7 @@ export default {
     methods: {
         /**
          * Event Click Out Box Item
-         * tnduc - 2022.09.07
+         * tnphuc - 2022.09.07
          */
         boxDetailClickOut(event: Event) {
             const me = this;
@@ -71,7 +71,7 @@ export default {
 
         /**
          * Emit Event Button Click
-         * tnduc - 2022.09.06
+         * tnphuc - 2022.09.06
          */
         buttonClick() {
             const me = this;
@@ -88,7 +88,7 @@ export default {
         /**
          * Click event on hidden dropdown item shows drop down panel
          * @returns 
-         * tnduc - 2022.09.07
+         * tnphuc - 2022.09.07
          */
         itemArrowClick() {
             const me = this;
@@ -112,7 +112,7 @@ export default {
         /**
          * Click event on child item in Drop menu
          * @returns void
-         * tnduc - 2022.09.07
+         * tnphuc - 2022.09.07
          */
         itemChildClick(itemChild: DropDownMenuChild) {
             const me = this;
@@ -135,7 +135,7 @@ export default {
          * Bật tắt DropDown Menu
          * @param e Event
          * @returns void
-         * tnduc - 2022.09.06
+         * tnphuc - 2022.09.06
          */
         displayDropDownPanel(show: boolean) {
             const me = this;
@@ -146,7 +146,7 @@ export default {
             if (me.thisData.isShowBoxDetail) {
                 me.control.clsArrowStatus = "arrow-up";
                 me.$nextTick(() => {
-                    if (me.control){
+                    if (me.control) {
                         me.calculatorPositionFloatLeftItemID(me.control.id, me.control.id + '-box-item');
                     }
                 });

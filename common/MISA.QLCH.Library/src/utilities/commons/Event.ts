@@ -3,11 +3,11 @@ import IHTMLElement from "./IHTMLElement";
 
 /**
  * Khai báo sự kiện click ngoài item
- * tnduc - 19.09.2023 
+ * tnphuc - 19.09.2023 
  */
 export const ClickOutEvent = {
-    beforeMount: (el: IHTMLElement, binding: { value: (event?: Event) => void}) => {
-        el.clickOutsideEvent = (event:Event) => {
+    beforeMount: (el: IHTMLElement, binding: { value: (event?: Event) => void }) => {
+        el.clickOutsideEvent = (event: Event) => {
             if (!(el == event.target || el.contains(event.target as Node))) {
                 binding.value(event);
             }
@@ -21,11 +21,11 @@ export const ClickOutEvent = {
 
 /**
  * Khai báo sự kiện nhấc chuột lên khi con trỏ ra khỏi vùng chứa item
- * tnduc - 19.09.2023 
+ * tnphuc - 19.09.2023 
  */
 export const MouseUpOutEvent = {
-    beforeMount: (el: IHTMLElement, binding: { value: (event?: Event) => void}) => {
-        el.clickOutsideEvent = (event:Event) => {
+    beforeMount: (el: IHTMLElement, binding: { value: (event?: Event) => void }) => {
+        el.clickOutsideEvent = (event: Event) => {
             if (!(el == event.target || el.contains(event.target as Node))) {
                 binding.value(event);
             }

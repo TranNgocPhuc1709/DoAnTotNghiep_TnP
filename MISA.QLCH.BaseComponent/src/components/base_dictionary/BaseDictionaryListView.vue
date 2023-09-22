@@ -30,7 +30,7 @@ export default {
 
     /**
      * hook set lại giao diện khi dom được render xong
-     * tnduc - 19.09.2023 
+     * tnphuc - 19.09.2023 
      */
     mounted() {
         try {
@@ -57,7 +57,7 @@ export default {
         /**
          * Load dữ liệu cho grid master
          * @param paramPaging Tham số phân trang
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onLoadGridMaster(paramPaging: ParamPaging) {
             try {
@@ -71,7 +71,7 @@ export default {
         /**
          * Thay đổi dòng selected trên Grid
          * @param listSelectedRecord 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onchangeSelectedRecordMaster(listSelectedRecord: Array<Record<string, any>>) {
             const me = this;
@@ -88,7 +88,7 @@ export default {
         /**
          * Sự kiện click button trên tool bar
          * @param toolBarControl control đang được click
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         async onClickItem(toolBarControl: Button | DropDownMenu | DropDownMenuChild) {
             const me = this;

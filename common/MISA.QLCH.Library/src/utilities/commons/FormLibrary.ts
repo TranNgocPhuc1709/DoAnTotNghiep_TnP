@@ -6,7 +6,7 @@ export default class FormLibrary {
 
     /**
      * Kiểm tra control trên form đã validate thành công hết chưa? nếu chưa thì focus vào control đầu tiên
-     * tnduc - 19.09.2023 
+     * tnphuc - 19.09.2023 
      */
     public static validFormByBindingControl(bindingControl: Record<string, BaseInput>) {
         const listControl = Convert.recordToArrayKey(bindingControl);

@@ -35,7 +35,7 @@ export default {
 
     /**
      * Đóng thông báo
-     * tnduc - 19.09.2023 
+     * tnphuc - 19.09.2023 
      */
     onCloseClick() {
       const me = this;
@@ -51,7 +51,7 @@ export default {
     /**
      * Sự kiện click vào nút chức năng
      * @param item nút mà người dùng vừa thao tác, sau đó đóng form
-     * tnduc - 19.09.2023 
+     * tnphuc - 19.09.2023 
      */
     onClickItem(item: ToolBarItemsView) {
       try {
@@ -71,7 +71,7 @@ export default {
     /**
      * Sự kiện click vào nút chức năng, các form cần callback thì override lại dùng
      * @param item nút mà người dùng vừa thao tác, sau đó đóng form
-     * tnduc - 19.09.2023 
+     * tnphuc - 19.09.2023 
      */
     onSelectAction(item: ToolBarItemsView) {
       if (item) {

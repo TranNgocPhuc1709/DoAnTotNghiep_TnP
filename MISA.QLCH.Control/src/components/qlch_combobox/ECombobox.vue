@@ -28,7 +28,7 @@ export default {
 
     /**
     * Lifecycle hook Vue
-    * tnduc - 2022.08.23
+    * tnphuc - 2022.08.23
     */
     created() {
         const me = this;
@@ -44,7 +44,7 @@ export default {
     methods: {
         /**
         * After the user enters the data, it will only take 0.2 seconds to search and emit the event to the outside
-        * tnduc - 19.09.2023 
+        * tnphuc - 19.09.2023 
         */
         onInput(e: Event) {
             const me = this;
@@ -58,7 +58,7 @@ export default {
         },
         /**
         * Handler Event Blur
-        * tnduc - 2022.08.08
+        * tnphuc - 2022.08.08
         */
         onBlur() {
             const me = this;
@@ -77,7 +77,7 @@ export default {
 
         /**
         * Event sự kiện Focus vào control
-        * tnduc - 2022.08.24
+        * tnphuc - 2022.08.24
         */
         onFocus() {
             const me = this;
@@ -93,7 +93,7 @@ export default {
 
         /**
          * Event Click on item drop down combobox
-         * tnduc - 2022.09.14
+         * tnphuc - 2022.09.14
          */
         onItemArrowClick() {
             const me = this;
@@ -112,7 +112,7 @@ export default {
         },
         /**
          * Reset Data
-         * tnduc - 2022.09.16
+         * tnphuc - 2022.09.16
          */
         resetData() {
             const me = this;
@@ -124,7 +124,7 @@ export default {
 
         /**
         * Initialize v-model for inherited classes
-        * tnduc - 2022.07.19
+        * tnphuc - 2022.07.19
         */
         clickItemInBox(item: Record<string, any>) {
             try {
@@ -146,7 +146,7 @@ export default {
 
         /**
         * Initialize v-model for inherited classes
-        * tnduc - 2022.07.19
+        * tnphuc - 2022.07.19
         */
         updateValue(item: Record<string, any>) {
             const me = this;
@@ -168,7 +168,7 @@ export default {
         /**
          * Tìm kiếm dữ liệu dựa trên key truyền vào
          * @param keySearch Key tìm kiếm
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         findDataBy(keySearch: string) {
             const me = this;
@@ -189,7 +189,7 @@ export default {
         /**
          * User event enter enter, Get active item to set up combo
          * @param e 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         pressKeyEnter(e: KeyboardEvent) {
             const me = this;
@@ -207,7 +207,7 @@ export default {
         /**
          * Handling users pressing down key
          * @param e Event
-         * tnduc - 2022.09.05
+         * tnphuc - 2022.09.05
          */
         pressKeyArrowDow(e: KeyboardEvent) {
             const me = this;
@@ -239,7 +239,7 @@ export default {
         /**
          * 
          * @param e Click phím Tab
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         pressKeyTab(e: KeyboardEvent) {
             const me = this;
@@ -252,7 +252,7 @@ export default {
         /**
          * Handling user press up key
          * @param e Event
-         * tnduc - 2022.09.05
+         * tnphuc - 2022.09.05
          */
         pressKeyArrowUp(e: KeyboardEvent) {
             const me = this;
@@ -282,7 +282,7 @@ export default {
          * Sự kiện hover vào item in box
          * @param item 
          * @returns 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         hoverItem(item: Record<string, any>) {
             const me = this;
@@ -315,7 +315,7 @@ export default {
 
         /**
          * Find the first item that satisfies the condition, set it to active
-         * tnduc - 2022.09.16
+         * tnphuc - 2022.09.16
          */
         activeItemByValue() {
             const me = this;
@@ -346,7 +346,7 @@ export default {
 
         /**
          * Active item in Box
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         setActiveBoxItem(item: Record<string, any>, active: boolean) {
             const me = this;
@@ -358,7 +358,7 @@ export default {
 
         /**
          * active item in Box
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         setSelectedBoxItem(item: Record<string, any>, selected: boolean) {
             const me = this;
@@ -369,7 +369,7 @@ export default {
         },
         /**
          * Perform scroll position calculation when item is hidden by scroll
-         * tnduc - 2022.09.19
+         * tnphuc - 2022.09.19
          */
         calculatorScrollPosition(item: Record<string, any>) {
             const me = this;
@@ -406,7 +406,7 @@ export default {
         /**
          * Cập nhật giao diện khi search dữ liệu
          * @param key Key search
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         filterDataDisplayBy(key: string) {
             const me = this;
@@ -442,7 +442,7 @@ export default {
 
         /**
          * reset the value of the control after the DOM is updated
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         updateDisplayInputBy(key: string) {
             const me = this;
@@ -454,7 +454,7 @@ export default {
 
         /**
          * binding value in combobox
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         bindingValue(value: any) {
             const me = this;
@@ -477,7 +477,7 @@ export default {
 
         /**
          * binding value in combobox
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         bindingValueWithItem(value: Record<string, any>) {
             const me = this;
@@ -494,7 +494,7 @@ export default {
 
         /**
          * Click event outside the combobox
-         * tnduc - 2022.09.15
+         * tnphuc - 2022.09.15
          */
         comboboxClickOut() {
             const me = this;
@@ -509,7 +509,7 @@ export default {
 
         /**
          * Hide and show BoxItem details
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         displayBoxItem(show: boolean) {
             const me = this;

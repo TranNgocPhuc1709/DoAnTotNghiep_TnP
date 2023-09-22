@@ -20,6 +20,8 @@ import LocalStorageLibrary from '@library-src/utilities/window/local-storage/Loc
 import ContextModel from '@store-src/models/context/ContextModel';
 import Guid from '@library-src/utilities/types/Guid';
 import Constant from '@library-src/utilities/constants/Constant';
+import Function from '@library-src/utilities/commons/Function';
+
 // import { useStore } from 'vuex';
 export default {
 
@@ -31,10 +33,10 @@ export default {
 
   setup() {
     const thisData: Ref<Login> = ref(new Login());
-    const btnLogin: Button = new Button({
+    const btnLogin: Ref<Button> = ref(new Button({
       fieldText: "ĐĂNG NHẬP",
       classType: "primary"
-    });
+    }));
     const websiteMISA = import.meta.env.QLCH_WebsiteMISA;
     // const store = useStore(); // Access the Vuex store
     return {
@@ -64,6 +66,7 @@ export default {
           placeholder: "Tên mã nhân viên / số điện thoại",
           styleInput: "padding-left: 35px",
           require: true
+
         }),
         "txtPassword": new TextBox({
           placeholder: "Nhập mật khẩu",
@@ -77,18 +80,37 @@ export default {
     /**
      * Sự kiện click btn Login
      */
-    onClickLogin() {
+    async onClickLogin() {
+
       try {
+
         const me = this;
+        const txtUserName = me.bindingControl[`txtUserName`];
+        txtUserName.readOnly = true;
+        const txtPassword = me.bindingControl[`txtPassword`];
+        txtPassword.readOnly = true;
+        const ebutton = me.btnLogin;
+        ebutton.isLoadingData = true;
         if (!FormLibrary.validFormByBindingControl(me.bindingControl)) {
           return;
         }
 
+        await Function.getTimeOut(3000, '');
         if (me.validateLogin()) {
-          // me.store.dispatch('context/updateUser', 'hello');
+
+
+
+
           const newContext = new ContextModel({ token: Guid.NewGuid() }); // Tạo token lưu trên local store
           LocalStorageLibrary.setByKey(Constant.tokenContext, newContext);
           router.push({ path: '/' })
+
+        }
+        else {
+
+          txtUserName.readOnly = false;
+          txtPassword.readOnly = false;
+          ebutton.isLoadingData = false;
         }
 
       } catch (error) {

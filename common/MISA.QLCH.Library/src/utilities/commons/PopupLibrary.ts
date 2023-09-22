@@ -9,7 +9,7 @@ export default class PopupLibrary {
      * Function tạo popup bất kỳ
      * @param component: Component cần khởi tạo
      * @param props : Tham số props cho component
-     * tnduc - 19.09.2023 
+     * tnphuc - 19.09.2023 
      */
     public static createPopup(component: Component, props: Record<string, any>) {
         const app = ElementLibrary.getAppIdSelector();
@@ -38,7 +38,7 @@ export default class PopupLibrary {
     /**
      * Tạo màn đen che parent khi show popup
      * @param idDom 
-     * tnduc - 19.09.2023 
+     * tnphuc - 19.09.2023 
      */
     public static createNewMask(idDom: string) {
         const me = this;
@@ -64,7 +64,7 @@ export default class PopupLibrary {
     /**
      * đóng popup
      * @param idDom 
-     * tnduc - 19.09.2023 
+     * tnphuc - 19.09.2023 
      */
     public static closePopup(idDom: string) {
         const me = this;
@@ -82,7 +82,7 @@ export default class PopupLibrary {
 
     /**
      * Set lại trạng thái cho phép người dùng ân tab và bôi đên text trên form là con có tab index lớn nhất
-     * tnduc - 19.09.2023 
+     * tnphuc - 19.09.2023 
      */
     private static setActiveSelectedAndTabIndexInLastedChild(frmParent: HTMLElement) {
         // const me = this;
@@ -100,7 +100,7 @@ export default class PopupLibrary {
      * Set lại z-index cho các formDetail
      * @param frmDetail 
      * @param frmParent
-     * tnduc - 19.09.2023 
+     * tnphuc - 19.09.2023 
      */
     private static createZIndexFormDetail(frmDetail: HTMLElement, frmParent: HTMLElement) {
         const allChild = ElementLibrary.getAllNodeChildBy(frmParent);
@@ -130,7 +130,7 @@ export default class PopupLibrary {
 
     /**
      * Set z-index cho mask
-     * tnduc - 19.09.2023 
+     * tnphuc - 19.09.2023 
      */
     private static setNewZIndexNewMask(mask: HTMLElement, frmDetail: HTMLElement, frmParent: HTMLElement, minusMore: number) {
         const me = this;

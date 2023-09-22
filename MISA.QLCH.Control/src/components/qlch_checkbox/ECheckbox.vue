@@ -20,7 +20,7 @@ export default {
     methods: {
         /**
          * Thay đổi dữ liệu checkBox
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onChange() {
             const me = this;

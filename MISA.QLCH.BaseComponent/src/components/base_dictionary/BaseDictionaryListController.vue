@@ -35,7 +35,7 @@ export default {
     },
 
     /**
-     * tnduc - 19.09.2023 
+     * tnphuc - 19.09.2023 
      */
     created() {
         const me = this;
@@ -50,7 +50,7 @@ export default {
 
         /**
          * Build GridMaster Column
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         buildGridMasterColumn(): Array<Column> {
             return [];
@@ -58,7 +58,7 @@ export default {
 
         /**
          * Build Item cho Toolbar
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         buildToolBarItems(): Array<ToolBarItemsView> {
             const toolBarItems: Array<ToolBarItemsView> = Array(new ToolBarItemsView({
@@ -117,7 +117,7 @@ export default {
         /**
          * Load dữ liệu cho grid Master
          * @param param
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         async beginLoadMasterData(param: ParamPaging) {
             const me = this;
@@ -135,7 +135,7 @@ export default {
         /**
          * Load dữ liệu master lên grid
          * @param param 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         loadMasterData(param: ParamPaging) {
             Log.InfoLog("Dev: Override lại function loadMasterData with param: " + JSON.stringify(param));
@@ -144,7 +144,7 @@ export default {
 
         /**
          * Load dữ liệu danh mục - nếu có
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         loadDictionaryData() {
             Log.InfoLog("Dev: Override lại function loadDictionaryData");
@@ -152,7 +152,7 @@ export default {
 
         /**
          * Set Khoá chính cho grid master
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         getPrimaryKeyMaster() {
             Log.InfoLog("Dev: Override lại function getPrimaryKeyMaster");
@@ -161,7 +161,7 @@ export default {
         /**
          * Load dữ liệu cho Grid Master
          * @param param Paging
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onLoadMaster(param: ParamPaging) {
             try {
@@ -178,7 +178,7 @@ export default {
         /**
          * Sự kiện thay đổi control dữ liệu đang tích chọn trên grid master
          * @param listSelectedRecord 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onChangeSelectedRecordMaster(listSelectedRecord: Array<Record<string, any>>) {
             try {
@@ -195,7 +195,7 @@ export default {
         /**
          * Sự kiện khi người dùng click trên tool Bar item
          * @param control 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onSelectAction(control: Button | DropDownMenu | DropDownMenuChild) {
             try {
@@ -234,7 +234,7 @@ export default {
 
         /**
          * Lấy record đầu tiên đang selected trên grid master
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         getFirstSelectedRecordMaster() {
             const me = this;
@@ -249,7 +249,7 @@ export default {
 
         /**
          * Lấy tất cả record đang select trên grid Master
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         getAllSelectedRecordMaster() {
             const me = this;
@@ -261,7 +261,7 @@ export default {
 
         /**
          * Thực hiện show form detail
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         viewFormDetail() {
             const me = this;
@@ -273,7 +273,7 @@ export default {
 
         /**
          * Khi nhấn button thêm trên tool bar thì thực hiện chức năng này
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         addNew() {
             const me = this;
@@ -283,7 +283,7 @@ export default {
 
         /**
          * Thực hiện hàm này khi nhấn vào button edit trên thanh toolbar
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         editItem() {
             const me = this;
@@ -295,7 +295,7 @@ export default {
 
         /**
          * Thực hiện hàm này khi nhấn vào button edit trên thanh toolbar
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         delItem() {
             const me = this;
@@ -307,7 +307,7 @@ export default {
 
         /**
          * Thực hiện hàm này khi nhấn vào button nhân bản trên thanh toolbar
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         cloneItem() {
             const me = this;
@@ -319,7 +319,7 @@ export default {
 
         /**
          * Thực hiện hàm này khi nhấn vào button nạp trên thanh toolbar
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         refresh() {
             const me = this;
@@ -332,7 +332,7 @@ export default {
 
         /**
          * Khai báo import component detail
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         async createComponent() {
             return (await import(`@src/components/base_dictionary_detail/BaseDictionaryDetailView.vue`)).default;
@@ -343,7 +343,7 @@ export default {
         /**
          * Ẩn hiện toolbar, contextmenu
          * @param listSelectedRecord 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         displayToolbarSelectedRecord(listSelectedRecord: Array<Record<string, any>>) {
             const me = this;
@@ -375,7 +375,7 @@ export default {
         /**
          * Ẩn hiện toolbar, contextmenu
          * @param control 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         customDisplayToolbarSelectedRecord(item: ToolBarItemsView, bEnable: boolean) {
             if (item.control) {
@@ -386,7 +386,7 @@ export default {
         /**
          * Ẩn hiện control khi loadingData
          * @param isLoadingData 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         displayToolbarLoadingData(isLoadingData: boolean) {
             const me = this;
@@ -422,7 +422,7 @@ export default {
         /**
          * Ẩn hiện toolbar, contextmenu
          * @param control 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         customDisplayToolbarLoadingData(item: ToolBarItemsView, bEnable: boolean) {
             if (item.control) {
@@ -432,7 +432,7 @@ export default {
 
         /**
          * Reset lại list selected Record trên Grid Master
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         resetListSelectedRecordMaster() {
             const me = this;
@@ -443,7 +443,7 @@ export default {
 
         /**
          * Tạo 1 record mới
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         addNewTemplateRecord() {
             const me = this;
@@ -457,7 +457,7 @@ export default {
 
         /**
          * Tạo dòng mặc định
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         getTemplateRecord() {
             return {};

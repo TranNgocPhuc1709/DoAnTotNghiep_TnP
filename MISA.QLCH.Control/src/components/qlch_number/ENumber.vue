@@ -47,7 +47,7 @@ export default {
 
     /**
      * LifeCycleHook của Vue
-     * tnduc - 2022.08.29
+     * tnphuc - 2022.08.29
      */
     created() {
         const me = this;
@@ -69,7 +69,7 @@ export default {
     methods: {
         /**
           * Khởi tạo v-model cho các class kế thừa
-          * tnduc - 2022.07.19
+          * tnphuc - 2022.07.19
           */
         onInput(e: Event) {
             const me = this;
@@ -103,7 +103,7 @@ export default {
         /**
          * Kiểm tra xem gía trị có thoả mãn không
          * @param value 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         checkIsValidValue(value: number) {
             const me = this;
@@ -123,7 +123,7 @@ export default {
 
         /**
          * Lấy vị trí của con trỏ chuột dùng để tính toán hành vi click nút người dùng
-         * tnduc - 2022.08.30
+         * tnphuc - 2022.08.30
          */
         getInputSelectionStart() {
             const me = this;
@@ -137,7 +137,7 @@ export default {
 
         /**
         * Khởi tạo sự kiện blur trên input
-        * tnduc - 2022.08.08
+        * tnphuc - 2022.08.08
         */
         onBlur() {
             const me = this;
@@ -157,7 +157,7 @@ export default {
         /**
         * Event sự kiện Focus vào control
         * Chỉ cho phép focus vào phần nguyên hoặc toàn bộ số (nếu định dạng số không có phần thập phân)
-        * tnduc - 2022.08.24
+        * tnphuc - 2022.08.24
         */
         onFocus() {
             const me = this;
@@ -182,7 +182,7 @@ export default {
 
         /**
          * Sự kiện nhập bàn phím trên thẻ input
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onKeyDown(e: KeyboardEvent) {
             try {
@@ -220,7 +220,7 @@ export default {
         /**
          * Xử lý người dùng nhấn phím lên xuống
          * @param e Event
-         * tnduc - 2022.09.05
+         * tnphuc - 2022.09.05
          */
         pressKeyArrowDowOrUp(e: KeyboardEvent) {
             const me = this;
@@ -251,7 +251,7 @@ export default {
 
         /**
          * Update v-model và format giá trị
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         updateValueAndDisplay(value: number) {
             const me = this;
@@ -271,7 +271,7 @@ export default {
         /**
          * Sự kiện người dùng nhập nút backSpace
          * @param e Event
-         * tnduc - 2022.09.05
+         * tnphuc - 2022.09.05
          */
         pressKeyBackspace(e: KeyboardEvent) {
             const me = this;
@@ -319,7 +319,7 @@ export default {
          * Sự kiện người dùng nhập nút delete
          * @param event
          * @returns 
-         * tnduc - 2022.09.05
+         * tnphuc - 2022.09.05
          */
         pressKeyDelete(e: KeyboardEvent) {
             const me = this;
@@ -365,7 +365,7 @@ export default {
 
         /**
          * Lấy vị trí con trỏ chuột hiện tại
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         getCursorPosition(input: any) {
             let cursorPosition = { "start": 1, "end": 1 };
@@ -380,7 +380,7 @@ export default {
         /**
          * Tính toán con trỏ chuột khi người dùng gõ phím , hoặc . trên bàn phím
          * Xử lý: Nếu người dùng nhập phím ,hoặc . thì con trỏ chuột tự động dịch về phần thập phân và không chạy qua các function format nữa
-         * tnduc - 2022.08.31
+         * tnphuc - 2022.08.31
          */
         pressKeyDecimalSeparator(e: KeyboardEvent) {
             const me = this;
@@ -406,7 +406,7 @@ export default {
         /**
          * Tính toán lại con trỏ chuột khi người dùng bắt đầu nhập ở phần thập phân của số
          * Nghiệp vụ: Khi người dùng nhập bất kì số gì trong phần thập phân thì coi là ghi đè kí tự đó chứ không phải chèn vào giữa, nên phải set selection lùi lại 1 nhịp để bôi đen
-         * tnduc - 2022.08.31
+         * tnphuc - 2022.08.31
          */
         pressKeyNumberEvent(e: KeyboardEvent) {
             const me = this;
@@ -440,7 +440,7 @@ export default {
 
         /**
          * Query đến Input Dom element
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         getHTMLInputElement() {
             const me = this;
@@ -465,7 +465,7 @@ export default {
 
         /**
          * Tính toán lại control chuột trên ô input
-         * tnduc - 2022.08.30
+         * tnphuc - 2022.08.30
          */
         recalculateMousePointer(oldValue: string, newValue: string, inputSelection: number) {
             const me = this;

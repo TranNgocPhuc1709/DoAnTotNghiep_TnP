@@ -4,7 +4,7 @@ export default class ElementLibrary {
     /**
      * Set Disable - Ngăn chặn sự kiện tabIndex
      * @param el Dom Element cần set
-     * tnduc - 19.09.2023
+     * tnphuc - 19.09.2023
      */
     public static setDisableTabIndexBy(el: HTMLElement) {
         const focusableElements: NodeListOf<HTMLElement> = el.querySelectorAll("a, button, input, select, textarea, [tabindex]:not([tabindex='-1'])");
@@ -18,7 +18,7 @@ export default class ElementLibrary {
     /**
      * Set Disable - Ngăn chặn sự kiện tabIndex
      * @param el Dom Element cần set
-     * tnduc - 19.09.2023
+     * tnphuc - 19.09.2023
      */
     public static setEnableTabIndexBy(el: HTMLElement) {
         const focusableElements: NodeListOf<HTMLElement> = el.querySelectorAll("a, button, input, select, textarea, [tabindex]:is([tabindex='-1'])");
@@ -32,7 +32,7 @@ export default class ElementLibrary {
     /**
      * Focus vào thẻ đầu tiên tìm thấy trong Element
      * @param el đối tượng Element cần query
-     * tnduc - 19.09.2023
+     * tnphuc - 19.09.2023
      */
     public static setFocusDefault(el: HTMLElement) {
         const focusableElements: NodeListOf<HTMLElement> = el.querySelectorAll("a, button, input, select, textarea, [tabindex]:is([tabindex='-1'])");
@@ -45,7 +45,7 @@ export default class ElementLibrary {
      * Function cho phép thêm mới 1 class Element
      * @param el đối tượng Element cần query
      * @param className Tên class cần add
-     * tnduc - 19.09.2023
+     * tnphuc - 19.09.2023
      */
     public static addClassForElement(el: HTMLElement, className: string) {
         let eClassName = el.getAttribute('class');
@@ -64,7 +64,7 @@ export default class ElementLibrary {
      * Function cho phép loại bỏ 1 class Element
      * @param el đối tượng Element cần query
      * @param className Tên class cần add
-     * tnduc - 19.09.2023
+     * tnphuc - 19.09.2023
      */
     public static removeClassForElement(el: HTMLElement, className: string) {
         let eClassName = el.getAttribute('class');
@@ -78,7 +78,7 @@ export default class ElementLibrary {
      * Function cho phép loại bỏ 1 class Element
      * @param el đối tượng Element cần query
      * @param className Tên class cần add
-     * tnduc - 19.09.2023
+     * tnphuc - 19.09.2023
      */
     public static removeClassForAllChildElement(el: HTMLElement, className: string) {
         const me = this;
@@ -97,7 +97,7 @@ export default class ElementLibrary {
 
     /**
      * Select element has id = "app" in body
-     * tnduc - 19.09.2023
+     * tnphuc - 19.09.2023
      */
     public static getAppIdSelector() {
         const me = this;
@@ -106,7 +106,7 @@ export default class ElementLibrary {
 
     /**
      * Select element has id = "qlch-mask" in body
-     * tnduc - 19.09.2023
+     * tnphuc - 19.09.2023
      */
     public static getMaskIdSelector() {
         const me = this;
@@ -115,7 +115,7 @@ export default class ElementLibrary {
 
     /**
      * Tạo một mask mới trên app
-     * tnduc - 19.09.2023
+     * tnphuc - 19.09.2023
      */
     public static createNewMask() {
         let mask = ElementLibrary.getMaskIdSelector();
@@ -138,7 +138,7 @@ export default class ElementLibrary {
     /**
      * Lấy toàn bộ thẻ dev cấp 2 trong div cha
      * @param parentDiv Div cha cần lấy child node
-     * tnduc - 19.09.2023
+     * tnphuc - 19.09.2023
      */
     public static getAllNodeChildBy(parentDiv: HTMLElement) {
         if (parentDiv.childNodes && Array.from(parentDiv.childNodes) && Array.from(parentDiv.childNodes).length > 0) {
@@ -151,7 +151,7 @@ export default class ElementLibrary {
      * Lấy về đối tượng Element có giá trị Attribute lớn nhất
      * @param frmParent Đối tượng Element cha
      * @param elementCSSStyle tên attribute cần set
-     * tnduc - 19.09.2023
+     * tnphuc - 19.09.2023
      */
     public static getElementHasMaxValueNumberStyleBy(frmParent: HTMLElement, elementCSSStyle: string) {
         const me = this;
@@ -182,7 +182,7 @@ export default class ElementLibrary {
      * Query Element by Id in DOM
      * @param id tên id cần query
      * @returns HTML Element
-     * tnduc - 19.09.2023
+     * tnphuc - 19.09.2023
      */
     public static getElementById(id: string) {
         return document.getElementById(id.trim());
@@ -192,7 +192,7 @@ export default class ElementLibrary {
      * 
      * @param tag 
      * @returns 
-     * tnduc - 19.09.2023
+     * tnphuc - 19.09.2023
      */
     public static createElement(tag: string) {
         return document.createElement(tag.trim())
@@ -202,7 +202,7 @@ export default class ElementLibrary {
      * Thêm 1 sự kiện vào document
      * @param eventName Tên sự kiện
      * @param func function thực thi
-     * tnduc - 19.09.2023
+     * tnphuc - 19.09.2023
      */
     public static addEventListener<K extends keyof DocumentEventMap>(eventName: K, func: (event: Event) => void) {
         document.addEventListener(eventName.trim(), func);
@@ -212,7 +212,7 @@ export default class ElementLibrary {
      * Loại bỏ 1 sự kiện vào document
      * @param eventName Tên sự kiện
      * @param func function thực thi
-     * tnduc - 19.09.2023
+     * tnphuc - 19.09.2023
      */
     public static removeEventListener<K extends keyof DocumentEventMap>(eventName: K, func: (event: Event) => void) {
         document.removeEventListener(eventName.trim(), func);
@@ -221,7 +221,7 @@ export default class ElementLibrary {
     /**
      * Focus vào id html
      * @param id
-     * tnduc - 19.09.2023
+     * tnphuc - 19.09.2023
      */
     public static focusInputControl(id: string) {
         const me = this;

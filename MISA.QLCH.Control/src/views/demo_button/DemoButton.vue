@@ -123,7 +123,7 @@ export default {
     methods: {
         /**
          * Sự kiện click vào btn show loading
-         * tnduc - 2022.08.25
+         * tnphuc - 2022.08.25
          * @param control 
          */
         async btnLoading_Click(control: Button) {

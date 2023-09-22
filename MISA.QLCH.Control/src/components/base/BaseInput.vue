@@ -19,7 +19,7 @@ export default {
     methods: {
         /**
          * Hover input event, recalculate the display of an empty field warning
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onHoverWarning() {
             try {
@@ -42,7 +42,7 @@ export default {
 
         /**
          * Focus this control
-         * tnduc - 2022.09.16
+         * tnphuc - 2022.09.16
          */
         focusInputControl() {
             const me = this;
@@ -55,7 +55,7 @@ export default {
 
         /**
          * Setup control to default
-         * tnduc - 2022.08.24
+         * tnphuc - 2022.08.24
          */
         activeControl(control: BaseInput) {
             if (!control) {
@@ -67,7 +67,7 @@ export default {
         /**
          * Function kiểm tra trạng thái control có thoả mãn không?
          * @param modelValue Gái trị đầu vào
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         setStatusControlByModel(control?: BaseInput, modelValue?: any) {
             if (!control) {
@@ -91,7 +91,7 @@ export default {
         /**
          * Check control is satisfied to emit Event out or not?
          * @returns True ? Pass : Fail
-         * tnduc - 2022.08.23
+         * tnphuc - 2022.08.23
          */
         validateControlBeforeHandlerEvent(control: BaseInput) {
             if (!control) {

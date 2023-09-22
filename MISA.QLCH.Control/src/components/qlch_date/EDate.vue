@@ -48,7 +48,7 @@ export default {
 
     /**
      * Hook Vue
-     * tnduc - 2022.10.14
+     * tnphuc - 2022.10.14
      * @returns 
      */
     created() {
@@ -56,7 +56,7 @@ export default {
         try {
             me.displayValueInInputBox(me.modelValue);
             me.buildPlaceholderByFormat();
-            me.setStatusControlByModel(me.control,me.modelValue);
+            me.setStatusControlByModel(me.control, me.modelValue);
         } catch (error) {
             Log.ErrorLog(error as Error);
         }
@@ -65,7 +65,7 @@ export default {
     methods: {
         /**
          * Display the value from the model to the input box
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         displayValueInInputBox(bindingValue: Date | undefined) {
             const me = this;
@@ -77,7 +77,7 @@ export default {
 
         /**
          * Build thông tin Placeholder mặc định theo định dạng thiết lập
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         buildPlaceholderByFormat() {
             const me = this;
@@ -89,7 +89,7 @@ export default {
 
         /**
          * Click event outside the combobox
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         dateTimeClickOut() {
             const me = this;
@@ -104,7 +104,7 @@ export default {
 
         /**
          * Event Click on the icon to display the calendar for the user to choose
-         * tnduc - 2022.10.13
+         * tnphuc - 2022.10.13
          */
         itemCalendarIconClick() {
             const me = this;
@@ -133,7 +133,7 @@ export default {
 
         /**
          * The event shows a form to quickly select the year and month
-         * tnduc - 19.09.2023 s
+         * tnphuc - 19.09.2023 s
          */
         clickChooseQuickMouthYear() {
             try {
@@ -144,7 +144,7 @@ export default {
 
         /**
          * build display calendar
-         * tnduc - 2022.10.17
+         * tnphuc - 2022.10.17
          */
         buildListDayInMouth(currentDate?: Date) {
             const me = this;
@@ -236,7 +236,7 @@ export default {
 
         /**
          * Check if the time value is valid
-         * tnduc - 2022.11.02
+         * tnphuc - 2022.11.02
          */
         checkIsTheTimeValueValid(anyDate: Date) {
             const me = this;
@@ -265,7 +265,7 @@ export default {
 
         /**
          * Get the number of weeks displayed in any 1 month (Applicable to the week starting from Sunday)
-         * tnduc - 2022.10.17
+         * tnphuc - 2022.10.17
          */
         getNumberWeekInMouth(year: number, month: number) {
             const firstOfMonth = new Date(year, month - 1, 1);
@@ -278,7 +278,7 @@ export default {
 
         /**
          * make display set for box item
-         * tnduc - 2022.10.13
+         * tnphuc - 2022.10.13
          */
         displayBoxItem(show: boolean) {
             const me = this;
@@ -294,7 +294,7 @@ export default {
 
         /**
          * Today's search button click event
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         btnToDayClick() {
             const me = this;
@@ -307,7 +307,7 @@ export default {
 
         /**
          * click event on selected date on calendar
-         * tnduc - 2022.10.17
+         * tnphuc - 2022.10.17
          */
         btnAnyDayClick(dayItem: DayInMouthModel) {
             const me = this;
@@ -324,7 +324,7 @@ export default {
         /**
          * Binding model Value
          * @param value Giá trị binding
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         updateModelValueAndReBuildViewCalendar(value: Date) {
             const me = this;
@@ -341,7 +341,7 @@ export default {
         /**
          * User input event in input box
          * @param e 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         blurEvent(e: Event) {
             const me = this;
@@ -357,7 +357,7 @@ export default {
         /**
          * Update the value to the input box after the user enters the input
          * @param keySearch 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         updateValueInput(keySearch: string) {
             const me = this;
@@ -398,7 +398,7 @@ export default {
         /**
          * change the month on the history
          * @param status 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         changeMouthClick(status: "up" | "down") {
             const me = this;

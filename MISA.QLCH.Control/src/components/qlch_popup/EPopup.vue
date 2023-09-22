@@ -41,7 +41,7 @@ export default {
 
     /**
      * Hook - Gọi hàm này khi tất cả dữ liệu trên Dom đã khởi tạo xong
-     * tnduc - 19.09.2023 
+     * tnphuc - 19.09.2023 
      */
     mounted() {
         try {
@@ -55,7 +55,7 @@ export default {
 
     /**
      * Hook - Gọi hàm này khi Dom đã thực hiện xóa element
-     * tnduc - 19.09.2023 
+     * tnphuc - 19.09.2023 
      */
     beforeUnmount() {
         try {
@@ -72,7 +72,7 @@ export default {
 
         /**
          * Function gán lại vị trí form ban đầu
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         setOriginLocationInForm() {
             const me = this;
@@ -87,7 +87,7 @@ export default {
 
         /**
          * Thực hiện click button close in form
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onCloseClick() {
             const me = this;
@@ -100,7 +100,7 @@ export default {
 
         /**
          * Thực hiện mở rộng form full màn hình
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onMaximizeClick() {
             const me = this;
@@ -114,7 +114,7 @@ export default {
         /**
          * Hiển thị popup dạng fill màn hình hay không
          * @param isPopupFill Có fill hay không?
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         setNewPopupLocation(isPopupFill: boolean) {
             const me = this;
@@ -133,7 +133,7 @@ export default {
 
         /**
          * Set vị trí form phủ kín màn hình
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         setFillLocationPopup(popup: HTMLElement) {
             popup.style.width = "100%";
@@ -145,7 +145,7 @@ export default {
 
         /**
          * Set vị trí form trở về như cũ
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         setOriginLocationPopup(popup: HTMLElement) {
             const me = this;
@@ -158,7 +158,7 @@ export default {
 
         /**
          * Sự kiện thay đổi độ lớn trình duyệt
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onResizeBrowser() {
             const me = this;
@@ -175,7 +175,7 @@ export default {
         /**
          * Khai báo sự kiện click con chuột xuống 
          * @param e 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onMouseDown(e: MouseEvent) {
             const me = this;
@@ -200,7 +200,7 @@ export default {
         /**
          * Khai báo sự kiện nhả con trỏ chuột trên from
          * @param e 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onMouseUp() {
             const me = this;
@@ -213,7 +213,7 @@ export default {
 
         /**
          * Khai báo sự kiện khi người dùng nhấc con chuột ra khỏi vùng đang chỉ định
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onMouseUpOut() {
             const me = this;
@@ -227,7 +227,7 @@ export default {
         /**
          * Khai báo sự kiện di chuyển con chuột trên from
          * @param e 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onMouseMove(e: MouseEvent) {
             const me = this;
@@ -268,7 +268,7 @@ export default {
 
         /**
          * Setup vị trí mới cho form sau khi di chuyển
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         clearFormMove() {
             const me = this;
@@ -279,7 +279,7 @@ export default {
          * 
          * @param formId ID form cần set giá trị
          * @param parentFormId 
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         setLocationFormByResizeBrowser(formId: string, parentFormId: string) {
             const form = document.getElementById(formId);

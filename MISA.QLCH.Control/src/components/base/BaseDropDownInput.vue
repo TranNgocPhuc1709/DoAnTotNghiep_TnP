@@ -25,7 +25,7 @@ export default {
     methods: {
         /**
          * Keyboard input event on input . tag
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         onKeyDown(e: KeyboardEvent) {
             const me = this;
@@ -53,10 +53,10 @@ export default {
         /**
          * Handling users pressKeyArrowDow
          * @param e Event
-         * tnduc - 2022.09.05
+         * tnphuc - 2022.09.05
          */
         pressKeyArrowDow(e: KeyboardEvent) {
-            if(!e.key){
+            if (!e.key) {
                 return;
             }
         },
@@ -64,10 +64,10 @@ export default {
         /**
          * Handling users pressKeyArrowUp
          * @param e Event
-         * tnduc - 2022.09.05
+         * tnphuc - 2022.09.05
          */
         pressKeyArrowUp(e: KeyboardEvent) {
-            if(!e.code){
+            if (!e.code) {
                 return
             }
         },
@@ -75,10 +75,10 @@ export default {
         /**
          * Handling users pressKeyTab
          * @param e Event
-         * tnduc - 2022.09.05
+         * tnphuc - 2022.09.05
          */
         pressKeyTab(e: KeyboardEvent) {
-            if(!e.code){
+            if (!e.code) {
                 return
             }
         },
@@ -86,10 +86,10 @@ export default {
         /**
          * Handling users pressKeyEnter
          * @param e Event
-         * tnduc - 2022.09.05
+         * tnphuc - 2022.09.05
          */
         pressKeyEnter(e: KeyboardEvent) {
-            if(!e.code){
+            if (!e.code) {
                 return
             }
         }

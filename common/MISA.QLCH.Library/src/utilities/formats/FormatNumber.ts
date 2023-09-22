@@ -5,7 +5,7 @@ export default class FormatNumber {
      * Hàm render ra định dạng kiểu số cần format
      * @param value Giá trị kiểu số cần format (1234.25)
      * @param format Kiểu số cần lấy định dạng
-     * tnduc - 2022.08.29
+     * tnphuc - 2022.08.29
      */
     static changeNumberFormat(value: number | null | undefined, format: NumberFormat): string {
         if (!value) {
@@ -55,7 +55,7 @@ export default class FormatNumber {
      * @param value 123456
      * @param format quantity
      * @return 123,456
-     * tnduc - 2022.08.30
+     * tnphuc - 2022.08.30
      */
     static formatNumber(value: string, format: NumberFormat) {
         return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, format.thousands ?? ".");

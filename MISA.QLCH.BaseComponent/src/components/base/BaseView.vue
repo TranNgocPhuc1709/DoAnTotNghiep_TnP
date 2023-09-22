@@ -9,7 +9,7 @@ export default {
     props: {
         /**
          * id root của component trên Dom
-         * tnduc - 19.09.2023 
+         * tnphuc - 19.09.2023 
          */
         idRoot: {
             type: String,

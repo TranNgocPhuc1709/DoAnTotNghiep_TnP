@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Thu vien dung chung MISA eShop",
   "main": "index.js",
-  "author": "tnduc",
+  "author": "tnphuc",
   "license": "MIT",
   "private": true,
   "devDependencies": {
