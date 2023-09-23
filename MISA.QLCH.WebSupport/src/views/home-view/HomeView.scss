@@ -1,5 +1,6 @@
 .body-revenue-bill {
     background-color: #E5E6EB;
+
 }
 
 .revenue-data {
@@ -87,8 +88,6 @@
 
 }
 
-
-
 .header-revenue div span {
     font-weight: 700;
     font-size: 13px;
@@ -104,4 +103,14 @@
 
 .value-revenue:hover {
     cursor: pointer;
+}
+
+.revenue-chart {
+    display: grid;
+    grid-template-columns: 4fr 5fr;
+    grid-template-rows: 400px 400px;
+    column-gap: 12px;
+    row-gap: 12px;
+    margin-top: 15px;
+
 }
