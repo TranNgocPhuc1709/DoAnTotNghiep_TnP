@@ -8,6 +8,57 @@
             <div class="d-flex-column height-fill width-fill">
                 <div class="navbar d-flex-vcenter">
                     <p class="title" v-if="thisData">{{thisData.title}}</p>
+                    <div class="menu-main-right d-flex flex-h-end">
+                        <div class="branches-user d-flex-vcenter">
+                            <router-link class="link-branches-user" to="#">Bắt đầu sử dụng</router-link>
+                            <div class="branch-menu">
+                                <span>Nơi để khai báo combobox</span>
+                                <!--Khai báo combobox-->
+                                <!-- <e-combobox :control="bindingControl[`combobox`]"
+                                    v-model="bindingControl[`combobox`].value" /> -->
+                            </div>
+                            <div class="user-manage d-flex-vcenter">
+                                <div class="img-user"></div>
+                                <span class="name-user">TnPhuc</span>
+                                <span class="icon-dropdown"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="support-app d-flex height-fill">
+                        <div class="item-support d-flex-vcenter">
+                            <router-link to="#" class="icon-light"></router-link>
+                        </div>
+                        <div class="item-support d-flex-vcenter">
+                            <router-link to="#1" class="icon-mess"></router-link>
+                        </div>
+                        <div class="item-support d-flex-vcenter">
+                            <router-link to="#2" class="icon-bell"></router-link>
+                        </div>
+                        <div class="item-support d-flex-vcenter">
+                            <router-link to="#3" class="icon-what"></router-link>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sales-app width-fill d-flex-vcenter">
+                    <router-link to="#store" class="content-sales-app width-fill d-flex">
+                        <div class="logo-app">
+                            <img class="img-logo-app"
+                                src="https://misast.mshopkeeper.vn/resources/images/svg/Logo_White.svg"
+                                alt="img_logo_misa_Shop">
+                        </div>
+                        <div class="app-content d-flex-column">
+                            <div class="title-app d-flex d-flex-vcenter">
+                                <span>Bán Hàng</span>
+                                <span class="event-messege">New</span>
+                            </div>
+                            <div class="messege-app">
+                                <span>Bấm vào đây để trải nghiệm ngay phiên bản bán hàng trên trình duyệt.</span>
+                            </div>
+                        </div>
+
+                    </router-link>
                 </div>
                 <div class="flex-1 bg-body scroll-auto" id="qlch-home-content">
                     <div class="main-content height-fill width-fill scroll-auto" id="main-control-content">

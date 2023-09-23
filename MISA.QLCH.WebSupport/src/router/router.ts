@@ -25,6 +25,15 @@ const routes: Array<RouteRecordRaw> = [
                     anonymous: false
                 }
             },
+            {
+                path: 'home',
+                name: 'Home',
+                component: () => import('@src/views/home-view/HomeView.vue'),
+                meta: {
+                    title: "Trang Chủ",
+                    anonymous: false
+                }
+            },
         ],
     },
     {

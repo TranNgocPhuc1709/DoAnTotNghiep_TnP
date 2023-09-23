@@ -155,6 +155,11 @@
     justify-content: center;
 }
 
+.d-flex-sp-center {
+    display: flex;
+    justify-content: space-between;
+}
+
 .d-flex-vcenter {
     display: flex;
     align-items: center;

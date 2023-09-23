@@ -1,27 +1,17 @@
 <h3>1.Combobox Default</h3>
 <div class="d-flex">
     <div class="bg-control">
-        <e-combobox
-            :control="cbbDefault"
-            v-model="cbbDefault.value"
-            @onLoadData="cbbDefaultLoadItemData"
-        />
+        <e-combobox :control="cbbDefault" v-model="cbbDefault.value" @onLoadData="cbbDefaultLoadItemData" />
 
     </div>
 
     <div class="bg-control">
-        <e-combobox
-            :control="cbbRequire"
-            v-model="cbbRequire.value"
-        />
+        <e-combobox :control="cbbRequire" v-model="cbbRequire.value" />
 
     </div>
 
     <div class="bg-control">
-        <e-combobox
-            :control="cbbReadOnly"
-            v-model="cbbReadOnly.value"
-        />
+        <e-combobox :control="cbbReadOnly" v-model="cbbReadOnly.value" />
 
     </div>
 
@@ -31,10 +21,7 @@
 <h3>2.Combobox loading</h3>
 <div class="d-flex">
     <div class="bg-control">
-        <e-combobox
-            :control="cbbLoading"
-            v-model="cbbLoading.value"
-        />
+        <e-combobox :control="cbbLoading" v-model="cbbLoading.value" />
 
     </div>
 </div>

@@ -5,9 +5,12 @@ import { Menu } from '@library-src/models/qlch_menu/Menu';
 import Main from './Main';
 import Log from '@library-src/utilities/Log';
 import LeftMenu from '@src/components/left_menu/LeftMenu.vue';
+
+//tnp
+import ECombobox from "qlch_control/ECombobox";
 export default {
     components: {
-        LeftMenu
+        LeftMenu, ECombobox,
     },
 
     setup() {
@@ -19,6 +22,10 @@ export default {
             {
                 routerLink: "/product",
                 fieldText: "Sản Phẩm"
+            },
+            {
+                routerLink: "/home",
+                fieldText: "Trang Chủ"
             }
         );
         return {
