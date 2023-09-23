@@ -1,0 +1,107 @@
+.body-revenue-bill {
+    background-color: #E5E6EB;
+}
+
+.revenue-data {
+    height: 270px;
+    background-color: #fff;
+    border-radius: 5px;
+
+}
+
+.header-bill {
+    height: 50px;
+    border-bottom: 1px solid #DFDFDF;
+
+    color: #757575;
+}
+
+.header-bill span {
+    margin: 0 0 0 15px;
+}
+
+.header-bill p {
+    margin-left: 5px;
+}
+
+.header-branch {
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.container-revenue {
+    margin-top: 15px;
+}
+
+
+.revenue-day,
+.revenue-bill {
+    border: 1px solid black;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.revenue-estimated {
+    border: 1px solid black;
+}
+
+.revenue-day,
+.revenue-estimated,
+.revenue-bill {
+    width: 345px;
+    height: 175px;
+
+    border-radius: 5px;
+    border-top: 3px solid #2b3173;
+
+}
+
+.header-revenue {
+    height: 40px;
+    border-bottom: 1px;
+    border-bottom: 1px solid #DFDFDF
+}
+
+.header-revenue {
+    height: 30px;
+    padding: 0 10px;
+    border-bottom: 1px solid #DFDFDF;
+}
+
+.item-revenue {
+    height: 30px;
+    padding: 5px 10px 0 10px;
+}
+
+.value-bills {
+    width: 25px;
+    height: 25px;
+    background-color: #EEEEEE;
+    color: #757575;
+    border-radius: 3px;
+}
+
+.item-revenue div span {
+    font-weight: 600;
+    font-size: 12px;
+
+}
+
+
+
+.header-revenue div span {
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.icon-value-revenue {
+    background: url(../../../../common/MISA.QLCH.Library/src/assets/images/common-icon.png) no-repeat -755px -127px;
+
+    width: 10px;
+    height: 13px;
+    color: var(--text-color);
+}
+
+.value-revenue:hover {
+    cursor: pointer;
+}

@@ -160,6 +160,11 @@
     justify-content: space-between;
 }
 
+.d-flex-space-around {
+    display: flex;
+    justify-content: space-around;
+}
+
 .d-flex-vcenter {
     display: flex;
     align-items: center;
