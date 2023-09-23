@@ -15,17 +15,17 @@ export default {
 
     setup() {
         const pages: Array<Menu> = new Array(
+            // {
+            //     routerLink: "/invoice",
+            //     fieldText: "Display Demo"
+            // },
             {
-                routerLink: "/invoice",
-                fieldText: "Display Demo"
+                routerLink: "/home",
+                fieldText: "Trang Chủ"
             },
             {
                 routerLink: "/product",
                 fieldText: "Sản Phẩm"
-            },
-            {
-                routerLink: "/home",
-                fieldText: "Trang Chủ"
             }
         );
         return {

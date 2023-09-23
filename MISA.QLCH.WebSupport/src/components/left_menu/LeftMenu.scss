@@ -1,26 +1,27 @@
-.left-sidebar{
+.left-sidebar {
     width: 160px;
     min-width: 160px;
     background-color: var(--pu-primary);
 }
 
-.item-route{
+
+.item-route {
     height: 40px;
     background-color: var(--pu-primary);
 }
 
-a{
+a {
     background-color: var(--pu-primary);
     color: var(--text-color-sidebar);
     text-decoration: none;
     padding-left: 15px;
 }
 
-a:hover{
+a:hover {
     background-color: var(--pu-primary-hover);
     color: var(--text-color-sidebar-hover);
 }
 
-.foot{
+.foot {
     border-top: 1px solid #ccc
 }
