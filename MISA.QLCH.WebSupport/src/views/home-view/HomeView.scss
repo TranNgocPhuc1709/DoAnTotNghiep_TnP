@@ -50,21 +50,15 @@
 .revenue-estimated,
 .revenue-bill {
     width: 345px;
-    height: 175px;
-
+    height: 185px;
     border-radius: 5px;
     border-top: 3px solid #2b3173;
 
 }
 
-.header-revenue {
-    height: 40px;
-    border-bottom: 1px;
-    border-bottom: 1px solid #DFDFDF
-}
 
 .header-revenue {
-    height: 30px;
+    height: 40px;
     padding: 0 10px;
     border-bottom: 1px solid #DFDFDF;
 }
@@ -95,7 +89,6 @@
 
 .icon-value-revenue {
     background: url(../../../../common/MISA.QLCH.Library/src/assets/images/common-icon.png) no-repeat -755px -127px;
-
     width: 10px;
     height: 13px;
     color: var(--text-color);
@@ -111,6 +104,105 @@
     grid-template-rows: 400px 400px;
     column-gap: 12px;
     row-gap: 12px;
-    margin-top: 15px;
+    padding: 10px 0;
 
+}
+
+.chart-item {
+    background-color: #fff;
+    border-radius: 5px;
+
+}
+
+.chart-item-header {
+    height: 50px;
+    border-bottom: 1px solid #DFDFDF;
+    padding: 0 15px;
+}
+
+.chart-item-header span {
+    color: #757575;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+.icon-setting-chart {
+    background: url(https://eshopvnappg2.misacdn.net/QLCH/resources/images/icon-tong-quan.png) no-repeat -3px -2px;
+    width: 15px;
+    height: 15px;
+    margin: 0 10px;
+
+}
+
+.icon-refresh-chart {
+    background: url(https://eshopvnappg2.misacdn.net/QLCH/resources/images/icon-tong-quan.png) no-repeat -27px -2px;
+    width: 15px;
+    height: 15px;
+
+}
+
+.icon-setting-chart:hover {
+    cursor: pointer;
+}
+
+.icon-refresh-chart:hover {
+    cursor: pointer;
+}
+
+.all-pay,
+.all-money,
+.all-profit {
+    width: 120px;
+    height: 50px;
+    padding: 10px;
+    background-color: #EEEEEE;
+    border-radius: 5px;
+
+}
+
+.all-pay:hover,
+.all-money:hover,
+.all-profit:hover {
+    background-color: #E5D4D4;
+    cursor: pointer;
+}
+
+.all-money {
+    margin: 10px 0 0 10px;
+}
+
+.all-pay {
+    margin: 10px 10px 0 10px;
+}
+
+.all-profit {
+    margin-top: 10px;
+}
+
+.icon-all-money {
+    width: 15px;
+    height: 15px;
+    background-color: #3B9BE2;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.icon-all-pay {
+    width: 15px;
+    height: 15px;
+    background-color: #E18314;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.icon-all-profit {
+    width: 15px;
+    height: 15px;
+    background-color: #6DAB13;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.field-text {
+    font-weight: 600;
 }
