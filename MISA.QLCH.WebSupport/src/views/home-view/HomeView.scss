@@ -167,7 +167,7 @@
 .all-money,
 .all-profit {
     width: 120px;
-    height: 50px;
+    height: 35px;
     padding: 10px;
     background-color: #EEEEEE;
     border-radius: 5px;
@@ -275,4 +275,17 @@
 .messege-item-chart:hover {
     cursor: pointer;
     font-weight: 600;
+}
+
+//cbBox
+.cbbItem {
+    max-width: 120px;
+}
+
+.cbbItem-chart {
+    min-width: 200px;
+}
+
+.cbbItem-chart-large {
+    min-width: 300px;
 }

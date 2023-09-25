@@ -8,6 +8,8 @@ import LeftMenu from '@src/components/left_menu/LeftMenu.vue';
 
 //tnp
 import ECombobox from "qlch_control/ECombobox";
+import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
+import { Ref, ref } from 'vue';
 export default {
     components: {
         LeftMenu, ECombobox,
@@ -28,8 +30,28 @@ export default {
                 fieldText: "Sản Phẩm"
             }
         );
+        const cbbStore: Ref<Combobox> = ref(new Combobox({
+            require: true,
+            data: [
+                {
+                    value: 1,
+                    display: "CH1"
+                },
+                {
+                    value: 2,
+                    display: "CH2"
+                },
+                {
+                    value: 3,
+                    display: "CH3"
+                },
+
+            ]
+            // require: true
+        }));
         return {
-            pages
+            pages,
+            cbbStore
         }
     },
 
@@ -51,6 +73,8 @@ export default {
                     }
                 });
             }
+            me.cbbStore.value = 1;
+
         } catch (error) {
             Log.ErrorLog(error as Error);
         }

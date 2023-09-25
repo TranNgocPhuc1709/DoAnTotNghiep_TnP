@@ -60,7 +60,9 @@ export default {
     /**
      * Building binding control
      */
+
     buildBindingControl() {
+
       return {
         "txtUserName": new TextBox({
           placeholder: "Tên mã nhân viên / số điện thoại",
@@ -80,24 +82,22 @@ export default {
     /**
      * Sự kiện click btn Login
      */
+
     async onClickLogin() {
-
+      debugger
       try {
-
         const me = this;
         if (!FormLibrary.validFormByBindingControl(me.bindingControl)) {
-
           return
         }
 
         me.onOffFormLoading(true);
-
         await Function.getTimeOut(3000, '');
+
         if (me.validateLogin()) {
           const newContext = new ContextModel({ token: Guid.NewGuid() }); // Tạo token lưu trên local store
           LocalStorageLibrary.setByKey(Constant.tokenContext, newContext);
           router.push({ path: '/' })
-
         }
         else {
           me.onOffFormLoading(false)

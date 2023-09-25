@@ -21,7 +21,8 @@ export default defineConfig(({ command, mode }) => {
           './BaseDictionaryListController': './src/components/base_dictionary/BaseDictionaryListController.vue',
           './BaseDictionaryListView': './src/components/base_dictionary/BaseDictionaryListView.vue',
           './BaseDictionaryDetailView': './src/components/base_dictionary_detail/BaseDictionaryDetailView.vue',
-          './BaseDictionaryDetailController': './src/components/base_dictionary_detail/BaseDictionaryDetailController.vue'
+          './BaseDictionaryDetailController': './src/components/base_dictionary_detail/BaseDictionaryDetailController.vue',
+          './BaseController': './src/components/base/BaseController.vue'
         },
         shared: ['vue']
       }),

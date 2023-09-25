@@ -1,0 +1,25 @@
+<e-popup :idRoot="idRoot">
+    <template v-slot:title>
+        <span>Tiền Thu Trong Ngày</span>
+    </template>
+    <template v-slot:window-button>
+        <div class="icon height-fill d-flex-vcenter" @click="onCloseClick">
+            <div class="i-close"></div>
+        </div>
+    </template>
+    <template v-slot:content-detail>
+        <div class="d-flex-vcenter">
+            <span class="flex-1">Tổng</span>
+            <span>120.000</span>
+        </div>
+        <div class="d-flex-vcenter">
+            <span class="flex-1">Tổng</span>
+            <span>120.000</span>
+        </div>
+
+    </template>
+    <template v-slot:form-button>
+        <div></div>
+    </template>
+
+</e-popup>

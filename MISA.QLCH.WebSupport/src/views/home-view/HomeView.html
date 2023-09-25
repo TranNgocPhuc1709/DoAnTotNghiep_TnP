@@ -11,7 +11,7 @@
                 <div class="header-revenue">
                     <div class=" d-flex-vcenter d-flex-sp-center height-fill">
                         <span>Tiền thu trong ngày</span>
-                        <div class="value-revenue d-flex">
+                        <div class="value-revenue d-flex" @click="showPopUpPrice()">
                             <span>0.00</span>
                             <span class="icon-value-revenue"></span>
                         </div>
@@ -130,9 +130,13 @@
     <div class="revenue-chart">
         <div class="chart-item">
             <div class="chart-item-header d-flex-vcenter  d-flex-sp-center">
-                <span>Doanh thu, chi phí, lợi nhuận</span>
-                <div class="setting-chart d-flex">
-                    <span>Combobox chỗ này</span>
+                <div class="flex-1">
+                    <span>Doanh thu, chi phí, lợi nhuận</span>
+                </div>
+                <div class="setting-chart d-flex-vcenter">
+                    <div class="cbbItem">
+                        <e-combobox :control="cbbCostBill" v-model="cbbCostBill.value" />
+                    </div>
                     <div class="d-flex">
                         <span class="icon-setting-chart"></span>
                         <span class="icon-refresh-chart"></span>
@@ -174,9 +178,13 @@
         </div>
         <div class="chart-item">
             <div class="chart-item-header d-flex-vcenter  d-flex-sp-center">
-                <span>Tình hình thu chi tiền theo thời gian</span>
-                <div class="setting-chart d-flex">
-                    <span>Combobox chỗ này</span>
+                <div class="flex-1">
+                    <span>Tình hình thu chi tiền theo thời gian</span>
+                </div>
+                <div class="setting-chart d-flex-vcenter">
+                    <div class="cbbItem">
+                        <e-combobox :control="cbbMonth" v-model="cbbMonth.value" />
+                    </div>
                     <div class="d-flex">
                         <span class="icon-setting-chart"></span>
                         <span class="icon-refresh-chart"></span>
@@ -215,9 +223,13 @@
         </div>
         <div class="chart-item">
             <div class="chart-item-header d-flex-vcenter d-flex-sp-center">
-                <span>Combobox</span>
-                <div class="setting-chart d-flex">
-                    <span>Combobox chỗ này</span>
+                <div class="cbbItem-chart">
+                    <e-combobox :control="cbbChart" v-model="cbbChart.value" />
+                </div>
+                <div class="setting-chart d-flex-vcenter">
+                    <div class="cbbItem">
+                        <e-combobox :control="cbbChartDate" v-model="cbbChartDate.value" />
+                    </div>
                     <div class="d-flex">
                         <span class="icon-setting-chart"></span>
                         <span class="icon-refresh-chart"></span>
@@ -265,9 +277,13 @@
         </div>
         <div class="chart-item">
             <div class="chart-item-header d-flex-vcenter  d-flex-sp-center">
-                <span>combobox</span>
-                <div class="setting-chart d-flex">
-                    <span>Combobox chỗ này</span>
+                <div class="cbbItem-chart-large">
+                    <e-combobox :control="cbbRevenue" v-model="cbbRevenue.value" />
+                </div>
+                <div class="setting-chart d-flex-vcenter">
+                    <div class="cbbItem">
+                        <e-combobox :control="cbbAllChart" v-model="cbbAllChart.value" />
+                    </div>
                     <div class="d-flex">
                         <span class="icon-setting-chart"></span>
                         <span class="icon-refresh-chart"></span>
@@ -275,6 +291,35 @@
                 </div>
 
 
+            </div>
+            <div class="chart-item-content d-flex">
+                <div class="all-money d-flex">
+                    <div class="icon-all-money">
+
+                    </div>
+                    <div class="field-text d-flex-column">
+                        <span>DOANH THU</span>
+
+                    </div>
+                </div>
+                <div class="all-pay d-flex">
+                    <div class="icon-all-pay">
+
+                    </div>
+                    <div class="field-text d-flex-column">
+                        <span>CHI PHÍ</span>
+
+                    </div>
+                </div>
+                <div class="all-profit d-flex">
+                    <div class="icon-all-profit">
+
+                    </div>
+                    <div class="field-text d-flex-column">
+                        <span>LỢI NHUẬN</span>
+
+                    </div>
+                </div>
             </div>
         </div>
 

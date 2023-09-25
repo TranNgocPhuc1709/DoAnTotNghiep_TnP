@@ -12,10 +12,7 @@
                         <div class="branches-user d-flex-vcenter">
                             <router-link class="link-branches-user" to="#">Bắt đầu sử dụng</router-link>
                             <div class="branch-menu">
-                                <span>Nơi để khai báo combobox</span>
-                                <!--Khai báo combobox-->
-                                <!-- <e-combobox :control="bindingControl[`combobox`]"
-                                    v-model="bindingControl[`combobox`].value" /> -->
+                                <e-combobox :control="cbbStore" v-model="cbbStore.value" />
                             </div>
                             <div class="user-manage d-flex-vcenter">
                                 <div class="img-user"></div>

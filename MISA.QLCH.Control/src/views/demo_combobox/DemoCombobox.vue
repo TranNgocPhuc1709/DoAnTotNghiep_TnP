@@ -230,7 +230,7 @@ export default {
                     display: "G3"
                 },
                 {
-                    value: "4",
+                    value: 4,
                     display: "G4"
                 },
                 {
