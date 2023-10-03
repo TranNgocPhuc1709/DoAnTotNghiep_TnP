@@ -105,7 +105,7 @@ export default {
                 if (me.control.data && me.control.data.length > 0) {
                     me.control.dataDisplay = me.control.data;
                 }
-                me.focusInputControl();
+
             } catch (error) {
                 Log.ErrorLog(error as Error);
             }
@@ -152,7 +152,7 @@ export default {
             const me = this;
             me.displayBoxItem(false);
             me.bindingValueWithItem(item);
-            me.focusInputControl();
+
 
             if (me.control) {
                 if (!me.validateControlBeforeHandlerEvent(me.control)) {

@@ -31,10 +31,14 @@
 }
 
 .text-header {
-    font: 700 16px "Roboto";
+    //tnp_textheader
+    // font: 700 16px "Roboto";
+    font-weight: 700;
+    font-size: 16px;
     color: var(--color-font-header);
 }
 
-.body-content-detail {
-    padding: 0 14px;
-}
+//trp (26/9)
+// .body-content-detail {
+//     padding: 0 14px;
+// }

@@ -1,0 +1,77 @@
+<e-popup styleFrom="width:350px; min-height: 100px" :idRoot="idRoot">
+    <template v-slot:title>
+        <span class="width-fill">Tại cửa hàng</span>
+    </template>
+    <template v-slot:window-button>
+        <div class="icon height-fill d-flex-vcenter" @click="onCloseClick">
+            <div class="i-close"></div>
+        </div>
+    </template>
+    <template v-slot:content-detail>
+        <div class="header-popup  d-flex-vcenter">
+            <span class="flex-1">Tổng</span>
+            <span>0</span>
+        </div>
+        <div class="content-popup d-flex-vcenter">
+            <span class="flex-1">Chờ giao/Lấy hàng</span>
+            <div class="item-content-popup d-flex-vcenter">
+                <p style="margin: auto auto;">0</p>
+            </div>
+            <span>0</span>
+        </div>
+        <div class="content-popup d-flex-vcenter">
+            <span class="flex-1">Đang giao hàng</span>
+            <div class="item-content-popup d-flex-vcenter">
+                <p style="margin: auto auto;">0</p>
+            </div>
+            <span>0</span>
+        </div>
+        <div class="content-popup d-flex-vcenter">
+            <span class="flex-1">Hoàn thành</span>
+            <div class="item-content-popup d-flex-vcenter">
+                <p style="margin: auto auto;">0</p>
+            </div>
+            <span>0</span>
+        </div>
+        <div class="content-popup d-flex-vcenter">
+            <span class="flex-1">Chờ thu COD</span>
+            <div class="item-content-popup d-flex-vcenter">
+                <p style="margin: auto auto;">0</p>
+            </div>
+            <span>0</span>
+        </div>
+        <div class="content-popup cancel-bill d-flex-vcenter">
+            <span class="flex-1">Thất bại</span>
+            <div class="item-content-popup d-flex-vcenter">
+                <p style="margin: auto auto;">0</p>
+            </div>
+            <span>0</span>
+        </div>
+        <div class="content-popup cancel-bill d-flex-vcenter">
+            <span class="flex-1">Đã chuyển khoản</span>
+            <div class="item-content-popup d-flex-vcenter">
+                <p style="margin: auto auto;">0</p>
+            </div>
+            <span>0</span>
+        </div>
+        <div class="content-popup cancel-bill d-flex-vcenter">
+            <span class="flex-1">Đã hủy</span>
+            <div class="item-content-popup d-flex-vcenter">
+                <p style="margin: auto auto;">0</p>
+            </div>
+            <span>0</span>
+        </div>
+        <div class="content-popup d-flex-vcenter">
+            <span class="flex-1">Lưu tạm</span>
+            <div class="item-content-popup d-flex-vcenter">
+                <p style="margin: auto auto;">0</p>
+            </div>
+            <span>0</span>
+        </div>
+
+    </template>
+    <template v-slot:form-button>
+        <div></div>
+    </template>
+
+</e-popup>

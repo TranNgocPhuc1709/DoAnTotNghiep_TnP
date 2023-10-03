@@ -1,5 +1,5 @@
-<template src="./PopupDetail.html"></template>
-<style scoped src="./PopupDetail.scss"></style>
+<template src="./PopUpUpdate.html"></template>
+<style scoped src="./PopUpUpdate.scss"></style>
 
 <script lang="ts">
 import Log from '@library-src/utilities/Log';

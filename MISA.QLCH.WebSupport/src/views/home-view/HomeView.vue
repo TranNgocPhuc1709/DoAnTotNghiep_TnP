@@ -98,6 +98,7 @@ export default {
 
 
             ]
+
             // require: true
         }));
         const cbbMonth: Ref<Combobox> = ref(new Combobox({
@@ -353,7 +354,56 @@ export default {
             if (component) {
                 PopupLibrary.createPopup(component, {});
             };
-        }
+        },
+        async showPopUpValueRevenue() {
+            const component = (await import(`./popup-show-revenue-value/PopupShowPopUpValueRevenue.vue`)).default;
+
+            if (component) {
+                PopupLibrary.createPopup(component, {});
+            };
+        },
+        async showPopUpCOD() {
+            const component = (await import(`./popup-COD/PopupCod.vue`)).default;
+            if (component) {
+                PopupLibrary.createPopup(component, {});
+            };
+        },
+        async showPopUpDeposit() {
+            const component = (await import(`./popup-deposit/Popup-Deposit.vue`)).default;
+            if (component) {
+                PopupLibrary.createPopup(component, {});
+            };
+        },
+        async showPopUpOther() {
+            const component = (await import(`./show-popup-other/ShowPopUpOther.vue`)).default;
+            if (component) {
+                PopupLibrary.createPopup(component, {});
+            };
+        },
+        async showPopUpValueBills() {
+            const component = (await import(`./show-popup-value-bills/PopUpValueBills.vue`)).default;
+            if (component) {
+                PopupLibrary.createPopup(component, {});
+            };
+        },
+        async showPopUpUpdate() {
+            const component = (await import(`./show-popup-update/PopUpUpdate.vue`)).default;
+            if (component) {
+                PopupLibrary.createPopup(component, {});
+            };
+        },
+        async showPopUpStore() {
+            const component = (await import(`./show-popup-store/PopUpStore.vue`)).default;
+            if (component) {
+                PopupLibrary.createPopup(component, {});
+            };
+        },
+        async showPopUpDeliver() {
+            const component = (await import(`./show-popup-deliver/PopUpDeliver.vue`)).default;
+            if (component) {
+                PopupLibrary.createPopup(component, {});
+            };
+        },
     }
 
 }

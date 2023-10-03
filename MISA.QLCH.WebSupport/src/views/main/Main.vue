@@ -32,6 +32,8 @@ export default {
         );
         const cbbStore: Ref<Combobox> = ref(new Combobox({
             require: true,
+
+
             data: [
                 {
                     value: 1,
@@ -56,9 +58,11 @@ export default {
     },
 
     data() {
+
         const thisData = new Main();
         return {
-            thisData
+            thisData,
+            DropdownUserVisible: false
         };
     },
 
@@ -91,6 +95,10 @@ export default {
             } catch (error) {
                 Log.ErrorLog(error as Error);
             }
+        },
+        toggleDropdownUser() {
+            const me = this
+            me.DropdownUserVisible = !me.DropdownUserVisible;
         }
     }
 }

@@ -21,7 +21,7 @@
                 <div class="item-revenue">
                     <div class=" d-flex-vcenter d-flex-sp-center height-fill">
                         <span>Bán Hàng</span>
-                        <div class="value-revenue d-flex">
+                        <div class="value-revenue d-flex" @click="showPopUpValueRevenue()">
                             <span>0.00</span>
                             <span class="icon-value-revenue"></span>
                         </div>
@@ -30,7 +30,7 @@
                 <div class="item-revenue">
                     <div class=" d-flex-vcenter d-flex-sp-center height-fill">
                         <span>Thu Nợ/Thu COD</span>
-                        <div class="value-revenue d-flex">
+                        <div class="value-revenue d-flex" @click="showPopUpCOD()">
                             <span>0.00</span>
                             <span class="icon-value-revenue"></span>
                         </div>
@@ -39,7 +39,7 @@
                 <div class="item-revenue">
                     <div class=" d-flex-vcenter d-flex-sp-center height-fill">
                         <span>Khách đặt cọc</span>
-                        <div class="value-revenue d-flex">
+                        <div class="value-revenue d-flex" @click="showPopUpDeposit()">
                             <span>0.00</span>
                             <span class="icon-value-revenue"></span>
                         </div>
@@ -48,7 +48,7 @@
                 <div class="item-revenue">
                     <div class=" d-flex-vcenter d-flex-sp-center  height-fill">
                         <span>Thu khác</span>
-                        <div class="value-revenue d-flex">
+                        <div class="value-revenue d-flex" @click="showPopUpOther()">
                             <span>0.00</span>
                             <span class="icon-value-revenue"></span>
                         </div>
@@ -62,7 +62,7 @@
                         <span>Doanh thu ước tính</span>
                         <div class="value-revenue d-flex">
                             <span>0.00</span>
-                            <span class="icon-value-revenue"></span>
+
                         </div>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                     <div class=" d-flex-vcenter d-flex-sp-center height-fill">
                         <span style="min-width: 135px;">Hóa đơn hoàn thành</span>
                         <div class="value-bills d-flex-center">0</div>
-                        <div class="value-revenue d-flex">
+                        <div class="value-revenue d-flex" @click="showPopUpValueBills()">
                             <span>0.00</span>
                             <span class="icon-value-revenue"></span>
                         </div>
@@ -81,7 +81,7 @@
                     <div class=" d-flex-vcenter d-flex-sp-center height-fill">
                         <span style="min-width: 135px;">Hóa đơn đang xử lý</span>
                         <div class="value-bills d-flex-center">0</div>
-                        <div class="value-revenue d-flex">
+                        <div class="value-revenue d-flex" @click="showPopUpUpdate()">
                             <span>0.00</span>
                             <span class="icon-value-revenue"></span>
                         </div>
@@ -96,7 +96,7 @@
                         <span>Hóa Đơn</span>
                         <div class="value-revenue d-flex">
                             <span>0.00</span>
-                            <span class="icon-value-revenue"></span>
+
                         </div>
                     </div>
                 </div>
@@ -104,7 +104,7 @@
                     <div class=" d-flex-vcenter d-flex-sp-center height-fill">
                         <span style="width: 120px;">Tại của hàng</span>
                         <div class="value-bills d-flex-center">0</div>
-                        <div class="value-revenue d-flex">
+                        <div class="value-revenue d-flex" @click="showPopUpStore()">
                             <span>0.00</span>
                             <span class="icon-value-revenue"></span>
                         </div>
@@ -114,7 +114,7 @@
                     <div class=" d-flex-vcenter d-flex-sp-center  height-fill">
                         <span style="width: 120px;">Giao hàng</span>
                         <div class="value-bills d-flex-center">0</div>
-                        <div class="value-revenue d-flex">
+                        <div class="value-revenue d-flex" @click="showPopUpDeliver()">
                             <span>0.00</span>
                             <span class="icon-value-revenue"></span>
                         </div>

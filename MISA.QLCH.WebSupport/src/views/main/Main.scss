@@ -43,6 +43,41 @@
     cursor: pointer;
 }
 
+.user-manage {
+    position: relative;
+}
+
+.user-manage-detail {
+    position: absolute;
+    width: 185px;
+    height: 100px;
+    border: 0.5px solid #E1E1E1;
+    top: 100%;
+    left: -55px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.user-detail-item {
+    font-weight: 600;
+    padding: 5px 15px;
+    border-bottom: 1px solid black;
+}
+
+.user-detail-item:hover,
+.user-detail-last-item:hover {
+    color: red;
+}
+
+// .key-icon {}
+
+.user-detail-last-item {
+    font-weight: 600;
+    padding: 5px 15px;
+
+}
+
 .img-user {
     background: url('https://misast.mshopkeeper.vn/backendg2/api/Image?id=&type=0&w=50&h=50&CompanyCode=misast') no-repeat center;
     width: 50px;

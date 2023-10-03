@@ -14,11 +14,24 @@
                             <div class="branch-menu">
                                 <e-combobox :control="cbbStore" v-model="cbbStore.value" />
                             </div>
-                            <div class="user-manage d-flex-vcenter">
+                            <div class="user-manage d-flex-vcenter" @click="toggleDropdownUser">
                                 <div class="img-user"></div>
                                 <span class="name-user">TnPhuc</span>
                                 <span class="icon-dropdown"></span>
+
+                                <div class="user-manage-detail d-flex-column" v-if="DropdownUserVisible">
+                                    <div class="user-detail-item height-fill">
+                                        <span>Thay đổi mật khẩu</span>
+                                    </div>
+                                    <div class="user-detail-item height-fill">
+                                        <span>Góp ý với nhà phát triển</span>
+                                    </div>
+                                    <div class="user-detail-last-item height-fill">
+                                        <span>Đăng xuất</span>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
                     </div>
 

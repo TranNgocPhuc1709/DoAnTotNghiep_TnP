@@ -1,6 +1,6 @@
 <e-popup styleFrom="width:350px; min-height: 100px" :idRoot="idRoot">
     <template v-slot:title>
-        <span class="width-fill">Tiền Thu Trong Ngày</span>
+        <span class="width-fill">Tại cửa hàng</span>
     </template>
     <template v-slot:window-button>
         <div class="icon height-fill d-flex-vcenter" @click="onCloseClick">
@@ -13,15 +13,24 @@
             <span>0</span>
         </div>
         <div class="content-popup d-flex-vcenter">
-            <span class="flex-1">Tiền mặt</span>
+            <span class="flex-1">Chờ thanh toán</span>
+            <div class="item-content-popup d-flex-vcenter">
+                <p style="margin: auto auto;">0</p>
+            </div>
             <span>0</span>
         </div>
         <div class="content-popup d-flex-vcenter">
-            <span class="flex-1">Voucher</span>
+            <span class="flex-1">Đã thanh toán</span>
+            <div class="item-content-popup d-flex-vcenter">
+                <p style="margin: auto auto;">0</p>
+            </div>
             <span>0</span>
         </div>
-        <div class="content-popup d-flex-vcenter">
-            <span class="flex-1">Điểm</span>
+        <div class="content-popup cancel-bill d-flex-vcenter">
+            <span class="flex-1">Đã hủy</span>
+            <div class="item-content-popup d-flex-vcenter">
+                <p style="margin: auto auto;">0</p>
+            </div>
             <span>0</span>
         </div>
 

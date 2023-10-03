@@ -1,0 +1,40 @@
+.icon {
+    cursor: pointer;
+}
+
+
+
+.header-popup {
+    height: 35px;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.header-popup span {
+    padding: 5px 15px;
+    font-weight: 600;
+}
+
+.content-popup span {
+    padding: 10px 15px 5px 25px;
+    font-weight: 600;
+}
+
+
+.content-popup div span {
+    height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.item-content-popup {
+
+    width: 30px;
+    height: 30px;
+    background-color: #EEEEEE;
+    margin-right: 50px;
+    font-weight: 600;
+}
+
+.cancel-bill {
+    color: red;
+}
