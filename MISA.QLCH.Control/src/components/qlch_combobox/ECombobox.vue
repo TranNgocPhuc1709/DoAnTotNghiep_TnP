@@ -105,7 +105,6 @@ export default {
                 if (me.control.data && me.control.data.length > 0) {
                     me.control.dataDisplay = me.control.data;
                 }
-
             } catch (error) {
                 Log.ErrorLog(error as Error);
             }
