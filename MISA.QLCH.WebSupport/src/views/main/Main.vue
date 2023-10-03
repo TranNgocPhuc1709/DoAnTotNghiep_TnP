@@ -96,9 +96,26 @@ export default {
                 Log.ErrorLog(error as Error);
             }
         },
-        toggleDropdownUser() {
-            const me = this
-            me.DropdownUserVisible = !me.DropdownUserVisible;
+
+        OnClickDropDownIconUser() {
+            try {
+                const me = this
+                me.DropdownUserVisible = !me.DropdownUserVisible;
+            }
+            catch (error) {
+                Log.ErrorLog(error as Error);
+            }
+
+
+        },
+        OnClickOutUserManage() {
+            try {
+                const me = this
+                me.DropdownUserVisible = false;
+            }
+            catch (error) {
+                Log.ErrorLog(error as Error);
+            }
         }
     }
 }
