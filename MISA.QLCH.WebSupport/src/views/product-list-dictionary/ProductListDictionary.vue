@@ -51,12 +51,12 @@ export default {
           width: 260
         }),
         new Column({
-          fieldText: "Giá",
+          fieldText: "Đơn Vị Tính",
           dataIndex: "Column4",
           width: 260
         }),
         new Column({
-          fieldText: "Tồn Kho",
+          fieldText: "Giá",
           dataIndex: "Column5",
           minWidth: 260,
           flex: 1
@@ -77,45 +77,69 @@ export default {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
       return [
         {
-          Column1: "Value 11",
-          Column2: "Value 21",
-          Column3: "Value 31",
-          Column4: "Value 41",
-          Column5: "Value 51",
-          Column6: "Value 61"
+          Column1: "AN01",
+          Column2: "Áo Nam Polo",
+          Column3: "Quần Áo",
+          Column4: "Chiếc",
+          Column5: "Giá",
+          Column6: "Hàng Mới Về"
         },
         {
-          Column1: "Value 12",
-          Column2: "Value 22",
-          Column3: "Value 32",
-          Column4: "Value 42",
-          Column5: "Value 52",
-          Column6: "Value 62"
+          Column1: "AN02",
+          Column2: "Áo khoác nỉ",
+          Column3: "Quần Áo",
+          Column4: "Chiếc",
+          Column5: "Giá",
+          Column6: "Hàng Mới Về"
         },
         {
-          Column1: "Value 13",
-          Column2: "Value 23",
-          Column3: "Value 33",
-          Column4: "Value 43",
-          Column5: "Value 53",
-          Column6: "Value 63"
-        },
-        {
-          Column1: "Value 14",
-          Column2: "Value 24",
-          Column3: "Value 34",
-          Column4: "Value 44",
-          Column5: "Value 54",
-          Column6: "Value 64"
-        },
-        {
-          Column1: "Value 15",
-          Column2: "Value 25",
-          Column3: "Value 35",
-          Column4: "Value 45",
-          Column5: "Value 55",
-          Column6: "Value 65"
+          Column1: "GD01",
+          Column2: "Giày Jordan",
+          Column3: "Giày dép",
+          Column4: "đôi",
+          Column5: "giá",
+          Column6: "Hàng Mới Về"
         }
+        // {
+        //   Column1: "Value 11",
+        //   Column2: "Value 21",
+        //   Column3: "Value 31",
+        //   Column4: "Value 41",
+        //   Column5: "Value 51",
+        //   Column6: "Value 61"
+        // },
+        // {
+        //   Column1: "Value 12",
+        //   Column2: "Value 22",
+        //   Column3: "Value 32",
+        //   Column4: "Value 42",
+        //   Column5: "Value 52",
+        //   Column6: "Value 62"
+        // },
+        // {
+        //   Column1: "Value 13",
+        //   Column2: "Value 23",
+        //   Column3: "Value 33",
+        //   Column4: "Value 43",
+        //   Column5: "Value 53",
+        //   Column6: "Value 63"
+        // },
+        // {
+        //   Column1: "Value 14",
+        //   Column2: "Value 24",
+        //   Column3: "Value 34",
+        //   Column4: "Value 44",
+        //   Column5: "Value 54",
+        //   Column6: "Value 64"
+        // },
+        // {
+        //   Column1: "Value 15",
+        //   Column2: "Value 25",
+        //   Column3: "Value 35",
+        //   Column4: "Value 45",
+        //   Column5: "Value 55",
+        //   Column6: "Value 65"
+        // }
       ];
     },
 

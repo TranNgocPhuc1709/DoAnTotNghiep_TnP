@@ -28,7 +28,13 @@ export default {
             {
                 routerLink: "/product",
                 fieldText: "Sản Phẩm"
+            },
+            {
+                routerLink: "/order",
+                fieldText: "Đơn Hàng"
             }
+
+
         );
         const cbbStore: Ref<Combobox> = ref(new Combobox({
             require: true,

@@ -5,7 +5,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/',
         name: 'main',
         component: () => import('@src/views/main/Main.vue'),
-        redirect: '/invoice',
+        redirect: '/home',
         children: [
             {
                 path: 'invoice',
@@ -25,6 +25,25 @@ const routes: Array<RouteRecordRaw> = [
                     anonymous: false
                 }
             },
+            {
+                path: 'order',
+                name: 'order',
+                component: () => import('@src/views/order-list-dictionary/OrderListDictionary.vue'),
+                meta: {
+                    title: "Đơn Hàng",
+                    anonymous: false
+                }
+            },
+            // {
+            //     path: 'revenue',
+            //     name: 'revenue',
+            //     component: () => import('@src/views/revenue-report/RevenueReport.vue'),
+            //     meta: {
+            //         title: "Đơn Hàng",
+            //         anonymous: false
+            //     }
+            // },
+
             {
                 path: 'home',
                 name: 'Home',

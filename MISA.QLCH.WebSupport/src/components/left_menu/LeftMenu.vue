@@ -9,7 +9,8 @@ export default {
         pages: {
             type: Array<Menu>,
             required: true
-        }
+        },
+
     },
 
     methods: {

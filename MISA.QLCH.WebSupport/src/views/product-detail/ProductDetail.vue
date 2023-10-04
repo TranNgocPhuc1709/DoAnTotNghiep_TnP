@@ -28,7 +28,7 @@ export default {
     */
     getTitleForm() {
       console.log("DEV: Override function getTitleForm return Title Form");
-      return "Title Form Detail";
+      return "Thông Tin Sản Phẩm";
     },
 
     /**
@@ -60,14 +60,14 @@ export default {
           bindingIndex: "Column3"
         }),
         "txtColumn4": new TextBox({
-          fieldText: "Giá",
+          fieldText: "Đơn Vị Tính",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column4"
         }),
         "txtColumn5": new TextBox({
-          fieldText: "Tồn Kho",
+          fieldText: "Giá",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,

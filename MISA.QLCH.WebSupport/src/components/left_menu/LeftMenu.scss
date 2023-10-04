@@ -10,6 +10,22 @@
     background-color: var(--pu-primary);
 }
 
+.item-link {
+    background-color: var(--pu-primary);
+    color: #fff;
+    height: 40px;
+    position: relative;
+}
+
+.main-revenue {
+    padding-left: 15px;
+}
+
+.item-link:hover {
+    background-color: var(--pu-primary-hover);
+    cursor: pointer;
+}
+
 a {
     background-color: var(--pu-primary);
     color: var(--text-color-sidebar);

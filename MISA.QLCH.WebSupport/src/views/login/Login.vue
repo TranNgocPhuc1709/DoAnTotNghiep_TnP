@@ -84,7 +84,7 @@ export default {
      */
 
     async onClickLogin() {
-      debugger
+
       try {
         const me = this;
         if (!FormLibrary.validFormByBindingControl(me.bindingControl)) {

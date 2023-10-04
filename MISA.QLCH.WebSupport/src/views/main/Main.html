@@ -2,9 +2,7 @@
     <div class="d-flex height-fill width-fill">
         <div>
             <left-menu @pageClick="changeItemMenu" :pages="pages" />
-
         </div>
-
         <div class="flex-1 body-right scroll-hidden">
             <div class="d-flex-column height-fill width-fill">
                 <div class="navbar d-flex-vcenter">
@@ -12,7 +10,6 @@
                     <div class="menu-main-right d-flex flex-h-end">
                         <div class="branches-user d-flex-vcenter">
                             <router-link class="link-branches-user" to="#">Bắt đầu sử dụng</router-link>
-                            <span>hello</span>
                             <div class="branch-menu">
                                 <e-combobox :control="cbbStore" v-model="cbbStore.value" />
                             </div>

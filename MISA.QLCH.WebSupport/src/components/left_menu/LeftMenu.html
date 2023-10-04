@@ -7,8 +7,30 @@
             <div v-for="item in pages" :key="item.routerLink" class="item-route width-fill">
                 <router-link :to="item.routerLink" class="d-flex-vcenter height-fill" @click="routerClick(item)">
                     <span>{{item.fieldText}}</span>
+
                 </router-link>
+
             </div>
+            <div class="item-link width-fill">
+                <div class="d-flex-vcenter height-fill" @click="OnClickDropRevenueFormRight">
+                    <span class="main-revenue">Báo Cáo</span>
+                    <div class="RevenueFormRight">
+
+                    </div>
+                </div>
+            </div>
+            <!-- <div v-for="item in pages" :key="item.routerLink" class="item-route width-fill">
+                <router-link :to="item.routerLink" class="d-flex-vcenter height-fill" @click="routerClick(item)">
+                    <span>{{item.fieldText}}</span>
+
+                </router-link>
+
+            </div> -->
+
+
+
+
+
 
         </div>
         <div class="foot">
