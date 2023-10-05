@@ -34,6 +34,15 @@ const routes: Array<RouteRecordRaw> = [
                     anonymous: false
                 }
             },
+            {
+                path: 'expense',
+                name: 'expense',
+                component: () => import('@src/views/expense-list-dictionary/ExpenseListDictionary.vue'),
+                meta: {
+                    title: "Chi Tiêu",
+                    anonymous: false
+                }
+            },
             // {
             //     path: 'revenue',
             //     name: 'revenue',

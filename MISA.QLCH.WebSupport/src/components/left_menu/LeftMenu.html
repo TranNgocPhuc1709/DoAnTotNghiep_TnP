@@ -5,40 +5,30 @@
         </div>
         <div class=" content flex-1" v-if="pages && pages.length">
             <div v-for="item in pages" :key="item.routerLink" class="item-route width-fill">
-                <router-link :to="item.routerLink" class="d-flex-vcenter height-fill" @click="routerClick(item)">
+                <div class="menulinkitem d-flex-vcenter height-fill" @click="routerClick(item)">
                     <span>{{item.fieldText}}</span>
-
-                </router-link>
-
-            </div>
-            <div class="item-link width-fill">
-                <div class="d-flex-vcenter height-fill" @click="OnClickDropRevenueFormRight">
-                    <span class="main-revenue">Báo Cáo</span>
-                    <div class="RevenueFormRight">
-
-                    </div>
                 </div>
+
+
+
             </div>
-            <!-- <div v-for="item in pages" :key="item.routerLink" class="item-route width-fill">
-                <router-link :to="item.routerLink" class="d-flex-vcenter height-fill" @click="routerClick(item)">
-                    <span>{{item.fieldText}}</span>
-
-                </router-link>
-
-            </div> -->
-
-
-
-
-
-
         </div>
         <div class="foot">
             <div class="item-route width-fill">
-                <a href="#" class="d-flex-vcenter height-fill">
+                <a href="#" class="menulinkitem d-flex-vcenter height-fill">
                     Thu gọn
                 </a>
             </div>
         </div>
+    </div>
+</div>
+<div class="main-revenue-right" v-if="MenuChildren && MenuChildren.length">
+    <div v-for="item in MenuChildren" :key="item.routerLink" class="item-route width-fill">
+        <div class="menulinkitem d-flex-vcenter height-fill" @click="routerClick(item)">
+            <span>{{item.fieldText}}</span>
+        </div>
+
+
+
     </div>
 </div>

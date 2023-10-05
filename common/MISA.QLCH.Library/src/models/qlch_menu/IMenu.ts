@@ -1,16 +1,24 @@
-export interface IMenu{
-    /**
-     * Link redirect
-     */
-    routerLink?: string;
+import { Menu } from "./Menu";
 
-     /**
-      * Display Text
-      */
-    fieldText?:string;
- 
-     /**
-      * Class's Icon
-      */
-    iconClass?:string;
+export interface IMenu {
+  /**
+   * Link redirect
+   */
+  routerLink?: string;
+
+  /**
+   * Display Text
+   */
+  fieldText?: string;
+
+  /**
+   * Class's Icon
+   */
+  iconClass?: string;
+
+  /**
+   * Con của Menu
+   */
+
+  children?: Array<Menu>;
 }

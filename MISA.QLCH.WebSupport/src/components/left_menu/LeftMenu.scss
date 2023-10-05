@@ -2,6 +2,7 @@
     width: 160px;
     min-width: 160px;
     background-color: var(--pu-primary);
+    position: relative;
 }
 
 
@@ -14,8 +15,34 @@
     background-color: var(--pu-primary);
     color: #fff;
     height: 40px;
-    position: relative;
+
+
 }
+
+.main-revenue-right {
+    position: absolute;
+    left: 160px;
+    bottom: 0;
+    width: 200px;
+    height: 510px;
+    z-index: 999;
+    background-color: #1E235A;
+
+}
+
+.link-revenue-right {
+    width: 100%;
+    height: 30px;
+    color: #AAACB2;
+    padding: 3px 0px 0px 20px;
+
+}
+
+.link-revenue-right:hover {
+    color: #fff;
+    cursor: pointer;
+}
+
 
 .main-revenue {
     padding-left: 15px;
@@ -26,14 +53,14 @@
     cursor: pointer;
 }
 
-a {
+.menulinkitem {
     background-color: var(--pu-primary);
     color: var(--text-color-sidebar);
     text-decoration: none;
     padding-left: 15px;
 }
 
-a:hover {
+.menulinkitem:hover {
     background-color: var(--pu-primary-hover);
     color: var(--text-color-sidebar-hover);
 }

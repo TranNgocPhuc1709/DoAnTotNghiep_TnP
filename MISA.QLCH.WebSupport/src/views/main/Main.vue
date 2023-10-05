@@ -17,10 +17,6 @@ export default {
 
     setup() {
         const pages: Array<Menu> = new Array(
-            // {
-            //     routerLink: "/invoice",
-            //     fieldText: "Display Demo"
-            // },
             {
                 routerLink: "/home",
                 fieldText: "Trang Chủ"
@@ -32,7 +28,37 @@ export default {
             {
                 routerLink: "/order",
                 fieldText: "Đơn Hàng"
-            }
+            },
+            {
+                routerLink: "/expense",
+                fieldText: "Chi Phí"
+            },
+            {
+                children: new Array(
+                    {
+                        fieldText: "Báo cáo đơn hàng",
+                    },
+                    {
+                        fieldText: "Báo cáo đơn hàng",
+                    },
+                ),
+                fieldText: "Báo cáo",
+            },
+            {
+                children: new Array(
+                    {
+                        fieldText: "Báo Hàng"
+                    },
+                    {
+                        fieldText: "Đặt Hàng",
+                    },
+                ),
+                fieldText: "Mua Hàng"
+            },
+            {
+                routerLink: "/home",
+                fieldText: "Trang Chủ"
+            },
 
 
         );
@@ -94,10 +120,15 @@ export default {
         /**
          * Handler Event Click Menu
          */
-        changeItemMenu(title: string) {
+
+        changeItemMenu(item: Menu) {
             const me = this;
             try {
-                me.thisData.title = title;
+                if (item.routerLink) {
+                    me.thisData.title = item.fieldText;
+                }
+
+
             } catch (error) {
                 Log.ErrorLog(error as Error);
             }
