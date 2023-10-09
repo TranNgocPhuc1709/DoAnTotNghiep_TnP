@@ -11,6 +11,7 @@ export class Menu {
             me.fieldText = iMenu.fieldText;
             me.iconClass = iMenu.iconClass;
             me.children = iMenu.children;
+            // me.headingText = iMenu.headingText;
         }
 
         if (!me.routerLink) {
@@ -33,5 +34,15 @@ export class Menu {
      */
     iconClass?: string;
 
+    /**
+     * Children item
+     */
+
     children?: Array<Menu>
+
+    /**Heading children */
+
+    // headingText?: string;
+
+
 }

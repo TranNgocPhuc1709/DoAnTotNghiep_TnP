@@ -8,11 +8,11 @@ const routes: Array<RouteRecordRaw> = [
         redirect: '/home',
         children: [
             {
-                path: 'invoice',
-                name: 'invoice',
-                component: () => import('@src/views/invoice-list-dictionary/InvoiceListDictionary.vue'),
+                path: 'home',
+                name: 'Home',
+                component: () => import('@src/views/home-view/HomeView.vue'),
                 meta: {
-                    title: "Hóa đơn",
+                    title: "Trang Chủ",
                     anonymous: false
                 }
             },
@@ -43,6 +43,70 @@ const routes: Array<RouteRecordRaw> = [
                     anonymous: false
                 }
             },
+            {
+                path: 'sales',
+                name: 'sales',
+                component: () => import('@src/views/sales-list-dictionary/SalesListDictionary.vue'),
+                meta: {
+                    title: "Bán Hàng",
+                    anonymous: false
+                }
+            },
+            {
+                path: 'categoryItem',
+                name: 'categoryItem',
+                component: () => import('@src/views/category-item-list-dictionary/CategoryItemListDictionary.vue'),
+                meta: {
+                    title: "Nhóm Hàng Hóa",
+                    anonymous: false
+                }
+            },
+            {
+                path: 'unit',
+                name: 'unit',
+                component: () => import('@src/views/unit-list-dictionary/UnitListDictionary.vue'),
+                meta: {
+                    title: "Đơn vị tính",
+                    anonymous: false
+                }
+            },
+            {
+                path: 'customerCategory',
+                name: 'customerCategory',
+                component: () => import('@src/views/customercategory-list-dictionary/CustomercategoryListDictionary.vue'),
+                meta: {
+                    title: "Nhóm khách hàng",
+                    anonymous: false
+                }
+            },
+            {
+                path: 'customer',
+                name: 'customer',
+                component: () => import('@src/views/customer-list-dictionary/CustomerListDictionary.vue'),
+                meta: {
+                    title: "Khách hàng",
+                    anonymous: false
+                }
+            },
+            {
+                path: 'vendorCategory',
+                name: 'vendorCategory',
+                component: () => import('@src/views/vendor-category-list-dictionary/VendorCategoryListDictionary.vue'),
+                meta: {
+                    title: "Nhóm nhà cung cấp",
+                    anonymous: false
+                }
+            },
+            {
+                path: 'vendor',
+                name: 'vendor',
+                component: () => import('@src/views/vendor-list-dictionary/VendorListDictionary.vue'),
+                meta: {
+                    title: "Nhà cung cấp",
+                    anonymous: false
+                }
+            },
+
             // {
             //     path: 'revenue',
             //     name: 'revenue',
@@ -53,15 +117,7 @@ const routes: Array<RouteRecordRaw> = [
             //     }
             // },
 
-            {
-                path: 'home',
-                name: 'Home',
-                component: () => import('@src/views/home-view/HomeView.vue'),
-                meta: {
-                    title: "Trang Chủ",
-                    anonymous: false
-                }
-            },
+
         ],
     },
     {

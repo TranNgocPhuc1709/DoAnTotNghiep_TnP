@@ -16,8 +16,8 @@ export default {
     data() {
         const MenuChildren = new Array<Menu>();
         const oldMenu = new Menu();
+
         return {
-            DropRightMenuRevenueVisible: false,
             MenuChildren,
             oldMenu
         }
@@ -30,7 +30,7 @@ export default {
          * @param item itemMenu
          */
         routerClick(item: Menu) {
-            debugger
+
             const me = this;
             try {
                 me.$emit("pageClick", item);
@@ -47,20 +47,13 @@ export default {
                     me.MenuChildren = item.children;
                     me.oldMenu = item;
                 }
+
             }
             catch (error) {
                 Log.ErrorLog(error as Error);
             }
         },
-        OnClickDropRevenueFormRight() {
-            try {
-                const me = this
-                me.DropRightMenuRevenueVisible = !me.DropRightMenuRevenueVisible;
-            }
-            catch (error) {
-                Log.ErrorLog(error as Error);
-            }
-        }
+
     }
 }
 </script>

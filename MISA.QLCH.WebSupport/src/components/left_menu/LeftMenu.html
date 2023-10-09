@@ -8,9 +8,6 @@
                 <div class="menulinkitem d-flex-vcenter height-fill" @click="routerClick(item)">
                     <span>{{item.fieldText}}</span>
                 </div>
-
-
-
             </div>
         </div>
         <div class="foot">
@@ -22,13 +19,12 @@
         </div>
     </div>
 </div>
+<!-- Menu Child -->
 <div class="main-revenue-right" v-if="MenuChildren && MenuChildren.length">
-    <div v-for="item in MenuChildren" :key="item.routerLink" class="item-route width-fill">
-        <div class="menulinkitem d-flex-vcenter height-fill" @click="routerClick(item)">
+    <div v-for="item in MenuChildren" :key="item.routerLink" class="menu-revenue-route width-fill">
+        <div class="item-revenue-route d-flex-vcenter height-fill" @click="routerClick(item)">
+            <span class="heading-revenue-item d-flex-vcenter">{{item.headingText}}</span>
             <span>{{item.fieldText}}</span>
         </div>
-
-
-
     </div>
 </div>

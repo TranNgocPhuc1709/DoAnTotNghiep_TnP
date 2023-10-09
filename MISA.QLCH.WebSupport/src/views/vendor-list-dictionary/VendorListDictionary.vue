@@ -1,14 +1,12 @@
-<template src="./InvoiceListDictionary.html"></template>
-<style lang="scss" scoped src="./InvoiceListDictionary.scss"></style>
-
+<template src="./VendorListDictionary.html"></template>
+<style lang="scss" scoped src="./VendorListDictionary.scss"></style>
 <script lang="ts">
-import InvoiceListDictionary from './InvoiceListDictionary';
+import VendorListDictionary from './VendorListDictionary';
 import { Ref, ref } from 'vue';
 import BaseDictionaryListView from 'qlch_base/BaseDictionaryListView';
 import BaseDictionaryListController from 'qlch_base/BaseDictionaryListController';
 import ParamPaging from '@library-src/models/qlch_control/qlch_grid/qlch_param_paging/ParamPaging';
 import Column from '@library-src/models/qlch_control/qlch_grid/qlch_column/Column';
-
 
 export default {
 
@@ -18,10 +16,9 @@ export default {
     BaseDictionaryListView,
   },
   setup() {
-    const thisData: Ref<InvoiceListDictionary> = ref(new InvoiceListDictionary());
+    const thisData: Ref<VendorListDictionary> = ref(new VendorListDictionary());
     return { thisData };
   },
-
   methods: {
 
     /**
@@ -39,33 +36,33 @@ export default {
       console.log("DEV: Override Function buildGridMasterColumn return list Column in Grid");
       return Array(
         new Column({
-          fieldText: "Demo Column 1",
+          fieldText: "Mã NCC",
           dataIndex: "Column1",
           width: 120,
         }),
         new Column({
-          fieldText: "Demo Column 2",
+          fieldText: "Tên NCC",
           dataIndex: "Column2",
           width: 260
         }),
         new Column({
-          fieldText: "Demo Column 3",
+          fieldText: "Nhóm NCC",
           dataIndex: "Column3",
           width: 260
         }),
         new Column({
-          fieldText: "Demo Column 4",
+          fieldText: "Số điện thoại",
           dataIndex: "Column4",
           width: 260
         }),
         new Column({
-          fieldText: "Demo Column 5",
+          fieldText: "Địa chỉ",
           dataIndex: "Column5",
           minWidth: 260,
           flex: 1
         }),
         new Column({
-          fieldText: "Demo Column 6",
+          fieldText: "Trạng thái",
           dataIndex: "Column6",
           width: 160
         })
@@ -80,45 +77,22 @@ export default {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
       return [
         {
-          Column1: "Value 11",
-          Column2: "Value 21",
-          Column3: "Value 31",
-          Column4: "Value 41",
-          Column5: "Value 51",
-          Column6: "Value 61"
+          Column1: "NCC-H1",
+          Column2: "Cty HaMinh",
+          Column3: "Hàng Nhập Khẩu",
+          Column4: "012345",
+          Column5: "Hà Nội",
+          Column6: "Đang theo dõi"
         },
         {
-          Column1: "Value 12",
-          Column2: "Value 22",
-          Column3: "Value 32",
-          Column4: "Value 42",
-          Column5: "Value 52",
-          Column6: "Value 62"
+          Column1: "NCC-H2",
+          Column2: "Cty Cổ Phần VNPT",
+          Column3: "Hàng Xuất Khẩu",
+          Column4: "012345",
+          Column5: "Nam Định",
+          Column6: "Ngừng theo dõi"
         },
-        {
-          Column1: "Value 13",
-          Column2: "Value 23",
-          Column3: "Value 33",
-          Column4: "Value 43",
-          Column5: "Value 53",
-          Column6: "Value 63"
-        },
-        {
-          Column1: "Value 14",
-          Column2: "Value 24",
-          Column3: "Value 34",
-          Column4: "Value 44",
-          Column5: "Value 54",
-          Column6: "Value 64"
-        },
-        {
-          Column1: "Value 15",
-          Column2: "Value 25",
-          Column3: "Value 35",
-          Column4: "Value 45",
-          Column5: "Value 55",
-          Column6: "Value 65"
-        }
+
       ];
     },
 
@@ -136,7 +110,7 @@ export default {
      */
     async createComponent() {
       console.log("DEV: Override Function createComponent Vue component Detail");
-      const frmDetail = (await import(`../invoice-detail/InvoiceDetail.vue`)).default;
+      const frmDetail = (await import(`../vendor-detail/VendorDetail.vue`)).default;
       return frmDetail;
     },
   }

@@ -17,8 +17,13 @@ export interface IMenu {
   iconClass?: string;
 
   /**
-   * Con của Menu
+   * Child Menu
    */
 
   children?: Array<Menu>;
+
+  /**
+   * child Heading
+   */
+  // headingText?: string;
 }

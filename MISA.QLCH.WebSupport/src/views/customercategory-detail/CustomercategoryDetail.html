@@ -1,0 +1,24 @@
+<base-dictionary-detail-view :idRoot="idRoot" :propView="propView" :styleFrom="`width: 500px;`"
+  @toolbarClick="onSelectAction" @closeFormClick="onCloseForm">
+  <template v-slot:content-detail>
+    <!-- <div class="qlch-input-default item-detail">
+      <i>(*) Dev: Khai báo control form tại đây:</i>
+    </div> -->
+    <div class="qlch-input-default item-detail">
+      <e-text-box :control="bindingControl[`txtColumn1`]"
+        v-model="masterData[bindingControl[`txtColumn1`].bindingIndex]"></e-text-box>
+    </div>
+    <div class="qlch-input-default item-detail">
+      <e-text-box :control="bindingControl[`txtColumn2`]"
+        v-model="masterData[bindingControl[`txtColumn2`].bindingIndex]"></e-text-box>
+    </div>
+    <div class="qlch-input-default item-detail">
+      <e-text-box :control="bindingControl[`txtColumn3`]"
+        v-model="masterData[bindingControl[`txtColumn3`].bindingIndex]"></e-text-box>
+    </div>
+    <div class="qlch-input-default item-detail">
+      <e-text-box :control="bindingControl[`txtColumn4`]"
+        v-model="masterData[bindingControl[`txtColumn4`].bindingIndex]"></e-text-box>
+    </div>
+  </template>
+</base-dictionary-detail-view>

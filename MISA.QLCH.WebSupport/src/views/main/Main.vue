@@ -16,56 +16,135 @@ export default {
     },
 
     setup() {
+        /**Khai báo hằng số pages là 1 mảng chứa các giá trị của đối tượng menu */
         const pages: Array<Menu> = new Array(
             {
-                routerLink: "/home",
+                routerLink: "home",
                 fieldText: "Trang Chủ"
             },
             {
-                routerLink: "/product",
-                fieldText: "Sản Phẩm"
-            },
-            {
-                routerLink: "/order",
-                fieldText: "Đơn Hàng"
-            },
-            {
-                routerLink: "/expense",
-                fieldText: "Chi Phí"
-            },
-            {
                 children: new Array(
+
                     {
-                        fieldText: "Báo cáo đơn hàng",
+                        routerLink: "sales",
+                        fieldText: "Bán hàng",
                     },
                     {
-                        fieldText: "Báo cáo đơn hàng",
+                        fieldText: "Bán hàng đa chi nhánh",
                     },
+                    {
+                        fieldText: "Nhập hàng",
+                    },
+                    {
+                        fieldText: "Kho",
+                    }
                 ),
                 fieldText: "Báo cáo",
             },
             {
+                routerLink: "order",
+                fieldText: "Đơn Hàng"
+            },
+            {
                 children: new Array(
                     {
+
                         fieldText: "Báo Hàng"
                     },
                     {
                         fieldText: "Đặt Hàng",
                     },
                 ),
-                fieldText: "Mua Hàng"
+                fieldText: "Mua Hàng",
+
             },
             {
-                routerLink: "/home",
-                fieldText: "Trang Chủ"
+                routerLink: "product",
+                fieldText: "Sản Phẩm"
             },
+
+            {
+                routerLink: "expense",
+                fieldText: "Chi Phí"
+            },
+            {
+                children: new Array(
+                    {
+                        headingText: "HÀNG HÓA"
+                    },
+                    {
+                        routerLink: "categoryItem",
+                        fieldText: "Nhóm hàng hóa"
+                    },
+                    {
+                        routerLink: "product",
+                        fieldText: "Hàng hóa",
+                    },
+                    {
+                        routerLink: "unit",
+                        fieldText: "Đơn vị tính",
+                    },
+                    {
+                        headingText: "KHÁCH HÀNG",
+                    },
+                    {
+                        routerLink: "customerCategory",
+                        fieldText: "Nhóm khách hàng",
+
+                    },
+                    {
+                        routerLink: "customer",
+                        fieldText: "khách hàng",
+
+                    },
+                    {
+                        headingText: "NHÀ CUNG CẤP",
+                    },
+                    {
+                        routerLink: "vendorCategory",
+                        fieldText: "Nhóm nhà cung cấp",
+                    },
+
+                    {
+                        routerLink: "vendor",
+                        fieldText: "Nhà cung cấp",
+                    },
+                    {
+                        routerLink: "",
+                        fieldText: "Đối tác giao hàng",
+                    },
+                    {
+                        headingText: "KHÁC",
+
+                    },
+                    {
+                        routerLink: "",
+                        fieldText: "Nhân viên"
+                    },
+
+                    {
+                        routerLink: "",
+                        fieldText: "Cửa hàng"
+                    },
+                    {
+                        routerLink: "",
+                        fieldText: "Ca làm việc"
+                    },
+                    {
+                        routerLink: "",
+                        fieldText: "Phương thức và dịch vụ thanh toán"
+                    }
+
+                ),
+                fieldText: "Danh Mục"
+            },
+
+
 
 
         );
         const cbbStore: Ref<Combobox> = ref(new Combobox({
             require: true,
-
-
             data: [
                 {
                     value: 1,
@@ -90,7 +169,6 @@ export default {
     },
 
     data() {
-
         const thisData = new Main();
         return {
             thisData,
