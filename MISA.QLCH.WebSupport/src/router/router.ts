@@ -106,6 +106,51 @@ const routes: Array<RouteRecordRaw> = [
                     anonymous: false
                 }
             },
+            {
+                path: 'shippingPartner',
+                name: 'shippingPartner',
+                component: () => import('@src/views/shipping-partner-list-dictionary/ShippingPartnerListDictionary.vue'),
+                meta: {
+                    title: "Đơn vị vận chuyển",
+                    anonymous: false
+                }
+            },
+            {
+                path: 'employee',
+                name: 'employee',
+                component: () => import('@src/views/employee-list-dictionary/EmployeeListDictionary.vue'),
+                meta: {
+                    title: "Nhân viên",
+                    anonymous: false
+                }
+            },
+            {
+                path: 'branch',
+                name: 'branch',
+                component: () => import('@src/views/branch-list-dictionary/BranchListDictionary.vue'),
+                meta: {
+                    title: "Cửa hàng",
+                    anonymous: false
+                }
+            },
+            {
+                path: 'shiftRecord',
+                name: 'shiftRecord',
+                component: () => import('@src/views/shift-record-list-dictionary/ShiftRecordListDictionary.vue'),
+                meta: {
+                    title: "Ca làm việc",
+                    anonymous: false
+                }
+            },
+            {
+                path: 'bankAccount',
+                name: 'bankAccount',
+                component: () => import('@src/views/bank-account-list-dictionary/BankAccountListDictionary.vue'),
+                meta: {
+                    title: "Phương thức thanh toán",
+                    anonymous: false
+                }
+            },
 
             // {
             //     path: 'revenue',

@@ -1,14 +1,14 @@
-<template src="./CategoryItemDetail.html"></template>
-<style lang="scss" scoped src="./CategoryItemDetail.scss"></style>
+<template src="./EmployeeDetail.html"></template>
+<style lang="scss" scoped src="./EmployeeDetail.scss"></style>
 <script lang="ts">
-import CategoryItemDetail from './CategoryItemDetail';
+import EmployeeDetail from './EmployeeDetail';
 import { Ref, ref } from 'vue';
 import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailController";
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
 import TextBox from "@library-src/models/qlch_control/qlch_text_box/TextBox";
 import ETextBox from "qlch_control/ETextBox";
-
-export default {
+        
+export default{
 
   extends: BaseDictionaryDetailController,
 
@@ -18,7 +18,7 @@ export default {
   },
 
   setup() {
-    const thisData: Ref<CategoryItemDetail> = ref(new CategoryItemDetail());
+    const thisData: Ref<EmployeeDetail> = ref(new EmployeeDetail());
     return { thisData };
   },
 
@@ -28,7 +28,7 @@ export default {
     */
     getTitleForm() {
       console.log("DEV: Override function getTitleForm return Title Form");
-      return "Thêm mới nhóm hàng hóa";
+      return "Title Form Detail";
     },
 
     /**
@@ -36,35 +36,49 @@ export default {
     */
     buildBindingControl() {
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
-      const labelWidth = 155;
+      const labelWidth = 115;
       return {
         "txtColumn1": new TextBox({
-          fieldText: "Mã Nhóm Hàng Hóa",
+          fieldText: "Demo Column 1",
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column1"
         }),
         "txtColumn2": new TextBox({
-          fieldText: "Tên Nhóm Hàng Hóa",
+          fieldText: "Demo Column 2",
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column2"
         }),
         "txtColumn3": new TextBox({
-          fieldText: "Mô Tả",
+          fieldText: "Demo Column 3",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column3"
         }),
         "txtColumn4": new TextBox({
-          fieldText: "Thuộc Nhóm",
+          fieldText: "Demo Column 4",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column4"
+        }),
+        "txtColumn5": new TextBox({
+          fieldText: "Demo Column 5",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          bindingIndex: "Column5"
+        }),
+        "txtColumn6": new TextBox({
+          fieldText: "Demo Column 6",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          bindingIndex: "Column6"
         }),
       }
     },
@@ -74,6 +88,6 @@ export default {
     */
     afterCloseForm() { },
   }
-
+    
 }
 </script>

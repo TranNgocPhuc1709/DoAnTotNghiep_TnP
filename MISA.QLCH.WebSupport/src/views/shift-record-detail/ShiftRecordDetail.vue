@@ -1,7 +1,7 @@
-<template src="./CategoryItemDetail.html"></template>
-<style lang="scss" scoped src="./CategoryItemDetail.scss"></style>
+<template src="./ShiftRecordDetail.html"></template>
+<style lang="scss" scoped src="./ShiftRecordDetail.scss"></style>
 <script lang="ts">
-import CategoryItemDetail from './CategoryItemDetail';
+import ShiftRecordDetail from './ShiftRecordDetail';
 import { Ref, ref } from 'vue';
 import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailController";
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
@@ -18,7 +18,7 @@ export default {
   },
 
   setup() {
-    const thisData: Ref<CategoryItemDetail> = ref(new CategoryItemDetail());
+    const thisData: Ref<ShiftRecordDetail> = ref(new ShiftRecordDetail());
     return { thisData };
   },
 
@@ -28,7 +28,7 @@ export default {
     */
     getTitleForm() {
       console.log("DEV: Override function getTitleForm return Title Form");
-      return "Thêm mới nhóm hàng hóa";
+      return "Title Form Detail";
     },
 
     /**
@@ -36,36 +36,29 @@ export default {
     */
     buildBindingControl() {
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
-      const labelWidth = 155;
+      const labelWidth = 115;
       return {
         "txtColumn1": new TextBox({
-          fieldText: "Mã Nhóm Hàng Hóa",
+          fieldText: "Tên ca",
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column1"
         }),
         "txtColumn2": new TextBox({
-          fieldText: "Tên Nhóm Hàng Hóa",
+          fieldText: "Giờ bắt đầu",
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column2"
         }),
         "txtColumn3": new TextBox({
-          fieldText: "Mô Tả",
+          fieldText: "Giờ kết thúc",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column3"
-        }),
-        "txtColumn4": new TextBox({
-          fieldText: "Thuộc Nhóm",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          bindingIndex: "Column4"
-        }),
+        })
       }
     },
 

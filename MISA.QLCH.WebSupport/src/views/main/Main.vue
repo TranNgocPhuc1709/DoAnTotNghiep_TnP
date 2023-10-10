@@ -110,7 +110,7 @@ export default {
                         fieldText: "Nhà cung cấp",
                     },
                     {
-                        routerLink: "",
+                        routerLink: "shippingPartner",
                         fieldText: "Đối tác giao hàng",
                     },
                     {
@@ -118,20 +118,20 @@ export default {
 
                     },
                     {
-                        routerLink: "",
+                        routerLink: "employee",
                         fieldText: "Nhân viên"
                     },
 
                     {
-                        routerLink: "",
+                        routerLink: "branch",
                         fieldText: "Cửa hàng"
                     },
                     {
-                        routerLink: "",
+                        routerLink: "shiftRecord",
                         fieldText: "Ca làm việc"
                     },
                     {
-                        routerLink: "",
+                        routerLink: "bankAccount",
                         fieldText: "Phương thức và dịch vụ thanh toán"
                     }
 
