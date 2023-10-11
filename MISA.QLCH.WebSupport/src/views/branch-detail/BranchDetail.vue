@@ -28,7 +28,7 @@ export default {
     */
     getTitleForm() {
       console.log("DEV: Override function getTitleForm return Title Form");
-      return "Title Form Detail";
+      return "Thêm mới cửa hàng";
     },
 
     /**

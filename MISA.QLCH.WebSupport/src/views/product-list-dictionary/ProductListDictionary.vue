@@ -48,22 +48,28 @@ export default {
         new Column({
           fieldText: "Nhóm Sản Phẩm",
           dataIndex: "Column3",
-          width: 260
+          width: 160
         }),
         new Column({
           fieldText: "Đơn Vị Tính",
           dataIndex: "Column4",
-          width: 260
+          width: 100
         }),
         new Column({
-          fieldText: "Giá",
+          fieldText: "Giá bán",
           dataIndex: "Column5",
-          minWidth: 260,
+          minWidth: 180,
           flex: 1
         }),
         new Column({
-          fieldText: "Ghi Chú",
+          fieldText: "Hiển thị trên trang bán hàng",
           dataIndex: "Column6",
+          width: 180
+
+        }),
+        new Column({
+          fieldText: "Trạng thái",
+          dataIndex: "Column7",
           width: 160
         })
       )
@@ -82,7 +88,8 @@ export default {
           Column3: "Quần Áo",
           Column4: "Chiếc",
           Column5: "Giá",
-          Column6: "Hàng Mới Về"
+          Column6: "Có",
+          Column7: "Đang kinh doanh"
         },
         {
           Column1: "AN02",
@@ -90,7 +97,8 @@ export default {
           Column3: "Quần Áo",
           Column4: "Chiếc",
           Column5: "Giá",
-          Column6: "Hàng Mới Về"
+          Column6: "Không",
+          Column7: "Ngừng kinh doanh"
         },
         {
           Column1: "GD01",
@@ -98,48 +106,9 @@ export default {
           Column3: "Giày dép",
           Column4: "đôi",
           Column5: "giá",
-          Column6: "Hàng Mới Về"
+          Column6: "Có",
+          Column7: "Đang kinh doanh"
         }
-        // {
-        //   Column1: "Value 11",
-        //   Column2: "Value 21",
-        //   Column3: "Value 31",
-        //   Column4: "Value 41",
-        //   Column5: "Value 51",
-        //   Column6: "Value 61"
-        // },
-        // {
-        //   Column1: "Value 12",
-        //   Column2: "Value 22",
-        //   Column3: "Value 32",
-        //   Column4: "Value 42",
-        //   Column5: "Value 52",
-        //   Column6: "Value 62"
-        // },
-        // {
-        //   Column1: "Value 13",
-        //   Column2: "Value 23",
-        //   Column3: "Value 33",
-        //   Column4: "Value 43",
-        //   Column5: "Value 53",
-        //   Column6: "Value 63"
-        // },
-        // {
-        //   Column1: "Value 14",
-        //   Column2: "Value 24",
-        //   Column3: "Value 34",
-        //   Column4: "Value 44",
-        //   Column5: "Value 54",
-        //   Column6: "Value 64"
-        // },
-        // {
-        //   Column1: "Value 15",
-        //   Column2: "Value 25",
-        //   Column3: "Value 35",
-        //   Column4: "Value 45",
-        //   Column5: "Value 55",
-        //   Column6: "Value 65"
-        // }
       ];
     },
 

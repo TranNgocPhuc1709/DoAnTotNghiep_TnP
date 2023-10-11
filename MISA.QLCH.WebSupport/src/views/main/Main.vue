@@ -24,7 +24,6 @@ export default {
             },
             {
                 children: new Array(
-
                     {
                         routerLink: "sales",
                         fieldText: "Bán hàng",
@@ -138,10 +137,6 @@ export default {
                 ),
                 fieldText: "Danh Mục"
             },
-
-
-
-
         );
         const cbbStore: Ref<Combobox> = ref(new Combobox({
             require: true,

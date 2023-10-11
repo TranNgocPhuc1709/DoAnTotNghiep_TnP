@@ -43,7 +43,6 @@ export default {
       thisData,
       btnLogin,
       websiteMISA,
-
     };
   },
 
@@ -68,7 +67,6 @@ export default {
           placeholder: "Tên mã nhân viên / số điện thoại",
           styleInput: "padding-left: 35px",
           require: true
-
         }),
         "txtPassword": new TextBox({
           placeholder: "Nhập mật khẩu",

@@ -43,14 +43,16 @@ export default {
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column1"
+          bindingIndex: "Column1",
+
         }),
         "txtColumn2": new TextBox({
           fieldText: "Diễn Giải",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column2"
+          bindingIndex: "Column2",
+
         }),
 
       }

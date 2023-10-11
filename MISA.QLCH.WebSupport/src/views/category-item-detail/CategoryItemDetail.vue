@@ -14,12 +14,14 @@ export default {
 
   components: {
     BaseDictionaryDetailView,
-    ETextBox
-  },
+    ETextBox,
 
+  },
   setup() {
     const thisData: Ref<CategoryItemDetail> = ref(new CategoryItemDetail());
-    return { thisData };
+    return {
+      thisData,
+    };
   },
 
   methods: {

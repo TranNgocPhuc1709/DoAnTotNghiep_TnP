@@ -48,7 +48,8 @@ export default {
         new Column({
           fieldText: "Trạng Thái",
           dataIndex: "Column3",
-          width: 260
+          width: 260,
+          flex: 1
         }),
       )
     },

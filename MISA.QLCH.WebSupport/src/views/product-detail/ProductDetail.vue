@@ -74,12 +74,20 @@ export default {
           bindingIndex: "Column5"
         }),
         "txtColumn6": new TextBox({
-          fieldText: "Ghi Chú",
+          fieldText: "Hiển thị trên trang bán hàng",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column6"
         }),
+        "txtColumn7": new TextBox({
+          fieldText: "Trạng thái",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          bindingIndex: "Column7"
+        }),
+
       }
     },
 
