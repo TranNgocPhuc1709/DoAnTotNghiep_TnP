@@ -3,8 +3,8 @@
                 {'d-flex-column':control.boxType=='vbox'},
                 control.classParent
             ]" v-click-out="comboboxClickOut">
-    <div v-if="control.fieldText && !control.isLoadingData" class="txt-label d-flex-vcenter"
-        :class=[control.classLabel]> <!--Label-->
+    <div v-if="control.fieldText && !control.isLoadingData" class="txt-label d-flex-vcenter" :class=[control.classLabel]
+        :style="`width:`+ control.labelWidth +`px`"> <!--Label-->
         <slot name="labelTextBox">
             <span>{{control.fieldText}}</span>
             <span v-if="control.require" class="txt-require">*</span>

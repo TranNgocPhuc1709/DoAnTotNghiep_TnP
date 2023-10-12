@@ -7,6 +7,8 @@ import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailContro
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
 import TextBox from "@library-src/models/qlch_control/qlch_text_box/TextBox";
 import ETextBox from "qlch_control/ETextBox";
+import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
+import ECombobox from "qlch_control/ECombobox";
 
 export default {
 
@@ -15,6 +17,7 @@ export default {
   components: {
     BaseDictionaryDetailView,
     ETextBox,
+    ECombobox
 
   },
   setup() {
@@ -61,7 +64,7 @@ export default {
           labelWidth: labelWidth,
           bindingIndex: "Column3"
         }),
-        "txtColumn4": new TextBox({
+        "txtColumn4": new Combobox({
           fieldText: "Thuộc Nhóm",
           require: false,
           maxLength: 255,

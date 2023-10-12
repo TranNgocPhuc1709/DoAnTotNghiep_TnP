@@ -7,13 +7,23 @@ export default class Combobox extends BaseDropDownInput {
      */
     constructor(combo?: ICombobox) {
         super('qlch-combobox', combo);
-        const me= this;
+        const me = this;
         me.selectOnly = combo?.selectOnly ?? false;
+        if (combo) {
+            if (combo?.labelWidth) {
+                me.labelWidth = combo.labelWidth
+            };
+        }
     }
 
     /**
      * Mode chỉ cho chọn - không cho nhập
      */
-    selectOnly:boolean = false;
-    
+    selectOnly: boolean = false;
+    /**
+    * Độ rộng của thẻ label
+    */
+
+    labelWidth?: number;
+
 }
