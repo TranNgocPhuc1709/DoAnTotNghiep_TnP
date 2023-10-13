@@ -57,11 +57,10 @@ export default {
                 fieldText: "Mua Hàng",
 
             },
-            {
-                routerLink: "product",
-                fieldText: "Sản Phẩm"
-            },
-
+            // {
+            //     routerLink: "product",
+            //     fieldText: "Sản Phẩm"
+            // },
             {
                 routerLink: "expense",
                 fieldText: "Chi Phí"
@@ -69,9 +68,7 @@ export default {
             {
                 children: new Array(
                     {
-                        headingText: "HÀNG HÓA"
-                    },
-                    {
+
                         routerLink: "categoryItem",
                         fieldText: "Nhóm hàng hóa"
                     },
@@ -82,10 +79,13 @@ export default {
                     {
                         routerLink: "unit",
                         fieldText: "Đơn vị tính",
-                    },
-                    {
-                        headingText: "KHÁCH HÀNG",
-                    },
+
+                    }
+                ),
+                fieldText: "Hàng Hóa"
+            },
+            {
+                children: new Array(
                     {
                         routerLink: "customerCategory",
                         fieldText: "Nhóm khách hàng",
@@ -95,10 +95,13 @@ export default {
                         routerLink: "customer",
                         fieldText: "khách hàng",
 
-                    },
-                    {
-                        headingText: "NHÀ CUNG CẤP",
-                    },
+
+                    }
+                ),
+                fieldText: "Khách Hàng"
+            },
+            {
+                children: new Array(
                     {
                         routerLink: "vendorCategory",
                         fieldText: "Nhóm nhà cung cấp",
@@ -112,10 +115,11 @@ export default {
                         routerLink: "shippingPartner",
                         fieldText: "Đối tác giao hàng",
                     },
-                    {
-                        headingText: "KHÁC",
-
-                    },
+                ),
+                fieldText: "Nhà Cung Cấp"
+            },
+            {
+                children: new Array(
                     {
                         routerLink: "employee",
                         fieldText: "Nhân viên"
@@ -133,10 +137,81 @@ export default {
                         routerLink: "bankAccount",
                         fieldText: "Phương thức và dịch vụ thanh toán"
                     }
-
                 ),
-                fieldText: "Danh Mục"
+                fieldText: "Khác"
             },
+
+            // {
+            //     children: new Array(
+            //         {
+            //             headingText: "HÀNG HÓA"
+            //         },
+            //         {
+            //             routerLink: "categoryItem",
+            //             fieldText: "Nhóm hàng hóa"
+            //         },
+            //         {
+            //             routerLink: "product",
+            //             fieldText: "Hàng hóa",
+            //         },
+            //         {
+            //             routerLink: "unit",
+            //             fieldText: "Đơn vị tính",
+            //         },
+            //         {
+            //             headingText: "KHÁCH HÀNG",
+            //         },
+            //         {
+            //             routerLink: "customerCategory",
+            //             fieldText: "Nhóm khách hàng",
+
+            //         },
+            //         {
+            //             routerLink: "customer",
+            //             fieldText: "khách hàng",
+
+            //         },
+            //         {
+            //             headingText: "NHÀ CUNG CẤP",
+            //         },
+            //         {
+            //             routerLink: "vendorCategory",
+            //             fieldText: "Nhóm nhà cung cấp",
+            //         },
+
+            //         {
+            //             routerLink: "vendor",
+            //             fieldText: "Nhà cung cấp",
+            //         },
+            //         {
+            //             routerLink: "shippingPartner",
+            //             fieldText: "Đối tác giao hàng",
+            //         },
+            //         {
+            //             headingText: "KHÁC",
+
+            //         },
+            //         {
+            //             routerLink: "employee",
+            //             fieldText: "Nhân viên"
+            //         },
+
+            //         {
+            //             routerLink: "branch",
+            //             fieldText: "Cửa hàng"
+            //         },
+            //         {
+            //             routerLink: "shiftRecord",
+            //             fieldText: "Ca làm việc"
+            //         },
+            //         {
+            //             routerLink: "bankAccount",
+            //             fieldText: "Phương thức và dịch vụ thanh toán"
+            //         }
+
+            //     ),
+            //     fieldText: "Danh Mục"
+            // },
         );
         const cbbStore: Ref<Combobox> = ref(new Combobox({
             require: true,

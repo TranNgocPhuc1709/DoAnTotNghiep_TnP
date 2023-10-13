@@ -23,6 +23,9 @@ export default class NumberModel extends BaseInput {
         if (number?.step) {
             me.step = number?.step ?? 1;
         }
+        if (number?.labelWidth) {
+            me.labelWidth = number.labelWidth;
+        };
 
         me.value = number?.value ?? 0;
         me.minValue = number?.minValue ?? Number.MIN_SAFE_INTEGER;
@@ -53,4 +56,9 @@ export default class NumberModel extends BaseInput {
      * Giá trị lớn nhất
      */
     maxValue: number = Number.MAX_SAFE_INTEGER;
+
+    /**
+     * Độ rộng của thẻ label
+     */
+    labelWidth?: number;
 }

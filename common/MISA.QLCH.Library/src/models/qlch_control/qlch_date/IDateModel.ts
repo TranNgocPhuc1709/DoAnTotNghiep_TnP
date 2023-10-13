@@ -13,4 +13,7 @@ export default interface IDateModel extends IBaseDropDownInput {
 
     // Date Format
     formatDate?: "dd/mm/yyyy" | "mm/dd/yyyy";
+
+    //độ dài label
+    labelWidth?: number;
 }

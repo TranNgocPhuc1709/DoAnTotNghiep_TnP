@@ -7,6 +7,13 @@ import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailContro
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
 import TextBox from "@library-src/models/qlch_control/qlch_text_box/TextBox";
 import ETextBox from "qlch_control/ETextBox";
+import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
+import ECombobox from "qlch_control/ECombobox";
+import NumberModel from '@library-src/models/qlch_control/qlch_number/NumberModel';
+import ENumber from "qlch_control/ENumber";
+import NumberFormat from '@library-src/models/qlch_control/number_format/NumberFormat';
+import Checkbox from '@library-src/models/qlch_control/qlch_checkbox/Checkbox';
+import ECheckbox from "qlch_control/ECheckbox";
 
 export default {
 
@@ -14,12 +21,19 @@ export default {
 
   components: {
     BaseDictionaryDetailView,
-    ETextBox
+    ETextBox,
+    ECombobox,
+    ENumber,
+    ECheckbox
+
   },
 
   setup() {
     const thisData: Ref<ProductDetail> = ref(new ProductDetail());
-    return { thisData };
+    return {
+      thisData,
+
+    };
   },
 
   methods: {
@@ -52,32 +66,63 @@ export default {
           labelWidth: labelWidth,
           bindingIndex: "Column2"
         }),
-        "txtColumn3": new TextBox({
+        "txtColumn3": new Combobox({
           fieldText: "Nhóm Sản Phẩm",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column3"
+          bindingIndex: "Column3",
+          data: [
+            {
+              value: 1,
+              display: "G1"
+            },
+            {
+              value: 2,
+              display: "G2"
+            },
+            {
+              value: 3,
+              display: "G3"
+            },
+          ]
         }),
-        "txtColumn4": new TextBox({
+        "txtColumn4": new Combobox({
           fieldText: "Đơn Vị Tính",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column4"
+          bindingIndex: "Column4",
+          data: [
+            {
+              value: 1,
+              display: "Chiếc"
+            },
+            {
+              value: 2,
+              display: "Cái"
+            },
+            {
+              value: 3,
+              display: "Combo"
+            },
+          ]
         }),
-        "txtColumn5": new TextBox({
+        "txtColumn5": new NumberModel({
           fieldText: "Giá",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
+          format: new NumberFormat({
+            decimal: ".",
+            thousands: ",",
+            precision: 4
+          }),
           bindingIndex: "Column5"
         }),
-        "txtColumn6": new TextBox({
+
+        "txtColumn6": new Checkbox({
           fieldText: "Hiển thị trên trang bán hàng",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
           bindingIndex: "Column6"
         }),
         "txtColumn7": new TextBox({
@@ -90,6 +135,7 @@ export default {
 
       }
     },
+    // Khởi tạo ảnh
 
     /**
     * Sau khi đóng form xong thì xử lý thêm gì ở master thì Override function này ở master

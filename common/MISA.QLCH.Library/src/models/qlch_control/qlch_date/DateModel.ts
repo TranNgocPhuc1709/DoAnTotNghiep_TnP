@@ -19,6 +19,9 @@ export default class DateModel extends BaseDropDownInput {
             if (date.formatDate) {
                 this.formatDate = date.formatDate;
             }
+            if (date.labelWidth) {
+                this.labelWidth = date.labelWidth;
+            }
         }
     }
 
@@ -34,4 +37,7 @@ export default class DateModel extends BaseDropDownInput {
 
     // Date Format
     formatDate: "dd/mm/yyyy" | "mm/dd/yyyy" = "dd/mm/yyyy";
+
+    // Độ dài label
+    labelWidth?: number;
 }

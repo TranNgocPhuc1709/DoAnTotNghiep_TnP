@@ -1,11 +1,15 @@
 .item-detail {
-  margin-bottom: 8px;
+  margin: 8px 8px;
+
 }
 
-.item-detail:first-child {
-  margin-top: 24px;
-}
+// .item-detail:first-child {
+//   margin-top: 24px;
+// }
 
-.item-detail:last-child{
-  margin-bottom: 24px;
+// .item-detail:last-child{
+//   margin-bottom: 24px;
+// }
+.form-detail-left {
+  margin-right: auto;
 }

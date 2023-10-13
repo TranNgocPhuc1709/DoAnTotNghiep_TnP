@@ -27,4 +27,9 @@ export default interface INumber extends IBaseInput {
      * Giá trị lớn nhất
      */
     maxValue?: number;
+
+    /**
+     * Độ dài label
+     */
+    labelWidth?: number;
 }

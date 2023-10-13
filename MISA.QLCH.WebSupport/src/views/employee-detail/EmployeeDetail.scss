@@ -6,6 +6,28 @@
   margin-top: 24px;
 }
 
-.item-detail:last-child{
+.item-detail:last-child {
   margin-bottom: 24px;
+}
+
+.heading-top {
+  height: 50px;
+  background-color: #F6F6F6;
+}
+
+.menu-detail-item {
+  padding: 5px 10px;
+  font-weight: 600;
+  color: #737373;
+  border-right: 1px solid #E1E1E1;
+}
+
+.menu-detail-item:hover {
+  background-color: #E3E3E3;
+  color: #2B3173;
+  cursor: pointer;
+}
+
+.form-employee-detail-left {
+  margin-right: auto;
 }

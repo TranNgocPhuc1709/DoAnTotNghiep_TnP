@@ -4,13 +4,14 @@
                 control.classParent
             ]" v-click-out="dateTimeClickOut">
     <div v-if="control.fieldText && !control.isLoadingData" class="txt-label d-flex-vcenter"
-        :class=[control.classLabel]>
+        :style="`width:`+control.labelWidth+`px`" :class=[control.classLabel]>
         <slot name="labelTextBox">
             <span v-t="control.fieldText"></span>
             <span v-if="control.require" class="txt-require">*</span>
         </slot>
     </div>
-    <div class="body-input prevent-select d-flex" :class="{'flex-1':control.boxType=='hbox'}" v-if="!control.isLoadingData">
+    <div class="body-input prevent-select d-flex" :class="{'flex-1':control.boxType=='hbox'}"
+        v-if="!control.isLoadingData">
         <input type="text" class="qlch-date-input flex-1" :id="control.id" :value="thisData.displayValue"
             :disabled="control.readOnly" :placeholder="control.placeholder"
             :class="[{'warning-valid': !control.isValidateSuccess && control.isActive}]" :maxlength="control.maxlength"
