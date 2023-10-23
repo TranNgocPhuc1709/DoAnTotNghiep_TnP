@@ -1,6 +1,21 @@
+<div class="heading-sales d-flex-center">
+  <h1>TỔNG HỢP BÁN HÀNG THEO NGÀY</h1>
+</div>
+<div class="content-data-sales  d-flex-vcenter">
+  <div class="item-data-sales">
+    <e-combobox :control="cbbSales" v-model="cbbSales.value" />
+  </div>
+  <span>Từ ngày</span>
+  <div class="item-data-sales">
+    <e-date :control="dtRequire" v-model="dtRequire.value" />
+  </div>
+  <span>Đến ngày</span>
+  <div class="item-data-sales">
+    <e-date :control="dtRequire" v-model="dtRequire.value" />
+  </div>
+</div>
 <div class="height-fill width-fill">
   <base-dictionary-list-view :viewControl="viewControl" @loadMaster="onLoadMaster"
     @changeSelectedRecordMaster="onChangeSelectedRecordMaster"
     @toolbarClick="onSelectAction"></base-dictionary-list-view>
 </div>
-        

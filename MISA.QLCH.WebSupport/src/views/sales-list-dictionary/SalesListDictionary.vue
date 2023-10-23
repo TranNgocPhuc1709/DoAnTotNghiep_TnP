@@ -7,6 +7,11 @@ import BaseDictionaryListView from 'qlch_base/BaseDictionaryListView';
 import BaseDictionaryListController from 'qlch_base/BaseDictionaryListController';
 import ParamPaging from '@library-src/models/qlch_control/qlch_grid/qlch_param_paging/ParamPaging';
 import Column from '@library-src/models/qlch_control/qlch_grid/qlch_column/Column';
+import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
+import ECombobox from "qlch_control/ECombobox";
+import Log from '@library-src/utilities/Log';
+import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
+import EDate from "qlch_control/EDate";
 
 export default {
 
@@ -14,11 +19,56 @@ export default {
 
   components: {
     BaseDictionaryListView,
+    ECombobox,
+    EDate
   },
   setup() {
     const thisData: Ref<SalesListDictionary> = ref(new SalesListDictionary());
-    return { thisData };
+    const cbbSales: Ref<Combobox> = ref(new Combobox({
+      require: true,
+      data: [
+        {
+          value: 1,
+          display: "Khác"
+        },
+        {
+          value: 2,
+          display: "Hôm nay"
+        },
+        {
+          value: 3,
+          display: "Tuần trước"
+        },
+
+      ]
+      // require: true
+    }));
+    const dtRequire: DateModel = new DateModel({
+      fieldText: "12345",
+      require: false,
+      timeFormatDefault: "StartDay",
+
+
+    });
+
+    return {
+      thisData,
+      cbbSales,
+      dtRequire
+    };
   },
+  created() {
+    try {
+      const me = this;
+
+      me.cbbSales.value = 1;
+
+
+    } catch (error) {
+      Log.ErrorLog(error as Error);
+    }
+  },
+
   methods: {
 
     /**

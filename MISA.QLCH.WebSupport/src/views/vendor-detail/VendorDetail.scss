@@ -1,11 +1,21 @@
 .item-detail {
-  margin-bottom: 8px;
+  margin: 8px 10px;
 }
 
-.item-detail:first-child {
-  margin-top: 24px;
+// .item-detail:first-child {
+//   margin-top: 24px;
+// }
+
+// .item-detail:last-child{
+//   margin-bottom: 24px;
+// }
+.heading-form-vendor {
+  font-weight: 600;
+  margin: 10px 0px;
+
 }
 
-.item-detail:last-child{
-  margin-bottom: 24px;
+.heading-form-vendor span {
+  font-size: 15px;
+  color: #757575;
 }

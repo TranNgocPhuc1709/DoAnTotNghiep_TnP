@@ -7,6 +7,8 @@ import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailContro
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
 import TextBox from "@library-src/models/qlch_control/qlch_text_box/TextBox";
 import ETextBox from "qlch_control/ETextBox";
+import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
+import ECombobox from "qlch_control/ECombobox";
 
 export default {
 
@@ -14,7 +16,8 @@ export default {
 
   components: {
     BaseDictionaryDetailView,
-    ETextBox
+    ETextBox,
+    ECombobox
   },
 
   setup() {
@@ -80,33 +83,89 @@ export default {
           labelWidth: labelWidth,
           bindingIndex: "Column6"
         }),
-        "txtColumn7": new TextBox({
+        "txtColumn7": new Combobox({
           fieldText: "Nhóm khách hàng",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column7"
+          bindingIndex: "Column7",
+          data: [
+            {
+
+              value: 1,
+              display: "G1"
+            },
+            {
+              value: 2,
+              display: "G2"
+            },
+            {
+              value: 3,
+              display: "G3"
+            },
+
+          ]
         }),
-        "txtColumn8": new TextBox({
+        "txtColumn8": new Combobox({
           fieldText: "Mã nhân viên phụ trách",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column8"
+          bindingIndex: "Column8",
+          data: [
+            {
+
+              value: 1,
+              display: "NV001"
+            },
+            {
+              value: 2,
+              display: "NV002"
+            },
+            {
+              value: 3,
+              display: "NV003"
+            },
+
+          ]
         }),
         "txtColumn9": new TextBox({
           fieldText: "Tên nhân viên phụ trách",
           require: false,
+          readOnly: true,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column9"
         }),
         "txtColumn10": new TextBox({
-          fieldText: "Chú ý",
+          fieldText: " Ghi chú",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column10"
+        }),
+        "txtColumn11": new Combobox({
+          fieldText: "Giới tính",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          bindingIndex: "Column10",
+          data: [
+            {
+
+              value: 1,
+              display: "Nam"
+            },
+            {
+              value: 2,
+              display: "Nữ"
+            },
+            {
+              value: 3,
+              display: "Không xác định"
+            },
+
+          ]
         }),
       }
     },

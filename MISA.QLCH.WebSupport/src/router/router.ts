@@ -35,6 +35,42 @@ const routes: Array<RouteRecordRaw> = [
                 }
             },
             {
+                path: 'inward',
+                name: 'inward',
+                component: () => import('@src/views/inward-list-dictionary/InwardListDictionary.vue'),
+                meta: {
+                    title: "Nhập Kho",
+                    anonymous: false
+                }
+            },
+            {
+                path: 'outward',
+                name: 'outward',
+                component: () => import('@src/views/outward-list-dictionary/OutwardListDictionary.vue'),
+                meta: {
+                    title: "Xuất Kho",
+                    anonymous: false
+                }
+            },
+            {
+                path: 'cashReceipt',
+                name: 'cashReceipt',
+                component: () => import('@src/views/cash-receipt-list-dictionary/CashReceiptListDictionary.vue'),
+                meta: {
+                    title: "Phiếu thu tiền",
+                    anonymous: false
+                }
+            },
+            {
+                path: 'cashPayment',
+                name: 'cashPayment',
+                component: () => import('@src/views/cash-payment-list-dictionary/CashPaymentListDictionary.vue'),
+                meta: {
+                    title: "Phiếu thu tiền",
+                    anonymous: false
+                }
+            },
+            {
                 path: 'expense',
                 name: 'expense',
                 component: () => import('@src/views/expense-list-dictionary/ExpenseListDictionary.vue'),
@@ -164,6 +200,15 @@ const routes: Array<RouteRecordRaw> = [
 
 
         ],
+    },
+    {
+        path: '/homeStore',
+        name: 'homeStore',
+        component: () => import('@src/views/home-store/HomeStore.vue'),
+        meta: {
+            title: "Trang Bán Hàng",
+            anonymous: true
+        }
     },
     {
         path: '/login',

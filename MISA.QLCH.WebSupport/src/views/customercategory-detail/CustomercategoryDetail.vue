@@ -53,19 +53,13 @@ export default {
           bindingIndex: "Column2"
         }),
         "txtColumn3": new TextBox({
-          fieldText: "Thuộc Nhóm",
+          fieldText: "Mô tả",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column3"
         }),
-        "txtColumn4": new TextBox({
-          fieldText: "Diễn Giải",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          bindingIndex: "Column4"
-        }),
+
       }
     },
 

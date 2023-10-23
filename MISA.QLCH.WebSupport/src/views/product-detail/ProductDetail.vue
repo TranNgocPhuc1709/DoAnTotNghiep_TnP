@@ -14,7 +14,6 @@ import ENumber from "qlch_control/ENumber";
 import NumberFormat from '@library-src/models/qlch_control/number_format/NumberFormat';
 import Checkbox from '@library-src/models/qlch_control/qlch_checkbox/Checkbox';
 import ECheckbox from "qlch_control/ECheckbox";
-
 export default {
 
   extends: BaseDictionaryDetailController,
@@ -24,8 +23,7 @@ export default {
     ETextBox,
     ECombobox,
     ENumber,
-    ECheckbox
-
+    ECheckbox,
   },
 
   setup() {
@@ -126,11 +124,20 @@ export default {
           bindingIndex: "Column6"
         }),
         "txtColumn7": new TextBox({
-          fieldText: "Trạng thái",
+          fieldText: "Màu sắc",
+          placeholder: "Xanh, Đỏ, Vàng,..",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column7"
+        }),
+        "txtColumn8": new TextBox({
+          fieldText: "Size",
+          placeholder: "S,M,L,XL,...",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          bindingIndex: "Column8"
         }),
 
       }

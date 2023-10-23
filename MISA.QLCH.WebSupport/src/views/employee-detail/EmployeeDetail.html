@@ -1,6 +1,7 @@
 <base-dictionary-detail-view :idRoot="idRoot" :propView="propView" :styleFrom="`min-width: 500px;`"
   @toolbarClick="onSelectAction" @closeFormClick="onCloseForm">
 
+
   <template v-slot:content-detail>
     <div class="heading-top d-flex-vcenter width-fill">
       <div class="menu-detail-item d-flex-vcenter">
@@ -19,8 +20,6 @@
         <span>Thời gian truy cập</span>
       </div>
     </div>
-
-
     <div class="pageInfo" v-if="disabledFormInfo">
       <div class="d-flex">
         <div class="form-employee-detail-left">
@@ -54,6 +53,14 @@
       <div class="qlch-input-default item-detail">
         <e-combobox :control="bindingControl[`txtColumn6`]"
           v-model="masterData[bindingControl[`txtColumn6`].bindingIndex]"></e-combobox>
+      </div>
+      <div class="qlch-input-default item-detail">
+        <e-text-box :control="bindingControl[`txtColumn7`]"
+          v-model="masterData[bindingControl[`txtColumn7`].bindingIndex]">
+          <template v-slot:trigger-left>
+            <div class="i-lock icon-left-input pss-abs"></div>
+          </template>
+        </e-text-box>
       </div>
     </div>
   </template>

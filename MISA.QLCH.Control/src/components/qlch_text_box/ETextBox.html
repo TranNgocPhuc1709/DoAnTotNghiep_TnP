@@ -16,7 +16,8 @@
         <input :type="thisData.inputType" class="qlch-txt flex-1" :style="control.styleInput" :id="control.id"
             :disabled="control.readOnly" :value="modelValue" :placeholder="control.placeholder"
             :class="[{'warning-valid': !control.isValidateSuccess && control.isActive}]" :maxlength="control.maxlength"
-            @input.stop="onInput" @blur.stop="onBlur" @focus.stop="onFocus" @keydown.stop="onKeyDown" autocomplete="off">
+            @input.stop="onInput" @blur.stop="onBlur" @focus.stop="onFocus" @keydown.stop="onKeyDown"
+            autocomplete="off">
 
         <span v-if="control.type=='password'" class="icon-show-hide-password pss-abs"
             :class="[thisData.classIconEyeStatus,{'icon-eye-read-only':control.readOnly}]"

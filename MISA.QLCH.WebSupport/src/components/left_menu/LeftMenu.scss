@@ -24,8 +24,8 @@
     left: 160px;
     bottom: 0;
     min-width: 200px;
-    height: 510px;
-    z-index: 999;
+    height: calc(100% - 80px);
+    z-index: 999999;
     background-color: #1E235A;
     overflow: auto;
     padding: 10px 15px;

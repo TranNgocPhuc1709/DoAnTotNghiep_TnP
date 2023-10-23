@@ -26,7 +26,7 @@
                                     <div class="user-detail-item height-fill">
                                         <span>Góp ý với nhà phát triển</span>
                                     </div>
-                                    <div class="user-detail-last-item height-fill">
+                                    <div class="user-detail-last-item height-fill" @click="LogOut()">
                                         <span>Đăng xuất</span>
                                     </div>
                                 </div>
@@ -52,7 +52,7 @@
                 </div>
 
                 <div class="sales-app width-fill d-flex-vcenter">
-                    <router-link to="#store" class="content-sales-app width-fill d-flex">
+                    <router-link to="/homeStore" class="content-sales-app width-fill d-flex">
                         <div class="logo-app">
                             <img class="img-logo-app"
                                 src="https://misast.mshopkeeper.vn/resources/images/svg/Logo_White.svg"

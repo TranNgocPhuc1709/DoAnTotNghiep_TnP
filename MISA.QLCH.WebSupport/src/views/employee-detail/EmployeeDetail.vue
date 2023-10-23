@@ -111,6 +111,17 @@ export default {
             }
           ]
         }),
+        "txtColumn7": new TextBox({
+          fieldText: "Mật khẩu",
+          type: "password",
+          require: true,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          styleInput: "padding-left: 35px",
+          bindingIndex: "Column7",
+
+
+        }),
       }
     },
     // ShowTaskInfo() {

@@ -10,6 +10,7 @@ import LeftMenu from '@src/components/left_menu/LeftMenu.vue';
 import ECombobox from "qlch_control/ECombobox";
 import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
 import { Ref, ref } from 'vue';
+import router from '@src/router';
 export default {
     components: {
         LeftMenu, ECombobox,
@@ -29,13 +30,13 @@ export default {
                         fieldText: "Bán hàng",
                     },
                     {
-                        fieldText: "Bán hàng đa chi nhánh",
-                    },
-                    {
                         fieldText: "Nhập hàng",
                     },
                     {
                         fieldText: "Kho",
+                    },
+                    {
+                        fieldText: "Quỹ tiền"
                     }
                 ),
                 fieldText: "Báo cáo",
@@ -53,9 +54,43 @@ export default {
                     {
                         fieldText: "Đặt Hàng",
                     },
+                    {
+                        fieldText: "Nhập Hàng",
+                    },
+                    {
+                        fieldText: "Trả lại Hàng mua",
+                    },
                 ),
                 fieldText: "Mua Hàng",
 
+            },
+            {
+                children: new Array(
+                    {
+                        fieldText: "Nhập Kho",
+                        routerLink: "inward"
+                    },
+                    {
+                        fieldText: "Xuất Kho",
+                        routerLink: "outward"
+                    }
+
+                ),
+                fieldText: "Kho Hàng"
+            },
+            {
+                children: new Array(
+                    {
+                        fieldText: "Phiếu thu tiền mặt",
+                        routerLink: "cashReceipt"
+                    },
+                    {
+                        fieldText: "Phiếu chi tiền mặt",
+                        routerLink: "cashPayment"
+                    }
+
+                ),
+                fieldText: "Quỹ Tiền"
             },
             // {
             //     routerLink: "product",
@@ -140,78 +175,6 @@ export default {
                 ),
                 fieldText: "Khác"
             },
-
-            // {
-            //     children: new Array(
-            //         {
-            //             headingText: "HÀNG HÓA"
-            //         },
-            //         {
-            //             routerLink: "categoryItem",
-            //             fieldText: "Nhóm hàng hóa"
-            //         },
-            //         {
-            //             routerLink: "product",
-            //             fieldText: "Hàng hóa",
-            //         },
-            //         {
-            //             routerLink: "unit",
-            //             fieldText: "Đơn vị tính",
-            //         },
-            //         {
-            //             headingText: "KHÁCH HÀNG",
-            //         },
-            //         {
-            //             routerLink: "customerCategory",
-            //             fieldText: "Nhóm khách hàng",
-
-            //         },
-            //         {
-            //             routerLink: "customer",
-            //             fieldText: "khách hàng",
-
-            //         },
-            //         {
-            //             headingText: "NHÀ CUNG CẤP",
-            //         },
-            //         {
-            //             routerLink: "vendorCategory",
-            //             fieldText: "Nhóm nhà cung cấp",
-            //         },
-
-            //         {
-            //             routerLink: "vendor",
-            //             fieldText: "Nhà cung cấp",
-            //         },
-            //         {
-            //             routerLink: "shippingPartner",
-            //             fieldText: "Đối tác giao hàng",
-            //         },
-            //         {
-            //             headingText: "KHÁC",
-
-            //         },
-            //         {
-            //             routerLink: "employee",
-            //             fieldText: "Nhân viên"
-            //         },
-
-            //         {
-            //             routerLink: "branch",
-            //             fieldText: "Cửa hàng"
-            //         },
-            //         {
-            //             routerLink: "shiftRecord",
-            //             fieldText: "Ca làm việc"
-            //         },
-            //         {
-            //             routerLink: "bankAccount",
-            //             fieldText: "Phương thức và dịch vụ thanh toán"
-            //         }
-
-            //     ),
-            //     fieldText: "Danh Mục"
-            // },
         );
         const cbbStore: Ref<Combobox> = ref(new Combobox({
             require: true,
@@ -301,6 +264,11 @@ export default {
             catch (error) {
                 Log.ErrorLog(error as Error);
             }
+        },
+        LogOut() {
+            localStorage.clear();
+            router.push({ path: '/login' })
+
         }
     }
 }

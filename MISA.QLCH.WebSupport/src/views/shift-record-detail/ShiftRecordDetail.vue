@@ -7,6 +7,8 @@ import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailContro
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
 import TextBox from "@library-src/models/qlch_control/qlch_text_box/TextBox";
 import ETextBox from "qlch_control/ETextBox";
+import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
+import ECombobox from "qlch_control/ECombobox";
 
 export default {
 
@@ -14,7 +16,8 @@ export default {
 
   components: {
     BaseDictionaryDetailView,
-    ETextBox
+    ETextBox,
+    ECombobox
   },
 
   setup() {
@@ -45,19 +48,47 @@ export default {
           labelWidth: labelWidth,
           bindingIndex: "Column1"
         }),
-        "txtColumn2": new TextBox({
+        "txtColumn2": new Combobox({
           fieldText: "Giờ bắt đầu",
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column2"
+          bindingIndex: "Column2",
+          data: [
+            {
+              value: 1,
+              display: "07:00"
+            },
+            {
+              value: 2,
+              display: "12:00"
+            },
+            {
+              value: 3,
+              display: "18:00"
+            },
+          ]
         }),
-        "txtColumn3": new TextBox({
+        "txtColumn3": new Combobox({
           fieldText: "Giờ kết thúc",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column3"
+          bindingIndex: "Column3",
+          data: [
+            {
+              value: 1,
+              display: "12:00"
+            },
+            {
+              value: 2,
+              display: "18:00"
+            },
+            {
+              value: 3,
+              display: "22:00"
+            },
+          ]
         })
       }
     },
