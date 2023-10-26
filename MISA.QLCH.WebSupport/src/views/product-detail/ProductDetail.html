@@ -1,8 +1,8 @@
 <base-dictionary-detail-view :idRoot="idRoot" :propView="propView" :styleFrom="`width: 800px;`"
   @toolbarClick="onSelectAction" @closeFormClick="onCloseForm">
   <template v-slot:content-detail>
-    <div class="d-flex-vcenter">
-      <div class="form-detail-left">
+    <div class="d-flex">
+      <div class="form-detail-left flex-1">
         <div class="qlch-input-default item-detail">
           <e-text-box :control="bindingControl[`txtColumn1`]"
             v-model="masterData[bindingControl[`txtColumn1`].bindingIndex]"></e-text-box>
@@ -25,18 +25,28 @@
             v-model="masterData[bindingControl[`txtColumn5`].bindingIndex]"></e-number>
         </div>
       </div>
-      <div class="form-detail-right d-flex-column d-flex-vcenter">
-        <div class="qlch-input-default item-detail">
+      <div class=" flex-1 d-flex-column">
+        <div class="form-detail-right flex-1">
+          <div class="qlch-input-default item-detail">
+            <e-number :control="bindingControl[`txtColumn9`]"
+              v-model="masterData[bindingControl[`txtColumn9`].bindingIndex]"></e-number>
+          </div>
+          <div class="qlch-input-default item-detail">
+            <e-number :control="bindingControl[`txtColumn10`]"
+              v-model="masterData[bindingControl[`txtColumn10`].bindingIndex]"></e-number>
+          </div>
+          <div class="qlch-input-default item-detail">
+            <e-number :control="bindingControl[`txtColumn11`]"
+              v-model="masterData[bindingControl[`txtColumn11`].bindingIndex]"></e-number>
+          </div>
+        </div>
+        <div class="qlch-input-default item-checkbox-detail">
           <e-checkbox :control="bindingControl[`txtColumn6`]"
             v-model="masterData[bindingControl[`txtColumn6`].bindingIndex]"></e-checkbox>
         </div>
       </div>
-    </div>
 
-    <!-- <div class="qlch-input-default item-detail">
-      <e-text-box :control="bindingControl[`txtColumn7`]"
-        v-model="masterData[bindingControl[`txtColumn7`].bindingIndex]"></e-text-box>
-    </div> -->
+    </div>
     <h3>Thông tin thuộc tính</h3>
     <div class="d-flex-column">
       <div class="qlch-input-default item-detail">

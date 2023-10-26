@@ -9,7 +9,8 @@ import TextBox from "@library-src/models/qlch_control/qlch_text_box/TextBox";
 import ETextBox from "qlch_control/ETextBox";
 import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
 import ECombobox from "qlch_control/ECombobox";
-
+import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
+import EDate from "qlch_control/EDate";
 export default {
 
   extends: BaseDictionaryDetailController,
@@ -17,7 +18,9 @@ export default {
   components: {
     BaseDictionaryDetailView,
     ETextBox,
-    ECombobox
+    ECombobox,
+    EDate
+
   },
 
   setup() {
@@ -76,7 +79,7 @@ export default {
           labelWidth: labelWidth,
           bindingIndex: "Column5"
         }),
-        "txtColumn6": new TextBox({
+        "txtColumn6": new DateModel({
           fieldText: "Ngày sinh",
           require: false,
           maxLength: 255,

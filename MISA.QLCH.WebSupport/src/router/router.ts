@@ -89,6 +89,33 @@ const routes: Array<RouteRecordRaw> = [
                 }
             },
             {
+                path: 'purchase',
+                name: 'purchase',
+                component: () => import('@src/views/purchase-list-dictionary/PurchaseListDictionary.vue'),
+                meta: {
+                    title: "Nhập Hàng",
+                    anonymous: false
+                }
+            },
+            {
+                path: 'monetaryFlow',
+                name: 'monetaryFlow',
+                component: () => import('@src/views/monetary-flow-list-dictionary/MonetaryFlowListDictionary.vue'),
+                meta: {
+                    title: "Quỹ tiền",
+                    anonymous: false
+                }
+            },
+            {
+                path: 'stock',
+                name: 'stock',
+                component: () => import('@src/views/stock-list-dictionary/StockListDictionary.vue'),
+                meta: {
+                    title: "Kho",
+                    anonymous: false
+                }
+            },
+            {
                 path: 'categoryItem',
                 name: 'categoryItem',
                 component: () => import('@src/views/category-item-list-dictionary/CategoryItemListDictionary.vue'),

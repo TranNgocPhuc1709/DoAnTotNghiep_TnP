@@ -20,29 +20,38 @@ export default {
         /**Khai báo hằng số pages là 1 mảng chứa các giá trị của đối tượng menu */
         const pages: Array<Menu> = new Array(
             {
-                routerLink: "home",
+
+                routerLink: "/home",
                 fieldText: "Trang Chủ"
             },
+
             {
                 children: new Array(
                     {
-                        routerLink: "sales",
+                        routerLink: "/sales",
                         fieldText: "Bán hàng",
                     },
                     {
+                        routerLink: "/purchase",
                         fieldText: "Nhập hàng",
                     },
                     {
+                        routerLink: "/stock",
                         fieldText: "Kho",
                     },
                     {
+                        routerLink: "/monetaryFlow",
                         fieldText: "Quỹ tiền"
+                    },
+                    {
+                        routerLink: "/profit",
+                        fieldText: "Lợi Nhuận"
                     }
                 ),
                 fieldText: "Báo cáo",
             },
             {
-                routerLink: "order",
+                routerLink: "/order",
                 fieldText: "Đơn Hàng"
             },
             {
@@ -68,11 +77,11 @@ export default {
                 children: new Array(
                     {
                         fieldText: "Nhập Kho",
-                        routerLink: "inward"
+                        routerLink: "/inward"
                     },
                     {
                         fieldText: "Xuất Kho",
-                        routerLink: "outward"
+                        routerLink: "/outward"
                     }
 
                 ),
@@ -82,11 +91,11 @@ export default {
                 children: new Array(
                     {
                         fieldText: "Phiếu thu tiền mặt",
-                        routerLink: "cashReceipt"
+                        routerLink: "/cashReceipt"
                     },
                     {
                         fieldText: "Phiếu chi tiền mặt",
-                        routerLink: "cashPayment"
+                        routerLink: "/cashPayment"
                     }
 
                 ),
@@ -97,22 +106,21 @@ export default {
             //     fieldText: "Sản Phẩm"
             // },
             {
-                routerLink: "expense",
+                routerLink: "/expense",
                 fieldText: "Chi Phí"
             },
             {
                 children: new Array(
                     {
-
-                        routerLink: "categoryItem",
+                        routerLink: "/categoryItem",
                         fieldText: "Nhóm hàng hóa"
                     },
                     {
-                        routerLink: "product",
+                        routerLink: "/product",
                         fieldText: "Hàng hóa",
                     },
                     {
-                        routerLink: "unit",
+                        routerLink: "/unit",
                         fieldText: "Đơn vị tính",
 
                     }
@@ -122,12 +130,12 @@ export default {
             {
                 children: new Array(
                     {
-                        routerLink: "customerCategory",
+                        routerLink: "/customerCategory",
                         fieldText: "Nhóm khách hàng",
 
                     },
                     {
-                        routerLink: "customer",
+                        routerLink: "/customer",
                         fieldText: "khách hàng",
 
 
@@ -138,16 +146,16 @@ export default {
             {
                 children: new Array(
                     {
-                        routerLink: "vendorCategory",
+                        routerLink: "/vendorCategory",
                         fieldText: "Nhóm nhà cung cấp",
                     },
 
                     {
-                        routerLink: "vendor",
+                        routerLink: "/vendor",
                         fieldText: "Nhà cung cấp",
                     },
                     {
-                        routerLink: "shippingPartner",
+                        routerLink: "/shippingPartner",
                         fieldText: "Đối tác giao hàng",
                     },
                 ),
@@ -156,20 +164,20 @@ export default {
             {
                 children: new Array(
                     {
-                        routerLink: "employee",
+                        routerLink: "/employee",
                         fieldText: "Nhân viên"
                     },
 
                     {
-                        routerLink: "branch",
+                        routerLink: "/branch",
                         fieldText: "Cửa hàng"
                     },
                     {
-                        routerLink: "shiftRecord",
+                        routerLink: "/shiftRecord",
                         fieldText: "Ca làm việc"
                     },
                     {
-                        routerLink: "bankAccount",
+                        routerLink: "/bankAccount",
                         fieldText: "Phương thức và dịch vụ thanh toán"
                     }
                 ),
@@ -210,16 +218,32 @@ export default {
     },
 
     created() {
+
         try {
             const me = this;
+
             if (me.pages && me.pages.length) {
                 me.pages.forEach(itemMenu => {
                     if (window.location.pathname == itemMenu.routerLink) {
                         me.thisData.title = itemMenu.fieldText;
                         return;
                     }
+                    if (itemMenu.children && itemMenu.children.length) {
+                        itemMenu.children.forEach(itemMenuChildren => {
+                            if (window.location.pathname == itemMenuChildren.routerLink) {
+                                me.thisData.title = itemMenuChildren.fieldText;
+                                return;
+                            }
+                        }
+                        )
+                    }
                 });
+
+
+
             }
+
+
             me.cbbStore.value = 1;
 
         } catch (error) {

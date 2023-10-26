@@ -1,0 +1,55 @@
+<div class="heading-stock">
+  <div class="d-flex-center">
+    <h1>TỔNG HỢP NHẬP XUẤT TỒN KHO</h1>
+  </div>
+  <div class="item-heading d-flex-center">
+    <span>Cửa Hàng: </span>
+    <strong>CH22</strong>
+  </div>
+  <div class="d-flex-center">
+    <div class="item-heading d-flex-center">
+      <span>Kho: </span>
+      <strong>Tất cả kho</strong>
+    </div>
+    <div class="item-heading d-flex-center">
+      <span>Nhóm hàng hóa: </span>
+      <strong>Tất cả nhóm</strong>
+    </div>
+    <div class="item-heading d-flex-center">
+      <span>Thống kê nhóm: </span>
+      <strong>Hàng hóa</strong>
+    </div>
+  </div>
+</div>
+
+
+<div class="content-data-stock d-flex-vcenter">
+  <div class="content-left flex-1 d-flex-vcenter ">
+    <div class="ccb-item-data-stock">
+      <e-combobox :control="cbbStock" v-model="cbbStock.value" />
+    </div>
+    <div class="item-data-stock">
+      <e-date :control="dtBeginRequire" v-model="dtBeginRequire.value" />
+    </div>
+    <div class="item-data-stock">
+      <e-date :control="dtEndRequire" v-model="dtEndRequire.value" />
+    </div>
+    <div class="btn-item-data-stock">
+      <e-button :control="btnGetData" />
+    </div>
+  </div>
+  <div class="content-right d-flex-vcenter">
+    <div class="btn-item-data-stock">
+      <e-button :control="btnPrintData" />
+    </div>
+    <div class="btn-item-data-stock">
+      <e-button :control="btnExportData" />
+    </div>
+  </div>
+
+</div>
+<div class="height-fill width-fill">
+  <base-dictionary-list-view :viewControl="viewControl" @loadMaster="onLoadMaster"
+    @changeSelectedRecordMaster="onChangeSelectedRecordMaster"
+    @toolbarClick="onSelectAction"></base-dictionary-list-view>
+</div>

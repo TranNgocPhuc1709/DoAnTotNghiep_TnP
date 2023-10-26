@@ -171,7 +171,7 @@ export default {
                 currTime = "23:59:59:999";
             }
 
-            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            // const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
             const firstDayOfMonth = new Date(currYear, currMonth, 1).getDay(),
                 lastDateOfMonth = new Date(currYear, currMonth + 1, 0).getDate(),
@@ -229,7 +229,7 @@ export default {
                     value: valueDate
                 });
             }
-            me.thisData.calendarMouth = `EDateResource.${months[currMonth]}`;
+            me.thisData.calendarMouth = `Tháng ${currMonth}`;
 
             me.thisData.calendarYear = "" + currYear;
         },

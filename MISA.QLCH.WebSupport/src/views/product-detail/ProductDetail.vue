@@ -114,14 +114,14 @@ export default {
           format: new NumberFormat({
             decimal: ".",
             thousands: ",",
-            precision: 4
+            precision: 2
           }),
           bindingIndex: "Column5"
         }),
 
         "txtColumn6": new Checkbox({
           fieldText: "Hiển thị trên trang bán hàng",
-          bindingIndex: "Column6"
+          bindingIndex: "Column6",
         }),
         "txtColumn7": new TextBox({
           fieldText: "Màu sắc",
@@ -138,6 +138,42 @@ export default {
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column8"
+        }),
+        "txtColumn9": new NumberModel({
+          fieldText: "Tồn kho ban đầu",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          format: new NumberFormat({
+            decimal: ".",
+            thousands: ",",
+            precision: 3
+          }),
+          bindingIndex: "Column9"
+        }),
+        "txtColumn10": new NumberModel({
+          fieldText: "Tồn kho tối thiểu",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          format: new NumberFormat({
+            decimal: ".",
+            thousands: ",",
+            precision: 3
+          }),
+          bindingIndex: "Column10"
+        }),
+        "txtColumn11": new NumberModel({
+          fieldText: "Tồn kho tối đa",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          format: new NumberFormat({
+            decimal: ".",
+            thousands: ",",
+            precision: 3
+          }),
+          bindingIndex: "Column11"
         }),
 
       }

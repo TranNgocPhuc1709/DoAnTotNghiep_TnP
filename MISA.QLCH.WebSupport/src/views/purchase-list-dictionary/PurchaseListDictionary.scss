@@ -1,32 +1,32 @@
-.heading-sales {
+.heading-purchase {
     height: 50px;
     border-bottom: 1px solid #F0F0F0;
 }
 
-.heading-sales h1 {
+.heading-purchase h1 {
     font-size: 20px;
     color: #2b3173;
     font-weight: 300;
 }
 
-.content-data-sales {
+.content-data-purchase {
     height: 50px;
-
+    padding: 0 5px;
 }
 
-.item-data-sales {
-    width: 180px;
-    z-index: 999;
-    margin: 0 10px;
-}
-
-.ccb-item-data-sales {
+.ccb-item-data-purchase {
     width: 100px;
     z-index: 999;
     margin: 0 10px;
 }
 
-.btn-item-data-sales {
+.item-data-purchase {
+    width: 180px;
+    z-index: 999;
+    margin: 0 10px;
+}
+
+.btn-item-data-purchase {
     height: 35px;
     margin: 0 10px 0 0;
 }

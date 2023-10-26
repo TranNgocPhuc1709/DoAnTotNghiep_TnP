@@ -1,22 +1,20 @@
 <base-dictionary-detail-view :idRoot="idRoot" :propView="propView" :styleFrom="`min-width: 500px;`"
   @toolbarClick="onSelectAction" @closeFormClick="onCloseForm">
-
-
   <template v-slot:content-detail>
     <div class="heading-top d-flex-vcenter width-fill">
-      <div class="menu-detail-item d-flex-vcenter">
-        <span @click="ShowTaskInfo()">Thông tin cơ bản</span>
+      <div class="menu-detail-item d-flex-vcenter" @click="ShowTaskInfo()">
+        <span>Thông tin cơ bản</span>
       </div>
-      <div class="menu-detail-item d-flex-vcenter">
-        <span @click="ShowTaskInfo2()">Vai trò</span>
+      <div class="menu-detail-item d-flex-vcenter" @click="ShowTaskRole()">
+        <span>Vai trò</span>
       </div>
-      <div class="menu-detail-item d-flex-vcenter">
+      <div class="menu-detail-item d-flex-vcenter" @click="contactInfo()">
         <span>Thông tin liên hệ</span>
       </div>
       <div class="menu-detail-item d-flex-vcenter">
         <span>Thông tin hồ sơ</span>
       </div>
-      <div class="menu-detail-item d-flex-vcenter">
+      <div class="menu-detail-item d-flex-vcenter" @click="accessTime()">
         <span>Thời gian truy cập</span>
       </div>
     </div>
@@ -39,28 +37,166 @@
             <e-date :control="bindingControl[`txtColumn4`]"
               v-model="masterData[bindingControl[`txtColumn4`].bindingIndex]"></e-date>
           </div>
+          <div class="qlch-input-default item-detail">
+            <e-combobox :control="bindingControl[`txtColumn11`]"
+              v-model="masterData[bindingControl[`txtColumn11`].bindingIndex]"></e-combobox>
+          </div>
+          <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtColumn7`]"
+              v-model="masterData[bindingControl[`txtColumn7`].bindingIndex]">
+              <template v-slot:trigger-left>
+                <div class="i-lock icon-left-input pss-abs"></div>
+              </template>
+            </e-text-box>
+          </div>
         </div>
         <div class="form-employee-detail-right">
-          <div class="img-employee">
-            <h1>hello</h1>
+          <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtColumn8`]"
+              v-model="masterData[bindingControl[`txtColumn8`].bindingIndex]"></e-text-box>
+          </div>
+          <div class="qlch-input-default item-detail">
+            <e-date :control="bindingControl[`txtColumn9`]"
+              v-model="masterData[bindingControl[`txtColumn9`].bindingIndex]"></e-date>
+          </div>
+          <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtColumn10`]"
+              v-model="masterData[bindingControl[`txtColumn10`].bindingIndex]"></e-text-box>
+          </div>
+          <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtColumn5`]"
+              v-model="masterData[bindingControl[`txtColumn5`].bindingIndex]"></e-text-box>
+          </div>
+          <div class="qlch-input-default item-detail">
+            <e-combobox :control="bindingControl[`txtColumn6`]"
+              v-model="masterData[bindingControl[`txtColumn6`].bindingIndex]"></e-combobox>
+          </div>
+          <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtColumn12`]"
+              v-model="masterData[bindingControl[`txtColumn12`].bindingIndex]"></e-text-box>
+          </div>
+        </div>
+
+      </div>
+      <div class="qlch-input-default item-checkbox-employee-detail">
+        <e-checkbox :control="bindingControl[`txtColumn13`]"
+          v-model="masterData[bindingControl[`txtColumn13`].bindingIndex]"></e-checkbox>
+      </div>
+    </div>
+    <div class="role" v-if="disabledFormRole">
+      <div class="d-flex">
+        <div class="qlch-input-default item-checkbox-role-detail">
+          <e-checkbox :control="bindingControl[`txtColumn14`]"
+            v-model="masterData[bindingControl[`txtColumn14`].bindingIndex]"></e-checkbox>
+        </div>
+        <div class="qlch-input-default item-checkbox-role-detail">
+          <e-checkbox :control="bindingControl[`txtColumn15`]"
+            v-model="masterData[bindingControl[`txtColumn15`].bindingIndex]"></e-checkbox>
+        </div>
+      </div>
+      <div class="qlch-input-default item-detail">
+        <e-combobox :control="bindingControl[`txtColumn16`]"
+          v-model="masterData[bindingControl[`txtColumn16`].bindingIndex]"></e-combobox>
+      </div>
+    </div>
+    <div class="contact-info" v-if="disabledFormContactInfo">
+      <div class="qlch-input-default item-detail">
+        <e-text-box :control="bindingControl[`txtColumn17`]"
+          v-model="masterData[bindingControl[`txtColumn17`].bindingIndex]"></e-text-box>
+      </div>
+      <span class="heading-contact-info d-flex">HỘ KHẨU THƯỜNG TRÚ</span>
+      <div class="qlch-input-default item-detail">
+        <e-text-box :control="bindingControl[`txtColumn18`]"
+          v-model="masterData[bindingControl[`txtColumn18`].bindingIndex]"></e-text-box>
+      </div>
+      <div class="d-flex">
+        <div class="form-contact-info-left">
+          <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtColumn19`]"
+              v-model="masterData[bindingControl[`txtColumn19`].bindingIndex]"></e-text-box>
+          </div>
+          <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtColumn20`]"
+              v-model="masterData[bindingControl[`txtColumn20`].bindingIndex]"></e-text-box>
+          </div>
+        </div>
+        <div class="form-contact-info-right">
+          <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtColumn21`]"
+              v-model="masterData[bindingControl[`txtColumn21`].bindingIndex]"></e-text-box>
+          </div>
+          <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtColumn22`]"
+              v-model="masterData[bindingControl[`txtColumn22`].bindingIndex]"></e-text-box>
+          </div>
+        </div>
+      </div>
+      <span class="heading-contact-info d-flex">CHỖ Ở HIỆN TẠI</span>
+      <div class="qlch-input-default item-detail">
+        <e-text-box :control="bindingControl[`txtColumn23`]"
+          v-model="masterData[bindingControl[`txtColumn23`].bindingIndex]"></e-text-box>
+      </div>
+      <div class="d-flex">
+        <div class="form-contact-info-left">
+          <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtColumn24`]"
+              v-model="masterData[bindingControl[`txtColumn24`].bindingIndex]"></e-text-box>
+          </div>
+          <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtColumn25`]"
+              v-model="masterData[bindingControl[`txtColumn25`].bindingIndex]"></e-text-box>
+          </div>
+        </div>
+        <div class="form-contact-info-right">
+          <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtColumn26`]"
+              v-model="masterData[bindingControl[`txtColumn26`].bindingIndex]"></e-text-box>
+          </div>
+          <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtColumn27`]"
+              v-model="masterData[bindingControl[`txtColumn27`].bindingIndex]"></e-text-box>
+          </div>
+        </div>
+      </div>
+      <span class="heading-contact-info d-flex">LIÊN HỆ KHẨN CẤP</span>
+      <div class="d-flex">
+        <div class="form-contact-info-left">
+          <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtColumn28`]"
+              v-model="masterData[bindingControl[`txtColumn28`].bindingIndex]"></e-text-box>
+          </div>
+          <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtColumn29`]"
+              v-model="masterData[bindingControl[`txtColumn29`].bindingIndex]"></e-text-box>
+          </div>
+        </div>
+        <div class="form-contact-info-right">
+          <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtColumn30`]"
+              v-model="masterData[bindingControl[`txtColumn30`].bindingIndex]"></e-text-box>
+          </div>
+          <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtColumn31`]"
+              v-model="masterData[bindingControl[`txtColumn31`].bindingIndex]"></e-text-box>
           </div>
         </div>
       </div>
       <div class="qlch-input-default item-detail">
-        <e-text-box :control="bindingControl[`txtColumn5`]"
-          v-model="masterData[bindingControl[`txtColumn5`].bindingIndex]"></e-text-box>
+        <e-text-box :control="bindingControl[`txtColumn32`]"
+          v-model="masterData[bindingControl[`txtColumn32`].bindingIndex]"></e-text-box>
       </div>
       <div class="qlch-input-default item-detail">
-        <e-combobox :control="bindingControl[`txtColumn6`]"
-          v-model="masterData[bindingControl[`txtColumn6`].bindingIndex]"></e-combobox>
+        <e-text-box :control="bindingControl[`txtColumn33`]"
+          v-model="masterData[bindingControl[`txtColumn33`].bindingIndex]"></e-text-box>
       </div>
+    </div>
+    <div class="access-time" v-if="disabledFormAccessTime">
       <div class="qlch-input-default item-detail">
-        <e-text-box :control="bindingControl[`txtColumn7`]"
-          v-model="masterData[bindingControl[`txtColumn7`].bindingIndex]">
-          <template v-slot:trigger-left>
-            <div class="i-lock icon-left-input pss-abs"></div>
-          </template>
-        </e-text-box>
+        <e-combobox :control="bindingControl[`txtColumn34`]"
+          v-model="masterData[bindingControl[`txtColumn34`].bindingIndex]"></e-combobox>
+      </div>
+      <div class="access-time-form" v-if="disabledAccessTimeFormItem">
+        <h1>hello</h1>
       </div>
     </div>
   </template>

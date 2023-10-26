@@ -1,7 +1,7 @@
-<template src="./SalesListDictionary.html"></template>
-<style lang="scss" scoped src="./SalesListDictionary.scss"></style>
+<template src="./PurchaseListDictionary.html"></template>
+<style lang="scss" scoped src="./PurchaseListDictionary.scss"></style>
 <script lang="ts">
-import SalesListDictionary from './SalesListDictionary';
+import PurchaseListDictionary from './PurchaseListDictionary';
 import { Ref, ref } from 'vue';
 import BaseDictionaryListView from 'qlch_base/BaseDictionaryListView';
 import BaseDictionaryListController from 'qlch_base/BaseDictionaryListController';
@@ -15,6 +15,7 @@ import EDate from "qlch_control/EDate";
 import Button from '@library-src/models/qlch_control/qlch_button/Button';
 import EButton from "qlch_control/EButton";
 
+
 export default {
 
   extends: BaseDictionaryListController,
@@ -23,11 +24,12 @@ export default {
     BaseDictionaryListView,
     ECombobox,
     EDate,
-    EButton
+    EButton,
+    // EDropDownMenu
   },
   setup() {
-    const thisData: Ref<SalesListDictionary> = ref(new SalesListDictionary());
-    const cbbSales: Ref<Combobox> = ref(new Combobox({
+    const thisData: Ref<PurchaseListDictionary> = ref(new PurchaseListDictionary());
+    const cbbPurchase: Ref<Combobox> = ref(new Combobox({
       require: true,
       data: [
         {
@@ -54,6 +56,7 @@ export default {
       fieldText: "Đến ngày",
       labelWidth: 60
     });
+
     const btnGetData: Button = new Button({
       fieldText: "Lấy dữ liệu",
       classType: "secondary",
@@ -72,34 +75,32 @@ export default {
       // classIconLeft: "i-add"
     });
 
+
     return {
       thisData,
-      cbbSales,
+      cbbPurchase,
       dtBeginRequire,
       dtEndRequire,
       btnGetData,
       btnExportData,
       btnPrintData
-
     };
   },
   created() {
     try {
       const me = this;
-
-      me.cbbSales.value = 1;
-
+      me.cbbPurchase.value = 1;
 
     } catch (error) {
       Log.ErrorLog(error as Error);
     }
   },
-
   methods: {
 
     /**
      * Tạo dòng mặc định
      */
+
     getTemplateRecord() {
       console.log("DEV: Override Function getTemplateRecord return new model()");
       return {};
@@ -112,36 +113,57 @@ export default {
       console.log("DEV: Override Function buildGridMasterColumn return list Column in Grid");
       return Array(
         new Column({
-          fieldText: "Demo Column 1",
+          fieldText: "Mã Hàng Hóa",
           dataIndex: "Column1",
           width: 120,
         }),
         new Column({
-          fieldText: "Demo Column 2",
+          fieldText: "Tên Hàng Hóa",
           dataIndex: "Column2",
           width: 260
         }),
         new Column({
-          fieldText: "Demo Column 3",
+          fieldText: "Đơn Vị Tính",
           dataIndex: "Column3",
           width: 260
         }),
         new Column({
-          fieldText: "Demo Column 4",
+          fieldText: "Nhóm Hàng Hóa",
           dataIndex: "Column4",
           width: 260
         }),
         new Column({
-          fieldText: "Demo Column 5",
+          fieldText: "SL Mua (1)",
           dataIndex: "Column5",
-          minWidth: 260,
+          minWidth: 160,
           flex: 1
         }),
         new Column({
-          fieldText: "Demo Column 6",
+          fieldText: "Đơn Giá TB (2) = (3) / (1)",
           dataIndex: "Column6",
           width: 160
-        })
+        }),
+        new Column({
+          fieldText: "Giá trị mua hàng (3)",
+          dataIndex: "Column7",
+          minWidth: 160,
+        }),
+        new Column({
+          fieldText: "SL Trả lại (4)",
+          dataIndex: "Column8",
+          minWidth: 160,
+        }),
+        new Column({
+          fieldText: "Giá trị trả lại hàng (5)",
+          dataIndex: "Column9",
+          minWidth: 160,
+        }),
+        new Column({
+          fieldText: "Tổng giá trị mua hàng (6) = (3) - (5)",
+          dataIndex: "Column10",
+          minWidth: 260,
+          flex: 1
+        }),
       )
     },
 
@@ -153,47 +175,33 @@ export default {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
       return [
         {
-          Column1: "Value 11",
-          Column2: "Value 21",
-          Column3: "Value 31",
-          Column4: "Value 41",
-          Column5: "Value 51",
-          Column6: "Value 61"
+          Column1: "HH001",
+          Column2: "Quần Đùi Nam",
+          Column3: "Chiếc",
+          Column4: "Quần Áo Thời Trang Nam",
+          Column5: "100",
+          Column6: "500000",
+          Column7: "50000000",
+          Column8: "0",
+          Column9: "0",
+          Column10: "50000000",
         },
         {
-          Column1: "Value 12",
-          Column2: "Value 22",
-          Column3: "Value 32",
-          Column4: "Value 42",
-          Column5: "Value 52",
-          Column6: "Value 62"
+          Column1: "HH00=2",
+          Column2: "Quần Dài Nam",
+          Column3: "Chiếc",
+          Column4: "Quần Áo Thời Trang Nam",
+          Column5: "200",
+          Column6: "1000000",
+          Column7: "100000000",
+          Column8: "0",
+          Column9: "0",
+          Column10: "100000000",
         },
-        {
-          Column1: "Value 13",
-          Column2: "Value 23",
-          Column3: "Value 33",
-          Column4: "Value 43",
-          Column5: "Value 53",
-          Column6: "Value 63"
-        },
-        {
-          Column1: "Value 14",
-          Column2: "Value 24",
-          Column3: "Value 34",
-          Column4: "Value 44",
-          Column5: "Value 54",
-          Column6: "Value 64"
-        },
-        {
-          Column1: "Value 15",
-          Column2: "Value 25",
-          Column3: "Value 35",
-          Column4: "Value 45",
-          Column5: "Value 55",
-          Column6: "Value 65"
-        }
+
       ];
     },
+
 
     /**
      * Set PrimaryKey cho object master
@@ -209,7 +217,7 @@ export default {
      */
     async createComponent() {
       console.log("DEV: Override Function createComponent Vue component Detail");
-      const frmDetail = (await import(`../sales-detail/SalesDetail.vue`)).default;
+      const frmDetail = (await import(`../purchase-detail/PurchaseDetail.vue`)).default;
       return frmDetail;
     },
   }

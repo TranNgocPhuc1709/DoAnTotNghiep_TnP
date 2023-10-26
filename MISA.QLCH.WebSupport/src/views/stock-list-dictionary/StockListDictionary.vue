@@ -1,7 +1,7 @@
-<template src="./SalesListDictionary.html"></template>
-<style lang="scss" scoped src="./SalesListDictionary.scss"></style>
+<template src="./StockListDictionary.html"></template>
+<style lang="scss" scoped src="./StockListDictionary.scss"></style>
 <script lang="ts">
-import SalesListDictionary from './SalesListDictionary';
+import StockListDictionary from './StockListDictionary';
 import { Ref, ref } from 'vue';
 import BaseDictionaryListView from 'qlch_base/BaseDictionaryListView';
 import BaseDictionaryListController from 'qlch_base/BaseDictionaryListController';
@@ -9,12 +9,11 @@ import ParamPaging from '@library-src/models/qlch_control/qlch_grid/qlch_param_p
 import Column from '@library-src/models/qlch_control/qlch_grid/qlch_column/Column';
 import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
 import ECombobox from "qlch_control/ECombobox";
-import Log from '@library-src/utilities/Log';
-import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
-import EDate from "qlch_control/EDate";
 import Button from '@library-src/models/qlch_control/qlch_button/Button';
+import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
+import Log from '@library-src/utilities/Log';
+import EDate from "qlch_control/EDate";
 import EButton from "qlch_control/EButton";
-
 export default {
 
   extends: BaseDictionaryListController,
@@ -26,8 +25,8 @@ export default {
     EButton
   },
   setup() {
-    const thisData: Ref<SalesListDictionary> = ref(new SalesListDictionary());
-    const cbbSales: Ref<Combobox> = ref(new Combobox({
+    const thisData: Ref<StockListDictionary> = ref(new StockListDictionary());
+    const cbbStock: Ref<Combobox> = ref(new Combobox({
       require: true,
       data: [
         {
@@ -54,6 +53,7 @@ export default {
       fieldText: "Đến ngày",
       labelWidth: 60
     });
+
     const btnGetData: Button = new Button({
       fieldText: "Lấy dữ liệu",
       classType: "secondary",
@@ -71,10 +71,9 @@ export default {
 
       // classIconLeft: "i-add"
     });
-
     return {
       thisData,
-      cbbSales,
+      cbbStock,
       dtBeginRequire,
       dtEndRequire,
       btnGetData,
@@ -86,15 +85,12 @@ export default {
   created() {
     try {
       const me = this;
-
-      me.cbbSales.value = 1;
-
+      me.cbbStock.value = 1;
 
     } catch (error) {
       Log.ErrorLog(error as Error);
     }
   },
-
   methods: {
 
     /**
@@ -153,7 +149,7 @@ export default {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
       return [
         {
-          Column1: "Value 11",
+          Column1: "Value 0001",
           Column2: "Value 21",
           Column3: "Value 31",
           Column4: "Value 41",
@@ -209,7 +205,7 @@ export default {
      */
     async createComponent() {
       console.log("DEV: Override Function createComponent Vue component Detail");
-      const frmDetail = (await import(`../sales-detail/SalesDetail.vue`)).default;
+      const frmDetail = (await import(`../stock-detail/StockDetail.vue`)).default;
       return frmDetail;
     },
   }

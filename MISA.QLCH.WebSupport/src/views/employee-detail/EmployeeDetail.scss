@@ -1,14 +1,16 @@
 .item-detail {
   margin-bottom: 8px;
+  margin-top: 10px;
 }
 
-.item-detail:first-child {
-  margin-top: 24px;
-}
+//TnP 26/10
+// .item-detail:first-child {
+//   margin-top: 24px;
+// }
 
-.item-detail:last-child {
-  margin-bottom: 30px;
-}
+// .item-detail:last-child {
+//   margin-bottom: 30px;
+// }
 
 
 .menu-detail-item {
@@ -19,17 +21,63 @@
 }
 
 .menu-detail-item:hover {
-
   color: #2B3173;
   cursor: pointer;
 }
 
 .form-employee-detail-left {
-  margin-right: auto;
+  margin-right: 10px;
 }
 
 .icon-left-input {
   top: calc((100% - 16px) / 2);
   left: 8px;
 
+}
+
+.item-checkbox-employee-detail {
+  width: 220px;
+  margin: 8px;
+}
+
+.role {
+  margin: 10px;
+
+
+}
+
+.item-checkbox-role-detail {
+  margin: 0 20px 0 0;
+
+}
+
+.heading-contact-info {
+  font-size: 15px;
+  font-weight: 600;
+  color: #757575;
+  padding: 10px 0;
+}
+
+
+
+.form-contact-info-left {
+  margin-right: 10px;
+}
+
+.role {
+  height: 300px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.contact-info {
+  height: 300px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.access-time {
+  height: 300px;
+  overflow: scroll;
+  overflow-x: hidden;
 }

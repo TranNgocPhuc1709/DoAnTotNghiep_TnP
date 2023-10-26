@@ -1,29 +1,30 @@
-<div class="heading-sales d-flex-center">
-  <h1>TỔNG HỢP BÁN HÀNG THEO NGÀY</h1>
+<div class="heading-purchase d-flex-center">
+  <h1>NHẬP HÀNG THEO HÀNG HÓA</h1>
 </div>
-<div class="content-data-sales d-flex-vcenter">
+<div class="content-data-purchase d-flex-vcenter">
   <div class="content-left flex-1 d-flex-vcenter ">
-    <div class="ccb-item-data-sales">
-      <e-combobox :control="cbbSales" v-model="cbbSales.value" />
+    <div class="ccb-item-data-purchase">
+      <e-combobox :control="cbbPurchase" v-model="cbbPurchase.value" />
     </div>
-    <div class="item-data-sales">
+    <div class="item-data-purchase">
       <e-date :control="dtBeginRequire" v-model="dtBeginRequire.value" />
     </div>
-    <div class="item-data-sales">
+    <div class="item-data-purchase">
       <e-date :control="dtEndRequire" v-model="dtEndRequire.value" />
     </div>
-    <div class="btn-item-data-sales">
+    <div class="btn-item-data-purchase">
       <e-button :control="btnGetData" />
     </div>
   </div>
   <div class="content-right d-flex-vcenter">
-    <div class="btn-item-data-sales">
+    <div class="btn-item-data-purchase">
       <e-button :control="btnPrintData" />
     </div>
-    <div class="btn-item-data-sales">
+    <div class="btn-item-data-purchase">
       <e-button :control="btnExportData" />
     </div>
   </div>
+
 </div>
 <div class="height-fill width-fill">
   <base-dictionary-list-view :viewControl="viewControl" @loadMaster="onLoadMaster"

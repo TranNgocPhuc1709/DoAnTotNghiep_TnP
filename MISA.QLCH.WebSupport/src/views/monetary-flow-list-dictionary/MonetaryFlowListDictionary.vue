@@ -1,18 +1,18 @@
-<template src="./SalesListDictionary.html"></template>
-<style lang="scss" scoped src="./SalesListDictionary.scss"></style>
+<template src="./MonetaryFlowListDictionary.html"></template>
+<style lang="scss" scoped src="./MonetaryFlowListDictionary.scss"></style>
 <script lang="ts">
-import SalesListDictionary from './SalesListDictionary';
+import MonetaryFlowListDictionary from './MonetaryFlowListDictionary';
 import { Ref, ref } from 'vue';
 import BaseDictionaryListView from 'qlch_base/BaseDictionaryListView';
 import BaseDictionaryListController from 'qlch_base/BaseDictionaryListController';
 import ParamPaging from '@library-src/models/qlch_control/qlch_grid/qlch_param_paging/ParamPaging';
 import Column from '@library-src/models/qlch_control/qlch_grid/qlch_column/Column';
 import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
-import ECombobox from "qlch_control/ECombobox";
-import Log from '@library-src/utilities/Log';
-import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
-import EDate from "qlch_control/EDate";
 import Button from '@library-src/models/qlch_control/qlch_button/Button';
+import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
+import ECombobox from "qlch_control/ECombobox";
+import EDate from "qlch_control/EDate";
+import Log from '@library-src/utilities/Log';
 import EButton from "qlch_control/EButton";
 
 export default {
@@ -21,13 +21,14 @@ export default {
 
   components: {
     BaseDictionaryListView,
-    ECombobox,
     EDate,
-    EButton
+    EButton,
+    ECombobox
+
   },
   setup() {
-    const thisData: Ref<SalesListDictionary> = ref(new SalesListDictionary());
-    const cbbSales: Ref<Combobox> = ref(new Combobox({
+    const thisData: Ref<MonetaryFlowListDictionary> = ref(new MonetaryFlowListDictionary());
+    const cbbmonetaryFlow: Ref<Combobox> = ref(new Combobox({
       require: true,
       data: [
         {
@@ -54,6 +55,7 @@ export default {
       fieldText: "Đến ngày",
       labelWidth: 60
     });
+
     const btnGetData: Button = new Button({
       fieldText: "Lấy dữ liệu",
       classType: "secondary",
@@ -71,10 +73,9 @@ export default {
 
       // classIconLeft: "i-add"
     });
-
     return {
       thisData,
-      cbbSales,
+      cbbmonetaryFlow,
       dtBeginRequire,
       dtEndRequire,
       btnGetData,
@@ -86,15 +87,12 @@ export default {
   created() {
     try {
       const me = this;
-
-      me.cbbSales.value = 1;
-
+      me.cbbmonetaryFlow.value = 1;
 
     } catch (error) {
       Log.ErrorLog(error as Error);
     }
   },
-
   methods: {
 
     /**
@@ -209,7 +207,7 @@ export default {
      */
     async createComponent() {
       console.log("DEV: Override Function createComponent Vue component Detail");
-      const frmDetail = (await import(`../sales-detail/SalesDetail.vue`)).default;
+      const frmDetail = (await import(`../monetary-flow-detail/MonetaryFlowDetail.vue`)).default;
       return frmDetail;
     },
   }
