@@ -139,12 +139,12 @@ export default {
           flex: 1
         }),
         new Column({
-          fieldText: "Đơn Giá TB (2) = (3) / (1)",
+          fieldText: "Giá (2)",
           dataIndex: "Column6",
           width: 160
         }),
         new Column({
-          fieldText: "Giá trị mua hàng (3)",
+          fieldText: "Giá trị mua (3)",
           dataIndex: "Column7",
           minWidth: 160,
         }),

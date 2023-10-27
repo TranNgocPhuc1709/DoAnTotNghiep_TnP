@@ -53,6 +53,16 @@ const routes: Array<RouteRecordRaw> = [
                 }
             },
             {
+                path: 'inventory',
+                name: 'inventory',
+                component: () => import('@src/views/inventory-list-dictionary/InventoryListDictionary.vue'),
+                meta: {
+                    title: "Kiểm kê kho",
+                    anonymous: false
+                }
+            },
+
+            {
                 path: 'cashReceipt',
                 name: 'cashReceipt',
                 component: () => import('@src/views/cash-receipt-list-dictionary/CashReceiptListDictionary.vue'),
@@ -102,7 +112,16 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'monetaryFlow',
                 component: () => import('@src/views/monetary-flow-list-dictionary/MonetaryFlowListDictionary.vue'),
                 meta: {
-                    title: "Quỹ tiền",
+                    title: "Doanh thu bàn giao ca",
+                    anonymous: false
+                }
+            },
+            {
+                path: 'revenueExpenditure',
+                name: 'revenueExpenditure',
+                component: () => import('@src/views/revenue-expenditure-list-dictionary/RevenueExpenditureListDictionary.vue'),
+                meta: {
+                    title: "Thu chi",
                     anonymous: false
                 }
             },

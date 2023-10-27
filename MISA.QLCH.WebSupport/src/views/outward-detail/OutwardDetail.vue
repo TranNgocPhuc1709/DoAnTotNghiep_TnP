@@ -7,14 +7,21 @@ import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailContro
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
 import TextBox from "@library-src/models/qlch_control/qlch_text_box/TextBox";
 import ETextBox from "qlch_control/ETextBox";
-        
-export default{
+import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
+import EDate from "qlch_control/EDate";
+import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
+import ECombobox from "qlch_control/ECombobox";
+
+
+export default {
 
   extends: BaseDictionaryDetailController,
 
   components: {
     BaseDictionaryDetailView,
-    ETextBox
+    ETextBox,
+    EDate,
+    ECombobox
   },
 
   setup() {
@@ -28,7 +35,7 @@ export default{
     */
     getTitleForm() {
       console.log("DEV: Override function getTitleForm return Title Form");
-      return "Title Form Detail";
+      return "Thêm mới phiếu xuất kho";
     },
 
     /**
@@ -38,48 +45,69 @@ export default{
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
       const labelWidth = 115;
       return {
-        "txtColumn1": new TextBox({
-          fieldText: "Demo Column 1",
-          require: true,
+        "txtColumn1": new DateModel({
+          fieldText: "Ngày xuất",
+          require: false,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column1"
         }),
         "txtColumn2": new TextBox({
-          fieldText: "Demo Column 2",
-          require: true,
+          fieldText: "Số phiếu xuất",
+          require: false,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column2"
         }),
-        "txtColumn3": new TextBox({
-          fieldText: "Demo Column 3",
+        "txtColumn3": new Combobox({
+          fieldText: "Đối tượng",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
+          data: [
+            {
+              value: 1,
+              display: "Nhân viên"
+            },
+            {
+              value: 2,
+              display: "Khách hàng"
+            },
+            {
+              value: 3,
+              display: "Nhà cung cấp"
+            }
+          ],
           bindingIndex: "Column3"
         }),
         "txtColumn4": new TextBox({
-          fieldText: "Demo Column 4",
+          fieldText: "Tổng tiền",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column4"
         }),
         "txtColumn5": new TextBox({
-          fieldText: "Demo Column 5",
+          fieldText: "Diễn giải",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column5"
         }),
         "txtColumn6": new TextBox({
-          fieldText: "Demo Column 6",
+          fieldText: "Người giao",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column6"
         }),
+        "txtColumn7": new Combobox({
+          fieldText: "Người giao",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          bindingIndex: "Column7"
+        })
       }
     },
 
@@ -88,6 +116,6 @@ export default{
     */
     afterCloseForm() { },
   }
-    
+
 }
 </script>

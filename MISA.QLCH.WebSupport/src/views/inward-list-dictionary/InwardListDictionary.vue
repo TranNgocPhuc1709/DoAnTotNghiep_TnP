@@ -7,17 +7,91 @@ import BaseDictionaryListView from 'qlch_base/BaseDictionaryListView';
 import BaseDictionaryListController from 'qlch_base/BaseDictionaryListController';
 import ParamPaging from '@library-src/models/qlch_control/qlch_grid/qlch_param_paging/ParamPaging';
 import Column from '@library-src/models/qlch_control/qlch_grid/qlch_column/Column';
-
+import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
+import ECombobox from "qlch_control/ECombobox";
+import Log from '@library-src/utilities/Log';
+import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
+import EDate from "qlch_control/EDate";
+import Button from '@library-src/models/qlch_control/qlch_button/Button';
+import EButton from "qlch_control/EButton";
 export default {
 
   extends: BaseDictionaryListController,
 
   components: {
     BaseDictionaryListView,
+    ECombobox,
+    EDate,
+    EButton
   },
   setup() {
     const thisData: Ref<InwardListDictionary> = ref(new InwardListDictionary());
-    return { thisData };
+    const cbbInward: Ref<Combobox> = ref(new Combobox({
+      require: true,
+      data: [
+        {
+          value: 1,
+          display: "Khác"
+        },
+        {
+          value: 2,
+          display: "Hôm nay"
+        },
+        {
+          value: 3,
+          display: "Tuần trước"
+        },
+
+      ]
+      // require: true
+    }));
+    const dtBeginRequire: DateModel = new DateModel({
+      fieldText: "Từ ngày",
+      labelWidth: 60
+    });
+    const dtEndRequire: DateModel = new DateModel({
+      fieldText: "Đến ngày",
+      labelWidth: 60
+    });
+    const btnGetData: Button = new Button({
+      fieldText: "Lấy dữ liệu",
+      classType: "secondary",
+      // classIconLeft: "i-add"
+    });
+    const btnExportData: Button = new Button({
+      fieldText: "Xuất File Excel",
+      classType: "secondary",
+
+      // classIconLeft: "i-add"
+    });
+    const btnPrintData: Button = new Button({
+      fieldText: "In Dữ Liệu",
+      classType: "secondary",
+
+      // classIconLeft: "i-add"
+    });
+
+    return {
+      thisData,
+      cbbInward,
+      dtBeginRequire,
+      dtEndRequire,
+      btnGetData,
+      btnExportData,
+      btnPrintData
+
+    };
+  },
+  created() {
+    try {
+      const me = this;
+
+      me.cbbInward.value = 1;
+
+
+    } catch (error) {
+      Log.ErrorLog(error as Error);
+    }
   },
   methods: {
 
@@ -61,16 +135,7 @@ export default {
           minWidth: 260,
           flex: 1
         }),
-        new Column({
-          fieldText: "Lý do",
-          dataIndex: "Column6",
-          width: 160
-        }),
-        new Column({
-          fieldText: "Loại chứng từ",
-          dataIndex: "Column7",
-          width: 160
-        })
+
       )
     },
 
@@ -87,8 +152,6 @@ export default {
           Column3: "Công Ty Cổ Phần MiSA",
           Column4: "100000",
           Column5: "Hàng mới nhập",
-          Column6: "hết hàng",
-          Column7: "Phiếu nhập hàng"
         },
         {
           Column1: "20/9/2023",
@@ -96,8 +159,7 @@ export default {
           Column3: "Công Ty Cổ Phần Giải Pháp Hà Minh",
           Column4: "200000",
           Column5: "Hàng mới nhập",
-          Column6: "hết hàng",
-          Column7: "Phiếu nhập hàng"
+
         },
       ];
     },

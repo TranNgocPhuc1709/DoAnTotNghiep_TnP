@@ -7,17 +7,89 @@ import BaseDictionaryListView from 'qlch_base/BaseDictionaryListView';
 import BaseDictionaryListController from 'qlch_base/BaseDictionaryListController';
 import ParamPaging from '@library-src/models/qlch_control/qlch_grid/qlch_param_paging/ParamPaging';
 import Column from '@library-src/models/qlch_control/qlch_grid/qlch_column/Column';
-
+import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
+import ECombobox from "qlch_control/ECombobox";
+import Button from '@library-src/models/qlch_control/qlch_button/Button';
+import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
+import Log from '@library-src/utilities/Log';
+import EDate from "qlch_control/EDate";
+import EButton from "qlch_control/EButton";
 export default {
 
   extends: BaseDictionaryListController,
 
   components: {
     BaseDictionaryListView,
+    ECombobox,
+    EDate,
+    EButton
   },
   setup() {
     const thisData: Ref<OrderListDictionary> = ref(new OrderListDictionary());
-    return { thisData };
+    const cbbOrder: Ref<Combobox> = ref(new Combobox({
+      require: true,
+      data: [
+        {
+          value: 1,
+          display: "Khác"
+        },
+        {
+          value: 2,
+          display: "Hôm nay"
+        },
+        {
+          value: 3,
+          display: "Tuần trước"
+        },
+
+      ]
+      // require: true
+    }));
+    const dtBeginRequire: DateModel = new DateModel({
+      fieldText: "Từ ngày",
+      labelWidth: 60
+    });
+    const dtEndRequire: DateModel = new DateModel({
+      fieldText: "Đến ngày",
+      labelWidth: 60
+    });
+
+    const btnGetData: Button = new Button({
+      fieldText: "Lấy dữ liệu",
+      classType: "secondary",
+      // classIconLeft: "i-add"
+    });
+    const btnExportData: Button = new Button({
+      fieldText: "Xuất File Excel",
+      classType: "secondary",
+
+      // classIconLeft: "i-add"
+    });
+    const btnPrintData: Button = new Button({
+      fieldText: "In Dữ Liệu",
+      classType: "secondary",
+
+      // classIconLeft: "i-add"
+    });
+    return {
+      thisData,
+      cbbOrder,
+      dtBeginRequire,
+      dtEndRequire,
+      btnGetData,
+      btnExportData,
+      btnPrintData
+
+    };
+  },
+  created() {
+    try {
+      const me = this;
+      me.cbbOrder.value = 1;
+
+    } catch (error) {
+      Log.ErrorLog(error as Error);
+    }
   },
   methods: {
 

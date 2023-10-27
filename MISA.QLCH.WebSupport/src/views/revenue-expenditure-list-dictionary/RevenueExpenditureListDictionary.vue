@@ -1,7 +1,7 @@
-<template src="./OutwardListDictionary.html"></template>
-<style lang="scss" scoped src="./OutwardListDictionary.scss"></style>
+<template src="./RevenueExpenditureListDictionary.html"></template>
+<style lang="scss" scoped src="./RevenueExpenditureListDictionary.scss"></style>
 <script lang="ts">
-import OutwardListDictionary from './OutwardListDictionary';
+import RevenueExpenditureListDictionary from './RevenueExpenditureListDictionary';
 import { Ref, ref } from 'vue';
 import BaseDictionaryListView from 'qlch_base/BaseDictionaryListView';
 import BaseDictionaryListController from 'qlch_base/BaseDictionaryListController';
@@ -14,6 +14,7 @@ import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
 import EDate from "qlch_control/EDate";
 import Button from '@library-src/models/qlch_control/qlch_button/Button';
 import EButton from "qlch_control/EButton";
+
 export default {
 
   extends: BaseDictionaryListController,
@@ -22,11 +23,11 @@ export default {
     BaseDictionaryListView,
     ECombobox,
     EDate,
-    EButton
+    EButton,
   },
   setup() {
-    const thisData: Ref<OutwardListDictionary> = ref(new OutwardListDictionary());
-    const cbbOutward: Ref<Combobox> = ref(new Combobox({
+    const thisData: Ref<RevenueExpenditureListDictionary> = ref(new RevenueExpenditureListDictionary());
+    const cbbRevenueExpenditure: Ref<Combobox> = ref(new Combobox({
       require: true,
       data: [
         {
@@ -53,6 +54,7 @@ export default {
       fieldText: "Đến ngày",
       labelWidth: 60
     });
+
     const btnGetData: Button = new Button({
       fieldText: "Lấy dữ liệu",
       classType: "secondary",
@@ -71,23 +73,21 @@ export default {
       // classIconLeft: "i-add"
     });
 
+
     return {
       thisData,
-      cbbOutward,
+      cbbRevenueExpenditure,
       dtBeginRequire,
       dtEndRequire,
       btnGetData,
       btnExportData,
       btnPrintData
-
     };
   },
   created() {
     try {
       const me = this;
-
-      me.cbbOutward.value = 1;
-
+      me.cbbRevenueExpenditure.value = 1;
 
     } catch (error) {
       Log.ErrorLog(error as Error);
@@ -110,31 +110,36 @@ export default {
       console.log("DEV: Override Function buildGridMasterColumn return list Column in Grid");
       return Array(
         new Column({
-          fieldText: "Ngày",
+          fieldText: "Demo Column 1",
           dataIndex: "Column1",
           width: 120,
         }),
         new Column({
-          fieldText: "Số phiếu xuất",
+          fieldText: "Demo Column 2",
           dataIndex: "Column2",
           width: 260
         }),
         new Column({
-          fieldText: "Đối tượng",
+          fieldText: "Demo Column 3",
           dataIndex: "Column3",
           width: 260
         }),
         new Column({
-          fieldText: "Tổng tiền",
+          fieldText: "Demo Column 4",
           dataIndex: "Column4",
           width: 260
         }),
         new Column({
-          fieldText: "Diễn giải ",
+          fieldText: "Demo Column 5",
           dataIndex: "Column5",
           minWidth: 260,
           flex: 1
         }),
+        new Column({
+          fieldText: "Demo Column 6",
+          dataIndex: "Column6",
+          width: 160
+        })
       )
     },
 
@@ -146,22 +151,48 @@ export default {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
       return [
         {
-          Column1: "17/9/2023",
-          Column2: "PNH123",
-          Column3: "Công Ty Cổ Phần MiSA",
-          Column4: "100000",
-          Column5: "Hàng mới nhập",
+          Column1: "Value 11",
+          Column2: "Value 21",
+          Column3: "Value 31",
+          Column4: "Value 41",
+          Column5: "Value 51",
+          Column6: "Value 61"
         },
         {
-          Column1: "20/9/2023",
-          Column2: "PNH100002",
-          Column3: "Công Ty Cổ Phần Giải Pháp Hà Minh",
-          Column4: "200000",
-          Column5: "Hàng mới nhập",
-
+          Column1: "Value 12",
+          Column2: "Value 22",
+          Column3: "Value 32",
+          Column4: "Value 42",
+          Column5: "Value 52",
+          Column6: "Value 62"
         },
+        {
+          Column1: "Value 13",
+          Column2: "Value 23",
+          Column3: "Value 33",
+          Column4: "Value 43",
+          Column5: "Value 53",
+          Column6: "Value 63"
+        },
+        {
+          Column1: "Value 14",
+          Column2: "Value 24",
+          Column3: "Value 34",
+          Column4: "Value 44",
+          Column5: "Value 54",
+          Column6: "Value 64"
+        },
+        {
+          Column1: "Value 15",
+          Column2: "Value 25",
+          Column3: "Value 35",
+          Column4: "Value 45",
+          Column5: "Value 55",
+          Column6: "Value 65"
+        }
       ];
     },
+
     /**
      * Set PrimaryKey cho object master
      */
@@ -176,7 +207,7 @@ export default {
      */
     async createComponent() {
       console.log("DEV: Override Function createComponent Vue component Detail");
-      const frmDetail = (await import(`../outward-detail/OutwardDetail.vue`)).default;
+      const frmDetail = (await import(`../revenue-expenditure-detail/RevenueExpenditureDetail.vue`)).default;
       return frmDetail;
     },
   }

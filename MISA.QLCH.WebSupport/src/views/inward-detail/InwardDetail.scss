@@ -6,6 +6,19 @@
   margin-top: 24px;
 }
 
-.item-detail:last-child{
+.item-detail:last-child {
   margin-bottom: 24px;
+}
+
+.heading-inward-info {
+  font-size: 15px;
+  font-weight: 600;
+  color: #757575;
+  display: block;
+  padding: 0 0 10px 0;
+}
+
+.form-inward-detail-left,
+.form-inward-detail-right {
+  margin: 15px 15px;
 }

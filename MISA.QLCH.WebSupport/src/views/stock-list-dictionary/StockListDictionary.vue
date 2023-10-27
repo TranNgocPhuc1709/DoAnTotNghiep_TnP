@@ -108,35 +108,35 @@ export default {
       console.log("DEV: Override Function buildGridMasterColumn return list Column in Grid");
       return Array(
         new Column({
-          fieldText: "Demo Column 1",
+          fieldText: "Mã Hàng Hóa",
           dataIndex: "Column1",
           width: 120,
         }),
         new Column({
-          fieldText: "Demo Column 2",
+          fieldText: "Tên Hàng Hóa",
           dataIndex: "Column2",
           width: 260
         }),
         new Column({
-          fieldText: "Demo Column 3",
+          fieldText: "Đơn Vị Tính",
           dataIndex: "Column3",
-          width: 260
+          width: 160
         }),
         new Column({
-          fieldText: "Demo Column 4",
+          fieldText: "Nhóm Hàng Hóa",
           dataIndex: "Column4",
           width: 260
         }),
         new Column({
-          fieldText: "Demo Column 5",
+          fieldText: "Giá Bán",
           dataIndex: "Column5",
-          minWidth: 260,
-          flex: 1
+          minWidth: 200,
         }),
         new Column({
-          fieldText: "Demo Column 6",
+          fieldText: " Số Lượng Tồn Kho",
           dataIndex: "Column6",
-          width: 160
+          width: 160,
+          flex: 1
         })
       )
     },
@@ -149,45 +149,14 @@ export default {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
       return [
         {
-          Column1: "Value 0001",
-          Column2: "Value 21",
-          Column3: "Value 31",
-          Column4: "Value 41",
-          Column5: "Value 51",
-          Column6: "Value 61"
+          Column1: "HH0001",
+          Column2: "Quần Áo Nam",
+          Column3: "Chiếc",
+          Column4: "Quần Áo",
+          Column5: "100000",
+          Column6: "10"
         },
-        {
-          Column1: "Value 12",
-          Column2: "Value 22",
-          Column3: "Value 32",
-          Column4: "Value 42",
-          Column5: "Value 52",
-          Column6: "Value 62"
-        },
-        {
-          Column1: "Value 13",
-          Column2: "Value 23",
-          Column3: "Value 33",
-          Column4: "Value 43",
-          Column5: "Value 53",
-          Column6: "Value 63"
-        },
-        {
-          Column1: "Value 14",
-          Column2: "Value 24",
-          Column3: "Value 34",
-          Column4: "Value 44",
-          Column5: "Value 54",
-          Column6: "Value 64"
-        },
-        {
-          Column1: "Value 15",
-          Column2: "Value 25",
-          Column3: "Value 35",
-          Column4: "Value 45",
-          Column5: "Value 55",
-          Column6: "Value 65"
-        }
+
       ];
     },
 

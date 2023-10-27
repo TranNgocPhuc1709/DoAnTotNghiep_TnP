@@ -1,34 +1,26 @@
-<div class="heading-stock">
-  <div class="d-flex-center">
-    <h1>SỐ LƯỢNG TỒN KHO THEO CỬA HÀNG</h1>
-  </div>
-  <!-- <div class="item-heading d-flex-center">
-    <span>Cửa Hàng: </span>
-    <strong>CH22</strong>
-  </div>   -->
+<div class="heading-revenueExpenditure d-flex-center">
+  <h1>BẢNG KÊ THU CHI</h1>
 </div>
-
-
-<div class="content-data-stock d-flex-vcenter">
+<div class="content-data-revenueExpenditure d-flex-vcenter">
   <div class="content-left flex-1 d-flex-vcenter ">
-    <div class="ccb-item-data-stock">
-      <e-combobox :control="cbbStock" v-model="cbbStock.value" />
+    <div class="ccb-item-data-revenueExpenditure">
+      <e-combobox :control="cbbRevenueExpenditure" v-model="cbbRevenueExpenditure.value" />
     </div>
-    <div class="item-data-stock">
+    <div class="item-data-revenueExpenditure">
       <e-date :control="dtBeginRequire" v-model="dtBeginRequire.value" />
     </div>
-    <div class="item-data-stock">
+    <div class="item-data-revenueExpenditure">
       <e-date :control="dtEndRequire" v-model="dtEndRequire.value" />
     </div>
-    <div class="btn-item-data-stock">
+    <div class="btn-item-data-revenueExpenditure">
       <e-button :control="btnGetData" />
     </div>
   </div>
   <div class="content-right d-flex-vcenter">
-    <div class="btn-item-data-stock">
+    <div class="btn-item-data-revenueExpenditure">
       <e-button :control="btnPrintData" />
     </div>
-    <div class="btn-item-data-stock">
+    <div class="btn-item-data-revenueExpenditure">
       <e-button :control="btnExportData" />
     </div>
   </div>
