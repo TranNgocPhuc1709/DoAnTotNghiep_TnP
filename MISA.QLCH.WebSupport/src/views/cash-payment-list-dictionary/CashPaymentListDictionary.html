@@ -1,6 +1,21 @@
+<div class="content-data-cashPayment d-flex-vcenter">
+  <div class="content-left flex-1 d-flex-vcenter ">
+    <div class="ccb-item-data-cashPayment">
+      <e-combobox :control="cbbCashPayment" v-model="cbbCashPayment.value" />
+    </div>
+    <div class="item-data-cashPayment">
+      <e-date :control="dtBeginRequire" v-model="dtBeginRequire.value" />
+    </div>
+    <div class="item-data-cashPayment">
+      <e-date :control="dtEndRequire" v-model="dtEndRequire.value" />
+    </div>
+    <div class="btn-item-data-cashPayment">
+      <e-button :control="btnGetData" />
+    </div>
+  </div>
+</div>
 <div class="height-fill width-fill">
   <base-dictionary-list-view :viewControl="viewControl" @loadMaster="onLoadMaster"
     @changeSelectedRecordMaster="onChangeSelectedRecordMaster"
     @toolbarClick="onSelectAction"></base-dictionary-list-view>
 </div>
-        

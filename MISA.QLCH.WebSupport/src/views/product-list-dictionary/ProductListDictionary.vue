@@ -20,7 +20,6 @@ export default {
     return { thisData };
   },
   methods: {
-
     /**
      * Tạo dòng mặc định
      */
@@ -38,6 +37,7 @@ export default {
         new Column({
           fieldText: "Mã Sản Phẩm",
           dataIndex: "Column1",
+          // type: ControlType.Date,
           width: 120,
         }),
         new Column({

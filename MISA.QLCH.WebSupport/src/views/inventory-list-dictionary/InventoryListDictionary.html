@@ -1,6 +1,21 @@
+<div class="content-data-inventory d-flex-vcenter">
+  <div class="content-left flex-1 d-flex-vcenter ">
+    <div class="ccb-item-data-inventory">
+      <e-combobox :control="cbbInventory" v-model="cbbInventory.value" />
+    </div>
+    <div class="item-data-inventory">
+      <e-date :control="dtBeginRequire" v-model="dtBeginRequire.value" />
+    </div>
+    <div class="item-data-inventory">
+      <e-date :control="dtEndRequire" v-model="dtEndRequire.value" />
+    </div>
+    <div class="btn-item-data-inventory">
+      <e-button :control="btnGetData" />
+    </div>
+  </div>
+</div>
 <div class="height-fill width-fill">
   <base-dictionary-list-view :viewControl="viewControl" @loadMaster="onLoadMaster"
     @changeSelectedRecordMaster="onChangeSelectedRecordMaster"
     @toolbarClick="onSelectAction"></base-dictionary-list-view>
 </div>
-        

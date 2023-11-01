@@ -1,0 +1,21 @@
+<div class="content-data-return d-flex-vcenter">
+  <div class="content-left flex-1 d-flex-vcenter ">
+    <div class="ccb-item-data-return">
+      <e-combobox :control="cbbReturn" v-model="cbbReturn.value" />
+    </div>
+    <div class="item-data-return">
+      <e-date :control="dtBeginRequire" v-model="dtBeginRequire.value" />
+    </div>
+    <div class="item-data-return">
+      <e-date :control="dtEndRequire" v-model="dtEndRequire.value" />
+    </div>
+    <div class="btn-item-data-return">
+      <e-button :control="btnGetData" />
+    </div>
+  </div>
+</div>
+<div class="height-fill width-fill">
+  <base-dictionary-list-view :viewControl="viewControl" @loadMaster="onLoadMaster"
+    @changeSelectedRecordMaster="onChangeSelectedRecordMaster"
+    @toolbarClick="onSelectAction"></base-dictionary-list-view>
+</div>

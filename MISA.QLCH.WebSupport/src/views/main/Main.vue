@@ -61,16 +61,15 @@ export default {
             {
                 children: new Array(
                     {
-
-                        fieldText: "Báo Hàng"
-                    },
-                    {
+                        routerLink: "/goodsOrder",
                         fieldText: "Đặt Hàng",
                     },
                     {
+                        routerLink: "/import",
                         fieldText: "Nhập Hàng",
                     },
                     {
+                        routerLink: "/return",
                         fieldText: "Trả lại Hàng mua",
                     },
                 ),

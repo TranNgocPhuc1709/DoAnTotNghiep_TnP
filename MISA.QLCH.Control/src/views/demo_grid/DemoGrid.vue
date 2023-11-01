@@ -309,7 +309,7 @@ export default {
             me.tblDefault.isLoadingData = true;
             me.tblDefault.data = new Array(
                 {
-                    "EmployeeCode": "Tran Duc 1",
+                    "EmployeeCode": "Tran Duc 123",
                     "BirthDay": "29/12/1994",
                     "Address": "SmartCity, Tây Mỗ, Nam Từ Liêm, Hà Nội",
                     "Amount": "2000000"

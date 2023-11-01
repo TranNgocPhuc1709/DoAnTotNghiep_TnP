@@ -7,14 +7,20 @@ import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailContro
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
 import TextBox from "@library-src/models/qlch_control/qlch_text_box/TextBox";
 import ETextBox from "qlch_control/ETextBox";
-        
-export default{
+import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
+import EDate from "qlch_control/EDate";
+import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
+import ECombobox from "qlch_control/ECombobox";
+
+export default {
 
   extends: BaseDictionaryDetailController,
 
   components: {
     BaseDictionaryDetailView,
-    ETextBox
+    ETextBox,
+    EDate,
+    ECombobox
   },
 
   setup() {
@@ -28,7 +34,7 @@ export default{
     */
     getTitleForm() {
       console.log("DEV: Override function getTitleForm return Title Form");
-      return "Title Form Detail";
+      return "Thêm mới phiếu kiểm kê kho";
     },
 
     /**
@@ -38,48 +44,52 @@ export default{
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
       const labelWidth = 115;
       return {
-        "txtColumn1": new TextBox({
-          fieldText: "Demo Column 1",
-          require: true,
+        "txtColumn1": new DateModel({
+          fieldText: "Ngày kiểm kê",
+          require: false,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column1"
         }),
         "txtColumn2": new TextBox({
-          fieldText: "Demo Column 2",
-          require: true,
+          fieldText: "Số phiếu kiểm kê",
+          require: false,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column2"
         }),
-        "txtColumn3": new TextBox({
-          fieldText: "Demo Column 3",
+        "txtColumn3": new Combobox({
+          fieldText: "Kho kiểm kê",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
+          data: [
+            {
+              value: 1,
+              display: "Kho 1"
+            },
+            {
+              value: 2,
+              display: "Kho 2"
+            }
+          ],
           bindingIndex: "Column3"
         }),
         "txtColumn4": new TextBox({
-          fieldText: "Demo Column 4",
+          fieldText: "Diễn giải",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column4"
         }),
         "txtColumn5": new TextBox({
-          fieldText: "Demo Column 5",
+          fieldText: "Trạng thái",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column5"
         }),
-        "txtColumn6": new TextBox({
-          fieldText: "Demo Column 6",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          bindingIndex: "Column6"
-        }),
+
       }
     },
 
@@ -88,6 +98,6 @@ export default{
     */
     afterCloseForm() { },
   }
-    
+
 }
 </script>

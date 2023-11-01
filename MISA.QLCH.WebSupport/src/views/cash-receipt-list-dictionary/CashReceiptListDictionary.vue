@@ -7,17 +7,73 @@ import BaseDictionaryListView from 'qlch_base/BaseDictionaryListView';
 import BaseDictionaryListController from 'qlch_base/BaseDictionaryListController';
 import ParamPaging from '@library-src/models/qlch_control/qlch_grid/qlch_param_paging/ParamPaging';
 import Column from '@library-src/models/qlch_control/qlch_grid/qlch_column/Column';
-
+import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
+import ECombobox from "qlch_control/ECombobox";
+import Log from '@library-src/utilities/Log';
+import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
+import EDate from "qlch_control/EDate";
+import Button from '@library-src/models/qlch_control/qlch_button/Button';
+import EButton from "qlch_control/EButton";
 export default {
 
   extends: BaseDictionaryListController,
 
   components: {
     BaseDictionaryListView,
+    ECombobox,
+    EDate,
+    EButton
   },
   setup() {
     const thisData: Ref<CashReceiptListDictionary> = ref(new CashReceiptListDictionary());
-    return { thisData };
+    const cbbCashReceipt: Ref<Combobox> = ref(new Combobox({
+      require: true,
+      data: [
+        {
+          value: 1,
+          display: "Khác"
+        },
+        {
+          value: 2,
+          display: "Hôm nay"
+        },
+        {
+          value: 3,
+          display: "Tuần trước"
+        },
+
+      ]
+      // require: true
+    }));
+    const dtBeginRequire: DateModel = new DateModel({
+      fieldText: "Từ ngày",
+      labelWidth: 60
+    });
+    const dtEndRequire: DateModel = new DateModel({
+      fieldText: "Đến ngày",
+      labelWidth: 60
+    });
+    const btnGetData: Button = new Button({
+      fieldText: "Lấy dữ liệu",
+      classType: "secondary",
+      // classIconLeft: "i-add"
+    });
+
+    return {
+      thisData,
+      cbbCashReceipt,
+      dtBeginRequire,
+      dtEndRequire,
+      btnGetData,
+    };
+  },
+  created() {
+    try {
+      const me = this;
+      me.cbbCashReceipt.value = 1;
+    } catch (error) {
+      Log.ErrorLog(error as Error);
+    }
   },
   methods: {
 
@@ -36,35 +92,30 @@ export default {
       console.log("DEV: Override Function buildGridMasterColumn return list Column in Grid");
       return Array(
         new Column({
-          fieldText: "Demo Column 1",
+          fieldText: "Ngày",
           dataIndex: "Column1",
           width: 120,
         }),
         new Column({
-          fieldText: "Demo Column 2",
+          fieldText: "Số chứng từ",
           dataIndex: "Column2",
           width: 260
         }),
         new Column({
-          fieldText: "Demo Column 3",
+          fieldText: "Tổng tiền",
           dataIndex: "Column3",
           width: 260
         }),
         new Column({
-          fieldText: "Demo Column 4",
+          fieldText: "Đối tượng nộp tiền",
           dataIndex: "Column4",
           width: 260
         }),
         new Column({
-          fieldText: "Demo Column 5",
+          fieldText: "Lý do",
           dataIndex: "Column5",
           minWidth: 260,
           flex: 1
-        }),
-        new Column({
-          fieldText: "Demo Column 6",
-          dataIndex: "Column6",
-          width: 160
         })
       )
     },
@@ -77,45 +128,19 @@ export default {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
       return [
         {
-          Column1: "Value 11",
-          Column2: "Value 21",
-          Column3: "Value 31",
-          Column4: "Value 41",
-          Column5: "Value 51",
-          Column6: "Value 61"
+          Column1: "31/12/2023",
+          Column2: "SH-00112",
+          Column3: "150000",
+          Column4: "Khách hàng",
+          Column5: "Thanh toán hàng hóa",
         },
         {
-          Column1: "Value 12",
-          Column2: "Value 22",
-          Column3: "Value 32",
-          Column4: "Value 42",
-          Column5: "Value 52",
-          Column6: "Value 62"
+          Column1: "10/12/2023",
+          Column2: "SH-00145",
+          Column3: "250000",
+          Column4: "Đối tác vận chuyển hàng",
+          Column5: "Thanh toán hàng hóa vận chuyển",
         },
-        {
-          Column1: "Value 13",
-          Column2: "Value 23",
-          Column3: "Value 33",
-          Column4: "Value 43",
-          Column5: "Value 53",
-          Column6: "Value 63"
-        },
-        {
-          Column1: "Value 14",
-          Column2: "Value 24",
-          Column3: "Value 34",
-          Column4: "Value 44",
-          Column5: "Value 54",
-          Column6: "Value 64"
-        },
-        {
-          Column1: "Value 15",
-          Column2: "Value 25",
-          Column3: "Value 35",
-          Column4: "Value 45",
-          Column5: "Value 55",
-          Column6: "Value 65"
-        }
       ];
     },
 

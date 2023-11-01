@@ -6,6 +6,31 @@
   margin-top: 24px;
 }
 
-.item-detail:last-child{
+.item-detail:last-child {
   margin-bottom: 24px;
+}
+
+.heading-cashPayment-info {
+  font-size: 15px;
+  font-weight: 600;
+  color: #757575;
+  display: block;
+  padding: 0 0 10px 0;
+}
+
+.form-cashPayment-detail-left,
+.form-cashPayment-detail-right,
+.grid-footer {
+  margin: 15px 15px;
+}
+
+.item-checkbox-detail {
+  width: 140px;
+  margin-top: 20px;
+}
+
+.form-cash-payment {
+  height: 380px;
+  overflow: scroll;
+  overflow-x: hidden;
 }

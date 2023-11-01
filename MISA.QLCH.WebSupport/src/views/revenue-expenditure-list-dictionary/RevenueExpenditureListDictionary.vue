@@ -110,36 +110,57 @@ export default {
       console.log("DEV: Override Function buildGridMasterColumn return list Column in Grid");
       return Array(
         new Column({
-          fieldText: "Demo Column 1",
+          fieldText: "Ngày chứng từ",
           dataIndex: "Column1",
           width: 120,
         }),
         new Column({
-          fieldText: "Demo Column 2",
+          fieldText: "Số chứng từ",
           dataIndex: "Column2",
           width: 260
         }),
         new Column({
-          fieldText: "Demo Column 3",
+          fieldText: "Loại chứng từ",
           dataIndex: "Column3",
           width: 260
         }),
         new Column({
-          fieldText: "Demo Column 4",
+          fieldText: "Tiền thu",
           dataIndex: "Column4",
           width: 260
         }),
         new Column({
-          fieldText: "Demo Column 5",
+          fieldText: "Tiền chi",
           dataIndex: "Column5",
           minWidth: 260,
           flex: 1
         }),
         new Column({
-          fieldText: "Demo Column 6",
+          fieldText: "Demo Column 6 ( Số dư cuối kỳ)",
           dataIndex: "Column6",
           width: 160
-        })
+        }),
+        new Column({
+          fieldText: "Nhân viên thu chi",
+          dataIndex: "Column7",
+          width: 160
+        }),
+        new Column({
+          fieldText: "Mã đối tượng",
+          dataIndex: "Column8",
+          width: 160
+        }),
+        new Column({
+          fieldText: "Tên đối tượng",
+          dataIndex: "Column9",
+          width: 160
+        }),
+        new Column({
+          fieldText: "Diễn giải",
+          dataIndex: "Column10",
+          width: 160
+        }),
+
       )
     },
 
@@ -151,45 +172,29 @@ export default {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
       return [
         {
-          Column1: "Value 11",
-          Column2: "Value 21",
-          Column3: "Value 31",
-          Column4: "Value 41",
-          Column5: "Value 51",
-          Column6: "Value 61"
+          Column1: "31/12/2023",
+          Column2: "HHP-001",
+          Column3: "Phiếu thu tiền mặt",
+          Column4: "120000",
+          Column5: "0",
+          Column6: "",
+          Column7: "Tnn",
+          Column8: "MISA",
+          Column9: "Công Ty MISA",
+          Column10: "Thu tiền hàng hóa"
         },
         {
-          Column1: "Value 12",
-          Column2: "Value 22",
-          Column3: "Value 32",
-          Column4: "Value 42",
-          Column5: "Value 52",
-          Column6: "Value 62"
+          Column1: "31/12/2023",
+          Column2: "HHP-002",
+          Column3: "Phiếu chi tiền mặt",
+          Column4: "0",
+          Column5: "250000",
+          Column6: "",
+          Column7: "NNN",
+          Column8: "VNPT",
+          Column9: "Công Ty truyền thông VNPM",
+          Column10: "Chi tiền thuê"
         },
-        {
-          Column1: "Value 13",
-          Column2: "Value 23",
-          Column3: "Value 33",
-          Column4: "Value 43",
-          Column5: "Value 53",
-          Column6: "Value 63"
-        },
-        {
-          Column1: "Value 14",
-          Column2: "Value 24",
-          Column3: "Value 34",
-          Column4: "Value 44",
-          Column5: "Value 54",
-          Column6: "Value 64"
-        },
-        {
-          Column1: "Value 15",
-          Column2: "Value 25",
-          Column3: "Value 35",
-          Column4: "Value 45",
-          Column5: "Value 55",
-          Column6: "Value 65"
-        }
       ];
     },
 

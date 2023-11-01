@@ -1,3 +1,113 @@
-<div class="d-flex-center" style="height: 100vh; width: 100vw;">
-    <span>This is Store Page</span>
+<div class="body-home-store width-full-view height-full-view ">
+    <div class="header-store width-fill d-flex">
+        <div class="header-left height-fill d-flex-vcenter flex-1">
+            <span class="logo-icon-home-store"></span>
+            <div class="bill-item d-flex-vcenter height-fill">
+                <div class="label-bill-item">
+                    <span>Hóa đơn</span>
+                    <span> 1</span>
+                </div>
+                <span class="delete-bill-item"></span>
+            </div>
+            <div class="add-bill d-flex-center height-fill" @click="addNewBill()">
+                <span class="add-bill-item"></span>
+            </div>
+        </div>
+        <div class="header-right height-fill d-flex-vcenter">
+            <div class="chosse-warehouse d-flex-vcenter" @click-="showChosseWarehouse()">
+                <span class="icon-warehouse"></span>
+                <span class="label-warehouse">Kho tổng</span>
+                <span class="icon-arrow-warehouse"></span>
+                <div class="item-warehouse" v-if="displayItemWarehouse">
+
+                </div>
+            </div>
+            <div class="messege-header height-fill d-flex-center">
+                <span class="icon-messege"></span>
+            </div>
+            <div class="notice-header height-fill d-flex-center">
+                <span class="icon-notice"></span>
+            </div>
+            <div class="user d-flex-vcenter">
+                <span class="icon-user"></span>
+                <span class="label-user">Trần Ngọc Phúc </span>
+                <span class="icon-arrow-user"></span>
+            </div>
+            <div class="more-action-header height-fill d-flex-center">
+                <span class="icon-more-action"></span>
+            </div>
+        </div>
+
+    </div>
+    <div class="content-home-store d-flex width-fill">
+        <div class="content-store flex-1">
+            <div class="out-line-content">
+                <div class="header-content-store d-flex">
+                    <div class="flex-1">
+                        <div class="product-search d-flex-vcenter">
+                            <div class="filter-search d-flex-vcenter">
+                                <span>Tìm kiếm</span>
+                                <span class="icon-filter-search"></span>
+                            </div>
+                            <span class="line-vertical"></span>
+                            <div class="input-search flex-1">
+                                <input class="width-fill type-input-search" type="text"
+                                    placeholder="Nhập tên hàng hóa, mã hàng hóa,...">
+                            </div>
+                            <span class="line-vertical"></span>
+                            <div class="quanty-search d-flex-vcenter">
+                                <span class="label-quanty-search">SL:</span>
+
+                                <!-- <div class="arrow-quanty d-flex-column">
+                                    <span class="quanty-up"></span>
+                                    <span class="quanty-down"></span>
+                                </div> -->
+                                <div class="arrow-quanty ">
+                                    <input class="type-input-quanty" type="number" placeholder="0">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sales-agent d-flex-vcenter">
+                        <span class="icon-sales-agent"></span>
+                        <input class="type-input-sales-agent" type="text" placeholder="NV Bán Hàng">
+                        <span class="arrow-sales-agent"></span>
+                    </div>
+                </div>
+                <div class="body-content-store">
+                    <!-- <div class="d-flex-column">
+                        <div class="item-product d-flex">
+                            <span class="flex-1">STT</span>
+                            <span class="flex-1">SP001</span>
+                            <span class="flex-1">Áp Polo Nam</span>
+                            <input class="child-item-product" type="number">
+                            <span class="flex-1">Chiếc</span>
+                            <input class="child-item-product-price" type="number">
+                            <input class="child-item-product-price" type="number">
+                            <span class="icon-child-product"></span>
+                        </div>
+                    </div> -->
+                    <div class="img-show-content d-flex-center height-fill d-flex-column">
+                        <div class="label-form-img">
+                            <span class="item-img-cart"></span>
+                            <span class="item-img-dress"></span>
+                            <span class="item-img-shoes"></span>
+                        </div>
+                        <div class="notice-form-img">
+                            <span>Chưa có sản phẩm nào được chọn !</span>
+                        </div>
+                        <div class="add-product d-flex-vcenter">
+                            <span class="icon-add-product"></span>
+                            <span class="label-add-product">Chọn hàng hóa</span>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="pay-store">
+
+        </div>
+    </div>
 </div>

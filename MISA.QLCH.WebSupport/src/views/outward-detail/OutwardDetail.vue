@@ -102,7 +102,7 @@ export default {
           bindingIndex: "Column6"
         }),
         "txtColumn7": new Combobox({
-          fieldText: "Người giao",
+          fieldText: "Tên",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,

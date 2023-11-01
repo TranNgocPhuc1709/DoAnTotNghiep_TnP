@@ -7,13 +7,14 @@ import TextBox from '@library-src/models/qlch_control/qlch_text_box/TextBox';
 import { Ref, ref } from 'vue';
 
 export default {
-    components: {ETextBox},
+    components: { ETextBox },
     setup() {
         /**
          * Property dùng cho Page
          */
         const txtDefault: Ref<TextBox> = ref(new TextBox({
             fieldText: "Tên hàng hóa",
+
         }));
 
         const txtReadOnly: Ref<TextBox> = ref(new TextBox({
@@ -57,7 +58,7 @@ export default {
 
         const txtLoading: Ref<TextBox> = ref(new TextBox({
             fieldText: "Tên hàng hóa",
-            
+
         }));
 
         return {
@@ -76,8 +77,8 @@ export default {
     /**
      * Hook
      */
-     created() {
-        const me =this;
+    created() {
+        const me = this;
         try {
             me.txtLoading.isLoadingData = true;
         } catch (error) {

@@ -14,10 +14,12 @@
 
 
 .menu-detail-item {
-  padding: 5px 10px;
+  padding: 10px 10px;
   font-weight: 600;
   color: #737373;
   border: 1px solid #E1E1E1;
+  border-radius: 5px;
+
 }
 
 .menu-detail-item:hover {
@@ -37,7 +39,7 @@
 
 .item-checkbox-employee-detail {
   width: 220px;
-  margin: 8px;
+  margin-top: 10px;
 }
 
 .role {
@@ -80,4 +82,9 @@
   height: 300px;
   overflow: scroll;
   overflow-x: hidden;
+}
+
+.item-checkbox-detail {
+  width: 165px;
+  margin: 20px 8px;
 }

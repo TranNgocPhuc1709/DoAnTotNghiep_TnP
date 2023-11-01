@@ -114,7 +114,7 @@ export default {
           format: new NumberFormat({
             decimal: ".",
             thousands: ",",
-            precision: 2
+            precision: 3
           }),
           bindingIndex: "Column5"
         }),
@@ -147,7 +147,7 @@ export default {
           format: new NumberFormat({
             decimal: ".",
             thousands: ",",
-            precision: 3
+            precision: 0
           }),
           bindingIndex: "Column9"
         }),
@@ -159,7 +159,7 @@ export default {
           format: new NumberFormat({
             decimal: ".",
             thousands: ",",
-            precision: 3
+            precision: 0
           }),
           bindingIndex: "Column10"
         }),
@@ -171,7 +171,7 @@ export default {
           format: new NumberFormat({
             decimal: ".",
             thousands: ",",
-            precision: 3
+            precision: 0
           }),
           bindingIndex: "Column11"
         }),

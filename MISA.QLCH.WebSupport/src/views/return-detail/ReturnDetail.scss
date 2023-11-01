@@ -1,0 +1,25 @@
+.item-detail {
+  margin-bottom: 8px;
+}
+
+.item-detail:first-child {
+  margin-top: 24px;
+}
+
+.item-detail:last-child {
+  margin-bottom: 24px;
+}
+
+.heading-return-info {
+  font-size: 15px;
+  font-weight: 600;
+  color: #757575;
+  display: block;
+  padding: 0 0 10px 0;
+}
+
+.form-return-detail-left,
+.form-return-detail-right,
+.grid-footer {
+  margin: 15px 15px;
+}

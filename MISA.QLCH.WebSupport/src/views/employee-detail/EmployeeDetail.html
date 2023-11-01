@@ -1,7 +1,7 @@
-<base-dictionary-detail-view :idRoot="idRoot" :propView="propView" :styleFrom="`min-width: 500px;`"
+<base-dictionary-detail-view :idRoot="idRoot" :propView="propView" :styleFrom="`min-width: 800px;`"
   @toolbarClick="onSelectAction" @closeFormClick="onCloseForm">
   <template v-slot:content-detail>
-    <div class="heading-top d-flex-vcenter width-fill">
+    <div class="heading-top d-flex-center width-fill">
       <div class="menu-detail-item d-flex-vcenter" @click="ShowTaskInfo()">
         <span>Thông tin cơ bản</span>
       </div>
@@ -20,7 +20,7 @@
     </div>
     <div class="pageInfo" v-if="disabledFormInfo">
       <div class="d-flex">
-        <div class="form-employee-detail-left">
+        <div class="form-employee-detail-left flex-1">
           <div class="qlch-input-default item-detail">
             <e-text-box :control="bindingControl[`txtColumn1`]"
               v-model="masterData[bindingControl[`txtColumn1`].bindingIndex]"></e-text-box>
@@ -41,7 +41,7 @@
             <e-combobox :control="bindingControl[`txtColumn11`]"
               v-model="masterData[bindingControl[`txtColumn11`].bindingIndex]"></e-combobox>
           </div>
-          <div class="qlch-input-default item-detail">
+          <div class="qlch-input-default item-detail" v-if="disablePassWord">
             <e-text-box :control="bindingControl[`txtColumn7`]"
               v-model="masterData[bindingControl[`txtColumn7`].bindingIndex]">
               <template v-slot:trigger-left>
@@ -50,7 +50,7 @@
             </e-text-box>
           </div>
         </div>
-        <div class="form-employee-detail-right">
+        <div class="form-employee-detail-right flex-1">
           <div class="qlch-input-default item-detail">
             <e-text-box :control="bindingControl[`txtColumn8`]"
               v-model="masterData[bindingControl[`txtColumn8`].bindingIndex]"></e-text-box>
@@ -71,7 +71,7 @@
             <e-combobox :control="bindingControl[`txtColumn6`]"
               v-model="masterData[bindingControl[`txtColumn6`].bindingIndex]"></e-combobox>
           </div>
-          <div class="qlch-input-default item-detail">
+          <div class="qlch-input-default item-detail" v-if="disablePassWord">
             <e-text-box :control="bindingControl[`txtColumn12`]"
               v-model="masterData[bindingControl[`txtColumn12`].bindingIndex]"></e-text-box>
           </div>
@@ -79,22 +79,22 @@
 
       </div>
       <div class="qlch-input-default item-checkbox-employee-detail">
-        <e-checkbox :control="bindingControl[`txtColumn13`]"
+        <e-checkbox :control="bindingControl[`txtColumn13`]" @click="onClickCheckPass()"
           v-model="masterData[bindingControl[`txtColumn13`].bindingIndex]"></e-checkbox>
       </div>
     </div>
     <div class="role" v-if="disabledFormRole">
-      <div class="d-flex">
-        <div class="qlch-input-default item-checkbox-role-detail">
+      <div class="d-flex d-flex-sp-center">
+        <div class="qlch-input-default item-checkbox-role-detail" @click="onClickRole">
           <e-checkbox :control="bindingControl[`txtColumn14`]"
             v-model="masterData[bindingControl[`txtColumn14`].bindingIndex]"></e-checkbox>
         </div>
-        <div class="qlch-input-default item-checkbox-role-detail">
+        <div class="qlch-input-default item-checkbox-role-detail" @click="onClickRole">
           <e-checkbox :control="bindingControl[`txtColumn15`]"
             v-model="masterData[bindingControl[`txtColumn15`].bindingIndex]"></e-checkbox>
         </div>
       </div>
-      <div class="qlch-input-default item-detail">
+      <div class="qlch-input-default item-detail" v-if="disableECombobox">
         <e-combobox :control="bindingControl[`txtColumn16`]"
           v-model="masterData[bindingControl[`txtColumn16`].bindingIndex]"></e-combobox>
       </div>
@@ -191,12 +191,18 @@
       </div>
     </div>
     <div class="access-time" v-if="disabledFormAccessTime">
-      <div class="qlch-input-default item-detail">
-        <e-combobox :control="bindingControl[`txtColumn34`]"
-          v-model="masterData[bindingControl[`txtColumn34`].bindingIndex]"></e-combobox>
+      <div class="d-flex d-flex-sp-center">
+        <div class="qlch-input-default item-detail item-checkbox-detail">
+          <e-checkbox :control="bindingControl[`txtColumn34`]"
+            v-model="masterData[bindingControl[`txtColumn34`].bindingIndex]"></e-checkbox>
+        </div>
+        <div class="qlch-input-default item-detail item-checkbox-detail">
+          <e-checkbox :control="bindingControl[`txtColumn35`]"
+            v-model="masterData[bindingControl[`txtColumn35`].bindingIndex]"></e-checkbox>
+        </div>
       </div>
-      <div class="access-time-form" v-if="disabledAccessTimeFormItem">
-        <h1>hello</h1>
+      <div class="access-time-form">
+
       </div>
     </div>
   </template>

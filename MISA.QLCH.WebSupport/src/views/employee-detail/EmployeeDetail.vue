@@ -14,6 +14,7 @@ import EDate from "qlch_control/EDate";
 import Log from '@library-src/utilities/Log';
 import Checkbox from '@library-src/models/qlch_control/qlch_checkbox/Checkbox';
 import ECheckbox from "qlch_control/ECheckbox";
+import BaseInput from '@library-src/models/qlch_control/base_input/BaseInput';
 // import Log from '@library-src/utilities/Log';
 
 export default {
@@ -28,6 +29,21 @@ export default {
     ECheckbox
   },
 
+
+
+  //TnP 31/12 start
+  data() {
+    const me = this;
+    const bindingControl: Record<string, BaseInput> = me.buildBindingControl();
+    return {
+      bindingControl
+    }
+
+  },
+  //TnP 31/12 end
+
+
+
   setup() {
     const thisData: Ref<EmployeeDetail> = ref(new EmployeeDetail());
     const disabledFormInfo: Ref<boolean> = ref(true);
@@ -35,6 +51,10 @@ export default {
     const disabledFormContactInfo: Ref<boolean> = ref(false);
     const disabledFormAccessTime: Ref<boolean> = ref(false);
     const disabledAccessTimeFormItem: Ref<boolean> = ref(false);
+    const disablePassWord: Ref<boolean> = ref(false);
+    const disableECombobox: Ref<boolean> = ref(true)
+    //Xử lý checkbox
+
 
     return {
       thisData,
@@ -42,7 +62,10 @@ export default {
       disabledFormRole,
       disabledFormContactInfo,
       disabledFormAccessTime,
-      disabledAccessTimeFormItem
+      disabledAccessTimeFormItem,
+      disablePassWord,
+      disableECombobox
+
 
       // isTaskInfoActive: false,
       // disabledFormInfo2: false
@@ -310,20 +333,13 @@ export default {
           labelWidth: labelWidth,
           bindingIndex: "Column33"
         }),
-        "txtColumn34": new Combobox({
-          fieldText: "Quyền truy cập",
-          maxLength: 255,
-          labelWidth: labelWidth,
-          data: [
-            {
-              value: 1,
-              display: "Truy cập tự do"
-            },
-            {
-              value: 2,
-              display: "Truy cập theo khung giờ"
-            }],
+        "txtColumn34": new Checkbox({
+          fieldText: "Truy cập theo khung giờ",
           bindingIndex: "Column34"
+        }),
+        "txtColumn35": new Checkbox({
+          fieldText: "Truy cập tự do",
+          bindingIndex: "Column35"
         }),
 
 
@@ -375,6 +391,39 @@ export default {
       }
     },
 
+    //TnP 31/12 start
+    onClickCheckPass() {
+      try {
+        const me = this;
+        const ShowCheckBoxPass = me.bindingControl["txtColumn13"];
+        if (ShowCheckBoxPass) {
+          me.disablePassWord = true
+        }
+        if (!ShowCheckBoxPass) {
+          me.disablePassWord = false;
+        }
+      } catch (error) {
+        Log.ErrorLog(error as Error);
+      }
+
+    },
+
+    onClickRole() {
+      try {
+        const me = this;
+        const ShowCheckBoxRole = me.bindingControl["txtColumn15"];
+        if (ShowCheckBoxRole) {
+          me.disableECombobox = false
+        }
+        else {
+          me.disableECombobox = true
+        }
+      } catch (error) {
+        Log.ErrorLog(error as Error);
+      }
+    },
+
+    //TnP 31/12 end
 
     /**
     * Sau khi đóng form xong thì xử lý thêm gì ở master thì Override function này ở master

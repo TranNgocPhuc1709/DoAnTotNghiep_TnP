@@ -35,6 +35,34 @@ const routes: Array<RouteRecordRaw> = [
                 }
             },
             {
+                path: 'goodsOrder',
+                name: 'goodsOrder',
+                component: () => import('@src/views/goods-order-list-dictionary/GoodsOrderListDictionary.vue'),
+                meta: {
+                    title: "Đặt Hàng",
+                    anonymous: false
+                }
+            },
+            {
+                path: 'import',
+                name: 'import',
+                component: () => import('@src/views/import-list-dictionary/ImportListDictionary.vue'),
+                meta: {
+                    title: "Nhập Hàng",
+                    anonymous: false
+                }
+            },
+            {
+                path: 'return',
+                name: 'return',
+                component: () => import('@src/views/return-list-dictionary/ReturnListDictionary.vue'),
+                meta: {
+                    title: "Nhập Hàng",
+                    anonymous: false
+                }
+            },
+
+            {
                 path: 'inward',
                 name: 'inward',
                 component: () => import('@src/views/inward-list-dictionary/InwardListDictionary.vue'),
@@ -76,7 +104,7 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'cashPayment',
                 component: () => import('@src/views/cash-payment-list-dictionary/CashPaymentListDictionary.vue'),
                 meta: {
-                    title: "Phiếu thu tiền",
+                    title: "Phiếu chi tiền",
                     anonymous: false
                 }
             },

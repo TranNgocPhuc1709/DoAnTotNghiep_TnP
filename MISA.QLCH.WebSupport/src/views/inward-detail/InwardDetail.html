@@ -22,25 +22,26 @@
         </div>
 
 
-        <div class="qlch-input-default item-detail">
+        <!-- <div class="qlch-input-default item-detail">
           <e-text-box :control="bindingControl[`txtColumn4`]"
             v-model="masterData[bindingControl[`txtColumn4`].bindingIndex]"></e-text-box>
-        </div>
+        </div> -->
 
       </div>
       <div class="form-inward-detail-right">
         <span class="heading-inward-info">CHỨNG TỪ</span>
         <div class="qlch-input-default item-detail">
-          <e-date :control="bindingControl[`txtColumn1`]"
-            v-model="masterData[bindingControl[`txtColumn1`].bindingIndex]"></e-date>
-        </div>
-        <div class="qlch-input-default item-detail">
           <e-text-box :control="bindingControl[`txtColumn2`]"
             v-model="masterData[bindingControl[`txtColumn2`].bindingIndex]"></e-text-box>
         </div>
+        <div class="qlch-input-default item-detail">
+          <e-date :control="bindingControl[`txtColumn1`]"
+            v-model="masterData[bindingControl[`txtColumn1`].bindingIndex]"></e-date>
+        </div>
+
       </div>
     </div>
-    <div class="form-inward-detail">
+    <div class="footer-form-inward-detail">
       <span class="heading-inward-info">CHI TIẾT</span>
     </div>
 
