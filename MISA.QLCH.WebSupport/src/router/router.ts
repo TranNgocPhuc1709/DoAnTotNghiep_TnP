@@ -281,7 +281,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@src/views/home-store/HomeStore.vue'),
         meta: {
             title: "Trang Bán Hàng",
-            anonymous: true
+            anonymous: false
         }
     },
     {

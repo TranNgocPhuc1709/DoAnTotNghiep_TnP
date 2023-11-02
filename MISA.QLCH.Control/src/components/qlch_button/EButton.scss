@@ -111,12 +111,37 @@
 
 .normal:hover {
     color: var(--btn-text-color-tertiary-hover);
-    
+
 }
 
 .normal.btn-read-only:hover {
     color: var(--btn-text-color-tertiary);
     border: none;
+}
+
+.SaveBtn {
+    background-color: #616CE6;
+    color: #ffffff;
+    border: none;
+    border-radius: 15px;
+}
+
+.SaveBtn:hover {
+    transition: 0.3s;
+    background-color: #4E56B8;
+
+}
+
+.CollectMoneyBtn {
+    background-color: #50b83c;
+    color: #ffffff;
+    border: none;
+    border-radius: 15px;
+}
+
+.CollectMoneyBtn:hover {
+    background-color: #52B04D;
+    transition: 0.3s;
 }
 
 .qlch-btn.normal[isLoading=true] {

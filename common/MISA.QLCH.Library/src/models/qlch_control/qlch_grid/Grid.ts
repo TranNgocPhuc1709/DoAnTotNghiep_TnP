@@ -6,10 +6,15 @@ export default class Grid extends BaseControl {
     /**
      * create constructor
      */
+
     constructor(grid?: IGrid) {
         super('qlch-grid', grid);
         const me = this;
+
         if (grid) {
+            if (grid.isNotShowFooter) {
+                me.isNotShowFooter = true;
+            }
             if (grid.columns) {
                 me.columns = grid.columns;
             }
@@ -43,6 +48,8 @@ export default class Grid extends BaseControl {
     */
     listSelectedRecord: Array<Record<string, any>> = [];
 
+    // Ẩn Footer
+    isNotShowFooter?: boolean = false;
 
     /**
      * Tham số paging của grid

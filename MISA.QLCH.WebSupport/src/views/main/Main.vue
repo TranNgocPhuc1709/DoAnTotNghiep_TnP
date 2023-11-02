@@ -194,6 +194,7 @@ export default {
         );
         const cbbStore: Ref<Combobox> = ref(new Combobox({
             require: true,
+            readOnly: false,
             data: [
                 {
                     value: 1,

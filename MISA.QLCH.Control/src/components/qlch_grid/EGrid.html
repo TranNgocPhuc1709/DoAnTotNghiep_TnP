@@ -92,7 +92,7 @@
         </table>
     </div>
 
-    <div class="paging-toolbar" v-if="thisData.footer">
+    <div class="paging-toolbar" v-if="thisData.footer && !control.isNotShowFooter">
         <div class="height-fill d-flex-vcenter body-paging-toolbar">
             <div class="pagging-toolbar-right flex-1 height-fill d-flex">
                 <div class="height-fill d-flex-vcenter">
@@ -148,4 +148,5 @@
             </div>
         </div>
     </div>
+
 </div>

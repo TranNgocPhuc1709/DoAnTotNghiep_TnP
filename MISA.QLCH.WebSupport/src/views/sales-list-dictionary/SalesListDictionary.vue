@@ -14,6 +14,7 @@ import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
 import EDate from "qlch_control/EDate";
 import Button from '@library-src/models/qlch_control/qlch_button/Button';
 import EButton from "qlch_control/EButton";
+import ToolBarItemsView from '@library-src/models/qlch_base/tool_bar_items_view/ToolBarItemsView';
 
 export default {
 
@@ -174,6 +175,13 @@ export default {
       console.log("DEV: Override Function createComponent Vue component Detail");
       const frmDetail = (await import(`../sales-detail/SalesDetail.vue`)).default;
       return frmDetail;
+    },
+    buildToolBarItems(): Array<ToolBarItemsView> {
+
+
+
+      return []
+
     },
   }
 

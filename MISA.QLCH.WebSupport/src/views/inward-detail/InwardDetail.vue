@@ -11,6 +11,9 @@ import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
 import EDate from "qlch_control/EDate";
 import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
 import ECombobox from "qlch_control/ECombobox";
+import Grid from '@library-src/models/qlch_control/qlch_grid/Grid';
+import EGrid from "qlch_control/EGrid";
+import Column from '@library-src/models/qlch_control/qlch_grid/qlch_column/Column';
 
 export default {
 
@@ -20,12 +23,104 @@ export default {
     BaseDictionaryDetailView,
     ETextBox,
     EDate,
-    ECombobox
+    ECombobox,
+    EGrid
 
   },
 
   setup() {
     const thisData: Ref<InwardDetail> = ref(new InwardDetail());
+    const columnDefault: Array<Column> = Array(
+      new Column({
+        fieldText: "Mã nhân viên",
+        width: 250,
+        dataIndex: "EmployeeCode",
+
+        isFilter: true
+      }),
+      new Column({
+        fieldText: "Sinh nhật",
+        dataIndex: "BirthDay",
+        isFilter: true,
+        width: 250
+      }),
+
+      new Column({
+        fieldText: "Địa chỉ",
+        minWidth: 350,
+        flex: 1,
+        dataIndex: "Address",
+        isFilter: true
+      }),
+
+      new Column({
+        fieldText: "Lương",
+        width: 350,
+        dataIndex: "Amount",
+        isFilter: true
+      }),
+
+    );
+    const dataGrid: Array<Record<string, any>> = new Array(
+      {
+        "EmployeeCode": "Tran Duc 1",
+        "BirthDay": "29/12/1994",
+        "Address": "SmartCity, Tây Mỗ, Nam Từ Liêm, Hà Nội",
+        "Amount": "2000000"
+      },
+      {
+        "EmployeeCode": "Tran Duc 1",
+        "BirthDay": "29/12/1994",
+        "Address": "SmartCity, Tây Mỗ, Nam Từ Liêm, Hà Nội",
+        "Amount": "2000000"
+      },
+      {
+        "EmployeeCode": "Tran Duc 1",
+        "BirthDay": "29/12/1994",
+        "Address": "SmartCity, Tây Mỗ, Nam Từ Liêm, Hà Nội",
+        "Amount": "2000000"
+      },
+      {
+        "EmployeeCode": "Tran Duc 1",
+        "BirthDay": "29/12/1994",
+        "Address": "SmartCity, Tây Mỗ, Nam Từ Liêm, Hà Nội",
+        "Amount": "2000000"
+      },
+      {
+        "EmployeeCode": "Tran Duc 1",
+        "BirthDay": "29/12/1994",
+        "Address": "SmartCity, Tây Mỗ, Nam Từ Liêm, Hà Nội",
+        "Amount": "2000000"
+      },
+      {
+        "EmployeeCode": "Tran Duc 1",
+        "BirthDay": "29/12/1994",
+        "Address": "SmartCity, Tây Mỗ, Nam Từ Liêm, Hà Nội",
+        "Amount": "2000000"
+      },
+      {
+        "EmployeeCode": "Tran Duc 1",
+        "BirthDay": "29/12/1994",
+        "Address": "SmartCity, Tây Mỗ, Nam Từ Liêm, Hà Nội",
+        "Amount": "2000000"
+      },
+      {
+        "EmployeeCode": "Tran Duc 1",
+        "BirthDay": "29/12/1994",
+        "Address": "SmartCity, Tây Mỗ, Nam Từ Liêm, Hà Nội",
+        "Amount": "2000000"
+      },
+    )
+
+    const tblDefault: Ref<Grid> = ref(new Grid({
+      columns: columnDefault,
+      data: dataGrid,
+      isNotShowFooter: true,
+      primaryKey: "EmployeeCode"
+    }));
+    return {
+      tblDefault
+    }
     return { thisData };
   },
 

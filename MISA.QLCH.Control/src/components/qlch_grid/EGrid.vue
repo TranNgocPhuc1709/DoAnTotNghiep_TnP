@@ -42,6 +42,7 @@ export default {
             type: Grid,
             require: true
         }
+
     },
 
     emits: ['loadData', 'changeSelectedRecord'],

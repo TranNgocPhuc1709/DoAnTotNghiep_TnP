@@ -16,11 +16,14 @@
         <div class="header-right height-fill d-flex-vcenter">
             <div class="chosse-warehouse d-flex-vcenter" @click-="showChosseWarehouse()">
                 <span class="icon-warehouse"></span>
+                <!-- <span>
+                    <e-combobox :control="cbbWareHouse" v-model="cbbWareHouse.value" />
+                </span> -->
                 <span class="label-warehouse">Kho tổng</span>
                 <span class="icon-arrow-warehouse"></span>
-                <div class="item-warehouse" v-if="displayItemWarehouse">
 
-                </div>
+                <!-- <div class="item-warehouse" v-if="displayItemWarehouse">
+                </div> -->
             </div>
             <div class="messege-header height-fill d-flex-center">
                 <span class="icon-messege"></span>
@@ -28,13 +31,120 @@
             <div class="notice-header height-fill d-flex-center">
                 <span class="icon-notice"></span>
             </div>
-            <div class="user d-flex-vcenter">
+            <div class="user d-flex-vcenter" @click="ShowFormLogOut()" v-click-out="LogOutClickOut">
                 <span class="icon-user"></span>
                 <span class="label-user">Trần Ngọc Phúc </span>
                 <span class="icon-arrow-user"></span>
+                <div class="logout-form" @click="LogOut()" v-if="disableFormLogOut">
+                    <span>Đăng xuất</span>
+                </div>
             </div>
-            <div class="more-action-header height-fill d-flex-center">
+            <div class="overlay width-fill height-fill" v-if="disableFormMoreAction"></div>
+            <div class="more-action-header height-fill d-flex-center" @click="ShowFormMoreAction()"
+                v-click-out="MoreActionClickOut">
                 <span class="icon-more-action"></span>
+                <div class="more-action-form d-flex-column" v-if="disableFormMoreAction">
+                    <div class="child-action-form d-flex">
+                        <div class="more-action-item d-flex-column d-flex-vcenter flex-1">
+                            <span class="img-action-item-sales"></span>
+                            <div class="label-action-item">
+                                <span>Bán Hàng</span>
+                            </div>
+                        </div>
+                        <div class="more-action-item-center d-flex-column d-flex-vcenter flex-1">
+                            <span class="img-action-item-order"></span>
+                            <div class="label-action-item">
+                                <span>Đơn Hàng</span>
+                            </div>
+                        </div>
+                        <div class="more-action-item d-flex-column d-flex-vcenter flex-1">
+                            <span class="img-action-item-invoice"></span>
+                            <div class="label-action-item">
+                                <span>Danh sách hóa đơn</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="child-action-form d-flex">
+                        <div class="more-action-item d-flex-column d-flex-vcenter flex-1">
+                            <span class="img-action-item-online-order"></span>
+                            <div class="label-action-item">
+                                <span>Đơn hàng online</span>
+                            </div>
+                        </div>
+                        <div class="more-action-item-center d-flex-column d-flex-vcenter flex-1">
+                            <span class="img-action-item-return"></span>
+                            <div class="label-action-item">
+                                <span>Đổi trả hàng</span>
+                            </div>
+                        </div>
+                        <div class="more-action-item d-flex-column d-flex-vcenter flex-1">
+                            <span class="img-action-item-request"></span>
+                            <div class="label-action-item">
+                                <span>Yêu cầu điều chuyển</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="child-action-form d-flex">
+                        <div class="more-action-item d-flex-column d-flex-vcenter flex-1">
+                            <span class="img-action-item-add-point"></span>
+                            <div class="label-action-item">
+                                <span>Nạp tiền</span>
+                            </div>
+                        </div>
+                        <div class="more-action-item-center d-flex-column d-flex-vcenter flex-1">
+                            <span class="img-action-item-revenue"></span>
+                            <div class="label-action-item">
+                                <span>Thu chi</span>
+                            </div>
+                        </div>
+                        <div class="more-action-item d-flex-column d-flex-vcenter flex-1">
+                            <span class="img-action-item-print"></span>
+                            <div class="label-action-item">
+                                <span>Máy in / Mẫu in</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="child-action-form d-flex">
+                        <div class="more-action-item d-flex-column d-flex-vcenter flex-1">
+                            <span class="img-action-item-report"></span>
+                            <div class="label-action-item">
+                                <span>Báo cáo theo ngày</span>
+                            </div>
+                        </div>
+                        <div class="more-action-item-center d-flex-column d-flex-vcenter flex-1">
+                            <span class="img-action-item-handover-history"></span>
+                            <div class="label-action-item">
+                                <span>Báo cáo trong ca</span>
+                            </div>
+                        </div>
+                        <div class="more-action-item d-flex-column d-flex-vcenter flex-1">
+                            <span class="img-action-item-history"></span>
+                            <div class="label-action-item">
+                                <span>Nhật ký truy cập</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="child-action-form d-flex">
+                        <div class="more-action-item d-flex-column d-flex-vcenter flex-1" @click="routerManage()">
+                            <span class="img-action-item-main-manage"></span>
+                            <div class="label-action-item">
+                                <span>Trang quản lý</span>
+                            </div>
+                        </div>
+                        <div class="more-action-item-center d-flex-column d-flex-vcenter flex-1">
+                            <span class="img-action-item-guide"></span>
+                            <div class="label-action-item">
+                                <span>Hướng dẫn</span>
+                            </div>
+                        </div>
+                        <div class="more-action-item d-flex-column d-flex-vcenter flex-1">
+                            <span class="img-action-item-contact-info"></span>
+                            <div class="label-action-item">
+                                <span>Giới thiệu</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -75,7 +185,7 @@
                     </div>
                 </div>
                 <div class="body-content-store">
-                    <!-- <div class="d-flex-column">
+                    <div class="d-flex-column">
                         <div class="item-product d-flex">
                             <span class="flex-1">STT</span>
                             <span class="flex-1">SP001</span>
@@ -86,7 +196,7 @@
                             <input class="child-item-product-price" type="number">
                             <span class="icon-child-product"></span>
                         </div>
-                    </div> -->
+                    </div>
                     <div class="img-show-content d-flex-center height-fill d-flex-column">
                         <div class="label-form-img">
                             <span class="item-img-cart"></span>
@@ -106,8 +216,98 @@
                 </div>
             </div>
         </div>
-        <div class="pay-store">
+        <div class="pay-store d-flex-column">
+            <div class="transaction d-flex-column flex-1">
+                <div class="header-transaction d-flex-column">
+                    <div class="header-item-time-line d-flex d-flex-sp-center">
+                        <div class="time-line-transaction d-flex-vcenter">
+                            <span class="icon-time-line-transaction"></span>
+                            <span class="date-time-transaction">02/12/2023</span>
+                            <span> - </span>
+                            <span class="real-time-transaction">14:43</span>
+                        </div>
+                        <div class="transaction-store-update d-flex-vcenter">
+                            <span class="icon-store-transaction"></span>
+                            <span class="lable-transaction-store-update">Tại Cửa Hàng</span>
+                            <span class="icon-arrow-store-transaction"></span>
+                        </div>
+                    </div>
+                    <div class="header-content d-flex">
+                        <div class="content-select-customer d-flex-vcenter">
+                            <span class="icon-guest-content"></span>
+                            <input class="type-input-select-customer" type="text" placeholder="Tên khách hàng...">
+                            <div class="out-line-icon-add-guest d-flex-center">
+                                <span class="icon-add-guest-content"></span>
+                            </div>
+                        </div>
+                        <div class="content-delivery d-flex-vcenter">
+                            <span class="icon-content-delivery"></span>
+                        </div>
+                        <div class="content-present d-flex-vcenter">
+                            <span class="icon-present-content"></span>
+                            <span class="icon-arrow-content-present"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-transaction flex-1">
+                    <div class="info-payment">
+                        <div class="info-payment-item d-flex-vcenter">
+                            <span class="label-transaction-item flex-1">Tổng tiền</span>
+                            <span class="transaction-price">0.00</span>
+                        </div>
+                        <div class="info-payment-item d-flex-vcenter">
+                            <span class="label-transaction-item label-sales flex-1">Khuyến mại</span>
+                            <span class="transaction-price-sales">0.00</span>
+                        </div>
+                        <div class="info-payment-item d-flex-vcenter">
+                            <span class="label-transaction-item label-all-price flex-1">Còn phải thu</span>
+                            <span class="transaction-all-price">0.00</span>
+                        </div>
+                    </div>
+                    <div class="check-point-price d-flex-vcenter d-flex-sp-center">
+                        <div class="check-payments">
+                            <e-combobox :control="cbbCheckPoint" v-model="cbbCheckPoint.value" />
+                        </div>
+                        <div class="type-input-payments">
+                            <input class="item-input-payments" type="number">
+                        </div>
+                    </div>
+                    <div class="notice-transaction">
+                        <div class="info-payment-item">
+                            <span class="label-transaction-item label-all-price flex-1">Tài khoản thu</span>
+                            <div class="width-fill">
+                                <e-combobox :control="cbbPayments" v-model="cbbPayments.value" />
+                            </div>
+                            <!-- <span class="transaction-all-price">0.00</span> -->
+                            <div class="info-payment-item d-flex-vcenter">
+                                <span class="label-transaction-item label-payment flex-1">Trả lại khách</span>
+                                <span class="payment-all-price">0.00</span>
+                            </div>
+                            <div class="type-input-notice">
+                                <input class="item-input-notice width-fill" type="text" placeholder="Ghi chú">
+                            </div>
+                        </div>
+                    </div>
 
+                </div>
+                <div class="form-pay d-flex-sp-center d-flex-vcenter">
+                    <span>
+                        <e-checkbox :control="cbkBill" v-model="cbkBill.value"></e-checkbox>
+                    </span>
+                    <span>
+                        <e-checkbox :control="cbkOrder" v-model="cbkOrder.value"></e-checkbox>
+                    </span>
+
+                </div>
+            </div>
+            <div class="prepare-bill d-flex-vcenter d-flex-sp-center">
+                <span class="btn-prepare-item height-fill width-fill">
+                    <e-button :control="btnTemporarySave" />
+                </span>
+                <span class="btn-prepare-item height-fill width-fill">
+                    <e-button :control="btnCollectMoney" />
+                </span>
+            </div>
         </div>
     </div>
 </div>

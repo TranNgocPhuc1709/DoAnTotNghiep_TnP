@@ -13,7 +13,7 @@
     <div class="body-input d-flex" :class="{'flex-1':control.boxType=='hbox'}" v-if="!control.isLoadingData">
         <!--Input-->
         <input v-if="!control.selectOnly" type="text" class="qlch-cbb flex-1" :id="control.id"
-            :disabled="!control.readOnly" :value="thisData.displayValue" :placeholder="control.placeholder"
+            :disabled="control.readOnly" :value="thisData.displayValue" :placeholder="control.placeholder"
             :class="[{'warning-valid': !control.isValidateSuccess && control.isActive}]" :maxlength="control.maxlength"
             @blur.stop="onBlur" @input.stop="onInput" @focus.stop="onFocus" @mouseover.stop="onHover"
             @keydown.stop="onKeyDown" autocomplete="off">

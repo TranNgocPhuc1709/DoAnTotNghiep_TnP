@@ -76,6 +76,7 @@
 
 
 .chosse-warehouse {
+    padding-right: 10px;
     height: 35px;
     border-radius: 10px;
     position: relative;
@@ -91,6 +92,7 @@
 }
 
 .user {
+    position: relative;
     height: 35px;
     border-radius: 10px;
     margin: 0 5px;
@@ -118,6 +120,7 @@
     display: inline-block;
     background-position-x: -42px;
     background-position-y: -6px;
+    margin-right: 5px;
 }
 
 .icon-arrow-warehouse {
@@ -196,18 +199,77 @@
 }
 
 .label-warehouse {
-    padding: 0 5px;
+    border: none;
+
 }
+
 
 .label-user {
     padding: 0 5px;
 }
 
+.logout-form {
+    position: absolute;
+    top: 40px;
+    right: 30px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    color: #212B36;
+    padding: 10px 50px 10px 10px;
+    box-shadow: 1px 2px 5px #888888;
+}
+
+.more-action-form {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    width: 435px;
+    height: 465px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    padding: 5px 20px 20px 20px;
+    overflow-y: scroll;
+    box-shadow: 1px 2px 5px #888888;
+    z-index: 99999;
+    cursor: default;
+}
+
+.logout-form:hover {
+    background-color: #EFF0FC;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
 .more-action-header {
+    position: relative;
     height: 35px;
     width: 35px;
     border-radius: 50%;
+}
 
+.more-action-item {
+    padding: 10px;
+}
+
+.more-action-item:hover {
+    background-color: #EFF0FD;
+    cursor: pointer;
+
+}
+
+.more-action-item-center:hover {
+    background-color: #EFF0FD;
+    cursor: pointer;
+}
+
+.more-action-item-center {
+    width: 50px;
+    padding: 10px;
+    margin: 0 10px;
+}
+
+.child-action-form {
+    margin-bottom: 10px;
 }
 
 .more-action-header:hover {
@@ -215,6 +277,10 @@
     transition: 0.3s;
     cursor: pointer;
 
+}
+
+.label-action-item {
+    text-align: center;
 }
 
 .icon-more-action {
@@ -226,6 +292,187 @@
     background-position-x: -186px;
     background-position-y: -6px;
 
+}
+
+.img-action-item-sales {
+    background-image: url(https://misast.mshopkeeper.vn/salecloudg1/img/ic.84a854b4.svg);
+    background-repeat: no-repeat;
+    background-position-x: 0px;
+    background-position-y: -672px;
+    background-size: 378px auto;
+    width: 42px;
+    height: 42px;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+.img-action-item-order {
+    background-image: url(https://misast.mshopkeeper.vn/salecloudg1/img/ic.84a854b4.svg);
+    background-repeat: no-repeat;
+    background-position-x: -42px;
+    background-position-y: -630px;
+    background-size: 378px auto;
+    width: 42px;
+    height: 42px;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+.img-action-item-invoice {
+    width: 44px;
+    height: 44px;
+    background-image: url(https://misast.mshopkeeper.vn/salecloudg1/img/ic.84a854b4.svg);
+    background-repeat: no-repeat;
+    display: inline-block;
+    background-position-x: -88px;
+    background-position-y: -660px;
+    background-size: 396px auto;
+    margin-bottom: 8px;
+}
+
+.img-action-item-online-order {
+    width: 44px;
+    height: 44px;
+    background-image: url(https://misast.mshopkeeper.vn/salecloudg1/img/ic.84a854b4.svg);
+    background-repeat: no-repeat;
+    display: inline-block;
+    background-position-x: -88px;
+    background-position-y: -704px;
+    background-size: 396px auto;
+    margin-bottom: 8px;
+}
+
+.img-action-item-return {
+    background-image: url(https://misast.mshopkeeper.vn/salecloudg1/img/ic.84a854b4.svg);
+    background-repeat: no-repeat;
+    background-position-x: 0px;
+    background-position-y: -630px;
+    background-size: 378px auto;
+    width: 42px;
+    height: 42px;
+    display: inline-block;
+    margin-bottom: 8px;
+
+}
+
+.img-action-item-request {
+    width: 44px;
+    height: 44px;
+    background-image: url(https://misast.mshopkeeper.vn/salecloudg1/img/ic.84a854b4.svg);
+    background-repeat: no-repeat;
+    display: inline-block;
+    background-position-x: -132px;
+    background-position-y: -704px;
+    background-size: 396px auto;
+    margin-bottom: 8px;
+
+}
+
+.img-action-item-add-point {
+    width: 42px;
+    height: 42px;
+    background-image: url(https://misast.mshopkeeper.vn/salecloudg1/img/ic.84a854b4.svg);
+    background-repeat: no-repeat;
+    display: inline-block;
+    background-position-x: -210px;
+    background-position-y: -966px;
+    background-size: 378px auto;
+    margin-bottom: 8px;
+
+}
+
+.img-action-item-revenue {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NCA0NCI+PHBhdGggZD0iTTE1IDFoMTRjNy43IDAgMTQgNi4zIDE0IDE0djE0YzAgNy43LTYuMyAxNC0xNCAxNEgxNUM3LjMgNDMgMSAzNi43IDEgMjlWMTVDMSA3LjMgNy4zIDEgMTUgMXoiIGZpbGw9IiM2MTZjZTYiLz48cGF0aCBkPSJNMjIgMTJjNi42IDAgMTIgNS40IDEyIDEycy01LjQgMTItMTIgMTItMTItNS40LTEyLTEyIDUuNC0xMiAxMi0xMnoiIG9wYWNpdHk9Ii4yIiBmaWxsPSIjZmZmIi8+PHBhdGggZD0iTTIyIDljNi42IDAgMTIgNS40IDEyIDEycy01LjQgMTItMTIgMTItMTItNS40LTEyLTEyUzE1LjQgOSAyMiA5eiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik0yMiA5LjhoMGM2LjIgMCAxMS4zIDUgMTEuMyAxMS4zaDBjMCA2LjItNSAxMS4zLTExLjMgMTEuM2gwYy02LjIgMC0xMS4zLTUtMTEuMy0xMS4zaDBjLjEtNi4zIDUuMS0xMS4zIDExLjMtMTEuM3oiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxLjUiLz48cGF0aCBkPSJNMjUuNyAyMy4xYzAgLjctLjMgMS4zLS44IDEuOC0uNi41LTEuNC44LTIuMi44djEuNGgtMXYtMS40Yy0xIDAtMi0uMi0zLS42di0xLjhjLjUuMiAxIC40IDEuNS41bDEuNS4zdi0yLjJsLS41LS4yYy0uNy0uMi0xLjQtLjYtMi0xLjItLjQtLjQtLjYtMS0uNi0xLjYgMC0uNi4zLTEuMy44LTEuNy42LS41IDEuNC0uNyAyLjItLjh2LTEuMWgxdjFjMSAwIDIgLjIgMi45LjZsLS43IDEuNmMtLjctLjMtMS41LS41LTIuMi0uNXYyLjFjLjcuMiAxLjMuNSAxLjkuOS4zLjIuNi41LjguOC4zLjUuNC45LjQgMS4zem0tMi4xLjFjMC0uMi0uMS0uNC0uMi0uNS0uMi0uMi0uNS0uMy0uNy0uNFYyNGMuNi0uMS45LS40LjktLjh6TTIwLjggMTljMCAuMi4xLjQuMi41LjIuMi40LjMuNy40di0xLjZjLS42IDAtLjkuMy0uOS43eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==);
+    width: 42px;
+    height: 42px;
+    margin-bottom: 8px;
+
+}
+
+.img-action-item-print {
+    width: 44px;
+    height: 44px;
+    background-image: url(https://misast.mshopkeeper.vn/salecloudg1/img/ic.84a854b4.svg);
+    background-repeat: no-repeat;
+    display: inline-block;
+    background-position-x: -308px;
+    background-position-y: -660px;
+    background-size: 396px auto;
+    margin-bottom: 8px;
+
+}
+
+.img-action-item-report {
+    width: 42px;
+    height: 42px;
+    background-image: url(https://misast.mshopkeeper.vn/salecloudg1/img/ic.84a854b4.svg);
+    background-repeat: no-repeat;
+    display: inline-block;
+    background-position-x: 0px;
+    background-position-y: -882px;
+    background-size: 378px auto;
+    margin-bottom: 8px;
+
+}
+
+.img-action-item-handover-history {
+    width: 42px;
+    height: 42px;
+    background-image: url(https://misast.mshopkeeper.vn/salecloudg1/img/ic.84a854b4.svg);
+    background-repeat: no-repeat;
+    display: inline-block;
+    background-position-x: -126px;
+    background-position-y: -1050px;
+    background-size: 378px auto;
+    margin-bottom: 8px;
+}
+
+.img-action-item-history {
+    width: 42px;
+    height: 42px;
+    background-image: url(https://misast.mshopkeeper.vn/salecloudg1/img/ic.84a854b4.svg);
+    background-repeat: no-repeat;
+    display: inline-block;
+    background-position-x: -210px;
+    background-position-y: -630px;
+    background-size: 378px auto;
+    margin-bottom: 8px;
+}
+
+.img-action-item-main-manage {
+    background-image: url(https://misast.mshopkeeper.vn/salecloudg1/img/ic.84a854b4.svg);
+    background-repeat: no-repeat;
+    background-position-x: -308px;
+    background-position-y: -880px;
+    background-size: 396px auto;
+    width: 44px;
+    height: 44px;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+.img-action-item-guide {
+    background-image: url(https://misast.mshopkeeper.vn/salecloudg1/img/ic.84a854b4.svg);
+    background-repeat: no-repeat;
+    background-position-x: -176px;
+    background-position-y: -660px;
+    background-size: 396px auto;
+    width: 44px;
+    height: 44px;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+.img-action-item-contact-info {
+    width: 44px;
+    height: 44px;
+    background-image: url(https://misast.mshopkeeper.vn/salecloudg1/img/ic.84a854b4.svg);
+    background-repeat: no-repeat;
+    display: inline-block;
+    background-position-x: -352px;
+    background-position-y: -924px;
+    background-size: 396px auto;
+    margin-bottom: 8px;
 }
 
 .content-home-store {
@@ -242,9 +489,8 @@
     width: 300px;
     background-color: #ffffff;
     border-radius: 10px;
-    border: 1px solid #ffffff;
+    padding: 5px 10px;
     margin: 10px 10px 0 0;
-
 }
 
 
@@ -393,11 +639,20 @@
 
 }
 
-::-webkit-scrollbar {
+.body-content-store::-webkit-scrollbar {
     width: 8px;
 }
 
-::-webkit-scrollbar-thumb {
+.body-content-store::-webkit-scrollbar-thumb {
+    background-color: rgb(164, 162, 162);
+    border-radius: 10px;
+}
+
+.more-action-form::-webkit-scrollbar {
+    width: 8px;
+}
+
+.more-action-form::-webkit-scrollbar-thumb {
     background-color: rgb(164, 162, 162);
     border-radius: 10px;
 }
@@ -511,4 +766,362 @@
 
 .label-add-product {
     color: #616ce6;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 999;
+    animation: fadeIn 0.3s forwards;
+
+}
+
+@keyframes fadeIn {
+    to {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+}
+
+.header-transaction {
+    height: 85px;
+}
+
+.header-item-time-line {
+    height: 36px;
+    margin-bottom: 5px;
+
+}
+
+.prepare-bill {
+    height: 65px;
+    background-color: #EDEFF2;
+}
+
+.time-line-transaction {
+
+    padding: 0 5px 0 0;
+    border-radius: 5px;
+}
+
+.time-line-transaction:hover {
+    border-radius: 10px;
+    background-color: #DFE2F0;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.transaction-store-update {
+
+    padding: 0 5px;
+    border-radius: 5px;
+}
+
+.transaction-store-update:hover {
+    border-radius: 10px;
+    background-color: #DFE2F0;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.icon-time-line-transaction {
+    transform: translate(0px, -2px);
+    width: 24px;
+    height: 24px;
+    background-image: url(https://misast.mshopkeeper.vn/salecloudg1/img/ic.84a854b4.svg);
+    background-repeat: no-repeat;
+    display: inline-block;
+    background-position-x: -150px;
+    background-position-y: -726px;
+}
+
+.icon-arrow-store-transaction {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    background-image: url(https://misast.mshopkeeper.vn/salecloudg1/img/ic.84a854b4.svg);
+    background-repeat: no-repeat;
+    background-position-x: -222px;
+    background-position-y: -582px;
+}
+
+.date-time-transaction {
+    margin-right: 3px;
+}
+
+.real-time-transaction {
+    margin-left: 3px;
+}
+
+.icon-store-transaction {
+    width: 24px;
+    height: 24px;
+    background-image: url(https://misast.mshopkeeper.vn/salecloudg1/img/ic.84a854b4.svg);
+    background-repeat: no-repeat;
+    display: inline-block;
+    background-position-x: -222px;
+    background-position-y: -510px;
+    margin-right: 3px;
+}
+
+.header-content {
+    height: 36px;
+}
+
+.content-select-customer {
+    border: 1px solid #DFE3E8;
+    border-radius: 10px;
+}
+
+.content-select-customer:hover {
+    cursor: pointer;
+    background-image: linear-gradient(180deg, #fff, #f1f3f8);
+
+}
+
+.icon-guest-content {
+    background-image: url(https://misast.mshopkeeper.vn/salecloudg1/img/ic.84a854b4.svg);
+    background-repeat: no-repeat;
+    background-position-x: -258px;
+    background-position-y: -6px;
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    margin: 0 0 0 5px;
+}
+
+.icon-add-guest-content {
+    background-image: url(https://misast.mshopkeeper.vn/salecloudg1/img/ic.84a854b4.svg);
+    background-repeat: no-repeat;
+    background-position-x: -294px;
+    background-position-y: -42px;
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+
+}
+
+.out-line-icon-add-guest {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+
+
+}
+
+.out-line-icon-add-guest:hover {
+    background-color: #DFE2F0;
+    transition: 0.5s;
+}
+
+.content-delivery {
+    padding: 0 5px;
+    border: 1px solid #DFE3E8;
+    border-radius: 10px;
+    margin: 0 10px;
+}
+
+.content-delivery:hover {
+    cursor: pointer;
+    background-color: #DFE2F0;
+    transition: 0.3s;
+}
+
+.icon-content-delivery {
+    background-image: url(https://misast.mshopkeeper.vn/salecloudg1/img/ic.84a854b4.svg);
+    background-repeat: no-repeat;
+    background-position-x: -222px;
+    background-position-y: -258px;
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+}
+
+.icon-present-content {
+    background-image: url(https://misast.mshopkeeper.vn/salecloudg1/img/ic.84a854b4.svg);
+    background-repeat: no-repeat;
+    background-position-x: -78px;
+    background-position-y: -42px;
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+}
+
+.icon-arrow-content-present {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    background-image: url(https://misast.mshopkeeper.vn/salecloudg1/img/ic.84a854b4.svg);
+    background-repeat: no-repeat;
+    background-position-x: -222px;
+    background-position-y: -582px;
+}
+
+.content-present {
+
+    border: 1px solid #DFE3E8;
+    border-radius: 10px;
+
+
+}
+
+.content-transaction {
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.content-present:hover {
+    cursor: pointer;
+    background-color: #DFE2F0;
+    transition: 0.3s;
+}
+
+.type-input-select-customer {
+    width: 125px;
+    margin: 0 5px;
+    border: none;
+    outline: none;
+}
+
+.type-input-select-customer::placeholder {
+    font-style: italic;
+}
+
+.info-payment-item {
+    margin-top: 10px;
+    margin-right: 10px;
+    height: 35px;
+}
+
+.label-transaction-item {
+    font-size: 15px;
+
+}
+
+.label-sales {
+    color: #616CE6;
+}
+
+.transaction-price-sales {
+    color: #616CE6;
+    font-size: 15px;
+}
+
+.label-all-price {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.transaction-all-price {
+    font-weight: 900;
+    font-size: 20px;
+}
+
+.payment-all-price {
+    font-weight: 900;
+    font-size: 20px;
+}
+
+.transaction-price {
+    font-weight: 900;
+    font-size: 20px;
+
+}
+
+.check-payments {
+    width: 120px;
+
+
+}
+
+.item-input-payments {
+    width: 120px;
+    outline: none;
+    border-bottom: 1px solid grey;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    // -moz-appearance: textfield;
+}
+
+.item-input-payments:focus {
+    border-bottom: 2px solid #616ce6;
+}
+
+
+.item-input-payments::-webkit-inner-spin-button,
+.item-input-payments::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.notice-transaction {
+    margin: 10px 0;
+}
+
+// .Bank-account {}
+
+.item-input-notice {
+    outline: none;
+    border-bottom: 1px solid grey;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    // -moz-appearance: textfield;
+}
+
+.item-input-notice::placeholder {
+    font-style: italic;
+}
+
+.item-input-notice:focus {
+    border-bottom: 2px solid #616ce6;
+}
+
+
+.item-input-notice::-webkit-inner-spin-button,
+.item-input-notice::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.content-transaction::-webkit-scrollbar {
+    width: 5px;
+}
+
+.content-transaction::-webkit-scrollbar-thumb {
+    background-color: rgb(189, 187, 187);
+    border-radius: 10px;
+}
+
+.form-pay {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    // background-color: red;
+    padding: 10px 0;
+
+}
+
+.form-pay::after {
+    background: linear-gradient(-45deg, #edeff2 25px, transparent 0), linear-gradient(45deg, #edeff2 25px, transparent 0);
+    background-repeat: repeat-x;
+    background-size: 10px 40px;
+    content: " ";
+    display: block;
+    position: absolute;
+    bottom: -8px;
+    left: 0px;
+    width: 100%;
+    height: 25px;
+}
+
+.btn-prepare-item {
+    margin: 0 10px;
+}
+
+.test {
+    background-color: red;
 }

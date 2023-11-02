@@ -7,7 +7,7 @@ Mode VBox
     height: 35px;
 }
 
-.txt-label{
+.txt-label {
     margin-right: 4px;
 }
 
@@ -46,7 +46,7 @@ Mode VBox
     display: block;
 }
 
-.warning-valid{
+.warning-valid {
     padding-left: 8px;
 }
 
@@ -91,7 +91,7 @@ Mode VBox
     top: 100%;
     left: 0%;
     background-color: var(--background-color);
-    z-index: 1;
+    z-index: 99;
 }
 
 .box-item {

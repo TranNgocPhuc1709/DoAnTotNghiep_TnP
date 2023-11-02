@@ -1,7 +1,8 @@
 import IBaseControl from "../base_control/IBaseControl";
 import Column from "./qlch_column/Column";
 
-export default interface IGrid extends IBaseControl{
+export default interface IGrid extends IBaseControl {
+    [x: string]: any;
     /**
      * Danh sách cột trên Grid
      */
@@ -17,5 +18,6 @@ export default interface IGrid extends IBaseControl{
      */
     primaryKey?: string;
 
-
+    // Ẩn Footer
+    isShowFooter?: boolean
 }

@@ -328,7 +328,12 @@ export default {
             // require: true
         }));
         return {
-            cbbCostBill, cbbMonth, cbbChart, cbbChartDate, cbbRevenue, cbbAllChart
+            cbbCostBill,
+            cbbMonth,
+            cbbChart,
+            cbbChartDate,
+            cbbRevenue,
+            cbbAllChart
         }
     },
     created() {
