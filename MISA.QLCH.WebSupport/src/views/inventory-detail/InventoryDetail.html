@@ -1,8 +1,8 @@
-<base-dictionary-detail-view :idRoot="idRoot" :propView="propView" :styleFrom="`min-width: 500px;`"
+<base-dictionary-detail-view :idRoot="idRoot" :propView="propView" :styleFrom="`width: 1000px;`"
   @toolbarClick="onSelectAction" @closeFormClick="onCloseForm">
   <template v-slot:content-detail>
-    <div class="d-flex">
-      <div class="form-inventory-detail-left">
+    <div class="content-form-inventory d-flex">
+      <div class="form-inventory-detail-left flex-1">
         <span class="heading-inventory-info">THÔNG TIN CHUNG</span>
 
         <div class="qlch-input-default item-detail">
@@ -13,10 +13,6 @@
           <e-combobox :control="bindingControl[`txtColumn3`]"
             v-model="masterData[bindingControl[`txtColumn3`].bindingIndex]"></e-combobox>
         </div>
-        <!-- <div class="qlch-input-default item-detail">
-          <e-text-box :control="bindingControl[`txtColumn5`]"
-            v-model="masterData[bindingControl[`txtColumn5`].bindingIndex]"></e-text-box>
-        </div> -->
       </div>
       <div class="form-inventory-detail-right">
         <span class="heading-inventory-info">CHỨNG TỪ</span>
@@ -32,6 +28,25 @@
 
 
       </div>
+    </div>
+    <div class="grid-footer">
+      <span class="heading-inventory-info">Chi tiết</span>
+      <e-grid :control="tblInventory" @loadData="onLoadData" />
+    </div>
+    <div class="synthetic-footer d-flex-vcenter">
+      <div class="main-synthetic d-flex-vcenter flex-1">
+        <e-number :control="bindingControl[`txtColumn6`]"
+          v-model="masterData[bindingControl[`txtColumn6`].bindingIndex]"></e-number>
+      </div>
+      <div class="main-synthetic d-flex-vcenter flex-1">
+        <e-number :control="bindingControl[`txtColumn7`]"
+          v-model="masterData[bindingControl[`txtColumn7`].bindingIndex]"></e-number>
+      </div>
+      <div class="main-synthetic d-flex-vcenter flex-1">
+        <e-number :control="bindingControl[`txtColumn8`]"
+          v-model="masterData[bindingControl[`txtColumn8`].bindingIndex]"></e-number>
+      </div>
+
     </div>
 
   </template>

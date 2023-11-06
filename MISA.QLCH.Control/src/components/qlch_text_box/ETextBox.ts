@@ -8,8 +8,9 @@ export default class ETextBox {
      * Thuộc tính render ra type của thẻ input
      * Phải sử dụng thuộc tính riêng bởi vì xử lý trò ẩn hiện con mắt trong TH input type password
      */
-    inputType: "text" | "password" = "text";
+    inputType: "text" | "password" | "number" = "text";
 
+    classType?: "primary" | "secondary" = "primary";
 
     /**
      * Class icon con mắt đóng mở trong TH show, hide password

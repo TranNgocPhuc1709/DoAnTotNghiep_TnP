@@ -532,8 +532,7 @@
 }
 
 .input-search {
-    margin: 0 35px 0 5px;
-
+    margin: 0 5px;
 }
 
 .type-input-search {
@@ -541,11 +540,6 @@
     border: none;
     padding: 5px 0 0 10px;
 
-}
-
-.type-input-search::placeholder {
-    font-style: italic;
-    color: #B4BDC5;
 }
 
 
@@ -959,7 +953,7 @@
 }
 
 .content-present {
-
+    margin-left: -5px;
     border: 1px solid #DFE3E8;
     border-radius: 10px;
 

@@ -18,6 +18,12 @@ export default interface IGrid extends IBaseControl {
      */
     primaryKey?: string;
 
+    // // Ẩn Footer
+    // isShowFooter?: boolean;
+
     // Ẩn Footer
-    isShowFooter?: boolean
+    isNotShowFooter?: boolean;
+
+    //Ẩn Checkbox Grid
+    isNotShowCheckbox?: boolean;
 }

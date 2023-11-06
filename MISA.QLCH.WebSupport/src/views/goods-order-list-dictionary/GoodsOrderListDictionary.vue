@@ -154,6 +154,46 @@ export default {
 
         },
         {
+          Column1: "31/10/2023",
+          Column2: "KHOT-PDH-0123",
+          Column3: "TnP",
+          Column4: "Nhà cung cấp MiSA",
+          Column5: "150000",
+          Column6: "Đã thực hiện",
+          Column7: "Đặt hàng nhà cung cấp"
+
+        },
+        {
+          Column1: "31/10/2023",
+          Column2: "KHOT-PDH-0123",
+          Column3: "TnP",
+          Column4: "Nhà cung cấp MiSA",
+          Column5: "150000",
+          Column6: "Đã thực hiện",
+          Column7: "Đặt hàng nhà cung cấp"
+
+        },
+        {
+          Column1: "31/10/2023",
+          Column2: "KHOT-PDH-0123",
+          Column3: "TnP",
+          Column4: "Nhà cung cấp MiSA",
+          Column5: "150000",
+          Column6: "Đã thực hiện",
+          Column7: "Đặt hàng nhà cung cấp"
+
+        },
+        {
+          Column1: "31/10/2023",
+          Column2: "KHOT-PDH-0123",
+          Column3: "TnP",
+          Column4: "Nhà cung cấp MiSA",
+          Column5: "150000",
+          Column6: "Đã thực hiện",
+          Column7: "Đặt hàng nhà cung cấp"
+
+        },
+        {
           Column1: "20/10/2023",
           Column2: "KHOT-PDH-0156",
           Column3: "TnP",
@@ -163,6 +203,7 @@ export default {
           Column7: "Đặt hàng nhà cung cấp"
 
         },
+
 
       ];
     },

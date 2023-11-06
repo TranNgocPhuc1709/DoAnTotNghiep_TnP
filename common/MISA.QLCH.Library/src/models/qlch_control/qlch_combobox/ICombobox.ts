@@ -7,4 +7,5 @@ export default interface ICombobox extends IBaseDropDownInput {
      */
     selectOnly?: boolean;
     labelWidth?: number;
+    classType?: "primary" | "secondary";
 }

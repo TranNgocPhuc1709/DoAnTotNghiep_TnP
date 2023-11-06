@@ -14,6 +14,7 @@ import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
 import Log from '@library-src/utilities/Log';
 import EDate from "qlch_control/EDate";
 import EButton from "qlch_control/EButton";
+import ToolBarItemsView from '@library-src/models/qlch_base/tool_bar_items_view/ToolBarItemsView';
 export default {
 
   extends: BaseDictionaryListController,
@@ -27,6 +28,25 @@ export default {
   setup() {
     const thisData: Ref<OrderListDictionary> = ref(new OrderListDictionary());
     const cbbOrder: Ref<Combobox> = ref(new Combobox({
+      require: true,
+      data: [
+        {
+          value: 1,
+          display: "Khác"
+        },
+        {
+          value: 2,
+          display: "Hôm nay"
+        },
+        {
+          value: 3,
+          display: "Tuần trước"
+        },
+
+      ]
+      // require: true
+    }));
+    const cbbDateOrder: Ref<Combobox> = ref(new Combobox({
       require: true,
       data: [
         {
@@ -78,7 +98,8 @@ export default {
       dtEndRequire,
       btnGetData,
       btnExportData,
-      btnPrintData
+      btnPrintData,
+      cbbDateOrder
 
     };
   },
@@ -86,6 +107,7 @@ export default {
     try {
       const me = this;
       me.cbbOrder.value = 1;
+      me.cbbDateOrder.value = 1;
 
     } catch (error) {
       Log.ErrorLog(error as Error);
@@ -179,6 +201,13 @@ export default {
           width: 160
         })
       )
+    },
+    // Hide-ToolBar-Footer
+
+    buildToolBarItems(): Array<ToolBarItemsView> {
+
+      return [];
+
     },
 
     /**

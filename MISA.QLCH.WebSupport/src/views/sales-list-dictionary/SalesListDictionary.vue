@@ -178,9 +178,7 @@ export default {
     },
     buildToolBarItems(): Array<ToolBarItemsView> {
 
-
-
-      return []
+      return [];
 
     },
   }

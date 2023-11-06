@@ -18,13 +18,20 @@ export default class TextBox extends BaseInput {
             if (textBox?.labelWidth) {
                 me.labelWidth = textBox.labelWidth
             };
+            if (textBox?.classType) {
+                me.classType = textBox.classType
+            };
         }
     }
 
     /**
      * Type Input String hoặc dạng password
      */
-    type: "text" | "password" = "text";
+    type: "text" | "password" | "number" = "text";
+
+    // định dạng ô input
+
+    classType?: "primary" | "secondary" = "primary";
 
     /**
      * Giá trị trước đó của control

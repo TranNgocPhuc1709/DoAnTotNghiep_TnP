@@ -14,6 +14,7 @@ import ECombobox from "qlch_control/ECombobox";
 import EDate from "qlch_control/EDate";
 import Log from '@library-src/utilities/Log';
 import EButton from "qlch_control/EButton";
+import ToolBarItemsView from '@library-src/models/qlch_base/tool_bar_items_view/ToolBarItemsView';
 
 export default {
 
@@ -234,7 +235,13 @@ export default {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
       return "Column1";
     },
+    // Hide-ToolBar-Footer
 
+    buildToolBarItems(): Array<ToolBarItemsView> {
+
+      return [];
+
+    },
     /**
      * Khai báo import component detail
      * Override lại function after close form

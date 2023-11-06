@@ -10,12 +10,15 @@ import Checkbox from '@library-src/models/qlch_control/qlch_checkbox/Checkbox';
 import ECheckbox from "qlch_control/ECheckbox";
 import Button from '@library-src/models/qlch_control/qlch_button/Button';
 import EButton from "qlch_control/EButton";
+// import TextBox from '@library-src/models/qlch_control/qlch_text_box/TextBox';
+import ETextBox from "qlch_control/ETextBox";
 
 export default {
     components: {
         ECombobox,
         ECheckbox,
-        EButton
+        EButton,
+        ETextBox
     },
     data() {
         return {
@@ -61,6 +64,23 @@ export default {
             ]
             // require: true
         }));
+        const cbbSearchProduct: Ref<Combobox> = ref(new Combobox({
+            require: false,
+            boxType: 'vbox',
+            classType: "secondary",
+            placeholder: "Nhập tên hàng hóa, mã hàng hóa",
+            data: [
+                {
+                    value: 1,
+                    display: "SP1"
+                },
+                {
+                    value: 2,
+                    display: "SP2"
+                },
+            ]
+            // require: true
+        }));
         const cbkBill: Ref<Checkbox> = ref(new Checkbox({
             fieldText: "In hóa đơn"
         }));
@@ -86,6 +106,7 @@ export default {
             cbkOrder,
             btnTemporarySave,
             btnCollectMoney,
+            cbbSearchProduct,
             cbbPayments
 
 

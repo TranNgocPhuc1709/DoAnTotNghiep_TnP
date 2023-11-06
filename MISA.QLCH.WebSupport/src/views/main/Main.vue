@@ -113,10 +113,10 @@ export default {
             //     routerLink: "product",
             //     fieldText: "Sản Phẩm"
             // },
-            {
-                routerLink: "/expense",
-                fieldText: "Chi Phí"
-            },
+            // {
+            //     routerLink: "/expense",
+            //     fieldText: "Chi Phí"
+            // },
             {
                 children: new Array(
                     {

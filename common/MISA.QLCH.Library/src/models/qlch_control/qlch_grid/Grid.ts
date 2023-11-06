@@ -15,6 +15,9 @@ export default class Grid extends BaseControl {
             if (grid.isNotShowFooter) {
                 me.isNotShowFooter = true;
             }
+            if (grid.isNotShowCheckbox) {
+                me.isNotShowCheckbox = true;
+            }
             if (grid.columns) {
                 me.columns = grid.columns;
             }
@@ -51,6 +54,8 @@ export default class Grid extends BaseControl {
     // Ẩn Footer
     isNotShowFooter?: boolean = false;
 
+    // Ẩn Checkbox
+    isNotShowCheckbox?: boolean = false;
     /**
      * Tham số paging của grid
      */

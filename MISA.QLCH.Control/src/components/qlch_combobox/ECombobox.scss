@@ -36,13 +36,15 @@ Mode VBox
     background-color: var(--input-bg-color-disable);
 }
 
+.qlch-cbb.warning-valid {
+    border: 1px solid var(--input-border-color-validate);
+}
+
 .lbl-default {
     margin-right: 16px;
 }
 
-.qlch-cbb.warning-valid {
-    border: 1px solid var(--input-border-color-validate);
-}
+
 
 .warning-valid {
     padding-left: 8px;
@@ -123,4 +125,29 @@ Mode VBox
 .box-item-content {
     position: relative;
     z-index: 2;
+}
+
+.secondary {
+    background: repeat-x 0 0;
+    width: 100%;
+    color: var(--input-text-color);
+    padding: 5px 17px 4px 5px;
+    background-color: var(--input-bg-color);
+    border: none;
+    // pointer-events: none;
+}
+
+
+.secondary:focus,
+.secondary.warning-valid:focus {
+    outline: none;
+}
+
+.secondary:disabled {
+    opacity: var(--opacity-read-only);
+    background-color: var(--input-bg-color-disable);
+}
+
+.secondary.warning-valid {
+    border: 1px solid var(--input-border-color-validate);
 }

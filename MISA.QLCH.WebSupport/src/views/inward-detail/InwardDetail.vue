@@ -14,6 +14,12 @@ import ECombobox from "qlch_control/ECombobox";
 import Grid from '@library-src/models/qlch_control/qlch_grid/Grid';
 import EGrid from "qlch_control/EGrid";
 import Column from '@library-src/models/qlch_control/qlch_grid/qlch_column/Column';
+import NumberModel from '@library-src/models/qlch_control/qlch_number/NumberModel';
+import ENumber from "qlch_control/ENumber";
+import NumberFormat from '@library-src/models/qlch_control/number_format/NumberFormat';
+import Log from '@library-src/utilities/Log';
+import Common from "@library-src/utilities/commons/Function";
+
 
 export default {
 
@@ -24,104 +30,102 @@ export default {
     ETextBox,
     EDate,
     ECombobox,
+    ENumber,
     EGrid
 
   },
 
   setup() {
     const thisData: Ref<InwardDetail> = ref(new InwardDetail());
-    const columnDefault: Array<Column> = Array(
+    const columnInward: Array<Column> = Array(
       new Column({
-        fieldText: "Mã nhân viên",
-        width: 250,
-        dataIndex: "EmployeeCode",
-
+        fieldText: "Mã HH",
+        width: 125,
+        dataIndex: "Code",
         isFilter: true
       }),
       new Column({
-        fieldText: "Sinh nhật",
-        dataIndex: "BirthDay",
+        fieldText: "Tên hàng hóa",
+        dataIndex: "Name",
         isFilter: true,
-        width: 250
+        width: 200
+      }),
+      new Column({
+        fieldText: "Kho",
+        dataIndex: "warehouse",
+        isFilter: true,
+        width: 200
       }),
 
       new Column({
-        fieldText: "Địa chỉ",
-        minWidth: 350,
-        flex: 1,
-        dataIndex: "Address",
+        fieldText: "ĐV Tính",
+        width: 100,
+        dataIndex: "NumberUnit",
         isFilter: true
       }),
 
       new Column({
-        fieldText: "Lương",
-        width: 350,
-        dataIndex: "Amount",
+        fieldText: "Số lượng",
+        width: 100,
+        dataIndex: "NumberOrder",
         isFilter: true
+      }),
+      new Column({
+        fieldText: "Đơn giá",
+        width: 100,
+        dataIndex: "NumberPrice",
+        isFilter: true
+      }),
+      new Column({
+        fieldText: "Thành tiền",
+        width: 250,
+        dataIndex: "IntoMoney",
+        isFilter: true,
+        flex: 1
       }),
 
     );
-    const dataGrid: Array<Record<string, any>> = new Array(
+    const dataGridInward: Array<Record<string, any>> = new Array(
       {
-        "EmployeeCode": "Tran Duc 1",
-        "BirthDay": "29/12/1994",
-        "Address": "SmartCity, Tây Mỗ, Nam Từ Liêm, Hà Nội",
-        "Amount": "2000000"
+        "Code": "SP-001",
+        "Name": "Quần Áo Nam",
+        "warehouse": "Kho 1",
+        "NumberUnit": "Chiếc",
+        "NumberOrder": "100",
+        "NumberPrice": "25000",
+        "IntoMoney": "2500000"
       },
       {
-        "EmployeeCode": "Tran Duc 1",
-        "BirthDay": "29/12/1994",
-        "Address": "SmartCity, Tây Mỗ, Nam Từ Liêm, Hà Nội",
-        "Amount": "2000000"
+        "Code": "SP-001",
+        "Name": "Quần Áo Nam",
+        "warehouse": "Kho 1",
+        "NumberUnit": "Chiếc",
+        "NumberOrder": "100",
+        "NumberPrice": "25000",
+        "IntoMoney": "2500000"
       },
       {
-        "EmployeeCode": "Tran Duc 1",
-        "BirthDay": "29/12/1994",
-        "Address": "SmartCity, Tây Mỗ, Nam Từ Liêm, Hà Nội",
-        "Amount": "2000000"
-      },
-      {
-        "EmployeeCode": "Tran Duc 1",
-        "BirthDay": "29/12/1994",
-        "Address": "SmartCity, Tây Mỗ, Nam Từ Liêm, Hà Nội",
-        "Amount": "2000000"
-      },
-      {
-        "EmployeeCode": "Tran Duc 1",
-        "BirthDay": "29/12/1994",
-        "Address": "SmartCity, Tây Mỗ, Nam Từ Liêm, Hà Nội",
-        "Amount": "2000000"
-      },
-      {
-        "EmployeeCode": "Tran Duc 1",
-        "BirthDay": "29/12/1994",
-        "Address": "SmartCity, Tây Mỗ, Nam Từ Liêm, Hà Nội",
-        "Amount": "2000000"
-      },
-      {
-        "EmployeeCode": "Tran Duc 1",
-        "BirthDay": "29/12/1994",
-        "Address": "SmartCity, Tây Mỗ, Nam Từ Liêm, Hà Nội",
-        "Amount": "2000000"
-      },
-      {
-        "EmployeeCode": "Tran Duc 1",
-        "BirthDay": "29/12/1994",
-        "Address": "SmartCity, Tây Mỗ, Nam Từ Liêm, Hà Nội",
-        "Amount": "2000000"
+        "Code": "SP-001",
+        "Name": "Quần Áo Nam",
+        "warehouse": "Kho 1",
+        "NumberUnit": "Chiếc",
+        "NumberOrder": "100",
+        "NumberPrice": "25000",
+        "IntoMoney": "2500000"
       },
     )
-
-    const tblDefault: Ref<Grid> = ref(new Grid({
-      columns: columnDefault,
-      data: dataGrid,
+    const tblInward: Ref<Grid> = ref(new Grid({
+      columns: columnInward,
+      data: dataGridInward,
       isNotShowFooter: true,
+      isNotShowCheckbox: true,
       primaryKey: "EmployeeCode"
     }));
+
     return {
-      tblDefault
-    }
-    return { thisData };
+      thisData,
+      tblInward
+    };
   },
 
   methods: {
@@ -179,6 +183,7 @@ export default {
           fieldText: "Tổng tiền",
           require: false,
           maxLength: 255,
+          readOnly: true,
           labelWidth: labelWidth,
           bindingIndex: "Column4"
         }),
@@ -201,10 +206,34 @@ export default {
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-
           bindingIndex: "Column7"
-        })
+        }),
+        "txtColumn8": new NumberModel({
+          fieldText: "Số lượng",
+          readOnly: true,
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          format: new NumberFormat({
+            decimal: ".",
+            thousands: ",",
+            precision: 0
+          }),
+          bindingIndex: "Column8"
+        }),
       }
+    },
+    async onLoadData(parameter: any) {
+      const me = this;
+      me.tblInward.isLoadingData = true;
+      me.tblInward.data = new Array(
+
+        // Khai báo dữ liệu biding
+      );
+      await Common.getTimeOut(3000, "");
+      me.tblInward.isLoadingData = false;
+      Log.InfoLog(parameter);
+
     },
 
     /**

@@ -14,6 +14,7 @@ import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
 import EDate from "qlch_control/EDate";
 import Button from '@library-src/models/qlch_control/qlch_button/Button';
 import EButton from "qlch_control/EButton";
+import ToolBarItemsView from '@library-src/models/qlch_base/tool_bar_items_view/ToolBarItemsView';
 
 export default {
 
@@ -204,6 +205,14 @@ export default {
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
       return "Column1";
+    },
+
+    // Hide-ToolBar-Footer
+
+    buildToolBarItems(): Array<ToolBarItemsView> {
+
+      return [];
+
     },
 
     /**

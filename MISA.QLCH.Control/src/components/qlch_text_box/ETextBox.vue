@@ -36,9 +36,7 @@ export default {
             if (!me.control) {
                 return;
             }
-
             me.thisData.inputType = me.control.type;
-
             me.setStatusControlByModel(me.control, me.modelValue);
         } catch (error) {
             Log.ErrorLog(error as Error);

@@ -6,7 +6,8 @@
             @mouseup="onMouseUpInGrid" v-mouse-up-out="onMouseUpOutGrid">
             <thead class="pss-sticky-top">
                 <tr class="d-flex">
-                    <th class="head-checkbox pss-sticky-left">
+                    <!-- //Tnp 3/11/checkbox-->
+                    <th class="head-checkbox pss-sticky-left" v-if="!control.isNotShowCheckbox">
                         <div class="width-fill height-fill">
                             <e-checkbox class="d-flex-center " :control="cbkCheckAll"
                                 @update:modelValue="onChangeSelectAllItem" v-model="thisData.isCheckAll"></e-checkbox>
@@ -67,7 +68,7 @@
             </tbody>
             <tbody v-else-if="control.data && control.data.length > 0">
                 <tr class="d-flex pss-rel" v-for="item in control.data" :key="item[control.primaryKey]">
-                    <td class="head-checkbox pss-sticky-left d-flex-center">
+                    <td class="head-checkbox pss-sticky-left d-flex-center" v-if="!control.isNotShowCheckbox">
                         <div class="">
                             <e-checkbox :control="cbkCheckItem" @update:modelValue="onChangeSelectItem($event, item)"
                                 v-model="item[`checked`]"></e-checkbox>

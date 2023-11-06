@@ -161,8 +161,9 @@
                             </div>
                             <span class="line-vertical"></span>
                             <div class="input-search flex-1">
-                                <input class="width-fill type-input-search" type="text"
-                                    placeholder="Nhập tên hàng hóa, mã hàng hóa,...">
+                                <!-- <input class="width-fill type-input-search" type="text"
+                                    placeholder="Nhập tên hàng hóa, mã hàng hóa,..."> -->
+                                <e-combobox :control="cbbSearchProduct" v-model="cbbSearchProduct.value" />
                             </div>
                             <span class="line-vertical"></span>
                             <div class="quanty-search d-flex-vcenter">

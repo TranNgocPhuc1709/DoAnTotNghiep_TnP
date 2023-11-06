@@ -15,6 +15,11 @@ import NumberFormat from '@library-src/models/qlch_control/number_format/NumberF
 import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
 import Checkbox from '@library-src/models/qlch_control/qlch_checkbox/Checkbox';
 import ECheckbox from "qlch_control/ECheckbox";
+import Grid from '@library-src/models/qlch_control/qlch_grid/Grid';
+import EGrid from "qlch_control/EGrid";
+import Column from '@library-src/models/qlch_control/qlch_grid/qlch_column/Column';
+import Log from '@library-src/utilities/Log';
+import Common from "@library-src/utilities/commons/Function";
 
 export default {
 
@@ -25,12 +30,58 @@ export default {
     ETextBox,
     EDate,
     ECombobox,
+    EGrid,
     ECheckbox
   },
 
   setup() {
     const thisData: Ref<CashPaymentDetail> = ref(new CashPaymentDetail());
-    return { thisData };
+    const columnCashPayment: Array<Column> = Array(
+      new Column({
+        fieldText: "Diễn giải",
+        width: 125,
+        dataIndex: "info",
+        flex: 1,
+        isFilter: true
+      }),
+      new Column({
+        fieldText: "Số tiền",
+        dataIndex: "NumberMoney",
+        isFilter: true,
+        width: 200
+      })
+
+
+    );
+    const dataGridCashPayment: Array<Record<string, any>> = new Array(
+      {
+        "info": "Chi tiền cho khách hàng",
+        "NumberMoney": "100000",
+      },
+      {
+        "info": "Chi tiền cho khách hàng",
+        "NumberMoney": "100000",
+      },
+      {
+        "info": "Chi tiền cho khách hàng",
+        "NumberMoney": "100000",
+      },
+
+
+
+    )
+    const tblCashPayment: Ref<Grid> = ref(new Grid({
+      columns: columnCashPayment,
+      data: dataGridCashPayment,
+      isNotShowFooter: true,
+      isNotShowCheckbox: true,
+      primaryKey: "EmployeeCode"
+
+    }));
+    return {
+      thisData,
+      tblCashPayment
+    };
   },
 
   methods: {
@@ -146,7 +197,18 @@ export default {
 
       }
     },
+    async onLoadData(parameter: any) {
+      const me = this;
+      me.tblCashPayment.isLoadingData = true;
+      me.tblCashPayment.data = new Array(
 
+        // Khai báo dữ liệu biding
+      );
+      await Common.getTimeOut(3000, "");
+      me.tblCashPayment.isLoadingData = false;
+      Log.InfoLog(parameter);
+
+    },
     /**
     * Sau khi đóng form xong thì xử lý thêm gì ở master thì Override function này ở master
     */

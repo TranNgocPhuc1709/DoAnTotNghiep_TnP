@@ -15,10 +15,39 @@
   margin: 15px 15px;
 }
 
+// .content-form-inventory {
+//   overflow-y: scroll;
+//   height: 170px;
+// }
+
 .heading-inventory-info {
   font-size: 15px;
   font-weight: 600;
   color: #757575;
   display: block;
   padding: 0 0 10px 0;
+}
+
+
+.grid-footer {
+  height: 160px;
+
+}
+
+.synthetic-footer {
+  margin: 50px 0 0px 0;
+  background-color: #EFF0F3;
+}
+
+.main-synthetic {
+  height: 30px;
+  padding: 10px 0;
+  margin-right: 50px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.main-synthetic span {
+  font-size: 14px;
+  font-weight: 600;
 }

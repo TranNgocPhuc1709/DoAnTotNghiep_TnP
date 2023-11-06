@@ -1,10 +1,10 @@
 <base-dictionary-detail-view :idRoot="idRoot" :propView="propView" :styleFrom="`min-width: 500px;`"
   @toolbarClick="onSelectAction" @closeFormClick="onCloseForm">
   <template v-slot:content-detail>
-    <div class="d-flex">
-      <div class="form-goodsorder-detail-left">
+    <div class="info-form-goodsorder d-flex">
+      <div class="form-goodsorder-detail-left flex-1">
         <span class="heading-goodsorder-info">THÔNG TIN CHUNG</span>
-        <div class="qlch-input-default item-detail">
+        <div class="qlch-input-default item-detail d-flex">
           <e-combobox :control="bindingControl[`txtColumn4`]"
             v-model="masterData[bindingControl[`txtColumn4`].bindingIndex]"></e-combobox>
         </div>
@@ -43,6 +43,17 @@
     </div>
     <div class="grid-footer">
       <span class="heading-goodsorder-info">Chi tiết</span>
+      <e-grid :control="tblGoodOrder" @loadData="onLoadData" />
+    </div>
+    <div class="synthetic-footer d-flex-vcenter">
+      <div class="main-synthetic d-flex-vcenter">
+        <e-number :control="bindingControl[`txtColumn10`]"
+          v-model="masterData[bindingControl[`txtColumn10`].bindingIndex]"></e-number>
+      </div>
+      <div class="main-synthetic d-flex-vcenter">
+        <e-number :control="bindingControl[`txtColumn5`]"
+          v-model="masterData[bindingControl[`txtColumn5`].bindingIndex]"></e-number>
+      </div>
 
     </div>
 

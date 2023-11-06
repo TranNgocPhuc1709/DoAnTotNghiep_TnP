@@ -1,6 +1,9 @@
 <div class="content-data-order d-flex-vcenter">
   <div class="content-left flex-1 d-flex-vcenter ">
     <div class="ccb-item-data-order">
+      <e-combobox :control="cbbDateOrder" v-model="cbbDateOrder.value" />
+    </div>
+    <div class="ccb-item-data-order">
       <e-combobox :control="cbbOrder" v-model="cbbOrder.value" />
     </div>
     <div class="item-data-order">

@@ -1,8 +1,8 @@
-<base-dictionary-detail-view :idRoot="idRoot" :propView="propView" :styleFrom="`min-width: 600px;`"
+<base-dictionary-detail-view :idRoot="idRoot" :propView="propView" :styleFrom="`width: 1000px;`"
   @toolbarClick="onSelectAction" @closeFormClick="onCloseForm">
   <template v-slot:content-detail>
-    <div class="d-flex">
-      <div class="form-import-detail-left">
+    <div class="content-form-import d-flex">
+      <div class="form-import-detail-left flex-1">
         <span class="heading-import-info">THÔNG TIN CHUNG</span>
         <div class="qlch-input-default item-detail">
           <e-combobox :control="bindingControl[`txtColumn3`]"
@@ -45,34 +45,19 @@
     </div>
     <div class="grid-footer">
       <span class="heading-import-info">Chi tiết</span>
+      <e-grid :control="tblImport" @loadData="onLoadData" />
+    </div>
+    <div class="synthetic-footer d-flex-vcenter">
+      <div class="main-synthetic d-flex-vcenter">
+        <e-number :control="bindingControl[`txtColumn10`]"
+          v-model="masterData[bindingControl[`txtColumn10`].bindingIndex]"></e-number>
+      </div>
+      <div class="main-synthetic d-flex-vcenter">
+        <e-number :control="bindingControl[`txtColumn4`]"
+          v-model="masterData[bindingControl[`txtColumn4`].bindingIndex]"></e-number>
+      </div>
 
     </div>
-    <!-- <div class="qlch-input-default item-detail">
-      <i>(*) Dev: Khai báo control form tại đây:</i>
-    </div>
-    <div class="qlch-input-default item-detail">
-      <e-text-box :control="bindingControl[`txtColumn1`]"
-        v-model="masterData[bindingControl[`txtColumn1`].bindingIndex]"></e-text-box>
-    </div>
-    <div class="qlch-input-default item-detail">
-      <e-text-box :control="bindingControl[`txtColumn2`]"
-        v-model="masterData[bindingControl[`txtColumn2`].bindingIndex]"></e-text-box>
-    </div>
-    <div class="qlch-input-default item-detail">
-      <e-text-box :control="bindingControl[`txtColumn3`]"
-        v-model="masterData[bindingControl[`txtColumn3`].bindingIndex]"></e-text-box>
-    </div>
-    <div class="qlch-input-default item-detail">
-      <e-text-box :control="bindingControl[`txtColumn4`]"
-        v-model="masterData[bindingControl[`txtColumn4`].bindingIndex]"></e-text-box>
-    </div>
-    <div class="qlch-input-default item-detail">
-      <e-text-box :control="bindingControl[`txtColumn5`]"
-        v-model="masterData[bindingControl[`txtColumn5`].bindingIndex]"></e-text-box>
-    </div>
-    <div class="qlch-input-default item-detail">
-      <e-text-box :control="bindingControl[`txtColumn6`]"
-        v-model="masterData[bindingControl[`txtColumn6`].bindingIndex]"></e-text-box>
-    </div> -->
+
   </template>
 </base-dictionary-detail-view>

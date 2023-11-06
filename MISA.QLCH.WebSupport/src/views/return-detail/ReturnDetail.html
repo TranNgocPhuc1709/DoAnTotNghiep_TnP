@@ -1,8 +1,8 @@
-<base-dictionary-detail-view :idRoot="idRoot" :propView="propView" :styleFrom="`min-width: 600px;`"
+<base-dictionary-detail-view :idRoot="idRoot" :propView="propView" :styleFrom="`width: 1000px;`"
   @toolbarClick="onSelectAction" @closeFormClick="onCloseForm">
   <template v-slot:content-detail>
-    <div class="d-flex">
-      <div class="form-return-detail-left">
+    <div class="content-form-return d-flex">
+      <div class="form-return-detail-left flex-1">
         <span class="heading-return-info">THÔNG TIN CHUNG</span>
         <div class="qlch-input-default item-detail">
           <e-combobox :control="bindingControl[`txtColumn3`]"
@@ -41,6 +41,17 @@
     </div>
     <div class="grid-footer">
       <span class="heading-return-info">Chi tiết</span>
+      <e-grid :control="tblReturn" @loadData="onLoadData" />
+    </div>
+    <div class="synthetic-footer d-flex-vcenter">
+      <div class="main-synthetic d-flex-vcenter">
+        <e-number :control="bindingControl[`txtColumn9`]"
+          v-model="masterData[bindingControl[`txtColumn9`].bindingIndex]"></e-number>
+      </div>
+      <div class="main-synthetic d-flex-vcenter">
+        <e-number :control="bindingControl[`txtColumn4`]"
+          v-model="masterData[bindingControl[`txtColumn4`].bindingIndex]"></e-number>
+      </div>
 
     </div>
   </template>

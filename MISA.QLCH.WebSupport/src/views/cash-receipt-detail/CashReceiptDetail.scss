@@ -19,9 +19,13 @@
 }
 
 .form-cashReceipt-detail-left,
-.form-cashReceipt-detail-right,
-.grid-footer {
+.form-cashReceipt-detail-right {
   margin: 15px 15px;
+}
+
+.grid-footer {
+  height: 110px;
+  margin-bottom: 50px;
 }
 
 .item-checkbox-detail {
@@ -30,7 +34,7 @@
 }
 
 .form-cash-receipt {
-  height: 380px;
+  height: 260px;
   overflow: scroll;
   overflow-x: hidden;
 }

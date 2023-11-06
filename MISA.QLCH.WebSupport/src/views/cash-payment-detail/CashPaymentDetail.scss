@@ -19,9 +19,13 @@
 }
 
 .form-cashPayment-detail-left,
-.form-cashPayment-detail-right,
-.grid-footer {
+.form-cashPayment-detail-right {
   margin: 15px 15px;
+}
+
+.grid-footer {
+  height: 145px;
+  margin: 0 0 40px 0;
 }
 
 .item-checkbox-detail {
@@ -29,8 +33,16 @@
   margin-top: 20px;
 }
 
+.heading-cashReceipt-info {
+  font-size: 15px;
+  font-weight: 600;
+  color: #757575;
+  display: block;
+  padding: 0 0 10px 0;
+}
+
 .form-cash-payment {
-  height: 380px;
+  height: 220px;
   overflow: scroll;
   overflow-x: hidden;
 }

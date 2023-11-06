@@ -1,8 +1,8 @@
-<base-dictionary-detail-view :idRoot="idRoot" :propView="propView" :styleFrom="`min-width: 500px;`"
+<base-dictionary-detail-view :idRoot="idRoot" :propView="propView" :styleFrom="`width: 1000px;`"
   @toolbarClick="onSelectAction" @closeFormClick="onCloseForm">
   <template v-slot:content-detail>
-    <div class="d-flex">
-      <div class="form-outward-detail-left">
+    <div class="content-form-outward d-flex">
+      <div class="form-outward-detail-left flex-1">
         <span class="heading-outward-info">THÔNG TIN CHUNG</span>
         <div class="qlch-input-default item-detail">
           <e-combobox :control="bindingControl[`txtColumn3`]"
@@ -20,11 +20,6 @@
           <e-text-box :control="bindingControl[`txtColumn5`]"
             v-model="masterData[bindingControl[`txtColumn5`].bindingIndex]"></e-text-box>
         </div>
-        <!-- <div class="qlch-input-default item-detail">
-          <e-text-box :control="bindingControl[`txtColumn4`]"
-            v-model="masterData[bindingControl[`txtColumn4`].bindingIndex]"></e-text-box>
-        </div> -->
-
       </div>
       <div class="form-outward-detail-right">
         <span class="heading-outward-info">CHỨNG TỪ</span>
@@ -39,8 +34,23 @@
 
       </div>
     </div>
-    <div class="footer-form-inward-detail">
+    <!-- <div class="footer-form-inward-detail">
       <span class="heading-outward-info">CHI TIẾT</span>
+    </div> -->
+    <div class="grid-footer">
+      <span class="heading-outward-info">Chi tiết</span>
+      <e-grid :control="tblOutward" @loadData="onLoadData" />
+    </div>
+    <div class="synthetic-footer d-flex-vcenter">
+      <div class="main-synthetic d-flex-vcenter">
+        <e-number :control="bindingControl[`txtColumn8`]"
+          v-model="masterData[bindingControl[`txtColumn8`].bindingIndex]"></e-number>
+      </div>
+      <div class="main-synthetic d-flex-vcenter">
+        <e-number :control="bindingControl[`txtColumn4`]"
+          v-model="masterData[bindingControl[`txtColumn4`].bindingIndex]"></e-number>
+      </div>
+
     </div>
   </template>
 </base-dictionary-detail-view>

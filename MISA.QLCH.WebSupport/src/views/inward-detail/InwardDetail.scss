@@ -19,14 +19,33 @@
 }
 
 .form-inward-detail-left,
-.form-inward-detail-right,
-.footer-form-inward-detail {
+.form-inward-detail-right {
   margin: 15px 15px;
 }
 
-.footer-form-inward-detail {
-  height: 150px;
-  width: 100%;
-  margin: 25px 15px;
+.content-form-inward {
+  overflow-y: scroll;
+  height: 170px;
+}
 
+.grid-footer {
+  height: 160px;
+  margin-top: 10px;
+}
+
+.synthetic-footer {
+  margin: 50px 0 0px 0;
+  background-color: #EFF0F3;
+}
+
+.main-synthetic {
+  height: 35px;
+  margin-right: 100px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.main-synthetic span {
+  font-size: 14px;
+  font-weight: 600;
 }

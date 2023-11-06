@@ -14,9 +14,9 @@
         <!--Input-->
         <input v-if="!control.selectOnly" type="text" class="qlch-cbb flex-1" :id="control.id"
             :disabled="control.readOnly" :value="thisData.displayValue" :placeholder="control.placeholder"
-            :class="[{'warning-valid': !control.isValidateSuccess && control.isActive}]" :maxlength="control.maxlength"
-            @blur.stop="onBlur" @input.stop="onInput" @focus.stop="onFocus" @mouseover.stop="onHover"
-            @keydown.stop="onKeyDown" autocomplete="off">
+            :class="[control.classType,{'warning-valid': !control.isValidateSuccess && control.isActive}]"
+            :maxlength="control.maxlength" @blur.stop="onBlur" @input.stop="onInput" @focus.stop="onFocus"
+            @mouseover.stop="onHover" @keydown.stop="onKeyDown" autocomplete="off">
 
         <div v-else class="flex-1 qlch-cbb cursor-pointer prevent-select" @click="onItemArrowClick" :id="control.id">
             <span class="d-flex-vcenter height-fill">
