@@ -10,7 +10,7 @@ export default class ETextBox {
      */
     inputType: "text" | "password" | "number" = "text";
 
-    classType?: "primary" | "secondary" = "primary";
+    classType?: "primary" | "secondary" | "tertiary" = "primary";
 
     /**
      * Class icon con mắt đóng mở trong TH show, hide password

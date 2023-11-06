@@ -14,7 +14,7 @@ export default {
          */
         const txtDefault: Ref<TextBox> = ref(new TextBox({
             fieldText: "Tên hàng hóa",
-
+            require: false
         }));
 
         const txtReadOnly: Ref<TextBox> = ref(new TextBox({
@@ -24,7 +24,9 @@ export default {
 
         const txtRequire: Ref<TextBox> = ref(new TextBox({
             fieldText: "Tên hàng hóa",
-            require: true
+            require: true,
+
+
         }));
 
         const txtVBoxDefault: Ref<TextBox> = ref(new TextBox({

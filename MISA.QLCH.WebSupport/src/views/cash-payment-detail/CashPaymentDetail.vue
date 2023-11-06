@@ -194,6 +194,14 @@ export default {
           fieldText: "Tính vào doanh thu",
           bindingIndex: "Column11",
         }),
+        "txtColumn12": new TextBox({
+          fieldText: "Tổng tiền",
+          readOnly: true,
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          bindingIndex: "Column12",
+        }),
 
       }
     },

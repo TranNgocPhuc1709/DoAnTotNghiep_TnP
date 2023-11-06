@@ -4,7 +4,7 @@ export default class ECombobox {
      * Create Constructor
      */
     constructor() {
-        
+
     }
 
     /**
@@ -22,6 +22,8 @@ export default class ECombobox {
      */
     indexBoxItemInFocus = -1;
 
-    
+
     isShowBoxItem: boolean = false;
+
+    classType?: "primary" | "secondary" | "tertiary" = "primary";
 }

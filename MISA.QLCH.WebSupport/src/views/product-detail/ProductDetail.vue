@@ -107,7 +107,7 @@ export default {
           ]
         }),
         "txtColumn5": new NumberModel({
-          fieldText: "Giá",
+          fieldText: "Giá mua",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
@@ -117,6 +117,18 @@ export default {
             precision: 3
           }),
           bindingIndex: "Column5"
+        }),
+        "txtColumn12": new NumberModel({
+          fieldText: "Giá bán",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          format: new NumberFormat({
+            decimal: ".",
+            thousands: ",",
+            precision: 3
+          }),
+          bindingIndex: "Column12"
         }),
 
         "txtColumn6": new Checkbox({

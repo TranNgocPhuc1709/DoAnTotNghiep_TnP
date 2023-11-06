@@ -31,7 +31,7 @@ export default class TextBox extends BaseInput {
 
     // định dạng ô input
 
-    classType?: "primary" | "secondary" = "primary";
+    classType?: "primary" | "secondary" | "tertiary" = "primary";
 
     /**
      * Giá trị trước đó của control

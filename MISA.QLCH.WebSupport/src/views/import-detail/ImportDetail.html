@@ -1,62 +1,133 @@
 <base-dictionary-detail-view :idRoot="idRoot" :propView="propView" :styleFrom="`width: 1000px;`"
   @toolbarClick="onSelectAction" @closeFormClick="onCloseForm">
   <template v-slot:content-detail>
-    <div class="content-form-import d-flex">
-      <div class="form-import-detail-left flex-1">
-        <span class="heading-import-info">THÔNG TIN CHUNG</span>
-        <div class="qlch-input-default item-detail">
-          <e-combobox :control="bindingControl[`txtColumn3`]"
-            v-model="masterData[bindingControl[`txtColumn3`].bindingIndex]"></e-combobox>
+    <div class="navbar-import d-flex-vcenter width-fill ">
+      <span class="navbar-item height-fill d-flex-vcenter" :class="{ 'selected': navbar1Selected }"
+        @click="showImport()">Phiếu Nhập</span>
+      <span class="line-navbar height-fill"></span>
+      <span class="navbar-item height-fill d-flex-vcenter" :class="{ 'selected': navbar2Selected }"
+        @click="showExport()">Phiếu Chi</span>
+    </div>
+    <div v-if="disableFormImport">
+      <div class="content-form-import d-flex">
+        <div class="form-import-detail-left flex-1">
+          <span class="heading-import-info">THÔNG TIN CHUNG</span>
+          <div class="qlch-input-default item-detail">
+            <e-combobox :control="bindingControl[`txtColumn3`]"
+              v-model="masterData[bindingControl[`txtColumn3`].bindingIndex]"></e-combobox>
+          </div>
+          <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtColumn7`]"
+              v-model="masterData[bindingControl[`txtColumn7`].bindingIndex]"></e-text-box>
+          </div>
+          <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtColumn9`]"
+              v-model="masterData[bindingControl[`txtColumn9`].bindingIndex]"></e-text-box>
+          </div>
+          <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtColumn6`]"
+              v-model="masterData[bindingControl[`txtColumn6`].bindingIndex]"></e-text-box>
+          </div>
+          <div class="qlch-input-default item-detail">
+            <e-combobox :control="bindingControl[`txtColumn5`]"
+              v-model="masterData[bindingControl[`txtColumn5`].bindingIndex]"></e-combobox>
+          </div>
+          <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtColumn8`]"
+              v-model="masterData[bindingControl[`txtColumn8`].bindingIndex]"></e-text-box>
+          </div>
         </div>
-        <div class="qlch-input-default item-detail">
-          <e-text-box :control="bindingControl[`txtColumn7`]"
-            v-model="masterData[bindingControl[`txtColumn7`].bindingIndex]"></e-text-box>
-        </div>
-        <div class="qlch-input-default item-detail">
-          <e-text-box :control="bindingControl[`txtColumn9`]"
-            v-model="masterData[bindingControl[`txtColumn9`].bindingIndex]"></e-text-box>
-        </div>
-        <div class="qlch-input-default item-detail">
-          <e-text-box :control="bindingControl[`txtColumn6`]"
-            v-model="masterData[bindingControl[`txtColumn6`].bindingIndex]"></e-text-box>
-        </div>
-        <div class="qlch-input-default item-detail">
-          <e-combobox :control="bindingControl[`txtColumn5`]"
-            v-model="masterData[bindingControl[`txtColumn5`].bindingIndex]"></e-combobox>
-        </div>
-        <div class="qlch-input-default item-detail">
-          <e-text-box :control="bindingControl[`txtColumn8`]"
-            v-model="masterData[bindingControl[`txtColumn8`].bindingIndex]"></e-text-box>
+
+        <div class="form-import-detail-right">
+          <span class="heading-import-info">CHỨNG TỪ</span>
+          <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtColumn2`]"
+              v-model="masterData[bindingControl[`txtColumn2`].bindingIndex]"></e-text-box>
+          </div>
+          <div class="qlch-input-default item-detail">
+            <e-date :control="bindingControl[`txtColumn1`]"
+              v-model="masterData[bindingControl[`txtColumn1`].bindingIndex]"></e-date>
+          </div>
+
         </div>
       </div>
-
-      <div class="form-import-detail-right">
-        <span class="heading-import-info">CHỨNG TỪ</span>
-        <div class="qlch-input-default item-detail">
-          <e-text-box :control="bindingControl[`txtColumn2`]"
-            v-model="masterData[bindingControl[`txtColumn2`].bindingIndex]"></e-text-box>
+      <div class="grid-footer">
+        <span class="heading-import-info">Chi tiết</span>
+        <e-grid :control="tblImport" @loadData="onLoadData" />
+      </div>
+      <div class="synthetic-footer d-flex-vcenter">
+        <div class="main-synthetic d-flex-vcenter">
+          <e-number :control="bindingControl[`txtColumn10`]"
+            v-model="masterData[bindingControl[`txtColumn10`].bindingIndex]"></e-number>
         </div>
-        <div class="qlch-input-default item-detail">
-          <e-date :control="bindingControl[`txtColumn1`]"
-            v-model="masterData[bindingControl[`txtColumn1`].bindingIndex]"></e-date>
+        <div class="main-synthetic d-flex-vcenter">
+          <e-number :control="bindingControl[`txtColumn4`]"
+            v-model="masterData[bindingControl[`txtColumn4`].bindingIndex]"></e-number>
+        </div>
+        <div class="main-synthetic d-flex-vcenter">
+          <e-number :control="bindingControl[`txtColumn16`]"
+            v-model="masterData[bindingControl[`txtColumn16`].bindingIndex]"></e-number>
         </div>
 
       </div>
     </div>
-    <div class="grid-footer">
-      <span class="heading-import-info">Chi tiết</span>
-      <e-grid :control="tblImport" @loadData="onLoadData" />
-    </div>
-    <div class="synthetic-footer d-flex-vcenter">
-      <div class="main-synthetic d-flex-vcenter">
-        <e-number :control="bindingControl[`txtColumn10`]"
-          v-model="masterData[bindingControl[`txtColumn10`].bindingIndex]"></e-number>
-      </div>
-      <div class="main-synthetic d-flex-vcenter">
-        <e-number :control="bindingControl[`txtColumn4`]"
-          v-model="masterData[bindingControl[`txtColumn4`].bindingIndex]"></e-number>
-      </div>
+    <div v-if="disableFormPayment">
+      <div class="content-form-import d-flex">
+        <div class="form-import-detail-left flex-1">
+          <span class="heading-import-info">THÔNG TIN CHUNG</span>
+          <div class="qlch-input-default item-detail">
+            <e-combobox :control="bindingControl[`txtColumn3`]"
+              v-model="masterData[bindingControl[`txtColumn3`].bindingIndex]"></e-combobox>
+          </div>
+          <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtColumn7`]"
+              v-model="masterData[bindingControl[`txtColumn7`].bindingIndex]"></e-text-box>
+          </div>
+          <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtColumn11`]"
+              v-model="masterData[bindingControl[`txtColumn11`].bindingIndex]"></e-text-box>
+          </div>
+          <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtColumn12`]"
+              v-model="masterData[bindingControl[`txtColumn12`].bindingIndex]"></e-text-box>
+          </div>
+          <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtColumn13`]"
+              v-model="masterData[bindingControl[`txtColumn13`].bindingIndex]"></e-text-box>
+          </div>
+        </div>
 
+        <div class="form-import-detail-right">
+          <span class="heading-import-info">CHỨNG TỪ</span>
+          <div class="qlch-input-default item-detail">
+            <e-text-box :control="bindingControl[`txtColumn14`]"
+              v-model="masterData[bindingControl[`txtColumn14`].bindingIndex]"></e-text-box>
+          </div>
+          <div class="qlch-input-default item-detail">
+            <e-date :control="bindingControl[`txtColumn15`]"
+              v-model="masterData[bindingControl[`txtColumn15`].bindingIndex]"></e-date>
+          </div>
+
+        </div>
+      </div>
+      <div class="grid-footer">
+        <span class="heading-import-info">Chi tiết</span>
+        <e-grid :control="tblImport" @loadData="onLoadData" />
+      </div>
+      <div class="synthetic-footer d-flex-vcenter">
+        <div class="main-synthetic d-flex-vcenter">
+          <e-number :control="bindingControl[`txtColumn10`]"
+            v-model="masterData[bindingControl[`txtColumn10`].bindingIndex]"></e-number>
+        </div>
+        <div class="main-synthetic d-flex-vcenter">
+          <e-number :control="bindingControl[`txtColumn4`]"
+            v-model="masterData[bindingControl[`txtColumn4`].bindingIndex]"></e-number>
+        </div>
+        <!-- <div class="main-synthetic d-flex-vcenter">
+          <e-number :control="bindingControl[`txtColumn16`]"
+            v-model="masterData[bindingControl[`txtColumn16`].bindingIndex]"></e-number>
+        </div> -->
+      </div>
     </div>
 
   </template>

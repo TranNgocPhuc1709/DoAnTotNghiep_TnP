@@ -57,7 +57,7 @@ export default {
         }),
         new Column({
           fieldText: "Giá bán",
-          dataIndex: "Column5",
+          dataIndex: "Column12",
           minWidth: 180,
           flex: 1
         }),

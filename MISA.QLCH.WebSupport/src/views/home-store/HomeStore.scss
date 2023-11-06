@@ -8,6 +8,18 @@
     box-sizing: border-box;
 }
 
+.number-bills {
+    margin-left: 5px;
+}
+
+.form-bill {
+    overflow-y: hidden;
+    overflow-x: auto;
+    width: 720px;
+
+}
+
+
 .logo-icon-home-store {
     width: 42px;
     height: 42px;
@@ -17,7 +29,7 @@
     background-position-x: -42px;
     background-position-y: -672px;
     background-size: 378px auto;
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 .delete-bill-item {
@@ -33,6 +45,7 @@
 }
 
 .bill-item {
+    min-width: 120px;
     padding: 0 10px;
 }
 
@@ -504,6 +517,10 @@
     margin-right: 10px;
 }
 
+.product-search.active-click {
+    border: 1px solid rgb(235, 140, 140);
+    transition: 0.3s;
+}
 
 .out-line-content {
     padding: 10px;
@@ -545,6 +562,7 @@
 
 .arrow-quanty {
     margin-left: 5px;
+    width: 50px;
 }
 
 
@@ -651,6 +669,15 @@
     border-radius: 10px;
 }
 
+.form-bill::-webkit-scrollbar {
+    height: 3px;
+}
+
+.form-bill::-webkit-scrollbar-thumb {
+    background-color: rgb(164, 162, 162);
+    border-radius: 2px;
+}
+
 .child-item-product {
     width: 100px;
     margin-right: 50px;
@@ -688,7 +715,7 @@
 }
 
 .icon-child-product {
-    margin-right: 10px;
+    margin: 0 15px;
     width: 24px;
     height: 24px;
     background-image: url(https://misast.mshopkeeper.vn/salecloudg1/img/ic.84a854b4.svg);
@@ -697,6 +724,10 @@
     background-position-x: -150px;
     background-position-y: -150px;
     vertical-align: middle;
+}
+
+.icon-child-product:hover {
+    cursor: pointer;
 }
 
 .item-product {
@@ -953,7 +984,7 @@
 }
 
 .content-present {
-    margin-left: -5px;
+
     border: 1px solid #DFE3E8;
     border-radius: 10px;
 
@@ -973,7 +1004,7 @@
 }
 
 .type-input-select-customer {
-    width: 125px;
+    width: 80%;
     margin: 0 5px;
     border: none;
     outline: none;
@@ -1010,22 +1041,23 @@
 
 .transaction-all-price {
     font-weight: 900;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .payment-all-price {
     font-weight: 900;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .transaction-price {
     font-weight: 900;
-    font-size: 20px;
+    font-size: 18px;
 
 }
 
 .check-payments {
     width: 120px;
+    margin-right: 20px;
 
 
 }
@@ -1116,6 +1148,10 @@
     margin: 0 10px;
 }
 
-.test {
-    background-color: red;
+.child-item {
+    margin-right: 15px;
+}
+
+.type-input-payments {
+    width: 125px;
 }

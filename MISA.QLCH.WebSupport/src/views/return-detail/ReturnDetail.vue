@@ -33,6 +33,10 @@ export default {
 
   setup() {
     const thisData: Ref<ReturnDetail> = ref(new ReturnDetail());
+    const disableFormImport: Ref<boolean> = ref(true);
+    const disableFormPayment: Ref<boolean> = ref(false);
+    const navbar1Selected: Ref<boolean> = ref(false);
+    const navbar2Selected: Ref<boolean> = ref(false);
     const columnReturn: Array<Column> = Array(
       new Column({
         fieldText: "Mã HH",
@@ -92,7 +96,7 @@ export default {
         "IntoMoney": "2500000"
       },
       {
-        "Code": "SP-001",
+        "Code": "SP-00123",
         "Name": "Quần Áo Nam",
         "warehouse": "Kho 1",
         "NumberUnit": "Chiếc",
@@ -122,7 +126,11 @@ export default {
     }));
     return {
       thisData,
-      tblReturn
+      tblReturn,
+      disableFormImport,
+      disableFormPayment,
+      navbar1Selected,
+      navbar2Selected
     };
   },
 
@@ -218,6 +226,50 @@ export default {
           }),
           bindingIndex: "Column9"
         }),
+        "txtColumn10": new TextBox({
+          fieldText: "Địa chỉ",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          bindingIndex: "Column10"
+        }),
+        "txtColumn11": new TextBox({
+          fieldText: "Lý do thu",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          bindingIndex: "Column11"
+        }),
+        "txtColumn12": new Combobox({
+          fieldText: "Nhân viên thu",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          bindingIndex: "Column12"
+        }),
+        "txtColumn13": new TextBox({
+          fieldText: "Tên nhân viên",
+          require: false,
+          readOnly: true,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          bindingIndex: "Column13"
+        }),
+        "txtColumn14": new TextBox({
+          fieldText: "Số phiếu thu",
+          require: false,
+          readOnly: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          bindingIndex: "Column14"
+        }),
+        "txtColumn15": new DateModel({
+          fieldText: "Ngày thu",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          bindingIndex: "Column15"
+        }),
       }
     },
     async onLoadData(parameter: any) {
@@ -230,6 +282,28 @@ export default {
       me.tblReturn.isLoadingData = false;
       Log.InfoLog(parameter);
 
+    },
+    showImport() {
+      try {
+        const me = this;
+        me.disableFormImport = true;
+        me.disableFormPayment = false;
+        me.navbar1Selected = true;
+        me.navbar2Selected = false;
+      } catch (error) {
+        Log.ErrorLog(error as Error);
+      }
+    },
+    showExport() {
+      try {
+        const me = this;
+        me.disableFormImport = false;
+        me.disableFormPayment = true;
+        me.navbar1Selected = false;
+        me.navbar2Selected = true;
+      } catch (error) {
+        Log.ErrorLog(error as Error);
+      }
     },
     /**
     * Sau khi đóng form xong thì xử lý thêm gì ở master thì Override function này ở master

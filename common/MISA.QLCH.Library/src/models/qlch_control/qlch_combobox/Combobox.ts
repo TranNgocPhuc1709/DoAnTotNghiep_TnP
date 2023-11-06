@@ -26,8 +26,10 @@ export default class Combobox extends BaseDropDownInput {
     /**
     * Độ rộng của thẻ label
     */
-    classType?: "primary" | "secondary" = "primary";
 
     labelWidth?: number;
 
+    // kiểu input
+
+    classType?: "primary" | "secondary" | "tertiary" = "primary";
 }

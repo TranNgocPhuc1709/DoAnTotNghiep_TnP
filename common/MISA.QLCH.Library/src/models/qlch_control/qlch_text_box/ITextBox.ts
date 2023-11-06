@@ -6,7 +6,7 @@ export default interface ITextBox extends IBaseInput {
      */
     type?: "text" | "password" | "number";
 
-    classType?: "primary" | "secondary";
+    classType?: "primary" | "secondary" | "tertiary";
     /**
      * Giá trị binding model
      */

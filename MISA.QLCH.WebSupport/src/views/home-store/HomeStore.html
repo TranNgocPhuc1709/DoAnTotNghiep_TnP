@@ -2,12 +2,16 @@
     <div class="header-store width-fill d-flex">
         <div class="header-left height-fill d-flex-vcenter flex-1">
             <span class="logo-icon-home-store"></span>
-            <div class="bill-item d-flex-vcenter height-fill">
-                <div class="label-bill-item">
-                    <span>Hóa đơn</span>
-                    <span> 1</span>
+            <div class="d-flex-vcenter height-fill">
+                <div class=" form-bill d-flex-vcenter height-fill">
+                    <div v-for="(bill, index) in bills" :key="index" class="bill-item d-flex-vcenter  height-fill">
+                        <div class="label-bill-item">
+                            <span>Hóa đơn</span>
+                            <span class="number-bills">{{bill}}</span>
+                        </div>
+                        <span class="delete-bill-item" @click="deleteBill(index)"></span>
+                    </div>
                 </div>
-                <span class="delete-bill-item"></span>
             </div>
             <div class="add-bill d-flex-center height-fill" @click="addNewBill()">
                 <span class="add-bill-item"></span>
@@ -20,7 +24,7 @@
                     <e-combobox :control="cbbWareHouse" v-model="cbbWareHouse.value" />
                 </span> -->
                 <span class="label-warehouse">Kho tổng</span>
-                <span class="icon-arrow-warehouse"></span>
+                <!-- <span class="icon-arrow-warehouse"></span> -->
 
                 <!-- <div class="item-warehouse" v-if="displayItemWarehouse">
                 </div> -->
@@ -154,7 +158,8 @@
             <div class="out-line-content">
                 <div class="header-content-store d-flex">
                     <div class="flex-1">
-                        <div class="product-search d-flex-vcenter">
+                        <div class="product-search d-flex-vcenter" @click="handleProductSearchClick"
+                            :class="{ 'active-click': isActive }">
                             <div class="filter-search d-flex-vcenter">
                                 <span>Tìm kiếm</span>
                                 <span class="icon-filter-search"></span>
@@ -174,29 +179,39 @@
                                     <span class="quanty-down"></span>
                                 </div> -->
                                 <div class="arrow-quanty ">
-                                    <input class="type-input-quanty" type="number" placeholder="0">
+                                    <!-- <input class="type-input-quanty" type="number" placeholder="0"> -->
+                                    <e-text-box :control="txtQuanTySearch" v-model="txtQuanTySearch.value" />
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="sales-agent d-flex-vcenter">
                         <span class="icon-sales-agent"></span>
-                        <input class="type-input-sales-agent" type="text" placeholder="NV Bán Hàng">
-                        <span class="arrow-sales-agent"></span>
+                        <e-combobox :control="cbbAgentSales" v-model="cbbAgentSales.value" />
+                        <!-- <span class="arrow-sales-agent"></span> -->
                     </div>
                 </div>
                 <div class="body-content-store">
                     <div class="d-flex-column">
-                        <div class="item-product d-flex">
+                        <div class="item-product d-flex-vcenter">
                             <span class="flex-1">STT</span>
                             <span class="flex-1">SP001</span>
                             <span class="flex-1">Áp Polo Nam</span>
-                            <input class="child-item-product" type="number">
-                            <span class="flex-1">Chiếc</span>
-                            <input class="child-item-product-price" type="number">
-                            <input class="child-item-product-price" type="number">
+                            <span class="flex-1 child-item">
+                                <e-text-box :control="txtPurchased" v-model="txtPurchased.value" />
+                            </span>
+                            <span class="flex-1 child-item">
+                                <e-combobox :control="txtUnit" v-model="txtUnit.value" />
+                            </span>
+                            <span class="flex-1 child-item">
+                                <e-text-box :control="txtPrice" v-model="txtPrice.value" />
+                            </span>
+                            <span class="flex-1">
+                                <e-text-box :control="txtPriceLast" v-model="txtPriceLast.value" />
+                            </span>
                             <span class="icon-child-product"></span>
                         </div>
+
                     </div>
                     <div class="img-show-content d-flex-center height-fill d-flex-column">
                         <div class="label-form-img">
@@ -234,12 +249,15 @@
                         </div>
                     </div>
                     <div class="header-content d-flex">
-                        <div class="content-select-customer d-flex-vcenter">
+                        <div class="content-select-customer d-flex-vcenter flex-1">
                             <span class="icon-guest-content"></span>
-                            <input class="type-input-select-customer" type="text" placeholder="Tên khách hàng...">
-                            <div class="out-line-icon-add-guest d-flex-center">
+                            <!-- <input class="type-input-select-customer" type="text" placeholder="Tên khách hàng..."> -->
+                            <span class="type-input-select-customer">
+                                <e-combobox :control="cbbSelectCustomer" v-model="cbbSelectCustomer.value" />
+                            </span>
+                            <!-- <div class="out-line-icon-add-guest d-flex-center">
                                 <span class="icon-add-guest-content"></span>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="content-delivery d-flex-vcenter">
                             <span class="icon-content-delivery"></span>
@@ -270,7 +288,7 @@
                             <e-combobox :control="cbbCheckPoint" v-model="cbbCheckPoint.value" />
                         </div>
                         <div class="type-input-payments">
-                            <input class="item-input-payments" type="number">
+                            <e-text-box :control="txtPayments" v-model="txtPayments.value" />
                         </div>
                     </div>
                     <div class="notice-transaction">
@@ -285,7 +303,7 @@
                                 <span class="payment-all-price">0.00</span>
                             </div>
                             <div class="type-input-notice">
-                                <input class="item-input-notice width-fill" type="text" placeholder="Ghi chú">
+                                <e-text-box :control="txtNotice" v-model="txtNotice.value" />
                             </div>
                         </div>
                     </div>

@@ -56,6 +56,10 @@
       <span class="heading-cashReceipt-info">Chi tiết</span>
       <e-grid :control="tblCashPayment" @loadData="onLoadData" />
     </div>
+    <div class="synthetic d-flex-vcenter">
+      <e-text-box :control="bindingControl[`txtColumn12`]"
+        v-model="masterData[bindingControl[`txtColumn12`].bindingIndex]"></e-text-box>
+    </div>
 
   </template>
 </base-dictionary-detail-view>

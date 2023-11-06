@@ -35,6 +35,11 @@ export default {
 
   setup() {
     const thisData: Ref<ImportDetail> = ref(new ImportDetail());
+    const disableFormImport: Ref<boolean> = ref(true);
+    const disableFormPayment: Ref<boolean> = ref(false);
+    const navbar1Selected: Ref<boolean> = ref(false);
+    const navbar2Selected: Ref<boolean> = ref(false);
+
     const dataGridImport: Array<Record<string, any>> = new Array(
       {
         "Code": "SP-001",
@@ -55,7 +60,7 @@ export default {
         "IntoMoney": "2500000"
       },
       {
-        "Code": "SP-001",
+        "Code": "SP-0012345",
         "Name": "Quần Áo Nam",
         "warehouse": "Kho 1",
         "NumberUnit": "Chiếc",
@@ -126,7 +131,11 @@ export default {
     }));
     return {
       thisData,
-      tblImport
+      tblImport,
+      disableFormImport,
+      disableFormPayment,
+      navbar1Selected,
+      navbar2Selected
     };
   },
 
@@ -165,6 +174,10 @@ export default {
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
+          data: [{
+            value: 1,
+            display: "NCC0012"
+          }],
           bindingIndex: "Column3"
         }),
         "txtColumn4": new NumberModel({
@@ -230,6 +243,56 @@ export default {
           }),
           bindingIndex: "Column10"
         }),
+
+        "txtColumn11": new TextBox({
+          fieldText: "Người nhận",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          bindingIndex: "Column11"
+        }),
+        "txtColumn12": new TextBox({
+          fieldText: "Địa chỉ",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          bindingIndex: "Column12"
+        }),
+        "txtColumn13": new TextBox({
+          fieldText: "Lý do chi",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          bindingIndex: "Column13"
+        }),
+        "txtColumn14": new TextBox({
+          fieldText: "Số phiếu chi",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          bindingIndex: "Column14"
+        }),
+        "txtColumn15": new DateModel({
+          fieldText: "Ngày chi",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          bindingIndex: "Column15"
+        }),
+        "txtColumn16": new NumberModel({
+          fieldText: "Tổng tiền thanh toán",
+          require: false,
+          readOnly: true,
+          maxLength: 255,
+          labelWidth: 150,
+          format: new NumberFormat({
+            decimal: ".",
+            thousands: ",",
+            precision: 0
+          }),
+          bindingIndex: "Column16"
+        }),
+
       }
     },
     async onLoadData(parameter: any) {
@@ -244,6 +307,30 @@ export default {
       Log.InfoLog(parameter);
 
     },
+    showImport() {
+      try {
+        const me = this;
+        me.disableFormImport = true;
+        me.disableFormPayment = false;
+        me.navbar1Selected = true;
+        me.navbar2Selected = false;
+      } catch (error) {
+        Log.ErrorLog(error as Error);
+      }
+    },
+    showExport() {
+      try {
+        const me = this;
+        me.disableFormImport = false;
+        me.disableFormPayment = true;
+        me.navbar1Selected = false;
+        me.navbar2Selected = true;
+      } catch (error) {
+        Log.ErrorLog(error as Error);
+      }
+    },
+
+
 
     /**
     * Sau khi đóng form xong thì xử lý thêm gì ở master thì Override function này ở master

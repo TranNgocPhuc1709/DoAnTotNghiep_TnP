@@ -1,3 +1,26 @@
+.navbar-import {
+  height: 35px;
+  background-color: #F6F6F6;
+
+}
+
+.navbar-item {
+  padding: 0 10px;
+  font-size: 14px;
+  font-weight: 600;
+
+}
+
+.navbar-item:hover {
+  cursor: pointer;
+  background-color: #E5E6EB;
+}
+
+.line-navbar {
+  width: 2px;
+  background-color: grey;
+}
+
 .item-detail {
   margin-bottom: 8px;
 }
@@ -8,6 +31,10 @@
 
 .item-detail:last-child {
   margin-bottom: 24px;
+}
+
+.selected {
+  background-color: #E5E6EB;
 }
 
 .heading-return-info {
@@ -29,7 +56,7 @@
 
 .content-form-return {
   overflow-y: scroll;
-  height: 170px;
+  height: 128px;
   margin-bottom: 20px;
 }
 
