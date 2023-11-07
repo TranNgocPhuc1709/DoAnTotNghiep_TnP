@@ -59,6 +59,7 @@ export default {
                     })
                 }),
                 new ToolBarItemsView({
+
                     name: "btnSaveAdd",
                     control: new Button({
                         fieldText: "Lưu và thêm mới",
@@ -152,7 +153,7 @@ export default {
                     return;
                 }
 
-                await Function.getTimeOut(5000, '');
+                await Function.getTimeOut(1000, '');
                 me.preDataBeforeSave();
                 me.submitChanges();
             } catch (error) {
@@ -186,7 +187,7 @@ export default {
                 if (me.masterData?.editMode == EditMode.View) {
                     return;
                 }
-                await Function.getTimeOut(5000, '');
+                await Function.getTimeOut(1000, '');
             } catch (error) {
                 Log.ErrorLog(error as Error)
             } finally {
@@ -245,8 +246,6 @@ export default {
             const me = this;
             me.closeForm();
         },
-
-
 
         /**
          * Hàm read loading toàn bộ from khi người dùng bắt đầu thực hiện chức năng

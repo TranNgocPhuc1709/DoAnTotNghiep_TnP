@@ -2,17 +2,28 @@
 <style lang="scss" scoped src="./ShiftRecordDetail.scss"></style>
 <script lang="ts">
 import ShiftRecordDetail from './ShiftRecordDetail';
-import { Ref, ref } from 'vue';
+import { PropType, Ref, ref } from 'vue';
 import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailController";
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
 import TextBox from "@library-src/models/qlch_control/qlch_text_box/TextBox";
 import ETextBox from "qlch_control/ETextBox";
 import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
 import ECombobox from "qlch_control/ECombobox";
+import ShiftRecord from '@store-src/models/shift-record/ShiftRecord';
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+
+
 
 export default {
 
+
   extends: BaseDictionaryDetailController,
+  props: {
+    masterData: {
+      type: Object as PropType<Record<string, any>>,
+      require: true
+    }
+  },
 
   components: {
     BaseDictionaryDetailView,
@@ -46,25 +57,25 @@ export default {
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column1"
+          bindingIndex: "ShiftName"
         }),
         "txtColumn2": new Combobox({
           fieldText: "Giờ bắt đầu",
-          require: true,
+          require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column2",
+          bindingIndex: "ShiftTimeStart",
           data: [
             {
-              value: 1,
+              value: "07:00",
               display: "07:00"
             },
             {
-              value: 2,
+              value: "12:00",
               display: "12:00"
             },
             {
-              value: 3,
+              value: "18:00",
               display: "18:00"
             },
           ]
@@ -74,24 +85,40 @@ export default {
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column3",
+          bindingIndex: "ShiftTimeStartEnd",
           data: [
             {
-              value: 1,
+              value: "12:00",
               display: "12:00"
             },
             {
-              value: 2,
+              value: "18:00",
               display: "18:00"
             },
             {
-              value: 3,
+              value: "22:00",
               display: "22:00"
             },
           ]
         })
       }
     },
+    saveData() {
+      const me = this;
+      let ListShiftRecord: Array<ShiftRecord> | null = new Array<ShiftRecord>;
+      if (me.masterData) {
+        ListShiftRecord = LocalStorageLibrary.getByKey<Array<ShiftRecord>>("ShiftRecord");
+        if (ListShiftRecord) {
+          ListShiftRecord.push(me.masterData);
+          LocalStorageLibrary.setByKey("ShiftRecord", ListShiftRecord);
+        }
+        else {
+          ListShiftRecord = new Array<ShiftRecord>({ ...me.masterData });
+          LocalStorageLibrary.setByKey("ShiftRecord", ListShiftRecord);
+        }
+      }
+    },
+
 
     /**
     * Sau khi đóng form xong thì xử lý thêm gì ở master thì Override function này ở master

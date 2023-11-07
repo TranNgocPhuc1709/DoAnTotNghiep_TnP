@@ -7,6 +7,8 @@ import BaseDictionaryListView from 'qlch_base/BaseDictionaryListView';
 import BaseDictionaryListController from 'qlch_base/BaseDictionaryListController';
 import ParamPaging from '@library-src/models/qlch_control/qlch_grid/qlch_param_paging/ParamPaging';
 import Column from '@library-src/models/qlch_control/qlch_grid/qlch_column/Column';
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import ShiftRecord from '@store-src/models/shift-record/ShiftRecord';
 
 export default {
 
@@ -37,22 +39,22 @@ export default {
       return Array(
         new Column({
           fieldText: "Tên ca",
-          dataIndex: "Column1",
+          dataIndex: "ShiftName",
           width: 120,
         }),
         new Column({
           fieldText: "Giờ bắt đầu",
-          dataIndex: "Column2",
+          dataIndex: "ShiftTimeStart",
           width: 260
         }),
         new Column({
           fieldText: "Giờ kết thúc",
-          dataIndex: "Column3",
+          dataIndex: "ShiftTimeStartEnd",
           width: 260
         }),
         new Column({
           fieldText: "Trạng thái",
-          dataIndex: "Column4",
+          dataIndex: "ShiftStatus",
           minWidth: 260,
           flex: 1
         }),
@@ -65,21 +67,12 @@ export default {
      */
     loadMasterData(param: ParamPaging) {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
-      return [
-        {
-          Column1: "Ca sáng",
-          Column2: "07:00:00",
-          Column3: "14:00:00",
-          Column4: "Đang theo dõi",
-        },
-        {
-          Column1: "Ca chiều",
-          Column2: "14:00:00",
-          Column3: "18:00:00",
-          Column4: "Ngừng theo dõi",
-        },
+      // const  newContext = new ShiftRecord ;
+      if (!LocalStorageLibrary.getByKey<Array<ShiftRecord>>("ShiftRecord")) {
+        return new Array<ShiftRecord>;
+      }
 
-      ];
+      return LocalStorageLibrary.getByKey<Array<ShiftRecord>>("ShiftRecord");
     },
 
     /**
