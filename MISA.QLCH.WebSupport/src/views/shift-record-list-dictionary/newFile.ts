@@ -10,7 +10,6 @@ import DropDownMenu from '@library-src/models/qlch_control/qlch_drop_down_menu/D
 import DropDownMenuChild from '@library-src/models/qlch_control/qlch_drop_down_menu/children/DropDownMenuChild';
 import { EditMode } from '@library-src/utilities/enums/EditMode';
 import Log from '@library-src/utilities/Log';
-
 export default (await import('vue')).defineComponent({
     extends: BaseDictionaryListController,
 
@@ -96,11 +95,8 @@ export default (await import('vue')).defineComponent({
                 if (!control) {
                     return;
                 }
-
                 const editMode = control.value;
                 switch (editMode) {
-
-
                     case EditMode.Edit:
                         me.editItem();
                         break;

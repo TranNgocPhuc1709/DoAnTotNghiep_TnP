@@ -108,7 +108,7 @@ export default {
       const me = this;
       let listShiftRecord: Array<ShiftRecord> | null = new Array<ShiftRecord>;
       if (me.masterData) {
-        if (me.masterData.editMode == 1) {
+        if (me.masterData.editMode == 1 || me.masterData.editMode == 4) {
           me.masterData['shiftId'] = Guid.NewGuid();
           listShiftRecord = LocalStorageLibrary.getByKey<Array<ShiftRecord>>("ShiftRecord");
           if (listShiftRecord) {
@@ -120,7 +120,6 @@ export default {
             LocalStorageLibrary.setByKey("ShiftRecord", listShiftRecord);
           }
         }
-
         if (me.masterData.editMode == 2) {
           listShiftRecord = LocalStorageLibrary.getByKey<Array<ShiftRecord>>("ShiftRecord");
           if (listShiftRecord) {
@@ -139,10 +138,6 @@ export default {
         }
       }
     },
-
-
-
-
     /**
     * Sau khi đóng form xong thì xử lý thêm gì ở master thì Override function này ở master
     */

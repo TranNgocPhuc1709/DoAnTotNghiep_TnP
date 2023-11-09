@@ -7,6 +7,8 @@ import BaseDictionaryListView from 'qlch_base/BaseDictionaryListView';
 import BaseDictionaryListController from 'qlch_base/BaseDictionaryListController';
 import ParamPaging from '@library-src/models/qlch_control/qlch_grid/qlch_param_paging/ParamPaging';
 import Column from '@library-src/models/qlch_control/qlch_grid/qlch_column/Column';
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import Unit from '@store-src/models/unit/Unit';
 
 export default {
 
@@ -60,15 +62,12 @@ export default {
      */
     loadMasterData(param: ParamPaging) {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
-      return [
-        {
-          CodeUnitList: "Bó",
-          ExplainUnitList: "Bó",
-          StatusUnitList: "Đang theo dõi",
-        },
-
-
-      ];
+      if (!LocalStorageLibrary.getByKey<Array<Unit>>("Unit")) {
+        return new Array<Unit>;
+      }
+      else {
+        return LocalStorageLibrary.getByKey<Array<Unit>>("Unit");
+      }
     },
 
     /**

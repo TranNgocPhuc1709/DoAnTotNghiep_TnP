@@ -7,6 +7,8 @@ import BaseDictionaryListView from 'qlch_base/BaseDictionaryListView';
 import BaseDictionaryListController from 'qlch_base/BaseDictionaryListController';
 import ParamPaging from '@library-src/models/qlch_control/qlch_grid/qlch_param_paging/ParamPaging';
 import Column from '@library-src/models/qlch_control/qlch_grid/qlch_column/Column';
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import CustomerCategory from '@store-src/models/customer-category/CustomerCategory';
 export default {
   extends: BaseDictionaryListController,
 
@@ -64,14 +66,12 @@ export default {
      */
     loadMasterData(param: ParamPaging) {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
-      return [
-        {
-          CodeCustomerCategory: "KH001",
-          NameCustomerCategory: "Khách Hàng Thân Thiết",
-          DescribeCustomerCategory: "Nhóm được ưu tiên thứ 2",
-          StatusCustomerCategory: "Đang theo dõi",
-        }
-      ];
+      if (!LocalStorageLibrary.getByKey<Array<CustomerCategory>>("customerCategory")) {
+        return new Array<CustomerCategory>;
+      }
+      else {
+        return LocalStorageLibrary.getByKey<Array<CustomerCategory>>("customerCategory");
+      }
     },
 
     /**

@@ -2,16 +2,24 @@
 <style lang="scss" scoped src="./CustomercategoryDetail.scss"></style>
 <script lang="ts">
 import CustomercategoryDetail from './CustomercategoryDetail';
-import { Ref, ref } from 'vue';
+import { PropType, Ref, ref } from 'vue';
 import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailController";
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
 import TextBox from "@library-src/models/qlch_control/qlch_text_box/TextBox";
 import ETextBox from "qlch_control/ETextBox";
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import Guid from '@library-src/utilities/types/Guid';
+import CustomerCategory from '@store-src/models/customer-category/CustomerCategory';
 
 export default {
 
   extends: BaseDictionaryDetailController,
-
+  props: {
+    masterData: {
+      type: Object as PropType<Record<string, any>>,
+      require: true
+    }
+  },
   components: {
     BaseDictionaryDetailView,
     ETextBox
@@ -62,7 +70,40 @@ export default {
 
       }
     },
-
+    saveData() {
+      const me = this;
+      let listCustomerCategory: Array<CustomerCategory> | null = new Array<CustomerCategory>;
+      if (me.masterData) {
+        if (me.masterData.editMode == 1 || me.masterData.editMode == 4) {
+          me.masterData['CustomerId'] = Guid.NewGuid();
+          listCustomerCategory = LocalStorageLibrary.getByKey<Array<CustomerCategory>>("customerCategory");
+          if (listCustomerCategory) {
+            listCustomerCategory.push(me.masterData);
+            LocalStorageLibrary.setByKey("customerCategory", listCustomerCategory);
+          }
+          else {
+            listCustomerCategory = new Array<CustomerCategory>({ ...me.masterData });
+            LocalStorageLibrary.setByKey("customerCategory", listCustomerCategory);
+          }
+        }
+        if (me.masterData.editMode == 2) {
+          listCustomerCategory = LocalStorageLibrary.getByKey<Array<CustomerCategory>>("customerCategory");
+          if (listCustomerCategory) {
+            listCustomerCategory.forEach(newItemCustomerCategory => {
+              if (me.masterData) {
+                if (newItemCustomerCategory.CustomerId == me.masterData.CustomerId) {
+                  newItemCustomerCategory.CodeCustomerCategory = me.masterData.CodeCustomerCategory;
+                  newItemCustomerCategory.NameCustomerCategory = me.masterData.NameCustomerCategory;
+                  newItemCustomerCategory.DescribeCustomerCategory = me.masterData.DescribeCustomerCategory;
+                  newItemCustomerCategory.StatusCustomerCategory = me.masterData.StatusCustomerCategory;
+                }
+              }
+            });
+            LocalStorageLibrary.setByKey("customerCategory", listCustomerCategory);
+          }
+        }
+      }
+    },
     /**
     * Sau khi đóng form xong thì xử lý thêm gì ở master thì Override function này ở master
     */
