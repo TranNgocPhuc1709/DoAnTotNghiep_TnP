@@ -38,26 +38,26 @@ export default {
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
       const labelWidth = 115;
       return {
-        "txtColumn1": new TextBox({
+        "txtCodeVendorCategory": new TextBox({
           fieldText: "Mã nhóm NCC",
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column1"
+          bindingIndex: "CodeVendorCategory"
         }),
-        "txtColumn2": new TextBox({
+        "txtNameVendorCategory": new TextBox({
           fieldText: "Tên nhóm NCC",
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column2"
+          bindingIndex: "NameVendorCategory"
         }),
-        "txtColumn3": new TextBox({
+        "txtDescribeVendorCategory": new TextBox({
           fieldText: "Mô tả",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column3"
+          bindingIndex: "DescribeVendorCategory"
         }),
 
       }

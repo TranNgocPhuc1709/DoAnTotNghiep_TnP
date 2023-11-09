@@ -36,40 +36,38 @@ export default {
       return Array(
         new Column({
           fieldText: "Mã Sản Phẩm",
-          dataIndex: "Column1",
-          // type: ControlType.Date,
+          dataIndex: "CodeProductList",
           width: 120,
         }),
         new Column({
           fieldText: "Tên Sản Phẩm",
-          dataIndex: "Column2",
+          dataIndex: "NameProductList",
           width: 260
         }),
         new Column({
           fieldText: "Nhóm Sản Phẩm",
-          dataIndex: "Column3",
+          dataIndex: "GroupProductList",
           width: 160
         }),
         new Column({
           fieldText: "Đơn Vị Tính",
-          dataIndex: "Column4",
+          dataIndex: "UnitProductList",
           width: 100
         }),
         new Column({
           fieldText: "Giá bán",
-          dataIndex: "Column12",
+          dataIndex: "PriceProductList",
           minWidth: 180,
           flex: 1
         }),
         new Column({
           fieldText: "Hiển thị trên trang bán hàng",
-          dataIndex: "Column6",
+          dataIndex: "ShowDisplayProduct",
           width: 180
-
         }),
         new Column({
           fieldText: "Trạng thái",
-          dataIndex: "Column7",
+          dataIndex: "StatusProductList",
           width: 160
         })
       )
@@ -83,32 +81,15 @@ export default {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
       return [
         {
-          Column1: "AN01",
-          Column2: "Áo Nam Polo",
-          Column3: "Quần Áo",
-          Column4: "Chiếc",
-          Column5: "Giá",
-          Column6: "Có",
-          Column7: "Đang kinh doanh"
+          CodeProductList: "AN01",
+          NameProductList: "Áo Nam Polo",
+          GroupProductList: "Quần Áo",
+          UnitProductList: "Chiếc",
+          PriceProductList: "Giá",
+          ShowDisplayProduct: "Có",
+          StatusProductList: "Đang kinh doanh"
         },
-        {
-          Column1: "AN02",
-          Column2: "Áo khoác nỉ",
-          Column3: "Quần Áo",
-          Column4: "Chiếc",
-          Column5: "Giá",
-          Column6: "Không",
-          Column7: "Ngừng kinh doanh"
-        },
-        {
-          Column1: "GD01",
-          Column2: "Giày Jordan",
-          Column3: "Giày dép",
-          Column4: "đôi",
-          Column5: "giá",
-          Column6: "Có",
-          Column7: "Đang kinh doanh"
-        }
+
       ];
     },
 
@@ -117,7 +98,7 @@ export default {
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "Column1";
+      return "CodeProduct";
     },
 
     /**

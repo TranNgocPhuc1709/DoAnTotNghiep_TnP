@@ -37,33 +37,33 @@ export default {
       return Array(
         new Column({
           fieldText: "Mã nhân viên",
-          dataIndex: "Column1",
+          dataIndex: "CodeEmployee",
           width: 120,
         }),
         new Column({
           fieldText: "Tên nhân viên",
-          dataIndex: "Column2",
+          dataIndex: "NameEmployee",
           width: 260
         }),
         new Column({
           fieldText: "Giới tính",
-          dataIndex: "Column3",
+          dataIndex: "GenderEmployee",
           width: 260
         }),
         new Column({
           fieldText: "Ngày sinh",
-          dataIndex: "Column4",
+          dataIndex: "BirthEmployee",
           width: 260
         }),
         new Column({
           fieldText: "Số ĐT",
-          dataIndex: "Column5",
+          dataIndex: "TelephoneEmployee",
           minWidth: 260,
           flex: 1
         }),
         new Column({
           fieldText: "Trạng thái làm việc",
-          dataIndex: "Column6",
+          dataIndex: "StatusEmployee",
           width: 160
         })
       )
@@ -77,29 +77,13 @@ export default {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
       return [
         {
-          Column1: "NV-01",
-          Column2: "Nguyễn Thảo",
-          Column3: "Nữ",
-          Column4: "17-08-2002",
-          Column5: "0123456789",
-          Column6: "Chính thức"
-        },
-        {
-          Column1: "NV-02",
-          Column2: "Trần Long",
-          Column3: "Nam",
-          Column4: "27-10-2006",
-          Column5: "0123456789",
-          Column6: "Thử việc"
-        },
-        {
-          Column1: "NV-03",
-          Column2: "Nguyễn Phương",
-          Column3: "Nữ",
-          Column4: "27-10-2006",
-          Column5: "0123456789",
-          Column6: "Đã nghỉ việc"
-        },
+          CodeEmployee: "NV-01",
+          NameEmployee: "Nguyễn Thảo",
+          GenderEmployee: "Nữ",
+          BirthEmployee: "17-08-2002",
+          TelephoneEmployee: "0123456789",
+          StatusEmployee: "Chính thức"
+        }
 
       ];
     },
@@ -109,7 +93,7 @@ export default {
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "Column1";
+      return "CodeEmployee";
     },
 
     /**

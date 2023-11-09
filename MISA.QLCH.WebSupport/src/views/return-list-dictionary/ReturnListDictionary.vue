@@ -94,27 +94,27 @@ export default {
       return Array(
         new Column({
           fieldText: "Ngày trả hàng",
-          dataIndex: "Column1",
+          dataIndex: "DateReturn",
           width: 120,
         }),
         new Column({
           fieldText: "Số phiếu xuất",
-          dataIndex: "Column2",
+          dataIndex: "BillNumberReturn",
           width: 260
         }),
         new Column({
           fieldText: "Nhà cung cấp",
-          dataIndex: "Column3",
+          dataIndex: "SupplierReturn",
           width: 260
         }),
         new Column({
           fieldText: "Tổng tiền",
-          dataIndex: "Column4",
+          dataIndex: "TotalMoneyReturn",
           width: 260
         }),
         new Column({
           fieldText: "Diễn giải",
-          dataIndex: "Column5",
+          dataIndex: "ExplantReturn",
           minWidth: 260,
           flex: 1
         })
@@ -129,45 +129,13 @@ export default {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
       return [
         {
-          Column1: "Value 11",
-          Column2: "Value 21",
-          Column3: "Value 31",
-          Column4: "Value 41",
-          Column5: "Value 51",
-          Column6: "Value 61"
+          DateReturn: "Value 11",
+          BillNumberReturn: "Value 21",
+          SupplierReturn: "Value 31",
+          TotalMoneyReturn: "Value 41",
+          ExplantReturn: "Value 51",
         },
-        {
-          Column1: "Value 12",
-          Column2: "Value 22",
-          Column3: "Value 32",
-          Column4: "Value 42",
-          Column5: "Value 52",
-          Column6: "Value 62"
-        },
-        {
-          Column1: "Value 13",
-          Column2: "Value 23",
-          Column3: "Value 33",
-          Column4: "Value 43",
-          Column5: "Value 53",
-          Column6: "Value 63"
-        },
-        {
-          Column1: "Value 14",
-          Column2: "Value 24",
-          Column3: "Value 34",
-          Column4: "Value 44",
-          Column5: "Value 54",
-          Column6: "Value 64"
-        },
-        {
-          Column1: "Value 15",
-          Column2: "Value 25",
-          Column3: "Value 35",
-          Column4: "Value 45",
-          Column5: "Value 55",
-          Column6: "Value 65"
-        }
+
       ];
     },
 
@@ -176,7 +144,7 @@ export default {
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "Column1";
+      return "DateReturn";
     },
 
     /**

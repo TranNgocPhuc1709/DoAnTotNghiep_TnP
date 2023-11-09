@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="header-right height-fill d-flex-vcenter">
-            <div class="chosse-warehouse d-flex-vcenter" @click-="showChosseWarehouse()">
+            <div class="chosse-warehouse d-flex-vcenter">
                 <span class="icon-warehouse"></span>
                 <!-- <span>
                     <e-combobox :control="cbbWareHouse" v-model="cbbWareHouse.value" />
@@ -204,10 +204,11 @@
                                 <e-combobox :control="txtUnit" v-model="txtUnit.value" />
                             </span>
                             <span class="flex-1 child-item">
-                                <e-text-box :control="txtPrice" v-model="txtPrice.value" />
+                                <!-- <e-text-box :control="txtPrice" v-model="txtPrice.value" /> -->
+                                <e-number :control="txtPrice" v-model="txtPrice.value" />
                             </span>
                             <span class="flex-1">
-                                <e-text-box :control="txtPriceLast" v-model="txtPriceLast.value" />
+                                <e-number :control="txtPriceLast" v-model="txtPriceLast.value" />
                             </span>
                             <span class="icon-child-product"></span>
                         </div>

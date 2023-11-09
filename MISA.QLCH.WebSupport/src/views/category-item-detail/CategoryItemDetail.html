@@ -2,16 +2,16 @@
   @toolbarClick="onSelectAction" @closeFormClick="onCloseForm">
   <template v-slot:content-detail>
     <div class="qlch-input-default item-detail">
-      <e-text-box :control="bindingControl[`txtColumn1`]"
-        v-model="masterData[bindingControl[`txtColumn1`].bindingIndex]"></e-text-box>
+      <e-text-box :control="bindingControl[`txtCodeGroupCategory`]"
+        v-model="masterData[bindingControl[`txtCodeGroupCategory`].bindingIndex]"></e-text-box>
     </div>
     <div class="qlch-input-default item-detail">
-      <e-text-box :control="bindingControl[`txtColumn2`]"
-        v-model="masterData[bindingControl[`txtColumn2`].bindingIndex]"></e-text-box>
+      <e-text-box :control="bindingControl[`txtNameGroupCategory`]"
+        v-model="masterData[bindingControl[`txtNameGroupCategory`].bindingIndex]"></e-text-box>
     </div>
     <div class="qlch-input-default item-detail">
-      <e-text-box :control="bindingControl[`txtColumn3`]"
-        v-model="masterData[bindingControl[`txtColumn3`].bindingIndex]"></e-text-box>
+      <e-text-box :control="bindingControl[`txtDescribeCategory`]"
+        v-model="masterData[bindingControl[`txtDescribeCategory`].bindingIndex]"></e-text-box>
     </div>
     <!-- <div class="qlch-input-default item-detail">
       <e-combobox :control="bindingControl[`txtColumn4`]"

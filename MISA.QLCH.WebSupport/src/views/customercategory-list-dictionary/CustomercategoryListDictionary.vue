@@ -7,9 +7,7 @@ import BaseDictionaryListView from 'qlch_base/BaseDictionaryListView';
 import BaseDictionaryListController from 'qlch_base/BaseDictionaryListController';
 import ParamPaging from '@library-src/models/qlch_control/qlch_grid/qlch_param_paging/ParamPaging';
 import Column from '@library-src/models/qlch_control/qlch_grid/qlch_column/Column';
-
 export default {
-
   extends: BaseDictionaryListController,
 
   components: {
@@ -37,22 +35,22 @@ export default {
       return Array(
         new Column({
           fieldText: "Mã nhóm khách hàng",
-          dataIndex: "Column1",
+          dataIndex: "CodeCustomerCategory",
           width: 150,
         }),
         new Column({
           fieldText: "Tên nhóm khách hàng",
-          dataIndex: "Column2",
+          dataIndex: "NameCustomerCategory",
           width: 260
         }),
         new Column({
           fieldText: "Mô tả",
-          dataIndex: "Column3",
+          dataIndex: "DescribeCustomerCategory",
           width: 260
         }),
         new Column({
           fieldText: "Trạng thái",
-          dataIndex: "Column4",
+          dataIndex: "StatusCustomerCategory",
           width: 260,
           flex: 1
         }),
@@ -68,17 +66,11 @@ export default {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
       return [
         {
-          Column1: "KH001",
-          Column2: "Khách Hàng Thân Thiết",
-          Column3: "Nhóm được ưu tiên thứ 2",
-          Column4: "Đang theo dõi",
-        },
-        {
-          Column1: "KH002",
-          Column2: "Khách Hàng V.I.P",
-          Column3: "Nhóm được ưu tiên hàng đầu",
-          Column4: "Ngừng theo dõi",
-        },
+          CodeCustomerCategory: "KH001",
+          NameCustomerCategory: "Khách Hàng Thân Thiết",
+          DescribeCustomerCategory: "Nhóm được ưu tiên thứ 2",
+          StatusCustomerCategory: "Đang theo dõi",
+        }
       ];
     },
 
@@ -87,7 +79,7 @@ export default {
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "Column1";
+      return "CodeCustomerCategory";
     },
 
     /**

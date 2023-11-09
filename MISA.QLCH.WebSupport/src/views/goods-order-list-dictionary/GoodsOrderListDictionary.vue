@@ -99,38 +99,38 @@ export default {
       return Array(
         new Column({
           fieldText: "Ngày đặt hàng",
-          dataIndex: "Column1",
+          dataIndex: "DateOrder",
           width: 120,
         }),
         new Column({
           fieldText: "Số phiếu",
-          dataIndex: "Column2",
+          dataIndex: "NumberOrder",
           width: 260
         }),
         new Column({
           fieldText: "Người đặt",
-          dataIndex: "Column3",
+          dataIndex: "PersonOrder",
           width: 260
         }),
         new Column({
           fieldText: "Nhà cung cấp",
-          dataIndex: "Column4",
+          dataIndex: "SupplierOrder",
           width: 260
         }),
         new Column({
           fieldText: "Tổng tiền",
-          dataIndex: "Column5",
+          dataIndex: "FullMoneyOrder",
           minWidth: 260,
           flex: 1
         }),
         new Column({
           fieldText: "Trạng thái",
-          dataIndex: "Column6",
+          dataIndex: "StatusOrder",
           width: 160
         }),
         new Column({
           fieldText: "Diễn giải",
-          dataIndex: "Column7",
+          dataIndex: "ExplainOrder",
           width: 160
         })
       )
@@ -144,67 +144,14 @@ export default {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
       return [
         {
-          Column1: "31/10/2023",
-          Column2: "KHOT-PDH-0123",
-          Column3: "TnP",
-          Column4: "Nhà cung cấp MiSA",
-          Column5: "150000",
-          Column6: "Đã thực hiện",
-          Column7: "Đặt hàng nhà cung cấp"
-
+          DateOrder: "31/10/2023",
+          NumberOrder: "KHOT-PDH-0123",
+          PersonOrder: "TnP",
+          SupplierOrder: "Nhà cung cấp MiSA",
+          FullMoneyOrder: "150000",
+          StatusOrder: "Đã thực hiện",
+          ExplainOrder: "Đặt hàng nhà cung cấp"
         },
-        {
-          Column1: "31/10/2023",
-          Column2: "KHOT-PDH-0123",
-          Column3: "TnP",
-          Column4: "Nhà cung cấp MiSA",
-          Column5: "150000",
-          Column6: "Đã thực hiện",
-          Column7: "Đặt hàng nhà cung cấp"
-
-        },
-        {
-          Column1: "31/10/2023",
-          Column2: "KHOT-PDH-0123",
-          Column3: "TnP",
-          Column4: "Nhà cung cấp MiSA",
-          Column5: "150000",
-          Column6: "Đã thực hiện",
-          Column7: "Đặt hàng nhà cung cấp"
-
-        },
-        {
-          Column1: "31/10/2023",
-          Column2: "KHOT-PDH-0123",
-          Column3: "TnP",
-          Column4: "Nhà cung cấp MiSA",
-          Column5: "150000",
-          Column6: "Đã thực hiện",
-          Column7: "Đặt hàng nhà cung cấp"
-
-        },
-        {
-          Column1: "31/10/2023",
-          Column2: "KHOT-PDH-0123",
-          Column3: "TnP",
-          Column4: "Nhà cung cấp MiSA",
-          Column5: "150000",
-          Column6: "Đã thực hiện",
-          Column7: "Đặt hàng nhà cung cấp"
-
-        },
-        {
-          Column1: "20/10/2023",
-          Column2: "KHOT-PDH-0156",
-          Column3: "TnP",
-          Column4: "Nhà cung cấp MiSA",
-          Column5: "2500000",
-          Column6: "Chưa thực hiện",
-          Column7: "Đặt hàng nhà cung cấp"
-
-        },
-
-
       ];
     },
 
@@ -213,7 +160,7 @@ export default {
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "Column1";
+      return "DateOrder";
     },
 
     /**

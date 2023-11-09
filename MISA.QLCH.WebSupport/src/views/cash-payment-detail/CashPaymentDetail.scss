@@ -47,6 +47,51 @@
   overflow-x: hidden;
 }
 
+.synthetic-footer {
+  margin: 50px 0 0px 0;
+  background-color: #EFF0F3;
+}
+
+.main-synthetic {
+  height: 35px;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
 .synthetic {
   height: 35px;
+}
+
+.grid-GoodsCashReceipt {
+  height: 150px;
+  border: 1px solid #F0F0F0;
+  overflow: scroll;
+
+  table {
+    border-collapse: collapse;
+  }
+
+  table,
+  thead,
+  tr,
+  th {
+    border-right: 1px solid #D0D0D0;
+  }
+
+  tbody,
+  tr,
+  td {
+    width: 100%;
+  }
+
+  thead,
+  tr,
+  th {
+    background-color: #F0F0F0;
+    padding: 10px 10px;
+    text-align: center;
+
+  }
 }

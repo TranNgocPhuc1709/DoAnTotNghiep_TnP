@@ -37,22 +37,22 @@ export default {
       return Array(
         new Column({
           fieldText: "Mã nhóm NCC",
-          dataIndex: "Column1",
+          dataIndex: "CodeVendorCategory",
           width: 120,
         }),
         new Column({
           fieldText: "Tên nhóm NCC",
-          dataIndex: "Column2",
+          dataIndex: "NameVendorCategory",
           width: 260
         }),
         new Column({
           fieldText: "Mô tả",
-          dataIndex: "Column3",
+          dataIndex: "DescribeVendorCategory",
           width: 260
         }),
         new Column({
           fieldText: "Trạng thái",
-          dataIndex: "Column4",
+          dataIndex: "StatusVendorCategory",
           width: 260,
           flex: 1
         }),
@@ -67,19 +67,13 @@ export default {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
       return [
         {
-          Column1: "NCC001",
-          Column2: "Hàng nội địa",
-          Column3: "Hàng mới về",
-          Column4: "Đang theo dõi",
+          CodeVendorCategory: "NCC001",
+          NameVendorCategory: "Hàng nội địa",
+          DescribeVendorCategory: "Hàng mới về",
+          StatusVendorCategory: "Đang theo dõi",
 
         },
-        {
-          Column1: "NCC002",
-          Column2: "Hàng nhập khẩu",
-          Column3: "Hàng mới",
-          Column4: "Ngừng theo dõi",
 
-        },
 
       ];
     },
@@ -89,7 +83,7 @@ export default {
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "Column1";
+      return "CodeVendorCategory";
     },
 
     /**

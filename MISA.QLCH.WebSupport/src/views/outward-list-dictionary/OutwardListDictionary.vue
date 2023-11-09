@@ -111,27 +111,27 @@ export default {
       return Array(
         new Column({
           fieldText: "Ngày",
-          dataIndex: "Column1",
+          dataIndex: "DayOutward",
           width: 120,
         }),
         new Column({
           fieldText: "Số phiếu xuất",
-          dataIndex: "Column2",
+          dataIndex: "DeliveryOutward",
           width: 260
         }),
         new Column({
           fieldText: "Đối tượng",
-          dataIndex: "Column3",
+          dataIndex: "ObjectOutward",
           width: 260
         }),
         new Column({
           fieldText: "Tổng tiền",
-          dataIndex: "Column4",
+          dataIndex: "TotalMoneyOutward",
           width: 260
         }),
         new Column({
           fieldText: "Diễn giải ",
-          dataIndex: "Column5",
+          dataIndex: "ExplainOutward",
           minWidth: 260,
           flex: 1
         }),
@@ -146,19 +146,11 @@ export default {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
       return [
         {
-          Column1: "17/9/2023",
-          Column2: "PNH123",
-          Column3: "Công Ty Cổ Phần MiSA",
-          Column4: "100000",
-          Column5: "Hàng mới nhập",
-        },
-        {
-          Column1: "20/9/2023",
-          Column2: "PNH100002",
-          Column3: "Công Ty Cổ Phần Giải Pháp Hà Minh",
-          Column4: "200000",
-          Column5: "Hàng mới nhập",
-
+          DayOutward: "17/9/2023",
+          DeliveryOutward: "PNH123",
+          ObjectOutward: "Công Ty Cổ Phần MiSA",
+          TotalMoneyOutward: "100000",
+          ExplainOutward: "Hàng mới nhập",
         },
       ];
     },
@@ -167,7 +159,7 @@ export default {
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "Column1";
+      return "DayOutward";
     },
 
     /**

@@ -13,25 +13,23 @@ import EButton from "qlch_control/EButton";
 // import TextBox from '@library-src/models/qlch_control/qlch_text_box/TextBox';
 import ETextBox from "qlch_control/ETextBox";
 import TextBox from '@library-src/models/qlch_control/qlch_text_box/TextBox';
+import NumberModel from '@library-src/models/qlch_control/qlch_number/NumberModel';
+import NumberFormat from '@library-src/models/qlch_control/number_format/NumberFormat';
+import ENumber from "qlch_control/ENumber";
 
 export default {
     components: {
         ECombobox,
         ECheckbox,
         EButton,
-        ETextBox
+        ETextBox,
+        ENumber
     },
     data() {
         return {
             billCount: 1,
             bills: [1],
-            products: [
-                // id: 1,
-                // code: 'SP001',
-                // name: 'Áo Polo Nam',
-                // quantity: 1,
-                // price: 100
-            ] // Mảng chứa thông tin sản phẩm
+            // Mảng chứa thông tin sản phẩm
         };
     },
     setup() {
@@ -52,12 +50,13 @@ export default {
             classType: "secondary",
             placeholder: "0"
         }));
-        const txtPrice: Ref<TextBox> = ref(new TextBox({
-            fieldText: "",
-            require: false,
-            type: "number",
-            classType: "secondary",
-            placeholder: "0"
+        const txtPrice: Ref<NumberModel> = ref(new NumberModel({
+            classType: "primary",
+            format: new NumberFormat({
+                decimal: ".",
+                thousands: ",",
+                precision: 0
+            }),
         }));
 
         const txtPriceLast: Ref<TextBox> = ref(new TextBox({
@@ -220,9 +219,6 @@ export default {
             isActive,
             txtUnit,
             cbbPayments
-
-
-
         }
     },
     created() {
@@ -262,14 +258,6 @@ export default {
             try {
                 const me = this;
                 me.bills.splice(index, 1);
-            } catch (error) {
-                Log.ErrorLog(error as Error);
-            }
-        },
-        showChosseWarehouse() {
-            try {
-                const me = this;
-                me.displayItemWarehouse = true
             } catch (error) {
                 Log.ErrorLog(error as Error);
             }

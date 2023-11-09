@@ -44,57 +44,56 @@ export default {
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
       const labelWidth = 115;
       return {
-        "txtColumn1": new TextBox({
+        "txtCodeCustomer": new TextBox({
           fieldText: "Mã khách hàng",
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column1"
+          bindingIndex: "CodeCustomer"
         }),
-        "txtColumn2": new TextBox({
+        "txtNameCustomer": new TextBox({
           fieldText: "Tên khách hàng",
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column2"
+          bindingIndex: "NameCustomer"
         }),
-        "txtColumn3": new TextBox({
+        "txtTelephoneCustomer": new TextBox({
           fieldText: "Số điện thoại",
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column3"
+          bindingIndex: "TelephoneCustomer"
         }),
-        "txtColumn4": new TextBox({
+        "txtEmailCustomer": new TextBox({
           fieldText: "Email",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column4"
+          bindingIndex: "EmailCustomer"
         }),
-        "txtColumn5": new TextBox({
+        "txtAddressCustomer": new TextBox({
           fieldText: "Địa chỉ",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column5"
+          bindingIndex: "AddressCustomer"
         }),
-        "txtColumn6": new DateModel({
+        "txtDateBirthCustomer": new DateModel({
           fieldText: "Ngày sinh",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column6"
+          bindingIndex: "DateBirthCustomer"
         }),
-        "txtColumn7": new Combobox({
+        "txtCustomerGroupList": new Combobox({
           fieldText: "Nhóm khách hàng",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column7",
+          bindingIndex: "CustomerGroupList",
           data: [
             {
-
               value: 1,
               display: "G1"
             },
@@ -109,12 +108,12 @@ export default {
 
           ]
         }),
-        "txtColumn8": new Combobox({
+        "txtCodeEmployeeCustomer": new Combobox({
           fieldText: "Mã nhân viên phụ trách",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column8",
+          bindingIndex: "CodeEmployeeCustomer",
           data: [
             {
 
@@ -132,39 +131,39 @@ export default {
 
           ]
         }),
-        "txtColumn9": new TextBox({
+        "txtNameEmployeeCustomer": new TextBox({
           fieldText: "Tên nhân viên phụ trách",
           require: false,
           readOnly: true,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column9"
+          bindingIndex: "NameEmployeeCustomer"
         }),
-        "txtColumn10": new TextBox({
+        "txtAttentionCustomer": new TextBox({
           fieldText: " Ghi chú",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column10"
+          bindingIndex: "AttentionCustomer"
         }),
-        "txtColumn11": new Combobox({
+        "txtGenderCustomer": new Combobox({
           fieldText: "Giới tính",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column10",
+          bindingIndex: "GenderCustomer",
           data: [
             {
 
-              value: 1,
+              value: "Name",
               display: "Nam"
             },
             {
-              value: 2,
+              value: "Nữ",
               display: "Nữ"
             },
             {
-              value: 3,
+              value: "Không xác định",
               display: "Không xác định"
             },
 
@@ -172,6 +171,134 @@ export default {
         }),
       }
     },
+    // return {
+    //     "txtCodeCustomer": new TextBox({
+    //       fieldText: "Mã khách hàng",
+    //       require: true,
+    //       maxLength: 255,
+    //       labelWidth: labelWidth,
+    //       bindingIndex: "CodeCustomer"
+    //     }),
+    //     "txtNameCustomer": new TextBox({
+    //       fieldText: "Tên khách hàng",
+    //       require: true,
+    //       maxLength: 255,
+    //       labelWidth: labelWidth,
+    //       bindingIndex: "NameCustomer"
+    //     }),
+    //     "txtColumn3": new TextBox({
+    //       fieldText: "Số điện thoại",
+    //       require: true,
+    //       maxLength: 255,
+    //       labelWidth: labelWidth,
+    //       bindingIndex: "Column3"
+    //     }),
+    //     "txtColumn4": new TextBox({
+    //       fieldText: "Email",
+    //       require: false,
+    //       maxLength: 255,
+    //       labelWidth: labelWidth,
+    //       bindingIndex: "Column4"
+    //     }),
+    //     "txtColumn5": new TextBox({
+    //       fieldText: "Địa chỉ",
+    //       require: false,
+    //       maxLength: 255,
+    //       labelWidth: labelWidth,
+    //       bindingIndex: "Column5"
+    //     }),
+    //     "txtColumn6": new DateModel({
+    //       fieldText: "Ngày sinh",
+    //       require: false,
+    //       maxLength: 255,
+    //       labelWidth: labelWidth,
+    //       bindingIndex: "Column6"
+    //     }),
+    //     "txtColumn7": new Combobox({
+    //       fieldText: "Nhóm khách hàng",
+    //       require: false,
+    //       maxLength: 255,
+    //       labelWidth: labelWidth,
+    //       bindingIndex: "Column7",
+    //       data: [
+    //         {
+
+    //           value: 1,
+    //           display: "G1"
+    //         },
+    //         {
+    //           value: 2,
+    //           display: "G2"
+    //         },
+    //         {
+    //           value: 3,
+    //           display: "G3"
+    //         },
+
+    //       ]
+    //     }),
+    //     "txtColumn8": new Combobox({
+    //       fieldText: "Mã nhân viên phụ trách",
+    //       require: false,
+    //       maxLength: 255,
+    //       labelWidth: labelWidth,
+    //       bindingIndex: "Column8",
+    //       data: [
+    //         {
+
+    //           value: 1,
+    //           display: "NV001"
+    //         },
+    //         {
+    //           value: 2,
+    //           display: "NV002"
+    //         },
+    //         {
+    //           value: 3,
+    //           display: "NV003"
+    //         },
+
+    //       ]
+    //     }),
+    //     "txtColumn9": new TextBox({
+    //       fieldText: "Tên nhân viên phụ trách",
+    //       require: false,
+    //       readOnly: true,
+    //       maxLength: 255,
+    //       labelWidth: labelWidth,
+    //       bindingIndex: "Column9"
+    //     }),
+    //     "txtColumn10": new TextBox({
+    //       fieldText: " Ghi chú",
+    //       require: false,
+    //       maxLength: 255,
+    //       labelWidth: labelWidth,
+    //       bindingIndex: "Column10"
+    //     }),
+    //     "txtColumn11": new Combobox({
+    //       fieldText: "Giới tính",
+    //       require: false,
+    //       maxLength: 255,
+    //       labelWidth: labelWidth,
+    //       bindingIndex: "Column10",
+    //       data: [
+    //         {
+
+    //           value: 1,
+    //           display: "Nam"
+    //         },
+    //         {
+    //           value: 2,
+    //           display: "Nữ"
+    //         },
+    //         {
+    //           value: 3,
+    //           display: "Không xác định"
+    //         },
+
+    //       ]
+    //     }),
+    //   }
 
     /**
     * Sau khi đóng form xong thì xử lý thêm gì ở master thì Override function này ở master

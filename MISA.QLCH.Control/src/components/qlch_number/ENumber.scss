@@ -12,19 +12,19 @@ Mode VBox
 }
 
 .qlch-num {
-    border-radius: 3px;
+    // border-radius: 3px;
     background: repeat-x 0 0;
     width: 100%;
     color: var(--input-text-color);
     padding: 5px 10px 4px;
     background-color: var(--input-bg-color);
-    border: 1px solid var(--input-border-color);
+    // border: 1px solid var(--input-border-color);
     text-align: right;
 }
 
 .qlch-num:focus,
 .qlch-num.warning-valid:focus {
-    border: 1px solid var(--input-border-color-hover);
+    // border: 1px solid var(--input-border-color-hover);
     outline: none;
 }
 
@@ -33,14 +33,14 @@ Mode VBox
     background-color: var(--input-bg-color-disable);
 }
 
+// .qlch-num.warning-valid {
+//     // border: 1px solid var(--input-border-color-validate);
+// }
+
 .lbl-default {
     margin-right: 16px;
 }
 
-
-.qlch-num.warning-valid {
-    border: 1px solid var(--input-border-color-validate);
-}
 
 .i-warning:hover+.bg-warning {
     display: block;
@@ -50,7 +50,7 @@ Mode VBox
     position: relative;
 }
 
-.warning-valid{
+.warning-valid {
     padding-left: 8px;
 }
 
@@ -74,3 +74,49 @@ Mode VBox
 .display-text {
     height: 20px;
 }
+
+
+
+.primary {
+    border-radius: 3px;
+    background: repeat-x 0 0;
+    width: 100%;
+    color: var(--input-text-color);
+    padding: 5px 10px 4px;
+    background-color: var(--input-bg-color);
+    border: 1px solid var(--input-border-color);
+    text-align: right;
+}
+
+.primary:focus,
+.primary.warning-valid:focus {
+    border: 1px solid var(--input-border-color-hover);
+    outline: none;
+}
+
+.primary:disabled {
+    opacity: var(--opacity-read-only);
+    background-color: var(--input-bg-color-disable);
+}
+
+.primary.warning-valid {
+    border: 1px solid var(--input-border-color-validate);
+}
+
+.secondary {
+    border: none;
+}
+
+.secondary:focus,
+.secondary.warning-valid:focus {
+    outline: none;
+}
+
+.secondary:disabled {
+    opacity: var(--opacity-read-only);
+    background-color: var(--input-bg-color-disable);
+}
+
+// .secondary.warning-valid {
+//     border: 1px solid var(--input-border-color-validate);
+// }

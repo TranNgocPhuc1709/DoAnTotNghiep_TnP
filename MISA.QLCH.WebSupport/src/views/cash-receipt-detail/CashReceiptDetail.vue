@@ -12,6 +12,7 @@ import EDate from "qlch_control/EDate";
 import ECombobox from "qlch_control/ECombobox";
 import NumberModel from '@library-src/models/qlch_control/qlch_number/NumberModel';
 import NumberFormat from '@library-src/models/qlch_control/number_format/NumberFormat';
+import ENumber from "qlch_control/ENumber";
 import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
 import Checkbox from '@library-src/models/qlch_control/qlch_checkbox/Checkbox';
 import ECheckbox from "qlch_control/ECheckbox";
@@ -31,6 +32,7 @@ export default {
     EDate,
     ECombobox,
     EGrid,
+    ENumber,
     ECheckbox
 
   },
@@ -101,21 +103,21 @@ export default {
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
       const labelWidth = 115;
       return {
-        "txtColumn1": new DateModel({
+        "txtDateCashReceipt": new DateModel({
           fieldText: "Ngày thu",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column1"
+          bindingIndex: "DateCashReceipt"
         }),
-        "txtColumn2": new TextBox({
+        "txtCodeCashReceipt": new TextBox({
           fieldText: "Số phiếu thu",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column2"
+          bindingIndex: "CodeCashReceipt"
         }),
-        "txtColumn3": new NumberModel({
+        "txtTotalMoneyCashReceipt": new NumberModel({
           fieldText: "Tổng tiền",
           require: false,
           maxLength: 255,
@@ -125,23 +127,23 @@ export default {
             thousands: ",",
             precision: 2
           }),
-          bindingIndex: "Column3"
+          bindingIndex: "TotalMoneyCashReceipt"
         }),
-        "txtColumn4": new Combobox({
+        "txtNameObjectCashReceipt": new Combobox({
           fieldText: "Tên đối tượng",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column4"
+          bindingIndex: "NameObjectCashReceipt"
         }),
-        "txtColumn5": new TextBox({
+        "txtExplantCashReceipt": new TextBox({
           fieldText: "Lý do thu",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column5"
+          bindingIndex: "ExplantCashReceipt"
         }),
-        "txtColumn6": new Combobox({
+        "txtObjectCashReceipt": new Combobox({
           fieldText: "Đối tượng nộp",
           require: false,
           maxLength: 255,
@@ -160,40 +162,68 @@ export default {
             }
           ],
           labelWidth: labelWidth,
-          bindingIndex: "Column6"
+          bindingIndex: "ObjectCashReceipt"
         }),
-        "txtColumn7": new TextBox({
+        "txtPayerCashReceipt": new TextBox({
           fieldText: "Người nộp",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column7"
+          bindingIndex: "PayerCashReceipt"
         }),
-        "txtColumn8": new TextBox({
+        "txtAddressPayerCashReceipt": new TextBox({
           fieldText: "Địa chỉ",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column8"
+          bindingIndex: "AddressPayerCashReceipt"
         }),
-        "txtColumn9": new Combobox({
+        "txtRevenueOfficerCashReceipt": new Combobox({
           fieldText: "Nhân viên thu",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column9"
+          bindingIndex: "RevenueOfficerCashReceipt"
         }),
-        "txtColumn10": new TextBox({
+        "txtNameRevenueOfficerCashReceipt": new TextBox({
           fieldText: "Tên nhân viên",
           readOnly: true,
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column10"
+          bindingIndex: "NameRevenueOfficerCashReceipt"
         }),
-        "txtColumn11": new Checkbox({
+        "txtIncludedCashReceipt": new Checkbox({
           fieldText: "Tính vào doanh thu",
-          bindingIndex: "Column11",
+          bindingIndex: "IncludedCashReceipt ",
+        }),
+
+
+        //Grid-Table
+
+        //Table Grid
+
+        "txtExplainCashReceipt": new TextBox({
+          fieldText: "",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          classType: "tertiary",
+          bindingIndex: "ExplainCashReceipt"
+        }),
+        "txtMoneyCashDetail": new NumberModel({
+          fieldText: "",
+          require: false,
+          readOnly: false,
+          maxLength: 255,
+          classType: "secondary",
+          labelWidth: labelWidth,
+          format: new NumberFormat({
+            decimal: ".",
+            thousands: ",",
+            precision: 3
+          }),
+          bindingIndex: "MoneyCashDetail"
         }),
 
       }

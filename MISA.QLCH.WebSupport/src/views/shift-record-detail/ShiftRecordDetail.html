@@ -2,17 +2,17 @@
   @toolbarClick="onSelectAction" @closeFormClick="onCloseForm">
   <template v-slot:content-detail>
     <div class="qlch-input-default item-detail">
-      <e-text-box :control="bindingControl[`txtColumn1`]"
-        v-model="masterData[bindingControl[`txtColumn1`].bindingIndex]"></e-text-box>
+      <e-text-box :control="bindingControl[`txtShiftName`]"
+        v-model="masterData[bindingControl[`txtShiftName`].bindingIndex]"></e-text-box>
     </div>
     <div class="d-flex">
       <div class="qlch-input-default item-detail">
-        <e-combobox :control="bindingControl[`txtColumn2`]"
-          v-model="masterData[bindingControl[`txtColumn2`].bindingIndex]"></e-combobox>
+        <e-combobox :control="bindingControl[`txtShiftTimeStart`]"
+          v-model="masterData[bindingControl[`txtShiftTimeStart`].bindingIndex]"></e-combobox>
       </div>
       <div class="qlch-input-default item-detail">
-        <e-combobox :control="bindingControl[`txtColumn3`]"
-          v-model="masterData[bindingControl[`txtColumn3`].bindingIndex]"></e-combobox>
+        <e-combobox :control="bindingControl[`txtShiftTimeStartEnd`]"
+          v-model="masterData[bindingControl[`txtShiftTimeStartEnd`].bindingIndex]"></e-combobox>
       </div>
     </div>
   </template>

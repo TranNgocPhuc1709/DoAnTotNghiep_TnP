@@ -37,53 +37,56 @@ export default {
       return Array(
         new Column({
           fieldText: "Mã khách hàng",
-          dataIndex: "Column1",
+          dataIndex: "CodeCustomer",
           width: 120,
         }),
         new Column({
           fieldText: "Tên khách hàng",
-          dataIndex: "Column2",
+          dataIndex: "NameCustomer",
           width: 260
         }),
         new Column({
           fieldText: "Điện thoại",
-          dataIndex: "Column3",
+          dataIndex: "TelephoneCustomer",
           width: 260
         }),
         new Column({
           fieldText: "email",
-          dataIndex: "Column4",
+          dataIndex: "EmailCustomer",
           width: 260
         }),
         new Column({
           fieldText: "Địa chỉ",
-          dataIndex: "Column5",
+          dataIndex: "AddressCustomer",
           minWidth: 260,
           flex: 1
         }),
         new Column({
           fieldText: "Ngày sinh",
-          dataIndex: "Column6",
+          dataIndex: "DateBirthCustomer",
           width: 160
         }),
+
+
         new Column({
           fieldText: "Nhóm khách hàng",
-          dataIndex: "Column7",
+          dataIndex: "CustomerGroupList",
           width: 160
         }),
+
         new Column({
           fieldText: "Mã nhân viên phụ trách",
-          dataIndex: "Column8",
+          dataIndex: "CodeEmployeeCustomer",
           width: 160
         }),
         new Column({
           fieldText: "Tên nhân viên phụ trách",
-          dataIndex: "Column9",
+          dataIndex: "NameEmployeeCustomer",
           width: 160
         }),
         new Column({
           fieldText: "Chú ý",
-          dataIndex: "Column10",
+          dataIndex: "AttentionCustomer",
           width: 160
         })
       )
@@ -97,28 +100,16 @@ export default {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
       return [
         {
-          Column1: "KH001",
-          Column2: "Nguyễn Văn A",
-          Column3: "0123456789",
-          Column4: "NguyenVanA@gmail.com",
-          Column5: "Hà Nội",
-          Column6: "18/10/2003",
-          Column7: "Nhóm khách hàng thân thiết",
-          Column8: "NV001",
-          Column9: "Nguyễn Thị Lụa",
-          Column10: "Khách quen",
-        },
-        {
-          Column1: "KH002",
-          Column2: "Nguyễn Hoàng A",
-          Column3: "0123456789",
-          Column4: "NguyenHoangA@gmail.com",
-          Column5: "Nam Định",
-          Column6: "18/10/2003",
-          Column7: "Nhóm khách hàng thân thiết",
-          Column8: "NV001",
-          Column9: "Nguyễn Thị lan",
-          Column10: "Khách quen",
+          CodeCustomer: "KH001",
+          NameCustomer: "Nguyễn Văn A",
+          TelephoneCustomer: "0123456789",
+          EmailCustomer: "NguyenVanA@gmail.com",
+          AddressCustomer: "Hà Nội",
+          DateBirthCustomer: "18/10/2003",
+          CustomerGroupList: "Nhóm khách hàng thân thiết",
+          CodeEmployeeCustomer: "NV001",
+          NameEmployeeCustomer: "Nguyễn Thị Lụa",
+          AttentionCustomer: "Khách quen",
         },
       ];
     },
@@ -128,7 +119,7 @@ export default {
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "Column1";
+      return "CodeCustomer";
     },
 
     /**

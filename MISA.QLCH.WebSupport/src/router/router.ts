@@ -57,7 +57,7 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'return',
                 component: () => import('@src/views/return-list-dictionary/ReturnListDictionary.vue'),
                 meta: {
-                    title: "Nhập Hàng",
+                    title: "Trả lại hàng mua",
                     anonymous: false
                 }
             },

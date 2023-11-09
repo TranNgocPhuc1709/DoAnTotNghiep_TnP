@@ -7,8 +7,8 @@ import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailContro
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
 import TextBox from "@library-src/models/qlch_control/qlch_text_box/TextBox";
 import ETextBox from "qlch_control/ETextBox";
-        
-export default{
+
+export default {
 
   extends: BaseDictionaryDetailController,
 
@@ -88,6 +88,6 @@ export default{
     */
     afterCloseForm() { },
   }
-    
+
 }
 </script>

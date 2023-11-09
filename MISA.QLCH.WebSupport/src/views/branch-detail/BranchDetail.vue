@@ -38,37 +38,38 @@ export default {
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
       const labelWidth = 115;
       return {
-        "txtColumn1": new TextBox({
+        "txtCodeBranch": new TextBox({
           fieldText: "Mã cửa hàng",
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column1"
+          bindingIndex: "CodeBranch"
         }),
-        "txtColumn2": new TextBox({
+        "txtNameBranch": new TextBox({
           fieldText: "Tên cửa hàng",
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column2"
+          bindingIndex: "NameBranch"
         }),
-        "txtColumn3": new TextBox({
+        "txtAddressBranch": new TextBox({
           fieldText: "Địa chỉ",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column3"
+          bindingIndex: "AddressBranch"
         }),
-        "txtColumn4": new TextBox({
+        "txtPhoneBranch": new TextBox({
           fieldText: "Số ĐT",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column4"
+          bindingIndex: "PhoneBranch"
         })
 
       }
     },
+
 
     /**
     * Sau khi đóng form xong thì xử lý thêm gì ở master thì Override function này ở master

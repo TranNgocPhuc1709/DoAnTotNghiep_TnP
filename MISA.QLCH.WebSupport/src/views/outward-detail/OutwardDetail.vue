@@ -11,15 +11,10 @@ import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
 import EDate from "qlch_control/EDate";
 import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
 import ECombobox from "qlch_control/ECombobox";
-import Column from '@library-src/models/qlch_control/qlch_grid/qlch_column/Column';
-import Grid from '@library-src/models/qlch_control/qlch_grid/Grid';
 import EGrid from "qlch_control/EGrid";
 import NumberModel from '@library-src/models/qlch_control/qlch_number/NumberModel';
 import NumberFormat from '@library-src/models/qlch_control/number_format/NumberFormat';
 import ENumber from "qlch_control/ENumber";
-import Log from '@library-src/utilities/Log';
-import Common from "@library-src/utilities/commons/Function";
-
 
 export default {
 
@@ -36,97 +31,10 @@ export default {
 
   setup() {
     const thisData: Ref<OutwardDetail> = ref(new OutwardDetail());
-    const columnOutward: Array<Column> = Array(
-      new Column({
-        fieldText: "Mã HH",
-        width: 125,
-        dataIndex: "Code",
-        isFilter: true
-      }),
-      new Column({
-        fieldText: "Tên hàng hóa",
-        dataIndex: "Name",
-        isFilter: true,
-        width: 200
-      }),
-      new Column({
-        fieldText: "Kho",
-        dataIndex: "warehouse",
-        isFilter: true,
-        width: 200
-      }),
 
-      new Column({
-        fieldText: "ĐV Tính",
-        width: 100,
-        dataIndex: "NumberUnit",
-        isFilter: true
-      }),
-
-      new Column({
-        fieldText: "Số lượng",
-        width: 100,
-        dataIndex: "NumberOrder",
-        isFilter: true
-      }),
-      new Column({
-        fieldText: "Đơn giá",
-        width: 100,
-        dataIndex: "NumberPrice",
-        isFilter: true
-      }),
-      new Column({
-        fieldText: "Thành tiền",
-        width: 250,
-        dataIndex: "IntoMoney",
-        isFilter: true,
-        flex: 1
-      }),
-
-    );
-    const dataGridOutward: Array<Record<string, any>> = new Array(
-      {
-        "Code": "SP-001",
-        "Name": "Quần Áo Nam",
-        "warehouse": "Kho 1",
-        "NumberUnit": "Chiếc",
-        "NumberOrder": "100",
-        "NumberPrice": "25000",
-        "IntoMoney": "2500000"
-      },
-      {
-        "Code": "SP-001",
-        "Name": "Quần Áo Nam",
-        "warehouse": "Kho 1",
-        "NumberUnit": "Chiếc",
-        "NumberOrder": "100",
-        "NumberPrice": "25000",
-        "IntoMoney": "2500000"
-      },
-      {
-        "Code": "SP-001",
-        "Name": "Quần Áo Nam",
-        "warehouse": "Kho 1",
-        "NumberUnit": "Chiếc",
-        "NumberOrder": "100",
-        "NumberPrice": "25000",
-        "IntoMoney": "2500000"
-      },
-
-
-
-    )
-    const tblOutward: Ref<Grid> = ref(new Grid({
-      columns: columnOutward,
-      data: dataGridOutward,
-      isNotShowFooter: true,
-      isNotShowCheckbox: true,
-      primaryKey: "EmployeeCode"
-
-    }));
     return {
       thisData,
-      tblOutward
+
     };
     return { thisData };
   },
@@ -147,44 +55,44 @@ export default {
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
       const labelWidth = 115;
       return {
-        "txtColumn1": new DateModel({
+        "txtDayOutward": new DateModel({
           fieldText: "Ngày xuất",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column1"
+          bindingIndex: "DayOutward"
         }),
-        "txtColumn2": new TextBox({
+        "txtDeliveryOutward": new TextBox({
           fieldText: "Số phiếu xuất",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column2"
+          bindingIndex: "DeliveryOutward"
         }),
-        "txtColumn3": new Combobox({
+        "txtObjectOutward": new Combobox({
           fieldText: "Đối tượng",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
           data: [
             {
-              value: 1,
+              value: "Nhân viên",
               display: "Nhân viên"
             },
             {
-              value: 2,
+              value: "Khách hàng",
               display: "Khách hàng"
             },
             {
-              value: 3,
+              value: "Nhà cung cấp",
               display: "Nhà cung cấp"
             }
           ],
-          bindingIndex: "Column3"
+          bindingIndex: "ObjectOutward"
         }),
-        "txtColumn4": new NumberModel({
+        "txtTotalMoneyOutward": new NumberModel({
           fieldText: "Tổng tiền",
-          readOnly: true,
+          readOnly: false,
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
@@ -193,33 +101,39 @@ export default {
             thousands: ",",
             precision: 0
           }),
-          bindingIndex: "Column4"
+          bindingIndex: "TotalMoneyOutward"
         }),
-        "txtColumn5": new TextBox({
+        "txtExplainOutward": new TextBox({
           fieldText: "Diễn giải",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column5"
+          bindingIndex: "ExplainOutward"
         }),
-        "txtColumn6": new TextBox({
+        "txtDeliverOutward": new TextBox({
           fieldText: "Người giao",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column6"
+          bindingIndex: "DeliverOutward"
         }),
-        "txtColumn7": new Combobox({
+        "txtObjectNameOutward": new Combobox({
           fieldText: "Tên",
           require: false,
           maxLength: 255,
+          data: [
+            {
+              value: "TNP",
+              display: "PNJ"
+            }
+          ],
           labelWidth: labelWidth,
-          bindingIndex: "Column7"
+          bindingIndex: "ObjectNameOutward"
         }),
-        "txtColumn8": new NumberModel({
+        "txtTotalQuantityOutward": new NumberModel({
           fieldText: "Tổng số lượng",
           require: false,
-          readOnly: true,
+          readOnly: false,
           maxLength: 255,
           labelWidth: labelWidth,
           format: new NumberFormat({
@@ -227,49 +141,98 @@ export default {
             thousands: ",",
             precision: 0
           }),
-          bindingIndex: "Column8"
+          bindingIndex: "TotalQuantityOutward"
+        }),
+
+
+
+        //Table Grid
+
+        "txtCodeProductOutWard": new TextBox({
+          fieldText: "",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          classType: "tertiary",
+          bindingIndex: "CodeProductOutWard"
+        }),
+        "txtNameProductOutWard": new TextBox({
+          fieldText: "",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          classType: "tertiary",
+          bindingIndex: "NameProductOutWard"
+        }),
+        "txtWarehouseProductOutWard": new Combobox({
+          fieldText: "",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          data: [
+            {
+              value: "Kh0 1",
+              display: "Kho 1"
+            }
+          ],
+          classType: "secondary",
+          bindingIndex: "WarehouseProductOutWard"
+        }),
+        "txtUnitProductOutWard": new Combobox({
+          fieldText: "",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          data: [
+            {
+              value: "Chiếc",
+              display: "Chiếc"
+            }
+          ],
+          classType: "secondary",
+          bindingIndex: "UnitProductOutWard"
+        }),
+        "txtNumberProductOutWard": new TextBox({
+          fieldText: "",
+          require: false,
+          readOnly: false,
+          maxLength: 255,
+          type: "number",
+          classType: "tertiary",
+          bindingIndex: "NumberProductOutWard"
+        }),
+
+        "txtUnitPriceOutWard": new NumberModel({
+          fieldText: "",
+          require: false,
+          readOnly: false,
+          maxLength: 255,
+          classType: "secondary",
+          labelWidth: labelWidth,
+          format: new NumberFormat({
+            decimal: ".",
+            thousands: ",",
+            precision: 3
+          }),
+          bindingIndex: "UnitPriceOutWard"
+        }),
+        "txtPaymentOutWard": new NumberModel({
+          fieldText: "",
+          require: false,
+          readOnly: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          classType: "secondary",
+          format: new NumberFormat({
+            decimal: ".",
+            thousands: ",",
+            precision: 3
+          }),
+          bindingIndex: "PaymentOutWard"
         }),
       }
     },
-    async onLoadData(parameter: any) {
-      const me = this;
-      me.tblOutward.isLoadingData = true;
-      me.tblOutward.data = new Array(
 
-        // Khai báo dữ liệu biding
-        {
-          "Code": "SP-001",
-          "Name": "Quần Áo Nam",
-          "warehouse": "Kho 1",
-          "NumberUnit": "Chiếc",
-          "NumberOrder": "100",
-          "NumberPrice": "25000",
-          "IntoMoney": "2500000"
-        },
-        {
-          "Code": "SP-001",
-          "Name": "Quần Áo Nam",
-          "warehouse": "Kho 1",
-          "NumberUnit": "Chiếc",
-          "NumberOrder": "100",
-          "NumberPrice": "25000",
-          "IntoMoney": "2500000"
-        },
-        {
-          "Code": "SP-001",
-          "Name": "Quần Áo Nam",
-          "warehouse": "Kho 1",
-          "NumberUnit": "Chiếc",
-          "NumberOrder": "100",
-          "NumberPrice": "25000",
-          "IntoMoney": "2500000"
-        },
-      );
-      await Common.getTimeOut(3000, "");
-      me.tblOutward.isLoadingData = false;
-      Log.InfoLog(parameter);
-
-    },
 
 
     /**

@@ -59,7 +59,6 @@ export default {
                     })
                 }),
                 new ToolBarItemsView({
-
                     name: "btnSaveAdd",
                     control: new Button({
                         fieldText: "Lưu và thêm mới",

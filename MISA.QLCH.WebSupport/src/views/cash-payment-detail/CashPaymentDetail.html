@@ -1,65 +1,91 @@
 <base-dictionary-detail-view :idRoot="idRoot" :propView="propView" :styleFrom="`min-width: 600px;`"
   @toolbarClick="onSelectAction" @closeFormClick="onCloseForm">
   <template v-slot:content-detail>
-
     <div class="form-cash-payment d-flex">
       <div class="form-cashPayment-detail-left flex-1">
         <span class="heading-cashPayment-info">THÔNG TIN CHUNG</span>
         <div class="qlch-input-default item-detail">
-          <e-combobox :control="bindingControl[`txtColumn6`]"
-            v-model="masterData[bindingControl[`txtColumn6`].bindingIndex]"></e-combobox>
+          <e-combobox :control="bindingControl[`txtObjectCashPayment`]"
+            v-model="masterData[bindingControl[`txtObjectCashPayment`].bindingIndex]"></e-combobox>
         </div>
         <div class="qlch-input-default item-detail">
-          <e-combobox :control="bindingControl[`txtColumn4`]"
-            v-model="masterData[bindingControl[`txtColumn4`].bindingIndex]"></e-combobox>
+          <e-combobox :control="bindingControl[`txtNameObjectCashPayment`]"
+            v-model="masterData[bindingControl[`txtNameObjectCashPayment`].bindingIndex]"></e-combobox>
         </div>
         <div class="qlch-input-default item-detail">
-          <e-text-box :control="bindingControl[`txtColumn7`]"
-            v-model="masterData[bindingControl[`txtColumn7`].bindingIndex]"></e-text-box>
+          <e-text-box :control="bindingControl[`txtReceiverCashPayment`]"
+            v-model="masterData[bindingControl[`txtReceiverCashPayment`].bindingIndex]"></e-text-box>
         </div>
         <div class="qlch-input-default item-detail">
-          <e-text-box :control="bindingControl[`txtColumn8`]"
-            v-model="masterData[bindingControl[`txtColumn8`].bindingIndex]"></e-text-box>
+          <e-text-box :control="bindingControl[`txtAddressCashPayment`]"
+            v-model="masterData[bindingControl[`txtAddressCashPayment`].bindingIndex]"></e-text-box>
         </div>
         <div class="qlch-input-default item-detail">
-          <e-text-box :control="bindingControl[`txtColumn5`]"
-            v-model="masterData[bindingControl[`txtColumn5`].bindingIndex]"></e-text-box>
+          <e-text-box :control="bindingControl[`txtReasonCashPayment`]"
+            v-model="masterData[bindingControl[`txtReasonCashPayment`].bindingIndex]"></e-text-box>
         </div>
         <div class="qlch-input-default item-detail">
-          <e-combobox :control="bindingControl[`txtColumn9`]"
-            v-model="masterData[bindingControl[`txtColumn9`].bindingIndex]"></e-combobox>
+          <e-combobox :control="bindingControl[`txtStaffCashPayment`]"
+            v-model="masterData[bindingControl[`txtStaffCashPayment`].bindingIndex]"></e-combobox>
         </div>
         <div class="qlch-input-default item-detail">
-          <e-text-box :control="bindingControl[`txtColumn10`]"
-            v-model="masterData[bindingControl[`txtColumn10`].bindingIndex]"></e-text-box>
+          <e-text-box :control="bindingControl[`txtNameStaffCashPayment`]"
+            v-model="masterData[bindingControl[`txtNameStaffCashPayment`].bindingIndex]"></e-text-box>
         </div>
       </div>
 
       <div class="form-cashPayment-detail-right">
         <span class="heading-cashPayment-info">CHỨNG TỪ</span>
         <div class="qlch-input-default item-detail">
-          <e-text-box :control="bindingControl[`txtColumn2`]"
-            v-model="masterData[bindingControl[`txtColumn2`].bindingIndex]"></e-text-box>
+          <e-text-box :control="bindingControl[`txtCodeCashPayment`]"
+            v-model="masterData[bindingControl[`txtCodeCashPayment`].bindingIndex]"></e-text-box>
         </div>
         <div class="qlch-input-default item-detail">
-          <e-date :control="bindingControl[`txtColumn1`]"
-            v-model="masterData[bindingControl[`txtColumn1`].bindingIndex]"></e-date>
+          <e-date :control="bindingControl[`txtDateCashPayment`]"
+            v-model="masterData[bindingControl[`txtDateCashPayment`].bindingIndex]"></e-date>
         </div>
         <div class="qlch-input-default item-checkbox-detail">
-          <e-checkbox :control="bindingControl[`txtColumn11`]"
-            v-model="masterData[bindingControl[`txtColumn11`].bindingIndex]"></e-checkbox>
+          <e-checkbox :control="bindingControl[`txtIncludedCashPayment`]"
+            v-model="masterData[bindingControl[`txtIncludedCashPayment`].bindingIndex]"></e-checkbox>
         </div>
 
       </div>
     </div>
     <div class="grid-footer">
       <span class="heading-cashReceipt-info">Chi tiết</span>
-      <e-grid :control="tblCashPayment" @loadData="onLoadData" />
+      <!-- <e-grid :control="tblCashPayment" @loadData="onLoadData" /> -->
+      <div class="grid-GoodsCashReceipt">
+        <table class="flex-1">
+          <thead>
+            <tr>
+              <th>Diễn Giải</th>
+              <th>Số tiền</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <e-text-box :control="bindingControl[`txtExplainCashPayment`]"
+                  v-model="masterData[bindingControl[`txtExplainCashPayment`].bindingIndex]"></e-text-box>
+              </td>
+              <td style="min-width: 220px;">
+                <e-number :control="bindingControl[`txtMoneyCashPayment`]"
+                  v-model="masterData[bindingControl[`txtMoneyCashPayment`].bindingIndex]"></e-number>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <div class="synthetic d-flex-vcenter">
-      <e-text-box :control="bindingControl[`txtColumn12`]"
-        v-model="masterData[bindingControl[`txtColumn12`].bindingIndex]"></e-text-box>
+
+    <div class="synthetic-footer d-flex-vcenter">
+      <div class="main-synthetic d-flex-vcenter">
+        <e-number :control="bindingControl[`txtTotalCashPayment`]"
+          v-model="masterData[bindingControl[`txtTotalCashPayment`].bindingIndex]"></e-number>
+      </div>
+
     </div>
+
 
   </template>
 </base-dictionary-detail-view>

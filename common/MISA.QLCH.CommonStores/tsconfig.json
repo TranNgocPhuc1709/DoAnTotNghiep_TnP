@@ -5,7 +5,13 @@
     "paths": {
       "@store-src/*": [
         "src/*"
-      ]
+      ],
+      "@library-src": [
+        "../MISA.QLCH.Library/src"
+      ],
+      "@library-src/*": [
+        "../MISA.QLCH.Library/src/*"
+      ],
     },
     /* Visit https://aka.ms/tsconfig to read more about this file */
     /* Projects */

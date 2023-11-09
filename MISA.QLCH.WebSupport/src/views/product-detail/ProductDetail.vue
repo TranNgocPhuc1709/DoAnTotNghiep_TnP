@@ -49,27 +49,167 @@ export default {
     buildBindingControl() {
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
       const labelWidth = 115;
+      // return {
+      //   "txtColumn1": new TextBox({
+      //     fieldText: "Mã Sản Phẩm",
+      //     require: true,
+      //     maxLength: 255,
+      //     labelWidth: labelWidth,
+      //     bindingIndex: "Column1"
+      //   }),
+      //   "txtColumn2": new TextBox({
+      //     fieldText: "Tên Sản Phẩm",
+      //     require: true,
+      //     maxLength: 255,
+      //     labelWidth: labelWidth,
+      //     bindingIndex: "Column2"
+      //   }),
+      //   "txtColumn3": new Combobox({
+      //     fieldText: "Nhóm Sản Phẩm",
+      //     require: false,
+      //     maxLength: 255,
+      //     labelWidth: labelWidth,
+      //     bindingIndex: "Column3",
+      //     data: [
+      //       {
+      //         value: 1,
+      //         display: "G1"
+      //       },
+      //       {
+      //         value: 2,
+      //         display: "G2"
+      //       },
+      //       {
+      //         value: 3,
+      //         display: "G3"
+      //       },
+      //     ]
+      //   }),
+      //   "txtColumn4": new Combobox({
+      //     fieldText: "Đơn Vị Tính",
+      //     require: false,
+      //     maxLength: 255,
+      //     labelWidth: labelWidth,
+      //     bindingIndex: "Column4",
+      //     data: [
+      //       {
+      //         value: 1,
+      //         display: "Chiếc"
+      //       },
+      //       {
+      //         value: 2,
+      //         display: "Cái"
+      //       },
+      //       {
+      //         value: 3,
+      //         display: "Combo"
+      //       },
+      //     ]
+      //   }),
+      //   "txtColumn5": new NumberModel({
+      //     fieldText: "Giá mua",
+      //     require: false,
+      //     maxLength: 255,
+      //     labelWidth: labelWidth,
+      //     format: new NumberFormat({
+      //       decimal: ".",
+      //       thousands: ",",
+      //       precision: 3
+      //     }),
+      //     bindingIndex: "Column5"
+      //   }),
+      //   "txtColumn12": new NumberModel({
+      //     fieldText: "Giá bán",
+      //     require: false,
+      //     maxLength: 255,
+      //     labelWidth: labelWidth,
+      //     format: new NumberFormat({
+      //       decimal: ".",
+      //       thousands: ",",
+      //       precision: 3
+      //     }),
+      //     bindingIndex: "Column12"
+      //   }),
+
+      //   "txtColumn6": new Checkbox({
+      //     fieldText: "Hiển thị trên trang bán hàng",
+      //     bindingIndex: "Column6",
+      //   }),
+      //   "txtColumn7": new TextBox({
+      //     fieldText: "Màu sắc",
+      //     placeholder: "Xanh, Đỏ, Vàng,..",
+      //     require: false,
+      //     maxLength: 255,
+      //     labelWidth: labelWidth,
+      //     bindingIndex: "Column7"
+      //   }),
+      //   "txtColumn8": new TextBox({
+      //     fieldText: "Size",
+      //     placeholder: "S,M,L,XL,...",
+      //     require: false,
+      //     maxLength: 255,
+      //     labelWidth: labelWidth,
+      //     bindingIndex: "Column8"
+      //   }),
+      //   "txtColumn9": new NumberModel({
+      //     fieldText: "Tồn kho ban đầu",
+      //     require: false,
+      //     maxLength: 255,
+      //     labelWidth: labelWidth,
+      //     format: new NumberFormat({
+      //       decimal: ".",
+      //       thousands: ",",
+      //       precision: 0
+      //     }),
+      //     bindingIndex: "Column9"
+      //   }),
+      //   "txtColumn10": new NumberModel({
+      //     fieldText: "Tồn kho tối thiểu",
+      //     require: false,
+      //     maxLength: 255,
+      //     labelWidth: labelWidth,
+      //     format: new NumberFormat({
+      //       decimal: ".",
+      //       thousands: ",",
+      //       precision: 0
+      //     }),
+      //     bindingIndex: "Column10"
+      //   }),
+      //   "txtColumn11": new NumberModel({
+      //     fieldText: "Tồn kho tối đa",
+      //     require: false,
+      //     maxLength: 255,
+      //     labelWidth: labelWidth,
+      //     format: new NumberFormat({
+      //       decimal: ".",
+      //       thousands: ",",
+      //       precision: 0
+      //     }),
+      //     bindingIndex: "Column11"
+      //   }),
+
+      // }
       return {
-        "txtColumn1": new TextBox({
+        "txtCodeProductList": new TextBox({
           fieldText: "Mã Sản Phẩm",
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column1"
+          bindingIndex: "CodeProductList"
         }),
-        "txtColumn2": new TextBox({
+        "txtNameProductList": new TextBox({
           fieldText: "Tên Sản Phẩm",
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column2"
+          bindingIndex: "NameProductList"
         }),
-        "txtColumn3": new Combobox({
+        "txtGroupProductList": new Combobox({
           fieldText: "Nhóm Sản Phẩm",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column3",
+          bindingIndex: "GroupProductList",
           data: [
             {
               value: 1,
@@ -85,12 +225,12 @@ export default {
             },
           ]
         }),
-        "txtColumn4": new Combobox({
+        "txtUnitProductList": new Combobox({
           fieldText: "Đơn Vị Tính",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column4",
+          bindingIndex: "UnitProductList",
           data: [
             {
               value: 1,
@@ -106,7 +246,7 @@ export default {
             },
           ]
         }),
-        "txtColumn5": new NumberModel({
+        "txtPurchasePriceProductList": new NumberModel({
           fieldText: "Giá mua",
           require: false,
           maxLength: 255,
@@ -116,42 +256,30 @@ export default {
             thousands: ",",
             precision: 3
           }),
-          bindingIndex: "Column5"
-        }),
-        "txtColumn12": new NumberModel({
-          fieldText: "Giá bán",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          format: new NumberFormat({
-            decimal: ".",
-            thousands: ",",
-            precision: 3
-          }),
-          bindingIndex: "Column12"
+          bindingIndex: "PurchasePriceProductList"
         }),
 
-        "txtColumn6": new Checkbox({
+        "txtShowDisplayProduct": new Checkbox({
           fieldText: "Hiển thị trên trang bán hàng",
-          bindingIndex: "Column6",
+          bindingIndex: "ShowDisplayProduct",
         }),
-        "txtColumn7": new TextBox({
+        "txtTypeProductList": new TextBox({
           fieldText: "Màu sắc",
           placeholder: "Xanh, Đỏ, Vàng,..",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column7"
+          bindingIndex: "TypeProductList"
         }),
-        "txtColumn8": new TextBox({
+        "txtSizeProductList": new TextBox({
           fieldText: "Size",
           placeholder: "S,M,L,XL,...",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column8"
+          bindingIndex: "SizeProductList"
         }),
-        "txtColumn9": new NumberModel({
+        "txtProductInventory": new NumberModel({
           fieldText: "Tồn kho ban đầu",
           require: false,
           maxLength: 255,
@@ -161,9 +289,9 @@ export default {
             thousands: ",",
             precision: 0
           }),
-          bindingIndex: "Column9"
+          bindingIndex: "ProductInventory"
         }),
-        "txtColumn10": new NumberModel({
+        "txtProductMinInventory": new NumberModel({
           fieldText: "Tồn kho tối thiểu",
           require: false,
           maxLength: 255,
@@ -173,9 +301,9 @@ export default {
             thousands: ",",
             precision: 0
           }),
-          bindingIndex: "Column10"
+          bindingIndex: "ProductMinInventory"
         }),
-        "txtColumn11": new NumberModel({
+        "txtProductMaxInventory": new NumberModel({
           fieldText: "Tồn kho tối đa",
           require: false,
           maxLength: 255,
@@ -185,7 +313,19 @@ export default {
             thousands: ",",
             precision: 0
           }),
-          bindingIndex: "Column11"
+          bindingIndex: "ProductMaxInventory"
+        }),
+        "txtPriceProductList": new NumberModel({
+          fieldText: "Giá bán",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          format: new NumberFormat({
+            decimal: ".",
+            thousands: ",",
+            precision: 3
+          }),
+          bindingIndex: "PriceProductList"
         }),
 
       }

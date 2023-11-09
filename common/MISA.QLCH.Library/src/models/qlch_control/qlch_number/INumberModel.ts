@@ -32,4 +32,6 @@ export default interface INumber extends IBaseInput {
      * Độ dài label
      */
     labelWidth?: number;
+
+    classType?: "primary" | "secondary";
 }

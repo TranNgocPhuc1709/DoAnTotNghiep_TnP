@@ -2,18 +2,22 @@
 <style lang="scss" scoped src="./ShiftRecordListDictionary.scss"></style>
 <script lang="ts">
 import ShiftRecordListDictionary from './ShiftRecordListDictionary';
-import { Ref, ref } from 'vue';
+import { PropType, Ref, ref } from 'vue';
 import BaseDictionaryListView from 'qlch_base/BaseDictionaryListView';
 import BaseDictionaryListController from 'qlch_base/BaseDictionaryListController';
 import ParamPaging from '@library-src/models/qlch_control/qlch_grid/qlch_param_paging/ParamPaging';
 import Column from '@library-src/models/qlch_control/qlch_grid/qlch_column/Column';
 import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
 import ShiftRecord from '@store-src/models/shift-record/ShiftRecord';
-
 export default {
 
   extends: BaseDictionaryListController,
-
+  props: {
+    masterData: {
+      type: Object as PropType<Record<string, any>>,
+      require: true
+    }
+  },
   components: {
     BaseDictionaryListView,
   },
@@ -71,16 +75,34 @@ export default {
       if (!LocalStorageLibrary.getByKey<Array<ShiftRecord>>("ShiftRecord")) {
         return new Array<ShiftRecord>;
       }
-
-      return LocalStorageLibrary.getByKey<Array<ShiftRecord>>("ShiftRecord");
+      else {
+        return LocalStorageLibrary.getByKey<Array<ShiftRecord>>("ShiftRecord");
+      }
     },
+    // delItem() {
 
+
+    //   // const me = this;
+    //   // let listShiftRecord: Array<ShiftRecord> | null = LocalStorageLibrary.getByKey<Array<ShiftRecord>>("ShiftRecord");
+    //   // if (me.masterData) {
+    //   //   if (me.masterData.editMode == 3) {
+    //   //     listShiftRecord = LocalStorageLibrary.getByKey<Array<ShiftRecord>>("ShiftRecord");
+    //   //     if (listShiftRecord) {
+    //   //       listShiftRecord = [];
+    //   //       LocalStorageLibrary.setByKey("ShiftRecord", listShiftRecord);
+    //   //     }
+    //   //   }
+    //   // }
+
+
+
+    // },
     /**
      * Set PrimaryKey cho object master
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "Column1";
+      return "ShiftName";
     },
 
     /**

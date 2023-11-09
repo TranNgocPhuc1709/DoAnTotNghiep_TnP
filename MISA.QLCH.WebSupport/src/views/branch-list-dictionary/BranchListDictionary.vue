@@ -37,33 +37,32 @@ export default {
       return Array(
         new Column({
           fieldText: "Mã cửa hàng",
-          dataIndex: "Column1",
+          dataIndex: "CodeBranch",
           width: 120,
         }),
         new Column({
           fieldText: "Tên cửa hàng",
-          dataIndex: "Column2",
+          dataIndex: "NameBranch",
           width: 260
         }),
         new Column({
           fieldText: "Địa chỉ",
-          dataIndex: "Column3",
+          dataIndex: "AddressBranch",
           width: 260
         }),
         new Column({
           fieldText: "Số điện thoại",
-          dataIndex: "Column4",
+          dataIndex: "PhoneBranch",
           width: 260
         }),
         new Column({
           fieldText: "Trạng thái",
-          dataIndex: "Column5",
+          dataIndex: "StatusBranch",
           minWidth: 260,
           flex: 1
         })
       )
     },
-
     /**
      * Load dữ liệu master lên grid
      * @param param 
@@ -72,19 +71,11 @@ export default {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
       return [
         {
-          Column1: "TSTCH-01",
-          Column2: "Shop Thiên Long",
-          Column3: "Hà Nội",
-          Column4: "0123456789",
-          Column5: "Đang hoạt động",
-
-        },
-        {
-          Column1: "TSTCH-02",
-          Column2: "Shop Minh Khai",
-          Column3: "Nam Định",
-          Column4: "0123456789",
-          Column5: "Ngừng hoạt động",
+          CodeBranch: "TSTCH-01",
+          NameBranch: "Shop Thiên Long",
+          AddressBranch: "Hà Nội",
+          PhoneBranch: "0123456789",
+          StatusBranch: "Đang hoạt động",
 
         }
 
@@ -96,7 +87,7 @@ export default {
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "Column1";
+      return "CodeBranch";
     },
 
     /**

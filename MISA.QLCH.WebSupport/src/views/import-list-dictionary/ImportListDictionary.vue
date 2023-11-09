@@ -95,35 +95,66 @@ export default {
     buildGridMasterColumn(): Array<Column> {
       console.log("DEV: Override Function buildGridMasterColumn return list Column in Grid");
       return Array(
+        // new Column({
+        //   fieldText: "Ngày nhập",
+        //   dataIndex: "Column1",
+        //   width: 120,
+        // }),
+        // new Column({
+        //   fieldText: "Số phiếu nhập",
+        //   dataIndex: "Column2",
+        //   width: 260
+        // }),
+        // new Column({
+        //   fieldText: "Nhà cung cấp",
+        //   dataIndex: "Column3",
+        //   width: 260
+        // }),
+        // new Column({
+        //   fieldText: "Thành tiền",
+        //   dataIndex: "Column4",
+        //   width: 260
+        // }),
+        // new Column({
+        //   fieldText: "Nhân viên mua hàng",
+        //   dataIndex: "Column5",
+        //   minWidth: 260,
+        //   flex: 1
+        // }),
+        // new Column({
+        //   fieldText: "Diễn giải",
+        //   dataIndex: "Column6",
+        //   width: 160
+        // })
         new Column({
           fieldText: "Ngày nhập",
-          dataIndex: "Column1",
+          dataIndex: "DateImport",
           width: 120,
         }),
         new Column({
           fieldText: "Số phiếu nhập",
-          dataIndex: "Column2",
+          dataIndex: "ReceiptNumberImport",
           width: 260
         }),
         new Column({
           fieldText: "Nhà cung cấp",
-          dataIndex: "Column3",
+          dataIndex: "SupplierImport",
           width: 260
         }),
         new Column({
           fieldText: "Thành tiền",
-          dataIndex: "Column4",
+          dataIndex: "IntoMoneyImport",
           width: 260
         }),
         new Column({
           fieldText: "Nhân viên mua hàng",
-          dataIndex: "Column5",
+          dataIndex: "StaffImport",
           minWidth: 260,
           flex: 1
         }),
         new Column({
           fieldText: "Diễn giải",
-          dataIndex: "Column6",
+          dataIndex: "ExplainImport",
           width: 160
         })
       )
@@ -137,45 +168,14 @@ export default {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
       return [
         {
-          Column1: "Value 11",
-          Column2: "Value 21",
-          Column3: "Value 31",
-          Column4: "Value 41",
-          Column5: "Value 51",
-          Column6: "Value 61"
+          DateImport: "21/10/2023",
+          ReceiptNumberImport: "123",
+          SupplierImport: "NCC123",
+          IntoMoneyImport: "120000",
+          StaffImport: "PNJ",
+          ExplainImport: "Nhập Hàng"
         },
-        {
-          Column1: "Value 12",
-          Column2: "Value 22",
-          Column3: "Value 32",
-          Column4: "Value 42",
-          Column5: "Value 52",
-          Column6: "Value 62"
-        },
-        {
-          Column1: "Value 13",
-          Column2: "Value 23",
-          Column3: "Value 33",
-          Column4: "Value 43",
-          Column5: "Value 53",
-          Column6: "Value 63"
-        },
-        {
-          Column1: "Value 14",
-          Column2: "Value 24",
-          Column3: "Value 34",
-          Column4: "Value 44",
-          Column5: "Value 54",
-          Column6: "Value 64"
-        },
-        {
-          Column1: "Value 15",
-          Column2: "Value 25",
-          Column3: "Value 35",
-          Column4: "Value 45",
-          Column5: "Value 55",
-          Column6: "Value 65"
-        }
+
       ];
     },
 
@@ -184,7 +184,7 @@ export default {
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "Column1";
+      return "DateImport";
     },
 
     /**

@@ -94,27 +94,27 @@ export default {
       return Array(
         new Column({
           fieldText: "Ngày",
-          dataIndex: "Column1",
+          dataIndex: "DateCashPayment",
           width: 120,
         }),
         new Column({
           fieldText: "Số chứng từ",
-          dataIndex: "Column2",
+          dataIndex: "CodeCashPayment",
           width: 260
         }),
         new Column({
           fieldText: "Tổng tiền",
-          dataIndex: "Column3",
+          dataIndex: "TotalCashPayment",
           width: 260
         }),
         new Column({
           fieldText: "Đối tượng nộp tiền",
-          dataIndex: "Column4",
+          dataIndex: "NameObjectCashPayment",
           width: 260
         }),
         new Column({
           fieldText: "Lý do",
-          dataIndex: "Column5",
+          dataIndex: "ReasonCashPayment",
           minWidth: 260,
           flex: 1
         })
@@ -129,54 +129,20 @@ export default {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
       return [
         {
-          Column1: "Value 11",
-          Column2: "Value 21",
-          Column3: "Value 31",
-          Column4: "Value 41",
-          Column5: "Value 51",
-          Column6: "Value 61"
+          DateCashPayment: "22/10/2023",
+          CodeCashPayment: "abc123",
+          TotalCashPayment: "1200000",
+          NameObjectCashPayment: "TNP",
+          ReasonCashPayment: "trả nợ khách"
         },
-        {
-          Column1: "Value 12",
-          Column2: "Value 22",
-          Column3: "Value 32",
-          Column4: "Value 42",
-          Column5: "Value 52",
-          Column6: "Value 62"
-        },
-        {
-          Column1: "Value 13",
-          Column2: "Value 23",
-          Column3: "Value 33",
-          Column4: "Value 43",
-          Column5: "Value 53",
-          Column6: "Value 63"
-        },
-        {
-          Column1: "Value 14",
-          Column2: "Value 24",
-          Column3: "Value 34",
-          Column4: "Value 44",
-          Column5: "Value 54",
-          Column6: "Value 64"
-        },
-        {
-          Column1: "Value 15",
-          Column2: "Value 25",
-          Column3: "Value 35",
-          Column4: "Value 45",
-          Column5: "Value 55",
-          Column6: "Value 65"
-        }
       ];
     },
-
     /**
      * Set PrimaryKey cho object master
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "Column1";
+      return "DateCashPayment";
     },
 
     /**

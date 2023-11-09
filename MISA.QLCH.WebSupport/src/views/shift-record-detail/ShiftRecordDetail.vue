@@ -11,6 +11,7 @@ import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
 import ECombobox from "qlch_control/ECombobox";
 import ShiftRecord from '@store-src/models/shift-record/ShiftRecord';
 import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import Guid from '@library-src/utilities/types/Guid';
 
 
 
@@ -52,14 +53,14 @@ export default {
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
       const labelWidth = 115;
       return {
-        "txtColumn1": new TextBox({
+        "txtShiftName": new TextBox({
           fieldText: "Tên ca",
-          require: true,
+          require: false,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "ShiftName"
         }),
-        "txtColumn2": new Combobox({
+        "txtShiftTimeStart": new Combobox({
           fieldText: "Giờ bắt đầu",
           require: false,
           maxLength: 255,
@@ -80,7 +81,7 @@ export default {
             },
           ]
         }),
-        "txtColumn3": new Combobox({
+        "txtShiftTimeStartEnd": new Combobox({
           fieldText: "Giờ kết thúc",
           require: false,
           maxLength: 255,
@@ -105,19 +106,41 @@ export default {
     },
     saveData() {
       const me = this;
-      let ListShiftRecord: Array<ShiftRecord> | null = new Array<ShiftRecord>;
+      let listShiftRecord: Array<ShiftRecord> | null = new Array<ShiftRecord>;
       if (me.masterData) {
-        ListShiftRecord = LocalStorageLibrary.getByKey<Array<ShiftRecord>>("ShiftRecord");
-        if (ListShiftRecord) {
-          ListShiftRecord.push(me.masterData);
-          LocalStorageLibrary.setByKey("ShiftRecord", ListShiftRecord);
+        if (me.masterData.editMode == 1) {
+          me.masterData['shiftId'] = Guid.NewGuid();
+          listShiftRecord = LocalStorageLibrary.getByKey<Array<ShiftRecord>>("ShiftRecord");
+          if (listShiftRecord) {
+            listShiftRecord.push(me.masterData);
+            LocalStorageLibrary.setByKey("ShiftRecord", listShiftRecord);
+          }
+          else {
+            listShiftRecord = new Array<ShiftRecord>({ ...me.masterData });
+            LocalStorageLibrary.setByKey("ShiftRecord", listShiftRecord);
+          }
         }
-        else {
-          ListShiftRecord = new Array<ShiftRecord>({ ...me.masterData });
-          LocalStorageLibrary.setByKey("ShiftRecord", ListShiftRecord);
+
+        if (me.masterData.editMode == 2) {
+          listShiftRecord = LocalStorageLibrary.getByKey<Array<ShiftRecord>>("ShiftRecord");
+          if (listShiftRecord) {
+            listShiftRecord.forEach(newItemRecord => {
+              if (me.masterData) {
+                if (newItemRecord.shiftId == me.masterData.shiftId) {
+                  newItemRecord.ShiftName = me.masterData.ShiftName;
+                  newItemRecord.ShiftTimeStart = me.masterData.ShiftTimeStart;
+                  newItemRecord.ShiftTimeStartEnd = me.masterData.ShiftTimeStartEnd;
+                  newItemRecord.ShiftStatus = me.masterData.ShiftStatus;
+                }
+              }
+            });
+            LocalStorageLibrary.setByKey("ShiftRecord", listShiftRecord);
+          }
         }
       }
     },
+
+
 
 
     /**

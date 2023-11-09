@@ -20,7 +20,6 @@ export default {
         const columnMaster = me.buildGridMasterColumn();
         const toolBarItems = me.buildToolBarItems();
         const primaryKeyMaster = me.getPrimaryKeyMaster();
-
         const viewControl: Ref<DictionaryListViewModel> = ref(new DictionaryListViewModel({
             gridMaster: new Grid({
                 columns: columnMaster,
@@ -31,7 +30,6 @@ export default {
         return {
             viewControl
         };
-
     },
 
     /**
@@ -45,7 +43,6 @@ export default {
             Log.ErrorLog(error as Error)
         }
     },
-
     methods: {
 
         /**
@@ -294,7 +291,7 @@ export default {
         },
 
         /**
-         * Thực hiện hàm này khi nhấn vào button edit trên thanh toolbar
+         * Thực hiện hàm này khi nhấn vào button delete trên thanh toolbar
          * tnphuc - 19.09.2023 
          */
         delItem() {

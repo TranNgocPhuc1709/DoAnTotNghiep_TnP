@@ -37,22 +37,22 @@ export default {
       return Array(
         new Column({
           fieldText: "STT",
-          dataIndex: "Column1",
+          dataIndex: "NumericalBank",
           width: 120,
         }),
         new Column({
           fieldText: "Tên thẻ",
-          dataIndex: "Column2",
+          dataIndex: "NameCardBank",
           width: 260
         }),
         new Column({
           fieldText: "Diễn giải",
-          dataIndex: "Column3",
+          dataIndex: "ExplainBank",
           width: 260
         }),
         new Column({
           fieldText: "Trạng thái",
-          dataIndex: "Column4",
+          dataIndex: "StatusBank",
           width: 260,
           flex: 1
         })
@@ -67,19 +67,12 @@ export default {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
       return [
         {
-          Column1: "1",
-          Column2: "Visa",
-          Column3: "Thẻ Visa",
-          Column4: "Đang theo dõi",
+          NumericalBank: "1",
+          NameCardBank: "Visa",
+          ExplainBank: "Thẻ Visa",
+          StatusBank: "Đang theo dõi",
 
-        },
-        {
-          Column1: "2",
-          Column2: "Master Card",
-          Column3: "Thẻ Master",
-          Column4: "Ngừng theo dõi",
-
-        },
+        }
 
       ];
     },
@@ -89,7 +82,7 @@ export default {
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "Column1";
+      return "NumericalBank";
     },
 
     /**

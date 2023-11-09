@@ -40,26 +40,26 @@ export default {
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
       const labelWidth = 128;
       return {
-        "txtColumn1": new TextBox({
+        "txtCodeVendor": new TextBox({
           fieldText: "Mã Nhà Cung Cấp",
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column1"
+          bindingIndex: "CodeVendor"
         }),
-        "txtColumn2": new TextBox({
+        "txtNameVendor": new TextBox({
           fieldText: "Tên Nhà Cung Cấp",
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column2"
+          bindingIndex: "NameVendor"
         }),
-        "txtColumn3": new Combobox({
+        "txtGroupVendor": new Combobox({
           fieldText: "Nhóm Nhà Cung Cấp",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column3",
+          bindingIndex: "GroupVendor",
           data: [
             {
               value: 1,
@@ -76,58 +76,55 @@ export default {
           ]
 
         }),
-        "txtColumn4": new TextBox({
+        "txtTelephoneVendor": new TextBox({
           fieldText: "Số Điện Thoại",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column4"
+          bindingIndex: "TelephoneVendor"
         }),
-        "txtColumn5": new TextBox({
+        "txtAddressVendor": new TextBox({
           fieldText: "Địa chỉ",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column5"
+          bindingIndex: "AddressVendor"
         }),
-        "txtColumn6": new TextBox({
+        "txtFullNameVendor": new TextBox({
           fieldText: "Họ Và Tên",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column6"
+          bindingIndex: "FullNameVendor"
         }),
-        "txtColumn7": new TextBox({
+        "txtEmailVendor": new TextBox({
           fieldText: "Email",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column7"
+          bindingIndex: "EmailVendor"
         }),
-        "txtColumn8": new TextBox({
+        "txtPhoneContactVendor": new TextBox({
           fieldText: "Số ĐT",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column8"
+          bindingIndex: "PhoneContactVendor"
         }),
-        "txtColumn9": new TextBox({
+        "txtTitleVendor": new TextBox({
           fieldText: "Chức Danh",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column9"
+          bindingIndex: "TitleVendor"
         }),
-        "txtColumn10": new TextBox({
+        "txtAddressItemVendor": new TextBox({
           fieldText: "Địa chỉ",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column10"
+          bindingIndex: "AddressItemVendor"
         }),
-
-
-
       }
     },
 

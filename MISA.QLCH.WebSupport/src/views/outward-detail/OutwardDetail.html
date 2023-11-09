@@ -5,50 +5,95 @@
       <div class="form-outward-detail-left flex-1">
         <span class="heading-outward-info">THÔNG TIN CHUNG</span>
         <div class="qlch-input-default item-detail">
-          <e-combobox :control="bindingControl[`txtColumn3`]"
-            v-model="masterData[bindingControl[`txtColumn3`].bindingIndex]"></e-combobox>
+          <e-combobox :control="bindingControl[`txtObjectOutward`]"
+            v-model="masterData[bindingControl[`txtObjectOutward`].bindingIndex]"></e-combobox>
         </div>
         <div class="qlch-input-default item-detail">
-          <e-combobox :control="bindingControl[`txtColumn7`]"
-            v-model="masterData[bindingControl[`txtColumn7`].bindingIndex]"></e-combobox>
+          <e-combobox :control="bindingControl[`txtObjectNameOutward`]"
+            v-model="masterData[bindingControl[`txtObjectNameOutward`].bindingIndex]"></e-combobox>
         </div>
         <div class="qlch-input-default item-detail">
-          <e-text-box :control="bindingControl[`txtColumn6`]"
-            v-model="masterData[bindingControl[`txtColumn6`].bindingIndex]"></e-text-box>
+          <e-text-box :control="bindingControl[`txtDeliverOutward`]"
+            v-model="masterData[bindingControl[`txtDeliverOutward`].bindingIndex]"></e-text-box>
         </div>
         <div class="qlch-input-default item-detail">
-          <e-text-box :control="bindingControl[`txtColumn5`]"
-            v-model="masterData[bindingControl[`txtColumn5`].bindingIndex]"></e-text-box>
+          <e-text-box :control="bindingControl[`txtExplainOutward`]"
+            v-model="masterData[bindingControl[`txtExplainOutward`].bindingIndex]"></e-text-box>
         </div>
       </div>
       <div class="form-outward-detail-right">
         <span class="heading-outward-info">CHỨNG TỪ</span>
         <div class="qlch-input-default item-detail">
-          <e-text-box :control="bindingControl[`txtColumn2`]"
-            v-model="masterData[bindingControl[`txtColumn2`].bindingIndex]"></e-text-box>
+          <e-text-box :control="bindingControl[`txtDeliveryOutward`]"
+            v-model="masterData[bindingControl[`txtDeliveryOutward`].bindingIndex]"></e-text-box>
         </div>
         <div class="qlch-input-default item-detail">
-          <e-date :control="bindingControl[`txtColumn1`]"
-            v-model="masterData[bindingControl[`txtColumn1`].bindingIndex]"></e-date>
+          <e-date :control="bindingControl[`txtDayOutward`]"
+            v-model="masterData[bindingControl[`txtDayOutward`].bindingIndex]"></e-date>
         </div>
 
       </div>
     </div>
-    <!-- <div class="footer-form-inward-detail">
-      <span class="heading-outward-info">CHI TIẾT</span>
-    </div> -->
+
     <div class="grid-footer">
       <span class="heading-outward-info">Chi tiết</span>
-      <e-grid :control="tblOutward" @loadData="onLoadData" />
+      <div class="grid-GoodsOutward">
+        <table class="flex-1">
+          <thead>
+            <tr>
+              <th>Mã Hàng Hóa</th>
+              <th>Tên Hàng Hóa</th>
+              <th>Kho</th>
+              <th>Đơn vị tính</th>
+              <th>Số lượng</th>
+              <th>Đơn giá</th>
+              <th>Thành tiền</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <e-text-box :control="bindingControl[`txtCodeProductOutWard`]"
+                  v-model="masterData[bindingControl[`txtCodeProductOutWard`].bindingIndex]"></e-text-box>
+              </td>
+
+              <td>
+                <e-text-box :control="bindingControl[`txtNameProductOutWard`]"
+                  v-model="masterData[bindingControl[`txtNameProductOutWard`].bindingIndex]"></e-text-box>
+              </td>
+              <td>
+                <e-combobox :control="bindingControl[`txtWarehouseProductOutWard`]"
+                  v-model="masterData[bindingControl[`txtWarehouseProductOutWard`].bindingIndex]"></e-combobox>
+              </td>
+              <td>
+                <e-combobox :control="bindingControl[`txtUnitProductOutWard`]"
+                  v-model="masterData[bindingControl[`txtUnitProductOutWard`].bindingIndex]"></e-combobox>
+              </td>
+              <td>
+                <e-text-box :control="bindingControl[`txtNumberProductOutWard`]"
+                  v-model="masterData[bindingControl[`txtNumberProductOutWard`].bindingIndex]"></e-text-box>
+              </td>
+              <td>
+                <e-number :control="bindingControl[`txtUnitPriceOutWard`]"
+                  v-model="masterData[bindingControl[`txtUnitPriceOutWard`].bindingIndex]"></e-number>
+              </td>
+              <td>
+                <e-number :control="bindingControl[`txtPaymentOutWard`]"
+                  v-model="masterData[bindingControl[`txtPaymentOutWard`].bindingIndex]"></e-number>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <div class="synthetic-footer d-flex-vcenter">
       <div class="main-synthetic d-flex-vcenter">
-        <e-number :control="bindingControl[`txtColumn8`]"
-          v-model="masterData[bindingControl[`txtColumn8`].bindingIndex]"></e-number>
+        <e-number :control="bindingControl[`txtTotalQuantityOutward`]"
+          v-model="masterData[bindingControl[`txtTotalQuantityOutward`].bindingIndex]"></e-number>
       </div>
       <div class="main-synthetic d-flex-vcenter">
-        <e-number :control="bindingControl[`txtColumn4`]"
-          v-model="masterData[bindingControl[`txtColumn4`].bindingIndex]"></e-number>
+        <e-number :control="bindingControl[`txtTotalMoneyOutward`]"
+          v-model="masterData[bindingControl[`txtTotalMoneyOutward`].bindingIndex]"></e-number>
       </div>
 
     </div>

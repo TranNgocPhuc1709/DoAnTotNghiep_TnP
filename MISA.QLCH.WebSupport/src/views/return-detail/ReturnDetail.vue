@@ -150,30 +150,37 @@ export default {
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
       const labelWidth = 115;
       return {
-        "txtColumn1": new DateModel({
+        "txtDateReturn": new DateModel({
           fieldText: "Ngày trả hàng",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column1"
+          bindingIndex: "DateReturn"
         }),
-        "txtColumn2": new TextBox({
+        "txtBillNumberReturn": new TextBox({
           fieldText: "Số phiếu xuất",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column2"
+          bindingIndex: "BillNumberReturn"
         }),
-        "txtColumn3": new Combobox({
+        //ncc
+        "txtSupplierReturn": new Combobox({
           fieldText: "Nhà cung cấp",
           require: false,
           maxLength: 255,
+          data: [
+            {
+              value: "NCC001",
+              display: "NCC001"
+            }
+          ],
           labelWidth: labelWidth,
-          bindingIndex: "Column3"
+          bindingIndex: "SupplierReturn"
         }),
-        "txtColumn4": new NumberModel({
+        "txtTotalMoneyReturn": new NumberModel({
           fieldText: "Thành tiền",
-          readOnly: true,
+          readOnly: false,
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
@@ -182,38 +189,39 @@ export default {
             thousands: ",",
             precision: 0
           }),
-          bindingIndex: "Column4"
+          bindingIndex: "TotalMoneyReturn"
         }),
-        "txtColumn5": new TextBox({
+        "txtExplantReturn": new TextBox({
           fieldText: "Diễn giải",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column5"
+          bindingIndex: "ExplantReturn"
         }),
-        "txtColumn6": new TextBox({
+        "txtNameSupplierReturn": new TextBox({
           fieldText: "Tên nhà cung cấp",
           readOnly: true,
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column6"
+          bindingIndex: "NameSupplierReturn"
         }),
-        "txtColumn7": new TextBox({
+        "txtReceiverReturn": new TextBox({
           fieldText: "Người nhận",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column7"
+          bindingIndex: "ReceiverReturn"
         }),
-        "txtColumn8": new TextBox({
+        "txtAddressSupplierReturn": new TextBox({
           fieldText: "Địa chỉ",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column8"
+          bindingIndex: "AddressSupplierReturn"
         }),
-        "txtColumn9": new NumberModel({
+        //Tong so luong
+        "txtTotalQuantityReturn": new NumberModel({
           fieldText: "Tổng số lượng",
           require: false,
           readOnly: true,
@@ -224,52 +232,140 @@ export default {
             thousands: ",",
             precision: 0
           }),
-          bindingIndex: "Column9"
+          bindingIndex: "TotalQuantityReturn"
         }),
-        "txtColumn10": new TextBox({
-          fieldText: "Địa chỉ",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          bindingIndex: "Column10"
-        }),
-        "txtColumn11": new TextBox({
+        // "txtColumn10": new TextBox({
+        //   fieldText: "Địa chỉ",
+        //   require: false,
+        //   maxLength: 255,
+        //   labelWidth: labelWidth,
+        //   bindingIndex: "Column10"
+        // }),
+        "txtReasonReturn": new TextBox({
           fieldText: "Lý do thu",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column11"
+          bindingIndex: "ReasonReturn"
         }),
-        "txtColumn12": new Combobox({
+        "txtRevenueOfficer": new Combobox({
           fieldText: "Nhân viên thu",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column12"
+          bindingIndex: "RevenueOfficerReturn"
         }),
-        "txtColumn13": new TextBox({
+        "txtRevenueOfficerNameReturn": new TextBox({
           fieldText: "Tên nhân viên",
           require: false,
           readOnly: true,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column13"
+          bindingIndex: "RevenueOfficerNameReturn"
         }),
-        "txtColumn14": new TextBox({
+        "txtReceiptNumberReturn": new TextBox({
           fieldText: "Số phiếu thu",
           require: false,
           readOnly: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column14"
+          bindingIndex: "ReceiptNumberReturn"
         }),
-        "txtColumn15": new DateModel({
+        "txtCollectionDateReturn": new DateModel({
           fieldText: "Ngày thu",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column15"
+          bindingIndex: "CollectionDateReturn"
         }),
+
+
+
+        //Table Grid
+
+        "txtCodeProductReturn": new TextBox({
+          fieldText: "",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          classType: "tertiary",
+          bindingIndex: "CodeProductReturn"
+        }),
+        "txtNameProductReturn": new TextBox({
+          fieldText: "",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          classType: "tertiary",
+          bindingIndex: "NameProductReturn"
+        }),
+        "txtWarehouseProductReturn": new Combobox({
+          fieldText: "",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          data: [
+            {
+              value: "Kh0 1",
+              display: "Kho 1"
+            }
+          ],
+          classType: "secondary",
+          bindingIndex: "WarehouseProductReturn"
+        }),
+        "txtUnitProductReturn": new Combobox({
+          fieldText: "",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          data: [
+            {
+              value: "Chiếc",
+              display: "Chiếc"
+            }
+          ],
+          classType: "secondary",
+          bindingIndex: "UnitProductReturn"
+        }),
+        "txtNumberProductReturn": new TextBox({
+          fieldText: "",
+          require: false,
+          readOnly: false,
+          maxLength: 255,
+          type: "number",
+          classType: "tertiary",
+          bindingIndex: "NumberProductReturn"
+        }),
+
+        "txtUnitPriceReturn": new NumberModel({
+          fieldText: "",
+          require: false,
+          readOnly: false,
+          maxLength: 255,
+          classType: "secondary",
+          labelWidth: labelWidth,
+          format: new NumberFormat({
+            decimal: ".",
+            thousands: ",",
+            precision: 3
+          }),
+          bindingIndex: "UnitPriceReturn"
+        }),
+        "txtPaymentReturn": new NumberModel({
+          fieldText: "",
+          require: false,
+          readOnly: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          classType: "secondary",
+          format: new NumberFormat({
+            decimal: ".",
+            thousands: ",",
+            precision: 3
+          }),
+          bindingIndex: "PaymentReturn"
+        }),
+
       }
     },
     async onLoadData(parameter: any) {

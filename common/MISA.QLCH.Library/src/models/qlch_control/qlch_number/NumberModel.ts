@@ -26,6 +26,9 @@ export default class NumberModel extends BaseInput {
         if (number?.labelWidth) {
             me.labelWidth = number.labelWidth;
         };
+        if (number?.classType) {
+            me.classType = number.classType;
+        };
 
         me.value = number?.value ?? 0;
         me.minValue = number?.minValue ?? Number.MIN_SAFE_INTEGER;
@@ -61,4 +64,6 @@ export default class NumberModel extends BaseInput {
      * Độ rộng của thẻ label
      */
     labelWidth?: number;
+
+    classType?: "primary" | "secondary" = "primary";
 }

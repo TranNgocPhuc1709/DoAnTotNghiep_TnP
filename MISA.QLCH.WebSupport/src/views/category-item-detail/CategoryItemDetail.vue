@@ -43,34 +43,27 @@ export default {
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
       const labelWidth = 155;
       return {
-        "txtColumn1": new TextBox({
+        "txtCodeGroupCategory": new TextBox({
           fieldText: "Mã Nhóm Hàng Hóa",
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column1"
+          bindingIndex: "CodeGroupCategory"
         }),
-        "txtColumn2": new TextBox({
+        "txtNameGroupCategory": new TextBox({
           fieldText: "Tên Nhóm Hàng Hóa",
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column2"
+          bindingIndex: "NameGroupCategory"
         }),
-        "txtColumn3": new TextBox({
+        "txtDescribeCategory": new TextBox({
           fieldText: "Mô Tả",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column3"
-        }),
-        // "txtColumn4": new Combobox({
-        //   fieldText: "Thuộc Nhóm",
-        //   require: false,
-        //   maxLength: 255,
-        //   labelWidth: labelWidth,
-        //   bindingIndex: "Column4"
-        // }),
+          bindingIndex: "DescribeCategory"
+        })
       }
     },
 

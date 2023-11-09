@@ -14,11 +14,7 @@ import ENumber from "qlch_control/ENumber";
 import NumberModel from '@library-src/models/qlch_control/qlch_number/NumberModel';
 import NumberFormat from '@library-src/models/qlch_control/number_format/NumberFormat';
 import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
-import Grid from '@library-src/models/qlch_control/qlch_grid/Grid';
-import EGrid from "qlch_control/EGrid";
-import Column from '@library-src/models/qlch_control/qlch_grid/qlch_column/Column';
-import Log from '@library-src/utilities/Log';
-import Common from "@library-src/utilities/commons/Function";
+
 
 
 
@@ -32,95 +28,13 @@ export default {
     EDate,
     ECombobox,
     ENumber,
-    EGrid
   },
 
   setup() {
     const thisData: Ref<GoodsOrderDetail> = ref(new GoodsOrderDetail());
-    const dataGrid: Array<Record<string, any>> = new Array(
-      {
-        "Code": "SP-001",
-        "Name": "Quần Áo Nam",
-        "NumberUnit": "Chiếc",
-        "NumberOrder": "100",
-        "NumberPrice": "25000",
-        "IntoMoney": "2500000"
-      },
-      {
-        "Code": "SP-001",
-        "Name": "Quần Áo Nam",
-        "NumberUnit": "Chiếc",
-        "NumberOrder": "100",
-        "NumberPrice": "25000",
-        "IntoMoney": "2500000"
-      },
-      {
-        "Code": "SP-001",
-        "Name": "Quần Áo Nam",
-        "NumberUnit": "Chiếc",
-        "NumberOrder": "100",
-        "NumberPrice": "25000",
-        "IntoMoney": "2500000"
-      },
 
-
-
-    )
-    const columnDefault: Array<Column> = Array(
-      new Column({
-        fieldText: "Mã HH",
-        width: 125,
-        dataIndex: "Code",
-        isFilter: true
-      }),
-      new Column({
-        fieldText: "Tên hàng hóa",
-        dataIndex: "Name",
-        isFilter: true,
-        width: 200
-      }),
-
-      new Column({
-        fieldText: "ĐV Tính",
-        minWidth: 100,
-        dataIndex: "NumberUnit",
-        flex: 1,
-        isFilter: true
-      }),
-
-      new Column({
-        fieldText: "Số lượng đặt",
-        width: 100,
-        dataIndex: "NumberOrder",
-        isFilter: true
-      }),
-      new Column({
-        fieldText: "Đơn giá",
-        width: 100,
-        dataIndex: "NumberPrice",
-        isFilter: true
-      }),
-      new Column({
-        fieldText: "Thành tiền",
-        width: 250,
-        dataIndex: "IntoMoney",
-        isFilter: true,
-
-      }),
-
-    );
-
-    const tblGoodOrder: Ref<Grid> = ref(new Grid({
-      columns: columnDefault,
-      data: dataGrid,
-      isNotShowFooter: true,
-      isNotShowCheckbox: true,
-      primaryKey: "EmployeeCode"
-
-    }));
     return {
       thisData,
-      tblGoodOrder
     };
   },
 
@@ -140,53 +54,60 @@ export default {
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
       const labelWidth = 115;
       return {
-        "txtColumn1": new DateModel({
+        "txtDateOrder": new DateModel({
           fieldText: "Ngày đặt hàng",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column1"
+          bindingIndex: "DateOrder"
         }),
-        "txtColumn2": new TextBox({
+        "txtNumberOrder": new TextBox({
           fieldText: "Số phiếu",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column2"
+          bindingIndex: "NumberOrder"
         }),
-        "txtColumn3": new Combobox({
+        "txtPersonOrder": new Combobox({
           fieldText: "Người đặt",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
           data: [
             {
-              value: 1,
-              display: "none"
+              value: "TNP",
+              display: "TNP"
             }
           ],
-          bindingIndex: "Column3"
+          bindingIndex: "PersonOrder"
         }),
-        "txtColumn4": new Combobox({
+        "txtSupplierOrder": new Combobox({
           fieldText: "Nhà cung cấp",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column4"
+          data: [
+            {
+              value: "NCC001",
+              display: "NCC001"
+            }
+          ],
+          bindingIndex: "SupplierOrder"
         }),
-        "txtColumn5": new NumberModel({
+        "txtFullMoneyOrder": new NumberModel({
           fieldText: "Tổng tiền",
           maxLength: 255,
           readOnly: true,
           labelWidth: 80,
+          classType: "secondary",
           format: new NumberFormat({
             decimal: ".",
             thousands: ",",
             precision: 0
           }),
-          bindingIndex: "Column5"
+          bindingIndex: "FullMoneyOrder"
         }),
-        "txtColumn6": new Combobox({
+        "txtStatusOrder": new Combobox({
           fieldText: "Trạng thái",
           require: false,
           maxLength: 255,
@@ -201,58 +122,117 @@ export default {
               display: "Chưa thực hiện"
             },
           ],
-          bindingIndex: "Column6"
+          bindingIndex: "StatusOrder"
         }),
-        "txtColumn7": new TextBox({
+        "txtExplainOrder": new TextBox({
           fieldText: "Diễn giải",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column7"
+          bindingIndex: "ExplainOrder"
         }),
-        "txtColumn8": new TextBox({
+        "txtSupplierNameOrder": new TextBox({
           fieldText: "Tên nhà cung cấp",
           require: false,
           readOnly: true,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column8"
+          bindingIndex: "SupplierNameOrder"
         }),
-        "txtColumn9": new TextBox({
+        "txtPersonOrderName": new TextBox({
           fieldText: "Tên người đặt",
           require: false,
           readOnly: true,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column9"
+          bindingIndex: "PersonOrderName"
         }),
-        "txtColumn10": new NumberModel({
+        "txtTotalOrder": new NumberModel({
           fieldText: "Tổng số lượng",
           require: false,
           readOnly: true,
           maxLength: 255,
+          classType: "secondary",
           labelWidth: labelWidth,
           format: new NumberFormat({
             decimal: ".",
             thousands: ",",
             precision: 0
           }),
-          bindingIndex: "Column10"
+          bindingIndex: "TotalOrder"
+        }),
+        "txtCodeProductOrder": new TextBox({
+          fieldText: "",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          classType: "tertiary",
+          bindingIndex: "CodeProductOrder"
+        }),
+        "txtNameProductOrder": new TextBox({
+          fieldText: "",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          classType: "tertiary",
+          bindingIndex: "NameProductOrder"
+        }),
+        "txtUnitProductOrder": new Combobox({
+          fieldText: "",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          data: [
+            {
+              value: "Chiếc",
+              display: "Chiếc"
+            }
+          ],
+          classType: "secondary",
+          bindingIndex: "UnitProductOrder"
+        }),
+        "txtNumberProductOrder": new TextBox({
+          fieldText: "",
+          require: false,
+          readOnly: false,
+          maxLength: 255,
+          type: "number",
+          classType: "tertiary",
+          bindingIndex: "NumberProductOrder"
+        }),
+
+        "txtUnitPriceOrder": new NumberModel({
+          fieldText: "",
+          require: false,
+          readOnly: false,
+          maxLength: 255,
+          classType: "secondary",
+          labelWidth: labelWidth,
+          format: new NumberFormat({
+            decimal: ".",
+            thousands: ",",
+            precision: 3
+          }),
+          bindingIndex: "UnitPriceOrder"
+        }),
+        "txtPaymentOrder": new NumberModel({
+          fieldText: "",
+          require: false,
+          readOnly: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          classType: "secondary",
+          format: new NumberFormat({
+            decimal: ".",
+            thousands: ",",
+            precision: 3
+          }),
+          bindingIndex: "PaymentOrder"
         }),
       }
     },
-    async onLoadData(parameter: any) {
-      const me = this;
-      me.tblGoodOrder.isLoadingData = true;
-      me.tblGoodOrder.data = new Array(
 
-        // Khai báo dữ liệu biding
-      );
-      await Common.getTimeOut(3000, "");
-      me.tblGoodOrder.isLoadingData = false;
-      Log.InfoLog(parameter);
 
-    },
 
     /**
     * Sau khi đóng form xong thì xử lý thêm gì ở master thì Override function này ở master

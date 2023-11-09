@@ -15,9 +15,9 @@
         <slot name="trigger-left"></slot>
         <input type="text" class="qlch-num flex-1" :id="control.id" :disabled="control.readOnly"
             :style="control.styleInput" :value="thisData.formatValue" :placeholder="control.placeholder"
-            :class="[{'warning-valid': !control.isValidateSuccess && control.isActive}]" :maxlength="control.maxLength"
-            @input.stop="onInput" @blur.stop="onBlur" @focus.stop="onFocus" @mouseover.stop="onHover"
-            @keydown.stop="onKeyDown" autocomplete="off">
+            :class="[control.classType,{'warning-valid': !control.isValidateSuccess && control.isActive}]"
+            :maxlength="control.maxLength" @input.stop="onInput" @blur.stop="onBlur" @focus.stop="onFocus"
+            @mouseover.stop="onHover" @keydown.stop="onKeyDown" autocomplete="off">
 
         <div v-if="!control.isValidateSuccess && control.isActive"
             class="warning-valid height-fill d-flex d-flex-vcenter pss-rel">

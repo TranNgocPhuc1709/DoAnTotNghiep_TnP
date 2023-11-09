@@ -11,15 +11,9 @@ import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
 import EDate from "qlch_control/EDate";
 import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
 import ECombobox from "qlch_control/ECombobox";
-import Grid from '@library-src/models/qlch_control/qlch_grid/Grid';
-import EGrid from "qlch_control/EGrid";
-import Column from '@library-src/models/qlch_control/qlch_grid/qlch_column/Column';
 import NumberModel from '@library-src/models/qlch_control/qlch_number/NumberModel';
 import NumberFormat from '@library-src/models/qlch_control/number_format/NumberFormat';
 import ENumber from "qlch_control/ENumber";
-import Log from '@library-src/utilities/Log';
-import Common from "@library-src/utilities/commons/Function";
-
 
 export default {
 
@@ -29,99 +23,15 @@ export default {
     BaseDictionaryDetailView,
     ETextBox,
     EDate,
-    EGrid,
     ENumber,
     ECombobox
   },
 
   setup() {
     const thisData: Ref<InventoryDetail> = ref(new InventoryDetail());
-    const columnInventory: Array<Column> = Array(
-      new Column({
-        fieldText: "Mã HH",
-        width: 125,
-        dataIndex: "Code",
-        isFilter: true
-      }),
-      new Column({
-        fieldText: "Tên hàng hóa",
-        dataIndex: "Name",
-        isFilter: true,
-        width: 200
-      }),
-      new Column({
-        fieldText: "ĐV tính",
-        dataIndex: "NumberUnit",
-        isFilter: true,
-        width: 200
-      }),
-      new Column({
-        fieldText: "Theo sổ",
-        width: 100,
-        dataIndex: "BeginInventory",
-        isFilter: true
-      }),
-      new Column({
-        fieldText: "Kiểm kê",
-        width: 100,
-        dataIndex: "UpdateInventory",
-        isFilter: true
-      }),
-      new Column({
-        fieldText: "Chênh lệch",
-        width: 100,
-        dataIndex: "Difference",
-        isFilter: true
-      }),
-      new Column({
-        fieldText: "Nguyên nhân",
-        width: 250,
-        dataIndex: "Reason",
-        isFilter: true,
-        flex: 1
-      }),
-    );
-    const dataGridInventory: Array<Record<string, any>> = new Array(
-      {
-        "Code": "SP-001",
-        "Name": "Quần Áo Nam",
-        "NumberUnit": "Chiếc",
-        "BeginInventory": "100",
-        "UpdateInventory": "80",
-        "Difference": "20",
-        "Reason": "Xuất hàng ra quầy"
-
-      },
-      {
-        "Code": "SP-002",
-        "Name": "Quần Áo Nữ",
-        "NumberUnit": "Chiếc",
-        "BeginInventory": "100",
-        "UpdateInventory": "120",
-        "Difference": "20",
-        "Reason": "Nhập hàng Từ nhà sản xuất"
-      },
-      {
-        "Code": "SP-002",
-        "Name": "Quần Áo Nữ",
-        "NumberUnit": "Chiếc",
-        "BeginInventory": "100",
-        "UpdateInventory": "120",
-        "Difference": "20",
-        "Reason": "Nhập hàng Từ nhà sản xuất"
-      },
-    )
-    const tblInventory: Ref<Grid> = ref(new Grid({
-      columns: columnInventory,
-      data: dataGridInventory,
-      isNotShowFooter: true,
-      isNotShowCheckbox: true,
-      primaryKey: "EmployeeCode"
-
-    }));
     return {
       thisData,
-      tblInventory
+
     };
   },
 
@@ -141,21 +51,21 @@ export default {
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
       const labelWidth = 115;
       return {
-        "txtColumn1": new DateModel({
+        "txtDateInventory": new DateModel({
           fieldText: "Ngày kiểm kê",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column1"
+          bindingIndex: "DateInventory"
         }),
-        "txtColumn2": new TextBox({
+        "txtVotesInventory": new TextBox({
           fieldText: "Số phiếu kiểm kê",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column2"
+          bindingIndex: "VotesInventory"
         }),
-        "txtColumn3": new Combobox({
+        "txtWarehouseInventory": new Combobox({
           fieldText: "Kho kiểm kê",
           require: false,
           maxLength: 255,
@@ -170,23 +80,23 @@ export default {
               display: "Kho 2"
             }
           ],
-          bindingIndex: "Column3"
+          bindingIndex: "WarehouseInventory"
         }),
-        "txtColumn4": new TextBox({
+        "txtExplantInventory": new TextBox({
           fieldText: "Diễn giải",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column4"
+          bindingIndex: "ExplantInventory"
         }),
-        "txtColumn5": new TextBox({
+        "txtStatusInventory": new TextBox({
           fieldText: "Trạng thái",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column5"
+          bindingIndex: "StatusInventory"
         }),
-        "txtColumn6": new NumberModel({
+        "txtTotalBeginInventory": new NumberModel({
           fieldText: "Tổng số lượng ban đầu",
           readOnly: true,
           require: false,
@@ -197,9 +107,9 @@ export default {
             thousands: ",",
             precision: 0
           }),
-          bindingIndex: "Column6"
+          bindingIndex: "TotalBeginInventory"
         }),
-        "txtColumn7": new NumberModel({
+        "txtTotalUpdateInventory": new NumberModel({
           fieldText: "Tổng số lượng kiểm kê",
           readOnly: true,
           require: false,
@@ -210,9 +120,9 @@ export default {
             thousands: ",",
             precision: 0
           }),
-          bindingIndex: "Column7"
+          bindingIndex: "TotalUpdateInventory"
         }),
-        "txtColumn8": new NumberModel({
+        "txtTotalEndInventory": new NumberModel({
           fieldText: "Tổng số lượng chênh lệch",
           readOnly: true,
           require: false,
@@ -223,23 +133,103 @@ export default {
             thousands: ",",
             precision: 0
           }),
-          bindingIndex: "Column8"
+          bindingIndex: "TotalEndInventory"
         }),
 
+
+        //Table Grid
+
+        "txtCodeProductInventory": new TextBox({
+          fieldText: "",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          classType: "tertiary",
+          bindingIndex: "CodeProductInventory"
+        }),
+        "txtNameProductInventory": new TextBox({
+          fieldText: "",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          classType: "tertiary",
+          bindingIndex: "NameProductInventory"
+        }),
+        "txtUnitProductInventory": new Combobox({
+          fieldText: "",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          data: [
+            {
+              value: "Chiếc",
+              display: "Chiếc"
+            }
+          ],
+          classType: "secondary",
+          bindingIndex: "UnitProductInventory"
+        }),
+        "txtBeginInventory": new NumberModel({
+          fieldText: "",
+          require: false,
+          readOnly: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          classType: "secondary",
+          format: new NumberFormat({
+            decimal: ".",
+            thousands: ",",
+            precision: 3
+          }),
+          bindingIndex: "BeginInventory"
+        }),
+        "txtUpdateInventory": new NumberModel({
+          fieldText: "",
+          require: false,
+          readOnly: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          classType: "secondary",
+          format: new NumberFormat({
+            decimal: ".",
+            thousands: ",",
+            precision: 3
+          }),
+          bindingIndex: "UpdateInventory"
+        }),
+        "txtEndInventory": new NumberModel({
+          fieldText: "",
+          require: false,
+          readOnly: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          classType: "secondary",
+          format: new NumberFormat({
+            decimal: ".",
+            thousands: ",",
+            precision: 3
+          }),
+          bindingIndex: "EndInventory"
+        }),
+        "txtReasonInventory": new TextBox({
+          fieldText: "",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          classType: "tertiary",
+          bindingIndex: "ReasonInventory"
+        }),
+        "txtHandleInventory": new TextBox({
+          fieldText: "",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          classType: "tertiary",
+          bindingIndex: "HandleInventory"
+        }),
       }
     },
-    async onLoadData(parameter: any) {
-      const me = this;
-      me.tblInventory.isLoadingData = true;
-      me.tblInventory.data = new Array(
 
-        // Khai báo dữ liệu biding
-      );
-      await Common.getTimeOut(3000, "");
-      me.tblInventory.isLoadingData = false;
-      Log.InfoLog(parameter);
-
-    },
 
     /**
     * Sau khi đóng form xong thì xử lý thêm gì ở master thì Override function này ở master

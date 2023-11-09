@@ -93,27 +93,27 @@ export default {
       return Array(
         new Column({
           fieldText: "Ngày",
-          dataIndex: "Column1",
+          dataIndex: "DateCashReceipt",
           width: 120,
         }),
         new Column({
           fieldText: "Số chứng từ",
-          dataIndex: "Column2",
+          dataIndex: "CodeCashReceipt",
           width: 260
         }),
         new Column({
           fieldText: "Tổng tiền",
-          dataIndex: "Column3",
+          dataIndex: "TotalMoneyCashReceipt",
           width: 260
         }),
         new Column({
           fieldText: "Đối tượng nộp tiền",
-          dataIndex: "Column4",
+          dataIndex: "ObjectCashReceipt",
           width: 260
         }),
         new Column({
           fieldText: "Lý do",
-          dataIndex: "Column5",
+          dataIndex: "ExplantCashReceipt",
           minWidth: 260,
           flex: 1
         })
@@ -128,19 +128,13 @@ export default {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
       return [
         {
-          Column1: "31/12/2023",
-          Column2: "SH-00112",
-          Column3: "150000",
-          Column4: "Khách hàng",
-          Column5: "Thanh toán hàng hóa",
+          DateCashReceipt: "31/12/2023",
+          CodeCashReceipt: "SH-00112",
+          TotalMoneyCashReceipt: "150000",
+          ObjectCashReceipt: "Khách hàng",
+          ExplantCashReceipt: "Thanh toán hàng hóa",
         },
-        {
-          Column1: "10/12/2023",
-          Column2: "SH-00145",
-          Column3: "250000",
-          Column4: "Đối tác vận chuyển hàng",
-          Column5: "Thanh toán hàng hóa vận chuyển",
-        },
+
       ];
     },
 
@@ -149,7 +143,7 @@ export default {
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "Column1";
+      return "DateCashReceipt";
     },
 
     /**

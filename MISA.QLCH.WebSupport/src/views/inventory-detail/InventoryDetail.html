@@ -6,24 +6,24 @@
         <span class="heading-inventory-info">THÔNG TIN CHUNG</span>
 
         <div class="qlch-input-default item-detail">
-          <e-text-box :control="bindingControl[`txtColumn4`]"
-            v-model="masterData[bindingControl[`txtColumn4`].bindingIndex]"></e-text-box>
+          <e-text-box :control="bindingControl[`txtExplantInventory`]"
+            v-model="masterData[bindingControl[`txtExplantInventory`].bindingIndex]"></e-text-box>
         </div>
         <div class="qlch-input-default item-detail">
-          <e-combobox :control="bindingControl[`txtColumn3`]"
-            v-model="masterData[bindingControl[`txtColumn3`].bindingIndex]"></e-combobox>
+          <e-combobox :control="bindingControl[`txtWarehouseInventory`]"
+            v-model="masterData[bindingControl[`txtWarehouseInventory`].bindingIndex]"></e-combobox>
         </div>
       </div>
       <div class="form-inventory-detail-right">
         <span class="heading-inventory-info">CHỨNG TỪ</span>
 
         <div class="qlch-input-default item-detail">
-          <e-date :control="bindingControl[`txtColumn1`]"
-            v-model="masterData[bindingControl[`txtColumn1`].bindingIndex]"></e-date>
+          <e-date :control="bindingControl[`txtDateInventory`]"
+            v-model="masterData[bindingControl[`txtDateInventory`].bindingIndex]"></e-date>
         </div>
         <div class="qlch-input-default item-detail">
-          <e-text-box :control="bindingControl[`txtColumn2`]"
-            v-model="masterData[bindingControl[`txtColumn2`].bindingIndex]"></e-text-box>
+          <e-text-box :control="bindingControl[`txtVotesInventory`]"
+            v-model="masterData[bindingControl[`txtVotesInventory`].bindingIndex]"></e-text-box>
         </div>
 
 
@@ -31,20 +31,74 @@
     </div>
     <div class="grid-footer">
       <span class="heading-inventory-info">Chi tiết</span>
-      <e-grid :control="tblInventory" @loadData="onLoadData" />
+      <div class="grid-GoodsInventory">
+        <table class="flex-1">
+          <thead>
+            <tr>
+              <th>Mã Hàng Hóa</th>
+              <th>Tên Hàng Hóa</th>
+              <th>Đơn vị tính</th>
+              <th>Theo sổ</th>
+              <th>Kiểm kê</th>
+              <th>Chênh lệch</th>
+              <th>Nguyên nhân</th>
+              <th>Xử lý</th>
+              <!-- <th>Số lượng</th>
+              <th>Đơn giá</th>
+              <th>Thành tiền</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <e-text-box :control="bindingControl[`txtCodeProductInventory`]"
+                  v-model="masterData[bindingControl[`txtCodeProductInventory`].bindingIndex]"></e-text-box>
+              </td>
+              <td>
+                <e-text-box :control="bindingControl[`txtNameProductInventory`]"
+                  v-model="masterData[bindingControl[`txtNameProductInventory`].bindingIndex]"></e-text-box>
+              </td>
+              <td>
+                <e-combobox :control="bindingControl[`txtUnitProductInventory`]"
+                  v-model="masterData[bindingControl[`txtUnitProductInventory`].bindingIndex]"></e-combobox>
+              </td>
+              <td>
+                <e-number :control="bindingControl[`txtBeginInventory`]"
+                  v-model="masterData[bindingControl[`txtBeginInventory`].bindingIndex]"></e-number>
+              </td>
+              <td>
+                <e-number :control="bindingControl[`txtUpdateInventory`]"
+                  v-model="masterData[bindingControl[`txtUpdateInventory`].bindingIndex]"></e-number>
+              </td>
+              <td>
+                <e-number :control="bindingControl[`txtEndInventory`]"
+                  v-model="masterData[bindingControl[`txtEndInventory`].bindingIndex]"></e-number>
+              </td>
+              <td>
+                <e-text-box :control="bindingControl[`txtReasonInventory`]"
+                  v-model="masterData[bindingControl[`txtReasonInventory`].bindingIndex]"></e-text-box>
+              </td>
+              <td>
+                <e-text-box :control="bindingControl[`txtHandleInventory`]"
+                  v-model="masterData[bindingControl[`txtHandleInventory`].bindingIndex]"></e-text-box>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <div class="synthetic-footer d-flex-vcenter">
       <div class="main-synthetic d-flex-vcenter flex-1">
-        <e-number :control="bindingControl[`txtColumn6`]"
-          v-model="masterData[bindingControl[`txtColumn6`].bindingIndex]"></e-number>
+        <e-number :control="bindingControl[`txtTotalBeginInventory`]"
+          v-model="masterData[bindingControl[`txtTotalBeginInventory`].bindingIndex]"></e-number>
       </div>
       <div class="main-synthetic d-flex-vcenter flex-1">
-        <e-number :control="bindingControl[`txtColumn7`]"
-          v-model="masterData[bindingControl[`txtColumn7`].bindingIndex]"></e-number>
+        <e-number :control="bindingControl[`txtTotalUpdateInventory`]"
+          v-model="masterData[bindingControl[`txtTotalUpdateInventory`].bindingIndex]"></e-number>
       </div>
       <div class="main-synthetic d-flex-vcenter flex-1">
-        <e-number :control="bindingControl[`txtColumn8`]"
-          v-model="masterData[bindingControl[`txtColumn8`].bindingIndex]"></e-number>
+        <e-number :control="bindingControl[`txtTotalEndInventory`]"
+          v-model="masterData[bindingControl[`txtTotalEndInventory`].bindingIndex]"></e-number>
       </div>
 
     </div>

@@ -38,20 +38,20 @@ export default {
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
       const labelWidth = 115;
       return {
-        "txtColumn1": new TextBox({
+        "txtNameCardBank": new TextBox({
           fieldText: "Tên thẻ",
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column1"
+          bindingIndex: "NameCardBank"
         }),
-        "txtColumn2": new TextBox({
+        "txtExplainBank": new TextBox({
           fieldText: "Diễn giải",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column2"
-        })
+          bindingIndex: "ExplainBank"
+        }),
       }
     },
 

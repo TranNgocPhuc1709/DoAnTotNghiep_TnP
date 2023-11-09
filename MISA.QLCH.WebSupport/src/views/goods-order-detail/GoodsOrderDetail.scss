@@ -31,6 +31,7 @@
 
 .grid-footer {
   height: 140px;
+  // overflow-y: auto;
 
 }
 
@@ -49,4 +50,37 @@
 .main-synthetic span {
   font-size: 14px;
   font-weight: 600;
+}
+
+.grid-GoodsOrder {
+  height: 150px;
+  border: 1px solid #F0F0F0;
+  overflow: scroll;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table,
+thead,
+tr,
+th {
+  border-right: 1px solid #D0D0D0;
+}
+
+tbody,
+tr,
+td {
+  width: 100%;
+  min-width: 200px
+}
+
+thead,
+tr,
+th {
+  background-color: #F0F0F0;
+  padding: 10px 10px;
+  text-align: center;
+
 }

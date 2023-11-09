@@ -125,9 +125,7 @@ export default {
       data: dataGridImport,
       isNotShowFooter: true,
       isNotShowCheckbox: true,
-
       primaryKey: "EmployeeCode"
-
     }));
     return {
       thisData,
@@ -155,21 +153,21 @@ export default {
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
       const labelWidth = 115;
       return {
-        "txtColumn1": new DateModel({
+        "txtDateImport": new DateModel({
           fieldText: "Ngày nhập",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column1"
+          bindingIndex: "DateImport"
         }),
-        "txtColumn2": new TextBox({
+        "txtReceiptNumberImport": new TextBox({
           fieldText: "Số phiếu nhập",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column2"
+          bindingIndex: "ReceiptNumberImport"
         }),
-        "txtColumn3": new Combobox({
+        "txtSupplierImport": new Combobox({
           fieldText: "Nhà cung cấp",
           require: false,
           maxLength: 255,
@@ -178,12 +176,12 @@ export default {
             value: 1,
             display: "NCC0012"
           }],
-          bindingIndex: "Column3"
+          bindingIndex: "SupplierImport"
         }),
-        "txtColumn4": new NumberModel({
+        "txtIntoMoneyImport": new NumberModel({
           fieldText: "Thành tiền",
           require: false,
-          readOnly: true,
+          readOnly: false,
           maxLength: 255,
           labelWidth: labelWidth,
           format: new NumberFormat({
@@ -191,49 +189,51 @@ export default {
             thousands: ",",
             precision: 0
           }),
-          bindingIndex: "Column4"
+          bindingIndex: "IntoMoneyImport"
         }),
-        "txtColumn5": new Combobox({
+        "txtStaffImport": new Combobox({
           fieldText: "Nhân viên mua hàng",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column5"
+          bindingIndex: "StaffImport"
         }),
-        "txtColumn6": new TextBox({
+        "txtExplainImport": new TextBox({
           fieldText: "Diễn giải",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column6"
+          bindingIndex: "ExplainImport"
         }),
-        "txtColumn7": new TextBox({
+
+        //txt7
+        "txtSupplierNameImport": new TextBox({
           fieldText: "Tên NCC",
           readOnly: true,
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column7"
+          bindingIndex: "SupplierNameImport "
         }),
-        "txtColumn8": new TextBox({
+        "txtStaffNameImport": new TextBox({
           fieldText: "Tên nhân viên",
           readOnly: true,
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column8"
+          bindingIndex: "StaffNameImport"
         }),
-        "txtColumn9": new TextBox({
+        "txtDeliverImport": new TextBox({
           fieldText: "Người giao",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column9"
+          bindingIndex: "DeliverImport"
         }),
-        "txtColumn10": new NumberModel({
+        "txtTotalImport": new NumberModel({
           fieldText: "Tổng số lượng",
           require: false,
-          readOnly: true,
+          readOnly: false,
           maxLength: 255,
           labelWidth: labelWidth,
           format: new NumberFormat({
@@ -241,48 +241,48 @@ export default {
             thousands: ",",
             precision: 0
           }),
-          bindingIndex: "Column10"
+          bindingIndex: "TotalImport"
         }),
 
-        "txtColumn11": new TextBox({
+        "txtReceiverImport": new TextBox({
           fieldText: "Người nhận",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column11"
+          bindingIndex: "ReceiverImport"
         }),
-        "txtColumn12": new TextBox({
+        "txtAddressImport": new TextBox({
           fieldText: "Địa chỉ",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column12"
+          bindingIndex: "AddressImport"
         }),
-        "txtColumn13": new TextBox({
+        "txtReasonImport": new TextBox({
           fieldText: "Lý do chi",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column13"
+          bindingIndex: "ReasonImport"
         }),
-        "txtColumn14": new TextBox({
+        "txtVotesImport": new TextBox({
           fieldText: "Số phiếu chi",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column14"
+          bindingIndex: "VotesImport"
         }),
-        "txtColumn15": new DateModel({
+        "txtVotesDateImport": new DateModel({
           fieldText: "Ngày chi",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column15"
+          bindingIndex: "VotesDateImport"
         }),
-        "txtColumn16": new NumberModel({
+        "txtTotalPaymentImport": new NumberModel({
           fieldText: "Tổng tiền thanh toán",
           require: false,
-          readOnly: true,
+          readOnly: false,
           maxLength: 255,
           labelWidth: 150,
           format: new NumberFormat({
@@ -290,7 +290,94 @@ export default {
             thousands: ",",
             precision: 0
           }),
-          bindingIndex: "Column16"
+          bindingIndex: "TotalPaymentImport"
+        }),
+
+
+
+        //Table Grid
+
+        "txtCodeProductImport": new TextBox({
+          fieldText: "",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          classType: "tertiary",
+          bindingIndex: "CodeProductImport"
+        }),
+        "txtNameProductImport": new TextBox({
+          fieldText: "",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          classType: "tertiary",
+          bindingIndex: "NameProductImport"
+        }),
+        "txtWarehouseProductImport": new Combobox({
+          fieldText: "",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          data: [
+            {
+              value: "Kh0 1",
+              display: "Kho 1"
+            }
+          ],
+          classType: "secondary",
+          bindingIndex: "WarehouseProductImport"
+        }),
+        "txtUnitProductImport": new Combobox({
+          fieldText: "",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          data: [
+            {
+              value: "Chiếc",
+              display: "Chiếc"
+            }
+          ],
+          classType: "secondary",
+          bindingIndex: "UnitProductImport"
+        }),
+        "txtNumberProductImport": new TextBox({
+          fieldText: "",
+          require: false,
+          readOnly: false,
+          maxLength: 255,
+          type: "number",
+          classType: "tertiary",
+          bindingIndex: "NumberProductImport"
+        }),
+
+        "txtUnitPriceImport": new NumberModel({
+          fieldText: "",
+          require: false,
+          readOnly: false,
+          maxLength: 255,
+          classType: "secondary",
+          labelWidth: labelWidth,
+          format: new NumberFormat({
+            decimal: ".",
+            thousands: ",",
+            precision: 3
+          }),
+          bindingIndex: "UnitPriceImport"
+        }),
+        "txtPaymentImport": new NumberModel({
+          fieldText: "",
+          require: false,
+          readOnly: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          classType: "secondary",
+          format: new NumberFormat({
+            decimal: ".",
+            thousands: ",",
+            precision: 3
+          }),
+          bindingIndex: "PaymentImport"
         }),
 
       }

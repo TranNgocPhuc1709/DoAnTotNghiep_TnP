@@ -88,26 +88,26 @@ export default {
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
       const labelWidth = 150;
       return {
-        "txtColumn1": new TextBox({
+        "txtCodeEmployee": new TextBox({
           fieldText: "Mã nhân viên",
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column1"
+          bindingIndex: "CodeEmployee"
         }),
-        "txtColumn2": new TextBox({
+        "txtNameEmployee": new TextBox({
           fieldText: "Tên nhân viên",
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column2"
+          bindingIndex: "NameEmployee"
         }),
-        "txtColumn3": new Combobox({
+        "txtGenderEmployee": new Combobox({
           fieldText: "Giới tính",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column3",
+          bindingIndex: "GenderEmployee",
           data: [
             {
               value: 1,
@@ -119,26 +119,26 @@ export default {
             }
           ]
         }),
-        "txtColumn4": new DateModel({
+        "txtBirthEmployee": new DateModel({
           fieldText: "Ngày sinh",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column4"
+          bindingIndex: "BirthEmployee"
         }),
-        "txtColumn5": new TextBox({
+        "txtTelephoneEmployee": new TextBox({
           fieldText: "Số điện thoại",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column5"
+          bindingIndex: "TelephoneEmployee"
         }),
-        "txtColumn6": new Combobox({
+        "txtStatusEmployee": new Combobox({
           fieldText: "Trạng thái làm việc",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column6",
+          bindingIndex: "StatusEmployee",
           data: [
             {
               value: 1,
@@ -150,70 +150,69 @@ export default {
             }
           ]
         }),
-        "txtColumn7": new TextBox({
+        "txtPasswordEmployee": new TextBox({
           fieldText: "Mật khẩu",
           type: "password",
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
           styleInput: "padding-left: 35px",
-          bindingIndex: "Column7",
+          bindingIndex: "PasswordEmployee",
         }),
-        "txtColumn8": new TextBox({
+        "txtIdCardEmployee": new TextBox({
           fieldText: "Số CMND",
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column8"
+          bindingIndex: "IdCardEmployee"
         }),
-        "txtColumn9": new DateModel({
+        "txtDateCardEmployee": new DateModel({
           fieldText: "Ngày Cấp CMND",
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column9"
+          bindingIndex: "DateCardEmployee"
         }),
-        "txtColumn10": new TextBox({
+        "txtAddressCardEmployee": new TextBox({
           fieldText: "Nơi Cấp CMND",
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column10"
+          bindingIndex: "AddressCardEmployee"
         }),
-        "txtColumn11": new Combobox({
+        "txtMaritalEmployee": new Combobox({
           fieldText: "Tình trạng hôn nhân",
           maxLength: 255,
           labelWidth: labelWidth,
           data: [
             {
-              value: 1,
+              value: "Độc thân",
               display: "Độc thân"
             },
             {
-              value: 2,
+              value: "Độc thân",
               display: "Đã kết hôn"
             }
           ],
-          bindingIndex: "Column11"
+          bindingIndex: "MaritalEmployee"
         }),
-        "txtColumn12": new TextBox({
+        "txtConfirmPasswordEmployee": new TextBox({
           fieldText: "Xác nhận mật khẩu",
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column12"
+          bindingIndex: "ConfirmPasswordEmployee"
         }),
-        "txtColumn13": new Checkbox({
+        "txtWorkWithSystem": new Checkbox({
           fieldText: "Cho phép làm việc với phần mềm",
-          bindingIndex: "Column13",
+          bindingIndex: "WorkWithSystem",
         }),
-        "txtColumn14": new Checkbox({
+        "txtSystemAdministrator ": new Checkbox({
           fieldText: "Vai trò quản trị hệ thống",
-          bindingIndex: "Column14",
+          bindingIndex: "SystemAdministrator ",
         }),
-        "txtColumn15": new Checkbox({
-          fieldText: "Vai trò quản lý chuỗi",
-          bindingIndex: "Column15",
-
+        "txtSystemSales": new Checkbox({
+          fieldText: "ai trò bán hàng",
+          bindingIndex: "SystemSales",
         }),
-        "txtColumn16": new Combobox({
+        "txtUsageSystem": new Combobox({
           maxLength: 255,
           labelWidth: labelWidth,
           placeholder: "Chọn 1 hoặc nhiều vai trò",
@@ -231,107 +230,107 @@ export default {
               display: "Nhân viên Marketing"
             }
           ],
-          bindingIndex: "Column15",
+          bindingIndex: "UsageSystem",
         }),
-        "txtColumn17": new TextBox({
+        "txtHomePhone": new TextBox({
           fieldText: "ĐT nhà riêng",
           labelWidth: labelWidth,
-          bindingIndex: "Column17"
+          bindingIndex: "HomePhone"
         }),
-        "txtColumn18": new TextBox({
+        "txtAddressHome": new TextBox({
           fieldText: "Địa chỉ",
           labelWidth: labelWidth,
-          bindingIndex: "Column18"
+          bindingIndex: "AddressHome"
         }),
-        "txtColumn19": new TextBox({
+        "txtNationEmployee": new TextBox({
           fieldText: "Quốc gia",
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column19"
+          bindingIndex: "NationEmployee"
         }),
-        "txtColumn20": new TextBox({
+        "txtDistrictEmployee": new TextBox({
           fieldText: "Quận/Huyện",
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column20"
+          bindingIndex: "DistrictEmployee"
         }),
-        "txtColumn21": new TextBox({
+        "txtProvinceEmployee": new TextBox({
           fieldText: "Tỉnh/Thành Phố",
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column21"
+          bindingIndex: "ProvinceEmployee"
         }),
-        "txtColumn22": new TextBox({
+        "txtWardsEmployee": new TextBox({
           fieldText: "Xã/Phường",
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column22"
+          bindingIndex: "WardsEmployee"
         }),
-        "txtColumn23": new TextBox({
+        "txtAddressPresent": new TextBox({
           fieldText: "Địa chỉ",
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column23"
+          bindingIndex: "AddressPresent"
         }),
-        "txtColumn24": new TextBox({
+        "txtNationPresent": new TextBox({
           fieldText: "Quốc gia",
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column24"
+          bindingIndex: "NationPresent"
         }),
-        "txtColumn25": new TextBox({
+        "txtDistrictPresent": new TextBox({
           fieldText: "Quận/Huyện",
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column25"
+          bindingIndex: "DistrictPresent"
         }),
-        "txtColumn26": new TextBox({
+        "txtProvincePresent": new TextBox({
           fieldText: "Tỉnh/Thành Phố",
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column26"
+          bindingIndex: "ProvincePresent"
         }),
-        "txtColumn27": new TextBox({
+        "txtWardsPresent": new TextBox({
           fieldText: "Xã/Phường",
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column27"
+          bindingIndex: "WardsPresent"
         }),
-        "txtColumn28": new TextBox({
+        "txtEmergencyEmployee": new TextBox({
           fieldText: "Họ và tên",
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column28"
+          bindingIndex: "EmergencyEmployee"
         }),
-        "txtColumn29": new TextBox({
+        "txtRelationshipEmployee": new TextBox({
           fieldText: "Quan hệ",
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column29"
+          bindingIndex: "RelationshipEmployee"
         }),
-        "txtColumn30": new TextBox({
+        "txtPhoneEmergency": new TextBox({
           fieldText: "ĐT di động",
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column30"
+          bindingIndex: "PhoneEmergency"
         }),
-        "txtColumn31": new TextBox({
+        "txtLandlinePhone": new TextBox({
           fieldText: "ĐT nhà riêng",
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column31"
+          bindingIndex: "LandlinePhone"
         }),
-        "txtColumn32": new TextBox({
+        "txtEmailHome": new TextBox({
           fieldText: "Email",
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column32"
+          bindingIndex: "EmailHome"
         }),
-        "txtColumn33": new TextBox({
+        "txtAddressEmergency": new TextBox({
           fieldText: "Địa chỉ",
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "Column33"
+          bindingIndex: "AddressEmergency"
         }),
         "txtColumn34": new Checkbox({
           fieldText: "Truy cập theo khung giờ",
@@ -395,7 +394,7 @@ export default {
     onClickCheckPass() {
       try {
         const me = this;
-        const ShowCheckBoxPass = me.bindingControl["txtColumn13"];
+        const ShowCheckBoxPass = me.bindingControl["txtPasswordEmployee"];
         if (ShowCheckBoxPass) {
           me.disablePassWord = true
         }
@@ -405,13 +404,12 @@ export default {
       } catch (error) {
         Log.ErrorLog(error as Error);
       }
-
     },
 
     onClickRole() {
       try {
         const me = this;
-        const ShowCheckBoxRole = me.bindingControl["txtColumn15"];
+        const ShowCheckBoxRole = me.bindingControl["txtSystemAdministrator"];
         if (ShowCheckBoxRole) {
           me.disableECombobox = false
         }

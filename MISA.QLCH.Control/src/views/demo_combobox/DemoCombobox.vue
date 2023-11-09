@@ -82,6 +82,7 @@ export default {
         const cbbRequire: Ref<Combobox> = ref(new Combobox({
             fieldText: "Nhóm hàng hóa",
             require: true,
+            classType: "primary",
             data: [
                 {
                     value: 1,

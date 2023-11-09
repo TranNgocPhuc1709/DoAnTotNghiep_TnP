@@ -37,33 +37,33 @@ export default {
       return Array(
         new Column({
           fieldText: "Mã NCC",
-          dataIndex: "Column1",
+          dataIndex: "CodeVendor",
           width: 120,
         }),
         new Column({
           fieldText: "Tên NCC",
-          dataIndex: "Column2",
+          dataIndex: "NameVendor",
           width: 260
         }),
         new Column({
           fieldText: "Nhóm NCC",
-          dataIndex: "Column3",
+          dataIndex: "GroupVendor",
           width: 260
         }),
         new Column({
           fieldText: "Số điện thoại",
-          dataIndex: "Column4",
+          dataIndex: "TelephoneVendor",
           width: 260
         }),
         new Column({
           fieldText: "Địa chỉ",
-          dataIndex: "Column5",
+          dataIndex: "AddressVendor",
           minWidth: 260,
           flex: 1
         }),
         new Column({
           fieldText: "Trạng thái",
-          dataIndex: "Column6",
+          dataIndex: "StatusVendor",
           width: 160
         })
       )
@@ -77,22 +77,13 @@ export default {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
       return [
         {
-          Column1: "NCC-H1",
-          Column2: "Cty HaMinh",
-          Column3: "Hàng Nhập Khẩu",
-          Column4: "012345",
-          Column5: "Hà Nội",
-          Column6: "Đang theo dõi"
+          CodeVendor: "NCC-H1",
+          NameVendor: "Cty HaMinh",
+          GroupVendor: "Hàng Nhập Khẩu",
+          TelephoneVendor: "012345",
+          AddressVendor: "Hà Nội",
+          StatusVendor: "Đang theo dõi"
         },
-        {
-          Column1: "NCC-H2",
-          Column2: "Cty Cổ Phần VNPT",
-          Column3: "Hàng Xuất Khẩu",
-          Column4: "012345",
-          Column5: "Nam Định",
-          Column6: "Ngừng theo dõi"
-        },
-
       ];
     },
 
@@ -101,7 +92,7 @@ export default {
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "Column1";
+      return "CodeVendor";
     },
 
     /**
