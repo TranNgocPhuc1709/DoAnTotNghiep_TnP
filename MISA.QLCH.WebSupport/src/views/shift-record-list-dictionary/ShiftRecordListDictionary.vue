@@ -74,30 +74,19 @@ export default {
         return LocalStorageLibrary.getByKey<Array<ShiftRecord>>("ShiftRecord");
       }
     },
-    delItem() {
-
-
-      // const me = this;
-      // let listShiftRecord: Array<ShiftRecord> | null = LocalStorageLibrary.getByKey<Array<ShiftRecord>>("ShiftRecord");
-      // if (me.masterData) {
-      //   if (me.masterData.editMode == 3) {
-      //     listShiftRecord = LocalStorageLibrary.getByKey<Array<ShiftRecord>>("ShiftRecord");
-      //     if (listShiftRecord) {
-      //       listShiftRecord = [];
-      //       LocalStorageLibrary.setByKey("ShiftRecord", listShiftRecord);
-      //     }
-      //   }
-      // }
-
-
-
+    /**
+     * Thực hiện chức năng xóa trên Toolbar
+     * @param listSelectedRecord 
+     */
+    afterDelete(listMasterData: Array<Record<string, any>>) {
+      LocalStorageLibrary.setByKey("ShiftRecord", listMasterData);
     },
     /**
      * Set PrimaryKey cho object master
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "ShiftName";
+      return "shiftId";
     },
 
     /**

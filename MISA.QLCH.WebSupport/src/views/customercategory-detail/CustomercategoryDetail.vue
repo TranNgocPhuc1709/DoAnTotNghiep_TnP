@@ -10,6 +10,8 @@ import ETextBox from "qlch_control/ETextBox";
 import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
 import Guid from '@library-src/utilities/types/Guid';
 import CustomerCategory from '@store-src/models/customer-category/CustomerCategory';
+import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
+import ECombobox from "qlch_control/ECombobox";
 
 export default {
 
@@ -22,7 +24,8 @@ export default {
   },
   components: {
     BaseDictionaryDetailView,
-    ETextBox
+    ETextBox,
+    ECombobox
   },
 
   setup() {
@@ -67,6 +70,23 @@ export default {
           labelWidth: labelWidth,
           bindingIndex: "DescribeCustomerCategory"
         }),
+        "txtStatusCustomerCategory": new Combobox({
+          fieldText: "Trạng thái",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          data: [
+            {
+              value: "Đang hoạt động",
+              display: "Đang hoạt động"
+            },
+            {
+              value: "Ngừng hoạt động",
+              display: "Ngừng hoạt động"
+            },
+          ],
+          bindingIndex: "StatusCustomerCategory"
+        }),
 
       }
     },
@@ -75,7 +95,7 @@ export default {
       let listCustomerCategory: Array<CustomerCategory> | null = new Array<CustomerCategory>;
       if (me.masterData) {
         if (me.masterData.editMode == 1 || me.masterData.editMode == 4) {
-          me.masterData['CustomerId'] = Guid.NewGuid();
+          me.masterData['CustomerCategoryId'] = Guid.NewGuid();
           listCustomerCategory = LocalStorageLibrary.getByKey<Array<CustomerCategory>>("customerCategory");
           if (listCustomerCategory) {
             listCustomerCategory.push(me.masterData);
@@ -91,7 +111,7 @@ export default {
           if (listCustomerCategory) {
             listCustomerCategory.forEach(newItemCustomerCategory => {
               if (me.masterData) {
-                if (newItemCustomerCategory.CustomerId == me.masterData.CustomerId) {
+                if (newItemCustomerCategory.CustomerCategoryId == me.masterData.CustomerCategoryId) {
                   newItemCustomerCategory.CodeCustomerCategory = me.masterData.CodeCustomerCategory;
                   newItemCustomerCategory.NameCustomerCategory = me.masterData.NameCustomerCategory;
                   newItemCustomerCategory.DescribeCustomerCategory = me.masterData.DescribeCustomerCategory;

@@ -122,7 +122,7 @@ export default {
                 me.viewControl.gridMaster.isLoadingData = true;
                 me.resetListSelectedRecordMaster();
                 me.displayToolbarLoadingData(true);
-                await Function.getTimeOut(3000, "");
+                await Function.getTimeOut(300, "");
                 me.viewControl.gridMaster.data = me.loadMasterData(param);
                 me.viewControl.gridMaster.isLoadingData = false;
                 me.displayToolbarLoadingData(false);
@@ -297,9 +297,43 @@ export default {
         delItem() {
             const me = this;
             const allRecord = me.getAllSelectedRecordMaster();
-            if (allRecord) {
-                Log.InfoLog("delItem record: " + JSON.stringify(allRecord));
+            if (allRecord && allRecord.length > 0) {
+                if (me.viewControl.gridMaster) {
+                    const lstMasterData = me.viewControl.gridMaster.data;
+                    if (lstMasterData && lstMasterData.length > 0) {
+
+                        me.actionDeleteData(allRecord, lstMasterData);
+                    }
+                }
             }
+        },
+
+        /**
+         * Thực hiện chức năng xóa trên Toolbar
+         * @param listSelectedRecord 
+         */
+        actionDeleteData(listSelectedRecord: Array<Record<string, any>>, listMasterData: Array<Record<string, any>>) {
+            const me = this;
+            if (listSelectedRecord?.length > 0 && listMasterData?.length > 0) {
+                listSelectedRecord.forEach(record => {
+
+                    listMasterData = listMasterData.filter(item => {
+                        if (me.viewControl.gridMaster?.primaryKey) {
+                            return item[me.viewControl.gridMaster?.primaryKey] != record[me.viewControl.gridMaster?.primaryKey];
+                        }
+                    })
+
+
+                });
+                if (me.viewControl.gridMaster) {
+                    me.viewControl.gridMaster.data = listMasterData;
+                }
+                me.afterDelete(listMasterData);
+            }
+        },
+
+        afterDelete(listMasterData: Array<Record<string, any>>) {
+            console.log(listMasterData);
         },
 
         /**

@@ -73,13 +73,19 @@ export default {
         return LocalStorageLibrary.getByKey<Array<CustomerCategory>>("customerCategory");
       }
     },
-
+    /**
+        * Thực hiện chức năng xóa trên Toolbar
+        * @param listSelectedRecord 
+        */
+    afterDelete(listMasterData: Array<Record<string, any>>) {
+      LocalStorageLibrary.setByKey("customerCategory", listMasterData);
+    },
     /**
      * Set PrimaryKey cho object master
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "CodeCustomerCategory";
+      return "CustomerCategoryId";
     },
 
     /**

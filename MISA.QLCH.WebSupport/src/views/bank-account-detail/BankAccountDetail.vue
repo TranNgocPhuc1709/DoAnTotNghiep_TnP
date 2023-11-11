@@ -2,19 +2,30 @@
 <style lang="scss" scoped src="./BankAccountDetail.scss"></style>
 <script lang="ts">
 import BankAccountDetail from './BankAccountDetail';
-import { Ref, ref } from 'vue';
+import { PropType, Ref, ref } from 'vue';
 import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailController";
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
 import TextBox from "@library-src/models/qlch_control/qlch_text_box/TextBox";
 import ETextBox from "qlch_control/ETextBox";
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import Guid from '@library-src/utilities/types/Guid';
+import BankAccount from '@store-src/models/bank-account/BankAccount';
+import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
+import ECombobox from "qlch_control/ECombobox";
 
 export default {
 
   extends: BaseDictionaryDetailController,
-
+  props: {
+    masterData: {
+      type: Object as PropType<Record<string, any>>,
+      require: true
+    }
+  },
   components: {
     BaseDictionaryDetailView,
-    ETextBox
+    ETextBox,
+    ECombobox
   },
 
   setup() {
@@ -52,9 +63,59 @@ export default {
           labelWidth: labelWidth,
           bindingIndex: "ExplainBank"
         }),
+        "txtStatusBank": new Combobox({
+          fieldText: "Trạng thái",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          data: [
+            {
+              value: "Đang hoạt động",
+              display: "Đang hoạt động"
+            },
+            {
+              value: "Ngừng hoạt động",
+              display: "Ngừng hoạt động"
+            }
+          ],
+          bindingIndex: "StatusBank"
+        }),
       }
     },
+    saveData() {
+      const me = this;
+      let listBankAccount: Array<BankAccount> | null = new Array<BankAccount>;
+      if (me.masterData) {
+        if (me.masterData.editMode == 1 || me.masterData.editMode == 4) {
+          me.masterData['BankId'] = Guid.NewGuid();
+          listBankAccount = LocalStorageLibrary.getByKey<Array<BankAccount>>("Bank");
+          if (listBankAccount) {
+            listBankAccount.push(me.masterData);
+            LocalStorageLibrary.setByKey("Bank", listBankAccount);
+          }
+          else {
+            listBankAccount = new Array<BankAccount>({ ...me.masterData });
+            LocalStorageLibrary.setByKey("Bank", listBankAccount);
+          }
+        }
+        if (me.masterData.editMode == 2) {
+          listBankAccount = LocalStorageLibrary.getByKey<Array<BankAccount>>("Bank");
+          if (listBankAccount) {
+            listBankAccount.forEach(newItemBank => {
+              if (me.masterData) {
+                if (newItemBank.BankId == me.masterData.BankId) {
+                  newItemBank.NameCardBank = me.masterData.NameCardBank;
+                  newItemBank.ExplainBank = me.masterData.ExplainBank;
+                  newItemBank.StatusBank = me.masterData.StatusBank;
 
+                }
+              }
+            });
+            LocalStorageLibrary.setByKey("Bank", listBankAccount);
+          }
+        }
+      }
+    },
     /**
     * Sau khi đóng form xong thì xử lý thêm gì ở master thì Override function này ở master
     */

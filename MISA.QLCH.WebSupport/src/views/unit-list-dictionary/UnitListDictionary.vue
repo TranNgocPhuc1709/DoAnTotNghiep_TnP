@@ -69,13 +69,20 @@ export default {
         return LocalStorageLibrary.getByKey<Array<Unit>>("Unit");
       }
     },
+    /**
+    * Thực hiện chức năng xóa trên Toolbar
+    * @param listSelectedRecord 
+    */
+    afterDelete(listMasterData: Array<Record<string, any>>) {
+      LocalStorageLibrary.setByKey("Unit", listMasterData);
+    },
 
     /**
      * Set PrimaryKey cho object master
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "CodeUnitList";
+      return "unitId";
     },
 
     /**

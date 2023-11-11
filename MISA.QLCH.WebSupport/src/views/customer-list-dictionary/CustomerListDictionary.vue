@@ -7,6 +7,8 @@ import BaseDictionaryListView from 'qlch_base/BaseDictionaryListView';
 import BaseDictionaryListController from 'qlch_base/BaseDictionaryListController';
 import ParamPaging from '@library-src/models/qlch_control/qlch_grid/qlch_param_paging/ParamPaging';
 import Column from '@library-src/models/qlch_control/qlch_grid/qlch_column/Column';
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import Customer from '@store-src/models/customer/Customer';
 
 export default {
 
@@ -98,28 +100,26 @@ export default {
      */
     loadMasterData(param: ParamPaging) {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
-      return [
-        {
-          CodeCustomer: "KH001",
-          NameCustomer: "Nguyễn Văn A",
-          TelephoneCustomer: "0123456789",
-          EmailCustomer: "NguyenVanA@gmail.com",
-          AddressCustomer: "Hà Nội",
-          DateBirthCustomer: "18/10/2003",
-          CustomerGroupList: "Nhóm khách hàng thân thiết",
-          CodeEmployeeCustomer: "NV001",
-          NameEmployeeCustomer: "Nguyễn Thị Lụa",
-          AttentionCustomer: "Khách quen",
-        },
-      ];
+      if (!LocalStorageLibrary.getByKey<Array<Customer>>("Customer")) {
+        return new Array<Customer>;
+      }
+      else {
+        return LocalStorageLibrary.getByKey<Array<Customer>>("Customer");
+      }
     },
-
+    /**
+      * Thực hiện chức năng xóa trên Toolbar
+      * @param listSelectedRecord 
+      */
+    afterDelete(listMasterData: Array<Record<string, any>>) {
+      LocalStorageLibrary.setByKey("Customer", listMasterData);
+    },
     /**
      * Set PrimaryKey cho object master
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "CodeCustomer";
+      return "CustomerId";
     },
 
     /**

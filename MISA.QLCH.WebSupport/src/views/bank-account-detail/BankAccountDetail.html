@@ -1,9 +1,6 @@
 <base-dictionary-detail-view :idRoot="idRoot" :propView="propView" :styleFrom="`width: 500px;`"
   @toolbarClick="onSelectAction" @closeFormClick="onCloseForm">
   <template v-slot:content-detail>
-    <!-- <div class="qlch-input-default item-detail">
-      <i>(*) Dev: Khai báo control form tại đây:</i>
-    </div> -->
     <div class="qlch-input-default item-detail">
       <e-text-box :control="bindingControl[`txtNameCardBank`]"
         v-model="masterData[bindingControl[`txtNameCardBank`].bindingIndex]"></e-text-box>
@@ -11,6 +8,10 @@
     <div class="qlch-input-default item-detail">
       <e-text-box :control="bindingControl[`txtExplainBank`]"
         v-model="masterData[bindingControl[`txtExplainBank`].bindingIndex]"></e-text-box>
+    </div>
+    <div class="qlch-input-default item-detail">
+      <e-combobox :control="bindingControl[`txtStatusBank`]"
+        v-model="masterData[bindingControl[`txtStatusBank`].bindingIndex]"></e-combobox>
     </div>
   </template>
 </base-dictionary-detail-view>

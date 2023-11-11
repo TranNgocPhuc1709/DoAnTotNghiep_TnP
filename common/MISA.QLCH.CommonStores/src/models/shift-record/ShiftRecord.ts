@@ -24,4 +24,5 @@ export default class ShiftRecord {
     ShiftStatus?: string;
     shiftId?: string;
 
+
 }

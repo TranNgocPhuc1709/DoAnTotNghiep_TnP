@@ -10,6 +10,8 @@ import ETextBox from "qlch_control/ETextBox";
 import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
 import Guid from '@library-src/utilities/types/Guid';
 import Unit from '@store-src/models/unit/Unit';
+import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
+import ECombobox from "qlch_control/ECombobox";
 
 export default {
 
@@ -22,7 +24,8 @@ export default {
   },
   components: {
     BaseDictionaryDetailView,
-    ETextBox
+    ETextBox,
+    ECombobox
   },
 
   setup() {
@@ -60,6 +63,24 @@ export default {
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "ExplainUnitList",
+        }),
+        "txtStatusUnitList": new Combobox({
+          fieldText: "Trạng thái",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          data: [
+            {
+              value: "Đang hoạt động",
+              display: "Đang hoạt động"
+            },
+
+            {
+              value: "Ngừng hoạt động",
+              display: "Ngừng hoạt động"
+            }
+          ],
+          bindingIndex: "StatusUnitList",
         }),
       }
     },

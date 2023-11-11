@@ -2,7 +2,7 @@
 <style lang="scss" scoped src="./ProductDetail.scss"></style>
 <script lang="ts">
 import ProductDetail from './ProductDetail';
-import { Ref, ref } from 'vue';
+import { PropType, Ref, ref } from 'vue';
 import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailController";
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
 import TextBox from "@library-src/models/qlch_control/qlch_text_box/TextBox";
@@ -12,18 +12,24 @@ import ECombobox from "qlch_control/ECombobox";
 import NumberModel from '@library-src/models/qlch_control/qlch_number/NumberModel';
 import ENumber from "qlch_control/ENumber";
 import NumberFormat from '@library-src/models/qlch_control/number_format/NumberFormat';
-import Checkbox from '@library-src/models/qlch_control/qlch_checkbox/Checkbox';
-import ECheckbox from "qlch_control/ECheckbox";
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import Guid from '@library-src/utilities/types/Guid';
+import Product from '@store-src/models/product/Product';
 export default {
 
   extends: BaseDictionaryDetailController,
-
+  props: {
+    masterData: {
+      type: Object as PropType<Record<string, any>>,
+      require: true
+    }
+  },
   components: {
     BaseDictionaryDetailView,
     ETextBox,
     ECombobox,
     ENumber,
-    ECheckbox,
+
   },
 
   setup() {
@@ -259,26 +265,39 @@ export default {
           bindingIndex: "PurchasePriceProductList"
         }),
 
-        "txtShowDisplayProduct": new Checkbox({
-          fieldText: "Hiển thị trên trang bán hàng",
+        "txtShowDisplayProduct": new Combobox({
+          fieldText: "Hiển thị trên danh sách bán hàng",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          data: [
+            {
+              value: "Có",
+              display: "Có"
+            },
+            {
+              value: "không",
+              display: "Không"
+            }
+          ],
           bindingIndex: "ShowDisplayProduct",
         }),
-        "txtTypeProductList": new TextBox({
-          fieldText: "Màu sắc",
-          placeholder: "Xanh, Đỏ, Vàng,..",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          bindingIndex: "TypeProductList"
-        }),
-        "txtSizeProductList": new TextBox({
-          fieldText: "Size",
-          placeholder: "S,M,L,XL,...",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          bindingIndex: "SizeProductList"
-        }),
+        // "txtTypeProductList": new TextBox({
+        //   fieldText: "Màu sắc",
+        //   placeholder: "Xanh, Đỏ, Vàng,..",
+        //   require: false,
+        //   maxLength: 255,
+        //   labelWidth: labelWidth,
+        //   bindingIndex: "TypeProductList"
+        // }),
+        // "txtSizeProductList": new TextBox({
+        //   fieldText: "Size",
+        //   placeholder: "S,M,L,XL,...",
+        //   require: false,
+        //   maxLength: 255,
+        //   labelWidth: labelWidth,
+        //   bindingIndex: "SizeProductList"
+        // }),
         "txtProductInventory": new NumberModel({
           fieldText: "Tồn kho ban đầu",
           require: false,
@@ -327,10 +346,69 @@ export default {
           }),
           bindingIndex: "PriceProductList"
         }),
+        "txtStatusProductList": new Combobox({
+          fieldText: "Trạng thái kinh doanh",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          data: [
+            {
+              value: "Đang kinh doanh",
+              display: "Đang kinh doanh"
+            },
+            {
+              value: "Ngừng kinh doanh",
+              display: "Ngừng kinh doanh"
+            }
+          ],
+          bindingIndex: "StatusProductList",
+        }),
 
       }
     },
-    // Khởi tạo ảnh
+
+    saveData() {
+      const me = this;
+      let listProduct: Array<Product> | null = new Array<Product>;
+      if (me.masterData) {
+        if (me.masterData.editMode == 1 || me.masterData.editMode == 4) {
+          me.masterData['ProductId'] = Guid.NewGuid();
+          listProduct = LocalStorageLibrary.getByKey<Array<Product>>("Product");
+          if (listProduct) {
+            listProduct.push(me.masterData);
+            LocalStorageLibrary.setByKey("Product", listProduct);
+          }
+          else {
+            listProduct = new Array<Product>({ ...me.masterData });
+            LocalStorageLibrary.setByKey("Product", listProduct);
+          }
+        }
+        if (me.masterData.editMode == 2) {
+          listProduct = LocalStorageLibrary.getByKey<Array<Product>>("Product");
+          if (listProduct) {
+            listProduct.forEach(newItemProduct => {
+              if (me.masterData) {
+                if (newItemProduct.ProductId == me.masterData.ProductId) {
+                  newItemProduct.CodeProductList = me.masterData.CodeProductList;
+                  newItemProduct.NameProductList = me.masterData.NameProductList;
+                  newItemProduct.GroupProductList = me.masterData.GroupProductList;
+                  newItemProduct.UnitProductList = me.masterData.UnitProductList;
+                  newItemProduct.PurchasePriceProductList = me.masterData.PurchasePriceProductList;
+                  newItemProduct.ShowDisplayProduct = me.masterData.ShowDisplayProduct;
+                  newItemProduct.ProductInventory = me.masterData.ProductInventory;
+                  newItemProduct.ProductMinInventory = me.masterData.ProductMinInventory;
+                  newItemProduct.ProductMaxInventory = me.masterData.ProductMaxInventory;
+                  newItemProduct.PriceProductList = me.masterData.PriceProductList;
+                  newItemProduct.StatusProductList = me.masterData.StatusProductList;
+
+                }
+              }
+            });
+            LocalStorageLibrary.setByKey("Product", listProduct);
+          }
+        }
+      }
+    },
 
     /**
     * Sau khi đóng form xong thì xử lý thêm gì ở master thì Override function này ở master

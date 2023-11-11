@@ -160,7 +160,7 @@ export default {
           bindingIndex: "NameStaffCashPayment"
         }),
         "txtIncludedCashPayment": new Checkbox({
-          fieldText: "Tính vào doanh thu",
+          fieldText: "Tính vào chi phí",
           bindingIndex: "IncludedCashPayment",
         }),
         // "txtColumn12": new TextBox({

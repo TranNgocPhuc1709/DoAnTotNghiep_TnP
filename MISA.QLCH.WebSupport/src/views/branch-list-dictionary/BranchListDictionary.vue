@@ -7,6 +7,8 @@ import BaseDictionaryListView from 'qlch_base/BaseDictionaryListView';
 import BaseDictionaryListController from 'qlch_base/BaseDictionaryListController';
 import ParamPaging from '@library-src/models/qlch_control/qlch_grid/qlch_param_paging/ParamPaging';
 import Column from '@library-src/models/qlch_control/qlch_grid/qlch_column/Column';
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import Branch from '@store-src/models/branch/Branch';
 
 export default {
 
@@ -69,25 +71,26 @@ export default {
      */
     loadMasterData(param: ParamPaging) {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
-      return [
-        {
-          CodeBranch: "TSTCH-01",
-          NameBranch: "Shop Thiên Long",
-          AddressBranch: "Hà Nội",
-          PhoneBranch: "0123456789",
-          StatusBranch: "Đang hoạt động",
-
-        }
-
-      ];
+      if (!LocalStorageLibrary.getByKey<Array<Branch>>("branch")) {
+        return new Array<Branch>;
+      }
+      else {
+        return LocalStorageLibrary.getByKey<Array<Branch>>("branch");
+      }
     },
-
+    /**
+     * Thực hiện chức năng xóa trên Toolbar
+     * @param listSelectedRecord 
+     */
+    afterDelete(listMasterData: Array<Record<string, any>>) {
+      LocalStorageLibrary.setByKey("branch", listMasterData);
+    },
     /**
      * Set PrimaryKey cho object master
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "CodeBranch";
+      return "BranchId";
     },
 
     /**

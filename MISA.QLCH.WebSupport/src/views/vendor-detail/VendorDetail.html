@@ -55,7 +55,9 @@
       <e-text-box :control="bindingControl[`txtAddressItemVendor`]"
         v-model="masterData[bindingControl[`txtAddressItemVendor`].bindingIndex]"></e-text-box>
     </div>
-
-
+    <div class="qlch-input-default item-detail">
+      <e-combobox :control="bindingControl[`txtStatusVendor`]"
+        v-model="masterData[bindingControl[`txtStatusVendor`].bindingIndex]"></e-combobox>
+    </div>
   </template>
 </base-dictionary-detail-view>

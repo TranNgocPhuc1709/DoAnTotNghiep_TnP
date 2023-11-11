@@ -9,8 +9,8 @@ import TextBox from "@library-src/models/qlch_control/qlch_text_box/TextBox";
 import ETextBox from "qlch_control/ETextBox";
 import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
 import Guid from '@library-src/utilities/types/Guid';
-// import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
-// import ECombobox from "qlch_control/ECombobox";
+import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
+import ECombobox from "qlch_control/ECombobox";
 import CategoryItem from '@store-src/models/category-item/CategoryItem';
 
 export default {
@@ -25,7 +25,7 @@ export default {
   components: {
     BaseDictionaryDetailView,
     ETextBox,
-    // ECombobox
+    ECombobox
 
   },
   setup() {
@@ -71,6 +71,23 @@ export default {
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "DescribeCategory"
+        }),
+        "txtStatusCategory": new Combobox({
+          fieldText: "Trạng thái",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          data: [
+            {
+              value: "Đang hoạt động",
+              display: "Đang hoạt động"
+            },
+            {
+              value: "Ngừng hoạt động",
+              display: "Ngừng hoạt động"
+            }
+          ],
+          bindingIndex: "StatusCategory"
         })
       }
     },
@@ -107,17 +124,7 @@ export default {
             LocalStorageLibrary.setByKey("CategoryItem", listCategory);
           }
         }
-        // if (me.masterData.editMode == 4) {
-        //   listCategory = LocalStorageLibrary.getByKey<Array<CategoryItem>>("CategoryItem");
-        //   if (listCategory) {
-        //     listCategory.push(me.masterData);
-        //     LocalStorageLibrary.setByKey("CategoryItem", listCategory);
-        //   }
-        //   else {
-        //     listCategory = new Array<CategoryItem>({ ...me.masterData });
-        //     LocalStorageLibrary.setByKey("CategoryItem", listCategory);
-        //   }
-        // }
+
       }
     },
 

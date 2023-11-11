@@ -10,7 +10,6 @@ export default class Unit {
             me.CodeUnitList = unit.CodeUnitList;
             me.ExplainUnitList = unit.ExplainUnitList;
             me.StatusUnitList = unit.StatusUnitList;
-
         }
         me.unitId = Guid.NewGuid();
     }

@@ -7,6 +7,8 @@ import BaseDictionaryListView from 'qlch_base/BaseDictionaryListView';
 import BaseDictionaryListController from 'qlch_base/BaseDictionaryListController';
 import ParamPaging from '@library-src/models/qlch_control/qlch_grid/qlch_param_paging/ParamPaging';
 import Column from '@library-src/models/qlch_control/qlch_grid/qlch_column/Column';
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import Vendor from '@store-src/models/vendor/Vendor';
 
 export default {
 
@@ -75,24 +77,26 @@ export default {
      */
     loadMasterData(param: ParamPaging) {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
-      return [
-        {
-          CodeVendor: "NCC-H1",
-          NameVendor: "Cty HaMinh",
-          GroupVendor: "Hàng Nhập Khẩu",
-          TelephoneVendor: "012345",
-          AddressVendor: "Hà Nội",
-          StatusVendor: "Đang theo dõi"
-        },
-      ];
+      if (!LocalStorageLibrary.getByKey<Array<Vendor>>("Vendor")) {
+        return new Array<Vendor>;
+      }
+      else {
+        return LocalStorageLibrary.getByKey<Array<Vendor>>("Vendor");
+      }
     },
-
+    /**
+  * Thực hiện chức năng xóa trên Toolbar
+  * @param listSelectedRecord 
+  */
+    afterDelete(listMasterData: Array<Record<string, any>>) {
+      LocalStorageLibrary.setByKey("Vendor", listMasterData);
+    },
     /**
      * Set PrimaryKey cho object master
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "CodeVendor";
+      return "VendorId";
     },
 
     /**

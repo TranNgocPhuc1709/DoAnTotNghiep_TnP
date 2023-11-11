@@ -2,7 +2,7 @@
 <style lang="scss" scoped src="./CustomerDetail.scss"></style>
 <script lang="ts">
 import CustomerDetail from './CustomerDetail';
-import { Ref, ref } from 'vue';
+import { PropType, Ref, ref } from 'vue';
 import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailController";
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
 import TextBox from "@library-src/models/qlch_control/qlch_text_box/TextBox";
@@ -11,10 +11,19 @@ import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
 import ECombobox from "qlch_control/ECombobox";
 import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
 import EDate from "qlch_control/EDate";
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import Guid from '@library-src/utilities/types/Guid';
+import Customer from '@store-src/models/customer/Customer';
+
 export default {
 
   extends: BaseDictionaryDetailController,
-
+  props: {
+    masterData: {
+      type: Object as PropType<Record<string, any>>,
+      require: true
+    }
+  },
   components: {
     BaseDictionaryDetailView,
     ETextBox,
@@ -62,6 +71,7 @@ export default {
           fieldText: "Số điện thoại",
           require: true,
           maxLength: 255,
+          type: "number",
           labelWidth: labelWidth,
           bindingIndex: "TelephoneCustomer"
         }),
@@ -91,7 +101,6 @@ export default {
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "CustomerGroupList",
           data: [
             {
               value: 1,
@@ -106,14 +115,14 @@ export default {
               display: "G3"
             },
 
-          ]
+          ],
+          bindingIndex: "CustomerGroupList",
         }),
         "txtCodeEmployeeCustomer": new Combobox({
           fieldText: "Mã nhân viên phụ trách",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "CodeEmployeeCustomer",
           data: [
             {
 
@@ -129,12 +138,13 @@ export default {
               display: "NV003"
             },
 
-          ]
+          ],
+          bindingIndex: "CodeEmployeeCustomer",
         }),
         "txtNameEmployeeCustomer": new TextBox({
           fieldText: "Tên nhân viên phụ trách",
           require: false,
-          readOnly: true,
+          readOnly: false,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "NameEmployeeCustomer"
@@ -299,7 +309,50 @@ export default {
     //       ]
     //     }),
     //   }
+    saveData() {
+      const me = this;
+      let listCustomer: Array<Customer> | null = new Array<Customer>;
+      if (me.masterData) {
+        if (me.masterData.editMode == 1 || me.masterData.editMode == 4) {
+          me.masterData['CustomerId'] = Guid.NewGuid();
+          listCustomer = LocalStorageLibrary.getByKey<Array<Customer>>("Customer");
+          if (listCustomer) {
+            listCustomer.push(me.masterData);
+            LocalStorageLibrary.setByKey("Customer", listCustomer);
+          }
+          else {
+            listCustomer = new Array<Customer>({ ...me.masterData });
+            LocalStorageLibrary.setByKey("Customer", listCustomer);
+          }
+        }
+        if (me.masterData.editMode == 2) {
+          listCustomer = LocalStorageLibrary.getByKey<Array<Customer>>("Customer");
+          if (listCustomer) {
+            listCustomer.forEach(newItemCustomer => {
+              if (me.masterData) {
+                if (newItemCustomer.CustomerId == me.masterData.CustomerId) {
+                  newItemCustomer.CodeCustomer = me.masterData.CodeCustomer;
+                  newItemCustomer.NameCustomer = me.masterData.NameCustomer;
+                  newItemCustomer.TelephoneCustomer = me.masterData.TelephoneCustomer;
+                  newItemCustomer.EmailCustomer = me.masterData.EmailCustomer;
+                  newItemCustomer.AddressCustomer = me.masterData.AddressCustomer;
+                  newItemCustomer.DateBirthCustomer = me.masterData.DateBirthCustomer;
+                  newItemCustomer.CustomerGroupList = me.masterData.CustomerGroupList;
+                  newItemCustomer.CodeEmployeeCustomer = me.masterData.CodeEmployeeCustomer;
+                  newItemCustomer.NameEmployeeCustomer = me.masterData.NameEmployeeCustomer;
+                  newItemCustomer.AttentionCustomer = me.masterData.AttentionCustomer;
+                  newItemCustomer.GenderCustomer = me.masterData.GenderCustomer;
 
+
+
+                }
+              }
+            });
+            LocalStorageLibrary.setByKey("Customer", listCustomer);
+          }
+        }
+      }
+    },
     /**
     * Sau khi đóng form xong thì xử lý thêm gì ở master thì Override function này ở master
     */

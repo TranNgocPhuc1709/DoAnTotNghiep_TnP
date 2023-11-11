@@ -2,17 +2,25 @@
 <style lang="scss" scoped src="./VendorDetail.scss"></style>
 <script lang="ts">
 import VendorDetail from './VendorDetail';
-import { Ref, ref } from 'vue';
+import { PropType, Ref, ref } from 'vue';
 import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailController";
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
 import TextBox from "@library-src/models/qlch_control/qlch_text_box/TextBox";
 import ETextBox from "qlch_control/ETextBox";
 import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
 import ECombobox from "qlch_control/ECombobox";
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import Guid from '@library-src/utilities/types/Guid';
+import Vendor from '@store-src/models/vendor/Vendor';
 export default {
 
   extends: BaseDictionaryDetailController,
-
+  props: {
+    masterData: {
+      type: Object as PropType<Record<string, any>>,
+      require: true
+    }
+  },
   components: {
     BaseDictionaryDetailView,
     ETextBox,
@@ -80,6 +88,7 @@ export default {
           fieldText: "Số Điện Thoại",
           require: false,
           maxLength: 255,
+          type: "number",
           labelWidth: labelWidth,
           bindingIndex: "TelephoneVendor"
         }),
@@ -108,6 +117,7 @@ export default {
           fieldText: "Số ĐT",
           require: false,
           maxLength: 255,
+          type: "number",
           labelWidth: labelWidth,
           bindingIndex: "PhoneContactVendor"
         }),
@@ -125,6 +135,65 @@ export default {
           labelWidth: labelWidth,
           bindingIndex: "AddressItemVendor"
         }),
+        "txtStatusVendor": new Combobox({
+          fieldText: "Trạng thái",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          data: [
+            {
+              value: "Ngừng cung cấp",
+              display: "Ngừng cung cấp"
+            },
+            {
+              value: "Cung cấp",
+              display: "Cung cấp"
+            },
+          ],
+          bindingIndex: "StatusVendor"
+        }),
+      }
+    },
+
+    saveData() {
+      const me = this;
+      let listVendor: Array<Vendor> | null = new Array<Vendor>;
+      if (me.masterData) {
+        if (me.masterData.editMode == 1 || me.masterData.editMode == 4) {
+          me.masterData['VendorId'] = Guid.NewGuid();
+          listVendor = LocalStorageLibrary.getByKey<Array<Vendor>>("Vendor");
+          if (listVendor) {
+            listVendor.push(me.masterData);
+            LocalStorageLibrary.setByKey("Vendor", listVendor);
+          }
+          else {
+            listVendor = new Array<Vendor>({ ...me.masterData });
+            LocalStorageLibrary.setByKey("Vendor", listVendor);
+          }
+        }
+        if (me.masterData.editMode == 2) {
+          listVendor = LocalStorageLibrary.getByKey<Array<Vendor>>("Vendor");
+          if (listVendor) {
+            listVendor.forEach(newItemVendorCategory => {
+              if (me.masterData) {
+                if (newItemVendorCategory.VendorId == me.masterData.VendorId) {
+                  newItemVendorCategory.CodeVendor = me.masterData.CodeVendor;
+                  newItemVendorCategory.NameVendor = me.masterData.NameVendor;
+                  newItemVendorCategory.GroupVendor = me.masterData.GroupVendor;
+                  newItemVendorCategory.TelephoneVendor = me.masterData.TelephoneVendor;
+                  newItemVendorCategory.AddressVendor = me.masterData.AddressVendor;
+                  newItemVendorCategory.FullNameVendor = me.masterData.FullNameVendor;
+                  newItemVendorCategory.EmailVendor = me.masterData.EmailVendor;
+                  newItemVendorCategory.PhoneContactVendor = me.masterData.PhoneContactVendor;
+                  newItemVendorCategory.TitleVendor = me.masterData.TitleVendor;
+                  newItemVendorCategory.AddressItemVendor = me.masterData.AddressItemVendor;
+                  newItemVendorCategory.StatusVendor = me.masterData.StatusVendor;
+                }
+              }
+            });
+            LocalStorageLibrary.setByKey("Vendor", listVendor);
+          }
+        }
       }
     },
 

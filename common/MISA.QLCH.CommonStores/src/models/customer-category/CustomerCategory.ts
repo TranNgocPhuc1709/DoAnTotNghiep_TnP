@@ -12,7 +12,7 @@ export default class CustomerCategory {
             me.DescribeCustomerCategory = customerCategory.DescribeCustomerCategory;
             me.StatusCustomerCategory = customerCategory.StatusCustomerCategory;
         }
-        me.CustomerId = Guid.NewGuid();
+        me.CustomerCategoryId = Guid.NewGuid();
     }
 
     /**
@@ -22,6 +22,6 @@ export default class CustomerCategory {
     NameCustomerCategory?: string;
     DescribeCustomerCategory?: string;
     StatusCustomerCategory?: string;
-    CustomerId?: string;
+    CustomerCategoryId?: string;
 
 }

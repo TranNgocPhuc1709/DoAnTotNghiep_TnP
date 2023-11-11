@@ -7,6 +7,8 @@ import BaseDictionaryListView from 'qlch_base/BaseDictionaryListView';
 import BaseDictionaryListController from 'qlch_base/BaseDictionaryListController';
 import ParamPaging from '@library-src/models/qlch_control/qlch_grid/qlch_param_paging/ParamPaging';
 import Column from '@library-src/models/qlch_control/qlch_grid/qlch_column/Column';
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import BankAccount from '@store-src/models/bank-account/BankAccount';
 
 export default {
 
@@ -35,11 +37,7 @@ export default {
     buildGridMasterColumn(): Array<Column> {
       console.log("DEV: Override Function buildGridMasterColumn return list Column in Grid");
       return Array(
-        new Column({
-          fieldText: "STT",
-          dataIndex: "NumericalBank",
-          width: 120,
-        }),
+
         new Column({
           fieldText: "Tên thẻ",
           dataIndex: "NameCardBank",
@@ -65,16 +63,19 @@ export default {
      */
     loadMasterData(param: ParamPaging) {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
-      return [
-        {
-          NumericalBank: "1",
-          NameCardBank: "Visa",
-          ExplainBank: "Thẻ Visa",
-          StatusBank: "Đang theo dõi",
-
-        }
-
-      ];
+      if (!LocalStorageLibrary.getByKey<Array<BankAccount>>("Bank")) {
+        return new Array<BankAccount>;
+      }
+      else {
+        return LocalStorageLibrary.getByKey<Array<BankAccount>>("Bank");
+      }
+    },
+    /**
+     * Thực hiện chức năng xóa trên Toolbar
+     * @param listSelectedRecord 
+     */
+    afterDelete(listMasterData: Array<Record<string, any>>) {
+      LocalStorageLibrary.setByKey("Bank", listMasterData);
     },
 
     /**
@@ -82,7 +83,7 @@ export default {
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "NumericalBank";
+      return "BankId";
     },
 
     /**

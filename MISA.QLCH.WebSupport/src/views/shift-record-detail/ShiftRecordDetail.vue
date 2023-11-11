@@ -101,6 +101,23 @@ export default {
               display: "22:00"
             },
           ]
+        }),
+        "txtShiftStatus": new Combobox({
+          fieldText: "Trạng thái",
+          require: false,
+          maxLength: 255,
+          labelWidth: labelWidth,
+          bindingIndex: "ShiftStatus",
+          data: [
+            {
+              value: "Đang hoạt động",
+              display: "Đang hoạt động"
+            },
+            {
+              value: "Ngừng hoạt động",
+              display: "Ngừng hoạt động"
+            }
+          ]
         })
       }
     },

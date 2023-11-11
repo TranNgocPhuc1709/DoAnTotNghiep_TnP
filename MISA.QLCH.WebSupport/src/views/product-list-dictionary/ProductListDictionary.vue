@@ -7,6 +7,8 @@ import BaseDictionaryListView from 'qlch_base/BaseDictionaryListView';
 import BaseDictionaryListController from 'qlch_base/BaseDictionaryListController';
 import ParamPaging from '@library-src/models/qlch_control/qlch_grid/qlch_param_paging/ParamPaging';
 import Column from '@library-src/models/qlch_control/qlch_grid/qlch_column/Column';
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import Product from '@store-src/models/product/Product';
 
 export default {
 
@@ -79,26 +81,26 @@ export default {
      */
     loadMasterData(param: ParamPaging) {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
-      return [
-        {
-          CodeProductList: "AN01",
-          NameProductList: "Áo Nam Polo",
-          GroupProductList: "Quần Áo",
-          UnitProductList: "Chiếc",
-          PriceProductList: "Giá",
-          ShowDisplayProduct: "Có",
-          StatusProductList: "Đang kinh doanh"
-        },
-
-      ];
+      if (!LocalStorageLibrary.getByKey<Array<Product>>("Product")) {
+        return new Array<Product>;
+      }
+      else {
+        return LocalStorageLibrary.getByKey<Array<Product>>("Product");
+      }
     },
-
+    /**
+     * Thực hiện chức năng xóa trên Toolbar
+     * @param listSelectedRecord 
+     */
+    afterDelete(listMasterData: Array<Record<string, any>>) {
+      LocalStorageLibrary.setByKey("Product", listMasterData);
+    },
     /**
      * Set PrimaryKey cho object master
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "CodeProduct";
+      return "ProductId";
     },
 
     /**
