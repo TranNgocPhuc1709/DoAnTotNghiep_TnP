@@ -163,6 +163,15 @@ const routes: Array<RouteRecordRaw> = [
                 }
             },
             {
+                path: 'profit',
+                name: 'profit',
+                component: () => import('@src/views/profit-list-dictionary/ProfitListDictionary.vue'),
+                meta: {
+                    title: "Lợi nhuận",
+                    anonymous: false
+                }
+            },
+            {
                 path: 'categoryItem',
                 name: 'categoryItem',
                 component: () => import('@src/views/category-item-list-dictionary/CategoryItemListDictionary.vue'),
@@ -258,6 +267,24 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import('@src/views/bank-account-list-dictionary/BankAccountListDictionary.vue'),
                 meta: {
                     title: "Phương thức thanh toán",
+                    anonymous: false
+                }
+            },
+            {
+                path: 'dictionaryStock',
+                name: 'dictionaryStock',
+                component: () => import('@src/views/dictionary-stock-list-dictionary/DictionaryStockListDictionary.vue'),
+                meta: {
+                    title: "Kho",
+                    anonymous: false
+                }
+            },
+            {
+                path: 'bank',
+                name: 'bank',
+                component: () => import('@src/views/bank-list-dictionary/BankListDictionary.vue'),
+                meta: {
+                    title: "Tài khoản ngân hàng",
                     anonymous: false
                 }
             },

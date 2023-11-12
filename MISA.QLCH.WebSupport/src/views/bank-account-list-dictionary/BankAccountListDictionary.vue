@@ -63,11 +63,11 @@ export default {
      */
     loadMasterData(param: ParamPaging) {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
-      if (!LocalStorageLibrary.getByKey<Array<BankAccount>>("Bank")) {
+      if (!LocalStorageLibrary.getByKey<Array<BankAccount>>("BankAccount")) {
         return new Array<BankAccount>;
       }
       else {
-        return LocalStorageLibrary.getByKey<Array<BankAccount>>("Bank");
+        return LocalStorageLibrary.getByKey<Array<BankAccount>>("BankAccount");
       }
     },
     /**
@@ -75,7 +75,7 @@ export default {
      * @param listSelectedRecord 
      */
     afterDelete(listMasterData: Array<Record<string, any>>) {
-      LocalStorageLibrary.setByKey("Bank", listMasterData);
+      LocalStorageLibrary.setByKey("BankAccount", listMasterData);
     },
 
     /**
@@ -83,7 +83,7 @@ export default {
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "BankId";
+      return "BankAccountId";
     },
 
     /**

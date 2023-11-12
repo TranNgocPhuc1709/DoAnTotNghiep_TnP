@@ -2,7 +2,7 @@
 <style lang="scss" scoped src="./EmployeeDetail.scss"></style>
 <script lang="ts">
 import EmployeeDetail from './EmployeeDetail';
-import { Ref, ref } from 'vue';
+import { PropType, Ref, ref } from 'vue';
 import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailController";
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
 import TextBox from "@library-src/models/qlch_control/qlch_text_box/TextBox";
@@ -12,21 +12,30 @@ import ECombobox from "qlch_control/ECombobox";
 import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
 import EDate from "qlch_control/EDate";
 import Log from '@library-src/utilities/Log';
-import Checkbox from '@library-src/models/qlch_control/qlch_checkbox/Checkbox';
-import ECheckbox from "qlch_control/ECheckbox";
 import BaseInput from '@library-src/models/qlch_control/base_input/BaseInput';
+// import Checkbox from '@library-src/models/qlch_control/qlch_checkbox/Checkbox';
+// import ECheckbox from "qlch_control/ECheckbox";
+
 // import Log from '@library-src/utilities/Log';
+import Employee from '@store-src/models/employee/Employee';
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import Guid from '@library-src/utilities/types/Guid';
 
 export default {
 
   extends: BaseDictionaryDetailController,
-
+  props: {
+    masterData: {
+      type: Object as PropType<Record<string, any>>,
+      require: true
+    }
+  },
   components: {
     BaseDictionaryDetailView,
     ETextBox,
     ECombobox,
     EDate,
-    ECheckbox
+    // ECheckbox
   },
 
 
@@ -53,6 +62,9 @@ export default {
     const disabledAccessTimeFormItem: Ref<boolean> = ref(false);
     const disablePassWord: Ref<boolean> = ref(false);
     const disableECombobox: Ref<boolean> = ref(true)
+    const navbar1Selected: Ref<boolean> = ref(false);
+    const navbar2Selected: Ref<boolean> = ref(false);
+    const navbar3Selected: Ref<boolean> = ref(false);
     //Xử lý checkbox
 
 
@@ -64,9 +76,10 @@ export default {
       disabledFormAccessTime,
       disabledAccessTimeFormItem,
       disablePassWord,
-      disableECombobox
-
-
+      disableECombobox,
+      navbar1Selected,
+      navbar2Selected,
+      navbar3Selected
       // isTaskInfoActive: false,
       // disabledFormInfo2: false
     };
@@ -110,11 +123,11 @@ export default {
           bindingIndex: "GenderEmployee",
           data: [
             {
-              value: 1,
+              value: "Nam",
               display: "Nam"
             },
             {
-              value: 2,
+              value: "Nữ",
               display: "Nữ"
             }
           ]
@@ -129,6 +142,7 @@ export default {
         "txtTelephoneEmployee": new TextBox({
           fieldText: "Số điện thoại",
           require: false,
+          type: "number",
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "TelephoneEmployee"
@@ -141,11 +155,11 @@ export default {
           bindingIndex: "StatusEmployee",
           data: [
             {
-              value: 1,
+              value: "Nhân viên chính thức",
               display: "Nhân viên chính thức"
             },
             {
-              value: 2,
+              value: "Nhân viên thử việc",
               display: "Nhân viên thử việc"
             }
           ]
@@ -162,6 +176,7 @@ export default {
         "txtIdCardEmployee": new TextBox({
           fieldText: "Số CMND",
           maxLength: 255,
+          type: "number",
           labelWidth: labelWidth,
           bindingIndex: "IdCardEmployee"
         }),
@@ -197,37 +212,36 @@ export default {
           fieldText: "Xác nhận mật khẩu",
           require: true,
           maxLength: 255,
+          type: "password",
           labelWidth: labelWidth,
           bindingIndex: "ConfirmPasswordEmployee"
         }),
-        "txtWorkWithSystem": new Checkbox({
-          fieldText: "Cho phép làm việc với phần mềm",
-          bindingIndex: "WorkWithSystem",
-        }),
-        "txtSystemAdministrator ": new Checkbox({
-          fieldText: "Vai trò quản trị hệ thống",
-          bindingIndex: "SystemAdministrator ",
-        }),
-        "txtSystemSales": new Checkbox({
-          fieldText: "ai trò bán hàng",
-          bindingIndex: "SystemSales",
-        }),
+        // "txtWorkWithSystem": new Checkbox({
+        //   fieldText: "Cho phép làm việc với phần mềm",
+        //   bindingIndex: "WorkWithSystem",
+        // }),
+        // "txtSystemAdministrator ": new Checkbox({
+        //   fieldText: "Vai trò quản trị hệ thống",
+        //   bindingIndex: "SystemAdministrator ",
+        // }),
+        // "txtSystemSales": new Checkbox({
+        //   fieldText: "Vai trò bán hàng",
+        //   bindingIndex: "SystemSales",
+        // }),
+
         "txtUsageSystem": new Combobox({
+          fieldText: "",
           maxLength: 255,
           labelWidth: labelWidth,
-          placeholder: "Chọn 1 hoặc nhiều vai trò",
+          placeholder: "Lựa chọn vai trò người dùng",
           data: [
             {
-              value: 1,
+              value: "Nhân viên bán hàng",
               display: "Nhân viên bán hàng"
             },
             {
-              value: 2,
-              display: "Nhân viên bán hàng Online"
-            },
-            {
-              value: 3,
-              display: "Nhân viên Marketing"
+              value: "Quản trị hệ thống",
+              display: "Quản trị hệ thống"
             }
           ],
           bindingIndex: "UsageSystem",
@@ -332,16 +346,14 @@ export default {
           labelWidth: labelWidth,
           bindingIndex: "AddressEmergency"
         }),
-        "txtColumn34": new Checkbox({
-          fieldText: "Truy cập theo khung giờ",
-          bindingIndex: "Column34"
-        }),
-        "txtColumn35": new Checkbox({
-          fieldText: "Truy cập tự do",
-          bindingIndex: "Column35"
-        }),
-
-
+        // "txtColumn34": new Checkbox({
+        //   fieldText: "Truy cập theo khung giờ",
+        //   bindingIndex: "Column34"
+        // }),
+        // "txtColumn35": new Checkbox({
+        //   fieldText: "Truy cập tự do",
+        //   bindingIndex: "Column35"
+        // }),
       }
     },
 
@@ -352,6 +364,10 @@ export default {
         me.disabledFormRole = false;
         me.disabledFormContactInfo = false;
         me.disabledFormAccessTime = false;
+
+        me.navbar1Selected = true;
+        me.navbar2Selected = false;
+        me.navbar3Selected = false;
       } catch (error) {
         Log.ErrorLog(error as Error);
       }
@@ -363,6 +379,10 @@ export default {
         me.disabledFormInfo = false;
         me.disabledFormContactInfo = false;
         me.disabledFormAccessTime = false;
+
+        me.navbar1Selected = false;
+        me.navbar2Selected = true;
+        me.navbar3Selected = false;
       } catch (error) {
         Log.ErrorLog(error as Error);
       }
@@ -374,6 +394,10 @@ export default {
         me.disabledFormInfo = false;
         me.disabledFormRole = false;
         me.disabledFormAccessTime = false;
+
+        me.navbar1Selected = false;
+        me.navbar2Selected = false;
+        me.navbar3Selected = true;
       } catch (error) {
         Log.ErrorLog(error as Error);
       }
@@ -390,36 +414,102 @@ export default {
       }
     },
 
-    //TnP 31/12 start
-    onClickCheckPass() {
-      try {
-        const me = this;
-        const ShowCheckBoxPass = me.bindingControl["txtPasswordEmployee"];
-        if (ShowCheckBoxPass) {
-          me.disablePassWord = true
+
+    saveData() {
+      const me = this;
+      let listEmployee: Array<Employee> | null = new Array<Employee>;
+      if (me.masterData) {
+        if (me.masterData.editMode == 1 || me.masterData.editMode == 4) {
+          me.masterData['EmployeeId'] = Guid.NewGuid();
+          listEmployee = LocalStorageLibrary.getByKey<Array<Employee>>("employee");
+          if (listEmployee) {
+            listEmployee.push(me.masterData);
+            LocalStorageLibrary.setByKey("employee", listEmployee);
+          }
+          else {
+            listEmployee = new Array<Employee>({ ...me.masterData });
+            LocalStorageLibrary.setByKey("employee", listEmployee);
+          }
         }
-        if (!ShowCheckBoxPass) {
-          me.disablePassWord = false;
+        if (me.masterData.editMode == 2) {
+          listEmployee = LocalStorageLibrary.getByKey<Array<Employee>>("employee");
+          if (listEmployee) {
+            listEmployee.forEach(newItemEmployee => {
+              if (me.masterData) {
+                if (newItemEmployee.EmployeeId == me.masterData.EmployeeId) {
+                  newItemEmployee.CodeEmployee = me.masterData.CodeEmployee;
+                  newItemEmployee.NameEmployee = me.masterData.NameEmployee;
+                  newItemEmployee.GenderEmployee = me.masterData.GenderEmployee;
+                  newItemEmployee.BirthEmployee = me.masterData.BirthEmployee;
+                  newItemEmployee.TelephoneEmployee = me.masterData.TelephoneEmployee;
+                  newItemEmployee.StatusEmployee = me.masterData.StatusEmployee;
+                  newItemEmployee.PasswordEmployee = me.masterData.PasswordEmployee;
+                  newItemEmployee.IdCardEmployee = me.masterData.IdCardEmployee;
+                  newItemEmployee.DateCardEmployee = me.masterData.DateCardEmployee;
+                  newItemEmployee.AddressCardEmployee = me.masterData.AddressCardEmployee;
+                  newItemEmployee.MaritalEmployee = me.masterData.MaritalEmployee;
+                  newItemEmployee.ConfirmPasswordEmployee = me.masterData.ConfirmPasswordEmployee;
+                  newItemEmployee.UsageSystem = me.masterData.UsageSystem;
+                  newItemEmployee.HomePhone = me.masterData.HomePhone;
+                  newItemEmployee.AddressHome = me.masterData.AddressHome;
+                  newItemEmployee.NationEmployee = me.masterData.NationEmployee;
+                  newItemEmployee.DistrictEmployee = me.masterData.DistrictEmployee;
+                  newItemEmployee.ProvinceEmployee = me.masterData.ProvinceEmployee;
+                  newItemEmployee.WardsEmployee = me.masterData.WardsEmployee;
+                  newItemEmployee.AddressPresent = me.masterData.AddressPresent;
+                  newItemEmployee.NationPresent = me.masterData.NationPresent;
+                  newItemEmployee.DistrictPresent = me.masterData.DistrictPresent;
+                  newItemEmployee.ProvincePresent = me.masterData.ProvincePresent;
+                  newItemEmployee.WardsPresent = me.masterData.WardsPresent;
+                  newItemEmployee.EmergencyEmployee = me.masterData.EmergencyEmployee;
+                  newItemEmployee.RelationshipEmployee = me.masterData.RelationshipEmployee;
+                  newItemEmployee.PhoneEmergency = me.masterData.PhoneEmergency;
+                  newItemEmployee.LandlinePhone = me.masterData.LandlinePhone;
+                  newItemEmployee.EmailHome = me.masterData.EmailHome;
+                  newItemEmployee.AddressEmergency = me.masterData.AddressEmergency;
+                }
+              }
+            });
+            LocalStorageLibrary.setByKey("employee", listEmployee);
+          }
         }
-      } catch (error) {
-        Log.ErrorLog(error as Error);
       }
     },
 
-    onClickRole() {
-      try {
-        const me = this;
-        const ShowCheckBoxRole = me.bindingControl["txtSystemAdministrator"];
-        if (ShowCheckBoxRole) {
-          me.disableECombobox = false
-        }
-        else {
-          me.disableECombobox = true
-        }
-      } catch (error) {
-        Log.ErrorLog(error as Error);
-      }
-    },
+
+    //TnP 31/12 start sự kiện tắt 2 ô password
+    // onClickCheckPass() {
+    //   try {
+    //     const me = this;
+    //     const ShowCheckBoxPass = me.bindingControl["txtPasswordEmployee"];
+    //     if (ShowCheckBoxPass) {
+    //       me.disablePassWord = true
+    //     }
+    //     if (!ShowCheckBoxPass) {
+    //       me.disablePassWord = false;
+    //     }
+    //   } catch (error) {
+    //     Log.ErrorLog(error as Error);
+    //   }
+    // },
+
+
+
+
+    // onClickRole() {
+    //   try {
+    //     const me = this;
+    //     const ShowCheckBoxRole = me.bindingControl["txtSystemAdministrator"];
+    //     if (ShowCheckBoxRole) {
+    //       me.disableECombobox = false
+    //     }
+    //     else {
+    //       me.disableECombobox = true
+    //     }
+    //   } catch (error) {
+    //     Log.ErrorLog(error as Error);
+    //   }
+    // },
 
     //TnP 31/12 end
 

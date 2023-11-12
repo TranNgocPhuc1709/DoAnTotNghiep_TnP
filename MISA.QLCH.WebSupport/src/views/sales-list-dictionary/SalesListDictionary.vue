@@ -166,7 +166,6 @@ export default {
         })
       )
     },
-
     /**
      * Load dữ liệu master lên grid
      * @param param 
@@ -175,16 +174,15 @@ export default {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
       return [
         {
-          Column1: "27/10/2023",
-          Column2: "100000",
-          Column3: "20000",
-          Column4: "0",
-          Column5: "120000",
+          DateSales: "27/10/2023",
+          RevenueMoneySales: "100000",
+          ExpenseMoneySales: "20000",
+          PromotionSales: "0",
+          TotalSales: "120000",
         },
 
       ];
     },
-
     /**
      * Set PrimaryKey cho object master
      */
@@ -192,7 +190,6 @@ export default {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
       return "Column1";
     },
-
     /**
      * Khai báo import component detail
      * Override lại function after close form
@@ -203,11 +200,8 @@ export default {
       return frmDetail;
     },
     buildToolBarItems(): Array<ToolBarItemsView> {
-
       return [];
-
     },
   }
-
 }
 </script>

@@ -115,53 +115,53 @@ export default {
       return Array(
         new Column({
           fieldText: "Mã Hàng Hóa",
-          dataIndex: "Column1",
+          dataIndex: "CodePurchase",
           width: 120,
         }),
         new Column({
           fieldText: "Tên Hàng Hóa",
-          dataIndex: "Column2",
+          dataIndex: "NamePurchase",
           width: 260
         }),
         new Column({
           fieldText: "Đơn Vị Tính",
-          dataIndex: "Column3",
+          dataIndex: "UnitPurchase",
           width: 260
         }),
         new Column({
           fieldText: "Nhóm Hàng Hóa",
-          dataIndex: "Column4",
+          dataIndex: "GroupPurchase",
           width: 260
         }),
         new Column({
           fieldText: "SL Mua (1)",
-          dataIndex: "Column5",
+          dataIndex: "QuantityPurchase",
           minWidth: 160,
           flex: 1
         }),
         new Column({
           fieldText: "Giá (2)",
-          dataIndex: "Column6",
+          dataIndex: "PricePurchase",
           width: 160
         }),
         new Column({
           fieldText: "Giá trị mua (3)",
-          dataIndex: "Column7",
+          dataIndex: "TotalPricePurchase",
           minWidth: 160,
         }),
         new Column({
           fieldText: "SL Trả lại (4)",
-          dataIndex: "Column8",
+          dataIndex: "QuantityReturnedPurchase",
           minWidth: 160,
         }),
         new Column({
           fieldText: "Giá trị trả lại hàng (5)",
-          dataIndex: "Column9",
+          dataIndex: "ReturnValuePurchase",
           minWidth: 160,
         }),
         new Column({
           fieldText: "Tổng giá trị mua hàng (6) = (3) - (5)",
-          dataIndex: "Column10",
+          dataIndex: "TotalValuePurchase",
           minWidth: 260,
           flex: 1
         }),
@@ -176,29 +176,17 @@ export default {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
       return [
         {
-          Column1: "HH001",
-          Column2: "Quần Đùi Nam",
-          Column3: "Chiếc",
-          Column4: "Quần Áo Thời Trang Nam",
-          Column5: "100",
-          Column6: "500000",
-          Column7: "50000000",
-          Column8: "0",
-          Column9: "0",
-          Column10: "50000000",
-        },
-        {
-          Column1: "HH00=2",
-          Column2: "Quần Dài Nam",
-          Column3: "Chiếc",
-          Column4: "Quần Áo Thời Trang Nam",
-          Column5: "200",
-          Column6: "1000000",
-          Column7: "100000000",
-          Column8: "0",
-          Column9: "0",
-          Column10: "100000000",
-        },
+          CodePurchase: "HH001",
+          NamePurchase: "Quần Đùi Nam",
+          UnitPurchase: "Chiếc",
+          GroupPurchase: "Quần Áo Thời Trang Nam",
+          QuantityPurchase: "100",
+          PricePurchase: "500000",
+          TotalPricePurchase: "50000000",
+          QuantityReturnedPurchase: "0",
+          ReturnValuePurchase: "0",
+          TotalValuePurchase: "50000000",
+        }
 
       ];
     },
@@ -209,12 +197,10 @@ export default {
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "Column1";
+      return "CodePurchase";
     },
     buildToolBarItems(): Array<ToolBarItemsView> {
-
       return [];
-
     },
 
     /**

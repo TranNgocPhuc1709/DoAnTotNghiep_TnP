@@ -110,32 +110,32 @@ export default {
       return Array(
         new Column({
           fieldText: "Mã Hàng Hóa",
-          dataIndex: "Column1",
+          dataIndex: "CodeStock",
           width: 120,
         }),
         new Column({
           fieldText: "Tên Hàng Hóa",
-          dataIndex: "Column2",
+          dataIndex: "NameStock",
           width: 260
         }),
         new Column({
           fieldText: "Đơn Vị Tính",
-          dataIndex: "Column3",
+          dataIndex: "UnitStock",
           width: 160
         }),
         new Column({
           fieldText: "Nhóm Hàng Hóa",
-          dataIndex: "Column4",
+          dataIndex: "GroupStock",
           width: 260
         }),
         new Column({
           fieldText: "Giá Bán",
-          dataIndex: "Column5",
+          dataIndex: "PriceStock",
           minWidth: 200,
         }),
         new Column({
           fieldText: " Số Lượng Tồn Kho",
-          dataIndex: "Column6",
+          dataIndex: "InventoryStock",
           width: 160,
           flex: 1
         })
@@ -150,12 +150,12 @@ export default {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
       return [
         {
-          Column1: "HH0001",
-          Column2: "Quần Áo Nam",
-          Column3: "Chiếc",
-          Column4: "Quần Áo",
-          Column5: "100000",
-          Column6: "10"
+          CodeStock: "HH0001",
+          NameStock: "Quần Áo Nam",
+          UnitStock: "Chiếc",
+          GroupStock: "Quần Áo",
+          PriceStock: "100000",
+          InventoryStock: "10"
         },
 
       ];

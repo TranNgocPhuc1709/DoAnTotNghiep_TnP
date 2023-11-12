@@ -112,27 +112,27 @@ export default {
       return Array(
         new Column({
           fieldText: "Ngày chứng từ",
-          dataIndex: "Column1",
+          dataIndex: "DateRevenueExpenditure",
           width: 120,
         }),
         new Column({
           fieldText: "Số chứng từ",
-          dataIndex: "Column2",
+          dataIndex: "CodeRevenueExpenditure",
           width: 260
         }),
         new Column({
           fieldText: "Loại chứng từ",
-          dataIndex: "Column3",
+          dataIndex: "StyleRevenueExpenditure",
           width: 260
         }),
         new Column({
           fieldText: "Tiền thu",
-          dataIndex: "Column4",
+          dataIndex: "TakeRevenueExpenditure",
           width: 260
         }),
         new Column({
           fieldText: "Tiền chi",
-          dataIndex: "Column5",
+          dataIndex: "SpendRevenueExpenditure",
           minWidth: 260,
           flex: 1
         }),
@@ -143,22 +143,22 @@ export default {
         }),
         new Column({
           fieldText: "Nhân viên thu chi",
-          dataIndex: "Column7",
+          dataIndex: "PersonCollectRevenue",
           width: 160
         }),
         new Column({
           fieldText: "Mã đối tượng",
-          dataIndex: "Column8",
+          dataIndex: "CodeObjectRevenue",
           width: 160
         }),
         new Column({
           fieldText: "Tên đối tượng",
-          dataIndex: "Column9",
+          dataIndex: "NameObjectRevenue",
           width: 160
         }),
         new Column({
           fieldText: "Diễn giải",
-          dataIndex: "Column10",
+          dataIndex: "ExplainRevenueExpenditure",
           width: 160
         }),
 
@@ -173,29 +173,17 @@ export default {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
       return [
         {
-          Column1: "31/12/2023",
-          Column2: "HHP-001",
-          Column3: "Phiếu thu tiền mặt",
-          Column4: "120000",
-          Column5: "0",
-          Column6: "",
-          Column7: "Tnn",
-          Column8: "MISA",
-          Column9: "Công Ty MISA",
-          Column10: "Thu tiền hàng hóa"
-        },
-        {
-          Column1: "31/12/2023",
-          Column2: "HHP-002",
-          Column3: "Phiếu chi tiền mặt",
-          Column4: "0",
-          Column5: "250000",
-          Column6: "",
-          Column7: "NNN",
-          Column8: "VNPT",
-          Column9: "Công Ty truyền thông VNPM",
-          Column10: "Chi tiền thuê"
-        },
+          DateRevenueExpenditure: "31/12/2023",
+          CodeRevenueExpenditure: "HHP-001",
+          StyleRevenueExpenditure: "Phiếu thu tiền mặt",
+          TakeRevenueExpenditure: "120000",
+          SpendRevenueExpenditure: "0",
+          Column6: "0",
+          PersonCollectRevenue: "Tnn",
+          CodeObjectRevenue: "MISA",
+          NameObjectRevenue: "Công Ty MISA",
+          ExplainRevenueExpenditure: "Thu tiền hàng hóa"
+        }
       ];
     },
 

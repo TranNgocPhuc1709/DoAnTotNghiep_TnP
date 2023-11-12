@@ -18,7 +18,7 @@
   font-weight: 600;
   color: #737373;
   border: 1px solid #E1E1E1;
-  border-radius: 5px;
+
 
 }
 
@@ -42,11 +42,6 @@
   margin-top: 10px;
 }
 
-.role {
-  margin: 10px;
-
-
-}
 
 .item-checkbox-role-detail {
   margin: 0 20px 0 0;
@@ -68,7 +63,13 @@
 
 .role {
   height: 300px;
-  overflow: scroll;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.pageInfo {
+  height: 300px;
+  overflow: auto;
   overflow-x: hidden;
 }
 
@@ -87,4 +88,9 @@
 .item-checkbox-detail {
   width: 165px;
   margin: 20px 8px;
+}
+
+.selected {
+  background-color: #E5E6EB;
+  color: #2B3173;
 }

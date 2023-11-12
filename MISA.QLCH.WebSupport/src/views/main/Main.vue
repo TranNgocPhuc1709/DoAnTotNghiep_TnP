@@ -185,8 +185,17 @@ export default {
                         fieldText: "Ca làm việc"
                     },
                     {
+                        routerLink: "/dictionaryStock",
+                        fieldText: "Kho"
+
+                    },
+                    {
                         routerLink: "/bankAccount",
                         fieldText: "Phương thức và dịch vụ thanh toán"
+                    },
+                    {
+                        routerLink: "/bank",
+                        fieldText: "Tài khoản ngân hàng"
                     }
                 ),
                 fieldText: "Khác"

@@ -14,6 +14,8 @@ import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
 import EDate from "qlch_control/EDate";
 import Button from '@library-src/models/qlch_control/qlch_button/Button';
 import EButton from "qlch_control/EButton";
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import Inward from '@store-src/models/inward/Inward';
 export default {
 
   extends: BaseDictionaryListController,
@@ -145,15 +147,19 @@ export default {
      */
     loadMasterData(param: ParamPaging) {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
-      return [
-        {
-          DayInward: "17/9/2023",
-          VotesInward: "PNH123",
-          ObjectInward: "Công Ty Cổ Phần MiSA",
-          TotalMoneyInward: "100000",
-          ExplantInward: "Hàng mới nhập",
-        },
-      ];
+      if (!LocalStorageLibrary.getByKey<Array<Inward>>("inward")) {
+        return new Array<Inward>;
+      }
+      else {
+        return LocalStorageLibrary.getByKey<Array<Inward>>("inward");
+      }
+    },
+    /**
+     * Thực hiện chức năng xóa trên Toolbar
+     * @param listSelectedRecord 
+     */
+    afterDelete(listMasterData: Array<Record<string, any>>) {
+      LocalStorageLibrary.setByKey("inward", listMasterData);
     },
 
     /**

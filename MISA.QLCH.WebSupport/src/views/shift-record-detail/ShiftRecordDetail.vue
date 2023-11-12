@@ -13,11 +13,7 @@ import ShiftRecord from '@store-src/models/shift-record/ShiftRecord';
 import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
 import Guid from '@library-src/utilities/types/Guid';
 
-
-
 export default {
-
-
   extends: BaseDictionaryDetailController,
   props: {
     masterData: {

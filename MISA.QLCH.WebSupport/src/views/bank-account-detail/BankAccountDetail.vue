@@ -87,31 +87,30 @@ export default {
       let listBankAccount: Array<BankAccount> | null = new Array<BankAccount>;
       if (me.masterData) {
         if (me.masterData.editMode == 1 || me.masterData.editMode == 4) {
-          me.masterData['BankId'] = Guid.NewGuid();
-          listBankAccount = LocalStorageLibrary.getByKey<Array<BankAccount>>("Bank");
+          me.masterData['BankAccountId'] = Guid.NewGuid();
+          listBankAccount = LocalStorageLibrary.getByKey<Array<BankAccount>>("BankAccount");
           if (listBankAccount) {
             listBankAccount.push(me.masterData);
-            LocalStorageLibrary.setByKey("Bank", listBankAccount);
+            LocalStorageLibrary.setByKey("BankAccount", listBankAccount);
           }
           else {
             listBankAccount = new Array<BankAccount>({ ...me.masterData });
-            LocalStorageLibrary.setByKey("Bank", listBankAccount);
+            LocalStorageLibrary.setByKey("BankAccount", listBankAccount);
           }
         }
         if (me.masterData.editMode == 2) {
-          listBankAccount = LocalStorageLibrary.getByKey<Array<BankAccount>>("Bank");
+          listBankAccount = LocalStorageLibrary.getByKey<Array<BankAccount>>("BankAccount");
           if (listBankAccount) {
-            listBankAccount.forEach(newItemBank => {
+            listBankAccount.forEach(newItemBankAccount => {
               if (me.masterData) {
-                if (newItemBank.BankId == me.masterData.BankId) {
-                  newItemBank.NameCardBank = me.masterData.NameCardBank;
-                  newItemBank.ExplainBank = me.masterData.ExplainBank;
-                  newItemBank.StatusBank = me.masterData.StatusBank;
-
+                if (newItemBankAccount.BankAccountId == me.masterData.BankAccountId) {
+                  newItemBankAccount.NameCardBank = me.masterData.NameCardBank;
+                  newItemBankAccount.ExplainBank = me.masterData.ExplainBank;
+                  newItemBankAccount.StatusBank = me.masterData.StatusBank;
                 }
               }
             });
-            LocalStorageLibrary.setByKey("Bank", listBankAccount);
+            LocalStorageLibrary.setByKey("BankAccount", listBankAccount);
           }
         }
       }

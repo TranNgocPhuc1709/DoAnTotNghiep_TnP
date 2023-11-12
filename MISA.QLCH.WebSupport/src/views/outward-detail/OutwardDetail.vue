@@ -11,7 +11,6 @@ import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
 import EDate from "qlch_control/EDate";
 import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
 import ECombobox from "qlch_control/ECombobox";
-import EGrid from "qlch_control/EGrid";
 import NumberModel from '@library-src/models/qlch_control/qlch_number/NumberModel';
 import NumberFormat from '@library-src/models/qlch_control/number_format/NumberFormat';
 import ENumber from "qlch_control/ENumber";
@@ -24,7 +23,6 @@ export default {
     BaseDictionaryDetailView,
     ETextBox,
     EDate,
-    EGrid,
     ENumber,
     ECombobox
   },

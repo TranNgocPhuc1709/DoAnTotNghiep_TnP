@@ -1,0 +1,22 @@
+<base-dictionary-detail-view :idRoot="idRoot" :propView="propView" :styleFrom="`width: 500px;`"
+  @toolbarClick="onSelectAction" @closeFormClick="onCloseForm">
+  <template v-slot:content-detail>
+
+    <div class="qlch-input-default item-detail">
+      <e-text-box :control="bindingControl[`txtCodeStore`]"
+        v-model="masterData[bindingControl[`txtCodeStore`].bindingIndex]"></e-text-box>
+    </div>
+    <div class="qlch-input-default item-detail">
+      <e-text-box :control="bindingControl[`txtNameStore`]"
+        v-model="masterData[bindingControl[`txtNameStore`].bindingIndex]"></e-text-box>
+    </div>
+    <div class="qlch-input-default item-detail">
+      <e-text-box :control="bindingControl[`txtExplainStore`]"
+        v-model="masterData[bindingControl[`txtExplainStore`].bindingIndex]"></e-text-box>
+    </div>
+    <div class="qlch-input-default item-detail">
+      <e-combobox :control="bindingControl[`txtStatusStore`]"
+        v-model="masterData[bindingControl[`txtStatusStore`].bindingIndex]"></e-combobox>
+    </div>
+  </template>
+</base-dictionary-detail-view>

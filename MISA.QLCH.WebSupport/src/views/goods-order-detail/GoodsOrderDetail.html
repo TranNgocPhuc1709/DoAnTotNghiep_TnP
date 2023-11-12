@@ -58,8 +58,8 @@
           <tbody>
             <tr>
               <td>
-                <e-text-box :control="bindingControl[`txtCodeProductOrder`]"
-                  v-model="masterData[bindingControl[`txtCodeProductOrder`].bindingIndex]"></e-text-box>
+                <e-combobox :control="bindingControl[`txtCodeProductOrder`]"
+                  v-model="masterData[bindingControl[`txtCodeProductOrder`].bindingIndex]"></e-combobox>
               </td>
               <td>
                 <e-text-box :control="bindingControl[`txtNameProductOrder`]"
@@ -91,7 +91,6 @@
     </div>
     <div class="synthetic-footer d-flex-vcenter">
       <div class="main-synthetic d-flex-vcenter">
-
         <e-number :control="bindingControl[`txtTotalOrder`]"
           v-model="masterData[bindingControl[`txtTotalOrder`].bindingIndex]"></e-number>
       </div>

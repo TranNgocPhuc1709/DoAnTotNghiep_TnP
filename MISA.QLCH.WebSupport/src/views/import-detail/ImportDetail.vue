@@ -14,11 +14,7 @@ import NumberModel from '@library-src/models/qlch_control/qlch_number/NumberMode
 import ENumber from "qlch_control/ENumber";
 import NumberFormat from '@library-src/models/qlch_control/number_format/NumberFormat';
 import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
-import Grid from '@library-src/models/qlch_control/qlch_grid/Grid';
-import EGrid from "qlch_control/EGrid";
-import Column from '@library-src/models/qlch_control/qlch_grid/qlch_column/Column';
 import Log from '@library-src/utilities/Log';
-import Common from "@library-src/utilities/commons/Function";
 
 export default {
 
@@ -28,7 +24,6 @@ export default {
     BaseDictionaryDetailView,
     ETextBox,
     EDate,
-    EGrid,
     ENumber,
     ECombobox
   },
@@ -40,96 +35,8 @@ export default {
     const navbar1Selected: Ref<boolean> = ref(false);
     const navbar2Selected: Ref<boolean> = ref(false);
 
-    const dataGridImport: Array<Record<string, any>> = new Array(
-      {
-        "Code": "SP-001",
-        "Name": "Quần Áo Nam",
-        "warehouse": "Kho 1",
-        "NumberUnit": "Chiếc",
-        "NumberOrder": "100",
-        "NumberPrice": "25000",
-        "IntoMoney": "2500000"
-      },
-      {
-        "Code": "SP-001",
-        "Name": "Quần Áo Nam",
-        "warehouse": "Kho 1",
-        "NumberUnit": "Chiếc",
-        "NumberOrder": "100",
-        "NumberPrice": "25000",
-        "IntoMoney": "2500000"
-      },
-      {
-        "Code": "SP-0012345",
-        "Name": "Quần Áo Nam",
-        "warehouse": "Kho 1",
-        "NumberUnit": "Chiếc",
-        "NumberOrder": "100",
-        "NumberPrice": "25000",
-        "IntoMoney": "2500000"
-      },
-
-
-
-    )
-    const columnImport: Array<Column> = Array(
-      new Column({
-        fieldText: "Mã HH",
-        width: 125,
-        dataIndex: "Code",
-        isFilter: true
-      }),
-      new Column({
-        fieldText: "Tên hàng hóa",
-        dataIndex: "Name",
-        isFilter: true,
-        width: 200
-      }),
-      new Column({
-        fieldText: "Kho",
-        dataIndex: "warehouse",
-        isFilter: true,
-        width: 200
-      }),
-
-      new Column({
-        fieldText: "ĐV Tính",
-        width: 100,
-        dataIndex: "NumberUnit",
-        isFilter: true
-      }),
-
-      new Column({
-        fieldText: "Số lượng",
-        width: 100,
-        dataIndex: "NumberOrder",
-        isFilter: true
-      }),
-      new Column({
-        fieldText: "Đơn giá",
-        width: 100,
-        dataIndex: "NumberPrice",
-        isFilter: true
-      }),
-      new Column({
-        fieldText: "Thành tiền",
-        width: 250,
-        dataIndex: "IntoMoney",
-        isFilter: true,
-        flex: 1
-      }),
-
-    );
-    const tblImport: Ref<Grid> = ref(new Grid({
-      columns: columnImport,
-      data: dataGridImport,
-      isNotShowFooter: true,
-      isNotShowCheckbox: true,
-      primaryKey: "EmployeeCode"
-    }));
     return {
       thisData,
-      tblImport,
       disableFormImport,
       disableFormPayment,
       navbar1Selected,
@@ -382,18 +289,7 @@ export default {
 
       }
     },
-    async onLoadData(parameter: any) {
-      const me = this;
-      me.tblImport.isLoadingData = true;
-      me.tblImport.data = new Array(
 
-        // Khai báo dữ liệu biding
-      );
-      await Common.getTimeOut(3000, "");
-      me.tblImport.isLoadingData = false;
-      Log.InfoLog(parameter);
-
-    },
     showImport() {
       try {
         const me = this;

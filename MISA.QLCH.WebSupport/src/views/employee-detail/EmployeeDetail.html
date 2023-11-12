@@ -2,18 +2,18 @@
   @toolbarClick="onSelectAction" @closeFormClick="onCloseForm">
   <template v-slot:content-detail>
     <div class="heading-top d-flex width-fill">
-      <div class="menu-detail-item d-flex-vcenter" @click="ShowTaskInfo()">
+      <div class="menu-detail-item d-flex-vcenter" :class="{ 'selected': navbar1Selected }" @click="ShowTaskInfo()">
         <span>Thông tin cơ bản</span>
       </div>
-      <div class="menu-detail-item d-flex-vcenter" @click="ShowTaskRole()">
+      <div class="menu-detail-item d-flex-vcenter" :class="{ 'selected': navbar2Selected }" @click="ShowTaskRole()">
         <span>Vai trò</span>
       </div>
-      <div class="menu-detail-item d-flex-vcenter" @click="contactInfo()">
+      <div class="menu-detail-item d-flex-vcenter" :class="{ 'selected': navbar3Selected }" @click="contactInfo()">
         <span>Thông tin liên hệ</span>
       </div>
-      <div class="menu-detail-item d-flex-vcenter" @click="accessTime()">
+      <!-- <div class="menu-detail-item d-flex-vcenter" @click="accessTime()">
         <span>Thời gian truy cập</span>
-      </div>
+      </div> -->
     </div>
     <div class="pageInfo" v-if="disabledFormInfo">
       <div class="d-flex">
@@ -38,7 +38,7 @@
             <e-combobox :control="bindingControl[`txtMaritalEmployee`]"
               v-model="masterData[bindingControl[`txtMaritalEmployee`].bindingIndex]"></e-combobox>
           </div>
-          <div class="qlch-input-default item-detail" v-if="disablePassWord">
+          <div class="qlch-input-default item-detail">
             <e-text-box :control="bindingControl[`txtPasswordEmployee`]"
               v-model="masterData[bindingControl[`txtPasswordEmployee`].bindingIndex]">
               <template v-slot:trigger-left>
@@ -68,17 +68,21 @@
             <e-combobox :control="bindingControl[`txtStatusEmployee`]"
               v-model="masterData[bindingControl[`txtStatusEmployee`].bindingIndex]"></e-combobox>
           </div>
-          <div class="qlch-input-default item-detail" v-if="disablePassWord">
+          <div class="qlch-input-default item-detail">
             <e-text-box :control="bindingControl[`txtConfirmPasswordEmployee`]"
               v-model="masterData[bindingControl[`txtConfirmPasswordEmployee`].bindingIndex]"></e-text-box>
           </div>
         </div>
 
       </div>
-      <div class="qlch-input-default item-checkbox-employee-detail">
+
+      <!-- sự kiện checkbox -->
+      <!-- <div class="qlch-input-default item-checkbox-employee-detail">
         <e-checkbox :control="bindingControl[`txtWorkWithSystem`]" @click="onClickCheckPass()"
           v-model="masterData[bindingControl[`txtWorkWithSystem`].bindingIndex]"></e-checkbox>
-      </div>
+      </div> -->
+
+
     </div>
     <div class="role" v-if="disabledFormRole">
 
@@ -92,7 +96,9 @@
             v-model="masterData[bindingControl[`txtSystemSales`].bindingIndex]"></e-checkbox>
         </div>
       </div> -->
-      <div class="qlch-input-default item-detail" v-if="disableECombobox">
+
+
+      <div class="qlch-input-default item-detail">
         <e-combobox :control="bindingControl[`txtUsageSystem`]"
           v-model="masterData[bindingControl[`txtUsageSystem`].bindingIndex]"></e-combobox>
       </div>

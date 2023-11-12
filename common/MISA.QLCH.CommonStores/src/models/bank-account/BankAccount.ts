@@ -8,10 +8,10 @@ export default class BankAccount {
             me.ExplainBank = bankAccount.ExplainBank;
             me.StatusBank = bankAccount.StatusBank;
         }
-        me.BankId = Guid.NewGuid();
+        me.BankAccountId = Guid.NewGuid();
     }
     NameCardBank?: string;
     ExplainBank?: string;
     StatusBank?: string;
-    BankId?: string;
+    BankAccountId?: string;
 }

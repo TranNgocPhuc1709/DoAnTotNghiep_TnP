@@ -7,6 +7,8 @@ import BaseDictionaryListView from 'qlch_base/BaseDictionaryListView';
 import BaseDictionaryListController from 'qlch_base/BaseDictionaryListController';
 import ParamPaging from '@library-src/models/qlch_control/qlch_grid/qlch_param_paging/ParamPaging';
 import Column from '@library-src/models/qlch_control/qlch_grid/qlch_column/Column';
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import Employee from '@store-src/models/employee/Employee';
 
 export default {
 
@@ -75,19 +77,20 @@ export default {
      */
     loadMasterData(param: ParamPaging) {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
-      return [
-        {
-          CodeEmployee: "NV-01",
-          NameEmployee: "Nguyễn Thảo",
-          GenderEmployee: "Nữ",
-          BirthEmployee: "17-08-2002",
-          TelephoneEmployee: "0123456789",
-          StatusEmployee: "Chính thức"
-        }
-
-      ];
+      if (!LocalStorageLibrary.getByKey<Array<Employee>>("employee")) {
+        return new Array<Employee>;
+      }
+      else {
+        return LocalStorageLibrary.getByKey<Array<Employee>>("employee");
+      }
     },
-
+    /**
+     * Thực hiện chức năng xóa trên Toolbar
+     * @param listSelectedRecord 
+     */
+    afterDelete(listMasterData: Array<Record<string, any>>) {
+      LocalStorageLibrary.setByKey("employee", listMasterData);
+    },
     /**
      * Set PrimaryKey cho object master
      */

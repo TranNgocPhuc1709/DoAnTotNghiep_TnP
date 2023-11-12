@@ -5,7 +5,6 @@ import ReturnDetail from './ReturnDetail';
 import { Ref, ref } from 'vue';
 import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailController";
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
-import Common from "@library-src/utilities/commons/Function";
 import TextBox from "@library-src/models/qlch_control/qlch_text_box/TextBox";
 import ETextBox from "qlch_control/ETextBox";
 import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
@@ -15,9 +14,6 @@ import NumberModel from '@library-src/models/qlch_control/qlch_number/NumberMode
 import ENumber from "qlch_control/ENumber";
 import NumberFormat from '@library-src/models/qlch_control/number_format/NumberFormat';
 import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
-import Grid from '@library-src/models/qlch_control/qlch_grid/Grid';
-import EGrid from "qlch_control/EGrid";
-import Column from '@library-src/models/qlch_control/qlch_grid/qlch_column/Column';
 import Log from '@library-src/utilities/Log';
 export default {
   extends: BaseDictionaryDetailController,
@@ -26,7 +22,6 @@ export default {
     BaseDictionaryDetailView,
     ETextBox,
     EDate,
-    EGrid,
     ENumber,
     ECombobox
   },
@@ -37,96 +32,9 @@ export default {
     const disableFormPayment: Ref<boolean> = ref(false);
     const navbar1Selected: Ref<boolean> = ref(false);
     const navbar2Selected: Ref<boolean> = ref(false);
-    const columnReturn: Array<Column> = Array(
-      new Column({
-        fieldText: "Mã HH",
-        width: 125,
-        dataIndex: "Code",
-        isFilter: true
-      }),
-      new Column({
-        fieldText: "Tên hàng hóa",
-        dataIndex: "Name",
-        isFilter: true,
-        width: 200
-      }),
-      new Column({
-        fieldText: "Kho",
-        dataIndex: "warehouse",
-        isFilter: true,
-        width: 200
-      }),
 
-      new Column({
-        fieldText: "ĐV Tính",
-        width: 100,
-        dataIndex: "NumberUnit",
-        isFilter: true
-      }),
-
-      new Column({
-        fieldText: "Số lượng",
-        width: 100,
-        dataIndex: "NumberOrder",
-        isFilter: true
-      }),
-      new Column({
-        fieldText: "Đơn giá",
-        width: 100,
-        dataIndex: "NumberPrice",
-        isFilter: true
-      }),
-      new Column({
-        fieldText: "Thành tiền",
-        width: 250,
-        dataIndex: "IntoMoney",
-        isFilter: true,
-        flex: 1
-      }),
-
-    );
-    const dataGridReturn: Array<Record<string, any>> = new Array(
-      {
-        "Code": "SP-001",
-        "Name": "Quần Áo Nam",
-        "warehouse": "Kho 1",
-        "NumberUnit": "Chiếc",
-        "NumberOrder": "100",
-        "NumberPrice": "25000",
-        "IntoMoney": "2500000"
-      },
-      {
-        "Code": "SP-00123",
-        "Name": "Quần Áo Nam",
-        "warehouse": "Kho 1",
-        "NumberUnit": "Chiếc",
-        "NumberOrder": "100",
-        "NumberPrice": "25000",
-        "IntoMoney": "2500000"
-      },
-      {
-        "Code": "SP-001",
-        "Name": "Quần Áo Nam",
-        "warehouse": "Kho 1",
-        "NumberUnit": "Chiếc",
-        "NumberOrder": "100",
-        "NumberPrice": "25000",
-        "IntoMoney": "2500000"
-      },
-
-
-
-    )
-    const tblReturn: Ref<Grid> = ref(new Grid({
-      columns: columnReturn,
-      data: dataGridReturn,
-      isNotShowFooter: true,
-      isNotShowCheckbox: true,
-      primaryKey: "EmployeeCode"
-    }));
     return {
       thisData,
-      tblReturn,
       disableFormImport,
       disableFormPayment,
       navbar1Selected,
@@ -368,17 +276,7 @@ export default {
 
       }
     },
-    async onLoadData(parameter: any) {
-      const me = this;
-      me.tblReturn.isLoadingData = true;
-      me.tblReturn.data = new Array(
-        // binding dữ liệu
-      );
-      await Common.getTimeOut(3000, "");
-      me.tblReturn.isLoadingData = false;
-      Log.InfoLog(parameter);
 
-    },
     showImport() {
       try {
         const me = this;

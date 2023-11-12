@@ -2,7 +2,7 @@
 <style lang="scss" scoped src="./InwardDetail.scss"></style>
 <script lang="ts">
 import InwardDetail from './InwardDetail';
-import { Ref, ref } from 'vue';
+import { PropType, Ref, ref } from 'vue';
 import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailController";
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
 import TextBox from "@library-src/models/qlch_control/qlch_text_box/TextBox";
@@ -11,120 +11,37 @@ import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
 import EDate from "qlch_control/EDate";
 import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
 import ECombobox from "qlch_control/ECombobox";
-import Grid from '@library-src/models/qlch_control/qlch_grid/Grid';
-import EGrid from "qlch_control/EGrid";
-import Column from '@library-src/models/qlch_control/qlch_grid/qlch_column/Column';
 import NumberModel from '@library-src/models/qlch_control/qlch_number/NumberModel';
 import ENumber from "qlch_control/ENumber";
 import NumberFormat from '@library-src/models/qlch_control/number_format/NumberFormat';
-import Log from '@library-src/utilities/Log';
-import Common from "@library-src/utilities/commons/Function";
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import Guid from '@library-src/utilities/types/Guid';
+import Inward from '@store-src/models/inward/Inward';
+
 
 
 export default {
 
   extends: BaseDictionaryDetailController,
-
+  props: {
+    masterData: {
+      type: Object as PropType<Record<string, any>>,
+      require: true
+    }
+  },
   components: {
     BaseDictionaryDetailView,
     ETextBox,
     EDate,
     ECombobox,
-    ENumber,
-    EGrid
-
+    ENumber
   },
 
   setup() {
     const thisData: Ref<InwardDetail> = ref(new InwardDetail());
-    const columnInward: Array<Column> = Array(
-      new Column({
-        fieldText: "Mã HH",
-        width: 125,
-        dataIndex: "Code",
-        isFilter: true
-      }),
-      new Column({
-        fieldText: "Tên hàng hóa",
-        dataIndex: "Name",
-        isFilter: true,
-        width: 200
-      }),
-      new Column({
-        fieldText: "Kho",
-        dataIndex: "warehouse",
-        isFilter: true,
-        width: 200
-      }),
-
-      new Column({
-        fieldText: "ĐV Tính",
-        width: 100,
-        dataIndex: "NumberUnit",
-        isFilter: true
-      }),
-
-      new Column({
-        fieldText: "Số lượng",
-        width: 100,
-        dataIndex: "NumberOrder",
-        isFilter: true
-      }),
-      new Column({
-        fieldText: "Đơn giá",
-        width: 100,
-        dataIndex: "NumberPrice",
-        isFilter: true
-      }),
-      new Column({
-        fieldText: "Thành tiền",
-        width: 250,
-        dataIndex: "IntoMoney",
-        isFilter: true,
-        flex: 1
-      }),
-
-    );
-    const dataGridInward: Array<Record<string, any>> = new Array(
-      {
-        "Code": "SP-001",
-        "Name": "Quần Áo Nam",
-        "warehouse": "Kho 1",
-        "NumberUnit": "Chiếc",
-        "NumberOrder": "100",
-        "NumberPrice": "25000",
-        "IntoMoney": "2500000"
-      },
-      {
-        "Code": "SP-001",
-        "Name": "Quần Áo Nam",
-        "warehouse": "Kho 1",
-        "NumberUnit": "Chiếc",
-        "NumberOrder": "100",
-        "NumberPrice": "25000",
-        "IntoMoney": "2500000"
-      },
-      {
-        "Code": "SP-001",
-        "Name": "Quần Áo Nam",
-        "warehouse": "Kho 1",
-        "NumberUnit": "Chiếc",
-        "NumberOrder": "100",
-        "NumberPrice": "25000",
-        "IntoMoney": "2500000"
-      },
-    )
-    const tblInward: Ref<Grid> = ref(new Grid({
-      columns: columnInward,
-      data: dataGridInward,
-      isNotShowFooter: true,
-      isNotShowCheckbox: true,
-      primaryKey: "EmployeeCode"
-    }));
-
     return {
       thisData,
-      tblInward
+
     };
   },
 
@@ -319,19 +236,46 @@ export default {
         }),
       }
     },
-    async onLoadData(parameter: any) {
+
+    saveData() {
       const me = this;
-      me.tblInward.isLoadingData = true;
-      me.tblInward.data = new Array(
+      let listInward: Array<Inward> | null = new Array<Inward>;
+      if (me.masterData) {
+        if (me.masterData.editMode == 1 || me.masterData.editMode == 4) {
+          me.masterData['InwardId'] = Guid.NewGuid();
+          listInward = LocalStorageLibrary.getByKey<Array<Inward>>("inward");
+          if (listInward) {
+            listInward.push(me.masterData);
+            LocalStorageLibrary.setByKey("inward", listInward);
+          }
+          else {
+            listInward = new Array<Inward>({ ...me.masterData });
+            LocalStorageLibrary.setByKey("inward", listInward);
+          }
+        }
+        if (me.masterData.editMode == 2) {
+          listInward = LocalStorageLibrary.getByKey<Array<Inward>>("inward");
+          if (listInward) {
+            listInward.forEach(newItemInward => {
+              if (me.masterData) {
+                if (newItemInward.InwardId == me.masterData.InwardId) {
+                  newItemInward.DayInward = me.masterData.DayInward;
+                  newItemInward.VotesInward = me.masterData.VotesInward;
+                  newItemInward.ObjectInward = me.masterData.ObjectInward;
+                  newItemInward.TotalMoneyInward = me.masterData.TotalMoneyInward;
+                  newItemInward.ExplantInward = me.masterData.ExplantInward;
+                  newItemInward.DeliverInward = me.masterData.DeliverInward;
+                  newItemInward.NameObjectInward = me.masterData.NameObjectInward;
+                  newItemInward.TotalInward = me.masterData.TotalInward;
 
-        // Khai báo dữ liệu biding
-      );
-      await Common.getTimeOut(3000, "");
-      me.tblInward.isLoadingData = false;
-      Log.InfoLog(parameter);
-
+                }
+              }
+            });
+            LocalStorageLibrary.setByKey("inward", listInward);
+          }
+        }
+      }
     },
-
     /**
     * Sau khi đóng form xong thì xử lý thêm gì ở master thì Override function này ở master
     */

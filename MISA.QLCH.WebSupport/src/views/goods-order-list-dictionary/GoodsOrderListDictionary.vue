@@ -14,6 +14,8 @@ import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
 import EDate from "qlch_control/EDate";
 import Button from '@library-src/models/qlch_control/qlch_button/Button';
 import EButton from "qlch_control/EButton";
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import GoodsOrder from '@store-src/models/goods-order/GoodsOrder';
 
 export default {
 
@@ -142,17 +144,12 @@ export default {
      */
     loadMasterData(param: ParamPaging) {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
-      return [
-        {
-          DateOrder: "31/10/2023",
-          NumberOrder: "KHOT-PDH-0123",
-          PersonOrder: "TnP",
-          SupplierOrder: "Nhà cung cấp MiSA",
-          FullMoneyOrder: "150000",
-          StatusOrder: "Đã thực hiện",
-          ExplainOrder: "Đặt hàng nhà cung cấp"
-        },
-      ];
+      if (!LocalStorageLibrary.getByKey<Array<GoodsOrder>>("goodsOrder")) {
+        return new Array<GoodsOrder>;
+      }
+      else {
+        return LocalStorageLibrary.getByKey<Array<GoodsOrder>>("goodsOrder");
+      }
     },
 
     /**
@@ -160,9 +157,12 @@ export default {
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "DateOrder";
+      return "GoodsOrderId";
     },
 
+    afterDelete(listMasterData: Array<Record<string, any>>) {
+      LocalStorageLibrary.setByKey("goodsOrder", listMasterData);
+    },
     /**
      * Khai báo import component detail
      * Override lại function after close form
