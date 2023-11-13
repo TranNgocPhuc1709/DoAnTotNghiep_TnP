@@ -14,6 +14,8 @@ import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
 import EDate from "qlch_control/EDate";
 import Button from '@library-src/models/qlch_control/qlch_button/Button';
 import EButton from "qlch_control/EButton";
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import Import from '@store-src/models/import/Import';
 
 export default {
 
@@ -143,7 +145,7 @@ export default {
         }),
         new Column({
           fieldText: "Thành tiền",
-          dataIndex: "IntoMoneyImport",
+          dataIndex: "TotalPaymentImport",
           width: 260
         }),
         new Column({
@@ -166,25 +168,26 @@ export default {
      */
     loadMasterData(param: ParamPaging) {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
-      return [
-        {
-          DateImport: "21/10/2023",
-          ReceiptNumberImport: "123",
-          SupplierImport: "NCC123",
-          IntoMoneyImport: "120000",
-          StaffImport: "PNJ",
-          ExplainImport: "Nhập Hàng"
-        },
-
-      ];
+      if (!LocalStorageLibrary.getByKey<Array<Import>>("importList")) {
+        return new Array<Import>;
+      }
+      else {
+        return LocalStorageLibrary.getByKey<Array<Import>>("importList");
+      }
     },
-
+    /**
+        * Thực hiện chức năng xóa trên Toolbar
+        * @param listSelectedRecord 
+        */
+    afterDelete(listMasterData: Array<Record<string, any>>) {
+      LocalStorageLibrary.setByKey("importList", listMasterData);
+    },
     /**
      * Set PrimaryKey cho object master
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "DateImport";
+      return "ImportId";
     },
 
     /**

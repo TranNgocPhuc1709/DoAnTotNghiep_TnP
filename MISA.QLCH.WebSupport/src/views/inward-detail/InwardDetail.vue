@@ -152,12 +152,18 @@ export default {
 
         //Table Grid
 
-        "txtCodeProductInward": new TextBox({
+        "txtCodeProductInward": new Combobox({
           fieldText: "",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          classType: "tertiary",
+          data: [
+            {
+              value: "123",
+              display: "123"
+            }
+          ],
+          classType: "secondary",
           bindingIndex: "CodeProductInward"
         }),
         "txtNameProductInward": new TextBox({
@@ -196,13 +202,18 @@ export default {
           classType: "secondary",
           bindingIndex: "UnitProductInward"
         }),
-        "txtNumberProductInward": new TextBox({
+        "txtNumberProductInward": new NumberModel({
           fieldText: "",
           require: false,
           readOnly: false,
           maxLength: 255,
-          type: "number",
-          classType: "tertiary",
+          classType: "thirty",
+          labelWidth: labelWidth,
+          format: new NumberFormat({
+            decimal: ".",
+            thousands: ",",
+            precision: 0
+          }),
           bindingIndex: "NumberProductInward"
         }),
 
@@ -211,7 +222,7 @@ export default {
           require: false,
           readOnly: false,
           maxLength: 255,
-          classType: "secondary",
+          classType: "thirty",
           labelWidth: labelWidth,
           format: new NumberFormat({
             decimal: ".",
@@ -226,7 +237,7 @@ export default {
           readOnly: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          classType: "secondary",
+          classType: "thirty",
           format: new NumberFormat({
             decimal: ".",
             thousands: ",",

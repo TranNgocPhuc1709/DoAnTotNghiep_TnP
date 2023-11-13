@@ -66,6 +66,7 @@ Mode VBox
     display: none;
     padding: 8px;
     border-radius: 3px;
+    z-index: 99;
 }
 
 .lbl-loading {
@@ -181,7 +182,7 @@ Mode VBox
 
 .tertiary {
     border: none;
-    border-bottom: 2px solid #616CE6;
+    border-bottom: 1px solid #616CE6;
 }
 
 .tertiary::placeholder {
@@ -190,6 +191,7 @@ Mode VBox
 
 .tertiary:focus,
 .tertiary.warning-valid:focus {
+    border-bottom: 2px solid #616CE6;
     outline: none;
 }
 

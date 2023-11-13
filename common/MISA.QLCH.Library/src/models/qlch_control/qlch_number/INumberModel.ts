@@ -33,5 +33,5 @@ export default interface INumber extends IBaseInput {
      */
     labelWidth?: number;
 
-    classType?: "primary" | "secondary";
+    classType?: "primary" | "secondary" | "thirty";
 }

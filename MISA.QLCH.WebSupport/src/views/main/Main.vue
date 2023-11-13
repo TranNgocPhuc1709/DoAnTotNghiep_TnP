@@ -118,6 +118,10 @@ export default {
             //     fieldText: "Chi Phí"
             // },
             {
+                routerLink: "/voucher",
+                fieldText: "Khuyến mãi"
+            },
+            {
                 children: new Array(
                     {
                         routerLink: "/categoryItem",

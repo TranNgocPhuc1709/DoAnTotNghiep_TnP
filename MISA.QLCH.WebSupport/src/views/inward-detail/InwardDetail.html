@@ -51,8 +51,8 @@
           <tbody>
             <tr>
               <td>
-                <e-text-box :control="bindingControl[`txtCodeProductInward`]"
-                  v-model="masterData[bindingControl[`txtCodeProductInward`].bindingIndex]"></e-text-box>
+                <e-combobox :control="bindingControl[`txtCodeProductInward`]"
+                  v-model="masterData[bindingControl[`txtCodeProductInward`].bindingIndex]"></e-combobox>
               </td>
 
               <td>
@@ -68,8 +68,8 @@
                   v-model="masterData[bindingControl[`txtUnitProductInward`].bindingIndex]"></e-combobox>
               </td>
               <td>
-                <e-text-box :control="bindingControl[`txtNumberProductInward`]"
-                  v-model="masterData[bindingControl[`txtNumberProductInward`].bindingIndex]"></e-text-box>
+                <e-number :control="bindingControl[`txtNumberProductInward`]"
+                  v-model="masterData[bindingControl[`txtNumberProductInward`].bindingIndex]"></e-number>
               </td>
               <td>
                 <e-number :control="bindingControl[`txtUnitPriceInward`]"

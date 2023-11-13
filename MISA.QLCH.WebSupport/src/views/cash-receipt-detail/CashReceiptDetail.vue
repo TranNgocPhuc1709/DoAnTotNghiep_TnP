@@ -2,7 +2,7 @@
 <style lang="scss" scoped src="./CashReceiptDetail.scss"></style>
 <script lang="ts">
 import CashReceiptDetail from './CashReceiptDetail';
-import { Ref, ref } from 'vue';
+import { PropType, Ref, ref } from 'vue';
 import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailController";
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
 import TextBox from "@library-src/models/qlch_control/qlch_text_box/TextBox";
@@ -16,11 +16,19 @@ import ENumber from "qlch_control/ENumber";
 import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
 import Checkbox from '@library-src/models/qlch_control/qlch_checkbox/Checkbox';
 import ECheckbox from "qlch_control/ECheckbox";
+import CashReceipt from '@store-src/models/cash-receipt/CashReceipt';
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import Guid from '@library-src/utilities/types/Guid';
 
 export default {
 
   extends: BaseDictionaryDetailController,
-
+  props: {
+    masterData: {
+      type: Object as PropType<Record<string, any>>,
+      require: true
+    }
+  },
   components: {
     BaseDictionaryDetailView,
     ETextBox,
@@ -84,6 +92,12 @@ export default {
           fieldText: "Tên đối tượng",
           require: false,
           maxLength: 255,
+          data: [
+            {
+              value: "TNP",
+              display: "TNP"
+            }
+          ],
           labelWidth: labelWidth,
           bindingIndex: "NameObjectCashReceipt"
         }),
@@ -100,15 +114,15 @@ export default {
           maxLength: 255,
           data: [
             {
-              value: 1,
+              value: "Nhà cung cấp",
               display: "Nhà cung cấp"
             },
             {
-              value: 2,
+              value: "Khách hàng",
               display: "khách hàng"
             },
             {
-              value: 3,
+              value: "Nhân viên",
               display: "Nhân viên"
             }
           ],
@@ -133,6 +147,12 @@ export default {
           fieldText: "Nhân viên thu",
           require: false,
           maxLength: 255,
+          data: [
+            {
+              value: "TNP",
+              display: "TNP"
+            }
+          ],
           labelWidth: labelWidth,
           bindingIndex: "RevenueOfficerCashReceipt"
         }),
@@ -146,7 +166,7 @@ export default {
         }),
         "txtIncludedCashReceipt": new Checkbox({
           fieldText: "Tính vào doanh thu",
-          bindingIndex: "IncludedCashReceipt ",
+          bindingIndex: "IncludedCashReceipt",
         }),
 
 
@@ -167,7 +187,7 @@ export default {
           require: false,
           readOnly: false,
           maxLength: 255,
-          classType: "secondary",
+          classType: "thirty",
           labelWidth: labelWidth,
           format: new NumberFormat({
             decimal: ".",
@@ -177,6 +197,47 @@ export default {
           bindingIndex: "MoneyCashDetail"
         }),
 
+      }
+    },
+    saveData() {
+      const me = this;
+      let listCashReceipt: Array<CashReceipt> | null = new Array<CashReceipt>;
+      if (me.masterData) {
+        if (me.masterData.editMode == 1 || me.masterData.editMode == 4) {
+          me.masterData['CashReceiptId'] = Guid.NewGuid();
+          listCashReceipt = LocalStorageLibrary.getByKey<Array<CashReceipt>>("cashReceipt");
+          if (listCashReceipt) {
+            listCashReceipt.push(me.masterData);
+            LocalStorageLibrary.setByKey("cashReceipt", listCashReceipt);
+          }
+          else {
+            listCashReceipt = new Array<CashReceipt>({ ...me.masterData });
+            LocalStorageLibrary.setByKey("cashReceipt", listCashReceipt);
+          }
+        }
+        if (me.masterData.editMode == 2) {
+          listCashReceipt = LocalStorageLibrary.getByKey<Array<CashReceipt>>("cashReceipt");
+          if (listCashReceipt) {
+            listCashReceipt.forEach(newItemCashReceipt => {
+              if (me.masterData) {
+                if (newItemCashReceipt.CashReceiptId == me.masterData.CashReceiptId) {
+                  newItemCashReceipt.DateCashReceipt = me.masterData.DateCashReceipt;
+                  newItemCashReceipt.CodeCashReceipt = me.masterData.CodeCashReceipt;
+                  newItemCashReceipt.TotalMoneyCashReceipt = me.masterData.TotalMoneyCashReceipt;
+                  newItemCashReceipt.NameObjectCashReceipt = me.masterData.NameObjectCashReceipt;
+                  newItemCashReceipt.ExplantCashReceipt = me.masterData.ExplantCashReceipt;
+                  newItemCashReceipt.ObjectCashReceipt = me.masterData.ObjectCashReceipt;
+                  newItemCashReceipt.PayerCashReceipt = me.masterData.PayerCashReceipt;
+                  newItemCashReceipt.AddressPayerCashReceipt = me.masterData.AddressPayerCashReceipt;
+                  newItemCashReceipt.RevenueOfficerCashReceipt = me.masterData.RevenueOfficerCashReceipt;
+                  newItemCashReceipt.NameRevenueOfficerCashReceipt = me.masterData.NameRevenueOfficerCashReceipt;
+                  newItemCashReceipt.IncludedCashReceipt = me.masterData.IncludedCashReceipt;
+                }
+              }
+            });
+            LocalStorageLibrary.setByKey("cashReceipt", listCashReceipt);
+          }
+        }
       }
     },
 

@@ -108,7 +108,6 @@ export default {
           maxLength: 255,
           readOnly: false,
           labelWidth: 80,
-          classType: "secondary",
           format: new NumberFormat({
             decimal: ".",
             thousands: ",",
@@ -123,11 +122,11 @@ export default {
           labelWidth: labelWidth,
           data: [
             {
-              value: 1,
+              value: "Đã thực hiện",
               display: "Đã thực hiện"
             },
             {
-              value: 2,
+              value: "Chưa thực hiện",
               display: "Chưa thực hiện"
             },
           ],
@@ -143,7 +142,7 @@ export default {
         "txtSupplierNameOrder": new TextBox({
           fieldText: "Tên nhà cung cấp",
           require: false,
-          readOnly: false,
+          readOnly: true,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "SupplierNameOrder"
@@ -151,7 +150,7 @@ export default {
         "txtPersonOrderName": new TextBox({
           fieldText: "Tên người đặt",
           require: false,
-          readOnly: false,
+          readOnly: true,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "PersonOrderName"
@@ -161,7 +160,6 @@ export default {
           require: false,
           readOnly: false,
           maxLength: 255,
-          classType: "secondary",
           labelWidth: labelWidth,
           format: new NumberFormat({
             decimal: ".",
@@ -215,13 +213,28 @@ export default {
           classType: "secondary",
           bindingIndex: "UnitProductOrder"
         }),
-        "txtNumberProductOrder": new TextBox({
+        // "txtNumberProductOrder": new TextBox({
+        //   fieldText: "",
+        //   require: false,
+        //   readOnly: false,
+        //   maxLength: 255,
+        //   type: "number",
+        //   classType: "tertiary",
+        //   bindingIndex: "NumberProductOrder"
+        // }),
+
+        "txtNumberProductOrder": new NumberModel({
           fieldText: "",
           require: false,
           readOnly: false,
           maxLength: 255,
-          type: "number",
-          classType: "tertiary",
+          classType: "thirty",
+          labelWidth: labelWidth,
+          format: new NumberFormat({
+            decimal: ".",
+            thousands: ",",
+            precision: 0
+          }),
           bindingIndex: "NumberProductOrder"
         }),
 
@@ -230,7 +243,7 @@ export default {
           require: false,
           readOnly: false,
           maxLength: 255,
-          classType: "secondary",
+          classType: "thirty",
           labelWidth: labelWidth,
           format: new NumberFormat({
             decimal: ".",
@@ -245,7 +258,7 @@ export default {
           readOnly: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          classType: "secondary",
+          classType: "thirty",
           format: new NumberFormat({
             decimal: ".",
             thousands: ",",

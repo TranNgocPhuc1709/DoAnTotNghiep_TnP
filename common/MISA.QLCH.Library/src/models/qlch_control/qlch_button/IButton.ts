@@ -4,7 +4,7 @@ export default interface IButton extends IBaseControl {
     /**
      * ClassType is the format of button
      */
-    classType?: "primary" | "secondary" | "tertiary" | "normal" | "SaveBtn" | "CollectMoneyBtn";
+    classType?: "primary" | "secondary" | "tertiary" | "normal" | "SaveBtn" | "CollectMoneyBtn" | "CloseBtn";
 
 
 

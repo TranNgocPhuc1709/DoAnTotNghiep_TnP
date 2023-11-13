@@ -1,0 +1,43 @@
+<base-dictionary-detail-view :idRoot="idRoot" :propView="propView" :styleFrom="`min-width: 500px;`"
+  @toolbarClick="onSelectAction" @closeFormClick="onCloseForm">
+  <template v-slot:content-detail>
+    <div class="date-voucher d-flex-vcenter">
+      <div class="qlch-input-default flex-1">
+        <e-date :control="bindingControl[`txtDayBeginVoucher`]"
+          v-model="masterData[bindingControl[`txtDayBeginVoucher`].bindingIndex]"></e-date>
+      </div>
+      <div class="qlch-input-default flex-1">
+        <e-date :control="bindingControl[`txtDayEndVoucher`]"
+          v-model="masterData[bindingControl[`txtDayEndVoucher`].bindingIndex]"></e-date>
+      </div>
+    </div>
+    <div class="qlch-input-default item-detail">
+      <e-text-box :control="bindingControl[`txtPublisherVoucher`]"
+        v-model="masterData[bindingControl[`txtPublisherVoucher`].bindingIndex]"></e-text-box>
+    </div>
+    <div class="qlch-input-default item-detail">
+      <e-text-box :control="bindingControl[`txtNameVoucher`]"
+        v-model="masterData[bindingControl[`txtNameVoucher`].bindingIndex]"></e-text-box>
+    </div>
+    <div class="qlch-input-default item-detail">
+      <e-number :control="bindingControl[`txtPriceVoucher`]"
+        v-model="masterData[bindingControl[`txtPriceVoucher`].bindingIndex]"></e-number>
+    </div>
+    <div class="qlch-input-default item-detail">
+      <e-text-box :control="bindingControl[`txtDescribeVoucher`]"
+        v-model="masterData[bindingControl[`txtDescribeVoucher`].bindingIndex]"></e-text-box>
+    </div>
+    <div class="qlch-input-default item-detail">
+      <e-combobox :control="bindingControl[`txtStatusVoucher`]"
+        v-model="masterData[bindingControl[`txtStatusVoucher`].bindingIndex]"></e-combobox>
+    </div>
+    <!-- <div class="qlch-input-default item-detail">
+      <e-text-box :control="bindingControl[`txtTotalNumberVoucher`]"
+        v-model="masterData[bindingControl[`txtTotalNumberVoucher`].bindingIndex]"></e-text-box>
+    </div>
+    <div class="qlch-input-default item-detail">
+      <e-number :control="bindingControl[`txtTotalPriceVoucher`]"
+        v-model="masterData[bindingControl[`txtTotalPriceVoucher`].bindingIndex]"></e-number>
+    </div> -->
+  </template>
+</base-dictionary-detail-view>

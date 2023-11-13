@@ -65,6 +65,7 @@ Mode VBox
     display: none;
     padding: 8px;
     border-radius: 3px;
+    z-index: 99;
 }
 
 .lbl-loading {
@@ -105,10 +106,27 @@ Mode VBox
 
 .secondary {
     border: none;
+    border-bottom: 1px solid #616CE6;
 }
+
+// .secondary:focus,
+// .secondary.warning-valid:focus {
+//     border-bottom: 2px solid #616CE6;
+//     outline: none;
+// }
+
+// .secondary:disabled {
+//     opacity: var(--opacity-read-only);
+//     background-color: var(--input-bg-color-disable);
+// }
+
+// .secondary.warning-valid {
+//     border-bottom: 1px solid var(--input-border-color-validate);
+// }
 
 .secondary:focus,
 .secondary.warning-valid:focus {
+    border-bottom: 2px solid #616CE6;
     outline: none;
 }
 
@@ -117,6 +135,26 @@ Mode VBox
     background-color: var(--input-bg-color-disable);
 }
 
-// .secondary.warning-valid {
-//     border: 1px solid var(--input-border-color-validate);
-// }
+.secondary.warning-valid {
+    border-bottom: 1px solid var(--input-border-color-validate);
+}
+
+
+.thirty {
+    border: none;
+
+}
+
+.thirty:focus,
+.thirty.warning-valid:focus {
+    outline: none;
+}
+
+.thirty:disabled {
+    opacity: var(--opacity-read-only);
+    background-color: var(--input-bg-color-disable);
+}
+
+.thirty.warning-valid {
+    border: 1px solid var(--input-border-color-validate);
+}

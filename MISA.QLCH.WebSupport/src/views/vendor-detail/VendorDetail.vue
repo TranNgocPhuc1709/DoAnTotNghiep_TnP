@@ -174,20 +174,20 @@ export default {
         if (me.masterData.editMode == 2) {
           listVendor = LocalStorageLibrary.getByKey<Array<Vendor>>("Vendor");
           if (listVendor) {
-            listVendor.forEach(newItemVendorCategory => {
+            listVendor.forEach(newItemVendor => {
               if (me.masterData) {
-                if (newItemVendorCategory.VendorId == me.masterData.VendorId) {
-                  newItemVendorCategory.CodeVendor = me.masterData.CodeVendor;
-                  newItemVendorCategory.NameVendor = me.masterData.NameVendor;
-                  newItemVendorCategory.GroupVendor = me.masterData.GroupVendor;
-                  newItemVendorCategory.TelephoneVendor = me.masterData.TelephoneVendor;
-                  newItemVendorCategory.AddressVendor = me.masterData.AddressVendor;
-                  newItemVendorCategory.FullNameVendor = me.masterData.FullNameVendor;
-                  newItemVendorCategory.EmailVendor = me.masterData.EmailVendor;
-                  newItemVendorCategory.PhoneContactVendor = me.masterData.PhoneContactVendor;
-                  newItemVendorCategory.TitleVendor = me.masterData.TitleVendor;
-                  newItemVendorCategory.AddressItemVendor = me.masterData.AddressItemVendor;
-                  newItemVendorCategory.StatusVendor = me.masterData.StatusVendor;
+                if (newItemVendor.VendorId == me.masterData.VendorId) {
+                  newItemVendor.CodeVendor = me.masterData.CodeVendor;
+                  newItemVendor.NameVendor = me.masterData.NameVendor;
+                  newItemVendor.GroupVendor = me.masterData.GroupVendor;
+                  newItemVendor.TelephoneVendor = me.masterData.TelephoneVendor;
+                  newItemVendor.AddressVendor = me.masterData.AddressVendor;
+                  newItemVendor.FullNameVendor = me.masterData.FullNameVendor;
+                  newItemVendor.EmailVendor = me.masterData.EmailVendor;
+                  newItemVendor.PhoneContactVendor = me.masterData.PhoneContactVendor;
+                  newItemVendor.TitleVendor = me.masterData.TitleVendor;
+                  newItemVendor.AddressItemVendor = me.masterData.AddressItemVendor;
+                  newItemVendor.StatusVendor = me.masterData.StatusVendor;
                 }
               }
             });

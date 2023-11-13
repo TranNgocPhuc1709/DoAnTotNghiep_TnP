@@ -14,6 +14,8 @@ import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
 import EDate from "qlch_control/EDate";
 import Button from '@library-src/models/qlch_control/qlch_button/Button';
 import EButton from "qlch_control/EButton";
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import Outward from '@store-src/models/outward/Outward';
 export default {
 
   extends: BaseDictionaryListController,
@@ -85,7 +87,6 @@ export default {
   created() {
     try {
       const me = this;
-
       me.cbbOutward.value = 1;
 
 
@@ -144,22 +145,26 @@ export default {
      */
     loadMasterData(param: ParamPaging) {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
-      return [
-        {
-          DayOutward: "17/9/2023",
-          DeliveryOutward: "PNH123",
-          ObjectOutward: "Công Ty Cổ Phần MiSA",
-          TotalMoneyOutward: "100000",
-          ExplainOutward: "Hàng mới nhập",
-        },
-      ];
+      if (!LocalStorageLibrary.getByKey<Array<Outward>>("outwardItem")) {
+        return new Array<Outward>;
+      }
+      else {
+        return LocalStorageLibrary.getByKey<Array<Outward>>("outwardItem");
+      }
+    },
+    /**
+     * Thực hiện chức năng xóa trên Toolbar
+     * @param listSelectedRecord 
+     */
+    afterDelete(listMasterData: Array<Record<string, any>>) {
+      LocalStorageLibrary.setByKey("outwardItem", listMasterData);
     },
     /**
      * Set PrimaryKey cho object master
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "DayOutward";
+      return "OutwardId";
     },
 
     /**

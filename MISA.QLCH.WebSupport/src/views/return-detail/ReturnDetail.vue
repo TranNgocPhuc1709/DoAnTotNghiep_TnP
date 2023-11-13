@@ -2,7 +2,7 @@
 <style lang="scss" scoped src="./ReturnDetail.scss"></style>
 <script lang="ts">
 import ReturnDetail from './ReturnDetail';
-import { Ref, ref } from 'vue';
+import { PropType, Ref, ref } from 'vue';
 import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailController";
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
 import TextBox from "@library-src/models/qlch_control/qlch_text_box/TextBox";
@@ -15,9 +15,19 @@ import ENumber from "qlch_control/ENumber";
 import NumberFormat from '@library-src/models/qlch_control/number_format/NumberFormat';
 import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
 import Log from '@library-src/utilities/Log';
+import Return from '@store-src/models/return/Return';
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import Guid from '@library-src/utilities/types/Guid';
+
+
 export default {
   extends: BaseDictionaryDetailController,
-
+  props: {
+    masterData: {
+      type: Object as PropType<Record<string, any>>,
+      require: true
+    }
+  },
   components: {
     BaseDictionaryDetailView,
     ETextBox,
@@ -132,7 +142,7 @@ export default {
         "txtTotalQuantityReturn": new NumberModel({
           fieldText: "Tổng số lượng",
           require: false,
-          readOnly: true,
+          readOnly: false,
           maxLength: 255,
           labelWidth: labelWidth,
           format: new NumberFormat({
@@ -161,6 +171,12 @@ export default {
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
+          data: [
+            {
+              value: "TNP",
+              display: "TNP"
+            }
+          ],
           bindingIndex: "RevenueOfficerReturn"
         }),
         "txtRevenueOfficerNameReturn": new TextBox({
@@ -191,12 +207,18 @@ export default {
 
         //Table Grid
 
-        "txtCodeProductReturn": new TextBox({
+        "txtCodeProductReturn": new Combobox({
           fieldText: "",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          classType: "tertiary",
+          data: [
+            {
+              value: "123",
+              display: "123"
+            }
+          ],
+          classType: "secondary",
           bindingIndex: "CodeProductReturn"
         }),
         "txtNameProductReturn": new TextBox({
@@ -235,13 +257,18 @@ export default {
           classType: "secondary",
           bindingIndex: "UnitProductReturn"
         }),
-        "txtNumberProductReturn": new TextBox({
+        "txtNumberProductReturn": new NumberModel({
           fieldText: "",
           require: false,
           readOnly: false,
           maxLength: 255,
-          type: "number",
-          classType: "tertiary",
+          classType: "thirty",
+          labelWidth: labelWidth,
+          format: new NumberFormat({
+            decimal: ".",
+            thousands: ",",
+            precision: 0
+          }),
           bindingIndex: "NumberProductReturn"
         }),
 
@@ -250,7 +277,7 @@ export default {
           require: false,
           readOnly: false,
           maxLength: 255,
-          classType: "secondary",
+          classType: "thirty",
           labelWidth: labelWidth,
           format: new NumberFormat({
             decimal: ".",
@@ -265,7 +292,7 @@ export default {
           readOnly: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          classType: "secondary",
+          classType: "thirty",
           format: new NumberFormat({
             decimal: ".",
             thousands: ",",
@@ -297,6 +324,51 @@ export default {
         me.navbar2Selected = true;
       } catch (error) {
         Log.ErrorLog(error as Error);
+      }
+    },
+    saveData() {
+      const me = this;
+      let listReturn: Array<Return> | null = new Array<Return>;
+      if (me.masterData) {
+        if (me.masterData.editMode == 1 || me.masterData.editMode == 4) {
+          me.masterData['ReturnId'] = Guid.NewGuid();
+          listReturn = LocalStorageLibrary.getByKey<Array<Return>>("returnItem");
+          if (listReturn) {
+            listReturn.push(me.masterData);
+            LocalStorageLibrary.setByKey("returnItem", listReturn);
+          }
+          else {
+            listReturn = new Array<Return>({ ...me.masterData });
+            LocalStorageLibrary.setByKey("returnItem", listReturn);
+          }
+        }
+        if (me.masterData.editMode == 2) {
+          listReturn = LocalStorageLibrary.getByKey<Array<Return>>("returnItem");
+          if (listReturn) {
+            listReturn.forEach(newItemReturn => {
+              if (me.masterData) {
+                if (newItemReturn.ReturnId == me.masterData.ReturnId) {
+                  newItemReturn.DateReturn = me.masterData.DateReturn;
+                  newItemReturn.BillNumberReturn = me.masterData.BillNumberReturn;
+                  newItemReturn.SupplierReturn = me.masterData.SupplierReturn;
+                  newItemReturn.TotalMoneyReturn = me.masterData.TotalMoneyReturn;
+                  newItemReturn.ExplantReturn = me.masterData.ExplantReturn;
+                  newItemReturn.NameSupplierReturn = me.masterData.NameSupplierReturn;
+                  newItemReturn.ReceiverReturn = me.masterData.ReceiverReturn;
+                  newItemReturn.AddressSupplierReturn = me.masterData.AddressSupplierReturn;
+                  newItemReturn.TotalQuantityReturn = me.masterData.TotalQuantityReturn;
+                  newItemReturn.ReasonReturn = me.masterData.ReasonReturn;
+                  newItemReturn.RevenueOfficerReturn = me.masterData.RevenueOfficerReturn;
+                  newItemReturn.RevenueOfficerNameReturn = me.masterData.RevenueOfficerNameReturn;
+                  newItemReturn.ReceiptNumberReturn = me.masterData.ReceiptNumberReturn;
+                  newItemReturn.CollectionDateReturn = me.masterData.CollectionDateReturn;
+
+                }
+              }
+            });
+            LocalStorageLibrary.setByKey("returnItem", listReturn);
+          }
+        }
       }
     },
     /**

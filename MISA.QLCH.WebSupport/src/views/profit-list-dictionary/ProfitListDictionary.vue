@@ -35,6 +35,27 @@ export default {
       console.log("DEV: Override Function buildGridMasterColumn return list Column in Grid");
       return Array(
         new Column({
+          fieldText: "Tháng",
+          dataIndex: "MonthProfit",
+          width: 200,
+        }),
+        new Column({
+          fieldText: "Lợi nhuận (9) = (5) - (8)",
+          dataIndex: "TotalProfit",
+          width: 260,
+          flex: 1
+        }),
+        new Column({
+          fieldText: "Tổng doanh thu (5) = (3) + (4)",
+          dataIndex: "TotalRevenue",
+          width: 300
+        }),
+        new Column({
+          fieldText: " Tổng doanh thu bán hàng (3) = (1) - (2)",
+          dataIndex: "TotalRevenueProfit",
+          width: 300
+        }),
+        new Column({
           fieldText: "Tiền Hàng(1)",
           dataIndex: "SalesProceedsProfit",
           width: 200,
@@ -45,32 +66,26 @@ export default {
           width: 260
         }),
         new Column({
-          fieldText: " Tổng doanh thu bán hàng (3) = (1) - (2)",
-          dataIndex: "TotalRevenueProfit",
+          fieldText: " Thu khác (4)",
+          dataIndex: "CollectOtherMoney",
           width: 300
         }),
         new Column({
-          fieldText: "Chi phí xuất kho bán hàng (4)",
-          dataIndex: "ExportProductProfit",
-          width: 260
-        }),
-        new Column({
-          fieldText: "Chi phí khác (5)",
-          dataIndex: "ExportOtherProfit",
-          minWidth: 200,
-
-        }),
-        new Column({
-          fieldText: "Tổng chi phí (6) = (4) + (5)",
+          fieldText: "Tổng chi phí (8) = (6) + (7)",
           dataIndex: "TotalExportProfit",
           width: 200
         }),
         new Column({
-          fieldText: "Lợi nhuận (7) = (3) - (6)",
-          dataIndex: "TotalProfit",
-          width: 260,
-          flex: 1
-        })
+          fieldText: "Chi phí xuất kho bán hàng (6)",
+          dataIndex: "ExportProductProfit",
+          width: 260
+        }),
+        new Column({
+          fieldText: "Chi phí khác (7)",
+          dataIndex: "ExportOtherProfit",
+          minWidth: 200,
+
+        }),
       )
     },
 
@@ -82,13 +97,19 @@ export default {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
       return [
         {
-          SalesProceedsProfit: "1000000",
-          PromotionProfit: "10000",
-          TotalRevenueProfit: "90000",
-          ExportProductProfit: "80000",
-          ExportOtherProfit: "0",
-          TotalExportProfit: "80000",
-          TotalProfit: "10000"
+          MonthProfit: "Tháng 1",
+          TotalProfit: "10000",
+          TotalRevenue: "80000",
+          TotalRevenueProfit: "1000000",
+          SalesProceedsProfit: "10000",
+          PromotionProfit: "90000",
+          CollectOtherMoney: "80000",
+          TotalExportProfit: "0",
+          ExportProductProfit: "100",
+          ExportOtherProfit: "200"
+
+
+
         }
       ];
     },

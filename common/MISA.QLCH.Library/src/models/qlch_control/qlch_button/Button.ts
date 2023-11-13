@@ -31,7 +31,7 @@ export default class Button extends BaseControl {
     /**
      * ClassType is the format of button
      */
-    classType?: "primary" | "secondary" | "tertiary" | "normal" | "SaveBtn" | "CollectMoneyBtn" = "primary";
+    classType?: "primary" | "secondary" | "tertiary" | "normal" | "SaveBtn" | "CollectMoneyBtn" | "CloseBtn" = "primary";
 
     /**
      * class contains the icon on the left

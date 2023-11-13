@@ -2,7 +2,7 @@
 <style lang="scss" scoped src="./CashPaymentDetail.scss"></style>
 <script lang="ts">
 import CashPaymentDetail from './CashPaymentDetail';
-import { Ref, ref } from 'vue';
+import { PropType, Ref, ref } from 'vue';
 import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailController";
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
 import TextBox from "@library-src/models/qlch_control/qlch_text_box/TextBox";
@@ -16,11 +16,19 @@ import ENumber from "qlch_control/ENumber";
 import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
 import Checkbox from '@library-src/models/qlch_control/qlch_checkbox/Checkbox';
 import ECheckbox from "qlch_control/ECheckbox";
+import CashPayment from '@store-src/models/cash-payment/CashPayment';
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import Guid from '@library-src/utilities/types/Guid';
 
 export default {
 
   extends: BaseDictionaryDetailController,
-
+  props: {
+    masterData: {
+      type: Object as PropType<Record<string, any>>,
+      require: true
+    }
+  },
   components: {
     BaseDictionaryDetailView,
     ETextBox,
@@ -109,11 +117,11 @@ export default {
           maxLength: 255,
           data: [
             {
-              value: 1,
+              value: "Nhà cung cấp",
               display: "Nhà cung cấp"
             },
             {
-              value: 2,
+              value: "Khách hàng",
               display: "khách hàng"
             },
             {
@@ -153,7 +161,7 @@ export default {
         }),
         "txtNameStaffCashPayment": new TextBox({
           fieldText: "Tên nhân viên",
-          readOnly: true,
+          readOnly: false,
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
@@ -189,7 +197,7 @@ export default {
           require: false,
           readOnly: false,
           maxLength: 255,
-          classType: "secondary",
+          classType: "thirty",
           labelWidth: labelWidth,
           format: new NumberFormat({
             decimal: ".",
@@ -198,6 +206,48 @@ export default {
           }),
           bindingIndex: "MoneyCashPayment"
         }),
+      }
+    },
+
+    saveData() {
+      const me = this;
+      let listCashPayment: Array<CashPayment> | null = new Array<CashPayment>;
+      if (me.masterData) {
+        if (me.masterData.editMode == 1 || me.masterData.editMode == 4) {
+          me.masterData['CashPaymentsId'] = Guid.NewGuid();
+          listCashPayment = LocalStorageLibrary.getByKey<Array<CashPayment>>("cashPayment");
+          if (listCashPayment) {
+            listCashPayment.push(me.masterData);
+            LocalStorageLibrary.setByKey("cashPayment", listCashPayment);
+          }
+          else {
+            listCashPayment = new Array<CashPayment>({ ...me.masterData });
+            LocalStorageLibrary.setByKey("cashPayment", listCashPayment);
+          }
+        }
+        if (me.masterData.editMode == 2) {
+          listCashPayment = LocalStorageLibrary.getByKey<Array<CashPayment>>("cashPayment");
+          if (listCashPayment) {
+            listCashPayment.forEach(newItemCashPayment => {
+              if (me.masterData) {
+                if (newItemCashPayment.CashPaymentsId == me.masterData.CashPaymentsId) {
+                  newItemCashPayment.DateCashPayment = me.masterData.DateCashPayment;
+                  newItemCashPayment.CodeCashPayment = me.masterData.CodeCashPayment;
+                  newItemCashPayment.TotalCashPayment = me.masterData.TotalCashPayment;
+                  newItemCashPayment.NameObjectCashPayment = me.masterData.NameObjectCashPayment;
+                  newItemCashPayment.ReasonCashPayment = me.masterData.ReasonCashPayment;
+                  newItemCashPayment.ObjectCashPayment = me.masterData.ObjectCashPayment;
+                  newItemCashPayment.ReceiverCashPayment = me.masterData.ReceiverCashPayment;
+                  newItemCashPayment.AddressCashPayment = me.masterData.AddressCashPayment;
+                  newItemCashPayment.StaffCashPayment = me.masterData.StaffCashPayment;
+                  newItemCashPayment.NameStaffCashPayment = me.masterData.NameStaffCashPayment;
+                  newItemCashPayment.IncludedCashPayment = me.masterData.IncludedCashPayment;
+                }
+              }
+            });
+            LocalStorageLibrary.setByKey("cashPayment", listCashPayment);
+          }
+        }
       }
     },
 

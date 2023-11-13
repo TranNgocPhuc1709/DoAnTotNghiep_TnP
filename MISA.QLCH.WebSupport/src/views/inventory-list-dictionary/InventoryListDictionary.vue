@@ -14,6 +14,8 @@ import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
 import EDate from "qlch_control/EDate";
 import Button from '@library-src/models/qlch_control/qlch_button/Button';
 import EButton from "qlch_control/EButton";
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import Inventory from '@store-src/models/inventory/Inventory';
 
 export default {
 
@@ -144,16 +146,19 @@ export default {
      */
     loadMasterData(param: ParamPaging) {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
-      return [
-        {
-          DateInventory: "22/10/2023",
-          VotesInventory: "abc123",
-          WarehouseInventory: "Kho tổng",
-          ExplantInventory: "kiểm tra hàng hóa",
-          StatusInventory: "Không có sự chênh lệch",
-        },
-
-      ];
+      if (!LocalStorageLibrary.getByKey<Array<Inventory>>("inventoryList")) {
+        return new Array<Inventory>;
+      }
+      else {
+        return LocalStorageLibrary.getByKey<Array<Inventory>>("inventoryList");
+      }
+    },
+    /**
+     * Thực hiện chức năng xóa trên Toolbar
+     * @param listSelectedRecord 
+     */
+    afterDelete(listMasterData: Array<Record<string, any>>) {
+      LocalStorageLibrary.setByKey("inventoryList", listMasterData);
     },
 
     /**
@@ -161,7 +166,7 @@ export default {
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "DateInventory";
+      return "InventoryId";
     },
 
     /**

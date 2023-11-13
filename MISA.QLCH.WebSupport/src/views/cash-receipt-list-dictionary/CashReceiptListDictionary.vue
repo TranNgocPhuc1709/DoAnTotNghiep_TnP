@@ -14,6 +14,8 @@ import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
 import EDate from "qlch_control/EDate";
 import Button from '@library-src/models/qlch_control/qlch_button/Button';
 import EButton from "qlch_control/EButton";
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import CashReceipt from '@store-src/models/cash-receipt/CashReceipt';
 export default {
 
   extends: BaseDictionaryListController,
@@ -108,7 +110,7 @@ export default {
         }),
         new Column({
           fieldText: "Đối tượng nộp tiền",
-          dataIndex: "ObjectCashReceipt",
+          dataIndex: "NameObjectCashReceipt",
           width: 260
         }),
         new Column({
@@ -126,16 +128,20 @@ export default {
      */
     loadMasterData(param: ParamPaging) {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
-      return [
-        {
-          DateCashReceipt: "31/12/2023",
-          CodeCashReceipt: "SH-00112",
-          TotalMoneyCashReceipt: "150000",
-          ObjectCashReceipt: "Khách hàng",
-          ExplantCashReceipt: "Thanh toán hàng hóa",
-        },
+      if (!LocalStorageLibrary.getByKey<Array<CashReceipt>>("cashReceipt")) {
+        return new Array<CashReceipt>;
+      }
+      else {
+        return LocalStorageLibrary.getByKey<Array<CashReceipt>>("cashReceipt");
+      }
+    },
 
-      ];
+    /**
+     * Thực hiện chức năng xóa trên Toolbar
+     * @param listSelectedRecord 
+     */
+    afterDelete(listMasterData: Array<Record<string, any>>) {
+      LocalStorageLibrary.setByKey("cashReceipt", listMasterData);
     },
 
     /**
@@ -143,7 +149,7 @@ export default {
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "DateCashReceipt";
+      return "CashReceiptId";
     },
 
     /**

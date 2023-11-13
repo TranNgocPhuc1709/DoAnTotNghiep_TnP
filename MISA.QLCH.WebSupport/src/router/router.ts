@@ -154,6 +154,15 @@ const routes: Array<RouteRecordRaw> = [
                 }
             },
             {
+                path: 'voucher',
+                name: 'voucher',
+                component: () => import('@src/views/voucher-list-dictionary/VoucherListDictionary.vue'),
+                meta: {
+                    title: "Thu chi",
+                    anonymous: false
+                }
+            },
+            {
                 path: 'stock',
                 name: 'stock',
                 component: () => import('@src/views/stock-list-dictionary/StockListDictionary.vue'),

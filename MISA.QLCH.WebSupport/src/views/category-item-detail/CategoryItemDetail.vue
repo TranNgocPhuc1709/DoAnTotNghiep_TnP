@@ -111,13 +111,13 @@ export default {
         if (me.masterData.editMode == 2) {
           listCategory = LocalStorageLibrary.getByKey<Array<CategoryItem>>("CategoryItem");
           if (listCategory) {
-            listCategory.forEach(newItemRecord => {
+            listCategory.forEach(newItemCategoryItem => {
               if (me.masterData) {
-                if (newItemRecord.CategoryItemId == me.masterData.CategoryItemId) {
-                  newItemRecord.CodeGroupCategory = me.masterData.CodeGroupCategory;
-                  newItemRecord.NameGroupCategory = me.masterData.NameGroupCategory;
-                  newItemRecord.DescribeCategory = me.masterData.DescribeCategory;
-                  newItemRecord.StatusCategory = me.masterData.StatusCategory;
+                if (newItemCategoryItem.CategoryItemId == me.masterData.CategoryItemId) {
+                  newItemCategoryItem.CodeGroupCategory = me.masterData.CodeGroupCategory;
+                  newItemCategoryItem.NameGroupCategory = me.masterData.NameGroupCategory;
+                  newItemCategoryItem.DescribeCategory = me.masterData.DescribeCategory;
+                  newItemCategoryItem.StatusCategory = me.masterData.StatusCategory;
                 }
               }
             });

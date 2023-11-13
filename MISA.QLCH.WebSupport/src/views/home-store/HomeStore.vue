@@ -16,6 +16,8 @@ import TextBox from '@library-src/models/qlch_control/qlch_text_box/TextBox';
 import NumberModel from '@library-src/models/qlch_control/qlch_number/NumberModel';
 import NumberFormat from '@library-src/models/qlch_control/number_format/NumberFormat';
 import ENumber from "qlch_control/ENumber";
+import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
+import EDate from "qlch_control/EDate";
 
 export default {
     components: {
@@ -23,25 +25,27 @@ export default {
         ECheckbox,
         EButton,
         ETextBox,
-        ENumber
+        ENumber,
+        EDate
     },
     data() {
         return {
-            billCount: 1,
-            bills: [1],
-            // Mảng chứa thông tin sản phẩm
+
         };
     },
     setup() {
         const disableFormLogOut: Ref<boolean> = ref(false);
         const isActive: Ref<boolean> = ref(false);
+        const disableFormShowDelivery: Ref<boolean> = ref(false)
         const disableFormMoreAction: Ref<boolean> = ref(false);
-        const txtQuanTySearch: Ref<TextBox> = ref(new TextBox({
-            fieldText: "",
-            require: false,
-            type: "number",
-            placeholder: "0",
-            classType: "tertiary"
+        const disableFormShowVoucher: Ref<boolean> = ref(false);
+        const txtQuanTySearch: Ref<NumberModel> = ref(new NumberModel({
+            classType: "thirty",
+            format: new NumberFormat({
+                decimal: ".",
+                thousands: ",",
+                precision: 0
+            }),
         }));
         const txtPurchased: Ref<TextBox> = ref(new TextBox({
             fieldText: "",
@@ -50,29 +54,168 @@ export default {
             classType: "secondary",
             placeholder: "0"
         }));
+
+        const txtInfoRecipient: Ref<Combobox> = ref(new Combobox({
+            fieldText: "Người nhận",
+            require: true,
+            data: [
+                {
+                    value: "Trần Ngọc Phúc",
+                    display: "Trần Ngọc Phúc"
+                }
+            ],
+            labelWidth: 120,
+            classType: "tertiary",
+            placeholder: "Số điện thoại, Tên khách hàng"
+        }));
+
+        const txtNumberRecipient: Ref<TextBox> = ref(new TextBox({
+            fieldText: "Số điện thoại",
+            require: true,
+            type: "number",
+            classType: "secondary",
+            labelWidth: 120,
+        }));
+        const txtAddressRecipient: Ref<TextBox> = ref(new TextBox({
+            fieldText: "Địa chỉ",
+            require: true,
+            type: "text",
+            classType: "secondary",
+            labelWidth: 120,
+            placeholder: "Số nhà, Tên nhà, Tên xóm,..."
+        }));
+
+        const dtDateDelivery: DateModel = new DateModel({
+            fieldText: "Ngày giao hàng",
+            require: true,
+            labelWidth: 120
+        });
+
+        const txtDeliveryCharges: Ref<NumberModel> = ref(new NumberModel({
+            fieldText: "Phí GH thu khách",
+            require: true,
+            classType: "secondary",
+            labelWidth: 120,
+            format: new NumberFormat({
+                decimal: ".",
+                thousands: ",",
+                precision: 3
+            }),
+        }));
+
+        const txtDeliveryPartner: Ref<Combobox> = ref(new Combobox({
+            fieldText: "Đối tác GH",
+            require: true,
+            data: [
+                {
+                    value: "Đối tác Shoppe",
+                    display: "Đối tác Shoppe"
+                }
+            ],
+            classType: "tertiary",
+            labelWidth: 120,
+
+        }));
+
+        const txtDeliveryService: Ref<Combobox> = ref(new Combobox({
+            fieldText: "Loại dịch vụ",
+            require: true,
+            data: [
+                {
+                    value: "Giao hàng nhanh",
+                    display: "Giao hàng nhanh"
+                }
+            ],
+            classType: "tertiary",
+            labelWidth: 120,
+
+        }));
+        const txtLadingCode: Ref<TextBox> = ref(new TextBox({
+            fieldText: "Mã vận đơn",
+            require: true,
+            type: "text",
+            classType: "secondary",
+            labelWidth: 120,
+
+        }));
+
+        const btnAcceptForm: Button = new Button({
+            fieldText: "Đồng ý",
+            classType: "SaveBtn"
+        });
+        const btnCloseForm: Button = new Button({
+            fieldText: "Đóng",
+            classType: "CloseBtn"
+        });
+
+        const cbbVoucherItem: Ref<Combobox> = ref(new Combobox({
+            fieldText: "Voucher",
+            require: true,
+            data: [
+                {
+                    value: "BigSales",
+                    display: "BigSales"
+                }
+            ],
+            classType: "tertiary",
+            labelWidth: 120,
+
+        }));
+
+        const numVoucherNumber: Ref<NumberModel> = ref(new NumberModel({
+            fieldText: "Số lượng",
+            classType: "secondary",
+            format: new NumberFormat({
+                decimal: ".",
+                thousands: ",",
+                precision: 3
+            }),
+            labelWidth: 120,
+        }));
+        const numVoucherPrice: Ref<NumberModel> = ref(new NumberModel({
+            fieldText: "Mệnh giá",
+            classType: "secondary",
+            format: new NumberFormat({
+                decimal: ".",
+                thousands: ",",
+                precision: 3
+            }),
+            labelWidth: 120,
+        }));
+        const numVoucherTotalPrice: Ref<NumberModel> = ref(new NumberModel({
+            fieldText: "Tổng giá trị",
+            classType: "secondary",
+            format: new NumberFormat({
+                decimal: ".",
+                thousands: ",",
+                precision: 3
+            }),
+            labelWidth: 120,
+        }));
+
         const txtPrice: Ref<NumberModel> = ref(new NumberModel({
-            classType: "primary",
+            classType: "secondary",
             format: new NumberFormat({
                 decimal: ".",
                 thousands: ",",
                 precision: 0
             }),
         }));
-
-        const txtPriceLast: Ref<TextBox> = ref(new TextBox({
-            fieldText: "",
-            require: false,
-            type: "number",
+        const txtPriceLast: Ref<NumberModel> = ref(new NumberModel({
             classType: "secondary",
-            placeholder: "0"
+            format: new NumberFormat({
+                decimal: ".",
+                thousands: ",",
+                precision: 0
+            }),
         }));
-
-        const txtPayments: Ref<TextBox> = ref(new TextBox({
-            fieldText: "",
-            require: false,
-            type: "number",
+        const txtPayments: Ref<NumberModel> = ref(new NumberModel({
             classType: "secondary",
-            placeholder: "0"
+            format: new NumberFormat({
+                decimal: ".",
+                thousands: ",",
+                precision: 0
+            }),
         }));
         const txtNotice: Ref<TextBox> = ref(new TextBox({
             fieldText: "",
@@ -121,15 +264,15 @@ export default {
 
             data: [
                 {
-                    value: 1,
-                    display: "SP1"
+                    value: "Quần Áo Nam",
+                    display: "Quần Áo Nam"
                 },
                 {
-                    value: 2,
-                    display: "SP2"
+                    value: "Quần Áo Nữ",
+                    display: "Quần Áo Nữ"
                 },
-            ]
-            // require: true
+
+            ],
         }));
         const cbbAgentSales: Ref<Combobox> = ref(new Combobox({
             require: false,
@@ -139,12 +282,12 @@ export default {
 
             data: [
                 {
-                    value: 1,
-                    display: "SP1"
+                    value: "Trần Ngọc Phúc",
+                    display: "Trần Ngọc Phúc"
                 },
                 {
-                    value: 2,
-                    display: "SP2"
+                    value: "Trần Ngọc Phúc",
+                    display: "Trần Ngọc Phúc"
                 },
             ]
             // require: true
@@ -156,13 +299,14 @@ export default {
             placeholder: "Tên khách hàng",
             data: [
                 {
-                    value: 1,
-                    display: "Trần Phúc"
+                    value: "Khách hàng 1",
+                    display: "Khách hàng 1"
                 },
                 {
-                    value: 2,
-                    display: "Chuyển khoản"
+                    value: "Khách hàng 2",
+                    display: "Khách hàng 2"
                 },
+
             ]
             // require: true
         }));
@@ -172,12 +316,12 @@ export default {
             classType: "tertiary",
             data: [
                 {
-                    value: 1,
-                    display: "Tiền mặt"
+                    value: "Chiếc",
+                    display: "Chiếc"
                 },
                 {
-                    value: 2,
-                    display: "Chuyển khoản"
+                    value: "Tá",
+                    display: "Tá"
                 },
             ]
             // require: true
@@ -213,11 +357,27 @@ export default {
             txtPurchased,
             txtPrice,
             txtPriceLast,
+            txtNumberRecipient,
+            txtDeliveryCharges,
+            txtAddressRecipient,
+            txtLadingCode,
+            txtInfoRecipient,
+            dtDateDelivery,
             cbbSelectCustomer,
+            txtDeliveryService,
+            disableFormShowDelivery,
+            txtDeliveryPartner,
+            btnAcceptForm,
+            btnCloseForm,
             txtPayments,
             txtNotice,
             isActive,
             txtUnit,
+            disableFormShowVoucher,
+            numVoucherNumber,
+            numVoucherPrice,
+            numVoucherTotalPrice,
+            cbbVoucherItem,
             cbbPayments
         }
     },
@@ -231,37 +391,8 @@ export default {
             Log.ErrorLog(error as Error);
         }
     },
-    watch: {
-        bills: {
-            handler(newBills) {
-                // Kiểm tra nếu không còn bill-item, thêm tự động một bill-item mới
-                if (newBills.length === 0) {
-                    this.addNewBill();
-                }
-            },
-            deep: true
-        }
-    },
+
     methods: {
-        addNewBill() {
-            try {
-                const me = this;
-                me.billCount++;
-                // Tăng số lượng bill
-                me.bills.push(me.billCount)
-                // Thêm hóa đơn mới vào danh sách với số thứ tự tăng dần
-            } catch (error) {
-                Log.ErrorLog(error as Error);
-            }
-        },
-        deleteBill(index: number) {
-            try {
-                const me = this;
-                me.bills.splice(index, 1);
-            } catch (error) {
-                Log.ErrorLog(error as Error);
-            }
-        },
         ShowFormLogOut() {
             try {
                 const me = this;
@@ -316,10 +447,45 @@ export default {
         routerManage() {
             router.push({ path: '/home' })
         },
-        handleProductSearchClick() {
+        ShowDelivery() {
             const me = this;
-            me.isActive = !this.isActive;
+            try {
+                me.disableFormShowDelivery = true;
+            } catch (error) {
+                Log.ErrorLog(error as Error);
+            }
+        },
+        OutFormDelivery() {
+            const me = this;
+            try {
+                if (me.disableFormShowDelivery) {
+                    me.disableFormShowDelivery = false;
+                }
+            } catch (error) {
+                Log.ErrorLog(error as Error);
+            }
+        },
+        ShowVoucher() {
+            const me = this;
+            try {
+                me.disableFormShowVoucher = true;
+            } catch (error) {
+                Log.ErrorLog(error as Error);
+            }
+        },
+        OutFormVoucher() {
+            const me = this;
+            try {
+                if (me.disableFormShowVoucher) {
+                    me.disableFormShowVoucher = false;
+                }
+            } catch (error) {
+                Log.ErrorLog(error as Error);
+            }
         }
+
+
+
 
     }
 

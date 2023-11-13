@@ -14,6 +14,8 @@ import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
 import EDate from "qlch_control/EDate";
 import Button from '@library-src/models/qlch_control/qlch_button/Button';
 import EButton from "qlch_control/EButton";
+import CashPayment from '@store-src/models/cash-payment/CashPayment';
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
 
 export default {
 
@@ -127,22 +129,26 @@ export default {
      */
     loadMasterData(param: ParamPaging) {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
-      return [
-        {
-          DateCashPayment: "22/10/2023",
-          CodeCashPayment: "abc123",
-          TotalCashPayment: "1200000",
-          NameObjectCashPayment: "TNP",
-          ReasonCashPayment: "trả nợ khách"
-        },
-      ];
+      if (!LocalStorageLibrary.getByKey<Array<CashPayment>>("cashPayment")) {
+        return new Array<CashPayment>;
+      }
+      else {
+        return LocalStorageLibrary.getByKey<Array<CashPayment>>("cashPayment");
+      }
+    },
+    /**
+     * Thực hiện chức năng xóa trên Toolbar
+     * @param listSelectedRecord 
+     */
+    afterDelete(listMasterData: Array<Record<string, any>>) {
+      LocalStorageLibrary.setByKey("cashPayment", listMasterData);
     },
     /**
      * Set PrimaryKey cho object master
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "DateCashPayment";
+      return "CashPaymentsId";
     },
 
     /**

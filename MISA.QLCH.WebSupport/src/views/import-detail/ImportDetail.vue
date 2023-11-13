@@ -2,7 +2,7 @@
 <style lang="scss" scoped src="./ImportDetail.scss"></style>
 <script lang="ts">
 import ImportDetail from './ImportDetail';
-import { Ref, ref } from 'vue';
+import { PropType, Ref, ref } from 'vue';
 import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailController";
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
 import TextBox from "@library-src/models/qlch_control/qlch_text_box/TextBox";
@@ -15,11 +15,19 @@ import ENumber from "qlch_control/ENumber";
 import NumberFormat from '@library-src/models/qlch_control/number_format/NumberFormat';
 import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
 import Log from '@library-src/utilities/Log';
+import Import from '@store-src/models/import/Import';
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import Guid from '@library-src/utilities/types/Guid';
 
 export default {
 
   extends: BaseDictionaryDetailController,
-
+  props: {
+    masterData: {
+      type: Object as PropType<Record<string, any>>,
+      require: true
+    }
+  },
   components: {
     BaseDictionaryDetailView,
     ETextBox,
@@ -80,7 +88,7 @@ export default {
           maxLength: 255,
           labelWidth: labelWidth,
           data: [{
-            value: 1,
+            value: "NCC0012",
             display: "NCC0012"
           }],
           bindingIndex: "SupplierImport"
@@ -103,6 +111,12 @@ export default {
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
+          data: [
+            {
+              value: "TNP",
+              display: "TNP"
+            }
+          ],
           bindingIndex: "StaffImport"
         }),
         "txtExplainImport": new TextBox({
@@ -204,12 +218,18 @@ export default {
 
         //Table Grid
 
-        "txtCodeProductImport": new TextBox({
+        "txtCodeProductImport": new Combobox({
           fieldText: "",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          classType: "tertiary",
+          data: [
+            {
+              value: "123",
+              display: "123"
+            }
+          ],
+          classType: "secondary",
           bindingIndex: "CodeProductImport"
         }),
         "txtNameProductImport": new TextBox({
@@ -248,13 +268,18 @@ export default {
           classType: "secondary",
           bindingIndex: "UnitProductImport"
         }),
-        "txtNumberProductImport": new TextBox({
+        "txtNumberProductImport": new NumberModel({
           fieldText: "",
           require: false,
           readOnly: false,
           maxLength: 255,
-          type: "number",
-          classType: "tertiary",
+          classType: "thirty",
+          labelWidth: labelWidth,
+          format: new NumberFormat({
+            decimal: ".",
+            thousands: ",",
+            precision: 0
+          }),
           bindingIndex: "NumberProductImport"
         }),
 
@@ -263,7 +288,7 @@ export default {
           require: false,
           readOnly: false,
           maxLength: 255,
-          classType: "secondary",
+          classType: "thirty",
           labelWidth: labelWidth,
           format: new NumberFormat({
             decimal: ".",
@@ -278,7 +303,7 @@ export default {
           readOnly: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          classType: "secondary",
+          classType: "thirty",
           format: new NumberFormat({
             decimal: ".",
             thousands: ",",
@@ -310,6 +335,54 @@ export default {
         me.navbar2Selected = true;
       } catch (error) {
         Log.ErrorLog(error as Error);
+      }
+    },
+
+    saveData() {
+      const me = this;
+      let listImport: Array<Import> | null = new Array<Import>;
+      if (me.masterData) {
+        if (me.masterData.editMode == 1 || me.masterData.editMode == 4) {
+          me.masterData['ImportId'] = Guid.NewGuid();
+          listImport = LocalStorageLibrary.getByKey<Array<Import>>("importList");
+          if (listImport) {
+            listImport.push(me.masterData);
+            LocalStorageLibrary.setByKey("importList", listImport);
+          }
+          else {
+            listImport = new Array<Import>({ ...me.masterData });
+            LocalStorageLibrary.setByKey("importList", listImport);
+          }
+        }
+        if (me.masterData.editMode == 2) {
+          listImport = LocalStorageLibrary.getByKey<Array<Import>>("importList");
+          if (listImport) {
+            listImport.forEach(newItemImport => {
+              if (me.masterData) {
+                if (newItemImport.ImportId == me.masterData.ImportId) {
+                  newItemImport.DateImport = me.masterData.DateImport;
+                  newItemImport.ReceiptNumberImport = me.masterData.ReceiptNumberImport;
+                  newItemImport.SupplierImport = me.masterData.SupplierImport;
+                  newItemImport.IntoMoneyImport = me.masterData.IntoMoneyImport;
+                  newItemImport.StaffImport = me.masterData.StaffImport;
+                  newItemImport.ExplainImport = me.masterData.ExplainImport;
+                  newItemImport.SupplierNameImport = me.masterData.SupplierNameImport;
+                  newItemImport.StaffNameImport = me.masterData.StaffNameImport;
+                  newItemImport.DeliverImport = me.masterData.DeliverImport;
+                  newItemImport.TotalImport = me.masterData.TotalImport;
+                  newItemImport.ReceiverImport = me.masterData.ReceiverImport;
+                  newItemImport.AddressImport = me.masterData.AddressImport;
+                  newItemImport.ReasonImport = me.masterData.ReasonImport;
+                  newItemImport.VotesImport = me.masterData.VotesImport;
+                  newItemImport.VotesDateImport = me.masterData.VotesDateImport;
+                  newItemImport.TotalPaymentImport = me.masterData.TotalPaymentImport;
+
+                }
+              }
+            });
+            LocalStorageLibrary.setByKey("importList", listImport);
+          }
+        }
       }
     },
 

@@ -109,13 +109,13 @@ export default {
         if (me.masterData.editMode == 2) {
           listDictionaryStock = LocalStorageLibrary.getByKey<Array<DictionaryStock>>("dictionaryStock");
           if (listDictionaryStock) {
-            listDictionaryStock.forEach(newItemRecord => {
+            listDictionaryStock.forEach(newItemDictionaryStock => {
               if (me.masterData) {
-                if (newItemRecord.DictionaryStockId == me.masterData.DictionaryStockId) {
-                  newItemRecord.CodeStore = me.masterData.CodeStore;
-                  newItemRecord.NameStore = me.masterData.NameStore;
-                  newItemRecord.ExplainStore = me.masterData.ExplainStore;
-                  newItemRecord.StatusStore = me.masterData.StatusStore;
+                if (newItemDictionaryStock.DictionaryStockId == me.masterData.DictionaryStockId) {
+                  newItemDictionaryStock.CodeStore = me.masterData.CodeStore;
+                  newItemDictionaryStock.NameStore = me.masterData.NameStore;
+                  newItemDictionaryStock.ExplainStore = me.masterData.ExplainStore;
+                  newItemDictionaryStock.StatusStore = me.masterData.StatusStore;
                 }
               }
             });

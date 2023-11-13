@@ -65,5 +65,5 @@ export default class NumberModel extends BaseInput {
      */
     labelWidth?: number;
 
-    classType?: "primary" | "secondary" = "primary";
+    classType?: "primary" | "secondary" | "thirty" = "primary";
 }

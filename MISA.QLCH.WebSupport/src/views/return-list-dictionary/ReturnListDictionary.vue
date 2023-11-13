@@ -14,6 +14,8 @@ import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
 import EDate from "qlch_control/EDate";
 import Button from '@library-src/models/qlch_control/qlch_button/Button';
 import EButton from "qlch_control/EButton";
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import Return from '@store-src/models/return/Return';
 
 export default {
 
@@ -127,16 +129,19 @@ export default {
      */
     loadMasterData(param: ParamPaging) {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
-      return [
-        {
-          DateReturn: "Value 11",
-          BillNumberReturn: "Value 21",
-          SupplierReturn: "Value 31",
-          TotalMoneyReturn: "Value 41",
-          ExplantReturn: "Value 51",
-        },
-
-      ];
+      if (!LocalStorageLibrary.getByKey<Array<Return>>("returnItem")) {
+        return new Array<Return>;
+      }
+      else {
+        return LocalStorageLibrary.getByKey<Array<Return>>("returnItem");
+      }
+    },
+    /**
+     * Thực hiện chức năng xóa trên Toolbar
+     * @param listSelectedRecord 
+     */
+    afterDelete(listMasterData: Array<Record<string, any>>) {
+      LocalStorageLibrary.setByKey("returnItem", listMasterData);
     },
 
     /**
@@ -144,7 +149,7 @@ export default {
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "DateReturn";
+      return "ReturnId";
     },
 
     /**

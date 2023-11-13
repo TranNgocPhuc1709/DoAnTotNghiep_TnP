@@ -316,14 +316,11 @@ export default {
             const me = this;
             if (listSelectedRecord?.length > 0 && listMasterData?.length > 0) {
                 listSelectedRecord.forEach(record => {
-
                     listMasterData = listMasterData.filter(item => {
                         if (me.viewControl.gridMaster?.primaryKey) {
                             return item[me.viewControl.gridMaster?.primaryKey] != record[me.viewControl.gridMaster?.primaryKey];
                         }
                     })
-
-
                 });
                 if (me.viewControl.gridMaster) {
                     me.viewControl.gridMaster.data = listMasterData;

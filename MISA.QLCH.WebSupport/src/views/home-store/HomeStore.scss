@@ -1,5 +1,6 @@
 .body-home-store {
     background-color: #EDEFF2;
+
 }
 
 .header-store {
@@ -16,6 +17,7 @@
     overflow-y: hidden;
     overflow-x: auto;
     width: 720px;
+
 
 }
 
@@ -496,6 +498,7 @@
     background-color: #FFFFFF;
     border-radius: 10px;
     margin: 10px 10px 0 10px;
+
 }
 
 .pay-store {
@@ -561,8 +564,7 @@
 
 
 .arrow-quanty {
-    margin-left: 5px;
-    width: 50px;
+    width: 40px;
 }
 
 
@@ -644,7 +646,7 @@
 //body content-store
 .body-content-store {
     width: 100%;
-    height: calc(100vh - 140px);
+    height: calc(100vh - 160px);
     margin-top: 20px;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -731,8 +733,13 @@
 }
 
 .item-product {
-    margin-top: 20px;
+    margin-top: 15px;
+    height: 35px;
+    background-color: #F9FAFB;
 }
+
+
+
 
 .item-img-cart {
     width: 60px;
@@ -945,6 +952,7 @@
     border: 1px solid #DFE3E8;
     border-radius: 10px;
     margin: 0 10px;
+
 }
 
 .content-delivery:hover {
@@ -952,6 +960,92 @@
     background-color: #DFE2F0;
     transition: 0.3s;
 }
+
+.PopUpDelivery {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    width: 750px;
+    height: 470px;
+    border-radius: 15px;
+    z-index: 9999;
+    padding: 20px 15px 10px 15px;
+    cursor: default;
+}
+
+.heading-popup-delivery {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 700;
+}
+
+.bodyPopup {
+    margin-top: 15px;
+    // height: 420px;
+    // overflow-y: scroll;
+}
+
+// .bodyPopup::-webkit-scrollbar {
+//     width: 8px;
+// }
+
+// .bodyPopup::-webkit-scrollbar-thumb {
+//     background-color: rgb(164, 162, 162);
+//     border-radius: 10px;
+// }
+
+.bodyPopup-item {
+    margin-top: 15px;
+    height: 40px;
+
+}
+
+.body-popup-left {
+    margin-right: 15px;
+}
+
+.heading-popup-left,
+.heading-popup-right {
+    background-color: #F1F3F8;
+    height: 35px;
+    padding: 0 10px;
+    border-radius: 15px;
+    font-weight: 700;
+}
+
+.btnPopup {
+    width: 250px;
+    height: 50px;
+    float: right;
+    margin-top: 65px;
+}
+
+.item-btnPopup-accept {
+    margin: 0 10px 0 0;
+}
+
+.PopUpVoucher {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    width: 380px;
+    height: 360px;
+    border-radius: 15px;
+    z-index: 9999;
+    padding: 15px;
+    cursor: default;
+}
+
+.heading-popup-voucher {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 700;
+}
+
 
 .icon-content-delivery {
     background-image: url(https://misast.mshopkeeper.vn/salecloudg1/img/ic.84a854b4.svg);
@@ -1058,8 +1152,7 @@
 .check-payments {
     width: 120px;
     margin-right: 20px;
-
-
+    height: 35px;
 }
 
 .item-input-payments {
@@ -1154,4 +1247,9 @@
 
 .type-input-payments {
     width: 125px;
+    height: 35px;
+}
+
+.type-input-notice {
+    height: 35px;
 }

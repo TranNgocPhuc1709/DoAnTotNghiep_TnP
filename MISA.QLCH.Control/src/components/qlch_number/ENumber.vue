@@ -36,7 +36,8 @@ export default {
             if (newValue != oldValue && me.control) {
                 if (me.checkIsValidValue(newValue)) {
                     me.thisData.formatValue = FormatNumber.changeNumberFormat(me.modelValue, me.control.format) ?? "";
-                } else {
+                }
+                else {
                     me.updateValueAndDisplay(oldValue);
                 }
             }

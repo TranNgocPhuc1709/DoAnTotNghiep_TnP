@@ -1,8 +1,8 @@
 <template src="./InventoryDetail.html"></template>
 <style lang="scss" scoped src="./InventoryDetail.scss"></style>
 <script lang="ts">
-import InventoryDetail from './InventoryDetail';
-import { Ref, ref } from 'vue';
+import InventoryDetail from '@store-src/models/inventory/InventoryDetail';
+import { PropType, Ref, ref } from 'vue';
 import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailController";
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
 import TextBox from "@library-src/models/qlch_control/qlch_text_box/TextBox";
@@ -14,23 +14,171 @@ import ECombobox from "qlch_control/ECombobox";
 import NumberModel from '@library-src/models/qlch_control/qlch_number/NumberModel';
 import NumberFormat from '@library-src/models/qlch_control/number_format/NumberFormat';
 import ENumber from "qlch_control/ENumber";
+import Inventory from '@store-src/models/inventory/Inventory';
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import Guid from '@library-src/utilities/types/Guid';
+import Button from '@library-src/models/qlch_control/qlch_button/Button';
+import EButton from "qlch_control/EButton";
 
 export default {
 
   extends: BaseDictionaryDetailController,
-
+  props: {
+    masterData: {
+      type: Object as PropType<Record<string, any>>,
+      require: true
+    }
+  },
   components: {
     BaseDictionaryDetailView,
     ETextBox,
     EDate,
     ENumber,
-    ECombobox
+    ECombobox,
+    EButton
+  },
+
+  /**
+     * tnphuc - 19.09.2023 
+     */
+  data() {
+    const lstInventoryDetail: Ref<Array<InventoryDetail>> = ref(new Array<InventoryDetail>());
+    const txtCodeProductInventory: Ref<Combobox> = ref(new Combobox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      data: [
+        {
+          value: "A123",
+          display: "A123"
+        },
+        {
+          value: "B123",
+          display: "B123"
+        }
+      ],
+      classType: "secondary"
+    }));
+    const txtNameProductInventory: Ref<TextBox> = ref(new TextBox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      classType: "tertiary"
+    }));
+    const txtUnitProductInventory: Ref<Combobox> = ref(new Combobox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      data: [
+        {
+          value: "Chiếc",
+          display: "Chiếc"
+        },
+        {
+          value: "Bộ",
+          display: "Bộ"
+        }
+      ],
+      classType: "secondary"
+    }));
+    const txtBeginInventory: Ref<NumberModel> = ref(new NumberModel({
+      fieldText: "",
+      classType: "thirty",
+      format: new NumberFormat({
+        decimal: ".",
+        thousands: ",",
+        precision: 0
+      }),
+    }));
+    const txtUpdateInventory: Ref<NumberModel> = ref(new NumberModel({
+      fieldText: "",
+      classType: "thirty",
+      format: new NumberFormat({
+        decimal: ".",
+        thousands: ",",
+        precision: 0
+      }),
+    }));
+    const txtEndInventory: Ref<NumberModel> = ref(new NumberModel({
+      fieldText: "",
+      classType: "thirty",
+      format: new NumberFormat({
+        decimal: ".",
+        thousands: ",",
+        precision: 0
+      }),
+    }));
+    const txtReasonInventory: Ref<TextBox> = ref(new TextBox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      classType: "tertiary"
+    }));
+    const txtStatusInventory: Ref<Combobox> = ref(new Combobox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      data: [
+        {
+          value: "Nhập kho",
+          display: "Nhập kho"
+        },
+        {
+          value: "Xuất kho",
+          display: "Xuất kho"
+        }
+      ],
+      classType: "secondary"
+    }));
+    return {
+      txtCodeProductInventory,
+      txtNameProductInventory,
+      txtUnitProductInventory,
+      txtBeginInventory,
+      txtUpdateInventory,
+      txtEndInventory,
+      txtReasonInventory,
+      txtStatusInventory,
+      lstInventoryDetail
+    };
+  },
+
+  created() {
+    try {
+      console.log(this.masterData);
+      //lấy giá trị khóa phụ trong masterData
+      const me = this;
+      if (me.masterData) {
+        const privateKey = me.masterData['InventoryId'];
+        if (privateKey) {
+          const localStorageInventoryDetail = LocalStorageLibrary.getByKey<Array<InventoryDetail>>("inventoryDetail");
+          if (localStorageInventoryDetail && localStorageInventoryDetail.length > 0) {
+            me.lstInventoryDetail = localStorageInventoryDetail.filter(item => {
+              return item.InventoryId == privateKey;
+            })
+          }
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
   },
 
   setup() {
     const thisData: Ref<InventoryDetail> = ref(new InventoryDetail());
+    const btnAddListTable: Button = new Button({
+      fieldText: "Thêm dòng",
+      classType: "primary"
+    });
+    const btnDelListTable: Button = new Button({
+      fieldText: "Xóa dòng",
+      classType: "secondary"
+    });
     return {
       thisData,
+      btnAddListTable,
+      btnDelListTable
 
     };
   },
@@ -72,11 +220,11 @@ export default {
           labelWidth: labelWidth,
           data: [
             {
-              value: 1,
+              value: "Kho 1",
               display: "Kho 1"
             },
             {
-              value: 2,
+              value: "Kho 2",
               display: "Kho 2"
             }
           ],
@@ -89,13 +237,13 @@ export default {
           labelWidth: labelWidth,
           bindingIndex: "ExplantInventory"
         }),
-        "txtStatusInventory": new TextBox({
-          fieldText: "Trạng thái",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          bindingIndex: "StatusInventory"
-        }),
+        // "txtStatusInventory": new TextBox({
+        //   fieldText: "Trạng thái",
+        //   require: false,
+        //   maxLength: 255,
+        //   labelWidth: labelWidth,
+        //   bindingIndex: "StatusInventory"
+        // }),
         "txtTotalBeginInventory": new NumberModel({
           fieldText: "Tổng số lượng ban đầu",
           readOnly: true,
@@ -124,7 +272,7 @@ export default {
         }),
         "txtTotalEndInventory": new NumberModel({
           fieldText: "Tổng số lượng chênh lệch",
-          readOnly: true,
+          readOnly: false,
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
@@ -134,102 +282,84 @@ export default {
             precision: 0
           }),
           bindingIndex: "TotalEndInventory"
-        }),
-
-
-        //Table Grid
-
-        "txtCodeProductInventory": new TextBox({
-          fieldText: "",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          classType: "tertiary",
-          bindingIndex: "CodeProductInventory"
-        }),
-        "txtNameProductInventory": new TextBox({
-          fieldText: "",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          classType: "tertiary",
-          bindingIndex: "NameProductInventory"
-        }),
-        "txtUnitProductInventory": new Combobox({
-          fieldText: "",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          data: [
-            {
-              value: "Chiếc",
-              display: "Chiếc"
-            }
-          ],
-          classType: "secondary",
-          bindingIndex: "UnitProductInventory"
-        }),
-        "txtBeginInventory": new NumberModel({
-          fieldText: "",
-          require: false,
-          readOnly: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          classType: "secondary",
-          format: new NumberFormat({
-            decimal: ".",
-            thousands: ",",
-            precision: 3
-          }),
-          bindingIndex: "BeginInventory"
-        }),
-        "txtUpdateInventory": new NumberModel({
-          fieldText: "",
-          require: false,
-          readOnly: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          classType: "secondary",
-          format: new NumberFormat({
-            decimal: ".",
-            thousands: ",",
-            precision: 3
-          }),
-          bindingIndex: "UpdateInventory"
-        }),
-        "txtEndInventory": new NumberModel({
-          fieldText: "",
-          require: false,
-          readOnly: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          classType: "secondary",
-          format: new NumberFormat({
-            decimal: ".",
-            thousands: ",",
-            precision: 3
-          }),
-          bindingIndex: "EndInventory"
-        }),
-        "txtReasonInventory": new TextBox({
-          fieldText: "",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          classType: "tertiary",
-          bindingIndex: "ReasonInventory"
-        }),
-        "txtHandleInventory": new TextBox({
-          fieldText: "",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          classType: "tertiary",
-          bindingIndex: "HandleInventory"
-        }),
+        })
       }
     },
 
+    AddListTable() {
+      try {
+        const me = this;
+        if (me.lstInventoryDetail?.length > 0) {
+          me.lstInventoryDetail.push(new InventoryDetail());
+        } else {
+          me.lstInventoryDetail = new Array<InventoryDetail>({});
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    saveData() {
+      const me = this;
+      console.log(me.lstInventoryDetail);
+      let listInventory: Array<Inventory> | null = new Array<Inventory>;
+      if (me.masterData) {
+        if (me.masterData.editMode == 1 || me.masterData.editMode == 4) {
+          me.masterData['InventoryId'] = Guid.NewGuid();
+          listInventory = LocalStorageLibrary.getByKey<Array<Inventory>>("inventoryList");
+          if (listInventory) {
+            listInventory.push(me.masterData);
+            LocalStorageLibrary.setByKey("inventoryList", listInventory);
+          }
+          else {
+            listInventory = new Array<Inventory>({ ...me.masterData });
+            LocalStorageLibrary.setByKey("inventoryList", listInventory);
+          }
+
+          //cất detail
+          //gán khoá phụ cho detail
+          if (me.lstInventoryDetail?.length > 0) {
+            me.lstInventoryDetail.forEach(detailItem => {
+              if (me.masterData) {
+                detailItem.InventoryId = me.masterData['InventoryId'];
+              }
+            });
+            //end gán khoá phụ
+
+            let listInventoryDetail: Array<InventoryDetail> | null = new Array<InventoryDetail>;
+            listInventoryDetail = LocalStorageLibrary.getByKey<Array<InventoryDetail>>("inventoryDetail");
+            if (listInventoryDetail) {
+              listInventoryDetail.push(...me.lstInventoryDetail);
+              LocalStorageLibrary.setByKey("inventoryDetail", listInventoryDetail);
+            }
+            else {
+              listInventoryDetail = new Array<InventoryDetail>(...me.lstInventoryDetail);
+              LocalStorageLibrary.setByKey("inventoryDetail", listInventoryDetail);
+            }
+          }
+          //end cất detail
+        }
+        if (me.masterData.editMode == 2) {
+          listInventory = LocalStorageLibrary.getByKey<Array<Inventory>>("inventoryDetail");
+          if (listInventory) {
+            listInventory.forEach(newItemInventory => {
+              if (me.masterData) {
+                if (newItemInventory.InventoryId == me.masterData.InventoryId) {
+                  newItemInventory.DateInventory = me.masterData.DateInventory;
+                  newItemInventory.VotesInventory = me.masterData.VotesInventory;
+                  newItemInventory.WarehouseInventory = me.masterData.WarehouseInventory;
+                  newItemInventory.ExplantInventory = me.masterData.ExplantInventory;
+                  newItemInventory.TotalBeginInventory = me.masterData.TotalBeginInventory;
+                  newItemInventory.TotalUpdateInventory = me.masterData.TotalUpdateInventory;
+                  newItemInventory.TotalEndInventory = me.masterData.TotalEndInventory;
+                }
+              }
+            });
+            LocalStorageLibrary.setByKey("inventoryList", listInventory);
+          }
+        }
+      }
+    },
 
     /**
     * Sau khi đóng form xong thì xử lý thêm gì ở master thì Override function này ở master

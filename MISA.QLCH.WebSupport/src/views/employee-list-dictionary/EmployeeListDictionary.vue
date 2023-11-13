@@ -96,7 +96,7 @@ export default {
      */
     getPrimaryKeyMaster() {
       console.log("DEV: Override Function getPrimaryKeyMaster return Property has Attribute is Key");
-      return "CodeEmployee";
+      return "EmployeeId";
     },
 
     /**

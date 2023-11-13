@@ -2,7 +2,7 @@
 <style lang="scss" scoped src="./OutwardDetail.scss"></style>
 <script lang="ts">
 import OutwardDetail from './OutwardDetail';
-import { Ref, ref } from 'vue';
+import { PropType, Ref, ref } from 'vue';
 import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailController";
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
 import TextBox from "@library-src/models/qlch_control/qlch_text_box/TextBox";
@@ -14,11 +14,19 @@ import ECombobox from "qlch_control/ECombobox";
 import NumberModel from '@library-src/models/qlch_control/qlch_number/NumberModel';
 import NumberFormat from '@library-src/models/qlch_control/number_format/NumberFormat';
 import ENumber from "qlch_control/ENumber";
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import Outward from '@store-src/models/outward/Outward';
+import Guid from '@library-src/utilities/types/Guid';
 
 export default {
 
   extends: BaseDictionaryDetailController,
-
+  props: {
+    masterData: {
+      type: Object as PropType<Record<string, any>>,
+      require: true
+    }
+  },
   components: {
     BaseDictionaryDetailView,
     ETextBox,
@@ -32,9 +40,8 @@ export default {
 
     return {
       thisData,
-
     };
-    return { thisData };
+
   },
 
   methods: {
@@ -146,12 +153,18 @@ export default {
 
         //Table Grid
 
-        "txtCodeProductOutWard": new TextBox({
+        "txtCodeProductOutWard": new Combobox({
           fieldText: "",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          classType: "tertiary",
+          data: [
+            {
+              value: "123",
+              display: "123"
+            }
+          ],
+          classType: "secondary",
           bindingIndex: "CodeProductOutWard"
         }),
         "txtNameProductOutWard": new TextBox({
@@ -190,13 +203,18 @@ export default {
           classType: "secondary",
           bindingIndex: "UnitProductOutWard"
         }),
-        "txtNumberProductOutWard": new TextBox({
+        "txtNumberProductOutWard": new NumberModel({
           fieldText: "",
           require: false,
           readOnly: false,
           maxLength: 255,
-          type: "number",
-          classType: "tertiary",
+          classType: "thirty",
+          labelWidth: labelWidth,
+          format: new NumberFormat({
+            decimal: ".",
+            thousands: ",",
+            precision: 0
+          }),
           bindingIndex: "NumberProductOutWard"
         }),
 
@@ -205,7 +223,7 @@ export default {
           require: false,
           readOnly: false,
           maxLength: 255,
-          classType: "secondary",
+          classType: "thirty",
           labelWidth: labelWidth,
           format: new NumberFormat({
             decimal: ".",
@@ -220,7 +238,7 @@ export default {
           readOnly: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          classType: "secondary",
+          classType: "thirty",
           format: new NumberFormat({
             decimal: ".",
             thousands: ",",
@@ -231,6 +249,44 @@ export default {
       }
     },
 
+    saveData() {
+      const me = this;
+      let listOutward: Array<Outward> | null = new Array<Outward>;
+      if (me.masterData) {
+        if (me.masterData.editMode == 1 || me.masterData.editMode == 4) {
+          me.masterData['OutwardId'] = Guid.NewGuid();
+          listOutward = LocalStorageLibrary.getByKey<Array<Outward>>("outwardItem");
+          if (listOutward) {
+            listOutward.push(me.masterData);
+            LocalStorageLibrary.setByKey("outwardItem", listOutward);
+          }
+          else {
+            listOutward = new Array<Outward>({ ...me.masterData });
+            LocalStorageLibrary.setByKey("outwardItem", listOutward);
+          }
+        }
+        if (me.masterData.editMode == 2) {
+          listOutward = LocalStorageLibrary.getByKey<Array<Outward>>("outwardItem");
+          if (listOutward) {
+            listOutward.forEach(newItemOutward => {
+              if (me.masterData) {
+                if (newItemOutward.OutwardId == me.masterData.OutwardId) {
+                  newItemOutward.DayOutward = me.masterData.DayOutward;
+                  newItemOutward.DeliveryOutward = me.masterData.DeliveryOutward;
+                  newItemOutward.ObjectOutward = me.masterData.ObjectOutward;
+                  newItemOutward.TotalMoneyOutward = me.masterData.TotalMoneyOutward;
+                  newItemOutward.ExplainOutward = me.masterData.ExplainOutward;
+                  newItemOutward.DeliverOutward = me.masterData.DeliverOutward;
+                  newItemOutward.ObjectNameOutward = me.masterData.ObjectNameOutward;
+                  newItemOutward.TotalQuantityOutward = me.masterData.TotalQuantityOutward;
+                }
+              }
+            });
+            LocalStorageLibrary.setByKey("outwardItem", listOutward);
+          }
+        }
+      }
+    },
 
 
     /**
