@@ -9,13 +9,7 @@ export default interface IOutward {
     TotalQuantityOutward?: string;
 
     //Grid-table
-    CodeProductOutWard?: string;
-    NameProductOutWard?: string;
-    WarehouseProductOutWard?: string;
-    UnitProductOutWard?: string;
-    NumberProductOutWard?: string;
-    UnitPriceOutWard?: number;
-    PaymentOutWard?: number;
+
 
 
 }

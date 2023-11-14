@@ -13,7 +13,6 @@ export default class InventoryDetail {
             me.ReasonInventory = inventoryDetail.ReasonInventory;
             me.StatusInventory = inventoryDetail.StatusInventory;
             me.InventoryId = inventoryDetail.InventoryId;
-
         }
         me.InventoryDetailId = Guid.NewGuid();
     }

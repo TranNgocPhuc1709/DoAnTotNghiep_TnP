@@ -9,7 +9,4 @@ export default interface IInventory {
     TotalEndInventory?: number;
 
 
-
-
-
 }

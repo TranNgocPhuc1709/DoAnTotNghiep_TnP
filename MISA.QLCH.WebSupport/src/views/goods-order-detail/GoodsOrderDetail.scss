@@ -42,7 +42,6 @@
 
 .main-synthetic {
   height: 35px;
-  margin-right: 100px;
   font-size: 14px;
   font-weight: 600;
 }
@@ -51,6 +50,16 @@
   font-size: 14px;
   font-weight: 600;
 }
+
+.btn-table {
+  margin-bottom: 10px;
+}
+
+.grid-footer-item {
+  height: 30px;
+  margin-right: 10px;
+}
+
 
 .grid-GoodsOrder {
   height: 150px;
@@ -67,13 +76,15 @@ thead,
 tr,
 th {
   border-right: 1px solid #D0D0D0;
+  min-width: 150px;
+  height: 35px;
 }
 
 tbody,
 tr,
 td {
   width: 100%;
-  min-width: 200px
+  height: 30px;
 }
 
 thead,

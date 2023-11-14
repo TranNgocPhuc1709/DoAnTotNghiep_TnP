@@ -34,15 +34,6 @@
         <div class="grid-footer-item flex-1">
           <span class="heading-inventory-info">Chi tiết</span>
         </div>
-        <div class="btn-table d-flex">
-          <div class="grid-footer-item">
-            <e-button :control="btnAddListTable" @click="AddListTable()" />
-          </div>
-          <div class="grid-footer-item">
-            <e-button :control="btnDelListTable" />
-          </div>
-        </div>
-
       </div>
       <div class="grid-GoodsInventory">
         <table class="flex-1">
@@ -56,9 +47,9 @@
               <th>Chênh lệch</th>
               <th>Nguyên nhân</th>
               <th>Xử lý</th>
-              <!-- <th>Số lượng</th>
-              <th>Đơn giá</th>
-              <th>Thành tiền</th> -->
+              <th>
+                <e-button :control="btnAddListTable" @click="AddListTable()" />
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -87,21 +78,24 @@
               <td>
                 <e-combobox :control="txtStatusInventory" v-model="item.StatusInventory"></e-combobox>
               </td>
+              <td>
+                <e-button :control="btnDelListTable" />
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-    <div class="synthetic-footer d-flex-vcenter">
-      <div class="main-synthetic d-flex-vcenter flex-1">
+    <div class="synthetic-footer d-flex-vcenter d-flex-sp-center">
+      <div class="main-synthetic d-flex-vcenter">
         <e-number :control="bindingControl[`txtTotalBeginInventory`]"
           v-model="masterData[bindingControl[`txtTotalBeginInventory`].bindingIndex]"></e-number>
       </div>
-      <div class="main-synthetic d-flex-vcenter flex-1">
+      <div class="main-synthetic d-flex-vcenter">
         <e-number :control="bindingControl[`txtTotalUpdateInventory`]"
           v-model="masterData[bindingControl[`txtTotalUpdateInventory`].bindingIndex]"></e-number>
       </div>
-      <div class="main-synthetic d-flex-vcenter flex-1">
+      <div class="main-synthetic d-flex-vcenter">
         <e-number :control="bindingControl[`txtTotalEndInventory`]"
           v-model="masterData[bindingControl[`txtTotalEndInventory`].bindingIndex]"></e-number>
       </div>

@@ -13,8 +13,7 @@ export default interface ICashReceipt {
 
 
     //Grid Table
-    ExplainCashReceipt?: string;
-    MoneyCashDetail?: number;
+
 
 
 }

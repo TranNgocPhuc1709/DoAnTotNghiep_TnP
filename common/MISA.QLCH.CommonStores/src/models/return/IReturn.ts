@@ -17,12 +17,5 @@ export default interface IReturn {
 
 
     //Grid
-    CodeProductReturn?: string;
-    NameProductReturn?: string;
-    WarehouseProductReturn?: string;
-    UnitProductReturn?: string;
-    NumberProductReturn?: string;
-    UnitPriceReturn?: number;
-    PaymentReturn?: number;
 
 }

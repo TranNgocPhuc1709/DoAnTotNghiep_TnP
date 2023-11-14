@@ -1,7 +1,6 @@
 <template src="./CashPaymentDetail.html"></template>
 <style lang="scss" scoped src="./CashPaymentDetail.scss"></style>
 <script lang="ts">
-import CashPaymentDetail from './CashPaymentDetail';
 import { PropType, Ref, ref } from 'vue';
 import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailController";
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
@@ -17,8 +16,11 @@ import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
 import Checkbox from '@library-src/models/qlch_control/qlch_checkbox/Checkbox';
 import ECheckbox from "qlch_control/ECheckbox";
 import CashPayment from '@store-src/models/cash-payment/CashPayment';
+import CashPaymentDetail from '@store-src/models/cash-payment/CashPaymentDetail';
 import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
 import Guid from '@library-src/utilities/types/Guid';
+import Button from '@library-src/models/qlch_control/qlch_button/Button';
+import EButton from "qlch_control/EButton";
 
 export default {
 
@@ -35,14 +37,72 @@ export default {
     EDate,
     ECombobox,
     ENumber,
-    ECheckbox
+    ECheckbox,
+    EButton
+  },
+
+
+  data() {
+    const lstCashPaymentDetail: Ref<Array<CashPaymentDetail>> = ref(new Array<CashPaymentDetail>());
+
+    const txtExplainCashPayment: Ref<TextBox> = ref(new TextBox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      classType: "tertiary"
+    }));
+    const txtMoneyCashPayment: Ref<NumberModel> = ref(new NumberModel({
+      fieldText: "",
+      classType: "thirty",
+      format: new NumberFormat({
+        decimal: ".",
+        thousands: ",",
+        precision: 0
+      }),
+    }));
+
+    return {
+      lstCashPaymentDetail,
+      txtExplainCashPayment,
+      txtMoneyCashPayment
+
+    }
+  },
+  created() {
+    try {
+      //lấy giá trị khóa phụ trong masterData
+      const me = this;
+      if (me.masterData) {
+        const privateKey = me.masterData['CashPaymentsId'];
+        if (privateKey) {
+          const localStorageCashPaymentDetail = LocalStorageLibrary.getByKey<Array<CashPaymentDetail>>("cashPaymentDetail");
+          if (localStorageCashPaymentDetail && localStorageCashPaymentDetail.length > 0) {
+            me.lstCashPaymentDetail = localStorageCashPaymentDetail.filter(item => {
+              return item.CashPaymentsId == privateKey;
+            })
+          }
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
   },
 
   setup() {
     const thisData: Ref<CashPaymentDetail> = ref(new CashPaymentDetail());
-
+    const btnAddListTable: Button = new Button({
+      fieldText: "Thêm dòng",
+      classType: "primary"
+    });
+    const btnDelListTable: Button = new Button({
+      fieldText: "Xóa dòng",
+      classType: "secondary"
+    });
     return {
       thisData,
+      btnAddListTable,
+      btnDelListTable
 
     };
   },
@@ -184,30 +244,32 @@ export default {
 
         //Table Grid
 
-        "txtExplainCashPayment": new TextBox({
-          fieldText: "",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          classType: "tertiary",
-          bindingIndex: "ExplainCashPayment"
-        }),
-        "txtMoneyCashPayment": new NumberModel({
-          fieldText: "",
-          require: false,
-          readOnly: false,
-          maxLength: 255,
-          classType: "thirty",
-          labelWidth: labelWidth,
-          format: new NumberFormat({
-            decimal: ".",
-            thousands: ",",
-            precision: 3
-          }),
-          bindingIndex: "MoneyCashPayment"
-        }),
+
       }
     },
+    AddListTable() {
+      try {
+        const me = this;
+        if (me.lstCashPaymentDetail?.length > 0) {
+          me.lstCashPaymentDetail.push(new CashPaymentDetail());
+        } else {
+          me.lstCashPaymentDetail = new Array<CashPaymentDetail>({});
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    DelListTable(item: CashPaymentDetail) {
+      const me = this;
+      if (item && me.lstCashPaymentDetail?.length > 0) {
+        me.lstCashPaymentDetail = me.lstCashPaymentDetail.filter(detail => {
+          return detail.CashPaymentDetailId != item.CashPaymentDetailId;
+        })
+      }
+
+
+    },
+
 
     saveData() {
       const me = this;
@@ -223,6 +285,27 @@ export default {
           else {
             listCashPayment = new Array<CashPayment>({ ...me.masterData });
             LocalStorageLibrary.setByKey("cashPayment", listCashPayment);
+          }
+          //cất detail
+          //gán khoá phụ cho detail
+          if (me.lstCashPaymentDetail?.length > 0) {
+            me.lstCashPaymentDetail.forEach(detailItem => {
+              if (me.masterData) {
+                detailItem.CashPaymentsId = me.masterData['CashPaymentsId'];
+              }
+            });
+            //end gán khoá phụ
+
+            let listCashPaymentDetail: Array<CashPaymentDetail> | null = new Array<CashPaymentDetail>;
+            listCashPaymentDetail = LocalStorageLibrary.getByKey<Array<CashPaymentDetail>>("cashPaymentDetail");
+            if (listCashPaymentDetail) {
+              listCashPaymentDetail.push(...me.lstCashPaymentDetail);
+              LocalStorageLibrary.setByKey("cashPaymentDetail", listCashPaymentDetail);
+            }
+            else {
+              listCashPaymentDetail = new Array<CashPaymentDetail>(...me.lstCashPaymentDetail);
+              LocalStorageLibrary.setByKey("cashPaymentDetail", listCashPaymentDetail);
+            }
           }
         }
         if (me.masterData.editMode == 2) {
@@ -246,6 +329,45 @@ export default {
               }
             });
             LocalStorageLibrary.setByKey("cashPayment", listCashPayment);
+          }
+
+          //cất detail
+          //gán khoá phụ cho detail
+          if (me.lstCashPaymentDetail?.length > 0) {
+            me.lstCashPaymentDetail.forEach(detailItem => {
+              if (me.masterData) {
+                detailItem.CashPaymentsId = me.masterData['CashPaymentsId'];
+              }
+            });
+            //end gán khoá phụ
+
+            let listCashPaymentDetail: Array<CashPaymentDetail> | null = new Array<CashPaymentDetail>;
+            listCashPaymentDetail = LocalStorageLibrary.getByKey<Array<CashPaymentDetail>>("cashPaymentDetail");
+            if (listCashPaymentDetail) {
+              listCashPaymentDetail = listCashPaymentDetail.filter(item => {
+                if (me.masterData) {
+                  return item.CashPaymentsId != me.masterData['CashPaymentsId'];
+                }
+              });
+              listCashPaymentDetail.push(...me.lstCashPaymentDetail);
+              LocalStorageLibrary.setByKey("cashPaymentDetail", listCashPaymentDetail);
+            }
+            else {
+              listCashPaymentDetail = new Array<CashPaymentDetail>(...me.lstCashPaymentDetail);
+              LocalStorageLibrary.setByKey("cashPaymentDetail", listCashPaymentDetail);
+            }
+          } else {
+            let listCashPaymentDetail: Array<CashPaymentDetail> | null = new Array<CashPaymentDetail>;
+            listCashPaymentDetail = LocalStorageLibrary.getByKey<Array<CashPaymentDetail>>("cashPaymentDetail");
+            if (listCashPaymentDetail) {
+              listCashPaymentDetail = listCashPaymentDetail.filter(item => {
+                if (me.masterData) {
+                  return item.CashPaymentsId != me.masterData['CashPaymentsId'];
+                }
+              });
+              listCashPaymentDetail.push(...me.lstCashPaymentDetail);
+              LocalStorageLibrary.setByKey("cashPaymentDetail", listCashPaymentDetail);
+            }
           }
         }
       }

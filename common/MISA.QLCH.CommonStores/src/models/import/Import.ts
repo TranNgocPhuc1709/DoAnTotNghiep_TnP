@@ -40,17 +40,6 @@ export default class Import {
     VotesImport?: string;
     VotesDateImport?: Date;
     TotalPaymentImport?: number;
-
     ImportId?: string;
 
-
-
-    //Grid-table
-    CodeProductImport?: string;
-    NameProductImport?: string;
-    WarehouseProductImport?: string;
-    UnitProductImport?: string;
-    NumberProductImport?: string;
-    UnitPriceImport?: number;
-    PaymentImport?: number;
 }

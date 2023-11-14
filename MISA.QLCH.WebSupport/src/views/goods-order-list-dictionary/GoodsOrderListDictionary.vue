@@ -116,7 +116,7 @@ export default {
         }),
         new Column({
           fieldText: "Nhà cung cấp",
-          dataIndex: "SupplierOrder",
+          dataIndex: "SupplierNameOrder",
           width: 260
         }),
         new Column({

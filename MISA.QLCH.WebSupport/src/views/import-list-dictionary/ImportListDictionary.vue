@@ -97,37 +97,6 @@ export default {
     buildGridMasterColumn(): Array<Column> {
       console.log("DEV: Override Function buildGridMasterColumn return list Column in Grid");
       return Array(
-        // new Column({
-        //   fieldText: "Ngày nhập",
-        //   dataIndex: "Column1",
-        //   width: 120,
-        // }),
-        // new Column({
-        //   fieldText: "Số phiếu nhập",
-        //   dataIndex: "Column2",
-        //   width: 260
-        // }),
-        // new Column({
-        //   fieldText: "Nhà cung cấp",
-        //   dataIndex: "Column3",
-        //   width: 260
-        // }),
-        // new Column({
-        //   fieldText: "Thành tiền",
-        //   dataIndex: "Column4",
-        //   width: 260
-        // }),
-        // new Column({
-        //   fieldText: "Nhân viên mua hàng",
-        //   dataIndex: "Column5",
-        //   minWidth: 260,
-        //   flex: 1
-        // }),
-        // new Column({
-        //   fieldText: "Diễn giải",
-        //   dataIndex: "Column6",
-        //   width: 160
-        // })
         new Column({
           fieldText: "Ngày nhập",
           dataIndex: "DateImport",
@@ -140,7 +109,7 @@ export default {
         }),
         new Column({
           fieldText: "Nhà cung cấp",
-          dataIndex: "SupplierImport",
+          dataIndex: "SupplierNameImport",
           width: 260
         }),
         new Column({

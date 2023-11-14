@@ -34,7 +34,5 @@ export default class CashPayment {
 
 
 
-    //Grid Table
-    ExplainCashPayment?: string;
-    MoneyCashPayment?: number;
+
 }

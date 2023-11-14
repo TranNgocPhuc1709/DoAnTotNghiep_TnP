@@ -12,7 +12,5 @@ export default interface ICashPayment {
     IncludedCashPayment?: boolean;
 
 
-    //Grid Table
-    ExplainCashPayment?: string;
-    MoneyCashPayment?: number;
+
 }

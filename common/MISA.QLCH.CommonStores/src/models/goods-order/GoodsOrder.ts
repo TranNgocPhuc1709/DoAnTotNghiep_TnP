@@ -14,20 +14,9 @@ export default class GoodsOrder {
             me.SupplierNameOrder = goodsOrder.SupplierNameOrder;
             me.PersonOrderName = goodsOrder.PersonOrderName;
             me.TotalOrder = goodsOrder.TotalOrder;
-
-
-
-            // me.CodeProductOrder = goodsOrder.CodeProductOrder;
-            // me.NameProductOrder = goodsOrder.NameProductOrder;
-            // me.UnitProductOrder = goodsOrder.UnitProductOrder;
-            // me.NumberProductOrder = goodsOrder.NumberProductOrder;
-            // me.UnitPriceOrder = goodsOrder.UnitPriceOrder;
-            // me.PaymentOrder = goodsOrder.PaymentOrder;
-
         }
         me.GoodsOrderId = Guid.NewGuid();
     }
-
 
     DateOrder?: Date;
     NumberOrder?: string;
@@ -39,11 +28,14 @@ export default class GoodsOrder {
     SupplierNameOrder?: string;
     PersonOrderName?: string;
     TotalOrder?: number;
+    GoodsOrderId?: string;
+
+
     // CodeProductOrder?: string;
     // NameProductOrder?: string;
     // UnitProductOrder?: string;
     // NumberProductOrder?: string;
     // UnitPriceOrder?: number;
     // PaymentOrder?: number;
-    GoodsOrderId?: string;
+
 }

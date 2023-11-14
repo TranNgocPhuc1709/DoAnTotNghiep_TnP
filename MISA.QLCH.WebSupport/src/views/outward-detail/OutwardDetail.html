@@ -36,7 +36,11 @@
     </div>
 
     <div class="grid-footer">
-      <span class="heading-outward-info">Chi tiết</span>
+      <div class="d-flex">
+        <div class="grid-footer-item flex-1">
+          <span class="heading-outward-info">Chi tiết</span>
+        </div>
+      </div>
       <div class="grid-GoodsOutward">
         <table class="flex-1">
           <thead>
@@ -48,45 +52,43 @@
               <th>Số lượng</th>
               <th>Đơn giá</th>
               <th>Thành tiền</th>
+              <th>
+                <e-button :control="btnAddListTable" @click="AddListTable()" />
+              </th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr v-if="lstOutwardDetail?.length > 0" v-for="item in lstOutwardDetail" :key="item.OutWardDetailId">
               <td>
-                <e-combobox :control="bindingControl[`txtCodeProductOutWard`]"
-                  v-model="masterData[bindingControl[`txtCodeProductOutWard`].bindingIndex]"></e-combobox>
-              </td>
-
-              <td>
-                <e-text-box :control="bindingControl[`txtNameProductOutWard`]"
-                  v-model="masterData[bindingControl[`txtNameProductOutWard`].bindingIndex]"></e-text-box>
+                <e-combobox :control="txtCodeProductOutWard" v-model="item.CodeProductOutWard"></e-combobox>
               </td>
               <td>
-                <e-combobox :control="bindingControl[`txtWarehouseProductOutWard`]"
-                  v-model="masterData[bindingControl[`txtWarehouseProductOutWard`].bindingIndex]"></e-combobox>
+                <e-text-box :control="txtNameProductOutWard" v-model="item.NameProductOutWard"></e-text-box>
               </td>
               <td>
-                <e-combobox :control="bindingControl[`txtUnitProductOutWard`]"
-                  v-model="masterData[bindingControl[`txtUnitProductOutWard`].bindingIndex]"></e-combobox>
+                <e-combobox :control="txtWarehouseProductOutWard" v-model="item.WarehouseProductOutWard"></e-combobox>
               </td>
               <td>
-                <e-number :control="bindingControl[`txtNumberProductOutWard`]"
-                  v-model="masterData[bindingControl[`txtNumberProductOutWard`].bindingIndex]"></e-number>
+                <e-combobox :control="txtUnitProductOutWard" v-model="item.UnitProductOutWard"></e-combobox>
               </td>
               <td>
-                <e-number :control="bindingControl[`txtUnitPriceOutWard`]"
-                  v-model="masterData[bindingControl[`txtUnitPriceOutWard`].bindingIndex]"></e-number>
+                <e-number :control="txtNumberProductOutWard" v-model="item.NumberProductOutWard"></e-number>
               </td>
               <td>
-                <e-number :control="bindingControl[`txtPaymentOutWard`]"
-                  v-model="masterData[bindingControl[`txtPaymentOutWard`].bindingIndex]"></e-number>
+                <e-number :control="txtUnitPriceOutWard" v-model="item.UnitPriceOutWard"></e-number>
+              </td>
+              <td>
+                <e-number :control="txtPaymentOutWard" v-model="item.PaymentOutWard"></e-number>
+              </td>
+              <td>
+                <e-button :control="btnDelListTable" />
               </td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-    <div class="synthetic-footer d-flex-vcenter">
+    <div class="synthetic-footer d-flex-vcenter d-flex-sp-center">
       <div class="main-synthetic d-flex-vcenter">
         <e-number :control="bindingControl[`txtTotalQuantityOutward`]"
           v-model="masterData[bindingControl[`txtTotalQuantityOutward`].bindingIndex]"></e-number>

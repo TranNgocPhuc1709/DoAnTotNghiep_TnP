@@ -1,7 +1,6 @@
 <template src="./GoodsOrderDetail.html"></template>
 <style lang="scss" scoped src="./GoodsOrderDetail.scss"></style>
 <script lang="ts">
-import GoodsOrderDetail from './GoodsOrderDetail';
 import { PropType, Ref, ref } from 'vue';
 import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailController";
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
@@ -17,9 +16,9 @@ import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
 import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
 import Guid from '@library-src/utilities/types/Guid';
 import GoodsOrder from '@store-src/models/goods-order/GoodsOrder';
-
-
-
+import GoodsOrderDetail from '@store-src/models/goods-order/GoodsOrderDetail';
+import Button from '@library-src/models/qlch_control/qlch_button/Button';
+import EButton from "qlch_control/EButton";
 
 
 export default {
@@ -37,13 +36,124 @@ export default {
     EDate,
     ECombobox,
     ENumber,
+    EButton
+  },
+
+  data() {
+    const lstGoodsOrderDetail: Ref<Array<GoodsOrderDetail>> = ref(new Array<GoodsOrderDetail>());
+    const txtCodeProductOrder: Ref<Combobox> = ref(new Combobox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      data: [
+        {
+          value: "A123",
+          display: "A123"
+        },
+        {
+          value: "B123",
+          display: "B123"
+        }
+      ],
+      classType: "secondary"
+    }));
+    const txtNameProductOrder: Ref<TextBox> = ref(new TextBox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      classType: "tertiary"
+    }));
+    const txtUnitProductOrder: Ref<Combobox> = ref(new Combobox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      data: [
+        {
+          value: "Chiếc",
+          display: "Chiếc"
+        },
+        {
+          value: "Bộ",
+          display: "Bộ"
+        }
+      ],
+      classType: "secondary"
+    }));
+    const txtNumberProductOrder: Ref<NumberModel> = ref(new NumberModel({
+      fieldText: "",
+      classType: "thirty",
+      format: new NumberFormat({
+        decimal: ".",
+        thousands: ",",
+        precision: 0
+      }),
+    }));
+    const txtUnitPriceOrder: Ref<NumberModel> = ref(new NumberModel({
+      fieldText: "",
+      classType: "thirty",
+      format: new NumberFormat({
+        decimal: ".",
+        thousands: ",",
+        precision: 0
+      }),
+    }));
+    const txtPaymentOrder: Ref<NumberModel> = ref(new NumberModel({
+      fieldText: "",
+      classType: "thirty",
+      format: new NumberFormat({
+        decimal: ".",
+        thousands: ",",
+        precision: 0
+      }),
+    }));
+
+    return {
+      lstGoodsOrderDetail,
+      txtCodeProductOrder,
+      txtNameProductOrder,
+      txtUnitProductOrder,
+      txtNumberProductOrder,
+      txtUnitPriceOrder,
+      txtPaymentOrder
+
+
+    }
+  },
+  created() {
+    try {
+      //lấy giá trị khóa phụ trong masterData
+      const me = this;
+      if (me.masterData) {
+        const privateKey = me.masterData['GoodsOrderId'];
+        if (privateKey) {
+          const localStorageGoodsOrderDetail = LocalStorageLibrary.getByKey<Array<GoodsOrderDetail>>("goodsOrderDetail");
+          if (localStorageGoodsOrderDetail && localStorageGoodsOrderDetail.length > 0) {
+            me.lstGoodsOrderDetail = localStorageGoodsOrderDetail.filter(item => {
+              return item.GoodsOrderId == privateKey;
+            })
+          }
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
   },
 
   setup() {
     const thisData: Ref<GoodsOrderDetail> = ref(new GoodsOrderDetail());
-
+    const btnAddListTable: Button = new Button({
+      fieldText: "Thêm dòng",
+      classType: "primary"
+    });
+    const btnDelListTable: Button = new Button({
+      fieldText: "Xóa dòng",
+      classType: "secondary"
+    });
     return {
       thisData,
+      btnAddListTable,
+      btnDelListTable
     };
   },
 
@@ -142,7 +252,7 @@ export default {
         "txtSupplierNameOrder": new TextBox({
           fieldText: "Tên nhà cung cấp",
           require: false,
-          readOnly: true,
+          readOnly: false,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "SupplierNameOrder"
@@ -169,108 +279,26 @@ export default {
           bindingIndex: "TotalOrder"
         }),
 
-
-
         // Grid Table
+      }
+    },
 
-        "txtCodeProductOrder": new Combobox({
-          fieldText: "",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          data: [
-            {
-              value: "1",
-              display: "123"
-            },
-            {
-              value: "CODE",
-              display: "Code"
-            }
-          ],
-          classType: "secondary",
-          bindingIndex: "CodeProductOrder"
-        }),
-        "txtNameProductOrder": new TextBox({
-          fieldText: "",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          classType: "tertiary",
-          bindingIndex: "NameProductOrder"
-        }),
-        "txtUnitProductOrder": new Combobox({
-          fieldText: "",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          data: [
-            {
-              value: "Chiếc",
-              display: "Chiếc"
-            }
-          ],
-          classType: "secondary",
-          bindingIndex: "UnitProductOrder"
-        }),
-        // "txtNumberProductOrder": new TextBox({
-        //   fieldText: "",
-        //   require: false,
-        //   readOnly: false,
-        //   maxLength: 255,
-        //   type: "number",
-        //   classType: "tertiary",
-        //   bindingIndex: "NumberProductOrder"
-        // }),
-
-        "txtNumberProductOrder": new NumberModel({
-          fieldText: "",
-          require: false,
-          readOnly: false,
-          maxLength: 255,
-          classType: "thirty",
-          labelWidth: labelWidth,
-          format: new NumberFormat({
-            decimal: ".",
-            thousands: ",",
-            precision: 0
-          }),
-          bindingIndex: "NumberProductOrder"
-        }),
-
-        "txtUnitPriceOrder": new NumberModel({
-          fieldText: "",
-          require: false,
-          readOnly: false,
-          maxLength: 255,
-          classType: "thirty",
-          labelWidth: labelWidth,
-          format: new NumberFormat({
-            decimal: ".",
-            thousands: ",",
-            precision: 3
-          }),
-          bindingIndex: "UnitPriceOrder"
-        }),
-        "txtPaymentOrder": new NumberModel({
-          fieldText: "",
-          require: false,
-          readOnly: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          classType: "thirty",
-          format: new NumberFormat({
-            decimal: ".",
-            thousands: ",",
-            precision: 3
-          }),
-          bindingIndex: "PaymentOrder"
-        }),
+    AddListTable() {
+      try {
+        const me = this;
+        if (me.lstGoodsOrderDetail?.length > 0) {
+          me.lstGoodsOrderDetail.push(new GoodsOrderDetail());
+        } else {
+          me.lstGoodsOrderDetail = new Array<GoodsOrderDetail>({});
+        }
+      } catch (error) {
+        console.log(error);
       }
     },
 
     saveData() {
       const me = this;
+      console.log(me.lstGoodsOrderDetail);
       let listGoodsOrder: Array<GoodsOrder> | null = new Array<GoodsOrder>;
       if (me.masterData) {
         if (me.masterData.editMode == 1 || me.masterData.editMode == 4) {
@@ -284,6 +312,30 @@ export default {
             listGoodsOrder = new Array<GoodsOrder>({ ...me.masterData });
             LocalStorageLibrary.setByKey("goodsOrder", listGoodsOrder);
           }
+
+          //cất detail
+          //gán khoá phụ cho detail
+          if (me.lstGoodsOrderDetail?.length > 0) {
+            me.lstGoodsOrderDetail.forEach(detailItem => {
+              if (me.masterData) {
+                detailItem.GoodsOrderId = me.masterData['GoodsOrderId'];
+              }
+            });
+            //end gán khoá phụ
+
+            let listGoodsOrderDetail: Array<GoodsOrderDetail> | null = new Array<GoodsOrderDetail>;
+            listGoodsOrderDetail = LocalStorageLibrary.getByKey<Array<GoodsOrderDetail>>("goodsOrderDetail");
+            if (listGoodsOrderDetail) {
+              listGoodsOrderDetail.push(...me.lstGoodsOrderDetail);
+              LocalStorageLibrary.setByKey("goodsOrderDetail", listGoodsOrderDetail);
+            }
+            else {
+              listGoodsOrderDetail = new Array<GoodsOrderDetail>(...me.lstGoodsOrderDetail);
+              LocalStorageLibrary.setByKey("goodsOrderDetail", listGoodsOrderDetail);
+            }
+          }
+
+
         }
         if (me.masterData.editMode == 2) {
           listGoodsOrder = LocalStorageLibrary.getByKey<Array<GoodsOrder>>("goodsOrder");

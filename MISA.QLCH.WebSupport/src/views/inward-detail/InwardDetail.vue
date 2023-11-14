@@ -1,7 +1,6 @@
 <template src="./InwardDetail.html"></template>
 <style lang="scss" scoped src="./InwardDetail.scss"></style>
 <script lang="ts">
-import InwardDetail from './InwardDetail';
 import { PropType, Ref, ref } from 'vue';
 import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailController";
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
@@ -17,8 +16,9 @@ import NumberFormat from '@library-src/models/qlch_control/number_format/NumberF
 import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
 import Guid from '@library-src/utilities/types/Guid';
 import Inward from '@store-src/models/inward/Inward';
-
-
+import InwardDetail from '@store-src/models/inward/InwardDetail';
+import Button from '@library-src/models/qlch_control/qlch_button/Button';
+import EButton from "qlch_control/EButton";
 
 export default {
 
@@ -34,14 +34,141 @@ export default {
     ETextBox,
     EDate,
     ECombobox,
-    ENumber
+    ENumber,
+    EButton
+  },
+
+  data() {
+    const lstInwardDetail: Ref<Array<InwardDetail>> = ref(new Array<InwardDetail>());
+    const txtCodeProductInward: Ref<Combobox> = ref(new Combobox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      data: [
+        {
+          value: "A123",
+          display: "A123"
+        },
+        {
+          value: "B123",
+          display: "B123"
+        }
+      ],
+      classType: "secondary"
+    }));
+    const txtNameProductInward: Ref<TextBox> = ref(new TextBox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      classType: "tertiary"
+    }));
+    const txtWarehouseProductInward: Ref<Combobox> = ref(new Combobox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      data: [
+        {
+          value: "Kho 1",
+          display: "Kho 1"
+        },
+        {
+          value: "Kho 2",
+          display: "Kho 2"
+        }
+      ],
+      classType: "secondary"
+    }));
+    const txtUnitProductInward: Ref<Combobox> = ref(new Combobox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      data: [
+        {
+          value: "Chiếc",
+          display: "Chiếc"
+        },
+        {
+          value: "Bộ",
+          display: "Bộ"
+        }
+      ],
+      classType: "secondary"
+    }));
+    const txtNumberProductInward: Ref<NumberModel> = ref(new NumberModel({
+      fieldText: "",
+      classType: "thirty",
+      format: new NumberFormat({
+        decimal: ".",
+        thousands: ",",
+        precision: 0
+      }),
+    }));
+    const txtUnitPriceInward: Ref<NumberModel> = ref(new NumberModel({
+      fieldText: "",
+      classType: "thirty",
+      format: new NumberFormat({
+        decimal: ".",
+        thousands: ",",
+        precision: 0
+      }),
+    }));
+    const txtPaymentInward: Ref<NumberModel> = ref(new NumberModel({
+      fieldText: "",
+      classType: "thirty",
+      format: new NumberFormat({
+        decimal: ".",
+        thousands: ",",
+        precision: 0
+      }),
+    }));
+
+    return {
+      lstInwardDetail,
+      txtCodeProductInward,
+      txtNameProductInward,
+      txtWarehouseProductInward,
+      txtUnitProductInward,
+      txtNumberProductInward,
+      txtUnitPriceInward,
+      txtPaymentInward
+
+
+    }
+  },
+  created() {
+    try {
+      //lấy giá trị khóa phụ trong masterData
+      const me = this;
+      if (me.masterData) {
+        const privateKey = me.masterData['InwardId'];
+        if (privateKey) {
+          const localStorageInwardDetail = LocalStorageLibrary.getByKey<Array<InwardDetail>>("inwardDetail");
+          if (localStorageInwardDetail && localStorageInwardDetail.length > 0) {
+            me.lstInwardDetail = localStorageInwardDetail.filter(item => {
+              return item.InwardId == privateKey;
+            })
+          }
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
   },
 
   setup() {
     const thisData: Ref<InwardDetail> = ref(new InwardDetail());
+    const btnAddListTable: Button = new Button({
+      fieldText: "Thêm dòng",
+      classType: "primary"
+    });
+    const btnDelListTable: Button = new Button({
+      fieldText: "Xóa dòng",
+      classType: "secondary"
+    });
     return {
       thisData,
-
+      btnAddListTable,
+      btnDelListTable
     };
   },
 
@@ -147,109 +274,24 @@ export default {
           bindingIndex: "TotalInward"
         }),
 
-
-
-
-        //Table Grid
-
-        "txtCodeProductInward": new Combobox({
-          fieldText: "",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          data: [
-            {
-              value: "123",
-              display: "123"
-            }
-          ],
-          classType: "secondary",
-          bindingIndex: "CodeProductInward"
-        }),
-        "txtNameProductInward": new TextBox({
-          fieldText: "",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          classType: "tertiary",
-          bindingIndex: "NameProductInward"
-        }),
-        "txtWarehouseProductInward": new Combobox({
-          fieldText: "",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          data: [
-            {
-              value: "Kh0 1",
-              display: "Kho 1"
-            }
-          ],
-          classType: "secondary",
-          bindingIndex: "WarehouseProductInward"
-        }),
-        "txtUnitProductInward": new Combobox({
-          fieldText: "",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          data: [
-            {
-              value: "Chiếc",
-              display: "Chiếc"
-            }
-          ],
-          classType: "secondary",
-          bindingIndex: "UnitProductInward"
-        }),
-        "txtNumberProductInward": new NumberModel({
-          fieldText: "",
-          require: false,
-          readOnly: false,
-          maxLength: 255,
-          classType: "thirty",
-          labelWidth: labelWidth,
-          format: new NumberFormat({
-            decimal: ".",
-            thousands: ",",
-            precision: 0
-          }),
-          bindingIndex: "NumberProductInward"
-        }),
-
-        "txtUnitPriceInward": new NumberModel({
-          fieldText: "",
-          require: false,
-          readOnly: false,
-          maxLength: 255,
-          classType: "thirty",
-          labelWidth: labelWidth,
-          format: new NumberFormat({
-            decimal: ".",
-            thousands: ",",
-            precision: 3
-          }),
-          bindingIndex: "UnitPriceInward"
-        }),
-        "txtPaymentInward": new NumberModel({
-          fieldText: "",
-          require: false,
-          readOnly: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          classType: "thirty",
-          format: new NumberFormat({
-            decimal: ".",
-            thousands: ",",
-            precision: 3
-          }),
-          bindingIndex: "PaymentInward"
-        }),
+      }
+    },
+    AddListTable() {
+      try {
+        const me = this;
+        if (me.lstInwardDetail?.length > 0) {
+          me.lstInwardDetail.push(new InwardDetail());
+        } else {
+          me.lstInwardDetail = new Array<InwardDetail>({});
+        }
+      } catch (error) {
+        console.log(error);
       }
     },
 
     saveData() {
       const me = this;
+      console.log(me.lstInwardDetail);
       let listInward: Array<Inward> | null = new Array<Inward>;
       if (me.masterData) {
         if (me.masterData.editMode == 1 || me.masterData.editMode == 4) {
@@ -262,6 +304,27 @@ export default {
           else {
             listInward = new Array<Inward>({ ...me.masterData });
             LocalStorageLibrary.setByKey("inward", listInward);
+          }
+          //cất detail
+          //gán khoá phụ cho detail
+          if (me.lstInwardDetail?.length > 0) {
+            me.lstInwardDetail.forEach(detailItem => {
+              if (me.masterData) {
+                detailItem.InwardId = me.masterData['InwardId'];
+              }
+            });
+            //end gán khoá phụ
+
+            let listInwardDetail: Array<InwardDetail> | null = new Array<InwardDetail>;
+            listInwardDetail = LocalStorageLibrary.getByKey<Array<InwardDetail>>("inwardDetail");
+            if (listInwardDetail) {
+              listInwardDetail.push(...me.lstInwardDetail);
+              LocalStorageLibrary.setByKey("inwardDetail", listInwardDetail);
+            }
+            else {
+              listInwardDetail = new Array<InwardDetail>(...me.lstInwardDetail);
+              LocalStorageLibrary.setByKey("inwardDetail", listInwardDetail);
+            }
           }
         }
         if (me.masterData.editMode == 2) {

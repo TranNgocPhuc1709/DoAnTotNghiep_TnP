@@ -60,38 +60,36 @@
                 <th>Số lượng</th>
                 <th>Đơn giá</th>
                 <th>Thành tiền</th>
+                <th>
+                  <e-button :control="btnAddListTable" @click="AddListTable()" />
+                </th>
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr v-if="lstReturnDetail?.length > 0" v-for="item in lstReturnDetail" :key="item.ReturnDetailId">
                 <td>
-                  <e-combobox :control="bindingControl[`txtCodeProductReturn`]"
-                    v-model="masterData[bindingControl[`txtCodeProductReturn`].bindingIndex]"></e-combobox>
-                </td>
-
-                <td>
-                  <e-text-box :control="bindingControl[`txtNameProductReturn`]"
-                    v-model="masterData[bindingControl[`txtNameProductReturn`].bindingIndex]"></e-text-box>
+                  <e-combobox :control="txtCodeProductReturn" v-model="item.CodeProductReturn"></e-combobox>
                 </td>
                 <td>
-                  <e-combobox :control="bindingControl[`txtWarehouseProductReturn`]"
-                    v-model="masterData[bindingControl[`txtWarehouseProductReturn`].bindingIndex]"></e-combobox>
+                  <e-text-box :control="txtNameProductReturn" v-model="item.NameProductReturn"></e-text-box>
                 </td>
                 <td>
-                  <e-combobox :control="bindingControl[`txtUnitProductReturn`]"
-                    v-model="masterData[bindingControl[`txtUnitProductReturn`].bindingIndex]"></e-combobox>
+                  <e-combobox :control="txtWarehouseProductReturn" v-model="item.WarehouseProductReturn"></e-combobox>
                 </td>
                 <td>
-                  <e-number :control="bindingControl[`txtNumberProductReturn`]"
-                    v-model="masterData[bindingControl[`txtNumberProductReturn`].bindingIndex]"></e-number>
+                  <e-combobox :control="txtUnitProductReturn" v-model="item.UnitProductReturn"></e-combobox>
                 </td>
                 <td>
-                  <e-number :control="bindingControl[`txtUnitPriceReturn`]"
-                    v-model="masterData[bindingControl[`txtUnitPriceReturn`].bindingIndex]"></e-number>
+                  <e-number :control="txtNumberProductReturn" v-model="item.NumberProductReturn"></e-number>
                 </td>
                 <td>
-                  <e-number :control="bindingControl[`txtPaymentReturn`]"
-                    v-model="masterData[bindingControl[`txtPaymentReturn`].bindingIndex]"></e-number>
+                  <e-number :control="txtUnitPriceReturn" v-model="item.UnitPriceReturn"></e-number>
+                </td>
+                <td>
+                  <e-number :control="txtPaymentReturn" v-model="item.PaymentReturn"></e-number>
+                </td>
+                <td>
+                  <e-button :control="btnDelListTable" />
                 </td>
               </tr>
             </tbody>
@@ -165,38 +163,36 @@
                 <th>Số lượng</th>
                 <th>Đơn giá</th>
                 <th>Thành tiền</th>
+                <th>
+                  <e-button :control="btnAddListTable" @click="AddListTable()" />
+                </th>
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr v-if="lstReturnDetail?.length > 0" v-for="item in lstReturnDetail" :key="item.ReturnDetailId">
                 <td>
-                  <e-combobox :control="bindingControl[`txtCodeProductReturn`]"
-                    v-model="masterData[bindingControl[`txtCodeProductReturn`].bindingIndex]"></e-combobox>
-                </td>
-
-                <td>
-                  <e-text-box :control="bindingControl[`txtNameProductReturn`]"
-                    v-model="masterData[bindingControl[`txtNameProductReturn`].bindingIndex]"></e-text-box>
+                  <e-combobox :control="txtCodeProductReturn" v-model="item.CodeProductReturn"></e-combobox>
                 </td>
                 <td>
-                  <e-combobox :control="bindingControl[`txtWarehouseProductReturn`]"
-                    v-model="masterData[bindingControl[`txtWarehouseProductReturn`].bindingIndex]"></e-combobox>
+                  <e-text-box :control="txtNameProductReturn" v-model="item.NameProductReturn"></e-text-box>
                 </td>
                 <td>
-                  <e-combobox :control="bindingControl[`txtUnitProductReturn`]"
-                    v-model="masterData[bindingControl[`txtUnitProductReturn`].bindingIndex]"></e-combobox>
+                  <e-combobox :control="txtWarehouseProductReturn" v-model="item.WarehouseProductReturn"></e-combobox>
                 </td>
                 <td>
-                  <e-number :control="bindingControl[`txtNumberProductReturn`]"
-                    v-model="masterData[bindingControl[`txtNumberProductReturn`].bindingIndex]"></e-number>
+                  <e-combobox :control="txtUnitProductReturn" v-model="item.UnitProductReturn"></e-combobox>
                 </td>
                 <td>
-                  <e-number :control="bindingControl[`txtUnitPriceReturn`]"
-                    v-model="masterData[bindingControl[`txtUnitPriceReturn`].bindingIndex]"></e-number>
+                  <e-number :control="txtNumberProductReturn" v-model="item.NumberProductReturn"></e-number>
                 </td>
                 <td>
-                  <e-number :control="bindingControl[`txtPaymentReturn`]"
-                    v-model="masterData[bindingControl[`txtPaymentReturn`].bindingIndex]"></e-number>
+                  <e-number :control="txtUnitPriceReturn" v-model="item.UnitPriceReturn"></e-number>
+                </td>
+                <td>
+                  <e-number :control="txtPaymentReturn" v-model="item.PaymentReturn"></e-number>
+                </td>
+                <td>
+                  <e-button :control="btnDelListTable" />
                 </td>
               </tr>
             </tbody>

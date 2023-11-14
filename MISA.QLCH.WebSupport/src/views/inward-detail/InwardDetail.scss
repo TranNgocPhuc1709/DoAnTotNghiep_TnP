@@ -40,7 +40,6 @@
 
 .main-synthetic {
   height: 35px;
-  margin-right: 100px;
   font-size: 14px;
   font-weight: 600;
 }
@@ -48,6 +47,15 @@
 .main-synthetic span {
   font-size: 14px;
   font-weight: 600;
+}
+
+.btn-table {
+  margin-bottom: 10px;
+}
+
+.grid-footer-item {
+  height: 30px;
+  margin-right: 10px;
 }
 
 .grid-GoodsInward {
@@ -64,12 +72,16 @@
   tr,
   th {
     border-right: 1px solid #D0D0D0;
+    width: 100%;
+    height: 30px;
+    min-width: 150px;
   }
 
   tbody,
   tr,
   td {
-    min-width: 150px
+    width: 100%;
+    height: 30px;
   }
 
   thead,

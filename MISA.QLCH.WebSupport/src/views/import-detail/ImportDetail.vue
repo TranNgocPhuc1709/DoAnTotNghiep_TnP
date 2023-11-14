@@ -1,7 +1,6 @@
 <template src="./ImportDetail.html"></template>
 <style lang="scss" scoped src="./ImportDetail.scss"></style>
 <script lang="ts">
-import ImportDetail from './ImportDetail';
 import { PropType, Ref, ref } from 'vue';
 import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailController";
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
@@ -16,8 +15,11 @@ import NumberFormat from '@library-src/models/qlch_control/number_format/NumberF
 import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
 import Log from '@library-src/utilities/Log';
 import Import from '@store-src/models/import/Import';
+import ImportDetail from '@store-src/models/import/ImportDetail';
 import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
 import Guid from '@library-src/utilities/types/Guid';
+import Button from '@library-src/models/qlch_control/qlch_button/Button';
+import EButton from "qlch_control/EButton";
 
 export default {
 
@@ -33,9 +35,127 @@ export default {
     ETextBox,
     EDate,
     ENumber,
-    ECombobox
+    ECombobox,
+    EButton
+  },
+  data() {
+    const lstImportDetail: Ref<Array<ImportDetail>> = ref(new Array<ImportDetail>());
+    const txtCodeProductImport: Ref<Combobox> = ref(new Combobox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      data: [
+        {
+          value: "A123",
+          display: "A123"
+        },
+        {
+          value: "B123",
+          display: "B123"
+        }
+      ],
+      classType: "secondary"
+    }));
+    const txtNameProductImport: Ref<TextBox> = ref(new TextBox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      classType: "tertiary"
+    }));
+    const txtWarehouseProductImport: Ref<Combobox> = ref(new Combobox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      data: [
+        {
+          value: "Kho 1",
+          display: "Kho 1"
+        },
+        {
+          value: "Kho 2",
+          display: "Kho 2"
+        }
+      ],
+      classType: "secondary"
+    }));
+    const txtUnitProductImport: Ref<Combobox> = ref(new Combobox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      data: [
+        {
+          value: "Chiếc",
+          display: "Chiếc"
+        },
+        {
+          value: "Bộ",
+          display: "Bộ"
+        }
+      ],
+      classType: "secondary"
+    }));
+
+    const txtNumberProductImport: Ref<NumberModel> = ref(new NumberModel({
+      fieldText: "",
+      classType: "thirty",
+      format: new NumberFormat({
+        decimal: ".",
+        thousands: ",",
+        precision: 0
+      }),
+    }));
+    const txtUnitPriceImport: Ref<NumberModel> = ref(new NumberModel({
+      fieldText: "",
+      classType: "thirty",
+      format: new NumberFormat({
+        decimal: ".",
+        thousands: ",",
+        precision: 0
+      }),
+    }));
+    const txtPaymentImport: Ref<NumberModel> = ref(new NumberModel({
+      fieldText: "",
+      classType: "thirty",
+      format: new NumberFormat({
+        decimal: ".",
+        thousands: ",",
+        precision: 0
+      }),
+    }));
+
+    return {
+      txtCodeProductImport,
+      txtNameProductImport,
+      txtWarehouseProductImport,
+      txtNumberProductImport,
+      txtUnitProductImport,
+      txtUnitPriceImport,
+      txtPaymentImport,
+      lstImportDetail
+    };
   },
 
+  created() {
+    try {
+      console.log(this.masterData);
+      //lấy giá trị khóa phụ trong masterData
+      const me = this;
+      if (me.masterData) {
+        const privateKey = me.masterData['ImportId'];
+        if (privateKey) {
+          const localStorageImportDetail = LocalStorageLibrary.getByKey<Array<ImportDetail>>("importDetail");
+          if (localStorageImportDetail && localStorageImportDetail.length > 0) {
+            me.lstImportDetail = localStorageImportDetail.filter(item => {
+              return item.ImportId == privateKey;
+            })
+          }
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+  },
   setup() {
     const thisData: Ref<ImportDetail> = ref(new ImportDetail());
     const disableFormImport: Ref<boolean> = ref(true);
@@ -43,14 +163,27 @@ export default {
     const navbar1Selected: Ref<boolean> = ref(false);
     const navbar2Selected: Ref<boolean> = ref(false);
 
+    const btnAddListTable: Button = new Button({
+      fieldText: "Thêm dòng",
+      classType: "primary"
+    });
+    const btnDelListTable: Button = new Button({
+      fieldText: "Xóa dòng",
+      classType: "secondary"
+    });
+
     return {
       thisData,
       disableFormImport,
       disableFormPayment,
       navbar1Selected,
-      navbar2Selected
+      navbar2Selected,
+      btnAddListTable,
+      btnDelListTable
     };
   },
+
+
 
   methods: {
     /**
@@ -130,11 +263,11 @@ export default {
         //txt7
         "txtSupplierNameImport": new TextBox({
           fieldText: "Tên NCC",
-          readOnly: true,
+          readOnly: false,
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "SupplierNameImport "
+          bindingIndex: "SupplierNameImport"
         }),
         "txtStaffNameImport": new TextBox({
           fieldText: "Tên nhân viên",
@@ -214,104 +347,19 @@ export default {
           bindingIndex: "TotalPaymentImport"
         }),
 
+      }
+    },
 
-
-        //Table Grid
-
-        "txtCodeProductImport": new Combobox({
-          fieldText: "",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          data: [
-            {
-              value: "123",
-              display: "123"
-            }
-          ],
-          classType: "secondary",
-          bindingIndex: "CodeProductImport"
-        }),
-        "txtNameProductImport": new TextBox({
-          fieldText: "",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          classType: "tertiary",
-          bindingIndex: "NameProductImport"
-        }),
-        "txtWarehouseProductImport": new Combobox({
-          fieldText: "",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          data: [
-            {
-              value: "Kh0 1",
-              display: "Kho 1"
-            }
-          ],
-          classType: "secondary",
-          bindingIndex: "WarehouseProductImport"
-        }),
-        "txtUnitProductImport": new Combobox({
-          fieldText: "",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          data: [
-            {
-              value: "Chiếc",
-              display: "Chiếc"
-            }
-          ],
-          classType: "secondary",
-          bindingIndex: "UnitProductImport"
-        }),
-        "txtNumberProductImport": new NumberModel({
-          fieldText: "",
-          require: false,
-          readOnly: false,
-          maxLength: 255,
-          classType: "thirty",
-          labelWidth: labelWidth,
-          format: new NumberFormat({
-            decimal: ".",
-            thousands: ",",
-            precision: 0
-          }),
-          bindingIndex: "NumberProductImport"
-        }),
-
-        "txtUnitPriceImport": new NumberModel({
-          fieldText: "",
-          require: false,
-          readOnly: false,
-          maxLength: 255,
-          classType: "thirty",
-          labelWidth: labelWidth,
-          format: new NumberFormat({
-            decimal: ".",
-            thousands: ",",
-            precision: 3
-          }),
-          bindingIndex: "UnitPriceImport"
-        }),
-        "txtPaymentImport": new NumberModel({
-          fieldText: "",
-          require: false,
-          readOnly: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          classType: "thirty",
-          format: new NumberFormat({
-            decimal: ".",
-            thousands: ",",
-            precision: 3
-          }),
-          bindingIndex: "PaymentImport"
-        }),
-
+    AddListTable() {
+      try {
+        const me = this;
+        if (me.lstImportDetail?.length > 0) {
+          me.lstImportDetail.push(new ImportDetail());
+        } else {
+          me.lstImportDetail = new Array<ImportDetail>({});
+        }
+      } catch (error) {
+        console.log(error);
       }
     },
 
@@ -353,6 +401,29 @@ export default {
             listImport = new Array<Import>({ ...me.masterData });
             LocalStorageLibrary.setByKey("importList", listImport);
           }
+
+          //cất detail
+          //gán khoá phụ cho detail
+          if (me.lstImportDetail?.length > 0) {
+            me.lstImportDetail.forEach(detailItem => {
+              if (me.masterData) {
+                detailItem.ImportId = me.masterData['ImportId'];
+              }
+            });
+            //end gán khoá phụ
+
+            let listImportDetail: Array<ImportDetail> | null = new Array<ImportDetail>;
+            listImportDetail = LocalStorageLibrary.getByKey<Array<ImportDetail>>("importDetail");
+            if (listImportDetail) {
+              listImportDetail.push(...me.lstImportDetail);
+              LocalStorageLibrary.setByKey("importDetail", listImportDetail);
+            }
+            else {
+              listImportDetail = new Array<ImportDetail>(...me.lstImportDetail);
+              LocalStorageLibrary.setByKey("importDetail", listImportDetail);
+            }
+          }
+          //end cất detail
         }
         if (me.masterData.editMode == 2) {
           listImport = LocalStorageLibrary.getByKey<Array<Import>>("importList");

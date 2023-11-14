@@ -1,6 +1,5 @@
 export default interface IImport {
 
-
     DateImport?: Date;
     ReceiptNumberImport?: string;
     SupplierImport?: string;
@@ -21,11 +20,5 @@ export default interface IImport {
 
 
     //Grid-table
-    CodeProductImport?: string;
-    NameProductImport?: string;
-    WarehouseProductImport?: string;
-    UnitProductImport?: string;
-    NumberProductImport?: string;
-    UnitPriceImport?: number;
-    PaymentImport?: number;
+
 }

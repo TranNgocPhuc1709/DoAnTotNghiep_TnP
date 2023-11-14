@@ -52,39 +52,43 @@
       </div>
     </div>
     <div class="grid-footer">
-      <span class="heading-cashReceipt-info">Chi tiết</span>
+      <div class="d-flex">
+        <div class="grid-footer-item flex-1">
+          <span class="heading-cashReceipt-info">Chi tiết</span>
+        </div>
+      </div>
       <div class="grid-GoodsCashReceipt">
         <table class="flex-1">
           <thead>
             <tr>
               <th>Diễn Giải</th>
               <th>Số tiền</th>
+              <th>
+                <e-button :control="btnAddListTable" @click="AddListTable()" />
+              </th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr v-if="lstCashReceiptDetail?.length > 0" v-for="item in lstCashReceiptDetail"
+              :key="item.CashReceiptDetailId">
               <td>
-                <e-text-box :control="bindingControl[`txtExplainCashReceipt`]"
-                  v-model="masterData[bindingControl[`txtExplainCashReceipt`].bindingIndex]"></e-text-box>
+                <e-text-box :control="txtExplainCashReceipt" v-model="item.ExplainCashReceipt"></e-text-box>
               </td>
-              <td style="min-width: 220px;">
-                <e-number :control="bindingControl[`txtMoneyCashDetail`]"
-                  v-model="masterData[bindingControl[`txtMoneyCashDetail`].bindingIndex]"></e-number>
+              <td>
+                <e-number :control="txtMoneyCashDetail" v-model="item.MoneyCashDetail"></e-number>
+              </td>
+              <td>
+                <e-button :control="btnDelListTable" />
               </td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-    <!-- <div class="qlch-input-default item-checkbox-detail">
-      <e-number :control="bindingControl[`txtTotalMoneyCashReceipt`]"
-        v-model="masterData[bindingControl[`txtTotalMoneyCashReceipt`].bindingIndex]"></e-number>
-    </div> -->
     <div class="synthetic-footer d-flex-vcenter">
       <div class="main-synthetic d-flex-vcenter">
         <e-number :control="bindingControl[`txtTotalMoneyCashReceipt`]"
           v-model="masterData[bindingControl[`txtTotalMoneyCashReceipt`].bindingIndex]"></e-number>
-
       </div>
 
     </div>

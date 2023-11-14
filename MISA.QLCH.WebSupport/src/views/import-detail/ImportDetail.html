@@ -48,11 +48,14 @@
             <e-date :control="bindingControl[`txtDateImport`]"
               v-model="masterData[bindingControl[`txtDateImport`].bindingIndex]"></e-date>
           </div>
-
         </div>
       </div>
       <div class="grid-footer">
-        <span class="heading-import-info">Chi tiết</span>
+        <div class="d-flex">
+          <div class="grid-footer-item flex-1">
+            <span class="heading-import-info">Chi tiết</span>
+          </div>
+        </div>
         <div class="grid-GoodsImport">
           <table class="flex-1">
             <thead>
@@ -64,45 +67,48 @@
                 <th>Số lượng</th>
                 <th>Đơn giá</th>
                 <th>Thành tiền</th>
+                <th>
+                  <e-button :control="btnAddListTable" @click="AddListTable()" />
+                </th>
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr v-if="lstImportDetail?.length > 0" v-for="item in lstImportDetail" :key="item.ImportDetailId">
                 <td>
-                  <e-combobox :control="bindingControl[`txtCodeProductImport`]"
-                    v-model="masterData[bindingControl[`txtCodeProductImport`].bindingIndex]"></e-combobox>
+                  <e-combobox :control="txtCodeProductImport" v-model="item.CodeProductImport"></e-combobox>
                 </td>
 
                 <td>
-                  <e-text-box :control="bindingControl[`txtNameProductImport`]"
-                    v-model="masterData[bindingControl[`txtNameProductImport`].bindingIndex]"></e-text-box>
+                  <e-text-box :control="txtNameProductImport" v-model="item.NameProductImport"></e-text-box>
                 </td>
                 <td>
-                  <e-combobox :control="bindingControl[`txtWarehouseProductImport`]"
-                    v-model="masterData[bindingControl[`txtWarehouseProductImport`].bindingIndex]"></e-combobox>
+                  <e-combobox :control="txtWarehouseProductImport" v-model="item.WarehouseProductImport"></e-combobox>
+
                 </td>
                 <td>
-                  <e-combobox :control="bindingControl[`txtUnitProductImport`]"
-                    v-model="masterData[bindingControl[`txtUnitProductImport`].bindingIndex]"></e-combobox>
+                  <e-combobox :control="txtUnitProductImport" v-model="item.UnitProductImport"></e-combobox>
+
                 </td>
                 <td>
-                  <e-number :control="bindingControl[`txtNumberProductImport`]"
-                    v-model="masterData[bindingControl[`txtNumberProductImport`].bindingIndex]"></e-number>
+                  <e-number :control="txtNumberProductImport" v-model="item.NumberProductImport"></e-number>
+
                 </td>
                 <td>
-                  <e-number :control="bindingControl[`txtUnitPriceImport`]"
-                    v-model="masterData[bindingControl[`txtUnitPriceImport`].bindingIndex]"></e-number>
+                  <e-number :control="txtUnitPriceImport" v-model="item.UnitPriceImport"></e-number>
+
                 </td>
                 <td>
-                  <e-number :control="bindingControl[`txtPaymentImport`]"
-                    v-model="masterData[bindingControl[`txtPaymentImport`].bindingIndex]"></e-number>
+                  <e-number :control="txtPaymentImport" v-model="item.PaymentImport"></e-number>
+                </td>
+                <td>
+                  <e-button :control="btnDelListTable" />
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
-      <div class="synthetic-footer d-flex-vcenter">
+      <div class="synthetic-footer d-flex-vcenter d-flex-sp-center">
         <div class="main-synthetic d-flex-vcenter">
           <e-number :control="bindingControl[`txtTotalImport`]"
             v-model="masterData[bindingControl[`txtTotalImport`].bindingIndex]"></e-number>
@@ -158,7 +164,11 @@
         </div>
       </div>
       <div class="grid-footer">
-        <span class="heading-import-info">Chi tiết</span>
+        <div class="d-flex">
+          <div class="grid-footer-item flex-1">
+            <span class="heading-import-info">Chi tiết</span>
+          </div>
+        </div>
         <div class="grid-GoodsImport">
           <table class="flex-1">
             <thead>
@@ -170,38 +180,41 @@
                 <th>Số lượng</th>
                 <th>Đơn giá</th>
                 <th>Thành tiền</th>
+                <th>
+                  <e-button :control="btnAddListTable" @click="AddListTable()" />
+                </th>
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr v-if="lstImportDetail?.length > 0" v-for="item in lstImportDetail" :key="item.ImportDetailId">
                 <td>
-                  <e-combobox :control="bindingControl[`txtCodeProductImport`]"
-                    v-model="masterData[bindingControl[`txtCodeProductImport`].bindingIndex]"></e-combobox>
+                  <e-combobox :control="txtCodeProductImport" v-model="item.CodeProductImport"></e-combobox>
                 </td>
 
                 <td>
-                  <e-text-box :control="bindingControl[`txtNameProductImport`]"
-                    v-model="masterData[bindingControl[`txtNameProductImport`].bindingIndex]"></e-text-box>
+                  <e-text-box :control="txtNameProductImport" v-model="item.NameProductImport"></e-text-box>
                 </td>
                 <td>
-                  <e-combobox :control="bindingControl[`txtWarehouseProductImport`]"
-                    v-model="masterData[bindingControl[`txtWarehouseProductImport`].bindingIndex]"></e-combobox>
+                  <e-combobox :control="txtWarehouseProductImport" v-model="item.WarehouseProductImport"></e-combobox>
+
                 </td>
                 <td>
-                  <e-combobox :control="bindingControl[`txtUnitProductImport`]"
-                    v-model="masterData[bindingControl[`txtUnitProductImport`].bindingIndex]"></e-combobox>
+                  <e-combobox :control="txtUnitProductImport" v-model="item.UnitProductImport"></e-combobox>
+
                 </td>
                 <td>
-                  <e-number :control="bindingControl[`txtNumberProductImport`]"
-                    v-model="masterData[bindingControl[`txtNumberProductImport`].bindingIndex]"></e-number>
+                  <e-number :control="txtNumberProductImport" v-model="item.NumberProductImport"></e-number>
+
                 </td>
                 <td>
-                  <e-number :control="bindingControl[`txtUnitPriceImport`]"
-                    v-model="masterData[bindingControl[`txtUnitPriceImport`].bindingIndex]"></e-number>
+                  <e-number :control="txtUnitPriceImport" v-model="item.UnitPriceImport"></e-number>
+
                 </td>
                 <td>
-                  <e-number :control="bindingControl[`txtPaymentImport`]"
-                    v-model="masterData[bindingControl[`txtPaymentImport`].bindingIndex]"></e-number>
+                  <e-number :control="txtPaymentImport" v-model="item.PaymentImport"></e-number>
+                </td>
+                <td>
+                  <e-button :control="btnDelListTable" />
                 </td>
               </tr>
             </tbody>

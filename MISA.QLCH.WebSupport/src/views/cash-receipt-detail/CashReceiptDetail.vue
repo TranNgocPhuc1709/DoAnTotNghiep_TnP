@@ -1,7 +1,6 @@
 <template src="./CashReceiptDetail.html"></template>
 <style lang="scss" scoped src="./CashReceiptDetail.scss"></style>
 <script lang="ts">
-import CashReceiptDetail from './CashReceiptDetail';
 import { PropType, Ref, ref } from 'vue';
 import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailController";
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
@@ -17,8 +16,11 @@ import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
 import Checkbox from '@library-src/models/qlch_control/qlch_checkbox/Checkbox';
 import ECheckbox from "qlch_control/ECheckbox";
 import CashReceipt from '@store-src/models/cash-receipt/CashReceipt';
+import CashReceiptDetail from '@store-src/models/cash-receipt/CashReceiptDetail';
 import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
 import Guid from '@library-src/utilities/types/Guid';
+import Button from '@library-src/models/qlch_control/qlch_button/Button';
+import EButton from "qlch_control/EButton";
 
 export default {
 
@@ -35,14 +37,72 @@ export default {
     EDate,
     ECombobox,
     ENumber,
-    ECheckbox
+    ECheckbox,
+    EButton
+
+  },
+
+
+  data() {
+    const lstCashReceiptDetail: Ref<Array<CashReceiptDetail>> = ref(new Array<CashReceiptDetail>());
+    const txtExplainCashReceipt: Ref<TextBox> = ref(new TextBox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      classType: "tertiary"
+    }));
+    const txtMoneyCashDetail: Ref<NumberModel> = ref(new NumberModel({
+      fieldText: "",
+      classType: "thirty",
+      format: new NumberFormat({
+        decimal: ".",
+        thousands: ",",
+        precision: 0
+      }),
+    }));
+
+    return {
+      lstCashReceiptDetail,
+      txtExplainCashReceipt,
+      txtMoneyCashDetail
+    }
+  },
+  created() {
+    try {
+      //lấy giá trị khóa phụ trong masterData
+      const me = this;
+      if (me.masterData) {
+        const privateKey = me.masterData['CashReceiptId'];
+        if (privateKey) {
+          const localStorageCashReceiptDetail = LocalStorageLibrary.getByKey<Array<CashReceiptDetail>>("cashReceiptDetail");
+          if (localStorageCashReceiptDetail && localStorageCashReceiptDetail.length > 0) {
+            me.lstCashReceiptDetail = localStorageCashReceiptDetail.filter(item => {
+              return item.CashReceiptId == privateKey;
+            })
+          }
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
 
   },
 
   setup() {
     const thisData: Ref<CashReceiptDetail> = ref(new CashReceiptDetail());
+    const btnAddListTable: Button = new Button({
+      fieldText: "Thêm dòng",
+      classType: "primary"
+    });
+    const btnDelListTable: Button = new Button({
+      fieldText: "Xóa dòng",
+      classType: "secondary"
+    });
+
     return {
       thisData,
+      btnAddListTable,
+      btnDelListTable
     };
   },
 
@@ -169,34 +229,19 @@ export default {
           bindingIndex: "IncludedCashReceipt",
         }),
 
+      }
+    },
 
-        //Grid-Table
-
-        //Table Grid
-
-        "txtExplainCashReceipt": new TextBox({
-          fieldText: "",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          classType: "tertiary",
-          bindingIndex: "ExplainCashReceipt"
-        }),
-        "txtMoneyCashDetail": new NumberModel({
-          fieldText: "",
-          require: false,
-          readOnly: false,
-          maxLength: 255,
-          classType: "thirty",
-          labelWidth: labelWidth,
-          format: new NumberFormat({
-            decimal: ".",
-            thousands: ",",
-            precision: 3
-          }),
-          bindingIndex: "MoneyCashDetail"
-        }),
-
+    AddListTable() {
+      try {
+        const me = this;
+        if (me.lstCashReceiptDetail?.length > 0) {
+          me.lstCashReceiptDetail.push(new CashReceiptDetail());
+        } else {
+          me.lstCashReceiptDetail = new Array<CashReceiptDetail>({});
+        }
+      } catch (error) {
+        console.log(error);
       }
     },
     saveData() {
@@ -213,6 +258,28 @@ export default {
           else {
             listCashReceipt = new Array<CashReceipt>({ ...me.masterData });
             LocalStorageLibrary.setByKey("cashReceipt", listCashReceipt);
+          }
+
+          //cất detail
+          //gán khoá phụ cho detail
+          if (me.lstCashReceiptDetail?.length > 0) {
+            me.lstCashReceiptDetail.forEach(detailItem => {
+              if (me.masterData) {
+                detailItem.CashReceiptId = me.masterData['CashReceiptId'];
+              }
+            });
+            //end gán khoá phụ
+
+            let listCashReceiptDetail: Array<CashReceiptDetail> | null = new Array<CashReceiptDetail>;
+            listCashReceiptDetail = LocalStorageLibrary.getByKey<Array<CashReceiptDetail>>("cashReceiptDetail");
+            if (listCashReceiptDetail) {
+              listCashReceiptDetail.push(...me.lstCashReceiptDetail);
+              LocalStorageLibrary.setByKey("cashReceiptDetail", listCashReceiptDetail);
+            }
+            else {
+              listCashReceiptDetail = new Array<CashReceiptDetail>(...me.lstCashReceiptDetail);
+              LocalStorageLibrary.setByKey("cashReceiptDetail", listCashReceiptDetail);
+            }
           }
         }
         if (me.masterData.editMode == 2) {

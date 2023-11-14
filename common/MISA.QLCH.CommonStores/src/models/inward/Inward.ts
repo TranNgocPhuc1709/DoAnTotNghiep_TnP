@@ -12,7 +12,6 @@ export default class Inward {
             me.DeliverInward = inward.DeliverInward;
             me.NameObjectInward = inward.NameObjectInward;
             me.TotalInward = inward.TotalInward;
-            // me.InwardArray = me.InwardArray || [];
 
         }
         me.InwardId = Guid.NewGuid();
@@ -32,13 +31,7 @@ export default class Inward {
 
     // table
 
-    CodeProductInward?: string;
-    NameProductInward?: string;
-    WarehouseProductInward?: string;
-    UnitProductInward?: string;
-    NumberProductInward?: number;
-    UnitPriceInward?: number;
-    PaymentInward?: number;
+
 
 
 

@@ -34,7 +34,11 @@
       </div>
     </div>
     <div class="grid-footer">
-      <span class="heading-inward-info">CHI TIẾT</span>
+      <div class="d-flex">
+        <div class="grid-footer-item flex-1">
+          <span class="heading-inward-info">CHI TIẾT</span>
+        </div>
+      </div>
       <div class="grid-GoodsInward">
         <table class="flex-1">
           <thead>
@@ -46,45 +50,43 @@
               <th>Số lượng</th>
               <th>Đơn giá</th>
               <th>Thành tiền</th>
+              <th>
+                <e-button :control="btnAddListTable" @click="AddListTable()" />
+              </th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr v-if="lstInwardDetail?.length > 0" v-for="item in lstInwardDetail" :key="item.CashReceiptDetailId">
               <td>
-                <e-combobox :control="bindingControl[`txtCodeProductInward`]"
-                  v-model="masterData[bindingControl[`txtCodeProductInward`].bindingIndex]"></e-combobox>
-              </td>
-
-              <td>
-                <e-text-box :control="bindingControl[`txtNameProductInward`]"
-                  v-model="masterData[bindingControl[`txtNameProductInward`].bindingIndex]"></e-text-box>
+                <e-combobox :control="txtCodeProductInward" v-model="item.CodeProductInward"></e-combobox>
               </td>
               <td>
-                <e-combobox :control="bindingControl[`txtWarehouseProductInward`]"
-                  v-model="masterData[bindingControl[`txtWarehouseProductInward`].bindingIndex]"></e-combobox>
+                <e-text-box :control="txtNameProductInward" v-model="item.NameProductInward"></e-text-box>
               </td>
               <td>
-                <e-combobox :control="bindingControl[`txtUnitProductInward`]"
-                  v-model="masterData[bindingControl[`txtUnitProductInward`].bindingIndex]"></e-combobox>
+                <e-combobox :control="txtWarehouseProductInward" v-model="item.WarehouseProductInward"></e-combobox>
               </td>
               <td>
-                <e-number :control="bindingControl[`txtNumberProductInward`]"
-                  v-model="masterData[bindingControl[`txtNumberProductInward`].bindingIndex]"></e-number>
+                <e-combobox :control="txtUnitProductInward" v-model="item.UnitProductInward"></e-combobox>
               </td>
               <td>
-                <e-number :control="bindingControl[`txtUnitPriceInward`]"
-                  v-model="masterData[bindingControl[`txtUnitPriceInward`].bindingIndex]"></e-number>
+                <e-number :control="txtNumberProductInward" v-model="item.NumberProductInward"></e-number>
               </td>
               <td>
-                <e-number :control="bindingControl[`txtPaymentInward`]"
-                  v-model="masterData[bindingControl[`txtPaymentInward`].bindingIndex]"></e-number>
+                <e-number :control="txtUnitPriceInward" v-model="item.UnitPriceInward"></e-number>
+              </td>
+              <td>
+                <e-number :control="txtPaymentInward" v-model="item.PaymentInward"></e-number>
+              </td>
+              <td>
+                <e-button :control="btnDelListTable" />
               </td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-    <div class="synthetic-footer d-flex-vcenter">
+    <div class="synthetic-footer d-flex-vcenter d-flex-sp-center">
       <div class="main-synthetic d-flex-vcenter">
         <e-number :control="bindingControl[`txtTotalInward`]"
           v-model="masterData[bindingControl[`txtTotalInward`].bindingIndex]"></e-number>

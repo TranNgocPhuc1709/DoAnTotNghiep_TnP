@@ -12,5 +12,4 @@ export default interface IInventoryDetail {
     InventoryDetailId?: string;
     InventoryId?: string;
 
-
 }

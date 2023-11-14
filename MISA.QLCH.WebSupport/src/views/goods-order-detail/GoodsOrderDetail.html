@@ -42,7 +42,19 @@
       </div>
     </div>
     <div class="grid-footer">
-      <span class="heading-goodsorder-info">Chi tiết</span>
+      <div class="d-flex">
+        <div class="grid-footer-item flex-1">
+          <span class="heading-goodsorder-info flex-1">Chi tiết</span>
+        </div>
+        <!-- <div class="btn-table d-flex">
+          <div class="grid-footer-item">
+            <e-button :control="btnAddListTable" @click="AddListTable()" />
+          </div>
+          <div class="grid-footer-item">
+            <e-button :control="btnDelListTable" />
+          </div>
+        </div> -->
+      </div>
       <div class="grid-GoodsOrder">
         <table class="flex-1">
           <thead>
@@ -53,44 +65,44 @@
               <th>Số lượng đặt</th>
               <th>Đơn giá</th>
               <th>Thành tiền</th>
+              <th>
+                <e-button :control="btnAddListTable" @click="AddListTable()" />
+              </th>
+
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr v-if="lstGoodsOrderDetail?.length > 0" v-for="item in lstGoodsOrderDetail"
+              :key="item.GoodsOrderDetailId">
               <td>
-                <e-combobox :control="bindingControl[`txtCodeProductOrder`]"
-                  v-model="masterData[bindingControl[`txtCodeProductOrder`].bindingIndex]"></e-combobox>
+                <e-combobox :control="txtCodeProductOrder" v-model="item.CodeProductOrder"></e-combobox>
               </td>
               <td>
-                <e-text-box :control="bindingControl[`txtNameProductOrder`]"
-                  v-model="masterData[bindingControl[`txtNameProductOrder`].bindingIndex]"></e-text-box>
+                <e-text-box :control="txtNameProductOrder" v-model="item.NameProductOrder"></e-text-box>
               </td>
               <td>
-                <e-combobox :control="bindingControl[`txtUnitProductOrder`]"
-                  v-model="masterData[bindingControl[`txtUnitProductOrder`].bindingIndex]"></e-combobox>
+                <e-combobox :control="txtUnitProductOrder" v-model="item.UnitProductOrder"></e-combobox>
               </td>
               <td>
-                <e-number :control="bindingControl[`txtNumberProductOrder`]"
-                  v-model="masterData[bindingControl[`txtNumberProductOrder`].bindingIndex]"></e-number>
+                <e-number :control="txtNumberProductOrder" v-model="item.NumberProductOrder"></e-number>
               </td>
               <td>
-                <e-number :control="bindingControl[`txtUnitPriceOrder`]"
-                  v-model="masterData[bindingControl[`txtUnitPriceOrder`].bindingIndex]"></e-number>
+                <e-number :control="txtUnitPriceOrder" v-model="item.UnitPriceOrder"></e-number>
               </td>
               <td>
-                <e-number :control="bindingControl[`txtPaymentOrder`]"
-                  v-model="masterData[bindingControl[`txtPaymentOrder`].bindingIndex]"></e-number>
+                <e-number :control="txtPaymentOrder" v-model="item.PaymentOrder"></e-number>
               </td>
-
+              <td>
+                <e-button :control="btnDelListTable" />
+              </td>
             </tr>
-
           </tbody>
 
         </table>
       </div>
     </div>
-    <div class="synthetic-footer d-flex-vcenter">
-      <div class="main-synthetic d-flex-vcenter">
+    <div class="synthetic-footer d-flex-vcenter d-flex-sp-center">
+      <div class="main-synthetic d-flex-vcenter ">
         <e-number :control="bindingControl[`txtTotalOrder`]"
           v-model="masterData[bindingControl[`txtTotalOrder`].bindingIndex]"></e-number>
       </div>
@@ -98,7 +110,6 @@
         <e-number :control="bindingControl[`txtFullMoneyOrder`]"
           v-model="masterData[bindingControl[`txtFullMoneyOrder`].bindingIndex]"></e-number>
       </div>
-
     </div>
 
   </template>

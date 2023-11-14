@@ -39,6 +39,25 @@ export default {
         const disableFormShowDelivery: Ref<boolean> = ref(false)
         const disableFormMoreAction: Ref<boolean> = ref(false);
         const disableFormShowVoucher: Ref<boolean> = ref(false);
+
+        //Hàng hóa start
+
+        // const txtProductCode: Ref<TextBox> = ref(new TextBox({
+        //     fieldText: "QA001",
+        //     require: false,
+        //     classType: "tertiary",
+
+        // }));
+
+        // const txtProductName: Ref<TextBox> = ref(new TextBox({
+        //     fieldText: "QA001",
+        //     require: false,
+        //     classType: "tertiary",
+
+        // }));
+
+
+
         const txtQuanTySearch: Ref<NumberModel> = ref(new NumberModel({
             classType: "thirty",
             format: new NumberFormat({
@@ -355,10 +374,12 @@ export default {
             cbbAgentSales,
             txtQuanTySearch,
             txtPurchased,
+            // txtProductCode,
             txtPrice,
             txtPriceLast,
             txtNumberRecipient,
             txtDeliveryCharges,
+            // txtProductName,
             txtAddressRecipient,
             txtLadingCode,
             txtInfoRecipient,

@@ -1,7 +1,7 @@
 <template src="./OutwardDetail.html"></template>
 <style lang="scss" scoped src="./OutwardDetail.scss"></style>
 <script lang="ts">
-import OutwardDetail from './OutwardDetail';
+
 import { PropType, Ref, ref } from 'vue';
 import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailController";
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
@@ -16,7 +16,10 @@ import NumberFormat from '@library-src/models/qlch_control/number_format/NumberF
 import ENumber from "qlch_control/ENumber";
 import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
 import Outward from '@store-src/models/outward/Outward';
+import OutwardDetail from '@store-src/models/outward/OutwardDetail';
 import Guid from '@library-src/utilities/types/Guid';
+import Button from '@library-src/models/qlch_control/qlch_button/Button';
+import EButton from "qlch_control/EButton";
 
 export default {
 
@@ -32,17 +35,148 @@ export default {
     ETextBox,
     EDate,
     ENumber,
+    EButton,
     ECombobox
+  },
+
+
+  data() {
+    const lstOutwardDetail: Ref<Array<OutwardDetail>> = ref(new Array<OutwardDetail>());
+    const txtCodeProductOutWard: Ref<Combobox> = ref(new Combobox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      data: [
+        {
+          value: "A123",
+          display: "A123"
+        },
+        {
+          value: "B123",
+          display: "B123"
+        }
+      ],
+      classType: "secondary"
+    }));
+    const txtNameProductOutWard: Ref<TextBox> = ref(new TextBox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      classType: "tertiary"
+    }));
+    const txtWarehouseProductOutWard: Ref<Combobox> = ref(new Combobox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      data: [
+        {
+          value: "Kho 1",
+          display: "Kho 1"
+        },
+        {
+          value: "Kho 2",
+          display: "Kho 2"
+        }
+      ],
+      classType: "secondary"
+    }));
+    const txtUnitProductOutWard: Ref<Combobox> = ref(new Combobox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      data: [
+        {
+          value: "Chiếc",
+          display: "Chiếc"
+        },
+        {
+          value: "Bộ",
+          display: "Bộ"
+        }
+      ],
+      classType: "secondary"
+    }));
+    const txtNumberProductOutWard: Ref<NumberModel> = ref(new NumberModel({
+      fieldText: "",
+      classType: "thirty",
+      format: new NumberFormat({
+        decimal: ".",
+        thousands: ",",
+        precision: 0
+      }),
+    }));
+    const txtUnitPriceOutWard: Ref<NumberModel> = ref(new NumberModel({
+      fieldText: "",
+      classType: "thirty",
+      format: new NumberFormat({
+        decimal: ".",
+        thousands: ",",
+        precision: 0
+      }),
+    }));
+    const txtPaymentOutWard: Ref<NumberModel> = ref(new NumberModel({
+      fieldText: "",
+      classType: "thirty",
+      format: new NumberFormat({
+        decimal: ".",
+        thousands: ",",
+        precision: 0
+      }),
+    }));
+
+    return {
+      lstOutwardDetail,
+      txtCodeProductOutWard,
+      txtNameProductOutWard,
+      txtWarehouseProductOutWard,
+      txtUnitProductOutWard,
+      txtNumberProductOutWard,
+      txtUnitPriceOutWard,
+      txtPaymentOutWard
+
+
+    }
+  },
+  created() {
+    try {
+      //lấy giá trị khóa phụ trong masterData
+      const me = this;
+      if (me.masterData) {
+        const privateKey = me.masterData['OutwardId'];
+        if (privateKey) {
+          const localStorageOutwardDetail = LocalStorageLibrary.getByKey<Array<OutwardDetail>>("outwardDetail");
+          if (localStorageOutwardDetail && localStorageOutwardDetail.length > 0) {
+            me.lstOutwardDetail = localStorageOutwardDetail.filter(item => {
+              return item.OutwardId == privateKey;
+            })
+          }
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
   },
 
   setup() {
     const thisData: Ref<OutwardDetail> = ref(new OutwardDetail());
-
+    const btnAddListTable: Button = new Button({
+      fieldText: "Thêm dòng",
+      classType: "primary"
+    });
+    const btnDelListTable: Button = new Button({
+      fieldText: "Xóa dòng",
+      classType: "secondary"
+    });
     return {
       thisData,
+      btnAddListTable,
+      btnDelListTable
     };
 
   },
+
+
 
   methods: {
     /**
@@ -148,104 +282,19 @@ export default {
           }),
           bindingIndex: "TotalQuantityOutward"
         }),
+      }
+    },
 
-
-
-        //Table Grid
-
-        "txtCodeProductOutWard": new Combobox({
-          fieldText: "",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          data: [
-            {
-              value: "123",
-              display: "123"
-            }
-          ],
-          classType: "secondary",
-          bindingIndex: "CodeProductOutWard"
-        }),
-        "txtNameProductOutWard": new TextBox({
-          fieldText: "",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          classType: "tertiary",
-          bindingIndex: "NameProductOutWard"
-        }),
-        "txtWarehouseProductOutWard": new Combobox({
-          fieldText: "",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          data: [
-            {
-              value: "Kh0 1",
-              display: "Kho 1"
-            }
-          ],
-          classType: "secondary",
-          bindingIndex: "WarehouseProductOutWard"
-        }),
-        "txtUnitProductOutWard": new Combobox({
-          fieldText: "",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          data: [
-            {
-              value: "Chiếc",
-              display: "Chiếc"
-            }
-          ],
-          classType: "secondary",
-          bindingIndex: "UnitProductOutWard"
-        }),
-        "txtNumberProductOutWard": new NumberModel({
-          fieldText: "",
-          require: false,
-          readOnly: false,
-          maxLength: 255,
-          classType: "thirty",
-          labelWidth: labelWidth,
-          format: new NumberFormat({
-            decimal: ".",
-            thousands: ",",
-            precision: 0
-          }),
-          bindingIndex: "NumberProductOutWard"
-        }),
-
-        "txtUnitPriceOutWard": new NumberModel({
-          fieldText: "",
-          require: false,
-          readOnly: false,
-          maxLength: 255,
-          classType: "thirty",
-          labelWidth: labelWidth,
-          format: new NumberFormat({
-            decimal: ".",
-            thousands: ",",
-            precision: 3
-          }),
-          bindingIndex: "UnitPriceOutWard"
-        }),
-        "txtPaymentOutWard": new NumberModel({
-          fieldText: "",
-          require: false,
-          readOnly: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          classType: "thirty",
-          format: new NumberFormat({
-            decimal: ".",
-            thousands: ",",
-            precision: 3
-          }),
-          bindingIndex: "PaymentOutWard"
-        }),
+    AddListTable() {
+      try {
+        const me = this;
+        if (me.lstOutwardDetail?.length > 0) {
+          me.lstOutwardDetail.push(new OutwardDetail());
+        } else {
+          me.lstOutwardDetail = new Array<OutwardDetail>({});
+        }
+      } catch (error) {
+        console.log(error);
       }
     },
 
@@ -264,6 +313,29 @@ export default {
             listOutward = new Array<Outward>({ ...me.masterData });
             LocalStorageLibrary.setByKey("outwardItem", listOutward);
           }
+
+          //cất detail
+          //gán khoá phụ cho detail
+          if (me.lstOutwardDetail?.length > 0) {
+            me.lstOutwardDetail.forEach(detailItem => {
+              if (me.masterData) {
+                detailItem.OutwardId = me.masterData['OutwardId'];
+              }
+            });
+            //end gán khoá phụ
+
+            let listOutwardDetail: Array<OutwardDetail> | null = new Array<OutwardDetail>;
+            listOutwardDetail = LocalStorageLibrary.getByKey<Array<OutwardDetail>>("outwardDetail");
+            if (listOutwardDetail) {
+              listOutwardDetail.push(...me.lstOutwardDetail);
+              LocalStorageLibrary.setByKey("outwardDetail", listOutwardDetail);
+            }
+            else {
+              listOutwardDetail = new Array<OutwardDetail>(...me.lstOutwardDetail);
+              LocalStorageLibrary.setByKey("outwardDetail", listOutwardDetail);
+            }
+          }
+
         }
         if (me.masterData.editMode == 2) {
           listOutward = LocalStorageLibrary.getByKey<Array<Outward>>("outwardItem");

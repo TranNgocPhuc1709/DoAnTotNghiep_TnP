@@ -1,7 +1,6 @@
 <template src="./ReturnDetail.html"></template>
 <style lang="scss" scoped src="./ReturnDetail.scss"></style>
 <script lang="ts">
-import ReturnDetail from './ReturnDetail';
 import { PropType, Ref, ref } from 'vue';
 import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailController";
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
@@ -16,8 +15,11 @@ import NumberFormat from '@library-src/models/qlch_control/number_format/NumberF
 import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
 import Log from '@library-src/utilities/Log';
 import Return from '@store-src/models/return/Return';
+import ReturnDetail from '@store-src/models/return/ReturnDetail';
 import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
 import Guid from '@library-src/utilities/types/Guid';
+import Button from '@library-src/models/qlch_control/qlch_button/Button';
+import EButton from "qlch_control/EButton";
 
 
 export default {
@@ -33,7 +35,126 @@ export default {
     ETextBox,
     EDate,
     ENumber,
+    EButton,
     ECombobox
+  },
+
+  data() {
+    const lstReturnDetail: Ref<Array<ReturnDetail>> = ref(new Array<ReturnDetail>());
+    const txtCodeProductReturn: Ref<Combobox> = ref(new Combobox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      data: [
+        {
+          value: "A123",
+          display: "A123"
+        },
+        {
+          value: "B123",
+          display: "B123"
+        }
+      ],
+      classType: "secondary"
+    }));
+    const txtNameProductReturn: Ref<TextBox> = ref(new TextBox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      classType: "tertiary"
+    }));
+    const txtWarehouseProductReturn: Ref<Combobox> = ref(new Combobox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      data: [
+        {
+          value: "Kho 1",
+          display: "Kho 1"
+        },
+        {
+          value: "Kho 2",
+          display: "Kho 2"
+        }
+      ],
+      classType: "secondary"
+    }));
+    const txtUnitProductReturn: Ref<Combobox> = ref(new Combobox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      data: [
+        {
+          value: "Chiếc",
+          display: "Chiếc"
+        },
+        {
+          value: "Bộ",
+          display: "Bộ"
+        }
+      ],
+      classType: "secondary"
+    }));
+
+    const txtNumberProductReturn: Ref<NumberModel> = ref(new NumberModel({
+      fieldText: "",
+      classType: "thirty",
+      format: new NumberFormat({
+        decimal: ".",
+        thousands: ",",
+        precision: 0
+      }),
+    }));
+    const txtUnitPriceReturn: Ref<NumberModel> = ref(new NumberModel({
+      fieldText: "",
+      classType: "thirty",
+      format: new NumberFormat({
+        decimal: ".",
+        thousands: ",",
+        precision: 0
+      }),
+    }));
+    const txtPaymentReturn: Ref<NumberModel> = ref(new NumberModel({
+      fieldText: "",
+      classType: "thirty",
+      format: new NumberFormat({
+        decimal: ".",
+        thousands: ",",
+        precision: 0
+      }),
+    }));
+
+    return {
+      txtCodeProductReturn,
+      txtNameProductReturn,
+      txtWarehouseProductReturn,
+      txtNumberProductReturn,
+      txtUnitProductReturn,
+      txtUnitPriceReturn,
+      txtPaymentReturn,
+      lstReturnDetail
+    };
+  },
+
+  created() {
+    try {
+      console.log(this.masterData);
+      //lấy giá trị khóa phụ trong masterData
+      const me = this;
+      if (me.masterData) {
+        const privateKey = me.masterData['ReturnId'];
+        if (privateKey) {
+          const localStorageReturnDetail = LocalStorageLibrary.getByKey<Array<ReturnDetail>>("returnDetail");
+          if (localStorageReturnDetail && localStorageReturnDetail.length > 0) {
+            me.lstReturnDetail = localStorageReturnDetail.filter(item => {
+              return item.ReturnId == privateKey;
+            })
+          }
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
   },
 
   setup() {
@@ -43,12 +164,23 @@ export default {
     const navbar1Selected: Ref<boolean> = ref(false);
     const navbar2Selected: Ref<boolean> = ref(false);
 
+
+    const btnAddListTable: Button = new Button({
+      fieldText: "Thêm dòng",
+      classType: "primary"
+    });
+    const btnDelListTable: Button = new Button({
+      fieldText: "Xóa dòng",
+      classType: "secondary"
+    });
     return {
       thisData,
       disableFormImport,
       disableFormPayment,
       navbar1Selected,
-      navbar2Selected
+      navbar2Selected,
+      btnAddListTable,
+      btnDelListTable
     };
   },
 
@@ -152,13 +284,6 @@ export default {
           }),
           bindingIndex: "TotalQuantityReturn"
         }),
-        // "txtColumn10": new TextBox({
-        //   fieldText: "Địa chỉ",
-        //   require: false,
-        //   maxLength: 255,
-        //   labelWidth: labelWidth,
-        //   bindingIndex: "Column10"
-        // }),
         "txtReasonReturn": new TextBox({
           fieldText: "Lý do thu",
           require: false,
@@ -203,104 +328,6 @@ export default {
           bindingIndex: "CollectionDateReturn"
         }),
 
-
-
-        //Table Grid
-
-        "txtCodeProductReturn": new Combobox({
-          fieldText: "",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          data: [
-            {
-              value: "123",
-              display: "123"
-            }
-          ],
-          classType: "secondary",
-          bindingIndex: "CodeProductReturn"
-        }),
-        "txtNameProductReturn": new TextBox({
-          fieldText: "",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          classType: "tertiary",
-          bindingIndex: "NameProductReturn"
-        }),
-        "txtWarehouseProductReturn": new Combobox({
-          fieldText: "",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          data: [
-            {
-              value: "Kh0 1",
-              display: "Kho 1"
-            }
-          ],
-          classType: "secondary",
-          bindingIndex: "WarehouseProductReturn"
-        }),
-        "txtUnitProductReturn": new Combobox({
-          fieldText: "",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          data: [
-            {
-              value: "Chiếc",
-              display: "Chiếc"
-            }
-          ],
-          classType: "secondary",
-          bindingIndex: "UnitProductReturn"
-        }),
-        "txtNumberProductReturn": new NumberModel({
-          fieldText: "",
-          require: false,
-          readOnly: false,
-          maxLength: 255,
-          classType: "thirty",
-          labelWidth: labelWidth,
-          format: new NumberFormat({
-            decimal: ".",
-            thousands: ",",
-            precision: 0
-          }),
-          bindingIndex: "NumberProductReturn"
-        }),
-
-        "txtUnitPriceReturn": new NumberModel({
-          fieldText: "",
-          require: false,
-          readOnly: false,
-          maxLength: 255,
-          classType: "thirty",
-          labelWidth: labelWidth,
-          format: new NumberFormat({
-            decimal: ".",
-            thousands: ",",
-            precision: 3
-          }),
-          bindingIndex: "UnitPriceReturn"
-        }),
-        "txtPaymentReturn": new NumberModel({
-          fieldText: "",
-          require: false,
-          readOnly: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          classType: "thirty",
-          format: new NumberFormat({
-            decimal: ".",
-            thousands: ",",
-            precision: 3
-          }),
-          bindingIndex: "PaymentReturn"
-        }),
-
       }
     },
 
@@ -326,6 +353,19 @@ export default {
         Log.ErrorLog(error as Error);
       }
     },
+
+    AddListTable() {
+      try {
+        const me = this;
+        if (me.lstReturnDetail?.length > 0) {
+          me.lstReturnDetail.push(new ReturnDetail());
+        } else {
+          me.lstReturnDetail = new Array<ReturnDetail>({});
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
     saveData() {
       const me = this;
       let listReturn: Array<Return> | null = new Array<Return>;
@@ -340,6 +380,28 @@ export default {
           else {
             listReturn = new Array<Return>({ ...me.masterData });
             LocalStorageLibrary.setByKey("returnItem", listReturn);
+          }
+
+          //cất detail
+          //gán khoá phụ cho detail
+          if (me.lstReturnDetail?.length > 0) {
+            me.lstReturnDetail.forEach(detailItem => {
+              if (me.masterData) {
+                detailItem.ReturnId = me.masterData['ReturnId'];
+              }
+            });
+            //end gán khoá phụ
+
+            let listReturnDetail: Array<ReturnDetail> | null = new Array<ReturnDetail>;
+            listReturnDetail = LocalStorageLibrary.getByKey<Array<ReturnDetail>>("returnDetail");
+            if (listReturnDetail) {
+              listReturnDetail.push(...me.lstReturnDetail);
+              LocalStorageLibrary.setByKey("returnDetail", listReturnDetail);
+            }
+            else {
+              listReturnDetail = new Array<ReturnDetail>(...me.lstReturnDetail);
+              LocalStorageLibrary.setByKey("returnDetail", listReturnDetail);
+            }
           }
         }
         if (me.masterData.editMode == 2) {

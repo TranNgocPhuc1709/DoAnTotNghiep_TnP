@@ -13,12 +13,7 @@ export default interface IGoodsOrder {
     TotalOrder?: number;
 
 
-    // CodeProductOrder?: string;
-    // NameProductOrder?: string;
-    // UnitProductOrder?: string;
-    // NumberProductOrder?: string;
-    // UnitPriceOrder?: number;
-    // PaymentOrder?: number;
+
 
 
 }
