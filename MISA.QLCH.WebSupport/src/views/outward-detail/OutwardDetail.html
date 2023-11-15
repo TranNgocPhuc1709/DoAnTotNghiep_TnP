@@ -81,7 +81,7 @@
                 <e-number :control="txtPaymentOutWard" v-model="item.PaymentOutWard"></e-number>
               </td>
               <td>
-                <e-button :control="btnDelListTable" />
+                <e-button :control="btnDelListTable" @click="DelListTable(item)" />
               </td>
             </tr>
           </tbody>

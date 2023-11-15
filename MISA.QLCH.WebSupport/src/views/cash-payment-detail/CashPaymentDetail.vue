@@ -266,8 +266,6 @@ export default {
           return detail.CashPaymentDetailId != item.CashPaymentDetailId;
         })
       }
-
-
     },
 
 

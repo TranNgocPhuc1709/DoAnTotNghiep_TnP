@@ -101,7 +101,7 @@
                   <e-number :control="txtPaymentImport" v-model="item.PaymentImport"></e-number>
                 </td>
                 <td>
-                  <e-button :control="btnDelListTable" />
+                  <e-button :control="btnDelListTable" @click="DelListTable(item)" />
                 </td>
               </tr>
             </tbody>
@@ -214,7 +214,7 @@
                   <e-number :control="txtPaymentImport" v-model="item.PaymentImport"></e-number>
                 </td>
                 <td>
-                  <e-button :control="btnDelListTable" />
+                  <e-button :control="btnDelListTable" @click="DelListTable(item)" />
                 </td>
               </tr>
             </tbody>

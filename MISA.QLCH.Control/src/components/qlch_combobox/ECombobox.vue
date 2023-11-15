@@ -16,7 +16,7 @@ export default {
         return { thisData };
     },
 
-    emits: ['update:modelValue', 'onLoadDataBy', 'blur'],
+    emits: ['update:modelValue', 'onLoadDataBy', 'blur', 'dataChange'],
 
     props: {
         modelValue: null as any,
@@ -62,8 +62,10 @@ export default {
         */
         onBlur() {
             const me = this;
+            console.log(me.control);
             try {
                 if (!me.control) {
+                    console.log("No Emit");
                     return;
                 }
                 me.activeControl(me.control);
@@ -159,6 +161,7 @@ export default {
                 }
 
                 me.$emit('update:modelValue', item[me.control.valueField]);
+                me.$emit('dataChange', item[me.control.valueField]);
             }
         },
 

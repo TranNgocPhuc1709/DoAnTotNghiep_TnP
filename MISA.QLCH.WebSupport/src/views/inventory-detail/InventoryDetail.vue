@@ -297,6 +297,14 @@ export default {
         console.log(error);
       }
     },
+    DelListTable(item: InventoryDetail) {
+      const me = this;
+      if (item && me.lstInventoryDetail?.length > 0) {
+        me.lstInventoryDetail = me.lstInventoryDetail.filter(detail => {
+          return detail.InventoryDetailId != item.InventoryDetailId;
+        })
+      }
+    },
 
     saveData() {
       const me = this;
@@ -339,7 +347,7 @@ export default {
           //end cất detail
         }
         if (me.masterData.editMode == 2) {
-          listInventory = LocalStorageLibrary.getByKey<Array<Inventory>>("inventoryDetail");
+          listInventory = LocalStorageLibrary.getByKey<Array<Inventory>>("inventoryList");
           if (listInventory) {
             listInventory.forEach(newItemInventory => {
               if (me.masterData) {
@@ -355,6 +363,45 @@ export default {
               }
             });
             LocalStorageLibrary.setByKey("inventoryList", listInventory);
+          }
+
+          //cất detail
+          //gán khoá phụ cho detail
+          if (me.lstInventoryDetail?.length > 0) {
+            me.lstInventoryDetail.forEach(detailItem => {
+              if (me.masterData) {
+                detailItem.InventoryId = me.masterData['InventoryId'];
+              }
+            });
+            //end gán khoá phụ
+
+            let listInventoryDetail: Array<InventoryDetail> | null = new Array<InventoryDetail>;
+            listInventoryDetail = LocalStorageLibrary.getByKey<Array<InventoryDetail>>("inventoryDetail");
+            if (listInventoryDetail) {
+              listInventoryDetail = listInventoryDetail.filter(item => {
+                if (me.masterData) {
+                  return item.InventoryId != me.masterData['InventoryId'];
+                }
+              });
+              listInventoryDetail.push(...me.lstInventoryDetail);
+              LocalStorageLibrary.setByKey("inventoryDetail", listInventoryDetail);
+            }
+            else {
+              listInventoryDetail = new Array<InventoryDetail>(...me.lstInventoryDetail);
+              LocalStorageLibrary.setByKey("inventoryDetail", listInventoryDetail);
+            }
+          } else {
+            let listInventoryDetail: Array<InventoryDetail> | null = new Array<InventoryDetail>;
+            listInventoryDetail = LocalStorageLibrary.getByKey<Array<InventoryDetail>>("inventoryDetail");
+            if (listInventoryDetail) {
+              listInventoryDetail = listInventoryDetail.filter(item => {
+                if (me.masterData) {
+                  return item.InventoryId != me.masterData['InventoryId'];
+                }
+              });
+              listInventoryDetail.push(...me.lstInventoryDetail);
+              LocalStorageLibrary.setByKey("inventoryDetail", listInventoryDetail);
+            }
           }
         }
       }

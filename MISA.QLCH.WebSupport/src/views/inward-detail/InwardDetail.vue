@@ -288,6 +288,14 @@ export default {
         console.log(error);
       }
     },
+    DelListTable(item: InwardDetail) {
+      const me = this;
+      if (item && me.lstInwardDetail?.length > 0) {
+        me.lstInwardDetail = me.lstInwardDetail.filter(detail => {
+          return detail.InwardDetailId != item.InwardDetailId;
+        })
+      }
+    },
 
     saveData() {
       const me = this;
@@ -346,6 +354,45 @@ export default {
               }
             });
             LocalStorageLibrary.setByKey("inward", listInward);
+          }
+
+          //cất detail
+          //gán khoá phụ cho detail
+          if (me.lstInwardDetail?.length > 0) {
+            me.lstInwardDetail.forEach(detailItem => {
+              if (me.masterData) {
+                detailItem.InwardId = me.masterData['InwardId'];
+              }
+            });
+            //end gán khoá phụ
+
+            let listInwardDetail: Array<InwardDetail> | null = new Array<InwardDetail>;
+            listInwardDetail = LocalStorageLibrary.getByKey<Array<InwardDetail>>("inwardDetail");
+            if (listInwardDetail) {
+              listInwardDetail = listInwardDetail.filter(item => {
+                if (me.masterData) {
+                  return item.InwardId != me.masterData['InwardId'];
+                }
+              });
+              listInwardDetail.push(...me.lstInwardDetail);
+              LocalStorageLibrary.setByKey("inwardDetail", listInwardDetail);
+            }
+            else {
+              listInwardDetail = new Array<InwardDetail>(...me.lstInwardDetail);
+              LocalStorageLibrary.setByKey("inwardDetail", listInwardDetail);
+            }
+          } else {
+            let listInwardDetail: Array<InwardDetail> | null = new Array<InwardDetail>;
+            listInwardDetail = LocalStorageLibrary.getByKey<Array<InwardDetail>>("inwardDetail");
+            if (listInwardDetail) {
+              listInwardDetail = listInwardDetail.filter(item => {
+                if (me.masterData) {
+                  return item.InwardId != me.masterData['InwardId'];
+                }
+              });
+              listInwardDetail.push(...me.lstInwardDetail);
+              LocalStorageLibrary.setByKey("inwardDetail", listInwardDetail);
+            }
           }
         }
       }

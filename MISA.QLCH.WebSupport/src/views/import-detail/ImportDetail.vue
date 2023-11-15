@@ -363,6 +363,18 @@ export default {
       }
     },
 
+    DelListTable(item: ImportDetail) {
+      const me = this;
+      if (item && me.lstImportDetail?.length > 0) {
+        me.lstImportDetail = me.lstImportDetail.filter(detail => {
+          return detail.ImportDetailId != item.ImportDetailId;
+        })
+      }
+
+
+    },
+
+
     showImport() {
       try {
         const me = this;
@@ -452,6 +464,46 @@ export default {
               }
             });
             LocalStorageLibrary.setByKey("importList", listImport);
+          }
+
+
+          //cất detail
+          //gán khoá phụ cho detail
+          if (me.lstImportDetail?.length > 0) {
+            me.lstImportDetail.forEach(detailItem => {
+              if (me.masterData) {
+                detailItem.ImportId = me.masterData['ImportId'];
+              }
+            });
+            //end gán khoá phụ
+
+            let listImportDetail: Array<ImportDetail> | null = new Array<ImportDetail>;
+            listImportDetail = LocalStorageLibrary.getByKey<Array<ImportDetail>>("importDetail");
+            if (listImportDetail) {
+              listImportDetail = listImportDetail.filter(item => {
+                if (me.masterData) {
+                  return item.ImportId != me.masterData['ImportId'];
+                }
+              });
+              listImportDetail.push(...me.lstImportDetail);
+              LocalStorageLibrary.setByKey("importDetail", listImportDetail);
+            }
+            else {
+              listImportDetail = new Array<ImportDetail>(...me.lstImportDetail);
+              LocalStorageLibrary.setByKey("importDetail", listImportDetail);
+            }
+          } else {
+            let listImportDetail: Array<ImportDetail> | null = new Array<ImportDetail>;
+            listImportDetail = LocalStorageLibrary.getByKey<Array<ImportDetail>>("importDetail");
+            if (listImportDetail) {
+              listImportDetail = listImportDetail.filter(item => {
+                if (me.masterData) {
+                  return item.ImportId != me.masterData['ImportId'];
+                }
+              });
+              listImportDetail.push(...me.lstImportDetail);
+              LocalStorageLibrary.setByKey("ImportDetail", listImportDetail);
+            }
           }
         }
       }

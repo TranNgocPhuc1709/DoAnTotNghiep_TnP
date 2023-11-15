@@ -1,6 +1,5 @@
 export default interface IInventoryDetail {
 
-
     CodeProductInventory?: string;
     NameProductInventory?: string;
     UnitProductInventory?: string;
@@ -9,7 +8,6 @@ export default interface IInventoryDetail {
     EndInventory?: number;
     ReasonInventory?: string;
     StatusInventory?: string;
-    InventoryDetailId?: string;
     InventoryId?: string;
 
 }

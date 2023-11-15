@@ -5,7 +5,7 @@
       <div class="form-goodsorder-detail-left flex-1">
         <span class="heading-goodsorder-info">THÔNG TIN CHUNG</span>
         <div class="qlch-input-default item-detail d-flex">
-          <e-combobox :control="bindingControl[`txtSupplierOrder`]"
+          <e-combobox @dataChange="ShowNameVendor" :control="bindingControl[`txtSupplierOrder`]"
             v-model="masterData[bindingControl[`txtSupplierOrder`].bindingIndex]"></e-combobox>
         </div>
         <div class="qlch-input-default item-detail">
@@ -13,7 +13,7 @@
             v-model="masterData[bindingControl[`txtSupplierNameOrder`].bindingIndex]"></e-text-box>
         </div>
         <div class="qlch-input-default item-detail">
-          <e-combobox :control="bindingControl[`txtPersonOrder`]"
+          <e-combobox @dataChange="ShowNameEmployee" :control="bindingControl[`txtPersonOrder`]"
             v-model="masterData[bindingControl[`txtPersonOrder`].bindingIndex]"></e-combobox>
         </div>
         <div class="qlch-input-default item-detail">
@@ -46,14 +46,7 @@
         <div class="grid-footer-item flex-1">
           <span class="heading-goodsorder-info flex-1">Chi tiết</span>
         </div>
-        <!-- <div class="btn-table d-flex">
-          <div class="grid-footer-item">
-            <e-button :control="btnAddListTable" @click="AddListTable()" />
-          </div>
-          <div class="grid-footer-item">
-            <e-button :control="btnDelListTable" />
-          </div>
-        </div> -->
+
       </div>
       <div class="grid-GoodsOrder">
         <table class="flex-1">
@@ -75,7 +68,8 @@
             <tr v-if="lstGoodsOrderDetail?.length > 0" v-for="item in lstGoodsOrderDetail"
               :key="item.GoodsOrderDetailId">
               <td>
-                <e-combobox :control="txtCodeProductOrder" v-model="item.CodeProductOrder"></e-combobox>
+                <e-combobox @dataChange="ShowNameProduct" :control="txtCodeProductOrder"
+                  v-model="item.CodeProductOrder"></e-combobox>
               </td>
               <td>
                 <e-text-box :control="txtNameProductOrder" v-model="item.NameProductOrder"></e-text-box>
@@ -93,7 +87,7 @@
                 <e-number :control="txtPaymentOrder" v-model="item.PaymentOrder"></e-number>
               </td>
               <td>
-                <e-button :control="btnDelListTable" />
+                <e-button :control="btnDelListTable" @click="DelListTable(item)" />
               </td>
             </tr>
           </tbody>

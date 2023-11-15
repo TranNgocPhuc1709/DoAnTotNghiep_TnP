@@ -366,6 +366,15 @@ export default {
         console.log(error);
       }
     },
+
+    DelListTable(item: ReturnDetail) {
+      const me = this;
+      if (item && me.lstReturnDetail?.length > 0) {
+        me.lstReturnDetail = me.lstReturnDetail.filter(detail => {
+          return detail.ReturnDetailId != item.ReturnDetailId;
+        })
+      }
+    },
     saveData() {
       const me = this;
       let listReturn: Array<Return> | null = new Array<Return>;
@@ -429,6 +438,45 @@ export default {
               }
             });
             LocalStorageLibrary.setByKey("returnItem", listReturn);
+          }
+
+          //cất detail
+          //gán khoá phụ cho detail
+          if (me.lstReturnDetail?.length > 0) {
+            me.lstReturnDetail.forEach(detailItem => {
+              if (me.masterData) {
+                detailItem.ReturnId = me.masterData['ReturnId'];
+              }
+            });
+            //end gán khoá phụ
+
+            let listReturnDetail: Array<ReturnDetail> | null = new Array<ReturnDetail>;
+            listReturnDetail = LocalStorageLibrary.getByKey<Array<ReturnDetail>>("returnDetail");
+            if (listReturnDetail) {
+              listReturnDetail = listReturnDetail.filter(item => {
+                if (me.masterData) {
+                  return item.ReturnId != me.masterData['ReturnId'];
+                }
+              });
+              listReturnDetail.push(...me.lstReturnDetail);
+              LocalStorageLibrary.setByKey("returnDetail", listReturnDetail);
+            }
+            else {
+              listReturnDetail = new Array<ReturnDetail>(...me.lstReturnDetail);
+              LocalStorageLibrary.setByKey("returnDetail", listReturnDetail);
+            }
+          } else {
+            let listReturnDetail: Array<ReturnDetail> | null = new Array<ReturnDetail>;
+            listReturnDetail = LocalStorageLibrary.getByKey<Array<ReturnDetail>>("returnDetail");
+            if (listReturnDetail) {
+              listReturnDetail = listReturnDetail.filter(item => {
+                if (me.masterData) {
+                  return item.ReturnId != me.masterData['ReturnId'];
+                }
+              });
+              listReturnDetail.push(...me.lstReturnDetail);
+              LocalStorageLibrary.setByKey("returnDetail", listReturnDetail);
+            }
           }
         }
       }

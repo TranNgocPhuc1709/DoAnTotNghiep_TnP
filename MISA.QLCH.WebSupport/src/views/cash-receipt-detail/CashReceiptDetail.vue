@@ -244,6 +244,15 @@ export default {
         console.log(error);
       }
     },
+
+    DelListTable(item: CashReceiptDetail) {
+      const me = this;
+      if (item && me.lstCashReceiptDetail?.length > 0) {
+        me.lstCashReceiptDetail = me.lstCashReceiptDetail.filter(detail => {
+          return detail.CashReceiptDetailId != item.CashReceiptDetailId;
+        })
+      }
+    },
     saveData() {
       const me = this;
       let listCashReceipt: Array<CashReceipt> | null = new Array<CashReceipt>;
@@ -303,6 +312,45 @@ export default {
               }
             });
             LocalStorageLibrary.setByKey("cashReceipt", listCashReceipt);
+          }
+
+          //cất detail
+          //gán khoá phụ cho detail
+          if (me.lstCashReceiptDetail?.length > 0) {
+            me.lstCashReceiptDetail.forEach(detailItem => {
+              if (me.masterData) {
+                detailItem.CashReceiptId = me.masterData['CashReceiptId'];
+              }
+            });
+            //end gán khoá phụ
+
+            let listCashReceiptDetail: Array<CashReceiptDetail> | null = new Array<CashReceiptDetail>;
+            listCashReceiptDetail = LocalStorageLibrary.getByKey<Array<CashReceiptDetail>>("cashReceiptDetail");
+            if (listCashReceiptDetail) {
+              listCashReceiptDetail = listCashReceiptDetail.filter(item => {
+                if (me.masterData) {
+                  return item.CashReceiptId != me.masterData['CashReceiptId'];
+                }
+              });
+              listCashReceiptDetail.push(...me.lstCashReceiptDetail);
+              LocalStorageLibrary.setByKey("cashReceiptDetail", listCashReceiptDetail);
+            }
+            else {
+              listCashReceiptDetail = new Array<CashReceiptDetail>(...me.lstCashReceiptDetail);
+              LocalStorageLibrary.setByKey("cashReceiptDetail", listCashReceiptDetail);
+            }
+          } else {
+            let listCashReceiptDetail: Array<CashReceiptDetail> | null = new Array<CashReceiptDetail>;
+            listCashReceiptDetail = LocalStorageLibrary.getByKey<Array<CashReceiptDetail>>("cashReceiptDetail");
+            if (listCashReceiptDetail) {
+              listCashReceiptDetail = listCashReceiptDetail.filter(item => {
+                if (me.masterData) {
+                  return item.CashReceiptId != me.masterData['CashReceiptId'];
+                }
+              });
+              listCashReceiptDetail.push(...me.lstCashReceiptDetail);
+              LocalStorageLibrary.setByKey("cashReceiptDetail", listCashReceiptDetail);
+            }
           }
         }
       }

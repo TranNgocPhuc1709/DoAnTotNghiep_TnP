@@ -134,7 +134,7 @@ export default {
         }),
         new Column({
           fieldText: "Trạng thái",
-          dataIndex: "StatusInventory",
+          dataIndex: "MainStatusInventory",
           minWidth: 260,
           flex: 1
         })

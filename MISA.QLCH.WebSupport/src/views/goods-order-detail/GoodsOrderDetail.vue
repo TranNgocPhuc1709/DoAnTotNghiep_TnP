@@ -19,6 +19,9 @@ import GoodsOrder from '@store-src/models/goods-order/GoodsOrder';
 import GoodsOrderDetail from '@store-src/models/goods-order/GoodsOrderDetail';
 import Button from '@library-src/models/qlch_control/qlch_button/Button';
 import EButton from "qlch_control/EButton";
+import Vendor from '@store-src/models/vendor/Vendor';
+import Employee from '@store-src/models/employee/Employee';
+import Product from '@store-src/models/product/Product';
 
 
 export default {
@@ -41,20 +44,15 @@ export default {
 
   data() {
     const lstGoodsOrderDetail: Ref<Array<GoodsOrderDetail>> = ref(new Array<GoodsOrderDetail>());
+
+    const lstCodeProductOrder = LocalStorageLibrary.getByKey<Array<Product>>("Product") ?? new Array<Product>();
     const txtCodeProductOrder: Ref<Combobox> = ref(new Combobox({
       fieldText: "",
       require: false,
       maxLength: 255,
-      data: [
-        {
-          value: "A123",
-          display: "A123"
-        },
-        {
-          value: "B123",
-          display: "B123"
-        }
-      ],
+      data: lstCodeProductOrder,
+      valueField: "CodeProductList",
+      displayField: "CodeProductList",
       classType: "secondary"
     }));
     const txtNameProductOrder: Ref<TextBox> = ref(new TextBox({
@@ -172,6 +170,8 @@ export default {
     buildBindingControl() {
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
       const labelWidth = 115;
+      const lstSupplierOrder = LocalStorageLibrary.getByKey<Array<Vendor>>("Vendor") ?? new Array<Vendor>();
+      const lstPersonOrder = LocalStorageLibrary.getByKey<Array<Employee>>("employee") ?? new Array<Employee>();
       return {
         "txtDateOrder": new DateModel({
           fieldText: "Ngày đặt hàng",
@@ -192,12 +192,9 @@ export default {
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          data: [
-            {
-              value: "TNP",
-              display: "TNP"
-            }
-          ],
+          data: lstPersonOrder,
+          valueField: "CodeEmployee",
+          displayField: "CodeEmployee",
           bindingIndex: "PersonOrder"
         }),
         "txtSupplierOrder": new Combobox({
@@ -205,12 +202,9 @@ export default {
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          data: [
-            {
-              value: "NCC001",
-              display: "NCC001"
-            }
-          ],
+          data: lstSupplierOrder,
+          valueField: "CodeVendor",
+          displayField: "CodeVendor",
           bindingIndex: "SupplierOrder"
         }),
         "txtFullMoneyOrder": new NumberModel({
@@ -252,7 +246,7 @@ export default {
         "txtSupplierNameOrder": new TextBox({
           fieldText: "Tên nhà cung cấp",
           require: false,
-          readOnly: false,
+          readOnly: true,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "SupplierNameOrder"
@@ -293,6 +287,84 @@ export default {
         }
       } catch (error) {
         console.log(error);
+      }
+    },
+
+    DelListTable(item: GoodsOrderDetail) {
+      const me = this;
+      if (item && me.lstGoodsOrderDetail?.length > 0) {
+        me.lstGoodsOrderDetail = me.lstGoodsOrderDetail.filter(detail => {
+          return detail.GoodsOrderDetailId != item.GoodsOrderDetailId;
+        })
+      }
+
+
+    },
+
+    ShowNameVendor(value: any) {
+      // debugger
+      const me = this;
+      const listVendor = LocalStorageLibrary.getByKey<Array<Vendor>>("Vendor");
+      if (listVendor && listVendor.length > 0 && me.masterData) {
+        // const vendorCode = me.masterData['SupplierOrder'];
+        if (value) {
+          let rowVendorByVendorCode = new Vendor();
+          for (let index = 0; index < listVendor.length; index++) {
+            const rowVendor = listVendor[index];
+            if (rowVendor.CodeVendor == value) {
+              rowVendorByVendorCode = rowVendor;
+              break;
+            }
+
+          }
+          if (rowVendorByVendorCode) {
+            me.masterData['SupplierNameOrder'] = rowVendorByVendorCode.NameVendor;
+          }
+        }
+      }
+
+
+    },
+    ShowNameEmployee(value: any) {
+      const me = this;
+      const listEmployee = LocalStorageLibrary.getByKey<Array<Employee>>("employee");
+      if (listEmployee && listEmployee.length > 0 && me.masterData) {
+        // const vendorCode = me.masterData['SupplierOrder'];
+        if (value) {
+          let rowVendorByEmployeeCode = new Employee();
+          for (let index = 0; index < listEmployee.length; index++) {
+            const rowVendor = listEmployee[index];
+            if (rowVendor.CodeEmployee == value) {
+              rowVendorByEmployeeCode = rowVendor;
+              break;
+            }
+
+          }
+          if (rowVendorByEmployeeCode) {
+            me.masterData['PersonOrderName'] = rowVendorByEmployeeCode.NameEmployee;
+          }
+        }
+      }
+
+    },
+    ShowNameProduct(value: any) {
+      const me = this;
+      const listProduct = LocalStorageLibrary.getByKey<Array<Product>>("Product");
+      if (listProduct && listProduct.length > 0 && me.masterData) {
+        // const vendorCode = me.masterData['SupplierOrder'];
+        if (value) {
+          let rowProductByProductCode = new Product();
+          for (let index = 0; index < listProduct.length; index++) {
+            const rowProductDetail = listProduct[index];
+            if (rowProductDetail.CodeProductList == value) {
+              rowProductByProductCode = rowProductDetail;
+              break;
+            }
+          }
+          if (rowProductByProductCode) {
+            me.masterData['NameProductOrder'] = rowProductByProductCode.NameProductList;
+          }
+        }
       }
     },
 
@@ -357,6 +429,43 @@ export default {
               }
             });
             LocalStorageLibrary.setByKey("goodsOrder", listGoodsOrder);
+          }
+
+          if (me.lstGoodsOrderDetail?.length > 0) {
+            me.lstGoodsOrderDetail.forEach(detailItem => {
+              if (me.masterData) {
+                detailItem.GoodsOrderId = me.masterData['GoodsOrderId'];
+              }
+            });
+            //end gán khoá phụ
+
+            let listGoodsOrderDetail: Array<GoodsOrderDetail> | null = new Array<GoodsOrderDetail>;
+            listGoodsOrderDetail = LocalStorageLibrary.getByKey<Array<GoodsOrderDetail>>("goodsOrderDetail");
+            if (listGoodsOrderDetail) {
+              listGoodsOrderDetail = listGoodsOrderDetail.filter(item => {
+                if (me.masterData) {
+                  return item.GoodsOrderId != me.masterData['GoodsOrderId'];
+                }
+              });
+              listGoodsOrderDetail.push(...me.lstGoodsOrderDetail);
+              LocalStorageLibrary.setByKey("goodsOrderDetail", listGoodsOrderDetail);
+            }
+            else {
+              listGoodsOrderDetail = new Array<GoodsOrderDetail>(...me.lstGoodsOrderDetail);
+              LocalStorageLibrary.setByKey("goodsOrderDetail", listGoodsOrderDetail);
+            }
+          } else {
+            let listGoodsOrderDetail: Array<GoodsOrderDetail> | null = new Array<GoodsOrderDetail>;
+            listGoodsOrderDetail = LocalStorageLibrary.getByKey<Array<GoodsOrderDetail>>("goodsOrderDetail");
+            if (listGoodsOrderDetail) {
+              listGoodsOrderDetail = listGoodsOrderDetail.filter(item => {
+                if (me.masterData) {
+                  return item.GoodsOrderId != me.masterData['GoodsOrderId'];
+                }
+              });
+              listGoodsOrderDetail.push(...me.lstGoodsOrderDetail);
+              LocalStorageLibrary.setByKey("goodsOrderDetail", listGoodsOrderDetail);
+            }
           }
         }
       }

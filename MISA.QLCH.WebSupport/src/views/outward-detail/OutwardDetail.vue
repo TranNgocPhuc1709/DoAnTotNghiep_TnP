@@ -297,6 +297,16 @@ export default {
         console.log(error);
       }
     },
+    DelListTable(item: OutwardDetail) {
+      const me = this;
+      if (item && me.lstOutwardDetail?.length > 0) {
+        me.lstOutwardDetail = me.lstOutwardDetail.filter(detail => {
+          return detail.OutWardDetailId != item.OutWardDetailId;
+        })
+      }
+
+
+    },
 
     saveData() {
       const me = this;
@@ -355,6 +365,45 @@ export default {
               }
             });
             LocalStorageLibrary.setByKey("outwardItem", listOutward);
+          }
+
+          //cất detail
+          //gán khoá phụ cho detail
+          if (me.lstOutwardDetail?.length > 0) {
+            me.lstOutwardDetail.forEach(detailItem => {
+              if (me.masterData) {
+                detailItem.OutwardId = me.masterData['OutwardId'];
+              }
+            });
+            //end gán khoá phụ
+
+            let listOutwardDetail: Array<OutwardDetail> | null = new Array<OutwardDetail>;
+            listOutwardDetail = LocalStorageLibrary.getByKey<Array<OutwardDetail>>("outwardDetail");
+            if (listOutwardDetail) {
+              listOutwardDetail = listOutwardDetail.filter(item => {
+                if (me.masterData) {
+                  return item.OutwardId != me.masterData['OutwardId'];
+                }
+              });
+              listOutwardDetail.push(...me.lstOutwardDetail);
+              LocalStorageLibrary.setByKey("outwardDetail", listOutwardDetail);
+            }
+            else {
+              listOutwardDetail = new Array<OutwardDetail>(...me.lstOutwardDetail);
+              LocalStorageLibrary.setByKey("outwardDetail", listOutwardDetail);
+            }
+          } else {
+            let listOutwardDetail: Array<OutwardDetail> | null = new Array<OutwardDetail>;
+            listOutwardDetail = LocalStorageLibrary.getByKey<Array<OutwardDetail>>("outwardDetail");
+            if (listOutwardDetail) {
+              listOutwardDetail = listOutwardDetail.filter(item => {
+                if (me.masterData) {
+                  return item.OutwardId != me.masterData['OutwardId'];
+                }
+              });
+              listOutwardDetail.push(...me.lstOutwardDetail);
+              LocalStorageLibrary.setByKey("outwardDetail", listOutwardDetail);
+            }
           }
         }
       }

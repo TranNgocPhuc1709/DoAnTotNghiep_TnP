@@ -62,6 +62,8 @@ export default {
                 return;
             }
             control.isActive = true;
+            // const me = this;
+            // me.focusInputControl();
         },
 
         /**
