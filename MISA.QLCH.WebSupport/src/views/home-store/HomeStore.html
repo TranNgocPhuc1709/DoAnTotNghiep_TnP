@@ -157,7 +157,8 @@
                             </div>
                             <span class="line-vertical"></span>
                             <div class="input-search flex-1">
-                                <e-combobox :control="cbbSearchProduct" v-model="cbbSearchProduct.value" />
+                                <e-combobox @dataChange="ShowNameProduct" :control="cbbSearchProduct"
+                                    v-model="cbbSearchProduct.value" />
                             </div>
                             <span class="line-vertical"></span>
                             <div class="quanty-search d-flex-vcenter">
@@ -176,139 +177,25 @@
                 </div>
 
                 <div class="body-content-store">
-                    <div class="d-flex-column">
+                    <div class="d-flex-column" v-if="lstProductDetail?.length > 0"
+                        v-for="(item,index) in lstProductDetail" :key="item.ProductDetailId">
                         <div class="item-product d-flex-vcenter">
-                            <!-- <span class="flex-1">
-                                <e-text-box :control="txtProductCode" v-model="txtProductCode.value" />
+                            <span class="flex-1">{{0 + index+1}}</span>
+                            <span class="flex-1">{{item.CodeProductList}}</span>
+                            <span class="flex-1">{{item.NameProductList}}</span>
+                            <span class="flex-1 child-item">
+                                <e-text-box :control="txtPurchased" v-model="item.QuantityProductList" />
+                            </span>
+                            <span class="flex-1 child-item">
+                                <e-text-box :control="txtUnit" v-model="item.UnitProductList" />
+                            </span>
+                            <span class="flex-1 child-item">
+                                <e-number :control="txtPrice" v-model="item.PriceProductList" />
                             </span>
                             <span class="flex-1">
-                                <e-text-box :control="txtProductName" v-model="txtProductName.value" />
-                            </span> -->
-                            <span class="flex-1">STT</span>
-                            <span class="flex-1">SP001</span>
-                            <span class="flex-1">Áo Polo Nam</span>
-                            <span class="flex-1 child-item">
-                                <e-text-box :control="txtPurchased" v-model="txtPurchased.value" />
+                                <e-number :control="txtPriceLast" v-model="item.TotalProductList" />
                             </span>
-                            <span class="flex-1 child-item" style="width: 50px;">
-                                <e-combobox :control="txtUnit" v-model="txtUnit.value" />
-                            </span>
-                            <span class="flex-1 child-item">
-                                <e-number :control="txtPrice" v-model="txtPrice.value" />
-                            </span>
-                            <span class="flex-1">
-                                <e-number :control="txtPriceLast" v-model="txtPriceLast.value" />
-                            </span>
-                            <span class="icon-child-product"></span>
-                        </div>
-
-                        <div class="item-product d-flex-vcenter">
-                            <span class="flex-1">STT</span>
-                            <span class="flex-1">SP001</span>
-                            <span class="flex-1">Áo Polo Nam</span>
-                            <span class="flex-1 child-item">
-                                <e-text-box :control="txtPurchased" v-model="txtPurchased.value" />
-                            </span>
-                            <span class="flex-1 child-item" style="width: 50px;">
-                                <e-combobox :control="txtUnit" v-model="txtUnit.value" />
-                            </span>
-                            <span class="flex-1 child-item">
-                                <e-number :control="txtPrice" v-model="txtPrice.value" />
-                            </span>
-                            <span class="flex-1">
-                                <e-number :control="txtPriceLast" v-model="txtPriceLast.value" />
-                            </span>
-                            <span class="icon-child-product"></span>
-                        </div>
-                        <div class="item-product d-flex-vcenter">
-                            <span class="flex-1">STT</span>
-                            <span class="flex-1">SP001</span>
-                            <span class="flex-1">Áo Polo Nam</span>
-                            <span class="flex-1 child-item">
-                                <e-text-box :control="txtPurchased" v-model="txtPurchased.value" />
-                            </span>
-                            <span class="flex-1 child-item" style="width: 50px;">
-                                <e-combobox :control="txtUnit" v-model="txtUnit.value" />
-                            </span>
-                            <span class="flex-1 child-item">
-                                <e-number :control="txtPrice" v-model="txtPrice.value" />
-                            </span>
-                            <span class="flex-1">
-                                <e-number :control="txtPriceLast" v-model="txtPriceLast.value" />
-                            </span>
-                            <span class="icon-child-product"></span>
-                        </div>
-                        <div class="item-product d-flex-vcenter">
-                            <span class="flex-1">STT</span>
-                            <span class="flex-1">SP001</span>
-                            <span class="flex-1">Áo Polo Nam</span>
-                            <span class="flex-1 child-item">
-                                <e-text-box :control="txtPurchased" v-model="txtPurchased.value" />
-                            </span>
-                            <span class="flex-1 child-item" style="width: 50px;">
-                                <e-combobox :control="txtUnit" v-model="txtUnit.value" />
-                            </span>
-                            <span class="flex-1 child-item">
-                                <e-number :control="txtPrice" v-model="txtPrice.value" />
-                            </span>
-                            <span class="flex-1">
-                                <e-number :control="txtPriceLast" v-model="txtPriceLast.value" />
-                            </span>
-                            <span class="icon-child-product"></span>
-                        </div>
-                        <div class="item-product d-flex-vcenter">
-                            <span class="flex-1">STT</span>
-                            <span class="flex-1">SP001</span>
-                            <span class="flex-1">Áo Polo Nam</span>
-                            <span class="flex-1 child-item">
-                                <e-text-box :control="txtPurchased" v-model="txtPurchased.value" />
-                            </span>
-                            <span class="flex-1 child-item" style="width: 50px;">
-                                <e-combobox :control="txtUnit" v-model="txtUnit.value" />
-                            </span>
-                            <span class="flex-1 child-item">
-                                <e-number :control="txtPrice" v-model="txtPrice.value" />
-                            </span>
-                            <span class="flex-1">
-                                <e-number :control="txtPriceLast" v-model="txtPriceLast.value" />
-                            </span>
-                            <span class="icon-child-product"></span>
-                        </div>
-                        <div class="item-product d-flex-vcenter">
-                            <span class="flex-1">STT</span>
-                            <span class="flex-1">SP001</span>
-                            <span class="flex-1">Áo Polo Nam</span>
-                            <span class="flex-1 child-item">
-                                <e-text-box :control="txtPurchased" v-model="txtPurchased.value" />
-                            </span>
-                            <span class="flex-1 child-item" style="width: 50px;">
-                                <e-combobox :control="txtUnit" v-model="txtUnit.value" />
-                            </span>
-                            <span class="flex-1 child-item">
-                                <e-number :control="txtPrice" v-model="txtPrice.value" />
-                            </span>
-                            <span class="flex-1">
-                                <e-number :control="txtPriceLast" v-model="txtPriceLast.value" />
-                            </span>
-                            <span class="icon-child-product"></span>
-                        </div>
-                        <div class="item-product d-flex-vcenter">
-                            <span class="flex-1">STT</span>
-                            <span class="flex-1">SP001</span>
-                            <span class="flex-1">Áo Polo Nam</span>
-                            <span class="flex-1 child-item">
-                                <e-text-box :control="txtPurchased" v-model="txtPurchased.value" />
-                            </span>
-                            <span class="flex-1 child-item" style="width: 50px;">
-                                <e-combobox :control="txtUnit" v-model="txtUnit.value" />
-                            </span>
-                            <span class="flex-1 child-item">
-                                <e-number :control="txtPrice" v-model="txtPrice.value" />
-                            </span>
-                            <span class="flex-1">
-                                <e-number :control="txtPriceLast" v-model="txtPriceLast.value" />
-                            </span>
-                            <span class="icon-child-product"></span>
+                            <span class="icon-child-product" @click="DelListTable(index)"></span>
                         </div>
                     </div>
                 </div>
@@ -357,7 +244,8 @@
                                             <span>Thông tin người nhận</span>
                                         </div>
                                         <div class="bodyPopup-item d-flex-vcenter">
-                                            <e-combobox :control="txtInfoRecipient" v-model="txtInfoRecipient.value" />
+                                            <e-combobox @dataChange="ShowInfoCustomer($event, item)"
+                                                :control="txtInfoRecipient" v-model="txtInfoRecipient.value" />
                                         </div>
                                         <div class="bodyPopup-item d-flex-vcenter">
                                             <e-text-box :control="txtNumberRecipient"
@@ -469,7 +357,15 @@
                         <div class="info-payment-item">
                             <span class="label-transaction-item label-all-price flex-1">Tài khoản thu</span>
                             <div class="type-input-notice width-fill">
-                                <e-combobox :control="cbbPayments" v-model="cbbPayments.value" />
+                                <div class="d-flex">
+                                    <div class="flex-1">
+                                        <e-combobox @dataChange="ShowCodeAccount" :control="cbbPayments"
+                                            v-model="cbbPayments.value" />
+                                    </div>
+                                    <div>
+                                        <e-text-box :control="txtAccountNumber" v-model="txtAccountNumber.value" />
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="info-payment-item d-flex-vcenter">

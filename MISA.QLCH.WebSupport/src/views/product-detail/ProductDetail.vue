@@ -15,6 +15,8 @@ import NumberFormat from '@library-src/models/qlch_control/number_format/NumberF
 import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
 import Guid from '@library-src/utilities/types/Guid';
 import Product from '@store-src/models/product/Product';
+import CategoryItem from '@store-src/models/category-item/CategoryItem';
+import Unit from '@store-src/models/unit/Unit';
 export default {
 
   extends: BaseDictionaryDetailController,
@@ -54,6 +56,9 @@ export default {
     */
     buildBindingControl() {
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
+      const lstGroupProductList = LocalStorageLibrary.getByKey<Array<CategoryItem>>("CategoryItem") ?? new Array<CategoryItem>()
+      const lstUnitProductList = LocalStorageLibrary.getByKey<Array<Unit>>("Unit") ?? new Array<Unit>()
+
       const labelWidth = 115;
       // return {
       //   "txtColumn1": new TextBox({
@@ -215,42 +220,22 @@ export default {
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
+          data: lstGroupProductList,
+          valueField: "NameGroupCategory",
+          displayField: "NameGroupCategory",
           bindingIndex: "GroupProductList",
-          data: [
-            {
-              value: 1,
-              display: "G1"
-            },
-            {
-              value: 2,
-              display: "G2"
-            },
-            {
-              value: 3,
-              display: "G3"
-            },
-          ]
         }),
         "txtUnitProductList": new Combobox({
           fieldText: "Đơn Vị Tính",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
+          data: lstUnitProductList,
+          valueField: "CodeUnitList",
+          displayField: "CodeUnitList",
           bindingIndex: "UnitProductList",
-          data: [
-            {
-              value: 1,
-              display: "Chiếc"
-            },
-            {
-              value: 2,
-              display: "Cái"
-            },
-            {
-              value: 3,
-              display: "Combo"
-            },
-          ]
+
+
         }),
         "txtPurchasePriceProductList": new NumberModel({
           fieldText: "Giá mua",
@@ -365,6 +350,10 @@ export default {
         }),
 
       }
+    },
+
+    ShowNameGroupCategory() {
+
     },
 
     saveData() {

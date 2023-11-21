@@ -1,6 +1,5 @@
 export default interface IProduct {
 
-
     CodeProductList?: string;
     NameProductList?: string;
     GroupProductList?: string;

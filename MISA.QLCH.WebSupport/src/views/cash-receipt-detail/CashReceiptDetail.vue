@@ -21,6 +21,7 @@ import LocalStorageLibrary from '@library-src/utilities/window/local-storage/Loc
 import Guid from '@library-src/utilities/types/Guid';
 import Button from '@library-src/models/qlch_control/qlch_button/Button';
 import EButton from "qlch_control/EButton";
+import Employee from '@store-src/models/employee/Employee';
 
 export default {
 
@@ -120,6 +121,7 @@ export default {
     */
     buildBindingControl() {
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
+      const lstRevenueOfficerCashReceipt = LocalStorageLibrary.getByKey<Array<Employee>>("employee") ?? new Array<Employee>();
       const labelWidth = 115;
       return {
         "txtDateCashReceipt": new DateModel({
@@ -144,7 +146,7 @@ export default {
           format: new NumberFormat({
             decimal: ".",
             thousands: ",",
-            precision: 2
+            precision: 0
           }),
           bindingIndex: "TotalMoneyCashReceipt"
         }),
@@ -207,12 +209,9 @@ export default {
           fieldText: "Nhân viên thu",
           require: false,
           maxLength: 255,
-          data: [
-            {
-              value: "TNP",
-              display: "TNP"
-            }
-          ],
+          data: lstRevenueOfficerCashReceipt,
+          valueField: "CodeEmployee",
+          displayField: "CodeEmployee",
           labelWidth: labelWidth,
           bindingIndex: "RevenueOfficerCashReceipt"
         }),
@@ -229,6 +228,23 @@ export default {
           bindingIndex: "IncludedCashReceipt",
         }),
 
+      }
+    },
+    ShowPaymentCashReceipt() {
+      const me = this;
+
+      ///tinh lai tong tien
+      if (me.masterData) {
+        me.masterData['TotalMoneyCashReceipt'] = 0;
+
+      }
+
+      for (let index = 0; index < me.lstCashReceiptDetail.length; index++) {
+        const element = me.lstCashReceiptDetail[index];
+        if (me.masterData && element) {
+          me.masterData['TotalMoneyCashReceipt'] += element.MoneyCashDetail ?? 0;
+
+        }
       }
     },
 
@@ -251,6 +267,40 @@ export default {
         me.lstCashReceiptDetail = me.lstCashReceiptDetail.filter(detail => {
           return detail.CashReceiptDetailId != item.CashReceiptDetailId;
         })
+      }
+      if (me.masterData) {
+        me.masterData['TotalMoneyCashReceipt'] = 0;
+
+      }
+
+      for (let index = 0; index < me.lstCashReceiptDetail.length; index++) {
+        const element = me.lstCashReceiptDetail[index];
+        if (me.masterData && element) {
+          me.masterData['TotalMoneyCashReceipt'] += element.MoneyCashDetail ?? 0;
+
+        }
+      }
+    },
+
+    ShowNameEmployee(value: any) {
+      const me = this;
+      const listEmployee = LocalStorageLibrary.getByKey<Array<Employee>>("employee");
+      if (listEmployee && listEmployee.length > 0 && me.masterData) {
+        // const vendorCode = me.masterData['SupplierOrder'];
+        if (value) {
+          let rowVendorByEmployeeCode = new Employee();
+          for (let index = 0; index < listEmployee.length; index++) {
+            const rowVendor = listEmployee[index];
+            if (rowVendor.CodeEmployee == value) {
+              rowVendorByEmployeeCode = rowVendor;
+              break;
+            }
+
+          }
+          if (rowVendorByEmployeeCode) {
+            me.masterData['NameRevenueOfficerCashReceipt'] = rowVendorByEmployeeCode.NameEmployee;
+          }
+        }
       }
     },
     saveData() {

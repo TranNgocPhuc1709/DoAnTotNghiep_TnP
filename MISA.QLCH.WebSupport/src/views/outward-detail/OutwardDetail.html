@@ -60,7 +60,8 @@
           <tbody>
             <tr v-if="lstOutwardDetail?.length > 0" v-for="item in lstOutwardDetail" :key="item.OutWardDetailId">
               <td>
-                <e-combobox :control="txtCodeProductOutWard" v-model="item.CodeProductOutWard"></e-combobox>
+                <e-combobox @dataChange="ShowNameProduct($event, item)" :control="txtCodeProductOutWard"
+                  v-model="item.CodeProductOutWard"></e-combobox>
               </td>
               <td>
                 <e-text-box :control="txtNameProductOutWard" v-model="item.NameProductOutWard"></e-text-box>
@@ -69,10 +70,11 @@
                 <e-combobox :control="txtWarehouseProductOutWard" v-model="item.WarehouseProductOutWard"></e-combobox>
               </td>
               <td>
-                <e-combobox :control="txtUnitProductOutWard" v-model="item.UnitProductOutWard"></e-combobox>
+                <e-text-box :control="txtUnitProductOutWard" v-model="item.UnitProductOutWard"></e-text-box>
               </td>
               <td>
-                <e-number :control="txtNumberProductOutWard" v-model="item.NumberProductOutWard"></e-number>
+                <e-number @blur="ShowPaymentOutward($event, item)" :control="txtNumberProductOutWard"
+                  v-model="item.NumberProductOutWard"></e-number>
               </td>
               <td>
                 <e-number :control="txtUnitPriceOutWard" v-model="item.UnitPriceOutWard"></e-number>

@@ -10,7 +10,7 @@
             v-model="masterData[bindingControl[`txtExplantInventory`].bindingIndex]"></e-text-box>
         </div>
         <div class="qlch-input-default item-detail">
-          <e-combobox :control="bindingControl[`txtWarehouseInventory`]"
+          <e-combobox @dataChange="SelectWareHouse($event)" :control="bindingControl[`txtWarehouseInventory`]"
             v-model="masterData[bindingControl[`txtWarehouseInventory`].bindingIndex]"></e-combobox>
         </div>
       </div>
@@ -55,19 +55,21 @@
           <tbody>
             <tr v-if="lstInventoryDetail?.length > 0" v-for="item in lstInventoryDetail" :key="item.InventoryDetailId">
               <td>
-                <e-combobox :control="txtCodeProductInventory" v-model="item.CodeProductInventory"></e-combobox>
+                <e-combobox @dataChange="ShowNameProduct($event, item)" :control="txtCodeProductInventory"
+                  v-model="item.CodeProductInventory"></e-combobox>
               </td>
               <td>
                 <e-text-box :control="txtNameProductInventory" v-model="item.NameProductInventory"></e-text-box>
               </td>
               <td>
-                <e-combobox :control="txtUnitProductInventory" v-model="item.UnitProductInventory"></e-combobox>
+                <e-text-box :control="txtUnitProductInventory" v-model="item.UnitProductInventory"></e-text-box>
               </td>
               <td>
                 <e-number :control="txtBeginInventory" v-model="item.BeginInventory"></e-number>
               </td>
               <td>
-                <e-number :control="txtUpdateInventory" v-model="item.UpdateInventory"></e-number>
+                <e-number @blur="ShowPaymentInventory($event, item)" :control="txtUpdateInventory"
+                  v-model="item.UpdateInventory"></e-number>
               </td>
               <td>
                 <e-number :control="txtEndInventory" v-model="item.EndInventory"></e-number>

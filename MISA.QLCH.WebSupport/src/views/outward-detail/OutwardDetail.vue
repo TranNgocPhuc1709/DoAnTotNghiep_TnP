@@ -20,6 +20,8 @@ import OutwardDetail from '@store-src/models/outward/OutwardDetail';
 import Guid from '@library-src/utilities/types/Guid';
 import Button from '@library-src/models/qlch_control/qlch_button/Button';
 import EButton from "qlch_control/EButton";
+import Product from '@store-src/models/product/Product';
+import DictionaryStock from '@store-src/models/dictionary-stock/DictionaryStock';
 
 export default {
 
@@ -42,20 +44,15 @@ export default {
 
   data() {
     const lstOutwardDetail: Ref<Array<OutwardDetail>> = ref(new Array<OutwardDetail>());
+    const lstCodeProductOutWard = LocalStorageLibrary.getByKey<Array<Product>>("Product") ?? new Array<Product>();
+    const lstWarehouseProductOutWard = LocalStorageLibrary.getByKey<Array<DictionaryStock>>("dictionaryStock") ?? new Array<DictionaryStock>();
     const txtCodeProductOutWard: Ref<Combobox> = ref(new Combobox({
       fieldText: "",
       require: false,
       maxLength: 255,
-      data: [
-        {
-          value: "A123",
-          display: "A123"
-        },
-        {
-          value: "B123",
-          display: "B123"
-        }
-      ],
+      data: lstCodeProductOutWard,
+      valueField: "CodeProductList",
+      displayField: "CodeProductList",
       classType: "secondary"
     }));
     const txtNameProductOutWard: Ref<TextBox> = ref(new TextBox({
@@ -68,33 +65,16 @@ export default {
       fieldText: "",
       require: false,
       maxLength: 255,
-      data: [
-        {
-          value: "Kho 1",
-          display: "Kho 1"
-        },
-        {
-          value: "Kho 2",
-          display: "Kho 2"
-        }
-      ],
+      data: lstWarehouseProductOutWard,
+      valueField: "NameStore",
+      displayField: "NameStore",
       classType: "secondary"
     }));
-    const txtUnitProductOutWard: Ref<Combobox> = ref(new Combobox({
+    const txtUnitProductOutWard: Ref<TextBox> = ref(new TextBox({
       fieldText: "",
       require: false,
       maxLength: 255,
-      data: [
-        {
-          value: "Chiếc",
-          display: "Chiếc"
-        },
-        {
-          value: "Bộ",
-          display: "Bộ"
-        }
-      ],
-      classType: "secondary"
+      classType: "tertiary"
     }));
     const txtNumberProductOutWard: Ref<NumberModel> = ref(new NumberModel({
       fieldText: "",
@@ -304,8 +284,65 @@ export default {
           return detail.OutWardDetailId != item.OutWardDetailId;
         })
       }
+      ///tinh lai tong tien
+      if (me.masterData) {
+        me.masterData['TotalMoneyOutward'] = 0;
+        me.masterData['TotalQuantityOutward'] = 0;
+      }
+
+      for (let index = 0; index < me.lstOutwardDetail.length; index++) {
+        const element = me.lstOutwardDetail[index];
+        if (me.masterData && element) {
+          me.masterData['TotalMoneyOutward'] += element.PaymentOutWard ?? 0;
+          me.masterData['TotalQuantityOutward'] += element.NumberProductOutWard ?? 0;
+
+        }
+      }
+    },
+
+    ShowNameProduct(value: any, item: OutwardDetail) {
+      const me = this;
+      const listProduct = LocalStorageLibrary.getByKey<Array<Product>>("Product");
+      if (listProduct && listProduct.length > 0 && me.masterData) {
+        // const vendorCode = me.masterData['SupplierOrder'];
+        if (value) {
+          let rowProductByProductCode = new Product();
+          for (let index = 0; index < listProduct.length; index++) {
+            const rowProductDetail = listProduct[index];
+            if (rowProductDetail.CodeProductList == value) {
+              rowProductByProductCode = rowProductDetail;
+              break;
+            }
+          }
+          if (rowProductByProductCode) {
+            item.NameProductOutWard = rowProductByProductCode.NameProductList;
+            item.UnitProductOutWard = rowProductByProductCode.UnitProductList;
+            item.UnitPriceOutWard = rowProductByProductCode.PurchasePriceProductList;
+          }
+        }
+      }
+    },
 
 
+    ShowPaymentOutward(value: number, item: OutwardDetail) {
+      const me = this;
+      if (item.UnitPriceOutWard) {
+        item.PaymentOutWard = item.UnitPriceOutWard * value;
+      }
+      ///tinh lai tong tien
+      if (me.masterData) {
+        me.masterData['TotalMoneyOutward'] = 0;
+        me.masterData['TotalQuantityOutward'] = 0;
+      }
+
+      for (let index = 0; index < me.lstOutwardDetail.length; index++) {
+        const element = me.lstOutwardDetail[index];
+        if (me.masterData && element) {
+          me.masterData['TotalMoneyOutward'] += element.PaymentOutWard ?? 0;
+          me.masterData['TotalQuantityOutward'] += element.NumberProductOutWard ?? 0;
+
+        }
+      }
     },
 
     saveData() {
@@ -345,7 +382,6 @@ export default {
               LocalStorageLibrary.setByKey("outwardDetail", listOutwardDetail);
             }
           }
-
         }
         if (me.masterData.editMode == 2) {
           listOutward = LocalStorageLibrary.getByKey<Array<Outward>>("outwardItem");

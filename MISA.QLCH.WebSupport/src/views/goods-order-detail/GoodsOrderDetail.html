@@ -68,17 +68,18 @@
             <tr v-if="lstGoodsOrderDetail?.length > 0" v-for="item in lstGoodsOrderDetail"
               :key="item.GoodsOrderDetailId">
               <td>
-                <e-combobox @dataChange="ShowNameProduct" :control="txtCodeProductOrder"
+                <e-combobox @dataChange="ShowNameProduct($event, item)" :control="txtCodeProductOrder"
                   v-model="item.CodeProductOrder"></e-combobox>
               </td>
               <td>
                 <e-text-box :control="txtNameProductOrder" v-model="item.NameProductOrder"></e-text-box>
               </td>
               <td>
-                <e-combobox :control="txtUnitProductOrder" v-model="item.UnitProductOrder"></e-combobox>
+                <e-text-box :control="txtUnitProductOrder" v-model="item.UnitProductOrder"></e-text-box>
               </td>
               <td>
-                <e-number :control="txtNumberProductOrder" v-model="item.NumberProductOrder"></e-number>
+                <e-number @blur="ShowPaymentOrder($event, item)" :control="txtNumberProductOrder"
+                  v-model="item.NumberProductOrder"></e-number>
               </td>
               <td>
                 <e-number :control="txtUnitPriceOrder" v-model="item.UnitPriceOrder"></e-number>

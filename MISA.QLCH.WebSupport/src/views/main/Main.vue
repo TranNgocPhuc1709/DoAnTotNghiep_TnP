@@ -11,6 +11,8 @@ import ECombobox from "qlch_control/ECombobox";
 import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
 import { Ref, ref } from 'vue';
 import router from '@src/router';
+import Branch from '@store-src/models/branch/Branch';
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
 export default {
     components: {
         LeftMenu, ECombobox,
@@ -18,6 +20,7 @@ export default {
 
     setup() {
         /**Khai báo hằng số pages là 1 mảng chứa các giá trị của đối tượng menu */
+        const lstCbbStore = LocalStorageLibrary.getByKey<Array<Branch>>("branch") ?? new Array<Branch>();
         const pages: Array<Menu> = new Array(
             {
 
@@ -206,23 +209,11 @@ export default {
             },
         );
         const cbbStore: Ref<Combobox> = ref(new Combobox({
-            require: true,
+            require: false,
             readOnly: false,
-            data: [
-                {
-                    value: 1,
-                    display: "CH1"
-                },
-                {
-                    value: 2,
-                    display: "CH2"
-                },
-                {
-                    value: 3,
-                    display: "CH3"
-                },
-
-            ]
+            data: lstCbbStore,
+            valueField: "NameBranch",
+            displayField: "NameBranch",
             // require: true
         }));
         return {
@@ -266,7 +257,7 @@ export default {
             }
 
 
-            me.cbbStore.value = 1;
+            me.cbbStore.valueField = "";
 
         } catch (error) {
             Log.ErrorLog(error as Error);

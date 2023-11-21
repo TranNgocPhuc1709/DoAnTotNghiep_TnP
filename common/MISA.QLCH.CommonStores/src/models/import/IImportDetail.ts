@@ -4,7 +4,7 @@ export default interface IImportDetail {
     NameProductImport?: string;
     WarehouseProductImport?: string;
     UnitProductImport?: string;
-    NumberProductImport?: string;
+    NumberProductImport?: number;
     UnitPriceImport?: number;
     PaymentImport?: number;
     ImportId?: string;

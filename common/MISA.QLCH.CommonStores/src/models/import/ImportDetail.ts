@@ -19,7 +19,7 @@ export default class ImportDetail {
     NameProductImport?: string;
     WarehouseProductImport?: string;
     UnitProductImport?: string;
-    NumberProductImport?: string;
+    NumberProductImport?: number;
     UnitPriceImport?: number;
     PaymentImport?: number;
     ImportDetailId?: string;

@@ -20,7 +20,7 @@ export default class OutwardDetail {
     NameProductOutWard?: string;
     WarehouseProductOutWard?: string;
     UnitProductOutWard?: string;
-    NumberProductOutWard?: string;
+    NumberProductOutWard?: number;
     UnitPriceOutWard?: number;
     PaymentOutWard?: number;
     OutwardId?: string;

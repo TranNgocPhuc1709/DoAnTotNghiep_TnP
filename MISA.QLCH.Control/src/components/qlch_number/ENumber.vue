@@ -149,7 +149,7 @@ export default {
 
                 me.activeControl(me.control);
                 me.setStatusControlByModel(me.control, me.modelValue);
-                me.$emit('blur');
+                me.$emit('blur', me.modelValue);
             } catch (error) {
                 Log.ErrorLog(error as Error);
             }

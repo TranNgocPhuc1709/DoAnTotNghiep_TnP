@@ -13,7 +13,7 @@
     </div>
     <div class="d-flex">
       <div class="qlch-input-default item-detail flex-1">
-        <e-combobox :control="bindingControl[`txtCustomerGroupList`]"
+        <e-combobox @dataChange="ShowNameCustomerCategory" :control=" bindingControl[`txtCustomerGroupList`]"
           v-model="masterData[bindingControl[`txtCustomerGroupList`].bindingIndex]"></e-combobox>
       </div>
       <div class="qlch-input-default item-detail flex-1">
@@ -41,7 +41,7 @@
     </div>
     <div class="d-flex">
       <div class="qlch-input-default item-detail flex-1">
-        <e-combobox :control="bindingControl[`txtCodeEmployeeCustomer`]"
+        <e-combobox @dataChange="ShowNameEmployee" :control="bindingControl[`txtCodeEmployeeCustomer`]"
           v-model="masterData[bindingControl[`txtCodeEmployeeCustomer`].bindingIndex]"></e-combobox>
       </div>
       <div class="qlch-input-default item-detail flex-1">

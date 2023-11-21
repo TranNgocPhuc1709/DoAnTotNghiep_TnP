@@ -112,36 +112,31 @@ export default {
     buildGridMasterColumn(): Array<Column> {
       console.log("DEV: Override Function buildGridMasterColumn return list Column in Grid");
       return Array(
-        // new Column({
-        //   fieldText: "Ngày",
-        //   dataIndex: "Column1",
-        //   width: 120,
-        // }),
-        // new Column({
-        //   fieldText: "Tiền hàng (1)",
-        //   dataIndex: "Column2",
-        //   width: 260
-        // }),
-        // new Column({
-        //   fieldText: "Tiền phí (2)",
-        //   dataIndex: "Column3",
-        //   width: 260
-        // }),
-        // new Column({
-        //   fieldText: "Khuyến mại (3)",
-        //   dataIndex: "Column4",
-        //   width: 260
-        // }),
-        // new Column({
-        //   fieldText: "Tổng (4) = (1) +(2) - (3)",
-        //   dataIndex: "Column5",
-        //   minWidth: 260,
-        //   flex: 1
-        // })
         new Column({
           fieldText: "Ngày",
           dataIndex: "DateSales",
           width: 120,
+        }),
+        new Column({
+          fieldText: "Giờ",
+          dataIndex: "TimesSales",
+          width: 120,
+        }),
+        new Column({
+          fieldText: "Số hóa đơn",
+          dataIndex: "NumberBillsSales",
+          width: 200,
+        }),
+        new Column({
+          fieldText: "Trạng thái",
+          dataIndex: "StatusBillsSales",
+          width: 220,
+        }),
+        new Column({
+          fieldText: "Tổng (4) = (1) +(2) - (3)",
+          dataIndex: "TotalSales",
+          minWidth: 260,
+          flex: 1
         }),
         new Column({
           fieldText: "Tiền hàng (1)",
@@ -158,12 +153,7 @@ export default {
           dataIndex: "PromotionSales",
           width: 260
         }),
-        new Column({
-          fieldText: "Tổng (4) = (1) +(2) - (3)",
-          dataIndex: "TotalSales",
-          minWidth: 260,
-          flex: 1
-        })
+
       )
     },
     /**
@@ -175,6 +165,9 @@ export default {
       return [
         {
           DateSales: "27/10/2023",
+          TimesSales: "20:00",
+          NumberBillsSales: "2131321232",
+          StatusBillsSales: "Đã Xác Nhận",
           RevenueMoneySales: "100000",
           ExpenseMoneySales: "20000",
           PromotionSales: "0",

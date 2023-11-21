@@ -14,9 +14,6 @@ export default class GoodsOrderDetail {
         }
         me.GoodsOrderDetailId = Guid.NewGuid();
     }
-
-
-
     CodeProductOrder?: string;
     NameProductOrder?: string;
     UnitProductOrder?: string;

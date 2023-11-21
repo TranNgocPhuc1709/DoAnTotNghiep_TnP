@@ -119,7 +119,7 @@ export default {
         }),
         new Column({
           fieldText: "Nhân viên mua hàng",
-          dataIndex: "StaffImport",
+          dataIndex: "StaffNameImport",
           minWidth: 260,
           flex: 1
         }),

@@ -13,7 +13,7 @@
         <div class="form-return-detail-left flex-1">
           <span class="heading-return-info">THÔNG TIN CHUNG</span>
           <div class="qlch-input-default item-detail">
-            <e-combobox :control="bindingControl[`txtSupplierReturn`]"
+            <e-combobox @dataChange="ShowNameVendor" :control="bindingControl[`txtSupplierReturn`]"
               v-model="masterData[bindingControl[`txtSupplierReturn`].bindingIndex]"></e-combobox>
           </div>
           <div class="qlch-input-default item-detail">
@@ -68,7 +68,8 @@
             <tbody>
               <tr v-if="lstReturnDetail?.length > 0" v-for="item in lstReturnDetail" :key="item.ReturnDetailId">
                 <td>
-                  <e-combobox :control="txtCodeProductReturn" v-model="item.CodeProductReturn"></e-combobox>
+                  <e-combobox @dataChange="ShowNameProduct($event, item)" :control="txtCodeProductReturn"
+                    v-model="item.CodeProductReturn"></e-combobox>
                 </td>
                 <td>
                   <e-text-box :control="txtNameProductReturn" v-model="item.NameProductReturn"></e-text-box>
@@ -77,10 +78,11 @@
                   <e-combobox :control="txtWarehouseProductReturn" v-model="item.WarehouseProductReturn"></e-combobox>
                 </td>
                 <td>
-                  <e-combobox :control="txtUnitProductReturn" v-model="item.UnitProductReturn"></e-combobox>
+                  <e-text-box :control="txtUnitProductReturn" v-model="item.UnitProductReturn"></e-text-box>
                 </td>
                 <td>
-                  <e-number :control="txtNumberProductReturn" v-model="item.NumberProductReturn"></e-number>
+                  <e-number @blur="ShowPaymentReturn($event, item)" :control="txtNumberProductReturn"
+                    v-model="item.NumberProductReturn"></e-number>
                 </td>
                 <td>
                   <e-number :control="txtUnitPriceReturn" v-model="item.UnitPriceReturn"></e-number>
@@ -96,7 +98,7 @@
           </table>
         </div>
       </div>
-      <div class="synthetic-footer d-flex-vcenter">
+      <div class="synthetic-footer d-flex-vcenter d-flex-sp-center">
         <div class="main-synthetic d-flex-vcenter">
           <e-number :control="bindingControl[`txtTotalQuantityReturn`]"
             v-model="masterData[bindingControl[`txtTotalQuantityReturn`].bindingIndex]"></e-number>
@@ -113,7 +115,7 @@
         <div class="form-return-detail-left flex-1">
           <span class="heading-return-info">THÔNG TIN CHUNG</span>
           <div class="qlch-input-default item-detail">
-            <e-combobox :control="bindingControl[`txtSupplierReturn`]"
+            <e-combobox @dataChange="ShowNameVendor" :control="bindingControl[`txtSupplierReturn`]"
               v-model="masterData[bindingControl[`txtSupplierReturn`].bindingIndex]"></e-combobox>
           </div>
           <div class="qlch-input-default item-detail">
@@ -129,7 +131,7 @@
               v-model="masterData[bindingControl[`txtReasonReturn`].bindingIndex]"></e-text-box>
           </div>
           <div class="qlch-input-default item-detail">
-            <e-combobox :control="bindingControl[`txtRevenueOfficer`]"
+            <e-combobox @dataChange="ShowNameEmployee" :control="bindingControl[`txtRevenueOfficer`]"
               v-model="masterData[bindingControl[`txtRevenueOfficer`].bindingIndex]"></e-combobox>
           </div>
           <div class="qlch-input-default item-detail">
@@ -171,7 +173,8 @@
             <tbody>
               <tr v-if="lstReturnDetail?.length > 0" v-for="item in lstReturnDetail" :key="item.ReturnDetailId">
                 <td>
-                  <e-combobox :control="txtCodeProductReturn" v-model="item.CodeProductReturn"></e-combobox>
+                  <e-combobox @dataChange="ShowNameProduct($event, item)" :control="txtCodeProductReturn"
+                    v-model="item.CodeProductReturn"></e-combobox>
                 </td>
                 <td>
                   <e-text-box :control="txtNameProductReturn" v-model="item.NameProductReturn"></e-text-box>
@@ -180,10 +183,11 @@
                   <e-combobox :control="txtWarehouseProductReturn" v-model="item.WarehouseProductReturn"></e-combobox>
                 </td>
                 <td>
-                  <e-combobox :control="txtUnitProductReturn" v-model="item.UnitProductReturn"></e-combobox>
+                  <e-text-box :control="txtUnitProductReturn" v-model="item.UnitProductReturn"></e-text-box>
                 </td>
                 <td>
-                  <e-number :control="txtNumberProductReturn" v-model="item.NumberProductReturn"></e-number>
+                  <e-number @blur="ShowPaymentReturn($event, item)" :control="txtNumberProductReturn"
+                    v-model="item.NumberProductReturn"></e-number>
                 </td>
                 <td>
                   <e-number :control="txtUnitPriceReturn" v-model="item.UnitPriceReturn"></e-number>
@@ -199,7 +203,7 @@
           </table>
         </div>
       </div>
-      <div class="synthetic-footer d-flex-vcenter">
+      <div class="synthetic-footer d-flex-vcenter d-flex-sp-center">
         <div class="main-synthetic d-flex-vcenter">
           <e-number :control="bindingControl[`txtTotalQuantityReturn`]"
             v-model="masterData[bindingControl[`txtTotalQuantityReturn`].bindingIndex]"></e-number>

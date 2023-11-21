@@ -55,7 +55,6 @@ export default {
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "CodeUnitList",
-
         }),
         "txtExplainUnitList": new TextBox({
           fieldText: "Diễn Giải",

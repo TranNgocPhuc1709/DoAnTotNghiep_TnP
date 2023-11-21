@@ -19,6 +19,8 @@ import Inward from '@store-src/models/inward/Inward';
 import InwardDetail from '@store-src/models/inward/InwardDetail';
 import Button from '@library-src/models/qlch_control/qlch_button/Button';
 import EButton from "qlch_control/EButton";
+import Product from '@store-src/models/product/Product';
+import DictionaryStock from '@store-src/models/dictionary-stock/DictionaryStock';
 
 export default {
 
@@ -40,20 +42,15 @@ export default {
 
   data() {
     const lstInwardDetail: Ref<Array<InwardDetail>> = ref(new Array<InwardDetail>());
+    const lstCodeProductInward = LocalStorageLibrary.getByKey<Array<Product>>("Product") ?? new Array<Product>();
+    const lstWarehouseProductInward = LocalStorageLibrary.getByKey<Array<DictionaryStock>>("dictionaryStock") ?? new Array<DictionaryStock>();
     const txtCodeProductInward: Ref<Combobox> = ref(new Combobox({
       fieldText: "",
       require: false,
       maxLength: 255,
-      data: [
-        {
-          value: "A123",
-          display: "A123"
-        },
-        {
-          value: "B123",
-          display: "B123"
-        }
-      ],
+      data: lstCodeProductInward,
+      valueField: "CodeProductList",
+      displayField: "CodeProductList",
       classType: "secondary"
     }));
     const txtNameProductInward: Ref<TextBox> = ref(new TextBox({
@@ -66,33 +63,16 @@ export default {
       fieldText: "",
       require: false,
       maxLength: 255,
-      data: [
-        {
-          value: "Kho 1",
-          display: "Kho 1"
-        },
-        {
-          value: "Kho 2",
-          display: "Kho 2"
-        }
-      ],
+      data: lstWarehouseProductInward,
+      valueField: "NameStore",
+      displayField: "NameStore",
       classType: "secondary"
     }));
-    const txtUnitProductInward: Ref<Combobox> = ref(new Combobox({
+    const txtUnitProductInward: Ref<TextBox> = ref(new TextBox({
       fieldText: "",
       require: false,
       maxLength: 255,
-      data: [
-        {
-          value: "Chiếc",
-          display: "Chiếc"
-        },
-        {
-          value: "Bộ",
-          display: "Bộ"
-        }
-      ],
-      classType: "secondary"
+      classType: "tertiary"
     }));
     const txtNumberProductInward: Ref<NumberModel> = ref(new NumberModel({
       fieldText: "",
@@ -294,6 +274,66 @@ export default {
         me.lstInwardDetail = me.lstInwardDetail.filter(detail => {
           return detail.InwardDetailId != item.InwardDetailId;
         })
+      }
+      // Tính lại tổng tiền
+      if (me.masterData) {
+        me.masterData['TotalMoneyInward'] = 0;
+        me.masterData['TotalInward'] = 0;
+      }
+
+      for (let index = 0; index < me.lstInwardDetail.length; index++) {
+        const element = me.lstInwardDetail[index];
+        if (me.masterData && element) {
+
+          me.masterData['TotalMoneyInward'] += element.PaymentInward ?? 0;
+          me.masterData['TotalInward'] += element.NumberProductInward ?? 0;
+        }
+      }
+    },
+
+
+    ShowNameProduct(value: any, item: InwardDetail) {
+      const me = this;
+      const listProduct = LocalStorageLibrary.getByKey<Array<Product>>("Product");
+      if (listProduct && listProduct.length > 0 && me.masterData) {
+        // const vendorCode = me.masterData['SupplierOrder'];
+        if (value) {
+          let rowProductByProductCode = new Product();
+          for (let index = 0; index < listProduct.length; index++) {
+            const rowProductDetail = listProduct[index];
+            if (rowProductDetail.CodeProductList == value) {
+              rowProductByProductCode = rowProductDetail;
+              break;
+            }
+          }
+          if (rowProductByProductCode) {
+            item.NameProductInward = rowProductByProductCode.NameProductList;
+            item.UnitProductInward = rowProductByProductCode.UnitProductList;
+            item.UnitPriceInward = rowProductByProductCode.PurchasePriceProductList;
+          }
+        }
+      }
+    },
+
+    ShowPaymentInward(value: number, item: InwardDetail) {
+      const me = this;
+      if (item.UnitPriceInward) {
+        item.PaymentInward = item.UnitPriceInward * value;
+
+      }
+
+      if (me.masterData) {
+        me.masterData['TotalMoneyInward'] = 0;
+        me.masterData['TotalInward'] = 0;
+      }
+
+      for (let index = 0; index < me.lstInwardDetail.length; index++) {
+        const element = me.lstInwardDetail[index];
+        if (me.masterData && element) {
+
+          me.masterData['TotalMoneyInward'] += element.PaymentInward ?? 0;
+          me.masterData['TotalInward'] += element.NumberProductInward ?? 0;
+        }
       }
     },
 

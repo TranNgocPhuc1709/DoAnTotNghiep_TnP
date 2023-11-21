@@ -20,7 +20,7 @@ export default class ReturnDetail {
     NameProductReturn?: string;
     WarehouseProductReturn?: string;
     UnitProductReturn?: string;
-    NumberProductReturn?: string;
+    NumberProductReturn?: number;
     UnitPriceReturn?: number;
     PaymentReturn?: number;
     ReturnId?: string;

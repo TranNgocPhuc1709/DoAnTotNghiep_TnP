@@ -13,7 +13,7 @@
         </div>
 
         <div class="qlch-input-default item-detail">
-          <e-combobox :control="bindingControl[`txtGroupProductList`]"
+          <e-combobox @dataChange="ShowNameGroupCategory" :control="bindingControl[`txtGroupProductList`]"
             v-model="masterData[bindingControl[`txtGroupProductList`].bindingIndex]"></e-combobox>
         </div>
         <div class="qlch-input-default item-detail">

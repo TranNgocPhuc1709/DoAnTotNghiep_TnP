@@ -44,7 +44,6 @@ export default {
 
   data() {
     const lstGoodsOrderDetail: Ref<Array<GoodsOrderDetail>> = ref(new Array<GoodsOrderDetail>());
-
     const lstCodeProductOrder = LocalStorageLibrary.getByKey<Array<Product>>("Product") ?? new Array<Product>();
     const txtCodeProductOrder: Ref<Combobox> = ref(new Combobox({
       fieldText: "",
@@ -61,21 +60,27 @@ export default {
       maxLength: 255,
       classType: "tertiary"
     }));
-    const txtUnitProductOrder: Ref<Combobox> = ref(new Combobox({
+    // const txtUnitProductOrder: Ref<Combobox> = ref(new Combobox({
+    //   fieldText: "",
+    //   require: false,
+    //   maxLength: 255,
+    //   data: [
+    //     {
+    //       value: "Chiếc",
+    //       display: "Chiếc"
+    //     },
+    //     {
+    //       value: "Bộ",
+    //       display: "Bộ"
+    //     }
+    //   ],
+    //   classType: "secondary"
+    // }));
+    const txtUnitProductOrder: Ref<TextBox> = ref(new TextBox({
       fieldText: "",
       require: false,
       maxLength: 255,
-      data: [
-        {
-          value: "Chiếc",
-          display: "Chiếc"
-        },
-        {
-          value: "Bộ",
-          display: "Bộ"
-        }
-      ],
-      classType: "secondary"
+      classType: "tertiary"
     }));
     const txtNumberProductOrder: Ref<NumberModel> = ref(new NumberModel({
       fieldText: "",
@@ -298,7 +303,19 @@ export default {
         })
       }
 
+      //Tính lại tổng tiền
+      if (me.masterData) {
+        me.masterData['FullMoneyOrder'] = 0;
+        me.masterData['TotalOrder'] = 0;
+      }
 
+      for (let index = 0; index < me.lstGoodsOrderDetail.length; index++) {
+        const element = me.lstGoodsOrderDetail[index];
+        if (me.masterData) {
+          me.masterData['FullMoneyOrder'] += element.PaymentOrder ?? 0;
+          me.masterData['TotalOrder'] += element.NumberProductOrder ?? 0;
+        }
+      }
     },
 
     ShowNameVendor(value: any) {
@@ -347,7 +364,7 @@ export default {
       }
 
     },
-    ShowNameProduct(value: any) {
+    ShowNameProduct(value: any, item: GoodsOrderDetail) {
       const me = this;
       const listProduct = LocalStorageLibrary.getByKey<Array<Product>>("Product");
       if (listProduct && listProduct.length > 0 && me.masterData) {
@@ -362,11 +379,36 @@ export default {
             }
           }
           if (rowProductByProductCode) {
-            me.masterData['NameProductOrder'] = rowProductByProductCode.NameProductList;
+            item.NameProductOrder = rowProductByProductCode.NameProductList;
+            item.UnitProductOrder = rowProductByProductCode.UnitProductList;
+            item.UnitPriceOrder = rowProductByProductCode.PurchasePriceProductList;
           }
         }
       }
     },
+
+    ShowPaymentOrder(value: number, item: GoodsOrderDetail) {
+
+      const me = this;
+      if (item.UnitPriceOrder) {
+        item.PaymentOrder = item.UnitPriceOrder * value;
+      }
+      ///tinh lai tong tien
+      if (me.masterData) {
+        me.masterData['FullMoneyOrder'] = 0;
+        me.masterData['TotalOrder'] = 0;
+      }
+
+      for (let index = 0; index < me.lstGoodsOrderDetail.length; index++) {
+        const element = me.lstGoodsOrderDetail[index];
+        if (me.masterData && element) {
+
+          me.masterData['FullMoneyOrder'] += element.PaymentOrder ?? 0;
+          me.masterData['TotalOrder'] += element.NumberProductOrder ?? 0;
+        }
+      }
+    },
+
 
     saveData() {
       const me = this;

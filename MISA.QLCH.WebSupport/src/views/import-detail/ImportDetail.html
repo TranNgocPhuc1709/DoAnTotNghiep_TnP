@@ -13,7 +13,7 @@
         <div class="form-import-detail-left flex-1">
           <span class="heading-import-info">THÔNG TIN CHUNG</span>
           <div class="qlch-input-default item-detail">
-            <e-combobox :control="bindingControl[`txtSupplierImport`]"
+            <e-combobox @dataChange="ShowNameVendor" :control="bindingControl[`txtSupplierImport`]"
               v-model="masterData[bindingControl[`txtSupplierImport`].bindingIndex]"></e-combobox>
           </div>
           <div class="qlch-input-default item-detail">
@@ -29,7 +29,7 @@
               v-model="masterData[bindingControl[`txtExplainImport`].bindingIndex]"></e-text-box>
           </div>
           <div class="qlch-input-default item-detail">
-            <e-combobox :control="bindingControl[`txtStaffImport`]"
+            <e-combobox @dataChange="ShowNameEmployee" :control="bindingControl[`txtStaffImport`]"
               v-model="masterData[bindingControl[`txtStaffImport`].bindingIndex]"></e-combobox>
           </div>
           <div class="qlch-input-default item-detail">
@@ -75,9 +75,9 @@
             <tbody>
               <tr v-if="lstImportDetail?.length > 0" v-for="item in lstImportDetail" :key="item.ImportDetailId">
                 <td>
-                  <e-combobox :control="txtCodeProductImport" v-model="item.CodeProductImport"></e-combobox>
+                  <e-combobox @dataChange="ShowNameProduct($event, item)" :control="txtCodeProductImport"
+                    v-model="item.CodeProductImport"></e-combobox>
                 </td>
-
                 <td>
                   <e-text-box :control="txtNameProductImport" v-model="item.NameProductImport"></e-text-box>
                 </td>
@@ -86,16 +86,15 @@
 
                 </td>
                 <td>
-                  <e-combobox :control="txtUnitProductImport" v-model="item.UnitProductImport"></e-combobox>
+                  <e-text-box :control="txtUnitProductImport" v-model="item.UnitProductImport"></e-text-box>
 
                 </td>
                 <td>
-                  <e-number :control="txtNumberProductImport" v-model="item.NumberProductImport"></e-number>
-
+                  <e-number @blur="ShowPaymentImport($event, item)" :control="txtNumberProductImport"
+                    v-model="item.NumberProductImport"></e-number>
                 </td>
                 <td>
                   <e-number :control="txtUnitPriceImport" v-model="item.UnitPriceImport"></e-number>
-
                 </td>
                 <td>
                   <e-number :control="txtPaymentImport" v-model="item.PaymentImport"></e-number>
@@ -129,7 +128,7 @@
         <div class="form-import-detail-left flex-1">
           <span class="heading-import-info">THÔNG TIN CHUNG</span>
           <div class="qlch-input-default item-detail">
-            <e-combobox :control="bindingControl[`txtSupplierImport`]"
+            <e-combobox @dataChange="ShowNameVendor" :control="bindingControl[`txtSupplierImport`]"
               v-model="masterData[bindingControl[`txtSupplierImport`].bindingIndex]"></e-combobox>
           </div>
           <div class="qlch-input-default item-detail">
@@ -188,7 +187,8 @@
             <tbody>
               <tr v-if="lstImportDetail?.length > 0" v-for="item in lstImportDetail" :key="item.ImportDetailId">
                 <td>
-                  <e-combobox :control="txtCodeProductImport" v-model="item.CodeProductImport"></e-combobox>
+                  <e-combobox @dataChange="ShowNameProduct($event, item)" :control="txtCodeProductImport"
+                    v-model="item.CodeProductImport"></e-combobox>
                 </td>
 
                 <td>
@@ -199,11 +199,12 @@
 
                 </td>
                 <td>
-                  <e-combobox :control="txtUnitProductImport" v-model="item.UnitProductImport"></e-combobox>
+                  <e-text-box :control="txtUnitProductImport" v-model="item.UnitProductImport"></e-text-box>
 
                 </td>
                 <td>
-                  <e-number :control="txtNumberProductImport" v-model="item.NumberProductImport"></e-number>
+                  <e-number @blur="ShowPaymentImport($event, item)" :control="txtNumberProductImport"
+                    v-model="item.NumberProductImport"></e-number>
 
                 </td>
                 <td>
@@ -221,7 +222,7 @@
           </table>
         </div>
       </div>
-      <div class="synthetic-footer d-flex-vcenter">
+      <div class="synthetic-footer d-flex-vcenter d-flex-sp-center">
         <div class="main-synthetic d-flex-vcenter">
           <e-number :control="bindingControl[`txtTotalImport`]"
             v-model="masterData[bindingControl[`txtTotalImport`].bindingIndex]"></e-number>

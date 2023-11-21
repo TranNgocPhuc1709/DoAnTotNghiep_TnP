@@ -19,6 +19,12 @@ import LocalStorageLibrary from '@library-src/utilities/window/local-storage/Loc
 import Guid from '@library-src/utilities/types/Guid';
 import Button from '@library-src/models/qlch_control/qlch_button/Button';
 import EButton from "qlch_control/EButton";
+import DictionaryStock from '@store-src/models/dictionary-stock/DictionaryStock';
+import Product from '@store-src/models/product/Product';
+import ImportDetail from '@store-src/models/import/ImportDetail';
+import ReturnDetail from '@store-src/models/return/ReturnDetail';
+import InwardDetail from '@store-src/models/inward/InwardDetail';
+import OutwardDetail from '@store-src/models/outward/OutwardDetail';
 
 export default {
 
@@ -43,20 +49,14 @@ export default {
      */
   data() {
     const lstInventoryDetail: Ref<Array<InventoryDetail>> = ref(new Array<InventoryDetail>());
+    const lstCodeProductInventory = LocalStorageLibrary.getByKey<Array<Product>>("Product") ?? new Array<Product>();
     const txtCodeProductInventory: Ref<Combobox> = ref(new Combobox({
       fieldText: "",
       require: false,
       maxLength: 255,
-      data: [
-        {
-          value: "A123",
-          display: "A123"
-        },
-        {
-          value: "B123",
-          display: "B123"
-        }
-      ],
+      data: lstCodeProductInventory,
+      valueField: "CodeProductList",
+      displayField: "CodeProductList",
       classType: "secondary"
     }));
     const txtNameProductInventory: Ref<TextBox> = ref(new TextBox({
@@ -65,24 +65,15 @@ export default {
       maxLength: 255,
       classType: "tertiary"
     }));
-    const txtUnitProductInventory: Ref<Combobox> = ref(new Combobox({
+    const txtUnitProductInventory: Ref<TextBox> = ref(new TextBox({
       fieldText: "",
       require: false,
       maxLength: 255,
-      data: [
-        {
-          value: "Chiếc",
-          display: "Chiếc"
-        },
-        {
-          value: "Bộ",
-          display: "Bộ"
-        }
-      ],
-      classType: "secondary"
+      classType: "tertiary"
     }));
     const txtBeginInventory: Ref<NumberModel> = ref(new NumberModel({
       fieldText: "",
+      readOnly: true,
       classType: "thirty",
       format: new NumberFormat({
         decimal: ".",
@@ -102,6 +93,7 @@ export default {
     const txtEndInventory: Ref<NumberModel> = ref(new NumberModel({
       fieldText: "",
       classType: "thirty",
+      readOnly: true,
       format: new NumberFormat({
         decimal: ".",
         thousands: ",",
@@ -196,6 +188,7 @@ export default {
     */
     buildBindingControl() {
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
+      const lstWarehouseInventory = LocalStorageLibrary.getByKey<Array<DictionaryStock>>("dictionaryStock") ?? new Array<DictionaryStock>();
       const labelWidth = 115;
       return {
         "txtDateInventory": new DateModel({
@@ -217,16 +210,9 @@ export default {
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          data: [
-            {
-              value: "Kho 1",
-              display: "Kho 1"
-            },
-            {
-              value: "Kho 2",
-              display: "Kho 2"
-            }
-          ],
+          data: lstWarehouseInventory,
+          valueField: "NameStore",
+          displayField: "NameStore",
           bindingIndex: "WarehouseInventory"
         }),
         "txtExplantInventory": new TextBox({
@@ -271,7 +257,7 @@ export default {
         }),
         "txtTotalEndInventory": new NumberModel({
           fieldText: "Tổng số lượng chênh lệch",
-          readOnly: false,
+          readOnly: true,
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
@@ -282,6 +268,30 @@ export default {
           }),
           bindingIndex: "TotalEndInventory"
         })
+      }
+    },
+
+    ShowPaymentInventory(value: number, item: InventoryDetail) {
+      const me = this;
+      if (item.BeginInventory) {
+        item.EndInventory = item.BeginInventory - value;
+      }
+
+      // Tính các giá trị tổng 
+      if (me.masterData) {
+        me.masterData['TotalBeginInventory'] = 0;
+        me.masterData['TotalUpdateInventory'] = 0;
+        me.masterData['TotalEndInventory'] = 0;
+      }
+
+      for (let index = 0; index < me.lstInventoryDetail.length; index++) {
+        const element = me.lstInventoryDetail[index];
+        if (me.masterData && element) {
+
+          me.masterData['TotalBeginInventory'] += element.BeginInventory ?? 0;
+          me.masterData['TotalUpdateInventory'] += element.UpdateInventory ?? 0;
+          me.masterData['TotalEndInventory'] += element.EndInventory ?? 0;
+        }
       }
     },
 
@@ -304,7 +314,177 @@ export default {
           return detail.InventoryDetailId != item.InventoryDetailId;
         })
       }
+      // Tính các giá trị tổng 
+      if (me.masterData) {
+        me.masterData['TotalBeginInventory'] = 0;
+        me.masterData['TotalUpdateInventory'] = 0;
+        me.masterData['TotalEndInventory'] = 0;
+      }
+
+      for (let index = 0; index < me.lstInventoryDetail.length; index++) {
+        const element = me.lstInventoryDetail[index];
+        if (me.masterData && element) {
+
+          me.masterData['TotalBeginInventory'] += element.BeginInventory ?? 0;
+          me.masterData['TotalUpdateInventory'] += element.UpdateInventory ?? 0;
+          me.masterData['TotalEndInventory'] += element.EndInventory ?? 0;
+        }
+      }
     },
+
+    ShowNameProduct(value: any, item: InventoryDetail) {
+      const me = this;
+      const listProduct = LocalStorageLibrary.getByKey<Array<Product>>("Product");
+      if (listProduct && listProduct.length > 0 && me.masterData) {
+        // const vendorCode = me.masterData['SupplierOrder'];
+        if (value) {
+          let rowProductByProductCode = new Product();
+          for (let index = 0; index < listProduct.length; index++) {
+            const rowProductDetail = listProduct[index];
+            if (rowProductDetail.CodeProductList == value) {
+              rowProductByProductCode = rowProductDetail;
+              break;
+            }
+          }
+          if (rowProductByProductCode) {
+            item.NameProductInventory = rowProductByProductCode.NameProductList;
+            item.UnitProductInventory = rowProductByProductCode.UnitProductList;
+          }
+        }
+      }
+
+      //Lấy số lượng hàng trong kho (Thêm Hàng Hóa)
+      const listImportDetail = LocalStorageLibrary.getByKey<Array<ImportDetail>>("importDetail");
+      if (listImportDetail && listImportDetail.length > 0 && me.masterData) {
+        const WareHouse = me.masterData['WarehouseInventory'];
+        item.BeginInventory = 0;
+        for (let index = 0; index < listImportDetail.length; index++) {
+          const element = listImportDetail[index];
+          if (element.CodeProductImport == value && element.WarehouseProductImport == WareHouse && element.NumberProductImport) {
+            item.BeginInventory += element.NumberProductImport;
+
+          }
+        }
+      }
+
+      //Lấy số lượng hàng trong kho (Trả lại Hàng Hóa)
+      const listReturnDetail = LocalStorageLibrary.getByKey<Array<ReturnDetail>>("returnDetail");
+      if (listReturnDetail && listReturnDetail.length > 0 && me.masterData) {
+        const WareHouseReturn = me.masterData['WarehouseInventory'];
+        // item.BeginInventory = 0;
+        for (let index = 0; index < listReturnDetail.length; index++) {
+          const elementReturn = listReturnDetail[index];
+          if (item.BeginInventory && elementReturn.CodeProductReturn == value && elementReturn.WarehouseProductReturn == WareHouseReturn && elementReturn.NumberProductReturn) {
+            item.BeginInventory -= elementReturn.NumberProductReturn;
+          }
+        }
+      }
+
+      //Thêm hàng mới (Nhập kho)
+      const listInwardDetail = LocalStorageLibrary.getByKey<Array<InwardDetail>>("inwardDetail");
+      if (listInwardDetail && listInwardDetail.length > 0 && me.masterData) {
+        const WareHouseInward = me.masterData['WarehouseInventory'];
+        // item.BeginInventory = 0;
+        for (let index = 0; index < listInwardDetail.length; index++) {
+          const elementInward = listInwardDetail[index];
+          if (item.BeginInventory && elementInward.CodeProductInward == value && elementInward.WarehouseProductInward == WareHouseInward && elementInward.NumberProductInward) {
+            item.BeginInventory += elementInward.NumberProductInward;
+          }
+        }
+      }
+      //Bớt hàng hóa (Xuất kho)
+      const listOutwardDetail = LocalStorageLibrary.getByKey<Array<OutwardDetail>>("outwardDetail");
+      if (listOutwardDetail && listOutwardDetail.length > 0 && me.masterData) {
+        const WareHouseOutward = me.masterData['WarehouseInventory'];
+        // item.BeginInventory = 0;
+        for (let index = 0; index < listOutwardDetail.length; index++) {
+          const elementOutward = listOutwardDetail[index];
+          if (item.BeginInventory && elementOutward.CodeProductOutWard == value && elementOutward.WarehouseProductOutWard == WareHouseOutward && elementOutward.NumberProductOutWard) {
+            item.BeginInventory -= elementOutward.NumberProductOutWard;
+          }
+        }
+      }
+
+    },
+
+    SelectWareHouse(item: string) {
+      const me = this;
+      if (me.lstInventoryDetail) {
+        for (let indexListDetail = 0; indexListDetail < me.lstInventoryDetail.length; indexListDetail++) {
+          const elementListDetail = me.lstInventoryDetail[indexListDetail]; //Dòng chi tiết
+          elementListDetail.BeginInventory = 0;
+        }
+      }
+
+      //Nhập Hàng Hóa
+      const listImportDetail = LocalStorageLibrary.getByKey<Array<ImportDetail>>("importDetail");
+      if (listImportDetail && listImportDetail.length > 0) {
+        for (let index = 0; index < listImportDetail.length; index++) {
+          const element = listImportDetail[index]; ///Dòng Nhập Hàng
+          if (element.WarehouseProductImport == item && me.lstInventoryDetail) {
+            for (let indexListDetail = 0; indexListDetail < me.lstInventoryDetail.length; indexListDetail++) {
+              const elementListDetail = me.lstInventoryDetail[indexListDetail]; //Dòng chi tiết
+              if (elementListDetail.CodeProductInventory == element.CodeProductImport && element.NumberProductImport) {
+                elementListDetail.BeginInventory = elementListDetail.BeginInventory ?? 0;
+                elementListDetail.BeginInventory += element.NumberProductImport;
+              }
+            }
+          }
+        }
+      }
+      //Trả Lại Hàng Hóa
+      const listReturnDetail = LocalStorageLibrary.getByKey<Array<ReturnDetail>>("returnDetail");
+      if (listReturnDetail && listReturnDetail.length > 0) {
+        for (let index = 0; index < listReturnDetail.length; index++) {
+          const elementReturn = listReturnDetail[index]; ///Dòng Nhập Hàng
+          if (elementReturn.WarehouseProductReturn == item && me.lstInventoryDetail) {
+            for (let indexListDetail = 0; indexListDetail < me.lstInventoryDetail.length; indexListDetail++) {
+              const elementListReturnDetail = me.lstInventoryDetail[indexListDetail]; //Dòng chi tiết
+              if (elementListReturnDetail.CodeProductInventory == elementReturn.CodeProductReturn && elementReturn.NumberProductReturn) {
+                elementListReturnDetail.BeginInventory = elementListReturnDetail.BeginInventory ?? 0;
+                elementListReturnDetail.BeginInventory -= elementReturn.NumberProductReturn;
+              }
+            }
+          }
+        }
+      }
+
+      //Nhập kho
+      const listInwardDetail = LocalStorageLibrary.getByKey<Array<InwardDetail>>("inwardDetail");
+      if (listInwardDetail && listInwardDetail.length > 0) {
+        for (let index = 0; index < listInwardDetail.length; index++) {
+          const elementInward = listInwardDetail[index]; ///Dòng Nhập Hàng
+          if (elementInward.WarehouseProductInward == item && me.lstInventoryDetail) {
+            for (let indexListDetail = 0; indexListDetail < me.lstInventoryDetail.length; indexListDetail++) {
+              const elementListInwardDetail = me.lstInventoryDetail[indexListDetail]; //Dòng chi tiết
+              if (elementListInwardDetail.CodeProductInventory == elementInward.CodeProductInward && elementInward.NumberProductInward) {
+                elementListInwardDetail.BeginInventory = elementListInwardDetail.BeginInventory ?? 0;
+                elementListInwardDetail.BeginInventory += elementInward.NumberProductInward;
+              }
+            }
+          }
+        }
+      }
+
+      //Xuất kho
+      const listOutwardDetail = LocalStorageLibrary.getByKey<Array<OutwardDetail>>("outwardDetail");
+      if (listOutwardDetail && listOutwardDetail.length > 0) {
+        for (let index = 0; index < listOutwardDetail.length; index++) {
+          const elementOutward = listOutwardDetail[index]; ///Dòng Nhập Hàng
+          if (elementOutward.WarehouseProductOutWard == item && me.lstInventoryDetail) {
+            for (let indexListDetail = 0; indexListDetail < me.lstInventoryDetail.length; indexListDetail++) {
+              const elementListOutwardDetail = me.lstInventoryDetail[indexListDetail]; //Dòng chi tiết
+              if (elementListOutwardDetail.CodeProductInventory == elementOutward.CodeProductOutWard && elementOutward.NumberProductOutWard) {
+                elementListOutwardDetail.BeginInventory = elementListOutwardDetail.BeginInventory ?? 0;
+                elementListOutwardDetail.BeginInventory -= elementOutward.NumberProductOutWard;
+              }
+            }
+          }
+        }
+      }
+
+    },
+
 
     saveData() {
       const me = this;

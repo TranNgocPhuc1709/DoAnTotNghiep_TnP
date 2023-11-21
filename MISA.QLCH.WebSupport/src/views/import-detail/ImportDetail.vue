@@ -20,6 +20,10 @@ import LocalStorageLibrary from '@library-src/utilities/window/local-storage/Loc
 import Guid from '@library-src/utilities/types/Guid';
 import Button from '@library-src/models/qlch_control/qlch_button/Button';
 import EButton from "qlch_control/EButton";
+import Vendor from '@store-src/models/vendor/Vendor';
+import Employee from '@store-src/models/employee/Employee';
+import Product from '@store-src/models/product/Product';
+import DictionaryStock from '@store-src/models/dictionary-stock/DictionaryStock';
 
 export default {
 
@@ -40,20 +44,15 @@ export default {
   },
   data() {
     const lstImportDetail: Ref<Array<ImportDetail>> = ref(new Array<ImportDetail>());
+    const lstCodeProductImport = LocalStorageLibrary.getByKey<Array<Product>>("Product") ?? new Array<Product>();
+    const lstWarehouseProductImport = LocalStorageLibrary.getByKey<Array<DictionaryStock>>("dictionaryStock") ?? new Array<DictionaryStock>();
     const txtCodeProductImport: Ref<Combobox> = ref(new Combobox({
       fieldText: "",
       require: false,
       maxLength: 255,
-      data: [
-        {
-          value: "A123",
-          display: "A123"
-        },
-        {
-          value: "B123",
-          display: "B123"
-        }
-      ],
+      data: lstCodeProductImport,
+      valueField: "CodeProductList",
+      displayField: "CodeProductList",
       classType: "secondary"
     }));
     const txtNameProductImport: Ref<TextBox> = ref(new TextBox({
@@ -66,33 +65,17 @@ export default {
       fieldText: "",
       require: false,
       maxLength: 255,
-      data: [
-        {
-          value: "Kho 1",
-          display: "Kho 1"
-        },
-        {
-          value: "Kho 2",
-          display: "Kho 2"
-        }
-      ],
+      data: lstWarehouseProductImport,
+      valueField: "NameStore",
+      displayField: "NameStore",
       classType: "secondary"
     }));
-    const txtUnitProductImport: Ref<Combobox> = ref(new Combobox({
+    const txtUnitProductImport: Ref<TextBox> = ref(new TextBox({
       fieldText: "",
       require: false,
       maxLength: 255,
-      data: [
-        {
-          value: "Chiếc",
-          display: "Chiếc"
-        },
-        {
-          value: "Bộ",
-          display: "Bộ"
-        }
-      ],
-      classType: "secondary"
+      // data:,
+      classType: "tertiary"
     }));
 
     const txtNumberProductImport: Ref<NumberModel> = ref(new NumberModel({
@@ -199,6 +182,8 @@ export default {
     */
     buildBindingControl() {
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
+      const lstSupplierImport = LocalStorageLibrary.getByKey<Array<Vendor>>("Vendor") ?? new Array<Vendor>();
+      const lstStaffImport = LocalStorageLibrary.getByKey<Array<Employee>>("employee") ?? new Array<Employee>();
       const labelWidth = 115;
       return {
         "txtDateImport": new DateModel({
@@ -220,10 +205,9 @@ export default {
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          data: [{
-            value: "NCC0012",
-            display: "NCC0012"
-          }],
+          data: lstSupplierImport,
+          valueField: "CodeVendor",
+          displayField: "CodeVendor",
           bindingIndex: "SupplierImport"
         }),
         "txtIntoMoneyImport": new NumberModel({
@@ -244,12 +228,9 @@ export default {
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          data: [
-            {
-              value: "TNP",
-              display: "TNP"
-            }
-          ],
+          data: lstStaffImport,
+          valueField: "CodeEmployee",
+          displayField: "CodeEmployee",
           bindingIndex: "StaffImport"
         }),
         "txtExplainImport": new TextBox({
@@ -370,8 +351,22 @@ export default {
           return detail.ImportDetailId != item.ImportDetailId;
         })
       }
+      //Tính lại tổng tiền
+      if (me.masterData) {
+        me.masterData['IntoMoneyImport'] = 0;
+        me.masterData['TotalPaymentImport'] = 0;
+        me.masterData['TotalImport'] = 0;
+      }
 
+      for (let index = 0; index < me.lstImportDetail.length; index++) {
+        const element = me.lstImportDetail[index];
+        if (me.masterData && element) {
 
+          me.masterData['IntoMoneyImport'] += element.PaymentImport ?? 0;
+          me.masterData['TotalPaymentImport'] += element.PaymentImport ?? 0;
+          me.masterData['TotalImport'] += element.NumberProductImport ?? 0;
+        }
+      }
     },
 
 
@@ -397,6 +392,97 @@ export default {
         Log.ErrorLog(error as Error);
       }
     },
+
+    ShowNameVendor(value: any) {
+      const me = this;
+      const listVendor = LocalStorageLibrary.getByKey<Array<Vendor>>("Vendor");
+      if (listVendor && listVendor.length > 0 && me.masterData) {
+        // const vendorCode = me.masterData['SupplierOrder'];
+        if (value) {
+          let rowVendorByVendorCode = new Vendor();
+          for (let index = 0; index < listVendor.length; index++) {
+            const rowVendor = listVendor[index];
+            if (rowVendor.CodeVendor == value) {
+              rowVendorByVendorCode = rowVendor;
+              break;
+            }
+
+          }
+          if (rowVendorByVendorCode) {
+            me.masterData['SupplierNameImport'] = rowVendorByVendorCode.NameVendor;
+          }
+        }
+      }
+    },
+    ShowNameEmployee(value: any) {
+      const me = this;
+      const listEmployee = LocalStorageLibrary.getByKey<Array<Employee>>("employee")
+      if (listEmployee && listEmployee.length > 0 && me.masterData) {
+        // const vendorCode = me.masterData['SupplierOrder'];
+        if (value) {
+          let rowEmployeeByCodeEmployee = new Employee();
+          for (let index = 0; index < listEmployee.length; index++) {
+            const rowVendor = listEmployee[index];
+            if (rowVendor.CodeEmployee == value) {
+              rowEmployeeByCodeEmployee = rowVendor;
+              break;
+            }
+
+          }
+          if (rowEmployeeByCodeEmployee) {
+            me.masterData['StaffNameImport'] = rowEmployeeByCodeEmployee.NameEmployee;
+          }
+        }
+      }
+    },
+
+    ShowNameProduct(value: any, item: ImportDetail) {
+      const me = this;
+      const listProduct = LocalStorageLibrary.getByKey<Array<Product>>("Product");
+      if (listProduct && listProduct.length > 0 && me.masterData) {
+        // const vendorCode = me.masterData['SupplierOrder'];
+        if (value) {
+          let rowProductByProductCode = new Product();
+          for (let index = 0; index < listProduct.length; index++) {
+            const rowProductDetail = listProduct[index];
+            if (rowProductDetail.CodeProductList == value) {
+              rowProductByProductCode = rowProductDetail;
+              break;
+            }
+          }
+          if (rowProductByProductCode) {
+            item.NameProductImport = rowProductByProductCode.NameProductList;
+            item.UnitProductImport = rowProductByProductCode.UnitProductList;
+            item.UnitPriceImport = rowProductByProductCode.PurchasePriceProductList;
+          }
+        }
+      }
+    },
+    ShowPaymentImport(value: number, item: ImportDetail) {
+
+      const me = this;
+      if (item.UnitPriceImport) {
+        item.PaymentImport = item.UnitPriceImport * value;
+
+      }
+      ///tinh lai tong tien
+      if (me.masterData) {
+        me.masterData['IntoMoneyImport'] = 0;
+        me.masterData['TotalPaymentImport'] = 0;
+        me.masterData['TotalImport'] = 0;
+      }
+
+      for (let index = 0; index < me.lstImportDetail.length; index++) {
+        const element = me.lstImportDetail[index];
+        if (me.masterData && element) {
+
+          me.masterData['IntoMoneyImport'] += element.PaymentImport ?? 0;
+          me.masterData['TotalPaymentImport'] += element.PaymentImport ?? 0;
+          me.masterData['TotalImport'] += element.NumberProductImport ?? 0;
+        }
+      }
+    },
+
 
     saveData() {
       const me = this;

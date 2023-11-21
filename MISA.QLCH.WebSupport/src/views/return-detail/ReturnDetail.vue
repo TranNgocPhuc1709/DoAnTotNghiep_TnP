@@ -20,6 +20,10 @@ import LocalStorageLibrary from '@library-src/utilities/window/local-storage/Loc
 import Guid from '@library-src/utilities/types/Guid';
 import Button from '@library-src/models/qlch_control/qlch_button/Button';
 import EButton from "qlch_control/EButton";
+import Vendor from '@store-src/models/vendor/Vendor';
+import Employee from '@store-src/models/employee/Employee';
+import Product from '@store-src/models/product/Product';
+import DictionaryStock from '@store-src/models/dictionary-stock/DictionaryStock';
 
 
 export default {
@@ -41,20 +45,15 @@ export default {
 
   data() {
     const lstReturnDetail: Ref<Array<ReturnDetail>> = ref(new Array<ReturnDetail>());
+    const lstCodeProductReturn = LocalStorageLibrary.getByKey<Array<Product>>("Product") ?? new Array<Product>();
+    const lstWarehouseProductReturn = LocalStorageLibrary.getByKey<Array<DictionaryStock>>("dictionaryStock") ?? new Array<DictionaryStock>();
     const txtCodeProductReturn: Ref<Combobox> = ref(new Combobox({
       fieldText: "",
       require: false,
       maxLength: 255,
-      data: [
-        {
-          value: "A123",
-          display: "A123"
-        },
-        {
-          value: "B123",
-          display: "B123"
-        }
-      ],
+      data: lstCodeProductReturn,
+      valueField: "CodeProductList",
+      displayField: "CodeProductList",
       classType: "secondary"
     }));
     const txtNameProductReturn: Ref<TextBox> = ref(new TextBox({
@@ -67,33 +66,16 @@ export default {
       fieldText: "",
       require: false,
       maxLength: 255,
-      data: [
-        {
-          value: "Kho 1",
-          display: "Kho 1"
-        },
-        {
-          value: "Kho 2",
-          display: "Kho 2"
-        }
-      ],
+      data: lstWarehouseProductReturn,
+      valueField: "NameStore",
+      displayField: "NameStore",
       classType: "secondary"
     }));
-    const txtUnitProductReturn: Ref<Combobox> = ref(new Combobox({
+    const txtUnitProductReturn: Ref<TextBox> = ref(new TextBox({
       fieldText: "",
       require: false,
       maxLength: 255,
-      data: [
-        {
-          value: "Chiếc",
-          display: "Chiếc"
-        },
-        {
-          value: "Bộ",
-          display: "Bộ"
-        }
-      ],
-      classType: "secondary"
+      classType: "tertiary"
     }));
 
     const txtNumberProductReturn: Ref<NumberModel> = ref(new NumberModel({
@@ -198,6 +180,8 @@ export default {
     */
     buildBindingControl() {
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
+      const lstSupplierReturn = LocalStorageLibrary.getByKey<Array<Vendor>>("Vendor") ?? new Array<Vendor>();
+      const lstRevenueOfficerReturn = LocalStorageLibrary.getByKey<Array<Employee>>("employee") ?? new Array<Employee>();
       const labelWidth = 115;
       return {
         "txtDateReturn": new DateModel({
@@ -219,12 +203,9 @@ export default {
           fieldText: "Nhà cung cấp",
           require: false,
           maxLength: 255,
-          data: [
-            {
-              value: "NCC001",
-              display: "NCC001"
-            }
-          ],
+          data: lstSupplierReturn,
+          valueField: "CodeVendor",
+          displayField: "CodeVendor",
           labelWidth: labelWidth,
           bindingIndex: "SupplierReturn"
         }),
@@ -296,12 +277,9 @@ export default {
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          data: [
-            {
-              value: "TNP",
-              display: "TNP"
-            }
-          ],
+          data: lstRevenueOfficerReturn,
+          valueField: "CodeEmployee",
+          displayField: "CodeEmployee",
           bindingIndex: "RevenueOfficerReturn"
         }),
         "txtRevenueOfficerNameReturn": new TextBox({
@@ -374,7 +352,110 @@ export default {
           return detail.ReturnDetailId != item.ReturnDetailId;
         })
       }
+
+      // TÍnh lại giá trị
+      if (me.masterData) {
+        me.masterData['TotalMoneyReturn'] = 0;
+        me.masterData['TotalQuantityReturn'] = 0;
+
+      }
+
+      for (let index = 0; index < me.lstReturnDetail.length; index++) {
+        const element = me.lstReturnDetail[index];
+        if (me.masterData && element) {
+          me.masterData['TotalMoneyReturn'] += element.PaymentReturn ?? 0;
+          me.masterData['TotalQuantityReturn'] += element.NumberProductReturn ?? 0;
+
+        }
+      }
     },
+    ShowNameVendor(value: any) {
+      const me = this;
+      const listVendor = LocalStorageLibrary.getByKey<Array<Vendor>>("Vendor");
+      if (listVendor && listVendor.length > 0 && me.masterData) {
+        // const vendorCode = me.masterData['SupplierOrder'];
+        if (value) {
+          let rowVendorByVendorCode = new Vendor();
+          for (let index = 0; index < listVendor.length; index++) {
+            const rowVendor = listVendor[index];
+            if (rowVendor.CodeVendor == value) {
+              rowVendorByVendorCode = rowVendor;
+              break;
+            }
+
+          }
+          if (rowVendorByVendorCode) {
+            me.masterData['NameSupplierReturn'] = rowVendorByVendorCode.NameVendor;
+          }
+        }
+      }
+    },
+
+    ShowNameEmployee(value: any) {
+      const me = this;
+      const listEmployee = LocalStorageLibrary.getByKey<Array<Employee>>("employee");
+      if (listEmployee && listEmployee.length > 0 && me.masterData) {
+        // const vendorCode = me.masterData['SupplierOrder'];
+        if (value) {
+          let rowEmployeeByEmployeeCode = new Employee();
+          for (let index = 0; index < listEmployee.length; index++) {
+            const rowVendor = listEmployee[index];
+            if (rowVendor.CodeEmployee == value) {
+              rowEmployeeByEmployeeCode = rowVendor;
+              break;
+            }
+          }
+          if (rowEmployeeByEmployeeCode) {
+            me.masterData['RevenueOfficerNameReturn'] = rowEmployeeByEmployeeCode.NameEmployee;
+          }
+        }
+      }
+    },
+    ShowNameProduct(value: any, item: ReturnDetail) {
+      const me = this;
+      const listProduct = LocalStorageLibrary.getByKey<Array<Product>>("Product");
+      if (listProduct && listProduct.length > 0 && me.masterData) {
+        // const vendorCode = me.masterData['SupplierOrder'];
+        if (value) {
+          let rowProductByProductCode = new Product();
+          for (let index = 0; index < listProduct.length; index++) {
+            const rowProductDetail = listProduct[index];
+            if (rowProductDetail.CodeProductList == value) {
+              rowProductByProductCode = rowProductDetail;
+              break;
+            }
+          }
+          if (rowProductByProductCode) {
+            item.NameProductReturn = rowProductByProductCode.NameProductList;
+            item.UnitProductReturn = rowProductByProductCode.UnitProductList;
+            item.UnitPriceReturn = rowProductByProductCode.PurchasePriceProductList;
+          }
+        }
+      }
+    },
+
+    ShowPaymentReturn(value: number, item: ReturnDetail) {
+      const me = this;
+      if (item.UnitPriceReturn) {
+        item.PaymentReturn = item.UnitPriceReturn * value;
+      }
+      ///tinh lai tong tien
+      if (me.masterData) {
+        me.masterData['TotalMoneyReturn'] = 0;
+        me.masterData['TotalQuantityReturn'] = 0;
+
+      }
+
+      for (let index = 0; index < me.lstReturnDetail.length; index++) {
+        const element = me.lstReturnDetail[index];
+        if (me.masterData && element) {
+          me.masterData['TotalMoneyReturn'] += element.PaymentReturn ?? 0;
+          me.masterData['TotalQuantityReturn'] += element.NumberProductReturn ?? 0;
+
+        }
+      }
+    },
+
     saveData() {
       const me = this;
       let listReturn: Array<Return> | null = new Array<Return>;

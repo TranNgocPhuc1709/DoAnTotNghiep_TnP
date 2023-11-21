@@ -18,6 +18,15 @@ import NumberFormat from '@library-src/models/qlch_control/number_format/NumberF
 import ENumber from "qlch_control/ENumber";
 import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
 import EDate from "qlch_control/EDate";
+import Product from '@store-src/models/product/Product';
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import Employee from '@store-src/models/employee/Employee';
+import Customer from '@store-src/models/customer/Customer';
+import BankAccount from '@store-src/models/bank-account/BankAccount';
+import Bank from '@store-src/models/bank/Bank';
+import Voucher from '@store-src/models/voucher/Voucher';
+import ProductDetail from '@store-src/models/product/ProductDetail';
+
 
 export default {
     components: {
@@ -29,8 +38,19 @@ export default {
         EDate
     },
     data() {
+        const lstProductDetail: Ref<Array<ProductDetail>> = ref(new Array<ProductDetail>(
+            // {
+            //     NumberProductList: 123,
+            //     CodeProductList: "SP12356",
+            //     NameProductList: "Quần áo Nam Thu Đông",
+            //     QuantityProductList: 1,
+            //     UnitProductList: "Chiếc",
+            //     PriceProductList: 100000,
+            //     TotalProductList: 200000,
+            // }
+        ));
         return {
-
+            lstProductDetail,
         };
     },
     setup() {
@@ -39,25 +59,12 @@ export default {
         const disableFormShowDelivery: Ref<boolean> = ref(false)
         const disableFormMoreAction: Ref<boolean> = ref(false);
         const disableFormShowVoucher: Ref<boolean> = ref(false);
-
-        //Hàng hóa start
-
-        // const txtProductCode: Ref<TextBox> = ref(new TextBox({
-        //     fieldText: "QA001",
-        //     require: false,
-        //     classType: "tertiary",
-
-        // }));
-
-        // const txtProductName: Ref<TextBox> = ref(new TextBox({
-        //     fieldText: "QA001",
-        //     require: false,
-        //     classType: "tertiary",
-
-        // }));
-
-
-
+        const lstCbbSearchProduct = LocalStorageLibrary.getByKey<Array<Product>>("Product") ?? new Array<Product>();
+        const lstCbbAgentSales = LocalStorageLibrary.getByKey<Array<Employee>>("employee") ?? new Array<Employee>();
+        const lstTxtInfoRecipient = LocalStorageLibrary.getByKey<Array<Customer>>("Customer") ?? new Array<Customer>();
+        const lstCbbCheckPoint = LocalStorageLibrary.getByKey<Array<BankAccount>>("BankAccount") ?? new Array<BankAccount>();
+        const lstCbbPayments = LocalStorageLibrary.getByKey<Array<Bank>>("Bank") ?? new Array<Bank>();
+        const lstCbbVoucherItem = LocalStorageLibrary.getByKey<Array<Voucher>>("voucher") ?? new Array<Voucher>();
         const txtQuanTySearch: Ref<NumberModel> = ref(new NumberModel({
             classType: "thirty",
             format: new NumberFormat({
@@ -77,12 +84,9 @@ export default {
         const txtInfoRecipient: Ref<Combobox> = ref(new Combobox({
             fieldText: "Người nhận",
             require: true,
-            data: [
-                {
-                    value: "Trần Ngọc Phúc",
-                    display: "Trần Ngọc Phúc"
-                }
-            ],
+            data: lstTxtInfoRecipient,
+            valueField: "NameCustomer",
+            displayField: "NameCustomer",
             labelWidth: 120,
             classType: "tertiary",
             placeholder: "Số điện thoại, Tên khách hàng"
@@ -170,12 +174,9 @@ export default {
         const cbbVoucherItem: Ref<Combobox> = ref(new Combobox({
             fieldText: "Voucher",
             require: true,
-            data: [
-                {
-                    value: "BigSales",
-                    display: "BigSales"
-                }
-            ],
+            data: lstCbbVoucherItem,
+            valueField: "NameVoucher",
+            displayField: "NameVoucher",
             classType: "tertiary",
             labelWidth: 120,
 
@@ -247,68 +248,48 @@ export default {
             require: true,
             boxType: 'vbox',
             classType: "tertiary",
-            data: [
-                {
-                    value: 1,
-                    display: "Tiền mặt"
-                },
-                {
-                    value: 2,
-                    display: "Chuyển khoản"
-                },
-            ]
+            data: lstCbbCheckPoint,
+            valueField: "NameCardBank",
+            displayField: "NameCardBank",
+            placeholder: "Hình thức thu"
             // require: true
         }));
         const cbbPayments: Ref<Combobox> = ref(new Combobox({
             require: true,
             boxType: 'vbox',
             classType: "tertiary",
-            data: [
-                {
-                    value: 1,
-                    display: "17954697 - ACB"
-                },
-                {
-                    value: 2,
-                    display: "Chuyển khoản"
-                },
-            ]
+            data: lstCbbPayments,
+            valueField: "NameAccount",
+            displayField: "NameAccount",
+            placeholder: "Ngân hàng"
+
             // require: true
+        }));
+        const txtAccountNumber: Ref<TextBox> = ref(new TextBox({
+            fieldText: "",
+            require: false,
+            type: "text",
+            classType: "secondary",
+            placeholder: "Số tài khoản"
         }));
         const cbbSearchProduct: Ref<Combobox> = ref(new Combobox({
             require: false,
             boxType: 'vbox',
             classType: "secondary",
             placeholder: "Nhập tên hàng hóa, mã hàng hóa",
-
-            data: [
-                {
-                    value: "Quần Áo Nam",
-                    display: "Quần Áo Nam"
-                },
-                {
-                    value: "Quần Áo Nữ",
-                    display: "Quần Áo Nữ"
-                },
-
-            ],
+            data: lstCbbSearchProduct,
+            valueField: "NameProductList",
+            displayField: "NameProductList",
         }));
         const cbbAgentSales: Ref<Combobox> = ref(new Combobox({
             require: false,
             boxType: 'vbox',
             classType: "secondary",
             placeholder: "Nhân Viên Bán Hàng",
+            data: lstCbbAgentSales,
+            valueField: "NameEmployee",
+            displayField: "NameEmployee",
 
-            data: [
-                {
-                    value: "Trần Ngọc Phúc",
-                    display: "Trần Ngọc Phúc"
-                },
-                {
-                    value: "Trần Ngọc Phúc",
-                    display: "Trần Ngọc Phúc"
-                },
-            ]
             // require: true
         }));
         const cbbSelectCustomer: Ref<Combobox> = ref(new Combobox({
@@ -316,34 +297,17 @@ export default {
             boxType: 'vbox',
             classType: "secondary",
             placeholder: "Tên khách hàng",
-            data: [
-                {
-                    value: "Khách hàng 1",
-                    display: "Khách hàng 1"
-                },
-                {
-                    value: "Khách hàng 2",
-                    display: "Khách hàng 2"
-                },
-
-            ]
+            data: lstTxtInfoRecipient,
+            valueField: "NameCustomer",
+            displayField: "NameCustomer",
             // require: true
         }));
-        const txtUnit: Ref<Combobox> = ref(new Combobox({
+        const txtUnit: Ref<TextBox> = ref(new TextBox({
             require: false,
             boxType: 'vbox',
             classType: "tertiary",
-            data: [
-                {
-                    value: "Chiếc",
-                    display: "Chiếc"
-                },
-                {
-                    value: "Tá",
-                    display: "Tá"
-                },
-            ]
-            // require: true
+            readOnly: false,
+
         }));
         const cbkBill: Ref<Checkbox> = ref(new Checkbox({
             fieldText: "In hóa đơn"
@@ -374,6 +338,7 @@ export default {
             cbbAgentSales,
             txtQuanTySearch,
             txtPurchased,
+            txtAccountNumber,
             // txtProductCode,
             txtPrice,
             txtPriceLast,
@@ -399,7 +364,9 @@ export default {
             numVoucherPrice,
             numVoucherTotalPrice,
             cbbVoucherItem,
-            cbbPayments
+            cbbPayments,
+
+
         }
     },
     created() {
@@ -503,7 +470,67 @@ export default {
             } catch (error) {
                 Log.ErrorLog(error as Error);
             }
-        }
+        },
+
+        DelListTable(index: number) {
+            if (index >= 0 && index < this.lstProductDetail.length) {
+                this.lstProductDetail.splice(index, 1);
+            }
+        },
+
+
+        ShowNameProduct(value: any) {
+            try {
+                const me = this;
+                let itemValue = new Product();
+                const listProduct = LocalStorageLibrary.getByKey<Array<Product>>("Product");
+                if (listProduct) {
+                    const listProductFilter = listProduct.filter(item => {
+                        if (value) {
+                            return item.NameProductList == value;
+                        }
+                    });
+
+                    if (listProductFilter?.length > 0) {
+                        itemValue = listProductFilter[0];
+                    }
+                }
+                if (me.lstProductDetail?.length > 0) {
+                    me.lstProductDetail.push(itemValue);
+                } else {
+                    me.lstProductDetail = new Array<ProductDetail>(itemValue);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+
+        },
+
+
+        // ShowInfoCustomer(value: any, item: Customer) {
+        //     const me = this;
+        //     const listCustomer = LocalStorageLibrary.getByKey<Array<Customer>>("Customer");
+        //     if (listCustomer && listCustomer.length > 0 && me.masterData) {
+        //         // const vendorCode = me.masterData['SupplierOrder'];
+        //         if (value) {
+        //             let rowCustomerByCustomerName = new Customer();
+        //             for (let index = 0; index < listCustomer.length; index++) {
+        //                 const rowProductDetail = listCustomer[index];
+        //                 if (rowProductDetail.NameCustomer == value) {
+        //                     rowCustomerByCustomerName = rowProductDetail;
+        //                     break;
+        //                 }
+        //             }
+        //             if (rowCustomerByCustomerName) {
+        //                 item.NameProductOrder = rowCustomerByCustomerName.TelephoneCustomer;
+        //                 item.UnitProductOrder = rowCustomerByCustomerName.AddressCustomer;
+        //                 item.UnitPriceOrder = rowCustomerByCustomerName.PurchasePriceProductList;
+        //             }
+        //         }
+        //     }
+        // },
+
+
 
 
 

@@ -14,6 +14,8 @@ import EDate from "qlch_control/EDate";
 import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
 import Guid from '@library-src/utilities/types/Guid';
 import Customer from '@store-src/models/customer/Customer';
+import CustomerCategory from '@store-src/models/customer-category/CustomerCategory';
+import Employee from '@store-src/models/employee/Employee';
 
 export default {
 
@@ -51,6 +53,9 @@ export default {
     */
     buildBindingControl() {
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
+      const lstCustomerGroupList = LocalStorageLibrary.getByKey<Array<CustomerCategory>>("customerCategory") ?? new Array<CustomerCategory>();
+      const lstCodeEmployeeCustomer = LocalStorageLibrary.getByKey<Array<Employee>>("employee") ?? new Array<Employee>();
+
       const labelWidth = 115;
       return {
         "txtCodeCustomer": new TextBox({
@@ -101,21 +106,9 @@ export default {
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          data: [
-            {
-              value: 1,
-              display: "G1"
-            },
-            {
-              value: 2,
-              display: "G2"
-            },
-            {
-              value: 3,
-              display: "G3"
-            },
-
-          ],
+          data: lstCustomerGroupList,
+          valueField: "NameCustomerCategory",
+          displayField: "NameCustomerCategory",
           bindingIndex: "CustomerGroupList",
         }),
         "txtCodeEmployeeCustomer": new Combobox({
@@ -123,28 +116,15 @@ export default {
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          data: [
-            {
-
-              value: 1,
-              display: "NV001"
-            },
-            {
-              value: 2,
-              display: "NV002"
-            },
-            {
-              value: 3,
-              display: "NV003"
-            },
-
-          ],
+          data: lstCodeEmployeeCustomer,
+          valueField: "CodeEmployee",
+          displayField: "CodeEmployee",
           bindingIndex: "CodeEmployeeCustomer",
         }),
         "txtNameEmployeeCustomer": new TextBox({
           fieldText: "Tên nhân viên phụ trách",
           require: false,
-          readOnly: false,
+          readOnly: true,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "NameEmployeeCustomer"
@@ -181,134 +161,30 @@ export default {
         }),
       }
     },
-    // return {
-    //     "txtCodeCustomer": new TextBox({
-    //       fieldText: "Mã khách hàng",
-    //       require: true,
-    //       maxLength: 255,
-    //       labelWidth: labelWidth,
-    //       bindingIndex: "CodeCustomer"
-    //     }),
-    //     "txtNameCustomer": new TextBox({
-    //       fieldText: "Tên khách hàng",
-    //       require: true,
-    //       maxLength: 255,
-    //       labelWidth: labelWidth,
-    //       bindingIndex: "NameCustomer"
-    //     }),
-    //     "txtColumn3": new TextBox({
-    //       fieldText: "Số điện thoại",
-    //       require: true,
-    //       maxLength: 255,
-    //       labelWidth: labelWidth,
-    //       bindingIndex: "Column3"
-    //     }),
-    //     "txtColumn4": new TextBox({
-    //       fieldText: "Email",
-    //       require: false,
-    //       maxLength: 255,
-    //       labelWidth: labelWidth,
-    //       bindingIndex: "Column4"
-    //     }),
-    //     "txtColumn5": new TextBox({
-    //       fieldText: "Địa chỉ",
-    //       require: false,
-    //       maxLength: 255,
-    //       labelWidth: labelWidth,
-    //       bindingIndex: "Column5"
-    //     }),
-    //     "txtColumn6": new DateModel({
-    //       fieldText: "Ngày sinh",
-    //       require: false,
-    //       maxLength: 255,
-    //       labelWidth: labelWidth,
-    //       bindingIndex: "Column6"
-    //     }),
-    //     "txtColumn7": new Combobox({
-    //       fieldText: "Nhóm khách hàng",
-    //       require: false,
-    //       maxLength: 255,
-    //       labelWidth: labelWidth,
-    //       bindingIndex: "Column7",
-    //       data: [
-    //         {
+    // ShowNameCustomerCategory() {
 
-    //           value: 1,
-    //           display: "G1"
-    //         },
-    //         {
-    //           value: 2,
-    //           display: "G2"
-    //         },
-    //         {
-    //           value: 3,
-    //           display: "G3"
-    //         },
+    // },
+    ShowNameEmployee(value: any) {
+      const me = this;
+      const listEmployee = LocalStorageLibrary.getByKey<Array<Employee>>("employee");
+      if (listEmployee && listEmployee.length > 0 && me.masterData) {
+        // const vendorCode = me.masterData['SupplierOrder'];
+        if (value) {
+          let rowEmployeeByCodeEmployee = new Employee();
+          for (let index = 0; index < listEmployee.length; index++) {
+            const rowVendor = listEmployee[index];
+            if (rowVendor.CodeEmployee == value) {
+              rowEmployeeByCodeEmployee = rowVendor;
+              break;
+            }
 
-    //       ]
-    //     }),
-    //     "txtColumn8": new Combobox({
-    //       fieldText: "Mã nhân viên phụ trách",
-    //       require: false,
-    //       maxLength: 255,
-    //       labelWidth: labelWidth,
-    //       bindingIndex: "Column8",
-    //       data: [
-    //         {
-
-    //           value: 1,
-    //           display: "NV001"
-    //         },
-    //         {
-    //           value: 2,
-    //           display: "NV002"
-    //         },
-    //         {
-    //           value: 3,
-    //           display: "NV003"
-    //         },
-
-    //       ]
-    //     }),
-    //     "txtColumn9": new TextBox({
-    //       fieldText: "Tên nhân viên phụ trách",
-    //       require: false,
-    //       readOnly: true,
-    //       maxLength: 255,
-    //       labelWidth: labelWidth,
-    //       bindingIndex: "Column9"
-    //     }),
-    //     "txtColumn10": new TextBox({
-    //       fieldText: " Ghi chú",
-    //       require: false,
-    //       maxLength: 255,
-    //       labelWidth: labelWidth,
-    //       bindingIndex: "Column10"
-    //     }),
-    //     "txtColumn11": new Combobox({
-    //       fieldText: "Giới tính",
-    //       require: false,
-    //       maxLength: 255,
-    //       labelWidth: labelWidth,
-    //       bindingIndex: "Column10",
-    //       data: [
-    //         {
-
-    //           value: 1,
-    //           display: "Nam"
-    //         },
-    //         {
-    //           value: 2,
-    //           display: "Nữ"
-    //         },
-    //         {
-    //           value: 3,
-    //           display: "Không xác định"
-    //         },
-
-    //       ]
-    //     }),
-    //   }
+          }
+          if (rowEmployeeByCodeEmployee) {
+            me.masterData['NameEmployeeCustomer'] = rowEmployeeByCodeEmployee.NameEmployee;
+          }
+        }
+      }
+    },
     saveData() {
       const me = this;
       let listCustomer: Array<Customer> | null = new Array<Customer>;

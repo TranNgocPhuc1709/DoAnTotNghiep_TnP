@@ -25,7 +25,7 @@
             v-model="masterData[bindingControl[`txtExplantCashReceipt`].bindingIndex]"></e-text-box>
         </div>
         <div class="qlch-input-default item-detail">
-          <e-combobox :control="bindingControl[`txtRevenueOfficerCashReceipt`]"
+          <e-combobox @dataChange="ShowNameEmployee" :control="bindingControl[`txtRevenueOfficerCashReceipt`]"
             v-model="masterData[bindingControl[`txtRevenueOfficerCashReceipt`].bindingIndex]"></e-combobox>
         </div>
         <div class="qlch-input-default item-detail">
@@ -75,7 +75,8 @@
                 <e-text-box :control="txtExplainCashReceipt" v-model="item.ExplainCashReceipt"></e-text-box>
               </td>
               <td>
-                <e-number :control="txtMoneyCashDetail" v-model="item.MoneyCashDetail"></e-number>
+                <e-number @blur="ShowPaymentCashReceipt($event, item)" :control="txtMoneyCashDetail"
+                  v-model="item.MoneyCashDetail"></e-number>
               </td>
               <td>
                 <e-button :control="btnDelListTable" @click="DelListTable(item)" />

@@ -12,6 +12,7 @@ import ECombobox from "qlch_control/ECombobox";
 import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
 import Guid from '@library-src/utilities/types/Guid';
 import Vendor from '@store-src/models/vendor/Vendor';
+import VendorCategory from '@store-src/models/vendor-category/VendorCategory';
 export default {
 
   extends: BaseDictionaryDetailController,
@@ -46,6 +47,7 @@ export default {
     */
     buildBindingControl() {
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
+      const lstGroupVendor = LocalStorageLibrary.getByKey<Array<VendorCategory>>("VendorCategory") ?? new Array<VendorCategory>();
       const labelWidth = 128;
       return {
         "txtCodeVendor": new TextBox({
@@ -68,20 +70,10 @@ export default {
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "GroupVendor",
-          data: [
-            {
-              value: 1,
-              display: "Nhà CC001"
-            },
-            {
-              value: 2,
-              display: "Nhà CC002"
-            },
-            {
-              value: 3,
-              display: "Nhà CC003"
-            },
-          ]
+          valueField: "NameVendorCategory",
+          displayField: "NameVendorCategory",
+          data: lstGroupVendor,
+
 
         }),
         "txtTelephoneVendor": new TextBox({
