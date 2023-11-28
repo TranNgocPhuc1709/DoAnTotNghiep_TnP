@@ -1,6 +1,5 @@
 export default interface IBank {
 
-
     CodeAccount?: string;
     NameAccount?: string;
     OwnerAccount?: string;

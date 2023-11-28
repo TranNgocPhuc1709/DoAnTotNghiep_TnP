@@ -14,7 +14,12 @@ import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
 import EDate from "qlch_control/EDate";
 import Button from '@library-src/models/qlch_control/qlch_button/Button';
 import EButton from "qlch_control/EButton";
-import ToolBarItemsView from '@library-src/models/qlch_base/tool_bar_items_view/ToolBarItemsView';
+// import ToolBarItemsView from '@library-src/models/qlch_base/tool_bar_items_view/ToolBarItemsView';
+import TextBox from '@library-src/models/qlch_control/qlch_text_box/TextBox';
+import ETextBox from "qlch_control/ETextBox";
+import NumberModel from '@library-src/models/qlch_control/qlch_number/NumberModel';
+import NumberFormat from '@library-src/models/qlch_control/number_format/NumberFormat';
+import ENumber from "qlch_control/ENumber";
 
 export default {
 
@@ -24,7 +29,9 @@ export default {
     BaseDictionaryListView,
     ECombobox,
     EDate,
-    EButton
+    EButton,
+    ETextBox,
+    ENumber
   },
   setup() {
     const thisData: Ref<SalesListDictionary> = ref(new SalesListDictionary());
@@ -73,6 +80,57 @@ export default {
       // classIconLeft: "i-add"
     });
 
+    //detail_table
+    const txtDateSalesDetail: DateModel = new DateModel({
+      fieldText: "",
+      labelWidth: 60,
+
+    });
+    const txtTimesSalesDetail: Ref<TextBox> = ref(new TextBox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      classType: "tertiary"
+    }));
+    const txtBillsSalesDetail: Ref<TextBox> = ref(new TextBox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      classType: "tertiary"
+    }));
+    const txtTotalSalesDetail: Ref<NumberModel> = ref(new NumberModel({
+      fieldText: "",
+      classType: "thirty",
+      format: new NumberFormat({
+        decimal: ".",
+        thousands: ",",
+        precision: 0
+      }),
+    }));
+    const txtGoodsMoneySalesDetail: Ref<NumberModel> = ref(new NumberModel({
+      fieldText: "",
+      classType: "thirty",
+      format: new NumberFormat({
+        decimal: ".",
+        thousands: ",",
+        precision: 0
+      }),
+    }));
+    const txtPromotionSalesDetail: Ref<NumberModel> = ref(new NumberModel({
+      fieldText: "",
+      classType: "thirty",
+      format: new NumberFormat({
+        decimal: ".",
+        thousands: ",",
+        precision: 0
+      }),
+    }));
+    const btnDelListTable: Button = new Button({
+      fieldText: "Hủy Hóa Đơn",
+      classType: "secondary"
+    });
+
+
     return {
       thisData,
       cbbSales,
@@ -80,7 +138,14 @@ export default {
       dtEndRequire,
       btnGetData,
       btnExportData,
-      btnPrintData
+      btnPrintData,
+      txtDateSalesDetail,
+      txtTimesSalesDetail,
+      txtBillsSalesDetail,
+      txtTotalSalesDetail,
+      txtGoodsMoneySalesDetail,
+      txtPromotionSalesDetail,
+      btnDelListTable
 
     };
   },
@@ -192,9 +257,9 @@ export default {
       const frmDetail = (await import(`../sales-detail/SalesDetail.vue`)).default;
       return frmDetail;
     },
-    buildToolBarItems(): Array<ToolBarItemsView> {
-      return [];
-    },
+    // buildToolBarItems(): Array<ToolBarItemsView> {
+    //   return [];
+    // },
   }
 }
 </script>

@@ -415,7 +415,6 @@ export default {
           elementListDetail.BeginInventory = 0;
         }
       }
-
       //Nhập Hàng Hóa
       const listImportDetail = LocalStorageLibrary.getByKey<Array<ImportDetail>>("importDetail");
       if (listImportDetail && listImportDetail.length > 0) {

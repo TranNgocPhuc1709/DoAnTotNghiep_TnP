@@ -27,7 +27,23 @@
 
 </div>
 <div class="height-fill width-fill">
-  <base-dictionary-list-view :viewControl="viewControl" @loadMaster="onLoadMaster"
+  <!-- <base-dictionary-list-view :viewControl="viewControl" @loadMaster="onLoadMaster"
     @changeSelectedRecordMaster="onChangeSelectedRecordMaster"
-    @toolbarClick="onSelectAction"></base-dictionary-list-view>
+    @toolbarClick="onSelectAction"></base-dictionary-list-view> -->
+  <div class="box" style="height: 200px; background-color: red; overflow-x: scroll;">
+    <div class="box-item" style="width: 1200px; height: 100px; ">
+      <table style="border: 1px solid black;">
+        <tr>
+          <th>Ngày</th>
+          <th>Số hóa đơn</th>
+          <th>Ngày lập hóa đơn</th>
+        </tr>
+        <tr>
+          <td>22/12/2022</td>
+          <td>132213221</td>
+          <th>22/12/2023</th>
+        </tr>
+      </table>
+    </div>
+  </div>
 </div>

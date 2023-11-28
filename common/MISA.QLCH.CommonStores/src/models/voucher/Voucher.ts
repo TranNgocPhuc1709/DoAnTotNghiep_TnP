@@ -25,6 +25,5 @@ export default class Voucher {
     TotalNumberVoucher?: number;
     TotalPriceVoucher?: number;
     StatusVoucher?: string;
-
     VoucherId?: string;
 }

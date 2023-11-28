@@ -122,7 +122,7 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'sales',
                 component: () => import('@src/views/sales-list-dictionary/SalesListDictionary.vue'),
                 meta: {
-                    title: "Bán Hàng",
+                    title: "Hóa đơn",
                     anonymous: false
                 }
             },

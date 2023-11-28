@@ -32,7 +32,7 @@ export default {
                 children: new Array(
                     {
                         routerLink: "/sales",
-                        fieldText: "Bán hàng",
+                        fieldText: "Danh sách hóa đơn",
                     },
                     {
                         routerLink: "/purchase",

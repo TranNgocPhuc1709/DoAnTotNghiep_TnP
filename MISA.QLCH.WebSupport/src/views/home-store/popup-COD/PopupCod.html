@@ -1,0 +1,22 @@
+<e-popup styleFrom="width:350px; min-height:100px" :idRoot="idRoot">
+    <template v-slot:title>
+        <span class="width-fill">Thông Báo</span>
+    </template>
+    <template v-slot:window-button>
+        <div class="icon height-fill d-flex-vcenter" @click="onCloseClick">
+            <div class="i-close"></div>
+        </div>
+    </template>
+    <template v-slot:content-detail>
+        <div class="header-popup  d-flex-vcenter">
+            <span class="flex-1">Thanh Toán Thành Công</span>
+        </div>
+
+
+
+    </template>
+    <template v-slot:form-button>
+        <div></div>
+    </template>
+
+</e-popup>

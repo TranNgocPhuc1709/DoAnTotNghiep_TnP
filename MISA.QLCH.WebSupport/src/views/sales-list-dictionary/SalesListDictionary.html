@@ -26,7 +26,50 @@
   </div>
 </div>
 <div class="height-fill width-fill">
-  <base-dictionary-list-view :viewControl="viewControl" @loadMaster="onLoadMaster"
+  <!-- <base-dictionary-list-view :viewControl="viewControl" @loadMaster="onLoadMaster"
     @changeSelectedRecordMaster="onChangeSelectedRecordMaster"
-    @toolbarClick="onSelectAction"></base-dictionary-list-view>
+    @toolbarClick="onSelectAction"></base-dictionary-list-view> -->
+
+  <div class="form-sales height-fill">
+    <div class="table-list">
+      <table class="flex-1">
+        <thead>
+          <tr>
+            <th>Ngày</th>
+            <th>Giờ</th>
+            <th>Số Hóa Đơn</th>
+            <th>Tổng (3) = (1) - (2)</th>
+            <th>Tiền Hàng (1)</th>
+            <th>Khuyến Mại (2)</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-if="lstSalesDetail?.length > 0" v-for="item in lstSalesDetail" :key="item.CashReceiptDetailId">
+            <td>
+              <e-date :control="txtDateSalesDetail" v-model="txtDateSalesDetail.value"></e-date>
+            </td>
+            <td>
+              <e-text-box :control="txtTimesSalesDetail" v-model="txtTimesSalesDetail.value"></e-text-box>
+            </td>
+            <td>
+              <e-text-box :control="txtBillsSalesDetail" v-model="txtBillsSalesDetail.value"></e-text-box>
+            </td>
+            <td>
+              <e-number :control="txtTotalSalesDetail" v-model="txtTotalSalesDetail.value"></e-number>
+            </td>
+            <td>
+              <e-number :control="txtGoodsMoneySalesDetail" v-model="txtGoodsMoneySalesDetail.value"></e-number>
+            </td>
+            <td>
+              <e-number :control="txtPromotionSalesDetail" v-model="txtPromotionSalesDetail.value"></e-number>
+            </td>
+            <td>
+              <e-button :control="btnDelListTable" @click="DelListTable(item)" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

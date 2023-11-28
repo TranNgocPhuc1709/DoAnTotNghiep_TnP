@@ -26,7 +26,13 @@ import BankAccount from '@store-src/models/bank-account/BankAccount';
 import Bank from '@store-src/models/bank/Bank';
 import Voucher from '@store-src/models/voucher/Voucher';
 import ProductDetail from '@store-src/models/product/ProductDetail';
-
+import Bill from '@store-src/models/bill-main/Bill';
+import TotalBill from '@store-src/models/total-bill/TotalBill';
+import TotalRefunds from '@store-src/models/total-refunds/TotalRefunds';
+import PopupLibrary from '@library-src/utilities/commons/PopupLibrary';
+// import VoucherDetail from '@store-src/models/voucher/VoucherDetail';
+// import VoucherDetail from '../voucher-detail/VoucherDetail';
+// import BankDetail from '@store-src/models/bank/BankDetail';
 
 export default {
     components: {
@@ -38,19 +44,20 @@ export default {
         EDate
     },
     data() {
-        const lstProductDetail: Ref<Array<ProductDetail>> = ref(new Array<ProductDetail>(
-            // {
-            //     NumberProductList: 123,
-            //     CodeProductList: "SP12356",
-            //     NameProductList: "Quần áo Nam Thu Đông",
-            //     QuantityProductList: 1,
-            //     UnitProductList: "Chiếc",
-            //     PriceProductList: 100000,
-            //     TotalProductList: 200000,
-            // }
-        ));
+        const lstProductDetail: Ref<Array<ProductDetail>> = ref(new Array<ProductDetail>());
+        const lstVoucher = LocalStorageLibrary.getByKey<Array<Voucher>>("voucher")
+        const bill: Ref<Bill> = ref(new Bill());
+        const totalBill: Ref<TotalBill> = ref(new TotalBill());
+        const totalRefunds: Ref<TotalRefunds> = ref(new TotalRefunds());
+
+
         return {
             lstProductDetail,
+            bill,
+            totalBill,
+            lstVoucher,
+            totalRefunds
+
         };
     },
     setup() {
@@ -73,12 +80,13 @@ export default {
                 precision: 0
             }),
         }));
-        const txtPurchased: Ref<TextBox> = ref(new TextBox({
-            fieldText: "",
-            require: false,
-            type: "number",
+        const txtPurchased: Ref<NumberModel> = ref(new NumberModel({
             classType: "secondary",
-            placeholder: "0"
+            format: new NumberFormat({
+                decimal: ".",
+                thousands: ",",
+                precision: 0
+            }),
         }));
 
         const txtInfoRecipient: Ref<Combobox> = ref(new Combobox({
@@ -237,6 +245,24 @@ export default {
                 precision: 0
             }),
         }));
+        const txtAllPayments: Ref<NumberModel> = ref(new NumberModel({
+            classType: "thirty",
+            // readOnly: true,
+            format: new NumberFormat({
+                decimal: ".",
+                thousands: ",",
+                precision: 2
+            }),
+        }));
+        const txtPromotion: Ref<NumberModel> = ref(new NumberModel({
+            classType: "thirty",
+            // readOnly: true,
+            format: new NumberFormat({
+                decimal: ".",
+                thousands: ",",
+                precision: 2
+            }),
+        }));
         const txtNotice: Ref<TextBox> = ref(new TextBox({
             fieldText: "",
             require: false,
@@ -365,6 +391,8 @@ export default {
             numVoucherTotalPrice,
             cbbVoucherItem,
             cbbPayments,
+            txtAllPayments,
+            txtPromotion
 
 
         }
@@ -374,6 +402,9 @@ export default {
             const me = this;
             me.cbbCheckPoint.value = 1;
             me.cbbPayments.value = 1;
+            me.bill.TotalMoneyBill = 0;
+            me.totalBill.collectedMoney = 0;
+            me.totalRefunds.refundDetail = 0;
 
         } catch (error) {
             Log.ErrorLog(error as Error);
@@ -473,9 +504,48 @@ export default {
         },
 
         DelListTable(index: number) {
+            const me = this;
             if (index >= 0 && index < this.lstProductDetail.length) {
                 this.lstProductDetail.splice(index, 1);
             }
+            if (me.bill.TotalMoneyBill) {
+                me.bill.TotalMoneyBill = 0;
+                me.totalBill.collectedMoney = 0;
+                me.totalRefunds.refundDetail = 0;
+            }
+
+            for (let index = 0; index < me.lstProductDetail.length; index++) {
+                const element = me.lstProductDetail[index];
+                if (!me.bill.TotalMoneyBill) {
+                    me.bill.TotalMoneyBill = 0;
+
+                }
+
+                if (element) {
+                    me.bill.TotalMoneyBill += element.TotalProductList ?? 0;
+                    // if (me.bill.TotalMoneyBill == 0) {
+                    //     me.totalBill.collectedMoney = 0 - me.numVoucherTotalPrice.value;
+                    // }
+                    // else {
+                    //     me.totalBill.collectedMoney = me.bill.TotalMoneyBill - me.numVoucherTotalPrice.value;
+                    // }
+                    me.totalBill.collectedMoney = me.bill.TotalMoneyBill - me.numVoucherTotalPrice.value;
+
+
+                }
+
+
+            }
+
+        },
+
+        //Show Popup
+        async showPopUpPayments() {
+
+            const component = (await import(`./popup-COD/PopupCod.vue`)).default;
+            if (component) {
+                PopupLibrary.createPopup(component, {});
+            };
         },
 
 
@@ -490,7 +560,6 @@ export default {
                             return item.NameProductList == value;
                         }
                     });
-
                     if (listProductFilter?.length > 0) {
                         itemValue = listProductFilter[0];
                     }
@@ -507,28 +576,85 @@ export default {
         },
 
 
-        // ShowInfoCustomer(value: any, item: Customer) {
-        //     const me = this;
-        //     const listCustomer = LocalStorageLibrary.getByKey<Array<Customer>>("Customer");
-        //     if (listCustomer && listCustomer.length > 0 && me.masterData) {
-        //         // const vendorCode = me.masterData['SupplierOrder'];
-        //         if (value) {
-        //             let rowCustomerByCustomerName = new Customer();
-        //             for (let index = 0; index < listCustomer.length; index++) {
-        //                 const rowProductDetail = listCustomer[index];
-        //                 if (rowProductDetail.NameCustomer == value) {
-        //                     rowCustomerByCustomerName = rowProductDetail;
-        //                     break;
-        //                 }
-        //             }
-        //             if (rowCustomerByCustomerName) {
-        //                 item.NameProductOrder = rowCustomerByCustomerName.TelephoneCustomer;
-        //                 item.UnitProductOrder = rowCustomerByCustomerName.AddressCustomer;
-        //                 item.UnitPriceOrder = rowCustomerByCustomerName.PurchasePriceProductList;
-        //             }
-        //         }
-        //     }
-        // },
+        ShowTotalProduct(value: number, item: ProductDetail) {
+            const me = this;
+            if (value == null) {
+                value = 0;
+            }
+            if (item.PriceProductList) {
+                item.TotalProductList = item.PriceProductList * value;
+            }
+
+            // /tinh lai tong tien
+            if (me.bill.TotalMoneyBill) {
+                me.bill.TotalMoneyBill = 0;
+
+
+            }
+            for (let index = 0; index < me.lstProductDetail.length; index++) {
+                const element = me.lstProductDetail[index];
+                if (!me.bill.TotalMoneyBill) {
+                    me.bill.TotalMoneyBill = 0;
+                }
+                if (element) {
+                    me.bill.TotalMoneyBill += element.TotalProductList ?? 0;
+                    me.totalBill.collectedMoney = me.bill.TotalMoneyBill - me.numVoucherTotalPrice.value;
+
+                }
+            }
+        },
+
+        ShowValueVoucher(item: String) {
+            const me = this;
+            if (me.lstVoucher) {
+                for (let indexListDetail = 0; indexListDetail < me.lstVoucher.length; indexListDetail++) {
+                    const elementListDetail = me.lstVoucher[indexListDetail]; //Dòng chi tiết
+                    if (item == elementListDetail.NameVoucher) {
+                        me.numVoucherPrice.value = elementListDetail.PriceVoucher ?? 0;
+                        // if (me.bill.TotalMoneyBill) {
+                        //     me.totalBill.collectedMoney = me.bill.TotalMoneyBill - me.numVoucherTotalPrice.value;
+                        // }
+
+                    }
+                }
+            }
+
+        },
+        ShowTotalVoucher(value: number) {
+            const me = this;
+            if (me.numVoucherPrice.value) {
+                me.numVoucherTotalPrice.value = me.numVoucherPrice.value * value;
+            }
+            // /tinh lai tong tien (Lấy giá trị CollectedMoney trong totalBill.ts)
+
+            if (me.bill.TotalMoneyBill == null)
+                me.totalBill.collectedMoney = 0 - me.numVoucherTotalPrice.value;
+            else {
+                me.totalBill.collectedMoney = me.bill.TotalMoneyBill - me.numVoucherTotalPrice.value
+            }
+
+            // for (let index = 0; index < me.lstProductDetail.length; index++) {
+            //     const element = me.lstProductDetail[index];
+            //     if (!me.bill.TotalMoneyBill) {
+            //         me.bill.TotalMoneyBill = 0;
+            //     }
+            //     if (element) {
+            //         me.bill.TotalMoneyBill += element.TotalProductList ?? 0;
+            //     }
+
+            // }
+        },
+        ShowDeposits(value: number) {
+            const me = this;
+
+            if (me.totalBill.collectedMoney) {
+                me.totalRefunds.refundDetail = value - me.totalBill.collectedMoney;
+            }
+            else {
+                me.totalBill.collectedMoney = 0
+                me.totalRefunds.refundDetail = value - me.totalBill.collectedMoney;
+            }
+        },
 
 
 

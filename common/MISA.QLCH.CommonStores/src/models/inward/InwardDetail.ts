@@ -16,7 +16,6 @@ export default class InwardDetail {
         }
         me.InwardDetailId = Guid.NewGuid();
 
-
     }
     CodeProductInward?: string;
     NameProductInward?: string;

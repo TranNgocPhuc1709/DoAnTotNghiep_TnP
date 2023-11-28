@@ -75,7 +75,6 @@ export default {
   created() {
     try {
       const me = this;
-
       me.cbbGoodsOrder.value = 1;
 
 
