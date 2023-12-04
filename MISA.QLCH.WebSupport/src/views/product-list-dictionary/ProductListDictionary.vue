@@ -62,11 +62,11 @@ export default {
           minWidth: 180,
           flex: 1
         }),
-        new Column({
-          fieldText: "Hiển thị trên trang bán hàng",
-          dataIndex: "ShowDisplayProduct",
-          width: 180
-        }),
+        // new Column({
+        //   fieldText: "Hiển thị trên trang bán hàng",
+        //   dataIndex: "ShowDisplayProduct",
+        //   width: 180
+        // }),
         new Column({
           fieldText: "Trạng thái",
           dataIndex: "StatusProductList",

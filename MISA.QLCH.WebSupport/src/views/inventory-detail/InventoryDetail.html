@@ -16,7 +16,6 @@
       </div>
       <div class="form-inventory-detail-right">
         <span class="heading-inventory-info">CHỨNG TỪ</span>
-
         <div class="qlch-input-default item-detail">
           <e-date :control="bindingControl[`txtDateInventory`]"
             v-model="masterData[bindingControl[`txtDateInventory`].bindingIndex]"></e-date>
@@ -24,6 +23,10 @@
         <div class="qlch-input-default item-detail">
           <e-text-box :control="bindingControl[`txtVotesInventory`]"
             v-model="masterData[bindingControl[`txtVotesInventory`].bindingIndex]"></e-text-box>
+        </div>
+        <div class="qlch-input-default item-detail">
+          <e-combobox :control="bindingControl[`txtStatusListInventory`]"
+            v-model="masterData[bindingControl[`txtStatusListInventory`].bindingIndex]"></e-combobox>
         </div>
 
 

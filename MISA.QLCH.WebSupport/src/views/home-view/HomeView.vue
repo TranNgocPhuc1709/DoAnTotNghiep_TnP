@@ -314,16 +314,13 @@ export default {
             data: [
                 {
                     value: 1,
-                    display: "Năm 2023"
+                    display: "Tháng này"
                 },
                 {
                     value: 2,
-                    display: "Năm 2022"
+                    display: "Tháng trước"
                 },
-                {
-                    value: 3,
-                    display: "Năm 2021"
-                }
+
             ]
             // require: true
         }));
@@ -340,12 +337,12 @@ export default {
         try {
             const me = this;
 
-            me.cbbCostBill.value = 1;
-            me.cbbMonth.value = 1;
+            me.cbbCostBill.value = 2;
+            me.cbbMonth.value = 2;
             me.cbbChart.value = 1;
-            me.cbbChartDate.value = 1;
+            me.cbbChartDate.value = 10;
             me.cbbRevenue.value = 1;
-            me.cbbAllChart.value = 1;
+            me.cbbAllChart.value = 2;
 
         } catch (error) {
             Log.ErrorLog(error as Error);

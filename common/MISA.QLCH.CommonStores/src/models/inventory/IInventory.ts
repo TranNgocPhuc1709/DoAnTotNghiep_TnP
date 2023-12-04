@@ -1,12 +1,13 @@
 export default interface IInventory {
 
-    DateInventory?: Date;
+    DateInventory?: string;
     VotesInventory?: string;
     WarehouseInventory?: string;
     ExplantInventory?: string;
     TotalBeginInventory?: number;
     TotalUpdateInventory?: number;
     TotalEndInventory?: number;
+    StatusListInventory?: string;
 
 
 }

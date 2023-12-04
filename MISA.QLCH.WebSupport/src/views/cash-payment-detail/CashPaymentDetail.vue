@@ -44,6 +44,7 @@ export default {
 
 
   data() {
+
     const lstCashPaymentDetail: Ref<Array<CashPaymentDetail>> = ref(new Array<CashPaymentDetail>());
 
     const txtExplainCashPayment: Ref<TextBox> = ref(new TextBox({
@@ -65,14 +66,15 @@ export default {
     return {
       lstCashPaymentDetail,
       txtExplainCashPayment,
-      txtMoneyCashPayment
+      txtMoneyCashPayment,
+
 
     }
   },
   created() {
     try {
-      //lấy giá trị khóa phụ trong masterData
       const me = this;
+      //lấy giá trị khóa phụ trong masterData
       if (me.masterData) {
         const privateKey = me.masterData['CashPaymentsId'];
         if (privateKey) {
@@ -84,6 +86,8 @@ export default {
           }
         }
       }
+
+
     } catch (error) {
       console.log(error);
     }
@@ -241,11 +245,14 @@ export default {
 
 
 
-        //Table Grid
+
 
 
       }
     },
+
+
+
     ShowPaymentCashPayment() {
       const me = this;
       ///tinh lai tong tien

@@ -1,36 +1,40 @@
-<base-dictionary-detail-view :idRoot="idRoot" :propView="propView" :styleFrom="`width: 800px;`"
+<base-dictionary-detail-view :idRoot="idRoot" :propView="propView" :styleFrom="`width: 500px;`"
   @toolbarClick="onSelectAction" @closeFormClick="onCloseForm">
   <template v-slot:content-detail>
-    <div class="d-flex">
-      <div class="form-detail-left flex-1">
-        <div class="qlch-input-default item-detail">
-          <e-text-box :control="bindingControl[`txtCodeProductList`]"
-            v-model="masterData[bindingControl[`txtCodeProductList`].bindingIndex]"></e-text-box>
-        </div>
-        <div class="qlch-input-default item-detail">
-          <e-text-box :control="bindingControl[`txtNameProductList`]"
-            v-model="masterData[bindingControl[`txtNameProductList`].bindingIndex]"></e-text-box>
-        </div>
 
-        <div class="qlch-input-default item-detail">
-          <e-combobox @dataChange="ShowNameGroupCategory" :control="bindingControl[`txtGroupProductList`]"
-            v-model="masterData[bindingControl[`txtGroupProductList`].bindingIndex]"></e-combobox>
-        </div>
-        <div class="qlch-input-default item-detail">
-          <e-combobox :control="bindingControl[`txtUnitProductList`]"
-            v-model="masterData[bindingControl[`txtUnitProductList`].bindingIndex]"></e-combobox>
-        </div>
-        <div class="qlch-input-default item-detail">
-          <e-number :control="bindingControl[`txtPurchasePriceProductList`]"
-            v-model="masterData[bindingControl[`txtPurchasePriceProductList`].bindingIndex]"></e-number>
-        </div>
-        <div class="qlch-input-default item-detail">
-          <e-number :control="bindingControl[`txtPriceProductList`]"
-            v-model="masterData[bindingControl[`txtPriceProductList`].bindingIndex]"></e-number>
-        </div>
+    <div class="form-detail-left flex-1">
+      <div class="qlch-input-default item-detail">
+        <e-text-box :control="bindingControl[`txtCodeProductList`]"
+          v-model="masterData[bindingControl[`txtCodeProductList`].bindingIndex]"></e-text-box>
       </div>
-      <div class="flex-1 d-flex-column">
-        <div class="form-detail-right flex-1">
+      <div class="qlch-input-default item-detail">
+        <e-text-box :control="bindingControl[`txtNameProductList`]"
+          v-model="masterData[bindingControl[`txtNameProductList`].bindingIndex]"></e-text-box>
+      </div>
+
+      <div class="qlch-input-default item-detail">
+        <e-combobox @dataChange="ShowNameGroupCategory" :control="bindingControl[`txtGroupProductList`]"
+          v-model="masterData[bindingControl[`txtGroupProductList`].bindingIndex]"></e-combobox>
+      </div>
+      <div class="qlch-input-default item-detail">
+        <e-combobox :control="bindingControl[`txtUnitProductList`]"
+          v-model="masterData[bindingControl[`txtUnitProductList`].bindingIndex]"></e-combobox>
+      </div>
+      <div class="qlch-input-default item-detail">
+        <e-number :control="bindingControl[`txtPurchasePriceProductList`]"
+          v-model="masterData[bindingControl[`txtPurchasePriceProductList`].bindingIndex]"></e-number>
+      </div>
+      <div class="qlch-input-default item-detail">
+        <e-number :control="bindingControl[`txtPriceProductList`]"
+          v-model="masterData[bindingControl[`txtPriceProductList`].bindingIndex]"></e-number>
+      </div>
+      <div class="qlch-input-default item-detail">
+        <e-combobox :control="bindingControl[`txtStatusProductList`]"
+          v-model="masterData[bindingControl[`txtStatusProductList`].bindingIndex]"></e-combobox>
+      </div>
+    </div>
+    <div class="flex-1 d-flex-column">
+      <!-- <div class="form-detail-right flex-1">
           <div class="qlch-input-default item-detail">
             <e-number :control="bindingControl[`txtProductInventory`]"
               v-model="masterData[bindingControl[`txtProductInventory`].bindingIndex]"></e-number>
@@ -47,19 +51,21 @@
             <e-combobox :control="bindingControl[`txtStatusProductList`]"
               v-model="masterData[bindingControl[`txtStatusProductList`].bindingIndex]"></e-combobox>
           </div>
+          
 
-        </div>
+        </div> -->
 
-        <!-- class="item-checkbox-detail" (Nếu dùng)-->
-        <div class="qlch-input-default item-detail">
+
+      <!-- class="item-checkbox-detail" (Nếu dùng)-->
+      <!-- <div class="qlch-input-default item-detail">
           <e-combobox :control="bindingControl[`txtShowDisplayProduct`]"
             v-model="masterData[bindingControl[`txtShowDisplayProduct`].bindingIndex]"></e-combobox>
-        </div>
+        </div> -->
 
-
-      </div>
 
     </div>
+
+
     <!-- <h3>Thông tin thuộc tính</h3>
     <div class="d-flex-column">
       <div class="qlch-input-default item-detail">

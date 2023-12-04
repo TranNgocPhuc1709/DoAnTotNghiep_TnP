@@ -1,0 +1,109 @@
+<e-popup styleFrom="width:1000px; min-height:500px" :idRoot="idRoot">
+    <template v-slot:title>
+        <span class="width-fill">Chi Tiết Hóa Đơn</span>
+    </template>
+    <template v-slot:window-button>
+        <div class="icon height-fill d-flex-vcenter" @click="onCloseClick">
+            <div class="i-close"></div>
+        </div>
+    </template>
+    <template v-slot:content-detail>
+        <div class="body-popup">
+            <div class="header-popup d-flex-vcenter">
+                <span class="heading-popup flex-1">Hóa Đơn Thanh Toán</span>
+            </div>
+            <div class="info-bill d-flex">
+                <div class="d-flex-column flex-1">
+                    <div>
+                        <span class="item-info-bill">Số: </span>
+                        <span>12121321</span>
+                    </div>
+                    <div>
+                        <span class="item-info-bill">Nhân Viên Bán Hàng: </span>
+                        <span>Phúc</span>
+                    </div>
+                    <div>
+                        <span class="item-info-bill">Khách Hàng: </span>
+                        <span>Phúc Trần</span>
+                    </div>
+                    <div>
+                        <span class="item-info-bill">Ghi chú: </span>
+                        <span>Hàng Mới</span>
+                    </div>
+                </div>
+                <div class="d-flex-column flex-1">
+                    <div>
+                        <span class="item-info-bill">Ngày: </span>
+                        <span>22/10/2022</span>
+                    </div>
+                    <span>
+                        <span class="item-info-bill">Kênh Bán Hàng: </span>
+                        <span>Tại Cửa Hàng</span>
+                    </span>
+                </div>
+            </div>
+            <div class="table-bill">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã HH</th>
+                            <th>Tên Hàng Hóa</th>
+                            <th>Đơn Vị Tính</th>
+                            <th>Số Lượng</th>
+                            <th>Đơn Giá</th>
+                            <th>Thành Tiền</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- v-if="lstBillDetail?.length > 0" v-for="(item,index) in lstBillDetail"
+                        :key="item.BillDetailId" -->
+                        <tr>
+                            <td>1</td>
+                            <td>SP001</td>
+                            <td>Áo Khoác Nam</td>
+                            <td>Chiếc</td>
+                            <td>2</td>
+                            <td>100.000</td>
+                            <td>200.000</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="footer-popup d-flex">
+                <div class="item-footer flex-1">
+                    <div>
+                        <span class="item-info-bill">Tổng Thanh Toán: </span>
+                        <span>200000</span>
+                    </div>
+                    <div>
+                        <span class="item-info-bill">Tiền Hàng: </span>
+                        <span>200.000</span>
+                    </div>
+                    <div>
+                        <span class="item-info-bill">Tiền Khuyến Mại: </span>
+                        <span>20.000</span>
+                    </div>
+                </div>
+                <div class="item-footer flex-1">
+                    <div>
+                        <span class="item-info-bill">Khách Trả: </span>
+                        <span>200.000</span>
+                    </div>
+                    <div>
+                        <span class="item-info-bill">Trả Lại Khách: </span>
+                        <span>20.000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </template>
+    <template v-slot:form-button>
+        <div></div>
+    </template>
+
+</e-popup>

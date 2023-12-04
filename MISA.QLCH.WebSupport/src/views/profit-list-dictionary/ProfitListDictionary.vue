@@ -8,16 +8,168 @@ import BaseDictionaryListController from 'qlch_base/BaseDictionaryListController
 import ParamPaging from '@library-src/models/qlch_control/qlch_grid/qlch_param_paging/ParamPaging';
 import Column from '@library-src/models/qlch_control/qlch_grid/qlch_column/Column';
 import ToolBarItemsView from '@library-src/models/qlch_base/tool_bar_items_view/ToolBarItemsView';
+import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
+import ECombobox from "qlch_control/ECombobox";
+import DateModel from '@library-src/models/qlch_control/qlch_date/DateModel';
+import EDate from "qlch_control/EDate";
+import Button from '@library-src/models/qlch_control/qlch_button/Button';
+import EButton from "qlch_control/EButton";
+import TextBox from '@library-src/models/qlch_control/qlch_text_box/TextBox';
+import ETextBox from "qlch_control/ETextBox";
+import NumberModel from '@library-src/models/qlch_control/qlch_number/NumberModel';
+import NumberFormat from '@library-src/models/qlch_control/number_format/NumberFormat';
+import ENumber from "qlch_control/ENumber";
+import Log from '@library-src/utilities/Log';
 export default {
 
   extends: BaseDictionaryListController,
 
   components: {
     BaseDictionaryListView,
+    ECombobox,
+    EDate,
+    EButton,
+    ETextBox,
+    ENumber
   },
   setup() {
     const thisData: Ref<ProfitListDictionary> = ref(new ProfitListDictionary());
-    return { thisData };
+    const cbbSales: Ref<Combobox> = ref(new Combobox({
+      require: true,
+      data: [
+        {
+          value: 1,
+          display: "Tháng này"
+        },
+        {
+          value: 2,
+          display: "Tháng trước"
+        },
+
+
+      ]
+      // require: true
+    }));
+    const dtBeginRequire: DateModel = new DateModel({
+      fieldText: "Từ ngày",
+      labelWidth: 60
+    });
+    const dtEndRequire: DateModel = new DateModel({
+      fieldText: "Đến ngày",
+      labelWidth: 60
+    });
+    const btnGetData: Button = new Button({
+      fieldText: "Lấy dữ liệu",
+      classType: "secondary",
+
+      // classIconLeft: "i-add"
+    });
+    const btnExportData: Button = new Button({
+      fieldText: "Xuất File Excel",
+      classType: "secondary",
+
+      // classIconLeft: "i-add"
+    });
+    const btnPrintData: Button = new Button({
+      fieldText: "In Dữ Liệu",
+      classType: "secondary",
+
+      // classIconLeft: "i-add"
+    });
+
+    //detail_table
+    const txtDateSalesDetail: DateModel = new DateModel({
+      fieldText: "",
+      labelWidth: 60,
+
+
+    });
+    const txtTimesSalesDetail: Ref<TextBox> = ref(new TextBox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      classType: "tertiary"
+    }));
+    const txtSalesAgent: Ref<TextBox> = ref(new TextBox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      classType: "tertiary"
+    }));
+    const txtBillsSalesDetail: Ref<TextBox> = ref(new TextBox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      classType: "tertiary"
+    }));
+    const txtNoticeSales: Ref<TextBox> = ref(new TextBox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      classType: "tertiary"
+    }));
+    const txtTotalSalesDetail: Ref<NumberModel> = ref(new NumberModel({
+      fieldText: "",
+      classType: "thirty",
+      format: new NumberFormat({
+        decimal: ".",
+        thousands: ",",
+        precision: 0
+      }),
+    }));
+    const txtGoodsMoneySalesDetail: Ref<NumberModel> = ref(new NumberModel({
+      fieldText: "",
+      classType: "thirty",
+      format: new NumberFormat({
+        decimal: ".",
+        thousands: ",",
+        precision: 0
+      }),
+    }));
+    const txtPromotionSalesDetail: Ref<NumberModel> = ref(new NumberModel({
+      fieldText: "",
+      classType: "thirty",
+      format: new NumberFormat({
+        decimal: ".",
+        thousands: ",",
+        precision: 0
+      }),
+    }));
+    const btnDelListTable: Button = new Button({
+      fieldText: "Hủy Hóa Đơn",
+      classType: "secondary"
+    });
+
+
+    return {
+      thisData,
+      cbbSales,
+      dtBeginRequire,
+      dtEndRequire,
+      btnGetData,
+      btnExportData,
+      btnPrintData,
+      txtDateSalesDetail,
+      txtTimesSalesDetail,
+      txtBillsSalesDetail,
+      txtTotalSalesDetail,
+      txtSalesAgent,
+      txtNoticeSales,
+      txtGoodsMoneySalesDetail,
+      txtPromotionSalesDetail,
+      btnDelListTable
+
+    };
+  },
+  created() {
+    try {
+      const me = this;
+      me.cbbSales.value = 1;
+
+
+    } catch (error) {
+      Log.ErrorLog(error as Error);
+    }
   },
   methods: {
 

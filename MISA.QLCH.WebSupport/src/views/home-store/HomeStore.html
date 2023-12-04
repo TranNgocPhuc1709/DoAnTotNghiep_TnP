@@ -20,7 +20,7 @@
         <div class="header-right height-fill d-flex-vcenter">
             <div class="chosse-warehouse d-flex-vcenter">
                 <span class="icon-warehouse"></span>
-                <span class="label-warehouse">Kho tổng</span>
+                <span class="label-warehouse">K-Store</span>
             </div>
             <div class="messege-header height-fill d-flex-center">
                 <span class="icon-messege"></span>
@@ -30,7 +30,7 @@
             </div>
             <div class="user d-flex-vcenter" @click="ShowFormLogOut()" v-click-out="LogOutClickOut">
                 <span class="icon-user"></span>
-                <span class="label-user">Trần Ngọc Phúc </span>
+                <span class="label-user">TnPhuc</span>
                 <span class="icon-arrow-user"></span>
                 <div class="logout-form" @click="LogOut()" v-if="disableFormLogOut">
                     <span>Đăng xuất</span>
@@ -171,7 +171,7 @@
                     </div>
                     <div class="sales-agent d-flex-vcenter">
                         <span class="icon-sales-agent"></span>
-                        <e-combobox :control="cbbAgentSales" v-model="cbbAgentSales.value" />
+                        <e-combobox :control="cbbAgentSales" v-model="bill.SalesAgent" />
                         <!-- <span class="arrow-sales-agent"></span> -->
                     </div>
                 </div>
@@ -182,24 +182,24 @@
 
 
                 <div class="body-content-store">
-                    <div class="d-flex-column" v-if="lstProductDetail?.length > 0"
-                        v-for="(item,index) in lstProductDetail" :key="item.ProductDetailId">
+                    <div class="d-flex-column" v-if="lstBillDetail?.length > 0" v-for="(item,index) in lstBillDetail"
+                        :key="item.BillDetailId">
                         <div class="item-product d-flex-vcenter">
                             <span class="flex-1">{{0 + index+1}}</span>
-                            <span class="flex-1">{{item.CodeProductList}}</span>
-                            <span class="flex-1">{{item.NameProductList}}</span>
+                            <span class="flex-1">{{item.CodeProductBill}}</span>
+                            <span class="flex-1">{{item.NameProductBill}}</span>
                             <span class="flex-1 child-item">
                                 <e-number @blur="ShowTotalProduct($event, item)" :control="txtPurchased"
-                                    v-model="item.QuantityProductList" />
+                                    v-model="item.QuantityBill" />
                             </span>
                             <span class="flex-1 child-item">
-                                <e-text-box :control="txtUnit" v-model="item.UnitProductList" />
+                                <e-text-box :control="txtUnit" v-model="item.UnitProductBill" />
                             </span>
                             <span class="flex-1 child-item">
-                                <e-number :control="txtPrice" v-model="item.PriceProductList" />
+                                <e-number :control="txtPrice" v-model="item.UnitPriceBill" />
                             </span>
                             <span class="flex-1">
-                                <e-number :control="txtPriceLast" v-model="item.TotalProductList" />
+                                <e-number :control="txtPriceLast" v-model="item.IntoMoneyBill" />
                             </span>
                             <span class="icon-child-product" @click="DelListTable(index)"></span>
                         </div>
@@ -229,7 +229,7 @@
                         <div class="content-select-customer d-flex-vcenter flex-1">
                             <span class="icon-guest-content"></span>
                             <span class="type-input-select-customer">
-                                <e-combobox :control="cbbSelectCustomer" v-model="cbbSelectCustomer.value" />
+                                <e-combobox :control="cbbSelectCustomer" v-model="bill.CustomerName" />
                             </span>
                             <!-- <div class="out-line-icon-add-guest d-flex-center">
                                 <span class="icon-add-guest-content"></span>
@@ -322,7 +322,7 @@
 
                                 </div>
                                 <div class="bodyPopup-item d-flex-vcenter">
-                                    <e-number :control="numVoucherTotalPrice" v-model="numVoucherTotalPrice.value" />
+                                    <e-number :control="numVoucherTotalPrice" v-model="bill.numVoucherTotalPrice" />
 
                                 </div>
                                 <div class="btnPopup d-flex">
@@ -352,35 +352,40 @@
                         <div class="info-payment-item d-flex-vcenter">
                             <span class="label-transaction-item label-sales flex-1">Khuyến mại</span>
                             <span class="transaction-price-sales">
-                                <span>{{numVoucherTotalPrice.value}}</span>
+                                <!-- <span>{{numVoucherTotalPrice.value}}</span> -->
+                                <span>{{bill.numVoucherTotalPrice}}</span>
                             </span>
                         </div>
                         <div class="info-payment-item d-flex-vcenter">
                             <span class="label-transaction-item label-all-price flex-1">Còn phải thu</span>
                             <span class="transaction-all-price">
-                                {{totalBill.collectedMoney}}
+                                <!-- {{totalBill.collectedMoney}} -->
+                                {{bill.collectedMoney}}
                             </span>
                         </div>
                     </div>
                     <div class="check-point-price d-flex-vcenter d-flex-sp-center">
                         <div class="check-payments">
-                            <e-combobox :control="cbbCheckPoint" v-model="cbbCheckPoint.value" />
+                            <e-combobox @dataChange="ShowCodeBank($event, item)" :control="cbbCheckPoint"
+                                v-model="cbbCheckPoint.value" />
                         </div>
                         <div class="type-input-payments">
-                            <e-number @blur="ShowDeposits($event)" :control="txtPayments" v-model="txtPayments.value" />
+                            <e-number @blur="ShowDeposits" :control="txtPayments" v-model="txtPayments.value" />
                         </div>
                     </div>
                     <div class="notice-transaction">
                         <div class="info-payment-item">
-                            <span class="label-transaction-item label-all-price flex-1">Tài khoản thu</span>
-                            <div class="type-input-notice width-fill">
-                                <div class="d-flex">
-                                    <div class="flex-1">
-                                        <e-combobox @dataChange="ShowCodeAccount($event,item)" :control="cbbPayments"
-                                            v-model="cbbPayments.value" />
-                                    </div>
-                                    <div>
-                                        <e-text-box :control="txtAccountNumber" v-model="txtAccountNumber.value" />
+                            <div v-if="DisableFormPayment">
+                                <span class="label-transaction-item label-all-price flex-1">Tài khoản thu</span>
+                                <div class="type-input-notice width-fill">
+                                    <div class="d-flex">
+                                        <div class="flex-1">
+                                            <e-combobox @dataChange="ShowCodeAccount($event)" :control="cbbPayments"
+                                                v-model="cbbPayments.value" />
+                                        </div>
+                                        <div>
+                                            <e-text-box :control="txtAccountNumber" v-model="txtAccountNumber.value" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -388,11 +393,11 @@
                             <div class="info-payment-item d-flex-vcenter">
                                 <span class="label-transaction-item label-payment flex-1">Trả lại khách</span>
                                 <span class="payment-all-price">
-                                    {{totalRefunds.refundDetail}}
+                                    {{bill.refundDetail}}
                                 </span>
                             </div>
                             <div class="type-input-notice">
-                                <e-text-box :control="txtNotice" v-model="txtNotice.value" />
+                                <e-text-box :control="txtNotice" v-model="bill.NoticeBill" />
                             </div>
                         </div>
                     </div>
@@ -405,18 +410,14 @@
                     <span>
                         <e-checkbox :control="cbkOrder" v-model="cbkOrder.value"></e-checkbox>
                     </span>
-
                 </div>
             </div>
             <div class="prepare-bill d-flex-vcenter d-flex-sp-center">
                 <span class="btn-prepare-item height-fill width-fill">
                     <e-button :control="btnTemporarySave" />
                 </span>
-                <div @click="showPopUpPayments()">
-                    <h1>all</h1>
-                </div>
-                <span class="btn-prepare-item height-fill width-fill" @click="showPopUpPayments()">
-                    <e-button :control="btnCollectMoney" />
+                <span class="btn-prepare-item height-fill width-fill">
+                    <e-button @click="saveData()" :control=" btnCollectMoney" />
                 </span>
             </div>
         </div>

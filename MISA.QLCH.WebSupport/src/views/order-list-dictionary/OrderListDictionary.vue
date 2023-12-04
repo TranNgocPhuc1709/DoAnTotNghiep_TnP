@@ -32,15 +32,11 @@ export default {
       data: [
         {
           value: 1,
-          display: "Khác"
+          display: "Tháng này"
         },
         {
           value: 2,
-          display: "Hôm nay"
-        },
-        {
-          value: 3,
-          display: "Tuần trước"
+          display: "Tháng trước"
         },
 
       ]
@@ -51,15 +47,12 @@ export default {
       data: [
         {
           value: 1,
-          display: "Khác"
+          display: "Ngày Giao Hàng"
         },
+
         {
           value: 2,
-          display: "Hôm nay"
-        },
-        {
-          value: 3,
-          display: "Tuần trước"
+          display: "Ngày tạo đơn"
         },
 
       ]
@@ -219,21 +212,166 @@ export default {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
       return [
         {
-          DateCreateOrder: "Value 11",
-          DateDelivery: "Value 21",
-          CodeBill: "Value 31",
-          StatusOrderList: "Value 41",
-          SalesAgentOrder: "Value 51",
-          ReceiverOrder: "Value 61",
-          PhoneReceiverOrder: "Value 61",
-          AddressDelivery: "Value 61",
-          DeliveryCharges: "Value 61",
-          DeliveryPartner: "Value 61",
-          ShippingOrder: "Value 61",
-          LadingBillOrder: "Value 61",
-          PlatformCodeOrder: "Value 61",
-          TotalPaymentOrder: "Value 61"
+          DateCreateOrder: "12/11/2023",
+          DateDelivery: "15/11/2023",
+          CodeBill: "021237481",
+          StatusOrderList: "Đang Giao Hàng",
+          SalesAgentOrder: "Trần Thị Mai",
+          ReceiverOrder: "Trần Ngọc Phúc",
+          PhoneReceiverOrder: "023432483",
+          AddressDelivery: "Bắc Từ Liêm, Hà Nội",
+          DeliveryCharges: "20000",
+          DeliveryPartner: "Shoppe",
+          ShippingOrder: "Đang hoạt động",
+          LadingBillOrder: "2299871",
+          PlatformCodeOrder: "DH2121398",
+          TotalPaymentOrder: "350000"
         },
+        {
+          DateCreateOrder: "13/11/2023",
+          DateDelivery: "16/11/2023",
+          CodeBill: "021237481",
+          StatusOrderList: "Đã Giao Hàng",
+          SalesAgentOrder: "Trần Thị Mai",
+          ReceiverOrder: "Trần Ngọc Phúc",
+          PhoneReceiverOrder: "023432483",
+          AddressDelivery: "Bắc Từ Liêm, Hà Nội",
+          DeliveryCharges: "20000",
+          DeliveryPartner: "Shoppe",
+          ShippingOrder: "Đang hoạt động",
+          LadingBillOrder: "2299871",
+          PlatformCodeOrder: "DH2121398",
+          TotalPaymentOrder: "350000"
+        },
+        {
+          DateCreateOrder: "14/11/2023",
+          DateDelivery: "17/11/2023",
+          CodeBill: "021237481",
+          StatusOrderList: "Đang Giao Hàng",
+          SalesAgentOrder: "Trần Thị Mai",
+          ReceiverOrder: "Trần Ngọc Phúc",
+          PhoneReceiverOrder: "023432483",
+          AddressDelivery: "Bắc Từ Liêm, Hà Nội",
+          DeliveryCharges: "20000",
+          DeliveryPartner: "Shoppe",
+          ShippingOrder: "Đang hoạt động",
+          LadingBillOrder: "2299871",
+          PlatformCodeOrder: "DH2121398",
+          TotalPaymentOrder: "350000"
+        },
+        {
+          DateCreateOrder: "15/11/2023",
+          DateDelivery: "18/11/2023",
+          CodeBill: "021237481",
+          StatusOrderList: "Đã Giao Hàng",
+          SalesAgentOrder: "Nguyễn Thị Lụa",
+          ReceiverOrder: "Trần Ngọc Phúc",
+          PhoneReceiverOrder: "023432483",
+          AddressDelivery: "Bắc Từ Liêm, Hà Nội",
+          DeliveryCharges: "20000",
+          DeliveryPartner: "Shoppe",
+          ShippingOrder: "Đang hoạt động",
+          LadingBillOrder: "2299871",
+          PlatformCodeOrder: "DH2121398",
+          TotalPaymentOrder: "350000"
+        },
+        {
+          DateCreateOrder: "16/11/2023",
+          DateDelivery: "19/11/2023",
+          CodeBill: "021237481",
+          StatusOrderList: "Đang Giao Hàng",
+          SalesAgentOrder: "Trần Thị Mai",
+          ReceiverOrder: "Trần Ngọc Phúc",
+          PhoneReceiverOrder: "023432483",
+          AddressDelivery: "Bắc Từ Liêm, Hà Nội",
+          DeliveryCharges: "20000",
+          DeliveryPartner: "Shoppe",
+          ShippingOrder: "Đang hoạt động",
+          LadingBillOrder: "2299871",
+          PlatformCodeOrder: "DH2121398",
+          TotalPaymentOrder: "350000"
+        },
+        {
+          DateCreateOrder: "17/11/2023",
+          DateDelivery: "20/11/2023",
+          CodeBill: "021237481",
+          StatusOrderList: "Đã Giao Hàng",
+          SalesAgentOrder: "Nguyễn Thị Lụa",
+          ReceiverOrder: "Trần Ngọc Phúc",
+          PhoneReceiverOrder: "023432483",
+          AddressDelivery: "Bắc Từ Liêm, Hà Nội",
+          DeliveryCharges: "20000",
+          DeliveryPartner: "Shoppe",
+          ShippingOrder: "Đang hoạt động",
+          LadingBillOrder: "2299871",
+          PlatformCodeOrder: "DH2121398",
+          TotalPaymentOrder: "350000"
+        },
+        {
+          DateCreateOrder: "18/11/2023",
+          DateDelivery: "21/11/2023",
+          CodeBill: "021237481",
+          StatusOrderList: "Đang Giao Hàng",
+          SalesAgentOrder: "Trần Thị Mai",
+          ReceiverOrder: "Trần Ngọc Phúc",
+          PhoneReceiverOrder: "023432483",
+          AddressDelivery: "Bắc Từ Liêm, Hà Nội",
+          DeliveryCharges: "20000",
+          DeliveryPartner: "Shoppe",
+          ShippingOrder: "Đang hoạt động",
+          LadingBillOrder: "2299871",
+          PlatformCodeOrder: "DH2121398",
+          TotalPaymentOrder: "350000"
+        },
+        {
+          DateCreateOrder: "19/11/2023",
+          DateDelivery: "22/11/2023",
+          CodeBill: "021237481",
+          StatusOrderList: "Đang Giao Hàng",
+          SalesAgentOrder: "Trần Thị Mai",
+          ReceiverOrder: "Trần Ngọc Phúc",
+          PhoneReceiverOrder: "023432483",
+          AddressDelivery: "Bắc Từ Liêm, Hà Nội",
+          DeliveryCharges: "20000",
+          DeliveryPartner: "Shoppe",
+          ShippingOrder: "Đang hoạt động",
+          LadingBillOrder: "2299871",
+          PlatformCodeOrder: "DH2121398",
+          TotalPaymentOrder: "350000"
+        },
+        {
+          DateCreateOrder: "20/11/2023",
+          DateDelivery: "23/11/2023",
+          CodeBill: "021237481",
+          StatusOrderList: "Đang Giao Hàng",
+          SalesAgentOrder: "Trần Thị Mai",
+          ReceiverOrder: "Trần Ngọc Phúc",
+          PhoneReceiverOrder: "023432483",
+          AddressDelivery: "Bắc Từ Liêm, Hà Nội",
+          DeliveryCharges: "20000",
+          DeliveryPartner: "Shoppe",
+          ShippingOrder: "Đang hoạt động",
+          LadingBillOrder: "2299871",
+          PlatformCodeOrder: "DH2121398",
+          TotalPaymentOrder: "350000"
+        },
+        {
+          DateCreateOrder: "21/11/2023",
+          DateDelivery: "24/11/2023",
+          CodeBill: "021237481",
+          StatusOrderList: "Đang Giao Hàng",
+          SalesAgentOrder: "Trần Thị Mai",
+          ReceiverOrder: "Trần Ngọc Phúc",
+          PhoneReceiverOrder: "023432483",
+          AddressDelivery: "Bắc Từ Liêm, Hà Nội",
+          DeliveryCharges: "20000",
+          DeliveryPartner: "Shoppe",
+          ShippingOrder: "Đang hoạt động",
+          LadingBillOrder: "2299871",
+          PlatformCodeOrder: "DH2121398",
+          TotalPaymentOrder: "350000"
+        },
+
 
       ];
     },

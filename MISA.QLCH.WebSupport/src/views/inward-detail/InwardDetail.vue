@@ -21,6 +21,7 @@ import Button from '@library-src/models/qlch_control/qlch_button/Button';
 import EButton from "qlch_control/EButton";
 import Product from '@store-src/models/product/Product';
 import DictionaryStock from '@store-src/models/dictionary-stock/DictionaryStock';
+import Employee from '@store-src/models/employee/Employee';
 
 export default {
 
@@ -110,7 +111,8 @@ export default {
       txtUnitProductInward,
       txtNumberProductInward,
       txtUnitPriceInward,
-      txtPaymentInward
+      txtPaymentInward,
+
 
 
     }
@@ -165,6 +167,7 @@ export default {
     * Khởi tạo control binding trên form
     */
     buildBindingControl() {
+      const lstObjectInward = LocalStorageLibrary.getByKey<Array<Employee>>("employee") ?? new Array<Employee>();
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
       const labelWidth = 115;
       return {
@@ -187,20 +190,9 @@ export default {
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          data: [
-            {
-              value: 1,
-              display: "Nhân viên"
-            },
-            {
-              value: 2,
-              display: "Khách hàng"
-            },
-            {
-              value: 3,
-              display: "Nhà cung cấp"
-            }
-          ],
+          data: lstObjectInward,
+          valueField: "CodeEmployee",
+          displayField: "CodeEmployee",
           bindingIndex: "ObjectInward"
         }),
         "txtTotalMoneyInward": new NumberModel({
@@ -233,9 +225,10 @@ export default {
           labelWidth: labelWidth,
           bindingIndex: "DeliverInward"
         }),
-        "txtNameObjectInward": new Combobox({
+        "txtNameObjectInward": new TextBox({
           fieldText: "Tên",
           require: false,
+          readOnly: true,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "NameObjectInward"
@@ -254,6 +247,27 @@ export default {
           bindingIndex: "TotalInward"
         }),
 
+      }
+    },
+
+    ShowNameInward(value: any) {
+      const me = this;
+      const listEmployee = LocalStorageLibrary.getByKey<Array<Employee>>("employee");
+      if (listEmployee && listEmployee.length > 0 && me.masterData) {
+        // const vendorCode = me.masterData['SupplierOrder'];
+        if (value) {
+          let rowVendorByEmployeeCode = new Employee();
+          for (let index = 0; index < listEmployee.length; index++) {
+            const rowVendor = listEmployee[index];
+            if (rowVendor.CodeEmployee == value) {
+              rowVendorByEmployeeCode = rowVendor;
+              break;
+            }
+          }
+          if (rowVendorByEmployeeCode) {
+            me.masterData['NameObjectInward'] = rowVendorByEmployeeCode.NameEmployee;
+          }
+        }
       }
     },
     AddListTable() {

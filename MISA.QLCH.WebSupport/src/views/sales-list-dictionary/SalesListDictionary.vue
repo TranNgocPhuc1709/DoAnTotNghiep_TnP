@@ -20,6 +20,8 @@ import ETextBox from "qlch_control/ETextBox";
 import NumberModel from '@library-src/models/qlch_control/qlch_number/NumberModel';
 import NumberFormat from '@library-src/models/qlch_control/number_format/NumberFormat';
 import ENumber from "qlch_control/ENumber";
+import PopupLibrary from '@library-src/utilities/commons/PopupLibrary';
+import Bill from '@store-src/models/bill-main/Bill';
 
 export default {
 
@@ -33,6 +35,12 @@ export default {
     ETextBox,
     ENumber
   },
+  data() {
+    const lstBill: Ref<Array<Bill>> = ref(new Array<Bill>());
+    return {
+      lstBill
+    }
+  },
   setup() {
     const thisData: Ref<SalesListDictionary> = ref(new SalesListDictionary());
     const cbbSales: Ref<Combobox> = ref(new Combobox({
@@ -40,15 +48,11 @@ export default {
       data: [
         {
           value: 1,
-          display: "Khác"
+          display: "Tháng này"
         },
         {
           value: 2,
-          display: "Hôm nay"
-        },
-        {
-          value: 3,
-          display: "Tuần trước"
+          display: "Tháng trước"
         },
 
       ]
@@ -65,6 +69,7 @@ export default {
     const btnGetData: Button = new Button({
       fieldText: "Lấy dữ liệu",
       classType: "secondary",
+
       // classIconLeft: "i-add"
     });
     const btnExportData: Button = new Button({
@@ -85,6 +90,7 @@ export default {
       fieldText: "",
       labelWidth: 60,
 
+
     });
     const txtTimesSalesDetail: Ref<TextBox> = ref(new TextBox({
       fieldText: "",
@@ -92,7 +98,19 @@ export default {
       maxLength: 255,
       classType: "tertiary"
     }));
+    const txtSalesAgent: Ref<TextBox> = ref(new TextBox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      classType: "tertiary"
+    }));
     const txtBillsSalesDetail: Ref<TextBox> = ref(new TextBox({
+      fieldText: "",
+      require: false,
+      maxLength: 255,
+      classType: "tertiary"
+    }));
+    const txtNoticeSales: Ref<TextBox> = ref(new TextBox({
       fieldText: "",
       require: false,
       maxLength: 255,
@@ -143,6 +161,8 @@ export default {
       txtTimesSalesDetail,
       txtBillsSalesDetail,
       txtTotalSalesDetail,
+      txtSalesAgent,
+      txtNoticeSales,
       txtGoodsMoneySalesDetail,
       txtPromotionSalesDetail,
       btnDelListTable
@@ -169,6 +189,15 @@ export default {
     getTemplateRecord() {
       console.log("DEV: Override Function getTemplateRecord return new model()");
       return {};
+    },
+
+
+    async ShowBill() {
+
+      const component = (await import(`./popup-bill/PopupBill.vue`)).default;
+      if (component) {
+        PopupLibrary.createPopup(component, {});
+      };
     },
 
     /**
@@ -228,16 +257,16 @@ export default {
     loadMasterData(param: ParamPaging) {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
       return [
-        {
-          DateSales: "27/10/2023",
-          TimesSales: "20:00",
-          NumberBillsSales: "2131321232",
-          StatusBillsSales: "Đã Xác Nhận",
-          RevenueMoneySales: "100000",
-          ExpenseMoneySales: "20000",
-          PromotionSales: "0",
-          TotalSales: "120000",
-        },
+        // {
+        //   DateSales: "27/10/2023",
+        //   TimesSales: "20:00",
+        //   NumberBillsSales: "2131321232",
+        //   StatusBillsSales: "Đã Xác Nhận",
+        //   RevenueMoneySales: "100000",
+        //   ExpenseMoneySales: "20000",
+        //   PromotionSales: "0",
+        //   TotalSales: "120000",
+        // },
 
       ];
     },

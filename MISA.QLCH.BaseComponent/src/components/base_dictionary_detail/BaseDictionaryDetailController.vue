@@ -58,14 +58,14 @@ export default {
                         classType: "primary"
                     })
                 }),
-                new ToolBarItemsView({
-                    name: "btnSaveAdd",
-                    control: new Button({
-                        fieldText: "Lưu và thêm mới",
-                        classIconLeft: "i-add",
-                        classType: "secondary"
-                    })
-                }),
+                // new ToolBarItemsView({
+                //     name: "btnSaveAdd",
+                //     control: new Button({
+                //         fieldText: "Lưu và thêm mới",
+                //         classIconLeft: "i-add",
+                //         classType: "secondary"
+                //     })
+                // }),
                 new ToolBarItemsView({
                     name: "btnCancel",
                     control: new Button({

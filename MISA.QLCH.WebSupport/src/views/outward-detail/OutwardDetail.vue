@@ -1,7 +1,6 @@
 <template src="./OutwardDetail.html"></template>
 <style lang="scss" scoped src="./OutwardDetail.scss"></style>
 <script lang="ts">
-
 import { PropType, Ref, ref } from 'vue';
 import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailController";
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
@@ -22,6 +21,7 @@ import Button from '@library-src/models/qlch_control/qlch_button/Button';
 import EButton from "qlch_control/EButton";
 import Product from '@store-src/models/product/Product';
 import DictionaryStock from '@store-src/models/dictionary-stock/DictionaryStock';
+import Employee from '@store-src/models/employee/Employee';
 
 export default {
 
@@ -171,6 +171,7 @@ export default {
     * Khởi tạo control binding trên form
     */
     buildBindingControl() {
+      const lstObjectInward = LocalStorageLibrary.getByKey<Array<Employee>>("employee") ?? new Array<Employee>();
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
       const labelWidth = 115;
       return {
@@ -193,20 +194,9 @@ export default {
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          data: [
-            {
-              value: "Nhân viên",
-              display: "Nhân viên"
-            },
-            {
-              value: "Khách hàng",
-              display: "Khách hàng"
-            },
-            {
-              value: "Nhà cung cấp",
-              display: "Nhà cung cấp"
-            }
-          ],
+          data: lstObjectInward,
+          valueField: "CodeEmployee",
+          displayField: "CodeEmployee",
           bindingIndex: "ObjectOutward"
         }),
         "txtTotalMoneyOutward": new NumberModel({
@@ -236,16 +226,11 @@ export default {
           labelWidth: labelWidth,
           bindingIndex: "DeliverOutward"
         }),
-        "txtObjectNameOutward": new Combobox({
+        "txtObjectNameOutward": new TextBox({
           fieldText: "Tên",
+          readOnly: true,
           require: false,
           maxLength: 255,
-          data: [
-            {
-              value: "TNP",
-              display: "PNJ"
-            }
-          ],
           labelWidth: labelWidth,
           bindingIndex: "ObjectNameOutward"
         }),
@@ -262,6 +247,26 @@ export default {
           }),
           bindingIndex: "TotalQuantityOutward"
         }),
+      }
+    },
+    ShowNameInward(value: any) {
+      const me = this;
+      const listEmployee = LocalStorageLibrary.getByKey<Array<Employee>>("employee");
+      if (listEmployee && listEmployee.length > 0 && me.masterData) {
+        // const vendorCode = me.masterData['SupplierOrder'];
+        if (value) {
+          let rowVendorByEmployeeCode = new Employee();
+          for (let index = 0; index < listEmployee.length; index++) {
+            const rowVendor = listEmployee[index];
+            if (rowVendor.CodeEmployee == value) {
+              rowVendorByEmployeeCode = rowVendor;
+              break;
+            }
+          }
+          if (rowVendorByEmployeeCode) {
+            me.masterData['ObjectNameOutward'] = rowVendorByEmployeeCode.NameEmployee;
+          }
+        }
       }
     },
 

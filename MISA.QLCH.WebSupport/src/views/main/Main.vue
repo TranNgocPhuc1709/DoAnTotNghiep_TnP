@@ -5,7 +5,6 @@ import { Menu } from '@library-src/models/qlch_menu/Menu';
 import Main from './Main';
 import Log from '@library-src/utilities/Log';
 import LeftMenu from '@src/components/left_menu/LeftMenu.vue';
-
 //tnp
 import ECombobox from "qlch_control/ECombobox";
 import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
@@ -13,6 +12,10 @@ import { Ref, ref } from 'vue';
 import router from '@src/router';
 import Branch from '@store-src/models/branch/Branch';
 import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import NotificationPopupViewModel from '@library-src/models/qlch_notification/NotificationPopupViewModel';
+import ToolBarItemsView from '@library-src/models/qlch_base/tool_bar_items_view/ToolBarItemsView';
+import Button from '@library-src/models/qlch_control/qlch_button/Button';
+import PopupLibrary from '@library-src/utilities/commons/PopupLibrary';
 export default {
     components: {
         LeftMenu, ECombobox,
@@ -34,22 +37,22 @@ export default {
                         routerLink: "/sales",
                         fieldText: "Danh sách hóa đơn",
                     },
-                    {
-                        routerLink: "/purchase",
-                        fieldText: "Nhập hàng",
-                    },
+                    // {
+                    //     routerLink: "/purchase",
+                    //     fieldText: "Nhập hàng",
+                    // },
                     {
                         routerLink: "/stock",
-                        fieldText: "Kho",
+                        fieldText: "Tồn Kho",
                     },
-                    {
-                        routerLink: "/monetaryFlow",
-                        fieldText: "Doanh thu bàn giao ca"
-                    },
-                    {
-                        routerLink: "/revenueExpenditure",
-                        fieldText: "Thu chi"
-                    },
+                    // {
+                    //     routerLink: "/monetaryFlow",
+                    //     fieldText: "Doanh thu bàn giao ca"
+                    // },
+                    // {
+                    //     routerLink: "/revenueExpenditure",
+                    //     fieldText: "Thu chi"
+                    // },
                     {
                         routerLink: "/profit",
                         fieldText: "Lợi Nhuận"
@@ -98,20 +101,24 @@ export default {
                 ),
                 fieldText: "Kho Hàng"
             },
-            {
-                children: new Array(
-                    {
-                        fieldText: "Phiếu thu tiền mặt",
-                        routerLink: "/cashReceipt"
-                    },
-                    {
-                        fieldText: "Phiếu chi tiền mặt",
-                        routerLink: "/cashPayment"
-                    }
 
-                ),
-                fieldText: "Quỹ Tiền"
-            },
+            //Quỹ tiền
+            // {
+            //     children: new Array(
+            //         {
+            //             fieldText: "Phiếu thu tiền mặt",
+            //             routerLink: "/cashReceipt"
+            //         },
+            //         {
+            //             fieldText: "Phiếu chi tiền mặt",
+            //             routerLink: "/cashPayment"
+            //         }
+
+            //     ),
+            //     fieldText: "Quỹ Tiền"
+            // },
+
+
             // {
             //     routerLink: "product",
             //     fieldText: "Sản Phẩm"
@@ -306,6 +313,38 @@ export default {
             localStorage.clear();
             router.push({ path: '/login' })
 
+        },
+        async showInformationPending() {
+            const infoNotification = new NotificationPopupViewModel({
+                icon: "info",
+                message: "Yêu cầu đang phát triển. Vui lòng thử lại sau!",
+                toolBarItems: Array(
+                    new ToolBarItemsView({
+                        name: "btnOK",
+                        control: new Button({
+                            fieldText: "Đồng ý"
+                        })
+                    })
+                )
+            })
+
+            const component = (await import(`qlch_control/ENotification`)).default;
+            if (component && component.methods) {
+                component.methods["onSelectAction"] = (item: ToolBarItemsView) => {
+                    Log.InfoLog(JSON.stringify(item));
+                };
+            };
+            if (component) {
+                PopupLibrary.createPopup(component, { "propView": infoNotification, "styleFrom": "min-width: 400px" });
+            };
+        },
+        onClickUpdate() {
+            try {
+                const me = this;
+                me.showInformationPending();
+            } catch (error) {
+                Log.ErrorLog(error as Error)
+            }
         }
     }
 }

@@ -240,6 +240,10 @@ export default {
               display: "Nhân viên bán hàng"
             },
             {
+              value: "Nhân viên thủ kho",
+              display: "Nhân viên thủ kho"
+            },
+            {
               value: "Quản trị hệ thống",
               display: "Quản trị hệ thống"
             }

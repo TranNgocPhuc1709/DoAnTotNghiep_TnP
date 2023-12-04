@@ -33,15 +33,11 @@ export default {
       data: [
         {
           value: 1,
-          display: "Khác"
+          display: "Tháng này"
         },
         {
           value: 2,
-          display: "Hôm nay"
-        },
-        {
-          value: 3,
-          display: "Tuần trước"
+          display: "Tháng trước"
         },
 
       ]
@@ -123,7 +119,7 @@ export default {
         }),
         new Column({
           fieldText: "Đối tượng",
-          dataIndex: "ObjectInward",
+          dataIndex: "NameObjectInward",
           width: 260
         }),
         new Column({

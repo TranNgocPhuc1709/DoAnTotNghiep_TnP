@@ -12,6 +12,7 @@ export default class ProductDetail {
             me.UnitProductList = productList.UnitProductList;
             me.PriceProductList = productList.PriceProductList;
             me.TotalProductList = productList.TotalProductList;
+            me.BillId = productList.BillId;
             me.ProductId = productList.ProductId;
         }
         me.ProductDetailId = Guid.NewGuid();
@@ -27,4 +28,5 @@ export default class ProductDetail {
     TotalProductList?: number;
     ProductId?: string;
     ProductDetailId?: string;
+    BillId?: string;
 }

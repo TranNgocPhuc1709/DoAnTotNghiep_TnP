@@ -35,39 +35,51 @@
       <table class="flex-1">
         <thead>
           <tr>
-            <th>Ngày</th>
-            <th>Giờ</th>
+            <th>Thời Gian Tạo Hóa Đơn</th>
             <th>Số Hóa Đơn</th>
             <th>Tổng (3) = (1) - (2)</th>
             <th>Tiền Hàng (1)</th>
             <th>Khuyến Mại (2)</th>
+            <th>Nhân Viên Bán Hàng</th>
+            <th>Ghi Chú</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          <tr v-if="lstSalesDetail?.length > 0" v-for="item in lstSalesDetail" :key="item.CashReceiptDetailId">
+          <tr v-if="lstBill?.length > 0" v-for="item in lstBill" :key="item.BillId">
             <td>
-              <e-date :control="txtDateSalesDetail" v-model="txtDateSalesDetail.value"></e-date>
+              <!-- <e-text-box :control="txtTimesSalesDetail" v-model="item.DateBill"></e-text-box> -->
+              {{item.DateBill}}
+            </td>
+            <td @click="ShowBill()">
+              <!-- <e-text-box :control="txtBillsSalesDetail" v-model="item.NumberBill"></e-text-box> -->
+              {{item.NumberBill}}
             </td>
             <td>
-              <e-text-box :control="txtTimesSalesDetail" v-model="txtTimesSalesDetail.value"></e-text-box>
+              <!-- <e-number :control="txtTotalSalesDetail" v-model="item.collectedMoney"></e-number> -->
+              {{item.collectedMoney}}
             </td>
             <td>
-              <e-text-box :control="txtBillsSalesDetail" v-model="txtBillsSalesDetail.value"></e-text-box>
+              <!-- <e-number :control="txtGoodsMoneySalesDetail" v-model="item.TotalMoneyBill"></e-number> -->
+              {{item.TotalMoneyBill}}
             </td>
             <td>
-              <e-number :control="txtTotalSalesDetail" v-model="txtTotalSalesDetail.value"></e-number>
+              <!-- <e-number :control="txtPromotionSalesDetail" v-model="item.numVoucherTotalPrice"></e-number> -->
+              {{item.numVoucherTotalPrice}}
             </td>
             <td>
-              <e-number :control="txtGoodsMoneySalesDetail" v-model="txtGoodsMoneySalesDetail.value"></e-number>
+              <!-- <e-text-box :control="txtSalesAgent" v-model="item.SalesAgent"></e-text-box> -->
+              {{item.SalesAgent}}
             </td>
             <td>
-              <e-number :control="txtPromotionSalesDetail" v-model="txtPromotionSalesDetail.value"></e-number>
+              <!-- <e-text-box :control="txtNoticeSales" v-model="item.NoticeBill"></e-text-box> -->
+              {{item.NoticeBill}}
             </td>
             <td>
               <e-button :control="btnDelListTable" @click="DelListTable(item)" />
             </td>
           </tr>
+
         </tbody>
       </table>
     </div>

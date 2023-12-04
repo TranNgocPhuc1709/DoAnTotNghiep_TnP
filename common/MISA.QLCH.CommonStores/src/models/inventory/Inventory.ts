@@ -11,17 +11,18 @@ export default class Inventory {
             me.TotalBeginInventory = inventory.TotalBeginInventory;
             me.TotalUpdateInventory = inventory.TotalUpdateInventory;
             me.TotalEndInventory = inventory.TotalEndInventory;
-
+            me.StatusListInventory = inventory.StatusListInventory;
         }
         me.InventoryId = Guid.NewGuid();
     }
-    DateInventory?: Date;
+    DateInventory?: string;
     VotesInventory?: string;
     WarehouseInventory?: string;
     ExplantInventory?: string;
     TotalBeginInventory?: number;
     TotalUpdateInventory?: number;
     TotalEndInventory?: number;
+    StatusListInventory?: string;
     InventoryId?: string;
 
 

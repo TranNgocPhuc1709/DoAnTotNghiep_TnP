@@ -5,12 +5,12 @@
       <div class="form-inward-detail-left flex-1">
         <span class="heading-inward-info">THÔNG TIN CHUNG</span>
         <div class="qlch-input-default item-detail">
-          <e-combobox :control="bindingControl[`txtObjectInward`]"
+          <e-combobox @dataChange="ShowNameInward" :control="bindingControl[`txtObjectInward`]"
             v-model="masterData[bindingControl[`txtObjectInward`].bindingIndex]"></e-combobox>
         </div>
         <div class="qlch-input-default item-detail">
-          <e-combobox :control="bindingControl[`txtNameObjectInward`]"
-            v-model="masterData[bindingControl[`txtNameObjectInward`].bindingIndex]"></e-combobox>
+          <e-text-box :control="bindingControl[`txtNameObjectInward`]"
+            v-model="masterData[bindingControl[`txtNameObjectInward`].bindingIndex]"></e-text-box>
         </div>
         <div class="qlch-input-default item-detail">
           <e-text-box :control="bindingControl[`txtDeliverInward`]"

@@ -27,14 +27,15 @@ import Bank from '@store-src/models/bank/Bank';
 import Voucher from '@store-src/models/voucher/Voucher';
 import ProductDetail from '@store-src/models/product/ProductDetail';
 import Bill from '@store-src/models/bill-main/Bill';
-import TotalBill from '@store-src/models/total-bill/TotalBill';
-import TotalRefunds from '@store-src/models/total-refunds/TotalRefunds';
 import PopupLibrary from '@library-src/utilities/commons/PopupLibrary';
+import Guid from '@library-src/utilities/types/Guid';
+import BillDetail from '@store-src/models/bill-main/BillDetail';
 // import VoucherDetail from '@store-src/models/voucher/VoucherDetail';
 // import VoucherDetail from '../voucher-detail/VoucherDetail';
 // import BankDetail from '@store-src/models/bank/BankDetail';
 
 export default {
+
     components: {
         ECombobox,
         ECheckbox,
@@ -44,24 +45,23 @@ export default {
         EDate
     },
     data() {
-        const lstProductDetail: Ref<Array<ProductDetail>> = ref(new Array<ProductDetail>());
-        const lstVoucher = LocalStorageLibrary.getByKey<Array<Voucher>>("voucher")
+        const lstBillDetail: Ref<Array<BillDetail>> = ref(new Array<BillDetail>());
+        const lstVoucher = LocalStorageLibrary.getByKey<Array<Voucher>>("voucher");
+        const lstBank = LocalStorageLibrary.getByKey<Array<Bank>>("Bank");
+        const lstBankAccount = LocalStorageLibrary.getByKey<Array<BankAccount>>("BankAccount");;
         const bill: Ref<Bill> = ref(new Bill());
-        const totalBill: Ref<TotalBill> = ref(new TotalBill());
-        const totalRefunds: Ref<TotalRefunds> = ref(new TotalRefunds());
-
-
         return {
-            lstProductDetail,
+            lstBillDetail,
             bill,
-            totalBill,
             lstVoucher,
-            totalRefunds
-
+            lstBank,
+            lstBankAccount
         };
     },
     setup() {
         const disableFormLogOut: Ref<boolean> = ref(false);
+        const DisableFormPayment: Ref<boolean> = ref(false);
+
         const isActive: Ref<boolean> = ref(false);
         const disableFormShowDelivery: Ref<boolean> = ref(false)
         const disableFormMoreAction: Ref<boolean> = ref(false);
@@ -392,7 +392,8 @@ export default {
             cbbVoucherItem,
             cbbPayments,
             txtAllPayments,
-            txtPromotion
+            txtPromotion,
+            DisableFormPayment
 
 
         }
@@ -403,8 +404,9 @@ export default {
             me.cbbCheckPoint.value = 1;
             me.cbbPayments.value = 1;
             me.bill.TotalMoneyBill = 0;
-            me.totalBill.collectedMoney = 0;
-            me.totalRefunds.refundDetail = 0;
+            me.bill.collectedMoney = 0;
+            me.bill.numVoucherTotalPrice = 0;
+            me.bill.refundDetail = 0;
 
         } catch (error) {
             Log.ErrorLog(error as Error);
@@ -505,54 +507,32 @@ export default {
 
         DelListTable(index: number) {
             const me = this;
-            if (index >= 0 && index < this.lstProductDetail.length) {
-                this.lstProductDetail.splice(index, 1);
+            if (index >= 0 && index < this.lstBillDetail.length) {
+                this.lstBillDetail.splice(index, 1);
             }
             if (me.bill.TotalMoneyBill) {
                 me.bill.TotalMoneyBill = 0;
-                me.totalBill.collectedMoney = 0;
-                me.totalRefunds.refundDetail = 0;
+                me.bill.collectedMoney = 0;
+                me.bill.refundDetail = 0;
             }
 
-            for (let index = 0; index < me.lstProductDetail.length; index++) {
-                const element = me.lstProductDetail[index];
+            for (let index = 0; index < me.lstBillDetail.length; index++) {
+                const element = me.lstBillDetail[index];
                 if (!me.bill.TotalMoneyBill) {
                     me.bill.TotalMoneyBill = 0;
-
                 }
 
-                if (element) {
-                    me.bill.TotalMoneyBill += element.TotalProductList ?? 0;
-                    // if (me.bill.TotalMoneyBill == 0) {
-                    //     me.totalBill.collectedMoney = 0 - me.numVoucherTotalPrice.value;
-                    // }
-                    // else {
-                    //     me.totalBill.collectedMoney = me.bill.TotalMoneyBill - me.numVoucherTotalPrice.value;
-                    // }
-                    me.totalBill.collectedMoney = me.bill.TotalMoneyBill - me.numVoucherTotalPrice.value;
-
-
+                if (element && me.bill.numVoucherTotalPrice) {
+                    me.bill.TotalMoneyBill += element.IntoMoneyBill ?? 0;
+                    me.bill.collectedMoney = me.bill.TotalMoneyBill - me.bill.numVoucherTotalPrice;
                 }
-
-
             }
-
         },
-
-        //Show Popup
-        async showPopUpPayments() {
-
-            const component = (await import(`./popup-COD/PopupCod.vue`)).default;
-            if (component) {
-                PopupLibrary.createPopup(component, {});
-            };
-        },
-
 
         ShowNameProduct(value: any) {
             try {
                 const me = this;
-                let itemValue = new Product();
+                let itemValue = new BillDetail();
                 const listProduct = LocalStorageLibrary.getByKey<Array<Product>>("Product");
                 if (listProduct) {
                     const listProductFilter = listProduct.filter(item => {
@@ -561,13 +541,16 @@ export default {
                         }
                     });
                     if (listProductFilter?.length > 0) {
-                        itemValue = listProductFilter[0];
+                        itemValue.CodeProductBill = listProductFilter[0].CodeProductList;
+                        itemValue.NameProductBill = listProductFilter[0].NameProductList;
+                        itemValue.UnitProductBill = listProductFilter[0].UnitProductList;
+                        itemValue.UnitPriceBill = listProductFilter[0].PriceProductList;
                     }
                 }
-                if (me.lstProductDetail?.length > 0) {
-                    me.lstProductDetail.push(itemValue);
+                if (me.lstBillDetail?.length > 0) {
+                    me.lstBillDetail.push(itemValue);
                 } else {
-                    me.lstProductDetail = new Array<ProductDetail>(itemValue);
+                    me.lstBillDetail = new Array<ProductDetail>(itemValue);
                 }
             } catch (error) {
                 console.log(error);
@@ -576,29 +559,27 @@ export default {
         },
 
 
-        ShowTotalProduct(value: number, item: ProductDetail) {
+        ShowTotalProduct(value: number, item: BillDetail) {
             const me = this;
             if (value == null) {
                 value = 0;
             }
-            if (item.PriceProductList) {
-                item.TotalProductList = item.PriceProductList * value;
+            if (item.UnitPriceBill) {
+                item.IntoMoneyBill = item.UnitPriceBill * value;
             }
-
             // /tinh lai tong tien
             if (me.bill.TotalMoneyBill) {
                 me.bill.TotalMoneyBill = 0;
-
-
+                // me.bill.numVoucherTotalPrice = 0;
             }
-            for (let index = 0; index < me.lstProductDetail.length; index++) {
-                const element = me.lstProductDetail[index];
+            for (let index = 0; index < me.lstBillDetail.length; index++) {
+                const element = me.lstBillDetail[index];
                 if (!me.bill.TotalMoneyBill) {
                     me.bill.TotalMoneyBill = 0;
                 }
-                if (element) {
-                    me.bill.TotalMoneyBill += element.TotalProductList ?? 0;
-                    me.totalBill.collectedMoney = me.bill.TotalMoneyBill - me.numVoucherTotalPrice.value;
+                if (element && me.bill.numVoucherTotalPrice) {
+                    me.bill.TotalMoneyBill += element.IntoMoneyBill ?? 0;
+                    me.bill.collectedMoney = me.bill.TotalMoneyBill - me.bill.numVoucherTotalPrice;
 
                 }
             }
@@ -611,9 +592,7 @@ export default {
                     const elementListDetail = me.lstVoucher[indexListDetail]; //Dòng chi tiết
                     if (item == elementListDetail.NameVoucher) {
                         me.numVoucherPrice.value = elementListDetail.PriceVoucher ?? 0;
-                        // if (me.bill.TotalMoneyBill) {
-                        //     me.totalBill.collectedMoney = me.bill.TotalMoneyBill - me.numVoucherTotalPrice.value;
-                        // }
+
 
                     }
                 }
@@ -623,15 +602,17 @@ export default {
         ShowTotalVoucher(value: number) {
             const me = this;
             if (me.numVoucherPrice.value) {
-                me.numVoucherTotalPrice.value = me.numVoucherPrice.value * value;
+                me.bill.numVoucherTotalPrice = me.numVoucherPrice.value * value;
             }
-            // /tinh lai tong tien (Lấy giá trị CollectedMoney trong totalBill.ts)
+            // /tinh lai tong tien (Lấy giá trị CollectedMoney trong bill.ts)
+            if (me.bill.numVoucherTotalPrice) {
+                if (me.bill.TotalMoneyBill == null)
+                    me.bill.collectedMoney = 0 - me.bill.numVoucherTotalPrice;
+                else {
+                    me.bill.collectedMoney = me.bill.TotalMoneyBill - me.bill.numVoucherTotalPrice;
+                }
+            }
 
-            if (me.bill.TotalMoneyBill == null)
-                me.totalBill.collectedMoney = 0 - me.numVoucherTotalPrice.value;
-            else {
-                me.totalBill.collectedMoney = me.bill.TotalMoneyBill - me.numVoucherTotalPrice.value
-            }
 
             // for (let index = 0; index < me.lstProductDetail.length; index++) {
             //     const element = me.lstProductDetail[index];
@@ -646,15 +627,91 @@ export default {
         },
         ShowDeposits(value: number) {
             const me = this;
-
-            if (me.totalBill.collectedMoney) {
-                me.totalRefunds.refundDetail = value - me.totalBill.collectedMoney;
+            if (me.bill.collectedMoney) {
+                me.bill.refundDetail = value - me.bill.collectedMoney;
             }
             else {
-                me.totalBill.collectedMoney = 0
-                me.totalRefunds.refundDetail = value - me.totalBill.collectedMoney;
+                me.bill.collectedMoney = 0
+                me.bill.refundDetail = value - me.bill.collectedMoney;
             }
         },
+        ShowCodeAccount(item: string) {
+            const me = this;
+            if (me.lstBank) {
+                for (let indexListDetail = 0; indexListDetail < me.lstBank.length; indexListDetail++) {
+                    const elementListDetail = me.lstBank[indexListDetail]; //Dòng chi tiết
+                    if (item == elementListDetail.NameAccount) {
+                        me.txtAccountNumber.value = elementListDetail.CodeAccount;
+                    }
+                }
+            }
+        },
+        ShowCodeBank(item: string) {
+            const me = this;
+            if (me.lstBankAccount) {
+                for (let indexListDetail = 0; indexListDetail < me.lstBankAccount.length; indexListDetail++) {
+                    const elementListDetail = me.lstBankAccount[indexListDetail]; //Dòng chi tiết
+
+
+                    if (item == elementListDetail.NameCardBank) {
+                        me.DisableFormPayment = false;
+                    }
+                    else {
+                        me.DisableFormPayment = true;
+                    }
+                }
+            }
+        },
+        //Show Popup
+        async saveData() {
+            const me = this;
+            let lstBill: Array<Bill> | null = new Array<Bill>;
+            me.bill['BillId'] = Guid.NewGuid();
+            me.bill['DateBill'] = new Date().toLocaleString();
+            me.bill['NumberBill'] = Guid.NewGuid();
+
+            lstBill = LocalStorageLibrary.getByKey<Array<Bill>>("itemBill");
+            if (lstBill) {
+                lstBill.push(me.bill);
+                LocalStorageLibrary.setByKey("itemBill", lstBill);
+            }
+            else {
+                lstBill = new Array<Bill>({ ...me.bill });
+                LocalStorageLibrary.setByKey("itemBill", lstBill);
+            }
+
+            // start cất detail
+            //gán khoá phụ cho detail
+            if (me.lstBillDetail?.length > 0) {
+                me.lstBillDetail.forEach(detailItem => {
+                    if (me.bill) {
+                        detailItem.BillId = me.bill['BillId'];
+                    }
+                });
+                //end gán khoá phụ
+
+                let listBillDetail: Array<BillDetail> | null = new Array<BillDetail>;
+                listBillDetail = LocalStorageLibrary.getByKey<Array<BillDetail>>("BillItemDetail");
+                if (listBillDetail) {
+                    listBillDetail.push(...me.lstBillDetail);
+                    LocalStorageLibrary.setByKey("BillItemDetail", listBillDetail);
+                }
+                else {
+                    listBillDetail = new Array<BillDetail>(...me.lstBillDetail);
+                    LocalStorageLibrary.setByKey("BillItemDetail", listBillDetail);
+                }
+            }
+
+
+            //end cất detail
+
+
+            const component = (await import(`./popup-COD/PopupCod.vue`)).default;
+            if (component) {
+                PopupLibrary.createPopup(component, {});
+            };
+        },
+
 
 
 

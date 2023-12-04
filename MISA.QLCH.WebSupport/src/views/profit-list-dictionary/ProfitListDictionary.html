@@ -1,6 +1,119 @@
-<div class="height-fill width-fill">
-  <base-dictionary-list-view :viewControl="viewControl" @loadMaster="onLoadMaster"
-    @changeSelectedRecordMaster="onChangeSelectedRecordMaster"
-    @toolbarClick="onSelectAction"></base-dictionary-list-view>
+<div class="heading-sales d-flex-center">
+  <h1>KẾT QUẢ DOANH THU</h1>
 </div>
-        
+<div class="content-data-sales d-flex-vcenter">
+  <div class=" flex-1 d-flex-vcenter ">
+    <div class="ccb-item-data-sales">
+      <e-combobox :control="cbbSales" v-model="cbbSales.value" />
+    </div>
+    <div class="item-data-sales">
+      <e-date :control="dtBeginRequire" v-model="dtBeginRequire.value" />
+    </div>
+    <div class="item-data-sales">
+      <e-date :control="dtEndRequire" v-model="dtEndRequire.value" />
+    </div>
+    <div class="btn-item-data-sales">
+      <e-button :control="btnGetData" />
+    </div>
+  </div>
+  <div class="d-flex-vcenter">
+    <div class="btn-item-data-sales">
+      <e-button :control="btnPrintData" />
+    </div>
+    <div class="btn-item-data-sales">
+      <e-button :control="btnExportData" />
+    </div>
+  </div>
+</div>
+<div class="height-fill width-fill">
+  <div class="form-sales height-fill">
+    <div class="table-list">
+      <table class="flex-1">
+        <thead>
+          <tr>
+            <th style="text-align: center;">Khoản Mục</th>
+            <th style="text-align: center;">Kết Quả</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <strong>I. Doanh Thu (1 + 2)</strong>
+            </td>
+            <td>
+              <strong>
+                850000
+              </strong>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>
+                1. Doanh Thu Bán Hàng
+              </strong>
+            </td>
+            <td>
+              <strong>
+                750000
+              </strong>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>
+                2. Thu Khác
+              </strong>
+            </td>
+            <td>
+              <strong>
+                100000
+              </strong>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>II.Chi Phí (1 + 2 )</strong>
+            </td>
+            <td>
+              <strong>
+                600000
+              </strong>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>1. Chi Phí Giá Vốn</strong>
+            </td>
+            <td>
+              <strong>
+                550000
+              </strong>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>2. Chi Khác</strong>
+            </td>
+            <td>
+              <strong>
+                50000
+              </strong>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>3. Lợi Nhuận ( I - II )</strong>
+            </td>
+            <td>
+              <strong>
+                250000
+              </strong>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

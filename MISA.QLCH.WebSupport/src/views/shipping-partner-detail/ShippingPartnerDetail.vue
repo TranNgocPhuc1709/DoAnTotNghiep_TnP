@@ -7,14 +7,17 @@ import BaseDictionaryDetailController from "qlch_base/BaseDictionaryDetailContro
 import BaseDictionaryDetailView from "qlch_base/BaseDictionaryDetailView";
 import TextBox from "@library-src/models/qlch_control/qlch_text_box/TextBox";
 import ETextBox from "qlch_control/ETextBox";
-        
-export default{
+import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
+import ECombobox from "qlch_control/ECombobox";
+
+export default {
 
   extends: BaseDictionaryDetailController,
 
   components: {
     BaseDictionaryDetailView,
-    ETextBox
+    ETextBox,
+    ECombobox
   },
 
   setup() {
@@ -28,7 +31,7 @@ export default{
     */
     getTitleForm() {
       console.log("DEV: Override function getTitleForm return Title Form");
-      return "Title Form Detail";
+      return "Thêm mới đơn vị vận chuyển";
     },
 
     /**
@@ -36,50 +39,54 @@ export default{
     */
     buildBindingControl() {
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
-      const labelWidth = 115;
+      const labelWidth = 125;
       return {
         "txtColumn1": new TextBox({
-          fieldText: "Demo Column 1",
+          fieldText: "Mã DT Giao Hàng",
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column1"
         }),
         "txtColumn2": new TextBox({
-          fieldText: "Demo Column 2",
+          fieldText: "Tên DT Giao Hàng",
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column2"
         }),
         "txtColumn3": new TextBox({
-          fieldText: "Demo Column 3",
+          fieldText: "Số Điện Thoại",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column3"
         }),
         "txtColumn4": new TextBox({
-          fieldText: "Demo Column 4",
+          fieldText: "Địa Chỉ",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column4"
         }),
-        "txtColumn5": new TextBox({
-          fieldText: "Demo Column 5",
+        "txtColumn5": new Combobox({
+          fieldText: "Trạng Thái",
           require: false,
+          data: [
+            {
+              value: "Đang hoạt động",
+              display: "Đang hoạt động"
+            },
+            {
+              value: "Ngừng hoạt động",
+              display: "Ngừng hoạt động"
+            }
+          ],
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "Column5"
         }),
-        "txtColumn6": new TextBox({
-          fieldText: "Demo Column 6",
-          require: false,
-          maxLength: 255,
-          labelWidth: labelWidth,
-          bindingIndex: "Column6"
-        }),
+
       }
     },
 
@@ -88,6 +95,6 @@ export default{
     */
     afterCloseForm() { },
   }
-    
+
 }
 </script>

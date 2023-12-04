@@ -1,3 +1,3 @@
 export default interface IVoucherDetail {
-    TotalVoucherDetail?: number
+    TotalVoucherDetail?: number;
 }

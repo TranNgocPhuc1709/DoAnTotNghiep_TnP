@@ -7,6 +7,7 @@ export default interface IProductDetail {
     UnitProductList?: string;
     PriceProductList?: number;
     TotalProductList?: number;
+    BillId?: string;
     ProductId?: string;
 
 }

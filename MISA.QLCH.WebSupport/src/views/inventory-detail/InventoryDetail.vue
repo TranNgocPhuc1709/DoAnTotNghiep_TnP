@@ -131,7 +131,7 @@ export default {
       txtEndInventory,
       txtReasonInventory,
       txtStatusInventory,
-      lstInventoryDetail
+      lstInventoryDetail,
     };
   },
 
@@ -222,13 +222,24 @@ export default {
           labelWidth: labelWidth,
           bindingIndex: "ExplantInventory"
         }),
-        // "txtStatusInventory": new TextBox({
-        //   fieldText: "Trạng thái",
-        //   require: false,
-        //   maxLength: 255,
-        //   labelWidth: labelWidth,
-        //   bindingIndex: "StatusInventory"
-        // }),
+
+        "txtStatusListInventory": new Combobox({
+          fieldText: "Trạng thái",
+          require: false,
+          maxLength: 255,
+          data: [
+            {
+              value: "Đã xử lý",
+              display: "Đã xử lý"
+            },
+            {
+              value: "Chưa xử lý",
+              display: "Chưa xử lý"
+            }
+          ],
+          labelWidth: labelWidth,
+          bindingIndex: "StatusListInventory"
+        }),
         "txtTotalBeginInventory": new NumberModel({
           fieldText: "Tổng số lượng ban đầu",
           readOnly: true,
@@ -502,7 +513,7 @@ export default {
             LocalStorageLibrary.setByKey("inventoryList", listInventory);
           }
 
-          //cất detail
+          // start cất detail
           //gán khoá phụ cho detail
           if (me.lstInventoryDetail?.length > 0) {
             me.lstInventoryDetail.forEach(detailItem => {
@@ -538,6 +549,7 @@ export default {
                   newItemInventory.TotalBeginInventory = me.masterData.TotalBeginInventory;
                   newItemInventory.TotalUpdateInventory = me.masterData.TotalUpdateInventory;
                   newItemInventory.TotalEndInventory = me.masterData.TotalEndInventory;
+                  newItemInventory.StatusListInventory = me.masterData.StatusListInventory;
                 }
               }
             });

@@ -302,7 +302,6 @@ export default {
           return detail.GoodsOrderDetailId != item.GoodsOrderDetailId;
         })
       }
-
       //Tính lại tổng tiền
       if (me.masterData) {
         me.masterData['FullMoneyOrder'] = 0;

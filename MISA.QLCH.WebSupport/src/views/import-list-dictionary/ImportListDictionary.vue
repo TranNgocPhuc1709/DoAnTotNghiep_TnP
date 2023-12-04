@@ -34,16 +34,13 @@ export default {
       data: [
         {
           value: 1,
-          display: "Khác"
+          display: "Tháng này"
         },
         {
           value: 2,
-          display: "Hôm nay"
+          display: "Tháng trước"
         },
-        {
-          value: 3,
-          display: "Tuần trước"
-        },
+
 
       ]
       // require: true
@@ -61,6 +58,12 @@ export default {
       classType: "secondary",
       // classIconLeft: "i-add"
     });
+    const btnPrintData: Button = new Button({
+      fieldText: "In dữ liệu",
+      classType: "secondary",
+      // classIconLeft: "i-add"
+    });
+
 
     return {
       thisData,
@@ -68,6 +71,7 @@ export default {
       dtBeginRequire,
       dtEndRequire,
       btnGetData,
+      btnPrintData
     };
   },
   created() {
