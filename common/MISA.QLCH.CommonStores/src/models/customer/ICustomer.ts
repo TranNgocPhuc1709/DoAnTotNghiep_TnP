@@ -4,7 +4,7 @@ export default interface ICustomer {
      */
     CodeCustomer?: string;
     NameCustomer?: string;
-    TelephoneCustomer?: number;
+    TelephoneCustomer?: string;
     EmailCustomer?: string;
     AddressCustomer?: string;
     DateBirthCustomer?: Date;

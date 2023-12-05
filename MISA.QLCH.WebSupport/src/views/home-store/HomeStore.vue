@@ -30,6 +30,8 @@ import Bill from '@store-src/models/bill-main/Bill';
 import PopupLibrary from '@library-src/utilities/commons/PopupLibrary';
 import Guid from '@library-src/utilities/types/Guid';
 import BillDetail from '@store-src/models/bill-main/BillDetail';
+import Branch from '@store-src/models/branch/Branch';
+
 // import VoucherDetail from '@store-src/models/voucher/VoucherDetail';
 // import VoucherDetail from '../voucher-detail/VoucherDetail';
 // import BankDetail from '@store-src/models/bank/BankDetail';
@@ -45,8 +47,10 @@ export default {
         EDate
     },
     data() {
+        const NameBranch = LocalStorageLibrary.getByKey<Array<Branch>>("branch");
         const lstBillDetail: Ref<Array<BillDetail>> = ref(new Array<BillDetail>());
         const lstVoucher = LocalStorageLibrary.getByKey<Array<Voucher>>("voucher");
+        const lstCustomer = LocalStorageLibrary.getByKey<Array<Customer>>("Customer");
         const lstBank = LocalStorageLibrary.getByKey<Array<Bank>>("Bank");
         const lstBankAccount = LocalStorageLibrary.getByKey<Array<BankAccount>>("BankAccount");;
         const bill: Ref<Bill> = ref(new Bill());
@@ -55,7 +59,12 @@ export default {
             bill,
             lstVoucher,
             lstBank,
-            lstBankAccount
+            lstBankAccount,
+            // timePresent: new Date().toLocaleDateString(), //Hiển thị mỗi ngày
+            timePresent: new Date().toLocaleString(),
+            NameBranch,
+            lstCustomer
+
         };
     },
     setup() {
@@ -91,7 +100,7 @@ export default {
 
         const txtInfoRecipient: Ref<Combobox> = ref(new Combobox({
             fieldText: "Người nhận",
-            require: true,
+            require: false,
             data: lstTxtInfoRecipient,
             valueField: "NameCustomer",
             displayField: "NameCustomer",
@@ -102,14 +111,19 @@ export default {
 
         const txtNumberRecipient: Ref<TextBox> = ref(new TextBox({
             fieldText: "Số điện thoại",
-            require: true,
-            type: "number",
+            require: false,
             classType: "secondary",
+            type: "number",
             labelWidth: 120,
+            // format: new NumberFormat({
+            //     decimal: ".",
+            //     thousands: ",",
+            //     precision: 0
+            // }),
         }));
         const txtAddressRecipient: Ref<TextBox> = ref(new TextBox({
             fieldText: "Địa chỉ",
-            require: true,
+            require: false,
             type: "text",
             classType: "secondary",
             labelWidth: 120,
@@ -118,13 +132,13 @@ export default {
 
         const dtDateDelivery: DateModel = new DateModel({
             fieldText: "Ngày giao hàng",
-            require: true,
+            require: false,
             labelWidth: 120
         });
 
         const txtDeliveryCharges: Ref<NumberModel> = ref(new NumberModel({
             fieldText: "Phí GH thu khách",
-            require: true,
+            require: false,
             classType: "secondary",
             labelWidth: 120,
             format: new NumberFormat({
@@ -136,7 +150,7 @@ export default {
 
         const txtDeliveryPartner: Ref<Combobox> = ref(new Combobox({
             fieldText: "Đối tác GH",
-            require: true,
+            require: false,
             data: [
                 {
                     value: "Đối tác Shoppe",
@@ -150,7 +164,7 @@ export default {
 
         const txtDeliveryService: Ref<Combobox> = ref(new Combobox({
             fieldText: "Loại dịch vụ",
-            require: true,
+            require: false,
             data: [
                 {
                     value: "Giao hàng nhanh",
@@ -163,7 +177,7 @@ export default {
         }));
         const txtLadingCode: Ref<TextBox> = ref(new TextBox({
             fieldText: "Mã vận đơn",
-            require: true,
+            require: false,
             type: "text",
             classType: "secondary",
             labelWidth: 120,
@@ -414,6 +428,7 @@ export default {
     },
 
     methods: {
+
         ShowFormLogOut() {
             try {
                 const me = this;
@@ -494,6 +509,8 @@ export default {
                 Log.ErrorLog(error as Error);
             }
         },
+
+        //v-click-out
         OutFormVoucher() {
             const me = this;
             try {
@@ -585,6 +602,20 @@ export default {
             }
         },
 
+        ShowInfoCustomer(item: string) {
+            const me = this;
+            if (me.lstCustomer) {
+                for (let indexListDetail = 0; indexListDetail < me.lstCustomer.length; indexListDetail++) {
+                    const elementListDetail = me.lstCustomer[indexListDetail]; //Dòng chi tiết
+                    if (item == elementListDetail.NameCustomer) {
+                        me.txtNumberRecipient.value = elementListDetail.TelephoneCustomer;
+                        me.txtAddressRecipient.value = elementListDetail.AddressCustomer;
+
+                    }
+                }
+            }
+        },
+
         ShowValueVoucher(item: String) {
             const me = this;
             if (me.lstVoucher) {
@@ -599,11 +630,12 @@ export default {
             }
 
         },
-        ShowTotalVoucher(value: number) {
+        closePopupVoucher() {
             const me = this;
-            if (me.numVoucherPrice.value) {
-                me.bill.numVoucherTotalPrice = me.numVoucherPrice.value * value;
-            }
+            me.disableFormShowVoucher = false;
+        },
+        AcceptFormVoucher() {
+            const me = this;
             // /tinh lai tong tien (Lấy giá trị CollectedMoney trong bill.ts)
             if (me.bill.numVoucherTotalPrice) {
                 if (me.bill.TotalMoneyBill == null)
@@ -612,17 +644,25 @@ export default {
                     me.bill.collectedMoney = me.bill.TotalMoneyBill - me.bill.numVoucherTotalPrice;
                 }
             }
+            me.disableFormShowVoucher = false;
 
-
-            // for (let index = 0; index < me.lstProductDetail.length; index++) {
-            //     const element = me.lstProductDetail[index];
-            //     if (!me.bill.TotalMoneyBill) {
-            //         me.bill.TotalMoneyBill = 0;
+        },
+        closePopupDelivery() {
+            const me = this;
+            me.disableFormShowDelivery = false;
+        },
+        ShowTotalVoucher(value: number) {
+            const me = this;
+            if (me.numVoucherPrice.value) {
+                me.bill.numVoucherTotalPrice = me.numVoucherPrice.value * value;
+            }
+            // /tinh lai tong tien (Lấy giá trị CollectedMoney trong bill.ts)
+            // if (me.bill.numVoucherTotalPrice) {
+            //     if (me.bill.TotalMoneyBill == null)
+            //         me.bill.collectedMoney = 0 - me.bill.numVoucherTotalPrice;
+            //     else {
+            //         me.bill.collectedMoney = me.bill.TotalMoneyBill - me.bill.numVoucherTotalPrice;
             //     }
-            //     if (element) {
-            //         me.bill.TotalMoneyBill += element.TotalProductList ?? 0;
-            //     }
-
             // }
         },
         ShowDeposits(value: number) {

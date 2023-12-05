@@ -11,6 +11,13 @@ export default {
     components: {
         ECombobox
     },
+    data() {
+        return {
+            // timePresent: new Date().toLocaleDateString(undefined, { month: 'long', year: 'numeric' }),
+            timePresent: new Date().toLocaleDateString(),
+
+        }
+    },
     setup() {
         const cbbCostBill: Ref<Combobox> = ref(new Combobox({
             require: true,

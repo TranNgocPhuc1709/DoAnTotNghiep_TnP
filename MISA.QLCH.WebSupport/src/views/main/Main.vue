@@ -103,20 +103,20 @@ export default {
             },
 
             //Quỹ tiền
-            // {
-            //     children: new Array(
-            //         {
-            //             fieldText: "Phiếu thu tiền mặt",
-            //             routerLink: "/cashReceipt"
-            //         },
-            //         {
-            //             fieldText: "Phiếu chi tiền mặt",
-            //             routerLink: "/cashPayment"
-            //         }
+            {
+                children: new Array(
+                    {
+                        fieldText: "Phiếu thu tiền mặt",
+                        routerLink: "/cashReceipt"
+                    },
+                    {
+                        fieldText: "Phiếu chi tiền mặt",
+                        routerLink: "/cashPayment"
+                    }
 
-            //     ),
-            //     fieldText: "Quỹ Tiền"
-            // },
+                ),
+                fieldText: "Quỹ Tiền"
+            },
 
 
             // {

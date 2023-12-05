@@ -215,9 +215,10 @@
                     <div class="header-item-time-line d-flex d-flex-sp-center">
                         <div class="time-line-transaction d-flex-vcenter">
                             <span class="icon-time-line-transaction"></span>
-                            <span class="date-time-transaction">02/12/2023</span>
+                            <!-- <span class="date-time-transaction">02/12/2023</span>
                             <span> - </span>
-                            <span class="real-time-transaction">14:43</span>
+                            <span class="real-time-transaction">14:43</span> -->
+                            <span>{{timePresent}}</span>
                         </div>
                         <div class="transaction-store-update d-flex-vcenter">
                             <span class="icon-store-transaction"></span>
@@ -237,8 +238,7 @@
                         </div>
 
                         <div class="overlay width-fill height-fill" v-if="disableFormShowDelivery"></div>
-                        <div class="content-delivery d-flex-vcenter" @click="ShowDelivery()"
-                            v-click-out="OutFormDelivery">
+                        <div class="content-delivery d-flex-vcenter" @click="ShowDelivery()">
                             <span class="icon-content-delivery"></span>
                             <div class="PopUpDelivery" v-if="disableFormShowDelivery">
                                 <div class="heading-popup-delivery">
@@ -250,7 +250,7 @@
                                             <span>Thông tin người nhận</span>
                                         </div>
                                         <div class="bodyPopup-item d-flex-vcenter">
-                                            <e-combobox @dataChange="ShowInfoCustomer($event, item)"
+                                            <e-combobox @dataChange="ShowInfoCustomer($event)"
                                                 :control="txtInfoRecipient" v-model="txtInfoRecipient.value" />
                                         </div>
                                         <div class="bodyPopup-item d-flex-vcenter">
@@ -290,17 +290,17 @@
                                 </div>
                                 <div class="btnPopup d-flex">
                                     <div class="item-btnPopup-accept flex-1">
-                                        <e-button :control="btnAcceptForm" />
+                                        <e-button :control="btnAcceptForm" @click="closePopupDelivery" />
                                     </div>
                                     <div class="item-btnPopup-close flex-1">
-                                        <e-button :control="btnCloseForm" />
+                                        <e-button :control="btnCloseForm" @click="closePopupDelivery" />
                                     </div>
                                 </div>
 
                             </div>
                         </div>
                         <div class="overlay width-fill height-fill" v-if="disableFormShowVoucher"></div>
-                        <div class="content-present d-flex-vcenter" @click="ShowVoucher()" v-click-out="OutFormVoucher">
+                        <div class="content-present d-flex-vcenter" @click="ShowVoucher()">
                             <span class="icon-present-content"></span>
                             <span class="icon-arrow-content-present"></span>
 
@@ -327,10 +327,10 @@
                                 </div>
                                 <div class="btnPopup d-flex">
                                     <div class="item-btnPopup-accept flex-1">
-                                        <e-button :control="btnAcceptForm" />
+                                        <e-button :control="btnAcceptForm" @click="AcceptFormVoucher" />
                                     </div>
                                     <div class="item-btnPopup-close flex-1">
-                                        <e-button :control="btnCloseForm" />
+                                        <e-button :control="btnCloseForm" @click="closePopupVoucher" />
                                     </div>
                                 </div>
                             </div>

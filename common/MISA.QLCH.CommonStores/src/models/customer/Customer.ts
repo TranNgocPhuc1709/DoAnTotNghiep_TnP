@@ -20,7 +20,7 @@ export default class Customer {
     }
     CodeCustomer?: string;
     NameCustomer?: string;
-    TelephoneCustomer?: number;
+    TelephoneCustomer?: string;
     EmailCustomer?: string;
     AddressCustomer?: string;
     DateBirthCustomer?: Date;
