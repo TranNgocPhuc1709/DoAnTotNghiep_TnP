@@ -345,22 +345,23 @@
                             <span class="transaction-price">
                                 <span>
                                     <!-- <e-number :control="txtAllPayments" v-model="bill.TotalMoneyBill"></e-number> -->
-                                    {{bill.TotalMoneyBill}}
+                                    {{ formatCurrency(bill.TotalMoneyBill) }}
                                 </span>
                             </span>
                         </div>
-                        <div class="info-payment-item d-flex-vcenter">
+                        <div class="info-payment-item d-flex-vcenter" v-if="DisableVoucher">
+                            <span class="icon-child-voucher" @click="DelVoucher"></span>
                             <span class="label-transaction-item label-sales flex-1">Khuyến mại</span>
                             <span class="transaction-price-sales">
                                 <!-- <span>{{numVoucherTotalPrice.value}}</span> -->
-                                <span>{{bill.numVoucherTotalPrice}}</span>
+                                <span>{{formatCurrency(bill.numVoucherTotalPrice)}}</span>
                             </span>
                         </div>
                         <div class="info-payment-item d-flex-vcenter">
                             <span class="label-transaction-item label-all-price flex-1">Còn phải thu</span>
                             <span class="transaction-all-price">
                                 <!-- {{totalBill.collectedMoney}} -->
-                                {{bill.collectedMoney}}
+                                {{formatCurrency(bill.collectedMoney)}}
                             </span>
                         </div>
                     </div>
@@ -393,7 +394,7 @@
                             <div class="info-payment-item d-flex-vcenter">
                                 <span class="label-transaction-item label-payment flex-1">Trả lại khách</span>
                                 <span class="payment-all-price">
-                                    {{bill.refundDetail}}
+                                    {{formatCurrency(bill.refundDetail)}}
                                 </span>
                             </div>
                             <div class="type-input-notice">

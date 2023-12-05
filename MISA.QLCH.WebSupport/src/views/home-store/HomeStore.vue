@@ -70,6 +70,7 @@ export default {
     setup() {
         const disableFormLogOut: Ref<boolean> = ref(false);
         const DisableFormPayment: Ref<boolean> = ref(false);
+        const DisableVoucher: Ref<boolean> = ref(false)
 
         const isActive: Ref<boolean> = ref(false);
         const disableFormShowDelivery: Ref<boolean> = ref(false)
@@ -370,6 +371,7 @@ export default {
             disableFormLogOut,
             disableFormMoreAction,
             cbbCheckPoint,
+            DisableVoucher,
             cbkBill,
             cbkOrder,
             btnTemporarySave,
@@ -428,6 +430,24 @@ export default {
     },
 
     methods: {
+        formatCurrency(value: any) {
+            // Định dạng giá trị tiền tệ
+            const formattedValue = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'VND', // Điều này có thể được thay đổi thành đơn vị tiền tệ của bạn
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
+            }).format(value);
+            const currencySymbol = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'VND',
+            }).formatToParts(1).find(part => part.type === 'currency')?.value;
+            if (currencySymbol) {
+                return formattedValue.replace(new RegExp(currencySymbol, 'g'), '').trim();
+            }
+
+            return formattedValue.trim();
+        },
 
         ShowFormLogOut() {
             try {
@@ -527,22 +547,37 @@ export default {
             if (index >= 0 && index < this.lstBillDetail.length) {
                 this.lstBillDetail.splice(index, 1);
             }
-            if (me.bill.TotalMoneyBill) {
-                me.bill.TotalMoneyBill = 0;
-                me.bill.collectedMoney = 0;
-                me.bill.refundDetail = 0;
-            }
+
+            // if (me.bill.TotalMoneyBill) {
+            //     me.bill.TotalMoneyBill = 0;
+            //     me.bill.collectedMoney = 0;
+            //     me.bill.refundDetail = 0;
+            // }
+
+            // for (let index = 0; index < me.lstBillDetail.length; index++) {
+            //     const element = me.lstBillDetail[index];
+            //     if (!me.bill.TotalMoneyBill) {
+            //         me.bill.TotalMoneyBill = 0;
+            //     }
+
+            //     if (element && me.bill.numVoucherTotalPrice) {
+            //         me.bill.TotalMoneyBill += element.IntoMoneyBill ?? 0;
+            //         me.bill.collectedMoney = me.bill.TotalMoneyBill - me.bill.numVoucherTotalPrice;
+            //     }
+            // }
+
+            //Tnp
+            me.bill.TotalMoneyBill = 0;
+            me.bill.collectedMoney = 0;
 
             for (let index = 0; index < me.lstBillDetail.length; index++) {
                 const element = me.lstBillDetail[index];
-                if (!me.bill.TotalMoneyBill) {
-                    me.bill.TotalMoneyBill = 0;
-                }
-
-                if (element && me.bill.numVoucherTotalPrice) {
+                if (element) {
                     me.bill.TotalMoneyBill += element.IntoMoneyBill ?? 0;
-                    me.bill.collectedMoney = me.bill.TotalMoneyBill - me.bill.numVoucherTotalPrice;
                 }
+            }
+            if (me.bill.numVoucherTotalPrice != null) {
+                me.bill.collectedMoney = me.bill.TotalMoneyBill - me.bill.numVoucherTotalPrice;
             }
         },
 
@@ -576,29 +611,59 @@ export default {
         },
 
 
+        // ShowTotalProduct(value: number, item: BillDetail) {
+        //     const me = this;
+        //     if (value == null) {
+        //         value = 0;
+        //     }
+        //     if (item.UnitPriceBill) {
+        //         item.IntoMoneyBill = item.UnitPriceBill * value;
+        //     }
+        //     // /tinh lai tong tien
+        //     if (me.bill.TotalMoneyBill) {
+        //         me.bill.TotalMoneyBill = 0;
+        //         // me.bill.numVoucherTotalPrice = 0;
+        //     }
+        //     for (let index = 0; index < me.lstBillDetail.length; index++) {
+        //         const element = me.lstBillDetail[index];
+        //         if (!me.bill.TotalMoneyBill) {
+        //             me.bill.TotalMoneyBill = 0;
+        //         }
+        //         if (element && me.bill.numVoucherTotalPrice) {
+        //             me.bill.TotalMoneyBill += element.IntoMoneyBill ?? 0;
+        //             me.bill.collectedMoney = me.bill.TotalMoneyBill - me.bill.numVoucherTotalPrice;
+
+        //         }
+        //     }
+        // },
         ShowTotalProduct(value: number, item: BillDetail) {
             const me = this;
+
+            // Nếu giá trị là null hoặc undefined, gán giá trị mặc định là 0
             if (value == null) {
                 value = 0;
             }
-            if (item.UnitPriceBill) {
+            if (item.UnitPriceBill != null) {
                 item.IntoMoneyBill = item.UnitPriceBill * value;
+            } else {
+                item.IntoMoneyBill = 0;
             }
-            // /tinh lai tong tien
-            if (me.bill.TotalMoneyBill) {
-                me.bill.TotalMoneyBill = 0;
-                // me.bill.numVoucherTotalPrice = 0;
-            }
+
+            // Tính lại tổng tiền trong hóa đơn
+            me.bill.TotalMoneyBill = 0;
+            me.bill.collectedMoney = 0;
+
             for (let index = 0; index < me.lstBillDetail.length; index++) {
                 const element = me.lstBillDetail[index];
-                if (!me.bill.TotalMoneyBill) {
-                    me.bill.TotalMoneyBill = 0;
-                }
-                if (element && me.bill.numVoucherTotalPrice) {
+                if (element) {
                     me.bill.TotalMoneyBill += element.IntoMoneyBill ?? 0;
-                    me.bill.collectedMoney = me.bill.TotalMoneyBill - me.bill.numVoucherTotalPrice;
-
                 }
+            }
+            // if (me.bill.numVoucherTotalPrice) {
+            //     me.bill.collectedMoney = me.bill.TotalMoneyBill - me.bill.numVoucherTotalPrice;
+            // }
+            if (me.bill.numVoucherTotalPrice != null) {
+                me.bill.collectedMoney = me.bill.TotalMoneyBill - me.bill.numVoucherTotalPrice;
             }
         },
 
@@ -634,6 +699,32 @@ export default {
             const me = this;
             me.disableFormShowVoucher = false;
         },
+        DelVoucher() {
+            const me = this;
+            me.DisableVoucher = false;
+            me.bill.numVoucherTotalPrice = 0;
+
+            me.bill.TotalMoneyBill = 0;
+            me.bill.collectedMoney = 0;
+
+            for (let index = 0; index < me.lstBillDetail.length; index++) {
+                const element = me.lstBillDetail[index];
+                if (element) {
+                    me.bill.TotalMoneyBill += element.IntoMoneyBill ?? 0;
+                }
+            }
+            if (me.bill.numVoucherTotalPrice != null) {
+                me.bill.collectedMoney = me.bill.TotalMoneyBill - me.bill.numVoucherTotalPrice;
+            }
+            else {
+                me.bill.collectedMoney = me.bill.TotalMoneyBill - 0;
+            }
+
+
+
+
+
+        },
         AcceptFormVoucher() {
             const me = this;
             // /tinh lai tong tien (Lấy giá trị CollectedMoney trong bill.ts)
@@ -645,6 +736,7 @@ export default {
                 }
             }
             me.disableFormShowVoucher = false;
+            me.DisableVoucher = true;
 
         },
         closePopupDelivery() {
@@ -656,14 +748,6 @@ export default {
             if (me.numVoucherPrice.value) {
                 me.bill.numVoucherTotalPrice = me.numVoucherPrice.value * value;
             }
-            // /tinh lai tong tien (Lấy giá trị CollectedMoney trong bill.ts)
-            // if (me.bill.numVoucherTotalPrice) {
-            //     if (me.bill.TotalMoneyBill == null)
-            //         me.bill.collectedMoney = 0 - me.bill.numVoucherTotalPrice;
-            //     else {
-            //         me.bill.collectedMoney = me.bill.TotalMoneyBill - me.bill.numVoucherTotalPrice;
-            //     }
-            // }
         },
         ShowDeposits(value: number) {
             const me = this;
