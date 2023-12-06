@@ -111,7 +111,7 @@ export default {
         new Column({
           fieldText: "Ngày",
           dataIndex: "DateInventory",
-          width: 120,
+          width: 80,
         }),
         new Column({
           fieldText: "Số phiếu kiểm kê",

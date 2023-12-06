@@ -109,7 +109,7 @@ export default {
         new Column({
           fieldText: "Ngày",
           dataIndex: "DayOutward",
-          width: 120,
+          width: 80,
         }),
         new Column({
           fieldText: "Số phiếu xuất",
@@ -118,7 +118,7 @@ export default {
         }),
         new Column({
           fieldText: "Đối tượng",
-          dataIndex: "ObjectOutward",
+          dataIndex: "ObjectNameOutward",
           width: 260
         }),
         new Column({

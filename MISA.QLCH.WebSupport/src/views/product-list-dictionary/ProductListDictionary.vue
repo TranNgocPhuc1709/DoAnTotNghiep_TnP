@@ -37,17 +37,17 @@ export default {
       console.log("DEV: Override Function buildGridMasterColumn return list Column in Grid");
       return Array(
         new Column({
-          fieldText: "Mã Sản Phẩm",
+          fieldText: "Mã Hàng Hóa",
           dataIndex: "CodeProductList",
           width: 120,
         }),
         new Column({
-          fieldText: "Tên Sản Phẩm",
+          fieldText: "Tên Hàng Hóa",
           dataIndex: "NameProductList",
           width: 260
         }),
         new Column({
-          fieldText: "Nhóm Sản Phẩm",
+          fieldText: "Nhóm Hàng Hóa",
           dataIndex: "GroupProductList",
           width: 160
         }),

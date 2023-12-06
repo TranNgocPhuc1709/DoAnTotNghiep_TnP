@@ -55,7 +55,7 @@ export default {
         new Column({
           fieldText: "Ngày sinh",
           dataIndex: "BirthEmployee",
-          width: 260
+          width: 80
         }),
         new Column({
           fieldText: "Số ĐT",

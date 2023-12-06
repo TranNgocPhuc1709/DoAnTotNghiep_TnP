@@ -31,6 +31,7 @@ import PopupLibrary from '@library-src/utilities/commons/PopupLibrary';
 import Guid from '@library-src/utilities/types/Guid';
 import BillDetail from '@store-src/models/bill-main/BillDetail';
 import Branch from '@store-src/models/branch/Branch';
+// import Outward from '@store-src/models/outward/Outward';
 
 // import VoucherDetail from '@store-src/models/voucher/VoucherDetail';
 // import VoucherDetail from '../voucher-detail/VoucherDetail';
@@ -47,6 +48,7 @@ export default {
         EDate
     },
     data() {
+        const lstBill = LocalStorageLibrary.getByKey<Array<Bill>>("itemBill") ?? new Array<Bill>();
         const NameBranch = LocalStorageLibrary.getByKey<Array<Branch>>("branch");
         const lstBillDetail: Ref<Array<BillDetail>> = ref(new Array<BillDetail>());
         const lstVoucher = LocalStorageLibrary.getByKey<Array<Voucher>>("voucher");
@@ -63,7 +65,8 @@ export default {
             // timePresent: new Date().toLocaleDateString(), //Hiển thị mỗi ngày
             timePresent: new Date().toLocaleString(),
             NameBranch,
-            lstCustomer
+            lstCustomer,
+            lstBill
 
         };
     },
@@ -423,6 +426,7 @@ export default {
             me.bill.collectedMoney = 0;
             me.bill.numVoucherTotalPrice = 0;
             me.bill.refundDetail = 0;
+            me.bill.Payments = 0;
 
         } catch (error) {
             Log.ErrorLog(error as Error);
@@ -430,6 +434,7 @@ export default {
     },
 
     methods: {
+
         formatCurrency(value: any) {
             // Định dạng giá trị tiền tệ
             const formattedValue = new Intl.NumberFormat('en-US', {
@@ -720,10 +725,6 @@ export default {
                 me.bill.collectedMoney = me.bill.TotalMoneyBill - 0;
             }
 
-
-
-
-
         },
         AcceptFormVoucher() {
             const me = this;
@@ -750,7 +751,11 @@ export default {
             }
         },
         ShowDeposits(value: number) {
+
             const me = this;
+            if (value == null) {
+                value = 0;
+            }
             if (me.bill.collectedMoney) {
                 me.bill.refundDetail = value - me.bill.collectedMoney;
             }
@@ -792,7 +797,7 @@ export default {
             let lstBill: Array<Bill> | null = new Array<Bill>;
             me.bill['BillId'] = Guid.NewGuid();
             me.bill['DateBill'] = new Date().toLocaleString();
-            me.bill['NumberBill'] = Guid.NewGuid();
+            me.bill['NumberBill'] = "HD" + me.generateRandomNumberString();
 
             lstBill = LocalStorageLibrary.getByKey<Array<Bill>>("itemBill");
             if (lstBill) {
@@ -825,9 +830,26 @@ export default {
                     LocalStorageLibrary.setByKey("BillItemDetail", listBillDetail);
                 }
             }
-
-
             //end cất detail
+
+
+            // const OutwardMain: Outward = new Outward({
+            //     ObjectNameOutward: me.bill.SalesAgent,
+            //     DeliveryOutward: "XK" + me.generateRandomNumberString(),
+            //     DayOutward: new Date(),
+            //     OutwardId: Guid.NewGuid()
+            // });
+
+            if (me.bill) {
+                me.bill.TotalSalesBill = 0;
+            }
+
+            for (let index = 0; index < me.lstBill.length; index++) {
+                const element = me.lstBill[index];
+                if (me.bill && element && me.bill.TotalSalesBill) {
+                    me.bill.TotalSalesBill += element.TotalMoneyBill ?? 0;
+                }
+            }
 
 
             const component = (await import(`./popup-COD/PopupCod.vue`)).default;
@@ -835,6 +857,16 @@ export default {
                 PopupLibrary.createPopup(component, {});
             };
         },
+
+        generateRandomNumberString() {
+            // Tạo một số ngẫu nhiên từ 100000 đến 999999 (bao gồm cả 2 đầu)
+            const randomNumber = Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000;
+            // Chuyển đổi số thành chuỗi
+            const randomString = randomNumber.toString();
+            return randomString;
+        },
+
+
 
 
 

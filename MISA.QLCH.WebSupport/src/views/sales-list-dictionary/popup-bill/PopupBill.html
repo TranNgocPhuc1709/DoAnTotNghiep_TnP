@@ -16,25 +16,25 @@
                 <div class="d-flex-column flex-1">
                     <div>
                         <span class="item-info-bill">Số: </span>
-                        <span>12121321</span>
+                        <span>{{itemBill.NumberBill}}</span>
                     </div>
                     <div>
                         <span class="item-info-bill">Nhân Viên Bán Hàng: </span>
-                        <span>Phúc</span>
+                        <span>{{itemBill.SalesAgent}}</span>
                     </div>
                     <div>
                         <span class="item-info-bill">Khách Hàng: </span>
-                        <span>Phúc Trần</span>
+                        <span>{{itemBill.CustomerName}}</span>
                     </div>
                     <div>
                         <span class="item-info-bill">Ghi chú: </span>
-                        <span>Hàng Mới</span>
+                        <span>{{itemBill.NoticeBill}}</span>
                     </div>
                 </div>
                 <div class="d-flex-column flex-1">
                     <div>
-                        <span class="item-info-bill">Ngày: </span>
-                        <span>22/10/2022</span>
+                        <span class="item-info-bill">Thời gian thanh toán: </span>
+                        <span>{{itemBill.DateBill}}</span>
                     </div>
                     <span>
                         <span class="item-info-bill">Kênh Bán Hàng: </span>
@@ -57,17 +57,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- v-if="lstBillDetail?.length > 0" v-for="(item,index) in lstBillDetail"
-                        :key="item.BillDetailId" -->
-                        <tr>
-                            <td>1</td>
-                            <td>SP001</td>
-                            <td>Áo Khoác Nam</td>
-                            <td>Chiếc</td>
-                            <td>2</td>
-                            <td>100.000</td>
-                            <td>200.000</td>
-
+                        <tr v-if="lstBillDetail?.length > 0" v-for="(item,index) in lstBillDetail"
+                            :key="item.BillDetailId">
+                            <td>{{0 + index+1}}</td>
+                            <td>{{item.CodeProductBill}}</td>
+                            <td>{{item.NameProductBill}}</td>
+                            <td>{{item.UnitProductBill}}</td>
+                            <td>{{item.QuantityBill}}</td>
+                            <td>{{formatCurrency(item.UnitPriceBill)}}</td>
+                            <td>{{formatCurrency(item.IntoMoneyBill)}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -76,25 +74,25 @@
                 <div class="item-footer flex-1">
                     <div>
                         <span class="item-info-bill">Tổng Thanh Toán: </span>
-                        <span>200000</span>
+                        <span>{{formatCurrency(itemBill.collectedMoney)}}</span>
                     </div>
                     <div>
                         <span class="item-info-bill">Tiền Hàng: </span>
-                        <span>200.000</span>
+                        <span>{{formatCurrency(itemBill.TotalMoneyBill)}}</span>
                     </div>
                     <div>
                         <span class="item-info-bill">Tiền Khuyến Mại: </span>
-                        <span>20.000</span>
+                        <span>{{formatCurrency(itemBill.numVoucherTotalPrice)}}</span>
                     </div>
                 </div>
                 <div class="item-footer flex-1">
                     <div>
                         <span class="item-info-bill">Khách Trả: </span>
-                        <span>200.000</span>
+                        <span>{{formatCurrency(itemBill.Payments)}}</span>
                     </div>
                     <div>
                         <span class="item-info-bill">Trả Lại Khách: </span>
-                        <span>20.000</span>
+                        <span>{{formatCurrency(itemBill.refundDetail)}}</span>
                     </div>
                 </div>
             </div>

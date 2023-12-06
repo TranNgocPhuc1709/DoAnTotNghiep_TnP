@@ -99,7 +99,7 @@ export default {
         new Column({
           fieldText: "Ngày trả hàng",
           dataIndex: "DateReturn",
-          width: 120,
+          width: 80,
         }),
         new Column({
           fieldText: "Số phiếu xuất",

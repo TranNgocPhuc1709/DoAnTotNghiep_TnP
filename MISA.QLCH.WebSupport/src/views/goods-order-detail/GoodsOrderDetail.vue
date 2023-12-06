@@ -126,7 +126,9 @@ export default {
     try {
       //lấy giá trị khóa phụ trong masterData
       const me = this;
+
       if (me.masterData) {
+        me.masterData['NumberOrder'] = "DH000" + me.generateRandomNumberString();
         const privateKey = me.masterData['GoodsOrderId'];
         if (privateKey) {
           const localStorageGoodsOrderDetail = LocalStorageLibrary.getByKey<Array<GoodsOrderDetail>>("goodsOrderDetail");
@@ -281,6 +283,13 @@ export default {
         // Grid Table
       }
     },
+    generateRandomNumberString() {
+      // Tạo một số ngẫu nhiên từ 100000 đến 999999 (bao gồm cả 2 đầu)
+      const randomNumber = Math.floor(Math.random() * (999 - 100 + 1)) + 1000;
+      // Chuyển đổi số thành chuỗi
+      const randomString = randomNumber.toString();
+      return randomString;
+    },
 
     AddListTable() {
       try {
@@ -302,6 +311,7 @@ export default {
           return detail.GoodsOrderDetailId != item.GoodsOrderDetailId;
         })
       }
+      // LocalStorageLibrary.setByKey("goodsOrderDetail", me.lstGoodsOrderDetail);
       //Tính lại tổng tiền
       if (me.masterData) {
         me.masterData['FullMoneyOrder'] = 0;
@@ -354,7 +364,6 @@ export default {
               rowVendorByEmployeeCode = rowVendor;
               break;
             }
-
           }
           if (rowVendorByEmployeeCode) {
             me.masterData['PersonOrderName'] = rowVendorByEmployeeCode.NameEmployee;

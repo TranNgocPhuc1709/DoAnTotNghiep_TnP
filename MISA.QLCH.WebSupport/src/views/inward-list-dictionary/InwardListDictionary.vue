@@ -110,7 +110,7 @@ export default {
         new Column({
           fieldText: "Ngày",
           dataIndex: "DayInward",
-          width: 120,
+          width: 80,
         }),
         new Column({
           fieldText: "Số phiếu nhập",

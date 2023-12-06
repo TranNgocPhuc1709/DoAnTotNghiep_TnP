@@ -12,8 +12,12 @@ export default class Outward {
             me.DeliverOutward = outwardItem.DeliverOutward;
             me.ObjectNameOutward = outwardItem.ObjectNameOutward;
             me.TotalQuantityOutward = outwardItem.TotalQuantityOutward;
+            me.OutwardId = outwardItem.OutwardId;
+
         }
-        me.OutwardId = Guid.NewGuid();
+        else {
+            me.OutwardId = Guid.NewGuid();
+        }
     }
     DayOutward?: Date;
     DeliveryOutward?: string;

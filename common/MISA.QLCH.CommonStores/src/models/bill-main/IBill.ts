@@ -7,6 +7,7 @@ export default interface IBill {
     refundDetail?: number;
     NoticeBill?: string;
     CustomerName?: string;
-
+    Payments?: number;
+    TotalSalesBill?: number;
     SalesAgent?: string;
 }

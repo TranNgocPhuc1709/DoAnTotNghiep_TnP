@@ -66,7 +66,7 @@ export default {
         new Column({
           fieldText: "Ngày sinh",
           dataIndex: "DateBirthCustomer",
-          width: 160
+          width: 80
         }),
 
 

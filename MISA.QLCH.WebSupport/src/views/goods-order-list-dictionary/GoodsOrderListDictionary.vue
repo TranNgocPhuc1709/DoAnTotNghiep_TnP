@@ -104,7 +104,7 @@ export default {
         new Column({
           fieldText: "Ngày đặt hàng",
           dataIndex: "DateOrder",
-          width: 120,
+          width: 80,
         }),
         new Column({
           fieldText: "Số phiếu",

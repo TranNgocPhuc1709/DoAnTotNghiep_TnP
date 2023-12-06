@@ -7,6 +7,7 @@ export default interface IOutward {
     DeliverOutward?: string;
     ObjectNameOutward?: string;
     TotalQuantityOutward?: string;
+    OutwardId?: string;
 
     //Grid-table
 

@@ -50,12 +50,12 @@ export default {
         new Column({
           fieldText: "Ngày bắt đầu",
           dataIndex: "DayBeginVoucher",
-          width: 200
+          width: 80
         }),
         new Column({
           fieldText: "Ngày kết thúc",
           dataIndex: "DayEndVoucher",
-          width: 200
+          width: 80
         }),
         new Column({
           fieldText: "Mô tả",

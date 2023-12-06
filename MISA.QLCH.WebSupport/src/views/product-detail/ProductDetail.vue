@@ -59,7 +59,7 @@ export default {
       const lstGroupProductList = LocalStorageLibrary.getByKey<Array<CategoryItem>>("CategoryItem") ?? new Array<CategoryItem>()
       const lstUnitProductList = LocalStorageLibrary.getByKey<Array<Unit>>("Unit") ?? new Array<Unit>()
 
-      const labelWidth = 115;
+      const labelWidth = 135;
       // return {
       //   "txtColumn1": new TextBox({
       //     fieldText: "Mã Sản Phẩm",
@@ -202,21 +202,21 @@ export default {
       // }
       return {
         "txtCodeProductList": new TextBox({
-          fieldText: "Mã Sản Phẩm",
+          fieldText: "Mã Hàng Hóa",
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "CodeProductList"
         }),
         "txtNameProductList": new TextBox({
-          fieldText: "Tên Sản Phẩm",
+          fieldText: "Tên Hàng Hóa",
           require: true,
           maxLength: 255,
           labelWidth: labelWidth,
           bindingIndex: "NameProductList"
         }),
         "txtGroupProductList": new Combobox({
-          fieldText: "Nhóm Sản Phẩm",
+          fieldText: "Nhóm Hàng Hóa",
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,

@@ -22,6 +22,7 @@ import NumberFormat from '@library-src/models/qlch_control/number_format/NumberF
 import ENumber from "qlch_control/ENumber";
 import PopupLibrary from '@library-src/utilities/commons/PopupLibrary';
 import Bill from '@store-src/models/bill-main/Bill';
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
 
 export default {
 
@@ -34,6 +35,11 @@ export default {
     EButton,
     ETextBox,
     ENumber
+  },
+  props: {
+    itemBill: {
+      type: Bill
+    }
   },
   data() {
     const lstBill: Ref<Array<Bill>> = ref(new Array<Bill>());
@@ -170,10 +176,12 @@ export default {
     };
   },
   created() {
+
     try {
       const me = this;
-
+      me.lstBill = LocalStorageLibrary.getByKey<Array<Bill>>("itemBill") ?? new Array<Bill>();
       me.cbbSales.value = 1;
+
 
 
     } catch (error) {
@@ -190,13 +198,23 @@ export default {
       console.log("DEV: Override Function getTemplateRecord return new model()");
       return {};
     },
+    GetDataSales() {
+      try {
+        const me = this;
+        me.lstBill = LocalStorageLibrary.getByKey<Array<Bill>>("itemBill") ?? new Array<Bill>();
+
+      } catch (error) {
+        Log.ErrorLog(error as Error);
+      }
+    },
 
 
-    async ShowBill() {
+
+    async ShowBill(item: Bill) {
 
       const component = (await import(`./popup-bill/PopupBill.vue`)).default;
       if (component) {
-        PopupLibrary.createPopup(component, {});
+        PopupLibrary.createPopup(component, { "itemBill": item });
       };
     },
 
@@ -256,19 +274,7 @@ export default {
      */
     loadMasterData(param: ParamPaging) {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
-      return [
-        // {
-        //   DateSales: "27/10/2023",
-        //   TimesSales: "20:00",
-        //   NumberBillsSales: "2131321232",
-        //   StatusBillsSales: "Đã Xác Nhận",
-        //   RevenueMoneySales: "100000",
-        //   ExpenseMoneySales: "20000",
-        //   PromotionSales: "0",
-        //   TotalSales: "120000",
-        // },
-
-      ];
+      return [];
     },
     /**
      * Set PrimaryKey cho object master
@@ -286,6 +292,33 @@ export default {
       const frmDetail = (await import(`../sales-detail/SalesDetail.vue`)).default;
       return frmDetail;
     },
+    DelListTable(item: Bill) {
+      const me = this;
+      if (item && me.lstBill?.length > 0) {
+        me.lstBill = me.lstBill.filter(detail => {
+          return detail.BillId != item.BillId;
+        })
+        LocalStorageLibrary.setByKey("itemBill", me.lstBill);
+      }
+    },
+    formatCurrency(value: any) {
+      // Định dạng giá trị tiền tệ
+      const formattedValue = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'VND', // Điều này có thể được thay đổi thành đơn vị tiền tệ của bạn
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      }).format(value);
+      const currencySymbol = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'VND',
+      }).formatToParts(1).find(part => part.type === 'currency')?.value;
+      if (currencySymbol) {
+        return formattedValue.replace(new RegExp(currencySymbol, 'g'), '').trim();
+      }
+      return formattedValue.trim();
+    },
+
     // buildToolBarItems(): Array<ToolBarItemsView> {
     //   return [];
     // },

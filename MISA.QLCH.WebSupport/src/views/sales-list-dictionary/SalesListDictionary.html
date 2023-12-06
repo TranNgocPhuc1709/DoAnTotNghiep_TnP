@@ -13,7 +13,7 @@
       <e-date :control="dtEndRequire" v-model="dtEndRequire.value" />
     </div>
     <div class="btn-item-data-sales">
-      <e-button :control="btnGetData" />
+      <e-button :control="btnGetData" @click="GetDataSales" />
     </div>
   </div>
   <div class="d-flex-vcenter">
@@ -48,36 +48,34 @@
         <tbody>
           <tr v-if="lstBill?.length > 0" v-for="item in lstBill" :key="item.BillId">
             <td>
-              <!-- <e-text-box :control="txtTimesSalesDetail" v-model="item.DateBill"></e-text-box> -->
               {{item.DateBill}}
             </td>
-            <td @click="ShowBill()">
-              <!-- <e-text-box :control="txtBillsSalesDetail" v-model="item.NumberBill"></e-text-box> -->
+            <td @click="ShowBill(item)" style="color: #7C6CE6; text-decoration: underline; cursor: pointer;">
               {{item.NumberBill}}
             </td>
             <td>
-              <!-- <e-number :control="txtTotalSalesDetail" v-model="item.collectedMoney"></e-number> -->
-              {{item.collectedMoney}}
+              {{formatCurrency(item.collectedMoney)}}
             </td>
             <td>
-              <!-- <e-number :control="txtGoodsMoneySalesDetail" v-model="item.TotalMoneyBill"></e-number> -->
-              {{item.TotalMoneyBill}}
+              {{formatCurrency(item.TotalMoneyBill)}}
             </td>
             <td>
-              <!-- <e-number :control="txtPromotionSalesDetail" v-model="item.numVoucherTotalPrice"></e-number> -->
-              {{item.numVoucherTotalPrice}}
+              {{formatCurrency(item.numVoucherTotalPrice)}}
             </td>
             <td>
-              <!-- <e-text-box :control="txtSalesAgent" v-model="item.SalesAgent"></e-text-box> -->
               {{item.SalesAgent}}
             </td>
             <td>
-              <!-- <e-text-box :control="txtNoticeSales" v-model="item.NoticeBill"></e-text-box> -->
               {{item.NoticeBill}}
             </td>
             <td>
               <e-button :control="btnDelListTable" @click="DelListTable(item)" />
             </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <!-- <td><strong>Tổng: {{itemBill.TotalSalesBill}}</strong></td> -->
           </tr>
 
         </tbody>
