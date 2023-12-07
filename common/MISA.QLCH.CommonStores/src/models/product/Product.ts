@@ -13,8 +13,8 @@ export default class Product {
             me.PurchasePriceProductList = product.PurchasePriceProductList;
             me.ShowDisplayProduct = product.ShowDisplayProduct;
             me.ProductInventory = product.ProductInventory;
-            me.ProductMinInventory = product.ProductMinInventory;
-            me.ProductMaxInventory = product.ProductMaxInventory;
+            // me.ProductMinInventory = product.ProductMinInventory;
+            // me.ProductMaxInventory = product.ProductMaxInventory;
             me.PriceProductList = product.PriceProductList;
             me.StatusProductList = product.StatusProductList;
         }
@@ -27,8 +27,8 @@ export default class Product {
     PurchasePriceProductList?: number;
     ShowDisplayProduct?: string;
     ProductInventory?: number;
-    ProductMinInventory?: number;
-    ProductMaxInventory?: number;
+    // ProductMinInventory?: number;
+    // ProductMaxInventory?: number;
     PriceProductList?: number;
     StatusProductList?: string;
     ProductId?: string;

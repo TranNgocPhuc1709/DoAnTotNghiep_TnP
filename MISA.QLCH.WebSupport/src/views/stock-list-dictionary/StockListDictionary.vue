@@ -15,15 +15,18 @@ import Log from '@library-src/utilities/Log';
 import EDate from "qlch_control/EDate";
 import EButton from "qlch_control/EButton";
 import ToolBarItemsView from '@library-src/models/qlch_base/tool_bar_items_view/ToolBarItemsView';
+// import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
 export default {
 
   extends: BaseDictionaryListController,
-
   components: {
     BaseDictionaryListView,
     ECombobox,
     EDate,
     EButton
+  },
+  data() {
+    // const lstStock = LocalStorageLibrary.getByKey<Array<Stock>>("itemBill") ?? new Array<Stock>();
   },
   setup() {
     const thisData: Ref<StockListDictionary> = ref(new StockListDictionary());
@@ -103,39 +106,7 @@ export default {
      */
     buildGridMasterColumn(): Array<Column> {
       console.log("DEV: Override Function buildGridMasterColumn return list Column in Grid");
-      return Array(
-        new Column({
-          fieldText: "Mã Hàng Hóa",
-          dataIndex: "CodeStock",
-          width: 120,
-        }),
-        new Column({
-          fieldText: "Tên Hàng Hóa",
-          dataIndex: "NameStock",
-          width: 260
-        }),
-        new Column({
-          fieldText: "Đơn Vị Tính",
-          dataIndex: "UnitStock",
-          width: 160
-        }),
-        new Column({
-          fieldText: "Nhóm Hàng Hóa",
-          dataIndex: "GroupStock",
-          width: 260
-        }),
-        new Column({
-          fieldText: "Giá Bán",
-          dataIndex: "PriceStock",
-          minWidth: 200,
-        }),
-        new Column({
-          fieldText: " Số Lượng Tồn Kho",
-          dataIndex: "InventoryStock",
-          width: 160,
-          flex: 1
-        })
-      )
+      return Array();
     },
 
     /**

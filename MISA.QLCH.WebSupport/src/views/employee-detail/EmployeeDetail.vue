@@ -417,7 +417,16 @@ export default {
         Log.ErrorLog(error as Error);
       }
     },
-
+    // CheckPassword() {
+    //   const me = this;
+    //   if (me.masterData) {
+    //     const Password = me.masterData['PasswordEmployee'];
+    //     const ConfirmPassword = me.masterData['ConfirmPasswordEmployee'];
+    //     if (Password != ConfirmPassword) {
+    //       alert('Lỗi: Hai giá trị không khớp.');
+    //     }
+    //   }
+    // },
 
     saveData() {
       const me = this;

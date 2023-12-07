@@ -50,7 +50,7 @@
             <td>
               {{item.DateBill}}
             </td>
-            <td @click="ShowBill(item)" style="color: #7C6CE6; text-decoration: underline; cursor: pointer;">
+            <td @click="ShowBill(item)" style="color: #7C6CE6; cursor: pointer;">
               {{item.NumberBill}}
             </td>
             <td>
@@ -75,7 +75,14 @@
           <tr>
             <td></td>
             <td></td>
-            <!-- <td><strong>Tổng: {{itemBill.TotalSalesBill}}</strong></td> -->
+
+            <td><strong>Tổng: {{TotalNumber}}</strong></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+
           </tr>
 
         </tbody>

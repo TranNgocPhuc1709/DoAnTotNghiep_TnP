@@ -5,5 +5,8 @@ export default interface IBillDetail {
     QuantityBill?: number;
     UnitPriceBill?: number;
     IntoMoneyBill?: number;
+    PurchaseBill?: number; // Giá mua
+    IntoPurchaseMoneyBill?: number; //Tổng tiền giá mua
+    Inventory?: number; //Kho
     BillId?: string;
 }

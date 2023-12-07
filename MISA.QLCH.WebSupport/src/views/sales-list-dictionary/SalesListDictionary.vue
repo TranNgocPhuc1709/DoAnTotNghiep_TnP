@@ -36,15 +36,19 @@ export default {
     ETextBox,
     ENumber
   },
-  props: {
-    itemBill: {
-      type: Bill
-    }
-  },
+  // props: {
+  //   itemBill: {
+  //     type: Bill
+  //   }
+  // },
   data() {
+    const TotalNumber: Ref<number> = ref(0);
     const lstBill: Ref<Array<Bill>> = ref(new Array<Bill>());
+    const itemBill: Ref<Bill> = ref(new Bill());
     return {
-      lstBill
+      lstBill,
+      itemBill,
+      TotalNumber
     }
   },
   setup() {
@@ -176,21 +180,24 @@ export default {
     };
   },
   created() {
-
     try {
       const me = this;
       me.lstBill = LocalStorageLibrary.getByKey<Array<Bill>>("itemBill") ?? new Array<Bill>();
+      me.TotalNumber = 0;
+      for (let index = 0; index < me.lstBill.length; index++) {
+        const element = me.lstBill[index];
+        if (element) {
+          me.TotalNumber = me.lstBill.map(element => element.collectedMoney ?? 0).reduce((acc, val) => acc + val, 0);;
+        }
+
+
+      }
       me.cbbSales.value = 1;
-
-
-
     } catch (error) {
       Log.ErrorLog(error as Error);
     }
   },
-
   methods: {
-
     /**
      * Tạo dòng mặc định
      */
@@ -202,6 +209,14 @@ export default {
       try {
         const me = this;
         me.lstBill = LocalStorageLibrary.getByKey<Array<Bill>>("itemBill") ?? new Array<Bill>();
+
+        for (let index = 0; index < me.lstBill.length; index++) {
+          const element = me.lstBill[index];
+          if (element) {
+            me.TotalNumber = me.lstBill.map(element => element.collectedMoney ?? 0).reduce((acc, val) => acc + val, 0);;
+          }
+
+        }
 
       } catch (error) {
         Log.ErrorLog(error as Error);
@@ -223,50 +238,7 @@ export default {
      */
     buildGridMasterColumn(): Array<Column> {
       console.log("DEV: Override Function buildGridMasterColumn return list Column in Grid");
-      return Array(
-        new Column({
-          fieldText: "Ngày",
-          dataIndex: "DateSales",
-          width: 120,
-        }),
-        new Column({
-          fieldText: "Giờ",
-          dataIndex: "TimesSales",
-          width: 120,
-        }),
-        new Column({
-          fieldText: "Số hóa đơn",
-          dataIndex: "NumberBillsSales",
-          width: 200,
-        }),
-        new Column({
-          fieldText: "Trạng thái",
-          dataIndex: "StatusBillsSales",
-          width: 220,
-        }),
-        new Column({
-          fieldText: "Tổng (4) = (1) +(2) - (3)",
-          dataIndex: "TotalSales",
-          minWidth: 260,
-          flex: 1
-        }),
-        new Column({
-          fieldText: "Tiền hàng (1)",
-          dataIndex: "RevenueMoneySales",
-          width: 260
-        }),
-        new Column({
-          fieldText: "Tiền phí (2)",
-          dataIndex: "ExpenseMoneySales",
-          width: 260
-        }),
-        new Column({
-          fieldText: "Khuyến mại (3)",
-          dataIndex: "PromotionSales",
-          width: 260
-        }),
-
-      )
+      return Array()
     },
     /**
      * Load dữ liệu master lên grid
@@ -299,6 +271,15 @@ export default {
           return detail.BillId != item.BillId;
         })
         LocalStorageLibrary.setByKey("itemBill", me.lstBill);
+      }
+
+      me.TotalNumber = 0;
+      for (let index = 0; index < me.lstBill.length; index++) {
+        const element = me.lstBill[index];
+        if (element) {
+          me.TotalNumber = me.lstBill.map(element => element.collectedMoney ?? 0).reduce((acc, val) => acc + val, 0);;
+        }
+
       }
     },
     formatCurrency(value: any) {

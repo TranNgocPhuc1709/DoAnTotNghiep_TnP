@@ -4,17 +4,17 @@
             <span class="logo-icon-home-store"></span>
             <div class="d-flex-vcenter height-fill">
                 <div class="form-bill d-flex-vcenter height-fill">
-                    <div class="bill-item d-flex-vcenter  height-fill">
+                    <div class="bill-item d-flex-vcenter height-fill" v-for="(bill, index) in bills" :key="index">
                         <div class="label-bill-item">
                             <span>Hóa đơn</span>
-                            <span class="number-bills">1</span>
+                            <span class="number-bills">{{bill.number}}</span>
                         </div>
-                        <span class="delete-bill-item"></span>
+                        <span class="delete-bill-item" @click="deleteBill(index)"></span>
                     </div>
                 </div>
             </div>
             <div class="add-bill d-flex-center height-fill">
-                <span class="add-bill-item"></span>
+                <span class="add-bill-item" @click="addBill"></span>
             </div>
         </div>
         <div class="header-right height-fill d-flex-vcenter">
@@ -163,7 +163,7 @@
                             <span class="line-vertical"></span>
                             <div class="quanty-search d-flex-vcenter">
                                 <span class="label-quanty-search">SL:</span>
-                                <div class="arrow-quanty ">
+                                <div class="arrow-quanty">
                                     <e-number :control="txtQuanTySearch" v-model="txtQuanTySearch.value" />
                                 </div>
                             </div>
@@ -198,9 +198,20 @@
                             <span class="flex-1 child-item">
                                 <e-number :control="txtPrice" v-model="item.UnitPriceBill" />
                             </span>
+
+                            <!--Giá mua-->
+                            <!-- <span class="flex-1 child-item">
+                                <e-number :control="txtPrice" v-model="item.PurchaseBill" />
+                            </span>
+                            <span class="flex-1">
+                                <e-number :control="txtPriceLastPurchase" v-model="item.IntoPurchaseMoneyBill" />
+                            </span> -->
+                            <!--Giá mua-->
+
                             <span class="flex-1">
                                 <e-number :control="txtPriceLast" v-model="item.IntoMoneyBill" />
                             </span>
+
                             <span class="icon-child-product" @click="DelListTable(index)"></span>
                         </div>
                     </div>
@@ -347,6 +358,7 @@
                                     <!-- <e-number :control="txtAllPayments" v-model="bill.TotalMoneyBill"></e-number> -->
                                     {{ formatCurrency(bill.TotalMoneyBill) }}
                                 </span>
+                                <!-- <span>{{bill.TotalPurchaseBill}}</span> -->
                             </span>
                         </div>
                         <div class="info-payment-item d-flex-vcenter" v-if="DisableVoucher">

@@ -11,8 +11,8 @@ export default class OutwardDetail {
             me.NumberProductOutWard = outwardDetail.NumberProductOutWard;
             me.UnitPriceOutWard = outwardDetail.UnitPriceOutWard;
             me.PaymentOutWard = outwardDetail.PaymentOutWard;
+            me.PurchaseOutWard = outwardDetail.PurchaseOutWard;
             me.OutwardId = outwardDetail.OutwardId;
-
         }
         me.OutWardDetailId = Guid.NewGuid();
     }
@@ -23,6 +23,7 @@ export default class OutwardDetail {
     NumberProductOutWard?: number;
     UnitPriceOutWard?: number;
     PaymentOutWard?: number;
+    PurchaseOutWard?: number;
     OutwardId?: string;
     OutWardDetailId?: string;
 }

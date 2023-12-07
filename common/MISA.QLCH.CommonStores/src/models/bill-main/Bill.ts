@@ -15,6 +15,7 @@ export default class Bill {
             me.SalesAgent = billItem.SalesAgent;
             me.Payments = billItem.Payments;
             me.TotalSalesBill = billItem.TotalSalesBill;
+            me.TotalPurchaseBill = billItem.TotalPurchaseBill;
         }
         me.BillId = Guid.NewGuid();
     }
@@ -29,5 +30,6 @@ export default class Bill {
     SalesAgent?: string;
     Payments?: number;
     TotalSalesBill?: number;
+    TotalPurchaseBill?: number; //Tổng số tiền nhập hàng
     BillId?: string;
 }

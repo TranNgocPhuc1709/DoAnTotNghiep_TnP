@@ -7,5 +7,6 @@ export default interface IOutwardDetail {
     NumberProductOutWard?: number;
     UnitPriceOutWard?: number;
     PaymentOutWard?: number;
+    PurchaseOutWard?: number;
     OutwardId?: string;
 }

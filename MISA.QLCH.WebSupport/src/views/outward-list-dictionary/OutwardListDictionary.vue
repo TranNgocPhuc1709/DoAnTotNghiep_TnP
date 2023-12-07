@@ -16,6 +16,8 @@ import Button from '@library-src/models/qlch_control/qlch_button/Button';
 import EButton from "qlch_control/EButton";
 import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
 import Outward from '@store-src/models/outward/Outward';
+import Bill from '@store-src/models/bill-main/Bill';
+import BillDetail from '@store-src/models/bill-main/BillDetail';
 export default {
 
   extends: BaseDictionaryListController,
@@ -25,6 +27,14 @@ export default {
     ECombobox,
     EDate,
     EButton
+  },
+  data() {
+    const lstBill: Ref<Array<Bill>> = ref(new Array<Bill>());
+    const lstBillDetail: Ref<Array<BillDetail>> = ref(new Array<BillDetail>());
+    return {
+      lstBill,
+      lstBillDetail
+    }
   },
   setup() {
     const thisData: Ref<OutwardListDictionary> = ref(new OutwardListDictionary());
@@ -154,6 +164,11 @@ export default {
      */
     afterDelete(listMasterData: Array<Record<string, any>>) {
       LocalStorageLibrary.setByKey("outwardItem", listMasterData);
+    },
+
+
+    GetDataSales() {
+
     },
     /**
      * Set PrimaryKey cho object master

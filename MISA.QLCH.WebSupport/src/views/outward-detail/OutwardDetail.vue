@@ -94,6 +94,15 @@ export default {
         precision: 0
       }),
     }));
+    const txtPurchaseOutWard: Ref<NumberModel> = ref(new NumberModel({
+      fieldText: "",
+      classType: "thirty",
+      format: new NumberFormat({
+        decimal: ".",
+        thousands: ",",
+        precision: 0
+      }),
+    }));
     const txtPaymentOutWard: Ref<NumberModel> = ref(new NumberModel({
       fieldText: "",
       classType: "thirty",
@@ -112,6 +121,7 @@ export default {
       txtUnitProductOutWard,
       txtNumberProductOutWard,
       txtUnitPriceOutWard,
+      txtPurchaseOutWard,
       txtPaymentOutWard
 
 
@@ -132,6 +142,8 @@ export default {
           }
         }
       }
+
+
     } catch (error) {
       console.log(error);
     }
@@ -300,7 +312,6 @@ export default {
         if (me.masterData && element) {
           me.masterData['TotalMoneyOutward'] += element.PaymentOutWard ?? 0;
           me.masterData['TotalQuantityOutward'] += element.NumberProductOutWard ?? 0;
-
         }
       }
     },

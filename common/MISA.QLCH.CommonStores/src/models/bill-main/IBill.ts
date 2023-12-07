@@ -9,5 +9,6 @@ export default interface IBill {
     CustomerName?: string;
     Payments?: number;
     TotalSalesBill?: number;
+    TotalPurchaseBill?: number;
     SalesAgent?: string;
 }

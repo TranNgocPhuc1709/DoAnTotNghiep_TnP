@@ -69,7 +69,7 @@
               v-model="masterData[bindingControl[`txtStatusEmployee`].bindingIndex]"></e-combobox>
           </div>
           <div class="qlch-input-default item-detail">
-            <e-text-box :control="bindingControl[`txtConfirmPasswordEmployee`]"
+            <e-text-box @blur="CheckPassword()" :control="bindingControl[`txtConfirmPasswordEmployee`]"
               v-model="masterData[bindingControl[`txtConfirmPasswordEmployee`].bindingIndex]"></e-text-box>
           </div>
         </div>

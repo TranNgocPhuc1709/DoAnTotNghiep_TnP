@@ -31,6 +31,9 @@ import PopupLibrary from '@library-src/utilities/commons/PopupLibrary';
 import Guid from '@library-src/utilities/types/Guid';
 import BillDetail from '@store-src/models/bill-main/BillDetail';
 import Branch from '@store-src/models/branch/Branch';
+import Outward from '@store-src/models/outward/Outward';
+import OutwardDetail from '@store-src/models/outward/OutwardDetail';
+
 // import Outward from '@store-src/models/outward/Outward';
 
 // import VoucherDetail from '@store-src/models/voucher/VoucherDetail';
@@ -66,7 +69,8 @@ export default {
             timePresent: new Date().toLocaleString(),
             NameBranch,
             lstCustomer,
-            lstBill
+            lstBill,
+            bills: [{ number: 1 }]
 
         };
     },
@@ -255,6 +259,14 @@ export default {
                 precision: 0
             }),
         }));
+        const txtPriceLastPurchase: Ref<NumberModel> = ref(new NumberModel({
+            classType: "secondary",
+            format: new NumberFormat({
+                decimal: ".",
+                thousands: ",",
+                precision: 0
+            }),
+        }));
         const txtPayments: Ref<NumberModel> = ref(new NumberModel({
             classType: "secondary",
             format: new NumberFormat({
@@ -387,6 +399,7 @@ export default {
             // txtProductCode,
             txtPrice,
             txtPriceLast,
+            txtPriceLastPurchase,
             txtNumberRecipient,
             txtDeliveryCharges,
             // txtProductName,
@@ -427,14 +440,28 @@ export default {
             me.bill.numVoucherTotalPrice = 0;
             me.bill.refundDetail = 0;
             me.bill.Payments = 0;
-
         } catch (error) {
             Log.ErrorLog(error as Error);
         }
     },
 
     methods: {
+        addBill() {
+            const me = this;
+            const newBill = {
+                number: me.bills.length + 1
+            };
 
+            me.bills.push(newBill);
+
+        },
+        deleteBill(index: number) {
+            const me = this;
+            // me.bills.splice(index, 1);
+            if (index !== 0) {
+                me.bills.splice(index, 1);
+            }
+        },
         formatCurrency(value: any) {
             // Định dạng giá trị tiền tệ
             const formattedValue = new Intl.NumberFormat('en-US', {
@@ -549,8 +576,8 @@ export default {
 
         DelListTable(index: number) {
             const me = this;
-            if (index >= 0 && index < this.lstBillDetail.length) {
-                this.lstBillDetail.splice(index, 1);
+            if (index >= 0 && index < me.lstBillDetail.length) {
+                me.lstBillDetail.splice(index, 1);
             }
 
             // if (me.bill.TotalMoneyBill) {
@@ -574,11 +601,13 @@ export default {
             //Tnp
             me.bill.TotalMoneyBill = 0;
             me.bill.collectedMoney = 0;
+            me.bill.TotalPurchaseBill = 0;
 
             for (let index = 0; index < me.lstBillDetail.length; index++) {
                 const element = me.lstBillDetail[index];
                 if (element) {
                     me.bill.TotalMoneyBill += element.IntoMoneyBill ?? 0;
+                    me.bill.TotalPurchaseBill += element.IntoPurchaseMoneyBill ?? 0;
                 }
             }
             if (me.bill.numVoucherTotalPrice != null) {
@@ -602,6 +631,7 @@ export default {
                         itemValue.NameProductBill = listProductFilter[0].NameProductList;
                         itemValue.UnitProductBill = listProductFilter[0].UnitProductList;
                         itemValue.UnitPriceBill = listProductFilter[0].PriceProductList;
+                        itemValue.PurchaseBill = listProductFilter[0].PurchasePriceProductList;
                     }
                 }
                 if (me.lstBillDetail?.length > 0) {
@@ -648,20 +678,26 @@ export default {
             if (value == null) {
                 value = 0;
             }
-            if (item.UnitPriceBill != null) {
+            if (item.UnitPriceBill && item.PurchaseBill != null) {
                 item.IntoMoneyBill = item.UnitPriceBill * value;
+                item.IntoPurchaseMoneyBill = item.PurchaseBill * value;
             } else {
                 item.IntoMoneyBill = 0;
+                item.IntoPurchaseMoneyBill = 0;
+
             }
 
             // Tính lại tổng tiền trong hóa đơn
             me.bill.TotalMoneyBill = 0;
             me.bill.collectedMoney = 0;
+            me.bill.TotalPurchaseBill = 0;
 
             for (let index = 0; index < me.lstBillDetail.length; index++) {
                 const element = me.lstBillDetail[index];
                 if (element) {
                     me.bill.TotalMoneyBill += element.IntoMoneyBill ?? 0;
+                    me.bill.TotalPurchaseBill += element.IntoPurchaseMoneyBill ?? 0;
+
                 }
             }
             // if (me.bill.numVoucherTotalPrice) {
@@ -831,31 +867,83 @@ export default {
                 }
             }
             //end cất detail
-
-
-            // const OutwardMain: Outward = new Outward({
-            //     ObjectNameOutward: me.bill.SalesAgent,
-            //     DeliveryOutward: "XK" + me.generateRandomNumberString(),
-            //     DayOutward: new Date(),
-            //     OutwardId: Guid.NewGuid()
-            // });
-
-            if (me.bill) {
-                me.bill.TotalSalesBill = 0;
-            }
-
-            for (let index = 0; index < me.lstBill.length; index++) {
-                const element = me.lstBill[index];
-                if (me.bill && element && me.bill.TotalSalesBill) {
-                    me.bill.TotalSalesBill += element.TotalMoneyBill ?? 0;
+            let ItemTotalQuantityOutward = 0;
+            for (let index = 0; index < me.lstBillDetail.length; index++) {
+                const element = me.lstBillDetail[index];
+                if (element) {
+                    ItemTotalQuantityOutward += element.QuantityBill ?? 0;
                 }
             }
+            const OutwardMain: Outward = new Outward({
+                ObjectNameOutward: me.bill.SalesAgent,
+                DeliveryOutward: "XK" + me.generateRandomNumberString(),
+                DayOutward: new Date(),
+                OutwardId: Guid.NewGuid(),
+                TotalQuantityOutward: '' + ItemTotalQuantityOutward,
+                TotalMoneyOutward: me.bill.TotalPurchaseBill,
+            });
+
+
+            let listOutward = LocalStorageLibrary.getByKey<Array<Outward>>("outwardItem");
+            if (listOutward) {
+                listOutward.push(OutwardMain);
+                LocalStorageLibrary.setByKey("outwardItem", listOutward);
+            }
+            else {
+                listOutward = new Array<Outward>({ ...OutwardMain });
+                LocalStorageLibrary.setByKey("outwardItem", listOutward);
+            }
+            const lstOutWardDetail: Array<OutwardDetail> = new Array<OutwardDetail>(
+
+            )
+            for (let index = 0; index < me.lstBillDetail.length; index++) {
+                const element = me.lstBillDetail[index];
+                const OurWardDetail: OutwardDetail = new OutwardDetail({
+                    CodeProductOutWard: element.CodeProductBill,
+                    NameProductOutWard: element.NameProductBill,
+                    UnitProductOutWard: element.UnitProductBill,
+                    NumberProductOutWard: element.QuantityBill,
+                    UnitPriceOutWard: element.PurchaseBill,
+                    PaymentOutWard: element.IntoPurchaseMoneyBill,
+                    OutwardId: OutwardMain.OutwardId,
+                })
+                lstOutWardDetail.push(OurWardDetail)
+            }
+            let listOutwardDetail: Array<OutwardDetail> | null = new Array<OutwardDetail>;
+            listOutwardDetail = LocalStorageLibrary.getByKey<Array<OutwardDetail>>("outwardDetail");
+            if (listOutwardDetail) {
+                listOutwardDetail.push(...lstOutWardDetail);
+                LocalStorageLibrary.setByKey("outwardDetail", listOutwardDetail);
+            }
+            else {
+                listOutwardDetail = new Array<OutwardDetail>(...lstOutWardDetail);
+                LocalStorageLibrary.setByKey("outwardDetail", listOutwardDetail);
+            }
+
+
+            // if (me.bill) {
+            //     me.bill.TotalSalesBill = 0;
+            // }
+
+            // for (let index = 0; index < me.lstBill.length; index++) {
+            //     const element = me.lstBill[index];
+            //     if (me.bill && element && me.bill.TotalSalesBill) {
+            //         me.bill.TotalSalesBill += element.TotalMoneyBill ?? 0;
+            //     }
+            // }
 
 
             const component = (await import(`./popup-COD/PopupCod.vue`)).default;
             if (component) {
                 PopupLibrary.createPopup(component, {});
             };
+            me.bill.TotalMoneyBill = 0;
+            me.bill.numVoucherTotalPrice = 0;
+            me.bill.collectedMoney = 0;
+            me.bill.refundDetail = 0;
+            me.bill.Payments = 0;
+            me.lstBillDetail.splice(0);
+
         },
 
         generateRandomNumberString() {
