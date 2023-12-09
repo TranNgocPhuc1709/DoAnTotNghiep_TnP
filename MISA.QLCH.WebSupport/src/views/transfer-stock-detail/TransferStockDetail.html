@@ -1,0 +1,105 @@
+<base-dictionary-detail-view :idRoot="idRoot" :propView="propView" :styleFrom="`width: 800px;`"
+  @toolbarClick="onSelectAction" @closeFormClick="onCloseForm">
+  <template v-slot:content-detail>
+    <div class="content-form-outward d-flex">
+      <div class="form-outward-detail-left flex-1">
+        <span class="heading-outward-info">THÔNG TIN CHUNG</span>
+        <div class="qlch-input-default item-detail">
+          <e-combobox @dataChange="ShowNameTransfer" :control="bindingControl[`txtObjectTransferStock`]"
+            v-model="masterData[bindingControl[`txtObjectTransferStock`].bindingIndex]"></e-combobox>
+        </div>
+        <div class="qlch-input-default item-detail">
+          <e-text-box :control="bindingControl[`txtObjectNameTransferStock`]"
+            v-model="masterData[bindingControl[`txtObjectNameTransferStock`].bindingIndex]"></e-text-box>
+        </div>
+        <div class="qlch-input-default item-detail">
+          <e-text-box :control="bindingControl[`txtNoteTransferStock`]"
+            v-model="masterData[bindingControl[`txtNoteTransferStock`].bindingIndex]"></e-text-box>
+        </div>
+      </div>
+      <div class="form-outward-detail-right">
+        <span class="heading-outward-info">CHỨNG TỪ</span>
+        <div class="qlch-input-default item-detail">
+          <e-text-box :control="bindingControl[`txtVotesTransferStock`]"
+            v-model="masterData[bindingControl[`txtVotesTransferStock`].bindingIndex]"></e-text-box>
+        </div>
+        <div class="qlch-input-default item-detail">
+          <e-date :control="bindingControl[`txtDateTransferStock`]"
+            v-model="masterData[bindingControl[`txtDateTransferStock`].bindingIndex]"></e-date>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-footer">
+      <div class="d-flex">
+        <div class="grid-footer-item flex-1">
+          <span class="heading-outward-info">Chi tiết</span>
+        </div>
+      </div>
+      <div class="grid-GoodsOutward">
+        <table class="flex-1">
+          <thead>
+            <tr>
+              <th>Mã Hàng Hóa</th>
+              <th>Tên Hàng Hóa</th>
+              <th>Đơn vị tính</th>
+              <th>Kho Xuất</th>
+              <th>Kho Nhập</th>
+              <th>Số lượng</th>
+              <th>Đơn giá</th>
+              <th>Thành tiền</th>
+              <th>
+                <e-button :control="btnAddListTable" @click="AddListTable()" />
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-if="lstTransferStockDetail?.length > 0" v-for="item in lstTransferStockDetail"
+              :key="item.TransferStockDetailId">
+              <td>
+                <e-combobox @dataChange="ShowNameProduct($event, item)" :control="txtCodeProductTransfer"
+                  v-model="item.CodeProductTransfer"></e-combobox>
+              </td>
+              <td>
+                <e-text-box :control="txtNameProductTransfer" v-model="item.NameProductTransfer"></e-text-box>
+              </td>
+              <td>
+                <e-text-box :control="txtUnitProductTransfer" v-model="item.UnitTransfer"></e-text-box>
+              </td>
+              <td>
+                <e-combobox :control="txtWarehouseExport" v-model="item.WareHouseExportTransfer"></e-combobox>
+              </td>
+              <td>
+                <e-combobox :control="txtWarehouseImport" v-model="item.WareHouseImportTransfer"></e-combobox>
+              </td>
+              <td>
+                <e-number @blur="ShowIntoMoneyTransfer($event, item)" :control="txtQuantityProductTransfer"
+                  v-model="item.QuantityTransfer"></e-number>
+              </td>
+              <td>
+                <e-number :control="txtUnitPriceTransfer" v-model="item.UnitPriceProduct"></e-number>
+              </td>
+              <td>
+                <e-number :control="txtIntoMoneyTransfer" v-model="item.IntoMoneyProduct"></e-number>
+              </td>
+              <td>
+                <e-button :control="btnDelListTable" @click="DelListTable(item)" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="synthetic-footer d-flex-vcenter d-flex-sp-center">
+      <div class="main-synthetic d-flex-vcenter">
+        <e-number :control="bindingControl[`txtTotalQuantityTransfer`]"
+          v-model="masterData[bindingControl[`txtTotalQuantityTransfer`].bindingIndex]"></e-number>
+      </div>
+      <div class="main-synthetic d-flex-vcenter">
+        <e-number :control="bindingControl[`txtTotalMoneyTransferStock`]"
+          v-model="masterData[bindingControl[`txtTotalMoneyTransferStock`].bindingIndex]"></e-number>
+      </div>
+
+    </div>
+  </template>
+</base-dictionary-detail-view>

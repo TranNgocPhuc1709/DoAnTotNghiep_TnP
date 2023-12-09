@@ -15,6 +15,8 @@ import EDate from "qlch_control/EDate";
 import Button from '@library-src/models/qlch_control/qlch_button/Button';
 import EButton from "qlch_control/EButton";
 import ToolBarItemsView from '@library-src/models/qlch_base/tool_bar_items_view/ToolBarItemsView';
+import Revenue from '@store-src/models/revenue/Revenue';
+// import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
 
 export default {
 
@@ -25,6 +27,12 @@ export default {
     ECombobox,
     EDate,
     EButton,
+  },
+  data() {
+    const lstRevenue: Ref<Array<Revenue>> = ref(new Array<Revenue>());
+    return {
+      lstRevenue
+    }
   },
   setup() {
     const thisData: Ref<RevenueExpenditureListDictionary> = ref(new RevenueExpenditureListDictionary());

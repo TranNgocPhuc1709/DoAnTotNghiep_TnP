@@ -56,7 +56,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-if="lstInwardDetail?.length > 0" v-for="item in lstInwardDetail" :key="item.CashReceiptDetailId">
+            <tr v-if="lstInwardDetail?.length > 0" v-for="item in lstInwardDetail" :key="item.InwardDetailId">
               <td>
                 <e-combobox @dataChange="ShowNameProduct($event, item)" :control="txtCodeProductInward"
                   v-model="item.CodeProductInward"></e-combobox>

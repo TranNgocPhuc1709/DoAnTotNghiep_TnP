@@ -20,6 +20,11 @@ import NumberModel from '@library-src/models/qlch_control/qlch_number/NumberMode
 import NumberFormat from '@library-src/models/qlch_control/number_format/NumberFormat';
 import ENumber from "qlch_control/ENumber";
 import Log from '@library-src/utilities/Log';
+import Bill from '@store-src/models/bill-main/Bill';
+import CashReceipt from '@store-src/models/cash-receipt/CashReceipt';
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import Outward from '@store-src/models/outward/Outward';
+import CashPayment from '@store-src/models/cash-payment/CashPayment';
 export default {
 
   extends: BaseDictionaryListController,
@@ -32,6 +37,38 @@ export default {
     ETextBox,
     ENumber
   },
+
+  data() {
+    const TotalSales: Ref<number> = ref(0);
+    const TotalProfit: Ref<number> = ref(0);
+    const TotalOtherRevenue: Ref<number> = ref(0);
+    const TotalOtherCosts: Ref<number> = ref(0);
+    const TotalRevenue: Ref<number> = ref(0);
+    const TotalExpense: Ref<number> = ref(0);
+    const TotalCostPrice: Ref<number> = ref(0);
+    const lstBill: Ref<Array<Bill>> = ref(new Array<Bill>());
+    const itemBill: Ref<Bill> = ref(new Bill());
+    const lstCashReceipt: Ref<Array<CashReceipt>> = ref(new Array<CashReceipt>());
+    const lstOutward: Ref<Array<Outward>> = ref(new Array<Outward>());
+    const lstCashPayment: Ref<Array<CashPayment>> = ref(new Array<CashPayment>());
+
+    return {
+      TotalSales,
+      lstBill,
+      itemBill,
+      lstCashReceipt,
+      TotalOtherRevenue,
+      TotalRevenue,
+      lstOutward,
+      TotalCostPrice,
+      lstCashPayment,
+      TotalOtherCosts,
+      TotalExpense,
+      TotalProfit
+
+    }
+  },
+
   setup() {
     const thisData: Ref<ProfitListDictionary> = ref(new ProfitListDictionary());
     const cbbSales: Ref<Combobox> = ref(new Combobox({
@@ -165,7 +202,37 @@ export default {
     try {
       const me = this;
       me.cbbSales.value = 1;
-
+      me.lstBill = LocalStorageLibrary.getByKey<Array<Bill>>("itemBill") ?? new Array<Bill>();
+      me.lstOutward = LocalStorageLibrary.getByKey<Array<Outward>>("outwardItem") ?? new Array<Outward>();
+      me.lstCashPayment = LocalStorageLibrary.getByKey<Array<CashPayment>>("cashPayment") ?? new Array<CashPayment>();
+      me.lstCashReceipt = LocalStorageLibrary.getByKey<Array<CashReceipt>>("cashReceipt") ?? new Array<CashReceipt>();
+      for (let index = 0; index < me.lstBill.length; index++) {
+        const element = me.lstBill[index];
+        if (element) {
+          me.TotalSales = me.lstBill.map(element => element.collectedMoney ?? 0).reduce((acc, val) => acc + val, 0);;
+        }
+      }
+      for (let index = 0; index < me.lstCashReceipt.length; index++) {
+        const element = me.lstCashReceipt[index];
+        if (element) {
+          me.TotalOtherRevenue += element.TotalMoneyCashReceipt || 0;
+        }
+      }
+      for (let index = 0; index < me.lstOutward.length; index++) {
+        const element = me.lstOutward[index];
+        if (element) {
+          me.TotalCostPrice += element.TotalMoneyOutward || 0;
+        }
+      }
+      for (let index = 0; index < me.lstCashPayment.length; index++) {
+        const element = me.lstCashPayment[index];
+        if (element) {
+          me.TotalOtherCosts += element.TotalCashPayment || 0;
+        }
+      }
+      me.TotalRevenue = me.TotalSales + me.TotalOtherRevenue;
+      me.TotalExpense = me.TotalCostPrice + me.TotalOtherCosts;
+      me.TotalProfit = me.TotalRevenue - me.TotalExpense;
 
     } catch (error) {
       Log.ErrorLog(error as Error);
@@ -247,23 +314,64 @@ export default {
      */
     loadMasterData(param: ParamPaging) {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
-      return [
-        {
-          MonthProfit: "Tháng 1",
-          TotalProfit: "10000",
-          TotalRevenue: "80000",
-          TotalRevenueProfit: "1000000",
-          SalesProceedsProfit: "10000",
-          PromotionProfit: "90000",
-          CollectOtherMoney: "80000",
-          TotalExportProfit: "0",
-          ExportProductProfit: "100",
-          ExportOtherProfit: "200"
-
-
-
+      return [];
+    },
+    GetDataProfit() {
+      try {
+        const me = this;
+        me.cbbSales.value = 1;
+        me.lstBill = LocalStorageLibrary.getByKey<Array<Bill>>("itemBill") ?? new Array<Bill>();
+        me.lstOutward = LocalStorageLibrary.getByKey<Array<Outward>>("outwardItem") ?? new Array<Outward>();
+        me.lstCashPayment = LocalStorageLibrary.getByKey<Array<CashPayment>>("cashPayment") ?? new Array<CashPayment>();
+        me.lstCashReceipt = LocalStorageLibrary.getByKey<Array<CashReceipt>>("cashReceipt") ?? new Array<CashReceipt>();
+        for (let index = 0; index < me.lstBill.length; index++) {
+          const element = me.lstBill[index];
+          if (element) {
+            me.TotalSales = me.lstBill.map(element => element.collectedMoney ?? 0).reduce((acc, val) => acc + val, 0);;
+          }
         }
-      ];
+        for (let index = 0; index < me.lstCashReceipt.length; index++) {
+          const element = me.lstCashReceipt[index];
+          if (element) {
+            me.TotalOtherRevenue = me.lstCashReceipt.map(element => element.TotalMoneyCashReceipt ?? 0).reduce((acc, val) => acc + val, 0);;
+          }
+        }
+        for (let index = 0; index < me.lstOutward.length; index++) {
+          const element = me.lstOutward[index];
+          if (element) {
+            me.TotalCostPrice = me.lstOutward.map(element => element.TotalMoneyOutward ?? 0).reduce((acc, val) => acc + val, 0);;
+          }
+        }
+        for (let index = 0; index < me.lstCashPayment.length; index++) {
+          const element = me.lstCashPayment[index];
+          if (element) {
+            me.TotalOtherCosts = me.lstCashPayment.map(element => element.TotalCashPayment ?? 0).reduce((acc, val) => acc + val, 0);;
+          }
+        }
+        me.TotalRevenue = me.TotalSales + me.TotalOtherRevenue;
+        me.TotalExpense = me.TotalCostPrice + me.TotalOtherCosts;
+        me.TotalProfit = me.TotalRevenue - me.TotalExpense;
+
+      } catch (error) {
+        Log.ErrorLog(error as Error);
+      }
+    },
+    formatCurrency(value: any) {
+      // Định dạng giá trị tiền tệ
+      const formattedValue = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'VND', // Điều này có thể được thay đổi thành đơn vị tiền tệ của bạn
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      }).format(value);
+      const currencySymbol = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'VND',
+      }).formatToParts(1).find(part => part.type === 'currency')?.value;
+      if (currencySymbol) {
+        return formattedValue.replace(new RegExp(currencySymbol, 'g'), '').trim();
+      }
+      return formattedValue.trim();
     },
 
     /**

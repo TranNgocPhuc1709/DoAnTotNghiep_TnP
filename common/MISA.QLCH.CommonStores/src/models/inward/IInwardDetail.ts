@@ -1,5 +1,4 @@
 export default interface IInwardDetail {
-
     CodeProductInward?: string;
     NameProductInward?: string;
     WarehouseProductInward?: string;
@@ -8,5 +7,4 @@ export default interface IInwardDetail {
     UnitPriceInward?: number;
     PaymentInward?: number;
     InwardId?: string;
-
 }

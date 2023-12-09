@@ -1,0 +1,93 @@
+.item-detail {
+  margin-bottom: 8px;
+}
+
+.item-detail:first-child {
+  margin-top: 24px;
+}
+
+.item-detail:last-child {
+  margin-bottom: 24px;
+}
+
+.heading-outward-info {
+  font-size: 15px;
+  font-weight: 600;
+  color: #757575;
+  display: block;
+  padding: 0 0 10px 0;
+}
+
+.form-outward-detail-left,
+.form-outward-detail-right {
+  margin: 15px 15px;
+}
+
+.content-form-outward {
+  overflow-y: scroll;
+  height: 170px;
+}
+
+.grid-footer {
+  height: 160px;
+}
+
+.synthetic-footer {
+  margin: 50px 0 0px 0;
+  background-color: #EFF0F3;
+}
+
+.main-synthetic {
+  height: 35px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.btn-table {
+  margin-bottom: 10px;
+}
+
+.grid-footer-item {
+  height: 30px;
+  margin-right: 10px;
+}
+
+.main-synthetic span {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.grid-GoodsOutward {
+  height: 150px;
+  border: 1px solid #F0F0F0;
+  overflow: scroll;
+
+  table {
+    border-collapse: collapse;
+  }
+
+  table,
+  thead,
+  tr,
+  th {
+    border-right: 1px solid #D0D0D0;
+    min-width: 150px;
+    height: 35px;
+  }
+
+  tbody,
+  tr,
+  td {
+    width: 100%;
+    height: 30px;
+  }
+
+  thead,
+  tr,
+  th {
+    background-color: #F0F0F0;
+    padding: 10px 10px;
+    text-align: center;
+
+  }
+}

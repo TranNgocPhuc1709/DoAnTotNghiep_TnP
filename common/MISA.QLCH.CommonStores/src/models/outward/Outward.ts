@@ -30,12 +30,12 @@ export default class Outward {
     OutwardId?: string;
 
     //Grid-table
-    CodeProductOutWard?: string;
-    NameProductOutWard?: string;
-    WarehouseProductOutWard?: string;
-    UnitProductOutWard?: string;
-    NumberProductOutWard?: string;
-    UnitPriceOutWard?: number;
-    PaymentOutWard?: number;
+    // CodeProductOutWard?: string;
+    // NameProductOutWard?: string;
+    // WarehouseProductOutWard?: string;
+    // UnitProductOutWard?: string;
+    // NumberProductOutWard?: string;
+    // UnitPriceOutWard?: number;
+    // PaymentOutWard?: number;
 
 }

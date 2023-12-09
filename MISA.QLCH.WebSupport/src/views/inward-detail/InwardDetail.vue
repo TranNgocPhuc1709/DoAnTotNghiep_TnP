@@ -353,7 +353,7 @@ export default {
 
     saveData() {
       const me = this;
-      console.log(me.lstInwardDetail);
+      // console.log(me.lstInwardDetail);
       let listInward: Array<Inward> | null = new Array<Inward>;
       if (me.masterData) {
         if (me.masterData.editMode == 1 || me.masterData.editMode == 4) {
@@ -403,7 +403,6 @@ export default {
                   newItemInward.DeliverInward = me.masterData.DeliverInward;
                   newItemInward.NameObjectInward = me.masterData.NameObjectInward;
                   newItemInward.TotalInward = me.masterData.TotalInward;
-
                 }
               }
             });
@@ -412,6 +411,7 @@ export default {
 
           //cất detail
           //gán khoá phụ cho detail
+
           if (me.lstInwardDetail?.length > 0) {
             me.lstInwardDetail.forEach(detailItem => {
               if (me.masterData) {

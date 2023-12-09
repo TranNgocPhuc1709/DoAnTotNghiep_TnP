@@ -13,7 +13,7 @@
       <e-date :control="dtEndRequire" v-model="dtEndRequire.value" />
     </div>
     <div class="btn-item-data-sales">
-      <e-button :control="btnGetData" />
+      <e-button :control="btnGetData" @click="GetDataProfit" />
     </div>
   </div>
   <div class="d-flex-vcenter">
@@ -41,9 +41,9 @@
             <td>
               <strong>I. Doanh Thu (1 + 2)</strong>
             </td>
-            <td>
+            <td style="text-align: right;">
               <strong>
-                850000
+                {{formatCurrency(TotalRevenue)}}
               </strong>
             </td>
           </tr>
@@ -53,10 +53,8 @@
                 1. Doanh Thu Bán Hàng
               </strong>
             </td>
-            <td>
-              <strong>
-                750000
-              </strong>
+            <td style="text-align: right;">
+              {{formatCurrency(TotalSales)}}
             </td>
           </tr>
           <tr>
@@ -65,19 +63,17 @@
                 2. Thu Khác
               </strong>
             </td>
-            <td>
-              <strong>
-                100000
-              </strong>
+            <td style="text-align: right;">
+              {{formatCurrency(TotalOtherRevenue)}}
             </td>
           </tr>
           <tr>
             <td>
               <strong>II.Chi Phí (1 + 2 )</strong>
             </td>
-            <td>
+            <td style="text-align: right;">
               <strong>
-                600000
+                {{formatCurrency(TotalExpense)}}
               </strong>
             </td>
           </tr>
@@ -85,29 +81,25 @@
             <td>
               <strong>1. Chi Phí Giá Vốn</strong>
             </td>
-            <td>
-              <strong>
-                550000
-              </strong>
+            <td style="text-align: right;">
+              {{formatCurrency(TotalCostPrice)}}
             </td>
           </tr>
           <tr>
             <td>
               <strong>2. Chi Khác</strong>
             </td>
-            <td>
-              <strong>
-                50000
-              </strong>
+            <td style="text-align: right;">
+              {{formatCurrency(TotalOtherCosts)}}
             </td>
           </tr>
           <tr>
             <td>
-              <strong>3. Lợi Nhuận ( I - II )</strong>
+              <strong>III. Lợi Nhuận ( I - II )</strong>
             </td>
-            <td>
+            <td style="text-align: right;">
               <strong>
-                250000
+                {{formatCurrency(TotalProfit)}}
               </strong>
             </td>
           </tr>

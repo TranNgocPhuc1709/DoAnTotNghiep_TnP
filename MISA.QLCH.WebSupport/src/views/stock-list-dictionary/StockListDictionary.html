@@ -21,7 +21,7 @@
       <e-date :control="dtEndRequire" v-model="dtEndRequire.value" />
     </div>
     <div class="btn-item-data-stock">
-      <e-button :control="btnGetData" />
+      <e-button :control="btnGetData" @click="GetDataStock()" />
     </div>
   </div>
   <div class="content-right d-flex-vcenter">
@@ -49,24 +49,24 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr v-if="lstStock?.length > 0" v-for="item in lstStock" :key="item.StockId">
             <td>
-
+              {{item.CodeProductStock}}
             </td>
             <td>
-              <!-- {{item.NumberBill}} -->
+              {{item.NameProductStock}}
             </td>
             <td>
-              <!-- {{item.collectedMoney}} -->
+              {{item.UnitProductStock}}
             </td>
             <td>
-              <!-- {{item.TotalMoneyBill}} -->
+              {{item.GroupProductStock}}
             </td>
             <td>
-              <!-- {{item.numVoucherTotalPrice}} -->
+              {{item.PriceProductStock}}
             </td>
             <td>
-              <!-- {{item.SalesAgent}} -->
+              {{item.InventoryNumberStock}}
             </td>
           </tr>
         </tbody>

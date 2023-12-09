@@ -15,7 +15,9 @@ import Log from '@library-src/utilities/Log';
 import EDate from "qlch_control/EDate";
 import EButton from "qlch_control/EButton";
 import ToolBarItemsView from '@library-src/models/qlch_base/tool_bar_items_view/ToolBarItemsView';
-// import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
+import Stock from '@store-src/models/stock/Stock';
+import Product from '@store-src/models/product/Product';
 export default {
 
   extends: BaseDictionaryListController,
@@ -26,7 +28,10 @@ export default {
     EButton
   },
   data() {
-    // const lstStock = LocalStorageLibrary.getByKey<Array<Stock>>("itemBill") ?? new Array<Stock>();
+    const lstStock: Ref<Array<Stock>> = ref(new Array<Stock>());
+    return {
+      lstStock
+    }
   },
   setup() {
     const thisData: Ref<StockListDictionary> = ref(new StockListDictionary());
@@ -86,7 +91,22 @@ export default {
     try {
       const me = this;
       me.cbbStock.value = 1;
+      me.lstStock = [];
+      let itemValue = new Stock();
+      const listProduct = LocalStorageLibrary.getByKey<Array<Product>>("Product");
+      if (listProduct && listProduct.length > 0) {
+        listProduct.forEach(product => {
+          itemValue = new Stock();
+          itemValue.CodeProductStock = product.CodeProductList;
+          itemValue.NameProductStock = product.NameProductList;
+          itemValue.UnitProductStock = product.UnitProductList;
+          itemValue.GroupProductStock = product.GroupProductList;
+          itemValue.PriceProductStock = product.PriceProductList;
 
+          me.lstStock.push(itemValue);
+
+        });
+      }
     } catch (error) {
       Log.ErrorLog(error as Error);
     }
@@ -115,17 +135,7 @@ export default {
      */
     loadMasterData(param: ParamPaging) {
       console.log("Dev: Override function loadMasterData with param: " + JSON.stringify(param));
-      return [
-        {
-          CodeStock: "HH0001",
-          NameStock: "Quần Áo Nam",
-          UnitStock: "Chiếc",
-          GroupStock: "Quần Áo",
-          PriceStock: "100000",
-          InventoryStock: "10"
-        },
-
-      ];
+      return [];
     },
 
     /**
@@ -139,9 +149,31 @@ export default {
     // Hide-ToolBar-Footer
 
     buildToolBarItems(): Array<ToolBarItemsView> {
-
       return [];
 
+    },
+    GetDataStock() {
+      try {
+        const me = this;
+        me.lstStock = [];
+        let itemValue = new Stock();
+        const listProduct = LocalStorageLibrary.getByKey<Array<Product>>("Product");
+        if (listProduct && listProduct.length > 0) {
+          listProduct.forEach(product => {
+            itemValue = new Stock();
+            itemValue.CodeProductStock = product.CodeProductList;
+            itemValue.NameProductStock = product.NameProductList;
+            itemValue.UnitProductStock = product.UnitProductList;
+            itemValue.GroupProductStock = product.GroupProductList;
+            itemValue.PriceProductStock = product.PriceProductList;
+
+            me.lstStock.push(itemValue);
+
+          });
+        }
+      } catch (error) {
+        Log.ErrorLog(error as Error);
+      }
     },
 
     /**

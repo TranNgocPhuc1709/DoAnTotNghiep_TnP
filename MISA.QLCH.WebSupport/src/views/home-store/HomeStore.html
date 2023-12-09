@@ -13,8 +13,8 @@
                     </div>
                 </div>
             </div>
-            <div class="add-bill d-flex-center height-fill">
-                <span class="add-bill-item" @click="addBill"></span>
+            <div class="add-bill d-flex-center height-fill" @click="addBill">
+                <span class="add-bill-item"></span>
             </div>
         </div>
         <div class="header-right height-fill d-flex-vcenter">
@@ -199,13 +199,22 @@
                                 <e-number :control="txtPrice" v-model="item.UnitPriceBill" />
                             </span>
 
+                            <!--Thông tin kho hàng  -->
+                            <!-- <span class="flex-1 child-item">
+                                <e-number :control="txtPrice" v-model="item.UnitPriceBill" />
+                            </span> -->
+
+
+
                             <!--Giá mua-->
+
                             <!-- <span class="flex-1 child-item">
                                 <e-number :control="txtPrice" v-model="item.PurchaseBill" />
                             </span>
                             <span class="flex-1">
                                 <e-number :control="txtPriceLastPurchase" v-model="item.IntoPurchaseMoneyBill" />
                             </span> -->
+
                             <!--Giá mua-->
 
                             <span class="flex-1">

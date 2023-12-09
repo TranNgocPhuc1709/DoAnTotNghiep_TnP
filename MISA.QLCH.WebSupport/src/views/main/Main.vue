@@ -49,10 +49,10 @@ export default {
                     //     routerLink: "/monetaryFlow",
                     //     fieldText: "Doanh thu bàn giao ca"
                     // },
-                    // {
-                    //     routerLink: "/revenueExpenditure",
-                    //     fieldText: "Thu chi"
-                    // },
+                    {
+                        routerLink: "/revenueExpenditure",
+                        fieldText: "Thu chi"
+                    },
                     {
                         routerLink: "/profit",
                         fieldText: "Lợi Nhuận"
@@ -91,6 +91,10 @@ export default {
                     {
                         fieldText: "Xuất Kho",
                         routerLink: "/outward"
+                    },
+                    {
+                        fieldText: "Chuyển Kho",
+                        routerLink: "/transferStock"
                     },
                     {
                         fieldText: "Kiểm kê kho",

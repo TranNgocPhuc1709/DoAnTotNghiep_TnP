@@ -27,7 +27,46 @@
 
 </div>
 <div class="height-fill width-fill">
-  <base-dictionary-list-view :viewControl="viewControl" @loadMaster="onLoadMaster"
-    @changeSelectedRecordMaster="onChangeSelectedRecordMaster"
-    @toolbarClick="onSelectAction"></base-dictionary-list-view>
+  <div class="form-sales height-fill">
+    <div class="table-list">
+      <table class="flex-1">
+        <thead>
+          <tr>
+            <th>Ngày chứng từ</th>
+            <th>Số chứng từ</th>
+            <th>Loại chứng từ</th>
+            <th>Tiền thu</th>
+            <th>Tiền chi</th>
+            <th>Nhân viên Thu/Chi</th>
+            <th>Diễn giải</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-if="lstRevenue?.length > 0" v-for="item in lstRevenue" :key="item.RevenueId">
+            <td>
+              {{item.DayRevenue}}
+            </td>
+            <td>
+              {{item.NumberRevenue}}
+            </td>
+            <td>
+              {{item.TypeRevenue}}
+            </td>
+            <td>
+              {{item.ReceivedRevenue}}
+            </td>
+            <td>
+              {{item.SpendingRevenue}}
+            </td>
+            <td>
+              {{item.SalesRevenue}}
+            </td>
+            <td>
+              {{item.NoteRevenue}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

@@ -78,7 +78,6 @@ export default {
         const disableFormLogOut: Ref<boolean> = ref(false);
         const DisableFormPayment: Ref<boolean> = ref(false);
         const DisableVoucher: Ref<boolean> = ref(false)
-
         const isActive: Ref<boolean> = ref(false);
         const disableFormShowDelivery: Ref<boolean> = ref(false)
         const disableFormMoreAction: Ref<boolean> = ref(false);
@@ -89,6 +88,7 @@ export default {
         const lstCbbCheckPoint = LocalStorageLibrary.getByKey<Array<BankAccount>>("BankAccount") ?? new Array<BankAccount>();
         const lstCbbPayments = LocalStorageLibrary.getByKey<Array<Bank>>("Bank") ?? new Array<Bank>();
         const lstCbbVoucherItem = LocalStorageLibrary.getByKey<Array<Voucher>>("voucher") ?? new Array<Voucher>();
+
         const txtQuanTySearch: Ref<NumberModel> = ref(new NumberModel({
             classType: "thirty",
             format: new NumberFormat({
@@ -449,17 +449,17 @@ export default {
         addBill() {
             const me = this;
             const newBill = {
-                number: me.bills.length + 1
+                number: me.bills.length > 0 ? me.bills[me.bills.length - 1].number + 1 : 1,
             };
-
             me.bills.push(newBill);
-
         },
         deleteBill(index: number) {
             const me = this;
-            // me.bills.splice(index, 1);
-            if (index !== 0) {
-                me.bills.splice(index, 1);
+            me.bills.splice(index, 1);
+            if (me.bills.length === 0) {
+                setTimeout(() => {
+                    me.addBill();
+                }, 100);
             }
         },
         formatCurrency(value: any) {

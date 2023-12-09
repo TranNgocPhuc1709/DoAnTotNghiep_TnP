@@ -80,6 +80,17 @@ const routes: Array<RouteRecordRaw> = [
                     anonymous: false
                 }
             },
+
+            {
+                path: 'transferStock',
+                name: 'transferStock',
+                component: () => import('@src/views/transfer-stock-list-dictionary/TransferStockListDictionary.vue'),
+                meta: {
+                    title: "Chuyển Kho",
+                    anonymous: false
+                }
+            },
+
             {
                 path: 'inventory',
                 name: 'inventory',
@@ -89,6 +100,7 @@ const routes: Array<RouteRecordRaw> = [
                     anonymous: false
                 }
             },
+
 
             {
                 path: 'cashReceipt',

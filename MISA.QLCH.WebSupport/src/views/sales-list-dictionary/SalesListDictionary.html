@@ -26,10 +26,6 @@
   </div>
 </div>
 <div class="height-fill width-fill">
-  <!-- <base-dictionary-list-view :viewControl="viewControl" @loadMaster="onLoadMaster"
-    @changeSelectedRecordMaster="onChangeSelectedRecordMaster"
-    @toolbarClick="onSelectAction"></base-dictionary-list-view> -->
-
   <div class="form-sales height-fill">
     <div class="table-list">
       <table class="flex-1">
@@ -73,10 +69,10 @@
             </td>
           </tr>
           <tr>
+            <!-- <td>tổng số lượng hóa đơn:{{TotalBill}}</td> -->
             <td></td>
             <td></td>
-
-            <td><strong>Tổng: {{TotalNumber}}</strong></td>
+            <td><strong>Tổng: {{formatCurrency(TotalNumber)}}</strong></td>
             <td></td>
             <td></td>
             <td></td>

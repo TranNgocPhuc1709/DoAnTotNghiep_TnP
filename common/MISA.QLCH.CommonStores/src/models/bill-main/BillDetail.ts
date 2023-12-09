@@ -10,9 +10,10 @@ export default class BillDetail {
             me.QuantityBill = billDetailItem.QuantityBill;
             me.UnitPriceBill = billDetailItem.UnitPriceBill;
             me.IntoMoneyBill = billDetailItem.IntoMoneyBill;
-            me.Inventory = billDetailItem.Inventory;
+            me.InventoryNumber = billDetailItem.InventoryNumber;
             me.PurchaseBill = billDetailItem.PurchaseBill;
             me.IntoPurchaseMoneyBill = billDetailItem.IntoPurchaseMoneyBill;
+            me.InventoryBill = billDetailItem.InventoryBill;
             me.BillId = billDetailItem.BillId;
 
 
@@ -27,7 +28,8 @@ export default class BillDetail {
     IntoMoneyBill?: number;
     PurchaseBill?: number; // Giá mua
     IntoPurchaseMoneyBill?: number; //Tổng tiền giá mua
-    Inventory?: number; //Kho
+    InventoryNumber?: number; //Số lượng hàng trong Kho
+    InventoryBill?: string; // Kho hàng
     BillId?: string;
     BillDetailId?: string;
 }

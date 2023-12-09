@@ -6,19 +6,54 @@ import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
 import { Ref, ref } from 'vue';
 import Log from "@library-src/utilities/Log";
 import PopupLibrary from "@library-src/utilities/commons/PopupLibrary";
+import LocalStorageLibrary from "@library-src/utilities/window/local-storage/LocalStorageLibrary";
+import CashReceiptDetail from "@store-src/models/cash-receipt/CashReceiptDetail";
+import Bill from "@store-src/models/bill-main/Bill";
+import CashReceipt from "@store-src/models/cash-receipt/CashReceipt";
 
 export default {
     components: {
         ECombobox
     },
     data() {
+        const TotalProceeds: Ref<number> = ref(0);
+        const TotalAnother: Ref<number> = ref(0);
+        const TotalSell: Ref<number> = ref(0);
+        const NumberInvoiceCompleted: Ref<number> = ref(0);
+        const TotalInvoiceCompleted: Ref<number> = ref(0);
+        const TotalRevenue: Ref<number> = ref(0);
+        const TotalInvoiceStore: Ref<number> = ref(0);
+        const NumberInvoiceStore: Ref<number> = ref(0);
+        const TotalNumberInvoiceStore: Ref<number> = ref(0);
+
+
+
+
+
+        const lstBill: Ref<Array<Bill>> = ref(new Array<Bill>());
+        const lstCashReceiptMain: Ref<Array<CashReceipt>> = ref(new Array<CashReceipt>());
+        const itemBill: Ref<Bill> = ref(new Bill());
         return {
             // timePresent: new Date().toLocaleDateString(undefined, { month: 'long', year: 'numeric' }),
             timePresent: new Date().toLocaleDateString(),
+            TotalProceeds,
+            lstBill,
+            itemBill,
+            TotalSell,
+            NumberInvoiceCompleted,
+            TotalInvoiceCompleted,
+            TotalRevenue,
+            lstCashReceiptMain,
+            TotalAnother,
+            TotalInvoiceStore,
+            NumberInvoiceStore,
+            TotalNumberInvoiceStore
+
 
         }
     },
     setup() {
+        const lstCashReceipt = LocalStorageLibrary.getByKey<Array<CashReceiptDetail>>("cashReceiptDetail") ?? new Array<CashReceiptDetail>();
         const cbbCostBill: Ref<Combobox> = ref(new Combobox({
             require: true,
             data: [
@@ -337,13 +372,13 @@ export default {
             cbbChart,
             cbbChartDate,
             cbbRevenue,
-            cbbAllChart
+            cbbAllChart,
+            lstCashReceipt
         }
     },
     created() {
         try {
             const me = this;
-
             me.cbbCostBill.value = 2;
             me.cbbMonth.value = 2;
             me.cbbChart.value = 1;
@@ -351,12 +386,97 @@ export default {
             me.cbbRevenue.value = 1;
             me.cbbAllChart.value = 2;
 
+
+            me.lstBill = LocalStorageLibrary.getByKey<Array<Bill>>("itemBill") ?? new Array<Bill>();
+            me.lstCashReceiptMain = LocalStorageLibrary.getByKey<Array<CashReceipt>>("cashReceipt") ?? new Array<CashReceipt>();
+            // me.TotalProceeds = 0;
+            for (let index = 0; index < me.lstBill.length; index++) {
+                const element = me.lstBill[index];
+                if (element) {
+                    me.TotalSell = me.lstBill.map(element => element.collectedMoney ?? 0).reduce((acc, val) => acc + val, 0);;
+                    me.NumberInvoiceCompleted = me.lstBill.length;
+                    me.TotalInvoiceCompleted = me.lstBill.map(element => element.collectedMoney ?? 0).reduce((acc, val) => acc + val, 0);;
+                    me.TotalRevenue = me.TotalInvoiceCompleted;
+                    me.TotalInvoiceStore = me.TotalRevenue;
+                    me.NumberInvoiceStore = me.NumberInvoiceCompleted;
+                    me.TotalNumberInvoiceStore = me.TotalInvoiceCompleted;
+                }
+
+
+            }
+            for (let index = 0; index < me.lstCashReceiptMain.length; index++) {
+                const element = me.lstCashReceiptMain[index];
+                if (element) {
+                    me.TotalAnother = me.lstCashReceiptMain.map(element => element.TotalMoneyCashReceipt ?? 0).reduce((acc, val) => acc + val, 0);;
+                }
+            }
+            me.TotalProceeds = me.TotalSell + me.TotalAnother;
+
+
         } catch (error) {
             Log.ErrorLog(error as Error);
         }
     },
 
     methods: {
+        formatCurrency(value: any) {
+            // Định dạng giá trị tiền tệ
+            const formattedValue = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'VND', // Điều này có thể được thay đổi thành đơn vị tiền tệ của bạn
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
+            }).format(value);
+            const currencySymbol = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'VND',
+            }).formatToParts(1).find(part => part.type === 'currency')?.value;
+            if (currencySymbol) {
+                return formattedValue.replace(new RegExp(currencySymbol, 'g'), '').trim();
+            }
+            return formattedValue.trim();
+        },
+        GetData() {
+            try {
+                const me = this;
+                me.cbbCostBill.value = 2;
+                me.cbbMonth.value = 2;
+                me.cbbChart.value = 1;
+                me.cbbChartDate.value = 10;
+                me.cbbRevenue.value = 1;
+                me.cbbAllChart.value = 2;
+
+
+                me.lstBill = LocalStorageLibrary.getByKey<Array<Bill>>("itemBill") ?? new Array<Bill>();
+                me.lstCashReceiptMain = LocalStorageLibrary.getByKey<Array<CashReceipt>>("cashReceipt") ?? new Array<CashReceipt>();
+                // me.TotalProceeds = 0;
+                for (let index = 0; index < me.lstBill.length; index++) {
+                    const element = me.lstBill[index];
+                    if (element) {
+                        me.TotalSell = me.lstBill.map(element => element.collectedMoney ?? 0).reduce((acc, val) => acc + val, 0);;
+                        me.NumberInvoiceCompleted = me.lstBill.length;
+                        me.TotalInvoiceCompleted = me.lstBill.map(element => element.collectedMoney ?? 0).reduce((acc, val) => acc + val, 0);;
+                        me.TotalRevenue = me.TotalInvoiceCompleted;
+                        me.TotalInvoiceStore = me.TotalRevenue;
+                        me.NumberInvoiceStore = me.NumberInvoiceCompleted;
+                        me.TotalNumberInvoiceStore = me.TotalInvoiceCompleted;
+                    }
+
+
+                }
+                for (let index = 0; index < me.lstCashReceiptMain.length; index++) {
+                    const element = me.lstCashReceiptMain[index];
+                    if (element) {
+                        me.TotalAnother = me.lstCashReceiptMain.map(element => element.TotalMoneyCashReceipt ?? 0).reduce((acc, val) => acc + val, 0);;
+                    }
+                }
+                me.TotalProceeds = me.TotalSell + me.TotalAnother;
+
+
+            } catch (error) {
+                Log.ErrorLog(error as Error);
+            }
+        },
         async showPopUpPrice() {
             const component = (await import(`./popup-detail/PopupDetail.vue`)).default;
 

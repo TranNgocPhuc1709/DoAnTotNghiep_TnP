@@ -43,12 +43,14 @@ export default {
   // },
   data() {
     const TotalNumber: Ref<number> = ref(0);
+    const TotalBill: Ref<number> = ref(0);
     const lstBill: Ref<Array<Bill>> = ref(new Array<Bill>());
     const itemBill: Ref<Bill> = ref(new Bill());
     return {
       lstBill,
       itemBill,
-      TotalNumber
+      TotalNumber,
+      TotalBill
     }
   },
   setup() {
@@ -209,14 +211,24 @@ export default {
       try {
         const me = this;
         me.lstBill = LocalStorageLibrary.getByKey<Array<Bill>>("itemBill") ?? new Array<Bill>();
-
+        me.TotalBill = me.lstBill.length;
         for (let index = 0; index < me.lstBill.length; index++) {
           const element = me.lstBill[index];
           if (element) {
             me.TotalNumber = me.lstBill.map(element => element.collectedMoney ?? 0).reduce((acc, val) => acc + val, 0);;
+
           }
 
         }
+        // for (let index = 0; index < me.lstBill.length; index++) {
+        //   const element = me.lstBill[index];
+        //   if (element && element.collectedMoney) {
+        //     me.TotalNumber += element.collectedMoney;
+
+        //   }
+        //   break;
+
+        // }
 
       } catch (error) {
         Log.ErrorLog(error as Error);

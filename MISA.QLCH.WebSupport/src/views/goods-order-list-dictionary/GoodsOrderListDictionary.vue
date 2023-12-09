@@ -27,6 +27,12 @@ export default {
     EDate,
     EButton
   },
+  data() {
+    return {
+      gridMasterColumns: [] as Column[],
+      fullMoneyOrders: [] as number[], // Array to store FullMoneyOrder values
+    };
+  },
   setup() {
     const thisData: Ref<GoodsOrderListDictionary> = ref(new GoodsOrderListDictionary());
     const cbbGoodsOrder: Ref<Combobox> = ref(new Combobox({
@@ -79,14 +85,24 @@ export default {
     try {
       const me = this;
       me.cbbGoodsOrder.value = 1;
-
-
+      me.gridMasterColumns = me.buildGridMasterColumn();
+      me.gridMasterColumns.forEach(column => {
+        if (column.dataIndex === 'FullMoneyOrder') {
+          // Gán giá trị tiền tệ
+        }
+      });
     } catch (error) {
       Log.ErrorLog(error as Error);
     }
   },
   methods: {
-
+    formatCurrency(amount: number) {
+      // Format the amount as currency (example: 100,000)
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD', // Adjust the currency code as needed
+      }).format(amount);
+    },
     /**
      * Tạo dòng mặc định
      */
@@ -137,7 +153,9 @@ export default {
           dataIndex: "ExplainOrder",
           width: 160
         })
+
       )
+
     },
 
     /**

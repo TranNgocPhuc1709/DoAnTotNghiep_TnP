@@ -1,11 +1,12 @@
 <div class="body-revenue-bill width-fill">
     <div class="revenue-data">
         <div class="header-bill d-flex-vcenter">
-            <span>Hoạt động trong ngày {{timePresent}}
-            </span>
+            <span class="flex-1">Hoạt động trong ngày {{timePresent}}</span>
+            <span class="icon-refresh-chart" @click="GetData"></span>
+
             <!-- <span>{{timePresent}}</span> -->
-            <p class="header-branch d-flex-vcenter height-fill"> (Misa)</p>
         </div>
+
 
         <div class="container-revenue d-flex-space-around">
             <div class="revenue-day">
@@ -13,7 +14,7 @@
                     <div class=" d-flex-vcenter d-flex-sp-center height-fill">
                         <span>Tiền thu trong ngày</span>
                         <div class="value-revenue d-flex" @click="showPopUpPrice()">
-                            <span>650.000.00</span>
+                            <span>{{formatCurrency(TotalProceeds)}}</span>
                             <span class="icon-value-revenue"></span>
                         </div>
                     </div>
@@ -23,34 +24,16 @@
                     <div class=" d-flex-vcenter d-flex-sp-center height-fill">
                         <span>Bán Hàng</span>
                         <div class="value-revenue d-flex" @click="showPopUpValueRevenue()">
-                            <span>550.000.00</span>
+                            <span>{{formatCurrency(TotalSell)}}</span>
                             <span class="icon-value-revenue"></span>
                         </div>
                     </div>
                 </div>
-                <!-- <div class="item-revenue">
-                    <div class=" d-flex-vcenter d-flex-sp-center height-fill">
-                        <span>Thu Nợ/Thu COD</span>
-                        <div class="value-revenue d-flex" @click="showPopUpCOD()">
-                            <span>0.00</span>
-                            <span class="icon-value-revenue"></span>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- <div class="item-revenue">
-                    <div class=" d-flex-vcenter d-flex-sp-center height-fill">
-                        <span>Khách đặt cọc</span>
-                        <div class="value-revenue d-flex" @click="showPopUpDeposit()">
-                            <span>0.00</span>
-                            <span class="icon-value-revenue"></span>
-                        </div>
-                    </div>
-                </div> -->
                 <div class="item-revenue">
                     <div class=" d-flex-vcenter d-flex-sp-center  height-fill">
                         <span>Thu khác</span>
                         <div class="value-revenue d-flex" @click="showPopUpOther()">
-                            <span>100.000.00</span>
+                            <span>{{formatCurrency(TotalAnother)}}</span>
                             <span class="icon-value-revenue"></span>
                         </div>
                     </div>
@@ -62,7 +45,7 @@
                     <div class=" d-flex-vcenter d-flex-sp-center height-fill">
                         <span>Doanh thu ước tính</span>
                         <div class="value-revenue d-flex">
-                            <span>850.000.00</span>
+                            <span>{{formatCurrency(TotalRevenue)}}</span>
 
                         </div>
                     </div>
@@ -71,14 +54,14 @@
                 <div class="item-revenue">
                     <div class=" d-flex-vcenter d-flex-sp-center height-fill">
                         <span style="min-width: 135px;">Hóa đơn hoàn thành</span>
-                        <div class="value-bills d-flex-center">3</div>
+                        <div class="value-bills d-flex-center">{{NumberInvoiceCompleted}}</div>
                         <div class="value-revenue d-flex" @click="showPopUpValueBills()">
-                            <span>550.000.00</span>
+                            <span>{{formatCurrency(TotalInvoiceCompleted)}}</span>
                             <span class="icon-value-revenue"></span>
                         </div>
                     </div>
                 </div>
-                <div class="item-revenue">
+                <!-- <div class="item-revenue">
                     <div class=" d-flex-vcenter d-flex-sp-center height-fill">
                         <span style="min-width: 135px;">Hóa đơn đang xử lý</span>
                         <div class="value-bills d-flex-center">5</div>
@@ -87,7 +70,7 @@
                             <span class="icon-value-revenue"></span>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
             </div>
 
@@ -96,7 +79,7 @@
                     <div class=" d-flex-vcenter d-flex-sp-center height-fill">
                         <span>Hóa Đơn</span>
                         <div class="value-revenue d-flex">
-                            <span>550.000.00</span>
+                            <span>{{formatCurrency(TotalInvoiceStore)}}</span>
 
                         </div>
                     </div>
@@ -104,9 +87,9 @@
                 <div class="item-revenue">
                     <div class=" d-flex-vcenter d-flex-sp-center height-fill">
                         <span style="width: 120px;">Tại của hàng</span>
-                        <div class="value-bills d-flex-center">3</div>
+                        <div class="value-bills d-flex-center">{{NumberInvoiceStore}}</div>
                         <div class="value-revenue d-flex" @click="showPopUpStore()">
-                            <span>550.000.00</span>
+                            <span>{{formatCurrency(TotalNumberInvoiceStore)}}</span>
                             <span class="icon-value-revenue"></span>
                         </div>
                     </div>
@@ -141,6 +124,7 @@
                     <div class="d-flex">
                         <span class="icon-setting-chart"></span>
                         <span class="icon-refresh-chart"></span>
+
                     </div>
                 </div>
 
