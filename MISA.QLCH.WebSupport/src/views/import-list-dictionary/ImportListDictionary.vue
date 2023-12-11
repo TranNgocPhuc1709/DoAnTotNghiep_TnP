@@ -16,6 +16,9 @@ import Button from '@library-src/models/qlch_control/qlch_button/Button';
 import EButton from "qlch_control/EButton";
 import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
 import Import from '@store-src/models/import/Import';
+import PopupLibrary from '@library-src/utilities/commons/PopupLibrary';
+import NotificationPopupViewModel from '@library-src/models/qlch_notification/NotificationPopupViewModel';
+import ToolBarItemsView from '@library-src/models/qlch_base/tool_bar_items_view/ToolBarItemsView';
 
 export default {
 
@@ -163,6 +166,38 @@ export default {
       return "ImportId";
     },
 
+    async showInformationPending() {
+      const infoNotification = new NotificationPopupViewModel({
+        icon: "info",
+        message: "Yêu cầu đang phát triển. Vui lòng thử lại sau!",
+        toolBarItems: Array(
+          new ToolBarItemsView({
+            name: "btnOK",
+            control: new Button({
+              fieldText: "Đồng ý"
+            })
+          })
+        )
+      })
+
+      const component = (await import(`qlch_control/ENotification`)).default;
+      if (component && component.methods) {
+        component.methods["onSelectAction"] = (item: ToolBarItemsView) => {
+          Log.InfoLog(JSON.stringify(item));
+        };
+      };
+      if (component) {
+        PopupLibrary.createPopup(component, { "propView": infoNotification, "styleFrom": "min-width: 400px" });
+      };
+    },
+    onClickUpdate() {
+      try {
+        const me = this;
+        me.showInformationPending();
+      } catch (error) {
+        Log.ErrorLog(error as Error)
+      }
+    },
     /**
      * Khai báo import component detail
      * Override lại function after close form

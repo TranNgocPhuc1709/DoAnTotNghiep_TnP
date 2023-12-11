@@ -49,7 +49,7 @@ export default {
         }),
         new Column({
           fieldText: "Đối tượng vận chuyển",
-          dataIndex: "ObjectNameTransferStock",
+          dataIndex: "NameObjectTransfer",
           width: 260
         }),
         new Column({

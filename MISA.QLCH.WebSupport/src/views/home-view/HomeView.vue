@@ -5,7 +5,7 @@ import ECombobox from "qlch_control/ECombobox";
 import Combobox from '@library-src/models/qlch_control/qlch_combobox/Combobox';
 import { Ref, ref } from 'vue';
 import Log from "@library-src/utilities/Log";
-import PopupLibrary from "@library-src/utilities/commons/PopupLibrary";
+// import PopupLibrary from "@library-src/utilities/commons/PopupLibrary";
 import LocalStorageLibrary from "@library-src/utilities/window/local-storage/LocalStorageLibrary";
 import CashReceiptDetail from "@store-src/models/cash-receipt/CashReceiptDetail";
 import Bill from "@store-src/models/bill-main/Bill";
@@ -25,9 +25,6 @@ export default {
         const TotalInvoiceStore: Ref<number> = ref(0);
         const NumberInvoiceStore: Ref<number> = ref(0);
         const TotalNumberInvoiceStore: Ref<number> = ref(0);
-
-
-
 
 
         const lstBill: Ref<Array<Bill>> = ref(new Array<Bill>());
@@ -477,62 +474,62 @@ export default {
                 Log.ErrorLog(error as Error);
             }
         },
-        async showPopUpPrice() {
-            const component = (await import(`./popup-detail/PopupDetail.vue`)).default;
+        // async showPopUpPrice() {
+        //     const component = (await import(`./popup-detail/PopupDetail.vue`)).default;
 
-            if (component) {
-                PopupLibrary.createPopup(component, {});
-            };
-        },
-        async showPopUpValueRevenue() {
-            const component = (await import(`./popup-show-revenue-value/PopupShowPopUpValueRevenue.vue`)).default;
+        //     if (component) {
+        //         PopupLibrary.createPopup(component, {});
+        //     };
+        // },
+        // async showPopUpValueRevenue() {
+        //     const component = (await import(`./popup-show-revenue-value/PopupShowPopUpValueRevenue.vue`)).default;
 
-            if (component) {
-                PopupLibrary.createPopup(component, {});
-            };
-        },
-        async showPopUpCOD() {
-            const component = (await import(`./popup-COD/PopupCod.vue`)).default;
-            if (component) {
-                PopupLibrary.createPopup(component, {});
-            };
-        },
-        async showPopUpDeposit() {
-            const component = (await import(`./popup-deposit/Popup-Deposit.vue`)).default;
-            if (component) {
-                PopupLibrary.createPopup(component, {});
-            };
-        },
-        async showPopUpOther() {
-            const component = (await import(`./show-popup-other/ShowPopUpOther.vue`)).default;
-            if (component) {
-                PopupLibrary.createPopup(component, {});
-            };
-        },
-        async showPopUpValueBills() {
-            const component = (await import(`./show-popup-value-bills/PopUpValueBills.vue`)).default;
-            if (component) {
-                PopupLibrary.createPopup(component, {});
-            };
-        },
-        async showPopUpUpdate() {
-            const component = (await import(`./show-popup-update/PopUpUpdate.vue`)).default;
-            if (component) {
-                PopupLibrary.createPopup(component, {});
-            };
-        },
-        async showPopUpStore() {
-            const component = (await import(`./show-popup-store/PopUpStore.vue`)).default;
-            if (component) {
-                PopupLibrary.createPopup(component, {});
-            };
-        },
-        async showPopUpDeliver() {
-            const component = (await import(`./show-popup-deliver/PopUpDeliver.vue`)).default;
-            if (component) {
-                PopupLibrary.createPopup(component, {});
-            };
-        },
+        //     if (component) {
+        //         PopupLibrary.createPopup(component, {});
+        //     };
+        // },
+        // async showPopUpCOD() {
+        //     const component = (await import(`./popup-COD/PopupCod.vue`)).default;
+        //     if (component) {
+        //         PopupLibrary.createPopup(component, {});
+        //     };
+        // },
+        // async showPopUpDeposit() {
+        //     const component = (await import(`./popup-deposit/Popup-Deposit.vue`)).default;
+        //     if (component) {
+        //         PopupLibrary.createPopup(component, {});
+        //     };
+        // },
+        // async showPopUpOther() {
+        //     const component = (await import(`./show-popup-other/ShowPopUpOther.vue`)).default;
+        //     if (component) {
+        //         PopupLibrary.createPopup(component, {});
+        //     };
+        // },
+        // async showPopUpValueBills() {
+        //     const component = (await import(`./show-popup-value-bills/PopUpValueBills.vue`)).default;
+        //     if (component) {
+        //         PopupLibrary.createPopup(component, {});
+        //     };
+        // },
+        // async showPopUpUpdate() {
+        //     const component = (await import(`./show-popup-update/PopUpUpdate.vue`)).default;
+        //     if (component) {
+        //         PopupLibrary.createPopup(component, {});
+        //     };
+        // },
+        // async showPopUpStore() {
+        //     const component = (await import(`./show-popup-store/PopUpStore.vue`)).default;
+        //     if (component) {
+        //         PopupLibrary.createPopup(component, {});
+        //     };
+        // },
+        // async showPopUpDeliver() {
+        //     const component = (await import(`./show-popup-deliver/PopUpDeliver.vue`)).default;
+        //     if (component) {
+        //         PopupLibrary.createPopup(component, {});
+        //     };
+        // },
     }
 
 }

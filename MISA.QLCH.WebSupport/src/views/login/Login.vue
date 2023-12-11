@@ -21,6 +21,7 @@ import ContextModel from '@store-src/models/context/ContextModel';
 import Guid from '@library-src/utilities/types/Guid';
 import Constant from '@library-src/utilities/constants/Constant';
 import Function from '@library-src/utilities/commons/Function';
+import Employee from '@store-src/models/employee/Employee';
 
 // import { useStore } from 'vuex';
 export default {
@@ -147,23 +148,36 @@ export default {
      */
     validateLogin() {
       const me = this;
-      const userName = (me.bindingControl['txtUserName'] as TextBox).value;
-      const password = (me.bindingControl['txtPassword'] as TextBox).value;
+      let userName = (me.bindingControl['txtUserName'] as TextBox).value;
+      let password = (me.bindingControl['txtPassword'] as TextBox).value;
 
-      if (userName && password) {
+      const lstAccount = LocalStorageLibrary.getByKey<Array<Employee>>("employee") ?? new Array<Employee>();
+      for (let index = 0; index < lstAccount.length; index++) {
+        const element = lstAccount[index];
+        if (element) {
+          if (userName !== element.CodeEmployee) {
+            me.showErrorLoginFail('txtUserName');
+            return false;
+          }
+          if (password !== element.PasswordEmployee) {
+            me.showErrorLoginFail('txtPassword');
+            return false;
+          }
+          return true;
+        }
 
       }
-      if (userName !== "admin") {
-        me.showErrorLoginFail('txtUserName');
-        return false;
-      }
+      // if (userName && password) {
 
-      if (password !== "12345678a") {
-        me.showErrorLoginFail('txtPassword');
-        return false;
-      }
+      // }
 
-      return true;
+
+      // if (password !== "12345678a") {
+      //   me.showErrorLoginFail('txtPassword');
+      //   return false;
+      // }
+
+
     },
 
     /**

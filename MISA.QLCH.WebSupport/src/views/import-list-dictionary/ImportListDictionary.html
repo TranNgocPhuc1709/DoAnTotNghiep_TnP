@@ -10,11 +10,11 @@
       <e-date :control="dtEndRequire" v-model="dtEndRequire.value" />
     </div>
     <div class="btn-item-data-import">
-      <e-button :control="btnGetData" />
+      <e-button :control="btnGetData" @click="onClickUpdate" />
     </div>
   </div>
   <div class="btn-item-data-import">
-    <e-button :control="btnPrintData" />
+    <e-button :control="btnPrintData" @click="onClickUpdate" />
   </div>
 
 </div>

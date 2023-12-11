@@ -16,4 +16,9 @@ export default class LocalStorageLibrary {
     public static setByKey(key: string, value: Record<string, any>) {
         localStorage.setItem(key, JSON.stringify(value));
     }
+
+    public static deleteByKey(key: string) {
+        localStorage.removeItem(key);
+    }
+
 }

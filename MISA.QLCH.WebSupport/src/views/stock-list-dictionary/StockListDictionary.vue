@@ -18,6 +18,8 @@ import ToolBarItemsView from '@library-src/models/qlch_base/tool_bar_items_view/
 import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
 import Stock from '@store-src/models/stock/Stock';
 import Product from '@store-src/models/product/Product';
+import InwardDetail from '@store-src/models/inward/InwardDetail';
+import OutwardDetail from '@store-src/models/outward/OutwardDetail';
 export default {
 
   extends: BaseDictionaryListController,
@@ -94,6 +96,8 @@ export default {
       me.lstStock = [];
       let itemValue = new Stock();
       const listProduct = LocalStorageLibrary.getByKey<Array<Product>>("Product");
+      const listInward = LocalStorageLibrary.getByKey<Array<InwardDetail>>("inwardDetail");
+      const listOutward = LocalStorageLibrary.getByKey<Array<OutwardDetail>>("outwardDetail");
       if (listProduct && listProduct.length > 0) {
         listProduct.forEach(product => {
           itemValue = new Stock();
@@ -103,6 +107,32 @@ export default {
           itemValue.GroupProductStock = product.GroupProductList;
           itemValue.PriceProductStock = product.PriceProductList;
 
+
+          //Tính tổng nhập kho
+          itemValue.TotalInward = 0;
+          itemValue.TotalOutward = 0;
+          if (listInward && listInward.length > 0) {
+            for (let index = 0; index < listInward.length; index++) {
+              const element = listInward[index];
+              if (element && element.CodeProductInward == itemValue.CodeProductStock) {
+                itemValue.TotalInward += element.NumberProductInward ?? 0;
+              }
+            }
+
+          }
+          if (listOutward && listOutward.length > 0) {
+            for (let index = 0; index < listOutward.length; index++) {
+              const element = listOutward[index];
+              if (element && element.CodeProductOutWard == itemValue.CodeProductStock) {
+                itemValue.TotalOutward += element.NumberProductOutWard ?? 0;
+              }
+            }
+
+          }
+          itemValue.InventoryNumberStock = itemValue.TotalInward - itemValue.TotalOutward
+
+
+          //end TÍnh tổng nhập kho
           me.lstStock.push(itemValue);
 
         });
@@ -157,6 +187,8 @@ export default {
         const me = this;
         me.lstStock = [];
         let itemValue = new Stock();
+        const listInward = LocalStorageLibrary.getByKey<Array<InwardDetail>>("inwardDetail");
+        const listOutward = LocalStorageLibrary.getByKey<Array<OutwardDetail>>("outwardDetail");
         const listProduct = LocalStorageLibrary.getByKey<Array<Product>>("Product");
         if (listProduct && listProduct.length > 0) {
           listProduct.forEach(product => {
@@ -166,6 +198,28 @@ export default {
             itemValue.UnitProductStock = product.UnitProductList;
             itemValue.GroupProductStock = product.GroupProductList;
             itemValue.PriceProductStock = product.PriceProductList;
+
+            itemValue.TotalInward = 0;
+            itemValue.TotalOutward = 0;
+            if (listInward && listInward.length > 0) {
+              for (let index = 0; index < listInward.length; index++) {
+                const element = listInward[index];
+                if (element && element.CodeProductInward == itemValue.CodeProductStock) {
+                  itemValue.TotalInward += element.NumberProductInward ?? 0;
+                }
+              }
+
+            }
+            if (listOutward && listOutward.length > 0) {
+              for (let index = 0; index < listOutward.length; index++) {
+                const element = listOutward[index];
+                if (element && element.CodeProductOutWard == itemValue.CodeProductStock) {
+                  itemValue.TotalOutward += element.NumberProductOutWard ?? 0;
+                }
+              }
+
+            }
+            itemValue.InventoryNumberStock = itemValue.TotalInward - itemValue.TotalOutward
 
             me.lstStock.push(itemValue);
 

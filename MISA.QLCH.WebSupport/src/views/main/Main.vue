@@ -16,6 +16,7 @@ import NotificationPopupViewModel from '@library-src/models/qlch_notification/No
 import ToolBarItemsView from '@library-src/models/qlch_base/tool_bar_items_view/ToolBarItemsView';
 import Button from '@library-src/models/qlch_control/qlch_button/Button';
 import PopupLibrary from '@library-src/utilities/commons/PopupLibrary';
+import Constant from '@library-src/utilities/constants/Constant';
 export default {
     components: {
         LeftMenu, ECombobox,
@@ -314,7 +315,7 @@ export default {
             }
         },
         LogOut() {
-            localStorage.clear();
+            LocalStorageLibrary.deleteByKey(Constant.tokenContext)
             router.push({ path: '/login' })
 
         },

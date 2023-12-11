@@ -33,6 +33,8 @@ import BillDetail from '@store-src/models/bill-main/BillDetail';
 import Branch from '@store-src/models/branch/Branch';
 import Outward from '@store-src/models/outward/Outward';
 import OutwardDetail from '@store-src/models/outward/OutwardDetail';
+import DictionaryStock from '@store-src/models/dictionary-stock/DictionaryStock';
+import InventoryDetail from '@store-src/models/inventory/InventoryDetail';
 
 // import Outward from '@store-src/models/outward/Outward';
 
@@ -59,7 +61,9 @@ export default {
         const lstBank = LocalStorageLibrary.getByKey<Array<Bank>>("Bank");
         const lstBankAccount = LocalStorageLibrary.getByKey<Array<BankAccount>>("BankAccount");;
         const bill: Ref<Bill> = ref(new Bill());
+
         return {
+
             lstBillDetail,
             bill,
             lstVoucher,
@@ -70,7 +74,9 @@ export default {
             NameBranch,
             lstCustomer,
             lstBill,
-            bills: [{ number: 1 }]
+            bills: [{ number: 1 }],
+            selectedBillIndex: null,
+            userClicked: false,
 
         };
     },
@@ -88,6 +94,8 @@ export default {
         const lstCbbCheckPoint = LocalStorageLibrary.getByKey<Array<BankAccount>>("BankAccount") ?? new Array<BankAccount>();
         const lstCbbPayments = LocalStorageLibrary.getByKey<Array<Bank>>("Bank") ?? new Array<Bank>();
         const lstCbbVoucherItem = LocalStorageLibrary.getByKey<Array<Voucher>>("voucher") ?? new Array<Voucher>();
+        const lstDictionaryStock = LocalStorageLibrary.getByKey<Array<DictionaryStock>>("dictionaryStock") ?? new Array<DictionaryStock>();
+        const lstInventoryDetail = LocalStorageLibrary.getByKey<Array<InventoryDetail>>("inventoryDetail") ?? new Array<InventoryDetail>();
 
         const txtQuanTySearch: Ref<NumberModel> = ref(new NumberModel({
             classType: "thirty",
@@ -96,6 +104,7 @@ export default {
                 thousands: ",",
                 precision: 0
             }),
+            value: 1,
         }));
         const txtPurchased: Ref<NumberModel> = ref(new NumberModel({
             classType: "secondary",
@@ -168,6 +177,16 @@ export default {
             classType: "tertiary",
             labelWidth: 120,
 
+        }));
+
+        const txtQuantityBill: Ref<Combobox> = ref(new Combobox({
+            fieldText: "",
+            require: false,
+            data: lstDictionaryStock,
+            valueField: "NameStore",
+            displayField: "NameStore",
+            classType: "tertiary",
+            labelWidth: 120,
         }));
 
         const txtDeliveryService: Ref<Combobox> = ref(new Combobox({
@@ -425,7 +444,9 @@ export default {
             cbbPayments,
             txtAllPayments,
             txtPromotion,
-            DisableFormPayment
+            DisableFormPayment,
+            txtQuantityBill,
+            lstInventoryDetail
 
 
         }
@@ -446,6 +467,11 @@ export default {
     },
 
     methods: {
+        selectBill(index: any) {
+            const me = this;
+            // Đặt selectedBillIndex bằng index của bill được chọn
+            me.selectedBillIndex = index;
+        },
         addBill() {
             const me = this;
             const newBill = {
@@ -579,25 +605,6 @@ export default {
             if (index >= 0 && index < me.lstBillDetail.length) {
                 me.lstBillDetail.splice(index, 1);
             }
-
-            // if (me.bill.TotalMoneyBill) {
-            //     me.bill.TotalMoneyBill = 0;
-            //     me.bill.collectedMoney = 0;
-            //     me.bill.refundDetail = 0;
-            // }
-
-            // for (let index = 0; index < me.lstBillDetail.length; index++) {
-            //     const element = me.lstBillDetail[index];
-            //     if (!me.bill.TotalMoneyBill) {
-            //         me.bill.TotalMoneyBill = 0;
-            //     }
-
-            //     if (element && me.bill.numVoucherTotalPrice) {
-            //         me.bill.TotalMoneyBill += element.IntoMoneyBill ?? 0;
-            //         me.bill.collectedMoney = me.bill.TotalMoneyBill - me.bill.numVoucherTotalPrice;
-            //     }
-            // }
-
             //Tnp
             me.bill.TotalMoneyBill = 0;
             me.bill.collectedMoney = 0;
@@ -632,45 +639,72 @@ export default {
                         itemValue.UnitProductBill = listProductFilter[0].UnitProductList;
                         itemValue.UnitPriceBill = listProductFilter[0].PriceProductList;
                         itemValue.PurchaseBill = listProductFilter[0].PurchasePriceProductList;
+                        itemValue.InventoryBill = "Kho 01";
+                        itemValue.QuantityBill = me.txtQuanTySearch.value;
+                        if (itemValue.UnitPriceBill) {
+                            itemValue.IntoMoneyBill = itemValue.QuantityBill * itemValue.UnitPriceBill;
+                        }
+                        if (itemValue.PurchaseBill) {
+                            itemValue.IntoPurchaseMoneyBill = itemValue.QuantityBill * itemValue.PurchaseBill;
+                        }
+
                     }
                 }
+
                 if (me.lstBillDetail?.length > 0) {
-                    me.lstBillDetail.push(itemValue);
+                    let Exist = false;
+                    for (let index = 0; index < me.lstBillDetail.length; index++) {
+                        const element = me.lstBillDetail[index];
+                        if (!element.QuantityBill) {
+                            element.QuantityBill = 0;
+                        }
+                        if (!element.UnitPriceBill) {
+                            element.UnitPriceBill = 0;
+                        }
+                        if (!element.PurchaseBill) {
+                            element.PurchaseBill = 0;
+                        }
+                        if (element && element.NameProductBill == itemValue.NameProductBill) {
+                            Exist = true;
+                            if (me.txtQuanTySearch.value == 0) {
+                                element.QuantityBill++;
+                            }
+                            else {
+                                element.QuantityBill += me.txtQuanTySearch.value;
+                            }
+                            element.IntoMoneyBill = element.QuantityBill * element.UnitPriceBill;
+                            element.IntoPurchaseMoneyBill = element.QuantityBill * element.PurchaseBill;
+                        }
+                    }
+                    if (!Exist) {
+                        me.lstBillDetail.push(itemValue);
+                    }
+
                 } else {
                     me.lstBillDetail = new Array<ProductDetail>(itemValue);
+                }
+
+                me.bill.TotalMoneyBill = 0;
+                me.bill.collectedMoney = 0;
+                me.bill.TotalPurchaseBill = 0;
+
+                for (let index = 0; index < me.lstBillDetail.length; index++) {
+                    const element = me.lstBillDetail[index];
+                    if (element) {
+                        me.bill.TotalMoneyBill += element.IntoMoneyBill ?? 0;
+                        me.bill.TotalPurchaseBill += element.IntoPurchaseMoneyBill ?? 0;
+
+
+                    }
+                }
+                if (me.bill.numVoucherTotalPrice != null) {
+                    me.bill.collectedMoney = me.bill.TotalMoneyBill - me.bill.numVoucherTotalPrice;
                 }
             } catch (error) {
                 console.log(error);
             }
 
         },
-
-
-        // ShowTotalProduct(value: number, item: BillDetail) {
-        //     const me = this;
-        //     if (value == null) {
-        //         value = 0;
-        //     }
-        //     if (item.UnitPriceBill) {
-        //         item.IntoMoneyBill = item.UnitPriceBill * value;
-        //     }
-        //     // /tinh lai tong tien
-        //     if (me.bill.TotalMoneyBill) {
-        //         me.bill.TotalMoneyBill = 0;
-        //         // me.bill.numVoucherTotalPrice = 0;
-        //     }
-        //     for (let index = 0; index < me.lstBillDetail.length; index++) {
-        //         const element = me.lstBillDetail[index];
-        //         if (!me.bill.TotalMoneyBill) {
-        //             me.bill.TotalMoneyBill = 0;
-        //         }
-        //         if (element && me.bill.numVoucherTotalPrice) {
-        //             me.bill.TotalMoneyBill += element.IntoMoneyBill ?? 0;
-        //             me.bill.collectedMoney = me.bill.TotalMoneyBill - me.bill.numVoucherTotalPrice;
-
-        //         }
-        //     }
-        // },
         ShowTotalProduct(value: number, item: BillDetail) {
             const me = this;
 
@@ -706,6 +740,7 @@ export default {
             if (me.bill.numVoucherTotalPrice != null) {
                 me.bill.collectedMoney = me.bill.TotalMoneyBill - me.bill.numVoucherTotalPrice;
             }
+
         },
 
         ShowInfoCustomer(item: string) {
@@ -899,12 +934,13 @@ export default {
             for (let index = 0; index < me.lstBillDetail.length; index++) {
                 const element = me.lstBillDetail[index];
                 const OurWardDetail: OutwardDetail = new OutwardDetail({
-                    CodeProductOutWard: element.CodeProductBill,
-                    NameProductOutWard: element.NameProductBill,
-                    UnitProductOutWard: element.UnitProductBill,
-                    NumberProductOutWard: element.QuantityBill,
-                    UnitPriceOutWard: element.PurchaseBill,
-                    PaymentOutWard: element.IntoPurchaseMoneyBill,
+                    CodeProductOutWard: element.CodeProductBill, //MÃ
+                    NameProductOutWard: element.NameProductBill, //Tên
+                    UnitProductOutWard: element.UnitProductBill, //Đơn vị tính
+                    NumberProductOutWard: element.QuantityBill, //Số lượng
+                    WarehouseProductOutWard: element.InventoryBill, // Kho sử dụng
+                    UnitPriceOutWard: element.PurchaseBill, //Đơn giá
+                    PaymentOutWard: element.IntoPurchaseMoneyBill, //Thành tiền
                     OutwardId: OutwardMain.OutwardId,
                 })
                 lstOutWardDetail.push(OurWardDetail)
@@ -919,18 +955,6 @@ export default {
                 listOutwardDetail = new Array<OutwardDetail>(...lstOutWardDetail);
                 LocalStorageLibrary.setByKey("outwardDetail", listOutwardDetail);
             }
-
-
-            // if (me.bill) {
-            //     me.bill.TotalSalesBill = 0;
-            // }
-
-            // for (let index = 0; index < me.lstBill.length; index++) {
-            //     const element = me.lstBill[index];
-            //     if (me.bill && element && me.bill.TotalSalesBill) {
-            //         me.bill.TotalSalesBill += element.TotalMoneyBill ?? 0;
-            //     }
-            // }
 
 
             const component = (await import(`./popup-COD/PopupCod.vue`)).default;

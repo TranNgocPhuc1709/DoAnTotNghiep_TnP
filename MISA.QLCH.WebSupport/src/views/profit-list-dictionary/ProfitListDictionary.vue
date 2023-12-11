@@ -33,9 +33,9 @@ export default {
     BaseDictionaryListView,
     ECombobox,
     EDate,
-    EButton,
     ETextBox,
-    ENumber
+    ENumber,
+    EButton
   },
 
   data() {
@@ -48,7 +48,7 @@ export default {
     const TotalCostPrice: Ref<number> = ref(0);
     const lstBill: Ref<Array<Bill>> = ref(new Array<Bill>());
     const itemBill: Ref<Bill> = ref(new Bill());
-    const lstCashReceipt: Ref<Array<CashReceipt>> = ref(new Array<CashReceipt>());
+    // const lstCashReceipt: Ref<Array<CashReceipt>> = ref(new Array<CashReceipt>()); // Thu tiền
     const lstOutward: Ref<Array<Outward>> = ref(new Array<Outward>());
     const lstCashPayment: Ref<Array<CashPayment>> = ref(new Array<CashPayment>());
 
@@ -56,7 +56,7 @@ export default {
       TotalSales,
       lstBill,
       itemBill,
-      lstCashReceipt,
+      // lstCashReceipt,
       TotalOtherRevenue,
       TotalRevenue,
       lstOutward,
@@ -205,15 +205,15 @@ export default {
       me.lstBill = LocalStorageLibrary.getByKey<Array<Bill>>("itemBill") ?? new Array<Bill>();
       me.lstOutward = LocalStorageLibrary.getByKey<Array<Outward>>("outwardItem") ?? new Array<Outward>();
       me.lstCashPayment = LocalStorageLibrary.getByKey<Array<CashPayment>>("cashPayment") ?? new Array<CashPayment>();
-      me.lstCashReceipt = LocalStorageLibrary.getByKey<Array<CashReceipt>>("cashReceipt") ?? new Array<CashReceipt>();
+      const lstCashReceipt = LocalStorageLibrary.getByKey<Array<CashReceipt>>("cashReceipt") ?? new Array<CashReceipt>();
       for (let index = 0; index < me.lstBill.length; index++) {
         const element = me.lstBill[index];
         if (element) {
           me.TotalSales = me.lstBill.map(element => element.collectedMoney ?? 0).reduce((acc, val) => acc + val, 0);;
         }
       }
-      for (let index = 0; index < me.lstCashReceipt.length; index++) {
-        const element = me.lstCashReceipt[index];
+      for (let index = 0; index < lstCashReceipt.length; index++) {
+        const element = lstCashReceipt[index];
         if (element) {
           me.TotalOtherRevenue += element.TotalMoneyCashReceipt || 0;
         }
@@ -323,17 +323,17 @@ export default {
         me.lstBill = LocalStorageLibrary.getByKey<Array<Bill>>("itemBill") ?? new Array<Bill>();
         me.lstOutward = LocalStorageLibrary.getByKey<Array<Outward>>("outwardItem") ?? new Array<Outward>();
         me.lstCashPayment = LocalStorageLibrary.getByKey<Array<CashPayment>>("cashPayment") ?? new Array<CashPayment>();
-        me.lstCashReceipt = LocalStorageLibrary.getByKey<Array<CashReceipt>>("cashReceipt") ?? new Array<CashReceipt>();
+        const lstCashReceipt = LocalStorageLibrary.getByKey<Array<CashReceipt>>("cashReceipt") ?? new Array<CashReceipt>();
         for (let index = 0; index < me.lstBill.length; index++) {
           const element = me.lstBill[index];
           if (element) {
             me.TotalSales = me.lstBill.map(element => element.collectedMoney ?? 0).reduce((acc, val) => acc + val, 0);;
           }
         }
-        for (let index = 0; index < me.lstCashReceipt.length; index++) {
-          const element = me.lstCashReceipt[index];
+        for (let index = 0; index < lstCashReceipt.length; index++) {
+          const element = lstCashReceipt[index];
           if (element) {
-            me.TotalOtherRevenue = me.lstCashReceipt.map(element => element.TotalMoneyCashReceipt ?? 0).reduce((acc, val) => acc + val, 0);;
+            me.TotalOtherRevenue = lstCashReceipt.map(element => element.TotalMoneyCashReceipt ?? 0).reduce((acc, val) => acc + val, 0);;
           }
         }
         for (let index = 0; index < me.lstOutward.length; index++) {

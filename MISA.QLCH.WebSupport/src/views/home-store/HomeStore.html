@@ -4,7 +4,8 @@
             <span class="logo-icon-home-store"></span>
             <div class="d-flex-vcenter height-fill">
                 <div class="form-bill d-flex-vcenter height-fill">
-                    <div class="bill-item d-flex-vcenter height-fill" v-for="(bill, index) in bills" :key="index">
+                    <div class="bill-item d-flex-vcenter height-fill" v-for="(bill, index) in bills" :key="index"
+                        :class="{ 'selected': selectedBillIndex === index }" @click="selectBill(index)">
                         <div class="label-bill-item">
                             <span>Hóa đơn</span>
                             <span class="number-bills">{{bill.number}}</span>
@@ -180,7 +181,6 @@
                 <!--Sản Phẩm -->
 
 
-
                 <div class="body-content-store">
                     <div class="d-flex-column" v-if="lstBillDetail?.length > 0" v-for="(item,index) in lstBillDetail"
                         :key="item.BillDetailId">
@@ -193,19 +193,11 @@
                                     v-model="item.QuantityBill" />
                             </span>
                             <span class="flex-1 child-item">
-                                <e-text-box :control="txtUnit" v-model="item.UnitProductBill" />
+                                {{item.UnitProductBill}}
                             </span>
                             <span class="flex-1 child-item">
                                 <e-number :control="txtPrice" v-model="item.UnitPriceBill" />
                             </span>
-
-                            <!--Thông tin kho hàng  -->
-                            <!-- <span class="flex-1 child-item">
-                                <e-number :control="txtPrice" v-model="item.UnitPriceBill" />
-                            </span> -->
-
-
-
                             <!--Giá mua-->
 
                             <!-- <span class="flex-1 child-item">
@@ -220,7 +212,15 @@
                             <span class="flex-1">
                                 <e-number :control="txtPriceLast" v-model="item.IntoMoneyBill" />
                             </span>
+                            <!--Thông tin số lượng hàng trong kho hàng  -->
+                            <!-- <span class="flex-1 child-item">
+                                {{item.InventoryNumber}}
+                            </span> -->
 
+                            <!--Thông tin kho hàng lưu trữ-->
+                            <!-- <span class="flex-1 child-item">
+                                <e-combobox :control="txtQuantityBill" v-model="item.InventoryBill"></e-combobox>
+                            </span> -->
                             <span class="icon-child-product" @click="DelListTable(index)"></span>
                         </div>
                     </div>
@@ -367,6 +367,7 @@
                                     <!-- <e-number :control="txtAllPayments" v-model="bill.TotalMoneyBill"></e-number> -->
                                     {{ formatCurrency(bill.TotalMoneyBill) }}
                                 </span>
+                                <!--Tổng tiền mua hàng-->
                                 <!-- <span>{{bill.TotalPurchaseBill}}</span> -->
                             </span>
                         </div>

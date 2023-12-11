@@ -190,7 +190,7 @@ export default {
           valueField: "CodeEmployee",
           displayField: "CodeEmployee",
           labelWidth: labelWidth,
-          bindingIndex: "ObjectTransferStock"
+          bindingIndex: "ObjectTransfer"
         }),
         "txtObjectNameTransferStock": new TextBox({
           fieldText: "Tên",
@@ -198,7 +198,7 @@ export default {
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,
-          bindingIndex: "ObjectNameTransferStock"
+          bindingIndex: "NameObjectTransfer"
         }),
         "txtNoteTransferStock": new TextBox({
           fieldText: "Diễn giải",
@@ -299,7 +299,7 @@ export default {
             }
           }
           if (rowVendorByEmployeeCode) {
-            me.masterData['ObjectNameTransferStock'] = rowVendorByEmployeeCode.NameEmployee;
+            me.masterData['NameObjectTransfer'] = rowVendorByEmployeeCode.NameEmployee;
           }
         }
       }
@@ -353,6 +353,7 @@ export default {
       const me = this;
       let listTransferStock: Array<TransferStock> | null = new Array<TransferStock>;
       if (me.masterData) {
+        debugger
         if (me.masterData.editMode == 1 || me.masterData.editMode == 4) {
           me.masterData['TransferStockId'] = Guid.NewGuid();
           listTransferStock = LocalStorageLibrary.getByKey<Array<TransferStock>>("transferStock");

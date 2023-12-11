@@ -244,7 +244,7 @@ export default {
         //txt7
         "txtSupplierNameImport": new TextBox({
           fieldText: "Tên NCC",
-          readOnly: false,
+          readOnly: true,
           require: false,
           maxLength: 255,
           labelWidth: labelWidth,

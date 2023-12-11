@@ -100,6 +100,7 @@ export default {
       classType: "secondary"
     });
 
+
     return {
       thisData,
       btnAddListTable,
@@ -123,6 +124,7 @@ export default {
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
       const lstRevenueOfficerCashReceipt = LocalStorageLibrary.getByKey<Array<Employee>>("employee") ?? new Array<Employee>();
       const labelWidth = 115;
+
       return {
         "txtDateCashReceipt": new DateModel({
           fieldText: "Ngày thu",
@@ -176,7 +178,7 @@ export default {
           maxLength: 255,
           data: [
             {
-              value: "Nhà cung cấp",
+              value: 1,
               display: "Nhà cung cấp"
             },
             {
@@ -190,7 +192,9 @@ export default {
           ],
           labelWidth: labelWidth,
           bindingIndex: "ObjectCashReceipt"
+
         }),
+
         "txtPayerCashReceipt": new TextBox({
           fieldText: "Người nộp",
           require: false,
@@ -228,7 +232,8 @@ export default {
           bindingIndex: "IncludedCashReceipt",
         }),
 
-      }
+      };
+
     },
     ShowPaymentCashReceipt() {
       const me = this;

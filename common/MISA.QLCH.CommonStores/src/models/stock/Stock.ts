@@ -10,6 +10,8 @@ export default class Stock {
             me.GroupProductStock = stock.GroupProductStock;
             me.PriceProductStock = stock.PriceProductStock;
             me.InventoryNumberStock = stock.InventoryNumberStock;
+            me.TotalInward = stock.TotalInward;
+            me.TotalOutward = stock.TotalOutward;
         }
         me.StockId = Guid.NewGuid();
     }
@@ -19,5 +21,7 @@ export default class Stock {
     GroupProductStock?: string;
     PriceProductStock?: number;
     InventoryNumberStock?: number;
+    TotalInward?: number; //Tổng nhập kho
+    TotalOutward?: number; // Tổng xuất kho
     StockId?: string;
 }

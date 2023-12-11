@@ -5,4 +5,7 @@ export default interface IStock {
     GroupProductStock?: string;
     PriceProductStock?: number;
     InventoryNumberStock?: number;
+
+    TotalInward?: number; //Tổng nhập kho
+    TotalOutward?: number; // Tổng xuất kho
 }
