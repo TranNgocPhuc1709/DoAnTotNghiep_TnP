@@ -5,7 +5,7 @@
       <div class="form-cashReceipt-detail-left">
         <span class="heading-cashReceipt-info">THÔNG TIN CHUNG</span>
         <div class="qlch-input-default item-detail">
-          <e-combobox :control="bindingControl[`txtObjectCashReceipt`]"
+          <e-combobox @dataChange="ShowValueObject" :control="bindingControl[`txtObjectCashReceipt`]"
             v-model="masterData[bindingControl[`txtObjectCashReceipt`].bindingIndex]"></e-combobox>
         </div>
         <div class="qlch-input-default item-detail">

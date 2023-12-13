@@ -18,7 +18,7 @@
     <template v-slot:form-button>
         <div class="height-fill width-fill no-pad-mar d-flex" v-if="propView">
             <div class="text-header height-fill d-flex-vcenter">
-                <e-button class="btn-help" :control="btnHelp"></e-button>
+                <e-button class="btn-help" :control="btnHelp" @click="onClickUpdate"></e-button>
             </div>
             <div v-if="propView && propView.toolBarItems && propView.toolBarItems.length > 0"
                 class="icon-right flex-1 height-fill flex-h-end">

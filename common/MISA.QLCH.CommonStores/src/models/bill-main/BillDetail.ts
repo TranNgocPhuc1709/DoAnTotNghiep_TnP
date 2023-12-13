@@ -24,7 +24,7 @@ export default class BillDetail {
     NameProductBill?: string;
     UnitProductBill?: string;
     QuantityBill?: number;
-    UnitPriceBill?: number;
+    UnitPriceBill?: number; // Giá bán
     IntoMoneyBill?: number;
     PurchaseBill?: number; // Giá mua
     IntoPurchaseMoneyBill?: number; //Tổng tiền giá mua

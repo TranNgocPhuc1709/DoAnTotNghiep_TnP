@@ -243,15 +243,8 @@ export default {
         //   bindingIndex: "Column12",
         // }),
 
-
-
-
-
-
       }
     },
-
-
 
     ShowPaymentCashPayment() {
       const me = this;

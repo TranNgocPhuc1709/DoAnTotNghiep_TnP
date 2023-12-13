@@ -25,6 +25,8 @@ import CashReceipt from '@store-src/models/cash-receipt/CashReceipt';
 import LocalStorageLibrary from '@library-src/utilities/window/local-storage/LocalStorageLibrary';
 import Outward from '@store-src/models/outward/Outward';
 import CashPayment from '@store-src/models/cash-payment/CashPayment';
+import PopupLibrary from '@library-src/utilities/commons/PopupLibrary';
+import NotificationPopupViewModel from '@library-src/models/qlch_notification/NotificationPopupViewModel';
 export default {
 
   extends: BaseDictionaryListController,
@@ -252,60 +254,7 @@ export default {
      */
     buildGridMasterColumn(): Array<Column> {
       console.log("DEV: Override Function buildGridMasterColumn return list Column in Grid");
-      return Array(
-        new Column({
-          fieldText: "Tháng",
-          dataIndex: "MonthProfit",
-          width: 200,
-        }),
-        new Column({
-          fieldText: "Lợi nhuận (9) = (5) - (8)",
-          dataIndex: "TotalProfit",
-          width: 260,
-          flex: 1
-        }),
-        new Column({
-          fieldText: "Tổng doanh thu (5) = (3) + (4)",
-          dataIndex: "TotalRevenue",
-          width: 300
-        }),
-        new Column({
-          fieldText: " Tổng doanh thu bán hàng (3) = (1) - (2)",
-          dataIndex: "TotalRevenueProfit",
-          width: 300
-        }),
-        new Column({
-          fieldText: "Tiền Hàng(1)",
-          dataIndex: "SalesProceedsProfit",
-          width: 200,
-        }),
-        new Column({
-          fieldText: "Khuyến mại(2)",
-          dataIndex: "PromotionProfit",
-          width: 260
-        }),
-        new Column({
-          fieldText: " Thu khác (4)",
-          dataIndex: "CollectOtherMoney",
-          width: 300
-        }),
-        new Column({
-          fieldText: "Tổng chi phí (8) = (6) + (7)",
-          dataIndex: "TotalExportProfit",
-          width: 200
-        }),
-        new Column({
-          fieldText: "Chi phí xuất kho bán hàng (6)",
-          dataIndex: "ExportProductProfit",
-          width: 260
-        }),
-        new Column({
-          fieldText: "Chi phí khác (7)",
-          dataIndex: "ExportOtherProfit",
-          minWidth: 200,
-
-        }),
-      )
+      return Array()
     },
 
     /**
@@ -354,6 +303,39 @@ export default {
 
       } catch (error) {
         Log.ErrorLog(error as Error);
+      }
+    },
+
+    async showInformationPending() {
+      const infoNotification = new NotificationPopupViewModel({
+        icon: "info",
+        message: "Yêu cầu đang phát triển. Vui lòng thử lại sau!",
+        toolBarItems: Array(
+          new ToolBarItemsView({
+            name: "btnOK",
+            control: new Button({
+              fieldText: "Đồng ý"
+            })
+          })
+        )
+      })
+
+      const component = (await import(`qlch_control/ENotification`)).default;
+      if (component && component.methods) {
+        component.methods["onSelectAction"] = (item: ToolBarItemsView) => {
+          Log.InfoLog(JSON.stringify(item));
+        };
+      };
+      if (component) {
+        PopupLibrary.createPopup(component, { "propView": infoNotification, "styleFrom": "min-width: 400px" });
+      };
+    },
+    onClickUpdate() {
+      try {
+        const me = this;
+        me.showInformationPending();
+      } catch (error) {
+        Log.ErrorLog(error as Error)
       }
     },
     formatCurrency(value: any) {

@@ -12,7 +12,6 @@ export default class InwardDetail {
             me.UnitPriceInward = inwardDetail.UnitPriceInward;
             me.PaymentInward = inwardDetail.PaymentInward;
             me.InwardId = inwardDetail.InwardId;
-
         }
         me.InwardDetailId = Guid.NewGuid();
 

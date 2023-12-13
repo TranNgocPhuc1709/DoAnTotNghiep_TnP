@@ -208,7 +208,6 @@ export default {
                   itemValue.TotalInward += element.NumberProductInward ?? 0;
                 }
               }
-
             }
             if (listOutward && listOutward.length > 0) {
               for (let index = 0; index < listOutward.length; index++) {
@@ -220,7 +219,6 @@ export default {
 
             }
             itemValue.InventoryNumberStock = itemValue.TotalInward - itemValue.TotalOutward
-
             me.lstStock.push(itemValue);
 
           });

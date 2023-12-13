@@ -11,4 +11,6 @@ export default interface IBill {
     TotalSalesBill?: number;
     TotalPurchaseBill?: number;
     SalesAgent?: string;
+    ObjectSalesAgent?: string;
+    NameStore?: string;
 }

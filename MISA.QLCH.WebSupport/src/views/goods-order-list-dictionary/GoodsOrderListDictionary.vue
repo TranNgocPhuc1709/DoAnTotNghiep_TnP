@@ -220,9 +220,6 @@ export default {
       }
     },
 
-
-
-
     /**
      * Khai báo import component detail
      * Override lại function after close form

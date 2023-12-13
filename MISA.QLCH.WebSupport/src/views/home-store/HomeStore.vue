@@ -35,6 +35,8 @@ import Outward from '@store-src/models/outward/Outward';
 import OutwardDetail from '@store-src/models/outward/OutwardDetail';
 import DictionaryStock from '@store-src/models/dictionary-stock/DictionaryStock';
 import InventoryDetail from '@store-src/models/inventory/InventoryDetail';
+import InwardDetail from '@store-src/models/inward/InwardDetail';
+import Constant from '@library-src/utilities/constants/Constant';
 
 // import Outward from '@store-src/models/outward/Outward';
 
@@ -59,6 +61,7 @@ export default {
         const lstVoucher = LocalStorageLibrary.getByKey<Array<Voucher>>("voucher");
         const lstCustomer = LocalStorageLibrary.getByKey<Array<Customer>>("Customer");
         const lstBank = LocalStorageLibrary.getByKey<Array<Bank>>("Bank");
+        const lstEmployee = LocalStorageLibrary.getByKey<Array<Employee>>("employee");
         const lstBankAccount = LocalStorageLibrary.getByKey<Array<BankAccount>>("BankAccount");;
         const bill: Ref<Bill> = ref(new Bill());
 
@@ -68,6 +71,7 @@ export default {
             bill,
             lstVoucher,
             lstBank,
+            lstEmployee,
             lstBankAccount,
             // timePresent: new Date().toLocaleDateString(), //Hiển thị mỗi ngày
             timePresent: new Date().toLocaleString(),
@@ -88,7 +92,7 @@ export default {
         const disableFormShowDelivery: Ref<boolean> = ref(false)
         const disableFormMoreAction: Ref<boolean> = ref(false);
         const disableFormShowVoucher: Ref<boolean> = ref(false);
-        const lstCbbSearchProduct = LocalStorageLibrary.getByKey<Array<Product>>("Product") ?? new Array<Product>();
+        let lstCbbSearchProduct = LocalStorageLibrary.getByKey<Array<Product>>("Product") ?? new Array<Product>();
         const lstCbbAgentSales = LocalStorageLibrary.getByKey<Array<Employee>>("employee") ?? new Array<Employee>();
         const lstTxtInfoRecipient = LocalStorageLibrary.getByKey<Array<Customer>>("Customer") ?? new Array<Customer>();
         const lstCbbCheckPoint = LocalStorageLibrary.getByKey<Array<BankAccount>>("BankAccount") ?? new Array<BankAccount>();
@@ -96,6 +100,11 @@ export default {
         const lstCbbVoucherItem = LocalStorageLibrary.getByKey<Array<Voucher>>("voucher") ?? new Array<Voucher>();
         const lstDictionaryStock = LocalStorageLibrary.getByKey<Array<DictionaryStock>>("dictionaryStock") ?? new Array<DictionaryStock>();
         const lstInventoryDetail = LocalStorageLibrary.getByKey<Array<InventoryDetail>>("inventoryDetail") ?? new Array<InventoryDetail>();
+
+        //Trạng thái kinh doanh
+        lstCbbSearchProduct = lstCbbSearchProduct.filter(item => {
+            return item.StatusProductList == "Đang kinh doanh";
+        });
 
         const txtQuanTySearch: Ref<NumberModel> = ref(new NumberModel({
             classType: "thirty",
@@ -222,7 +231,7 @@ export default {
 
         const cbbVoucherItem: Ref<Combobox> = ref(new Combobox({
             fieldText: "Voucher",
-            require: true,
+            require: false,
             data: lstCbbVoucherItem,
             valueField: "NameVoucher",
             displayField: "NameVoucher",
@@ -461,6 +470,7 @@ export default {
             me.bill.numVoucherTotalPrice = 0;
             me.bill.refundDetail = 0;
             me.bill.Payments = 0;
+
         } catch (error) {
             Log.ErrorLog(error as Error);
         }
@@ -536,7 +546,7 @@ export default {
             }
         },
         LogOut() {
-            localStorage.clear();
+            LocalStorageLibrary.deleteByKey(Constant.tokenContext)
             router.push({ path: '/login' })
 
         },
@@ -648,9 +658,39 @@ export default {
                             itemValue.IntoPurchaseMoneyBill = itemValue.QuantityBill * itemValue.PurchaseBill;
                         }
 
+                        // Số lượng hàng trong kho 01
+
+                        if (!itemValue.InventoryNumber) {
+                            itemValue.InventoryNumber = 0;
+                        }
+                        const listInwardDetail = LocalStorageLibrary.getByKey<Array<InwardDetail>>("inwardDetail");
+                        if (listInwardDetail && listInwardDetail.length > 0) {
+                            for (let index = 0; index < listInwardDetail.length; index++) {
+                                const elementInward = listInwardDetail[index]; ///Dòng Nhập Hàng
+                                if (elementInward.WarehouseProductInward == "Kho 01" && elementInward.NameProductInward == value) {
+                                    itemValue.InventoryNumber += elementInward.NumberProductInward || 0;
+                                }
+                            }
+                        }
+
+                        // //Xuất kho
+                        const listOutwardDetail = LocalStorageLibrary.getByKey<Array<OutwardDetail>>("outwardDetail");
+                        if (listOutwardDetail && listOutwardDetail.length > 0) {
+                            for (let index = 0; index < listOutwardDetail.length; index++) {
+                                const elementOutward = listOutwardDetail[index]; ///Dòng Nhập Hàng
+                                if (elementOutward.WarehouseProductOutWard == "Kho 01" && elementOutward.NameProductOutWard == value) {
+                                    itemValue.InventoryNumber -= elementOutward.NumberProductOutWard || 0;
+                                }
+                            }
+                        }
+
+
+
+
+
                     }
                 }
-
+                // Số lượng
                 if (me.lstBillDetail?.length > 0) {
                     let Exist = false;
                     for (let index = 0; index < me.lstBillDetail.length; index++) {
@@ -684,6 +724,8 @@ export default {
                     me.lstBillDetail = new Array<ProductDetail>(itemValue);
                 }
 
+
+                //Tính lại tổng tiền
                 me.bill.TotalMoneyBill = 0;
                 me.bill.collectedMoney = 0;
                 me.bill.TotalPurchaseBill = 0;
@@ -693,8 +735,6 @@ export default {
                     if (element) {
                         me.bill.TotalMoneyBill += element.IntoMoneyBill ?? 0;
                         me.bill.TotalPurchaseBill += element.IntoPurchaseMoneyBill ?? 0;
-
-
                     }
                 }
                 if (me.bill.numVoucherTotalPrice != null) {
@@ -705,6 +745,17 @@ export default {
             }
 
         },
+        // ShowObjectAgent(item: string) {
+        //     const me = this;
+        //     if (me.lstEmployee) {
+        //         for (let indexListDetail = 0; indexListDetail < me.lstEmployee.length; indexListDetail++) {
+        //             const elementListDetail = me.lstEmployee[indexListDetail]; //Dòng chi tiết
+        //             if (item == elementListDetail.NameEmployee) {
+        //                 me.bill.ObjectSalesAgent = elementListDetail.CodeEmployee;
+        //             }
+        //         }
+        //     }
+        // },
         ShowTotalProduct(value: number, item: BillDetail) {
             const me = this;
 
@@ -734,9 +785,7 @@ export default {
 
                 }
             }
-            // if (me.bill.numVoucherTotalPrice) {
-            //     me.bill.collectedMoney = me.bill.TotalMoneyBill - me.bill.numVoucherTotalPrice;
-            // }
+
             if (me.bill.numVoucherTotalPrice != null) {
                 me.bill.collectedMoney = me.bill.TotalMoneyBill - me.bill.numVoucherTotalPrice;
             }
@@ -779,7 +828,9 @@ export default {
             const me = this;
             me.DisableVoucher = false;
             me.bill.numVoucherTotalPrice = 0;
-
+            me.numVoucherNumber.value = 0;
+            me.cbbVoucherItem.value = "";
+            me.numVoucherPrice.value = 0;
             me.bill.TotalMoneyBill = 0;
             me.bill.collectedMoney = 0;
 
@@ -809,6 +860,7 @@ export default {
             }
             me.disableFormShowVoucher = false;
             me.DisableVoucher = true;
+
 
         },
         closePopupDelivery() {
@@ -846,22 +898,17 @@ export default {
                 }
             }
         },
-        ShowCodeBank(item: string) {
+        ShowCodeBank() {
             const me = this;
-            if (me.lstBankAccount) {
-                for (let indexListDetail = 0; indexListDetail < me.lstBankAccount.length; indexListDetail++) {
-                    const elementListDetail = me.lstBankAccount[indexListDetail]; //Dòng chi tiết
-
-
-                    if (item == elementListDetail.NameCardBank) {
-                        me.DisableFormPayment = false;
-                    }
-                    else {
-                        me.DisableFormPayment = true;
-                    }
-                }
+            if (me.cbbCheckPoint.value == "Tiền mặt") {
+                me.DisableFormPayment = false;
+            } else {
+                me.DisableFormPayment = true;
             }
         },
+
+
+
         //Show Popup
         async saveData() {
             const me = this;
@@ -910,12 +957,14 @@ export default {
                 }
             }
             const OutwardMain: Outward = new Outward({
+                // ObjectOutward: me.bill.ObjectSalesAgent,
                 ObjectNameOutward: me.bill.SalesAgent,
                 DeliveryOutward: "XK" + me.generateRandomNumberString(),
                 DayOutward: new Date(),
                 OutwardId: Guid.NewGuid(),
                 TotalQuantityOutward: '' + ItemTotalQuantityOutward,
                 TotalMoneyOutward: me.bill.TotalPurchaseBill,
+
             });
 
 

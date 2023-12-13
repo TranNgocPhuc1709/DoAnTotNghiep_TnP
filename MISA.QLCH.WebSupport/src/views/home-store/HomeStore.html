@@ -21,7 +21,8 @@
         <div class="header-right height-fill d-flex-vcenter">
             <div class="chosse-warehouse d-flex-vcenter">
                 <span class="icon-warehouse"></span>
-                <span class="label-warehouse">K-Store</span>
+                <!-- <span class="label-warehouse">{{bill.NameStore}}</span> -->
+                <span>K-Store</span>
             </div>
             <div class="messege-header height-fill d-flex-center">
                 <span class="icon-messege"></span>
@@ -31,7 +32,7 @@
             </div>
             <div class="user d-flex-vcenter" @click="ShowFormLogOut()" v-click-out="LogOutClickOut">
                 <span class="icon-user"></span>
-                <span class="label-user">TnPhuc</span>
+                <span class="label-user">Nguyễn Thị Mai</span>
                 <span class="icon-arrow-user"></span>
                 <div class="logout-form" @click="LogOut()" v-if="disableFormLogOut">
                     <span>Đăng xuất</span>
@@ -172,8 +173,11 @@
                     </div>
                     <div class="sales-agent d-flex-vcenter">
                         <span class="icon-sales-agent"></span>
-                        <e-combobox :control="cbbAgentSales" v-model="bill.SalesAgent" />
-                        <!-- <span class="arrow-sales-agent"></span> -->
+                        <e-combobox :control="cbbAgentSales" v-model="bill.SalesAgent"
+                            @dataChange="ShowObjectAgent($event)" />
+
+
+                        <!-- <span>{{bill.ObjectSalesAgent}}</span> -->
                     </div>
                 </div>
 
@@ -213,9 +217,10 @@
                                 <e-number :control="txtPriceLast" v-model="item.IntoMoneyBill" />
                             </span>
                             <!--Thông tin số lượng hàng trong kho hàng  -->
-                            <!-- <span class="flex-1 child-item">
-                                {{item.InventoryNumber}}
-                            </span> -->
+                            <span class="child-item-last child-item">
+                                Tồn kho: {{item.InventoryNumber}}
+                            </span>
+
 
                             <!--Thông tin kho hàng lưu trữ-->
                             <!-- <span class="flex-1 child-item">
@@ -375,21 +380,19 @@
                             <span class="icon-child-voucher" @click="DelVoucher"></span>
                             <span class="label-transaction-item label-sales flex-1">Khuyến mại</span>
                             <span class="transaction-price-sales">
-                                <!-- <span>{{numVoucherTotalPrice.value}}</span> -->
                                 <span>{{formatCurrency(bill.numVoucherTotalPrice)}}</span>
                             </span>
                         </div>
                         <div class="info-payment-item d-flex-vcenter">
                             <span class="label-transaction-item label-all-price flex-1">Còn phải thu</span>
                             <span class="transaction-all-price">
-                                <!-- {{totalBill.collectedMoney}} -->
                                 {{formatCurrency(bill.collectedMoney)}}
                             </span>
                         </div>
                     </div>
                     <div class="check-point-price d-flex-vcenter d-flex-sp-center">
                         <div class="check-payments">
-                            <e-combobox @dataChange="ShowCodeBank($event, item)" :control="cbbCheckPoint"
+                            <e-combobox @dataChange="ShowCodeBank" :control="cbbCheckPoint"
                                 v-model="cbbCheckPoint.value" />
                         </div>
                         <div class="type-input-payments">

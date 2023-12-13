@@ -22,6 +22,9 @@ import Guid from '@library-src/utilities/types/Guid';
 import Button from '@library-src/models/qlch_control/qlch_button/Button';
 import EButton from "qlch_control/EButton";
 import Employee from '@store-src/models/employee/Employee';
+import Customer from '@store-src/models/customer/Customer';
+import BaseInput from '@library-src/models/qlch_control/base_input/BaseInput';
+import Vendor from '@store-src/models/vendor/Vendor';
 
 export default {
 
@@ -45,6 +48,8 @@ export default {
 
 
   data() {
+    const me = this;
+    const bindingControl: Record<string, BaseInput> = me.buildBindingControl();
     const lstCashReceiptDetail: Ref<Array<CashReceiptDetail>> = ref(new Array<CashReceiptDetail>());
     const txtExplainCashReceipt: Ref<TextBox> = ref(new TextBox({
       fieldText: "",
@@ -65,7 +70,8 @@ export default {
     return {
       lstCashReceiptDetail,
       txtExplainCashReceipt,
-      txtMoneyCashDetail
+      txtMoneyCashDetail,
+      bindingControl
     }
   },
   created() {
@@ -116,6 +122,52 @@ export default {
       console.log("DEV: Override function getTitleForm return Title Form");
       return "Thêm mới phiếu thu";
     },
+    ShowValueObject(value: string) {
+      const me = this;
+      (me.bindingControl[`txtNameObjectCashReceipt`] as Combobox).data = [];
+      const lstCustomer = LocalStorageLibrary.getByKey<Array<Customer>>("Customer");
+      const lstVendor = LocalStorageLibrary.getByKey<Array<Vendor>>("Vendor");
+      const lstEmployee = LocalStorageLibrary.getByKey<Array<Employee>>("employee");
+      if (value == "Khách hàng") {
+        if (lstCustomer) {
+          for (let index = 0; index < lstCustomer.length; index++) {
+            const element = lstCustomer[index];
+            if (element) {
+              (me.bindingControl[`txtNameObjectCashReceipt`] as Combobox).data?.push({
+                value: element.NameCustomer,
+                display: element.NameCustomer
+              })
+            }
+          }
+        }
+      }
+      if (value == "Nhà cung cấp") {
+        if (lstVendor) {
+          for (let index = 0; index < lstVendor.length; index++) {
+            const element = lstVendor[index];
+            if (element) {
+              (me.bindingControl[`txtNameObjectCashReceipt`] as Combobox).data?.push({
+                value: element.NameVendor,
+                display: element.NameVendor
+              })
+            }
+          }
+        }
+      }
+      if (value == "Nhân viên") {
+        if (lstEmployee) {
+          for (let index = 0; index < lstEmployee.length; index++) {
+            const element = lstEmployee[index];
+            if (element) {
+              (me.bindingControl[`txtNameObjectCashReceipt`] as Combobox).data?.push({
+                value: element.NameEmployee,
+                display: element.NameEmployee
+              })
+            }
+          }
+        }
+      }
+    },
 
     /**
     * Khởi tạo control binding trên form
@@ -124,7 +176,6 @@ export default {
       console.log("DEV: Override function buildBindingControl return Record Control binding in Form");
       const lstRevenueOfficerCashReceipt = LocalStorageLibrary.getByKey<Array<Employee>>("employee") ?? new Array<Employee>();
       const labelWidth = 115;
-
       return {
         "txtDateCashReceipt": new DateModel({
           fieldText: "Ngày thu",
@@ -156,12 +207,6 @@ export default {
           fieldText: "Tên đối tượng",
           require: false,
           maxLength: 255,
-          data: [
-            {
-              value: "TNP",
-              display: "TNP"
-            }
-          ],
           labelWidth: labelWidth,
           bindingIndex: "NameObjectCashReceipt"
         }),
@@ -178,12 +223,12 @@ export default {
           maxLength: 255,
           data: [
             {
-              value: 1,
+              value: "Nhà cung cấp",
               display: "Nhà cung cấp"
             },
             {
               value: "Khách hàng",
-              display: "khách hàng"
+              display: "Khách hàng"
             },
             {
               value: "Nhân viên",
@@ -310,6 +355,7 @@ export default {
     },
     saveData() {
       const me = this;
+
       let listCashReceipt: Array<CashReceipt> | null = new Array<CashReceipt>;
       if (me.masterData) {
         if (me.masterData.editMode == 1 || me.masterData.editMode == 4) {

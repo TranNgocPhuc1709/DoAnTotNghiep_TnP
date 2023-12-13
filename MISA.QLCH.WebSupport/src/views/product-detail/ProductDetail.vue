@@ -267,22 +267,6 @@ export default {
           ],
           bindingIndex: "ShowDisplayProduct",
         }),
-        // "txtTypeProductList": new TextBox({
-        //   fieldText: "Màu sắc",
-        //   placeholder: "Xanh, Đỏ, Vàng,..",
-        //   require: false,
-        //   maxLength: 255,
-        //   labelWidth: labelWidth,
-        //   bindingIndex: "TypeProductList"
-        // }),
-        // "txtSizeProductList": new TextBox({
-        //   fieldText: "Size",
-        //   placeholder: "S,M,L,XL,...",
-        //   require: false,
-        //   maxLength: 255,
-        //   labelWidth: labelWidth,
-        //   bindingIndex: "SizeProductList"
-        // }),
         "txtProductInventory": new NumberModel({
           fieldText: "Tồn kho ban đầu",
           require: false,
@@ -385,10 +369,10 @@ export default {
                   newItemProduct.PurchasePriceProductList = me.masterData.PurchasePriceProductList;
                   newItemProduct.ShowDisplayProduct = me.masterData.ShowDisplayProduct;
                   newItemProduct.ProductInventory = me.masterData.ProductInventory;
-                  newItemProduct.ProductMinInventory = me.masterData.ProductMinInventory;
-                  newItemProduct.ProductMaxInventory = me.masterData.ProductMaxInventory;
                   newItemProduct.PriceProductList = me.masterData.PriceProductList;
                   newItemProduct.StatusProductList = me.masterData.StatusProductList;
+                  // newItemProduct.ProductMinInventory = me.masterData.ProductMinInventory;
+                  // newItemProduct.ProductMaxInventory = me.masterData.ProductMaxInventory;
 
                 }
               }

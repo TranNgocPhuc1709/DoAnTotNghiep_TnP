@@ -152,26 +152,30 @@ export default {
       let password = (me.bindingControl['txtPassword'] as TextBox).value;
 
       const lstAccount = LocalStorageLibrary.getByKey<Array<Employee>>("employee") ?? new Array<Employee>();
+
       for (let index = 0; index < lstAccount.length; index++) {
         const element = lstAccount[index];
         if (element) {
-          if (userName !== element.CodeEmployee) {
-            me.showErrorLoginFail('txtUserName');
-            return false;
-          }
-          if (password !== element.PasswordEmployee) {
-            me.showErrorLoginFail('txtPassword');
-            return false;
-          }
-          return true;
-        }
+          if (userName == element.CodeEmployee && password == element.PasswordEmployee) {
+            LocalStorageLibrary.setByKey("userName", element);
+            return true;
 
+          }
+        }
       }
+      me.showErrorLoginFail('txtUserName');
+      return false;
       // if (userName && password) {
 
       // }
-
-
+      // if (userName !== element.CodeEmployee) {
+      //   me.showErrorLoginFail('txtUserName');
+      //   return false;
+      // }
+      // if (password !== element.PasswordEmployee) {
+      //   me.showErrorLoginFail('txtPassword');
+      //   return false;
+      // }
       // if (password !== "12345678a") {
       //   me.showErrorLoginFail('txtPassword');
       //   return false;
@@ -217,7 +221,7 @@ export default {
       let message = "Đăng nhập thất bại. Vui lòng thử lại";
       switch (controlName) {
         case "txtUserName":
-          message = "Tên đăng nhập không chính xác!"
+          message = "Thông tin đăng nhập không chính xác"
           break;
         case "txtPassword":
           message = "Mật khẩu không chính xác!"

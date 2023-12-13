@@ -427,37 +427,37 @@ export default {
         }
       }
       //Nhập Hàng Hóa
-      const listImportDetail = LocalStorageLibrary.getByKey<Array<ImportDetail>>("importDetail");
-      if (listImportDetail && listImportDetail.length > 0) {
-        for (let index = 0; index < listImportDetail.length; index++) {
-          const element = listImportDetail[index]; ///Dòng Nhập Hàng
-          if (element.WarehouseProductImport == item && me.lstInventoryDetail) {
-            for (let indexListDetail = 0; indexListDetail < me.lstInventoryDetail.length; indexListDetail++) {
-              const elementListDetail = me.lstInventoryDetail[indexListDetail]; //Dòng chi tiết
-              if (elementListDetail.CodeProductInventory == element.CodeProductImport && element.NumberProductImport) {
-                elementListDetail.BeginInventory = elementListDetail.BeginInventory ?? 0;
-                elementListDetail.BeginInventory += element.NumberProductImport;
-              }
-            }
-          }
-        }
-      }
+      // const listImportDetail = LocalStorageLibrary.getByKey<Array<ImportDetail>>("importDetail");
+      // if (listImportDetail && listImportDetail.length > 0) {
+      //   for (let index = 0; index < listImportDetail.length; index++) {
+      //     const element = listImportDetail[index]; ///Dòng Nhập Hàng
+      //     if (element.WarehouseProductImport == item && me.lstInventoryDetail) {
+      //       for (let indexListDetail = 0; indexListDetail < me.lstInventoryDetail.length; indexListDetail++) {
+      //         const elementListDetail = me.lstInventoryDetail[indexListDetail]; //Dòng chi tiết
+      //         if (elementListDetail.CodeProductInventory == element.CodeProductImport && element.NumberProductImport) {
+      //           elementListDetail.BeginInventory = elementListDetail.BeginInventory ?? 0;
+      //           elementListDetail.BeginInventory += element.NumberProductImport;
+      //         }
+      //       }
+      //     }
+      //   }
+      // }
       //Trả Lại Hàng Hóa
-      const listReturnDetail = LocalStorageLibrary.getByKey<Array<ReturnDetail>>("returnDetail");
-      if (listReturnDetail && listReturnDetail.length > 0) {
-        for (let index = 0; index < listReturnDetail.length; index++) {
-          const elementReturn = listReturnDetail[index]; ///Dòng Nhập Hàng
-          if (elementReturn.WarehouseProductReturn == item && me.lstInventoryDetail) {
-            for (let indexListDetail = 0; indexListDetail < me.lstInventoryDetail.length; indexListDetail++) {
-              const elementListReturnDetail = me.lstInventoryDetail[indexListDetail]; //Dòng chi tiết
-              if (elementListReturnDetail.CodeProductInventory == elementReturn.CodeProductReturn && elementReturn.NumberProductReturn) {
-                elementListReturnDetail.BeginInventory = elementListReturnDetail.BeginInventory ?? 0;
-                elementListReturnDetail.BeginInventory -= elementReturn.NumberProductReturn;
-              }
-            }
-          }
-        }
-      }
+      // const listReturnDetail = LocalStorageLibrary.getByKey<Array<ReturnDetail>>("returnDetail");
+      // if (listReturnDetail && listReturnDetail.length > 0) {
+      //   for (let index = 0; index < listReturnDetail.length; index++) {
+      //     const elementReturn = listReturnDetail[index]; ///Dòng Nhập Hàng
+      //     if (elementReturn.WarehouseProductReturn == item && me.lstInventoryDetail) {
+      //       for (let indexListDetail = 0; indexListDetail < me.lstInventoryDetail.length; indexListDetail++) {
+      //         const elementListReturnDetail = me.lstInventoryDetail[indexListDetail]; //Dòng chi tiết
+      //         if (elementListReturnDetail.CodeProductInventory == elementReturn.CodeProductReturn && elementReturn.NumberProductReturn) {
+      //           elementListReturnDetail.BeginInventory = elementListReturnDetail.BeginInventory ?? 0;
+      //           elementListReturnDetail.BeginInventory -= elementReturn.NumberProductReturn;
+      //         }
+      //       }
+      //     }
+      //   }
+      // }
 
       //Nhập kho
       const listInwardDetail = LocalStorageLibrary.getByKey<Array<InwardDetail>>("inwardDetail");

@@ -9,15 +9,17 @@
                     <p class="title" v-if="thisData">{{thisData.title}}</p>
                     <div class="menu-main-right d-flex flex-h-end">
                         <div class="branches-user d-flex-vcenter">
-                            <router-link class="link-branches-user" to="#" @click="onClickUpdate">Bắt đầu sử
-                                dụng</router-link>
+                            <router-link class="link-branches-user" to="#" @click="onClickUpdate">
+                                <span>Bắt đầu sử dụng</span>
+                            </router-link>
                             <div class="branch-menu">
-                                <e-combobox :control="cbbStore" v-model="cbbStore.value" />
+                                <e-combobox @dataChange="ShowNameStore" :control="cbbStore" v-model="cbbStore.value" />
+                                <!-- <span>{{bill.NameStore}}</span> -->
                             </div>
                             <div class="user-manage d-flex-vcenter" @click="OnClickDropDownIconUser()"
                                 v-click-out="OnClickOutUserManage">
                                 <span class="img-user"></span>
-                                <span class="name-user">TnPhuc</span>
+                                <span class="name-user">{{UserName}}</span>
                                 <span class="icon-dropdown"></span>
 
                                 <div class="user-manage-detail d-flex-column" v-if="DropdownUserVisible">

@@ -17,17 +17,20 @@ import ToolBarItemsView from '@library-src/models/qlch_base/tool_bar_items_view/
 import Button from '@library-src/models/qlch_control/qlch_button/Button';
 import PopupLibrary from '@library-src/utilities/commons/PopupLibrary';
 import Constant from '@library-src/utilities/constants/Constant';
+import Bill from '@store-src/models/bill-main/Bill';
+import Employee from '@store-src/models/employee/Employee';
 export default {
     components: {
         LeftMenu, ECombobox,
     },
 
     setup() {
+
         /**Khai báo hằng số pages là 1 mảng chứa các giá trị của đối tượng menu */
         const lstCbbStore = LocalStorageLibrary.getByKey<Array<Branch>>("branch") ?? new Array<Branch>();
-        const pages: Array<Menu> = new Array(
-            {
+        let pages: Array<Menu> = new Array(
 
+            {
                 routerLink: "/home",
                 fieldText: "Trang Chủ"
             },
@@ -50,10 +53,10 @@ export default {
                     //     routerLink: "/monetaryFlow",
                     //     fieldText: "Doanh thu bàn giao ca"
                     // },
-                    {
-                        routerLink: "/revenueExpenditure",
-                        fieldText: "Thu chi"
-                    },
+                    // {
+                    //     routerLink: "/revenueExpenditure",
+                    //     fieldText: "Thu chi"
+                    // },
                     {
                         routerLink: "/profit",
                         fieldText: "Lợi Nhuận"
@@ -93,10 +96,10 @@ export default {
                         fieldText: "Xuất Kho",
                         routerLink: "/outward"
                     },
-                    {
-                        fieldText: "Chuyển Kho",
-                        routerLink: "/transferStock"
-                    },
+                    // {
+                    //     fieldText: "Chuyển Kho",
+                    //     routerLink: "/transferStock"
+                    // },
                     {
                         fieldText: "Kiểm kê kho",
                         routerLink: "/inventory"
@@ -108,20 +111,20 @@ export default {
             },
 
             //Quỹ tiền
-            {
-                children: new Array(
-                    {
-                        fieldText: "Phiếu thu tiền mặt",
-                        routerLink: "/cashReceipt"
-                    },
-                    {
-                        fieldText: "Phiếu chi tiền mặt",
-                        routerLink: "/cashPayment"
-                    }
+            // {
+            //     children: new Array(
+            //         {
+            //             fieldText: "Phiếu thu tiền mặt",
+            //             routerLink: "/cashReceipt"
+            //         },
+            //         {
+            //             fieldText: "Phiếu chi tiền mặt",
+            //             routerLink: "/cashPayment"
+            //         }
 
-                ),
-                fieldText: "Quỹ Tiền"
-            },
+            //     ),
+            //     fieldText: "Quỹ Tiền"
+            // },
 
 
             // {
@@ -220,6 +223,37 @@ export default {
                 fieldText: "Khác"
             },
         );
+
+        //Tạo phân quyền
+
+        // const user = LocalStorageLibrary.getByKey<Employee>("userName") ?? new Employee;
+        // if (user.UsageSystem == "Nhân viên bán hàng") {
+        //     pages = new Array()
+        // }
+        // if (user.UsageSystem == "Nhân viên thủ kho") {
+        //     pages = new Array(
+        //         {
+        //             children: new Array(
+        //                 {
+        //                     routerLink: "/goodsOrder",
+        //                     fieldText: "Đặt Hàng",
+        //                 },
+        //                 {
+        //                     routerLink: "/import",
+        //                     fieldText: "Nhập Hàng",
+        //                 },
+        //                 {
+        //                     routerLink: "/return",
+        //                     fieldText: "Trả lại Hàng mua",
+        //                 },
+        //             ),
+        //             fieldText: "Mua Hàng",
+
+        //         },
+        //     )
+        // }
+
+
         const cbbStore: Ref<Combobox> = ref(new Combobox({
             require: false,
             readOnly: false,
@@ -235,15 +269,22 @@ export default {
     },
 
     data() {
+        const UserName: Ref<string> = ref("")
+        const user: Ref<Employee> = ref(new Employee())
         const thisData = new Main();
+        const lstBranch = LocalStorageLibrary.getByKey<Array<Branch>>("branch");
+        const bill: Ref<Bill> = ref(new Bill());
         return {
             thisData,
-            DropdownUserVisible: false
+            DropdownUserVisible: false,
+            lstBranch,
+            bill,
+            user,
+            UserName
         };
     },
 
     created() {
-
         try {
             const me = this;
 
@@ -263,13 +304,11 @@ export default {
                         )
                     }
                 });
-
-
-
             }
+            me.user = LocalStorageLibrary.getByKey<Employee>("userName") ?? new Employee;
+            me.UserName = me.user.NameEmployee ?? "";
 
-
-            me.cbbStore.valueField = "";
+            me.cbbStore.value = "K-Store";
 
         } catch (error) {
             Log.ErrorLog(error as Error);
@@ -304,6 +343,17 @@ export default {
             }
 
 
+        },
+        ShowNameStore(item: string) {
+            const me = this;
+            if (me.lstBranch) {
+                for (let indexListDetail = 0; indexListDetail < me.lstBranch.length; indexListDetail++) {
+                    const elementListDetail = me.lstBranch[indexListDetail];
+                    if (item == elementListDetail.NameBranch) {
+                        me.bill.NameStore = elementListDetail.CodeBranch;
+                    }
+                }
+            }
         },
         OnClickOutUserManage() {
             try {
